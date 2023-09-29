@@ -1,12 +1,17 @@
 
 'use client'
 
+import { RootUrlService } from "@/framework/sdk/root-url.service";
 import { ServiceMetadata, ServiceMetadataDefinition } from "@/framework/sdk/service-metadata";
 import { PageLayoutServiceResponse } from "@/framework/sdk/services/layout-service.response";
+import { RenderWidgetService } from "@/framework/services/render-widget-service";
 import { RequestContext } from "@/framework/services/request-context";
 import { RendererContractImpl } from "@/renderer-contract";
+import { widgetRegistry } from "@/widget-registry";
 
 export default function PageClient({ layout, metadata, context }: { layout: PageLayoutServiceResponse, metadata: ServiceMetadataDefinition, context: RequestContext }) {
+    RootUrlService.rootUrl = `${process.env["NEXT_CMS_URL"]}`;
+    RenderWidgetService.widgetRegistry = widgetRegistry;
 
     if (context.isEdit && typeof window !== 'undefined') {
         ServiceMetadata.serviceMetadataCache = metadata;

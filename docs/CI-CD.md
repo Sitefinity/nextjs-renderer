@@ -19,6 +19,8 @@ Running in dev mode **does not require installing additional software and works 
 
    If CMS is hosted on local IIS (Step 5 to 14) -> [instructions](https://www.progress.com/documentation/sitefinity-cms/host-sitefinity-cms-and-the-.net-core-renderer-on-the-same-iis)
 
+   If CMS is hosted in Sitefinity cloud, make sure to enter your validation key in the 'SF_CLOUD_KEY' environment variable as shown in env.development
+
    Configure the CMS web service -> Follow the instructions [here](https://www.progress.com/documentation/sitefinity-cms/setup-the-asp.net-core-renderer#configure-sitefinity-cms)
 
 4. Run in the console
@@ -37,9 +39,10 @@ If you wish to run the local node dev server under https, generate an ssl certif
 * **'PROXY_URL'** -> The URL of the CMS, where to proxy all of the requests that are not pages.
 * **'PROXY_ORIGINAL_HOST'** -> The host of the dev server. Defaults to 'localhost'.
 * **'PROXY_ORIGINAL_HOST'** -> The port of the dev server. Defaults to '5001'.
+* **'SF_CLOUD_KEY'** -> The secret to work with Sitefinity Cloud.
 
-### Production (.env.production)
-* **'PUBLIC_URL'** -> The root path of the scripts when deployed to the CMS. Defaults to '/sitefinity/public/renderers/React'
+* **'SSL_CRT_FILE'** -> The crt file for https [See](./SSL.md).
+* **'SSL_KEY_FILE'** -> The key file for https [See](./SSL.md).
 
 # Deployment
 

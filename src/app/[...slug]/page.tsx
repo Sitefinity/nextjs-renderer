@@ -9,6 +9,8 @@ import { LayoutService } from '@/framework/sdk/services/layout.service';
 import { RenderWidgetService } from '@/framework/services/render-widget-service';
 import { WidgetModel } from '@/framework/widgets/widget-model';
 import { RequestContext } from '@/framework/services/request-context';
+import { widgetRegistry } from '@/widget-registry';
+import { RootUrlService } from '@/framework/sdk/root-url.service';
 
 // export async function generateStaticParams() {
 //     const getAllArgs: GetAllArgs = {
@@ -46,7 +48,9 @@ import { RequestContext } from '@/framework/services/request-context';
 
 
 export default async function Page({ params, searchParams }: PageParams) {
+    RootUrlService.rootUrl = `${process.env["NEXT_CMS_URL"]}`;
     await ServiceMetadata.fetch();
+    RenderWidgetService.widgetRegistry = widgetRegistry;
 
     const actionParam = searchParams['sfaction'];
 

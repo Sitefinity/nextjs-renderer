@@ -32,7 +32,7 @@ export class LayoutService {
             url += `${concatChar}sfaction=${action}`;
         }
 
-        url = RootUrlService.getUrl() + url.substring(1);
+        url = RootUrlService.rootUrl + url.substring(1);
         headers["X-Requested-With"] = "react";
 
         return fetch(url, { headers }).then(x => x.json());

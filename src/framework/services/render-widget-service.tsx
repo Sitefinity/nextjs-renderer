@@ -2,12 +2,13 @@ import React from "react";
 import { RequestContext } from "./request-context";
 import { WidgetContext } from "../widgets/widget-context";
 import { WidgetModel } from "../widgets/widget-model";
-import { widgetRegistry as registry } from "@/widget-registry";
+import { WidgetRegistry } from "../widgets/widget-registry";
 
 export class RenderWidgetService {
+    public static widgetRegistry: WidgetRegistry;
 
     public static createComponent(widgetModel: WidgetModel<any>, requestContext: RequestContext) {
-        const registeredType = registry.widgets[widgetModel.Name];
+        const registeredType = RenderWidgetService.widgetRegistry.widgets[widgetModel.Name];
 
         parseProperties(widgetModel, requestContext, this);
 
