@@ -1,0 +1,4018 @@
+{
+   "Name":"AllProperties",
+   "Caption":"AllProperties",
+   "PropertyMetadata":[
+      {
+         "Name":"Basic",
+         "Sections":[
+            {
+               "Name":"Main",
+               "Title":null,
+               "Properties":[
+                  {
+                     "Name":"Readonly",
+                     "DefaultValue":null,
+                     "Title":"Readonly",
+                     "Type":"string",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Validations_Readonly":"True"
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"EmailField",
+                     "DefaultValue":null,
+                     "Title":"Email field",
+                     "Type":"string",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Validations_Regex":"^((([a-zA-Z]|\\d|[!#\\$%\u0026\u0027\\*\\\u002B\\-\\/=\\?\\^_\u0060{\\|}~]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])\u002B(\\.([a-zA-Z]|\\d|[!#\\$%\u0026\u0027\\*\\\u002B\\-\\/=\\?\\^_\u0060{\\|}~]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])\u002B)*)|((\\x22)((((\\x20|\\x09)*(\\x0d\\x0a))?(\\x20|\\x09)\u002B)?(([\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x7f]|\\x21|[\\x23-\\x5b]|[\\x5d-\\x7e]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])|(\\\\([\\x01-\\x09\\x0b\\x0c\\x0d-\\x7f]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF]))))*(((\\x20|\\x09)*(\\x0d\\x0a))?(\\x20|\\x09)\u002B)?(\\x22)))@((([a-zA-Z]|\\d|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])|(([a-zA-Z]|\\d|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])([a-zA-Z]|\\d|-|\\.|_|~|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])*([a-zA-Z]|\\d|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])))\\.)\u002B(([a-zA-Z]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])|(([a-zA-Z]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])([a-zA-Z]|\\d|-|\\.|_|~|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])*([a-zA-Z]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])))\\.?$",
+                        "Validations_RegexErrorMsg":"Enter valid email."
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"PlaceHolderProp",
+                     "DefaultValue":null,
+                     "Title":"PlaceHolderProp",
+                     "Type":"string",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Meta_Placeholder_Text":"This is the placeholder"
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"DescriptionExtendedProp",
+                     "DefaultValue":null,
+                     "Title":"Description",
+                     "Type":"string",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Meta_Description_InlineDescription":"Inline description",
+                        "Meta_Description_InstructionalNotes":"Instructional notes",
+                        "Meta_Description_Description":"This is the extended description"
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"ExcludedFromCopyProp",
+                     "DefaultValue":"0",
+                     "Title":"ExcludedFromCopyProp",
+                     "Type":"number",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Meta_Copy_Exclude":"True"
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"DoubleValidation",
+                     "DefaultValue":"0",
+                     "Title":"DoubleValidation",
+                     "Type":"number",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Validations_DecimalPlaces":"10",
+                        "Validations_MaxValue":"20",
+                        "Validations_MinValue":"1",
+                        "Validations_RangeErrorMsg":"\u0421\u0442\u043E\u0439\u043D\u043E\u0441\u0442 \u043C\u0435\u0436\u0434\u0443 1 \u0438 20."
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"HtmlField",
+                     "DefaultValue":null,
+                     "Title":"HtmlField",
+                     "Type":"html",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Meta_DynamicLinksContainer_HasLinks":"True",
+                        "Meta_Placeholder_Text":"This is the placeholder",
+                        "Meta_ContentContainer_HasContent":"True"
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"TextAreaField",
+                     "DefaultValue":"This is some text.",
+                     "Title":"TextAreaField",
+                     "Type":"textArea",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"Password",
+                     "DefaultValue":null,
+                     "Title":"Password",
+                     "Type":"password",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"ColorField",
+                     "DefaultValue":"#AABBCC",
+                     "Title":"ColorField",
+                     "Type":"color",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"Range",
+                     "DefaultValue":null,
+                     "Title":"Range",
+                     "Type":"range",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Meta_Suffix_Value":"MB"
+                     },
+                     "TypeChildProperties":[
+                        {
+                           "Name":"Min",
+                           "DefaultValue":null,
+                           "Title":"Min",
+                           "Type":"number",
+                           "SectionName":null,
+                           "CategoryName":null,
+                           "Properties":{
+                              
+                           },
+                           "TypeChildProperties":[
+                              
+                           ],
+                           "Position":0
+                        },
+                        {
+                           "Name":"Max",
+                           "DefaultValue":null,
+                           "Title":"Max",
+                           "Type":"number",
+                           "SectionName":null,
+                           "CategoryName":null,
+                           "Properties":{
+                              
+                           },
+                           "TypeChildProperties":[
+                              
+                           ],
+                           "Position":0
+                        }
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"FileTypes",
+                     "DefaultValue":null,
+                     "Title":"File types",
+                     "Type":"fileTypes",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        
+                     },
+                     "TypeChildProperties":[
+                        {
+                           "Name":"Type",
+                           "DefaultValue":null,
+                           "Title":"Type",
+                           "Type":"string",
+                           "SectionName":null,
+                           "CategoryName":null,
+                           "Properties":{
+                              
+                           },
+                           "TypeChildProperties":[
+                              
+                           ],
+                           "Position":0
+                        },
+                        {
+                           "Name":"Other",
+                           "DefaultValue":null,
+                           "Title":"Other",
+                           "Type":"string",
+                           "SectionName":null,
+                           "CategoryName":null,
+                           "Properties":{
+                              
+                           },
+                           "TypeChildProperties":[
+                              
+                           ],
+                           "Position":0
+                        }
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"ViewName",
+                     "DefaultValue":"Default",
+                     "Title":"ViewName",
+                     "Type":"viewSelector",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Meta_Choices":"[{\u0022Title\u0022:\u0022Default\u0022,\u0022Name\u0022:\u0022Default\u0022,\u0022Value\u0022:\u0022Default\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Second\u0022,\u0022Name\u0022:\u0022Second\u0022,\u0022Value\u0022:\u0022Second\u0022,\u0022Icon\u0022:null}]",
+                        "Meta_Choices_AllowMultiple":"False"
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"ViewNameDefaultValue",
+                     "DefaultValue":"Second",
+                     "Title":"ViewNameDefaultValue",
+                     "Type":"viewSelector",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Meta_Choices":"[{\u0022Title\u0022:\u0022Default\u0022,\u0022Name\u0022:\u0022Default\u0022,\u0022Value\u0022:\u0022Default\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Second\u0022,\u0022Name\u0022:\u0022Second\u0022,\u0022Value\u0022:\u0022Second\u0022,\u0022Icon\u0022:null}]",
+                        "Meta_Choices_AllowMultiple":"False"
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"ViewNameDefaultValueInvalid",
+                     "DefaultValue":"invalid",
+                     "Title":"ViewNameDefaultValueInvalid",
+                     "Type":"viewSelector",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Meta_Choices":"[{\u0022Title\u0022:\u0022Default\u0022,\u0022Name\u0022:\u0022Default\u0022,\u0022Value\u0022:\u0022Default\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Second\u0022,\u0022Name\u0022:\u0022Second\u0022,\u0022Value\u0022:\u0022Second\u0022,\u0022Icon\u0022:null}]",
+                        "Meta_Choices_AllowMultiple":"False"
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"ObjectWithLinks",
+                     "DefaultValue":null,
+                     "Title":"ObjectWithLinks",
+                     "Type":"complex",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Meta_DynamicLinksContainer_HasLinks":"True"
+                     },
+                     "TypeChildProperties":[
+                        {
+                           "Name":"Link",
+                           "DefaultValue":null,
+                           "Title":"Link",
+                           "Type":"linkInsert",
+                           "SectionName":null,
+                           "CategoryName":null,
+                           "Properties":{
+                              
+                           },
+                           "TypeChildProperties":[
+                              
+                           ],
+                           "Position":0
+                        }
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"Link",
+                     "DefaultValue":null,
+                     "Title":"Link",
+                     "Type":"linkInsert",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"LinkRequired",
+                     "DefaultValue":null,
+                     "Title":"LinkRequired",
+                     "Type":"linkInsert",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Validations_Required":"True"
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"StringLengthValidation",
+                     "DefaultValue":null,
+                     "Title":"String length validation",
+                     "Type":"string",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Validations_MaxValue":"6",
+                        "Validations_MinValue":"2",
+                        "Validations_StringLengthErrorMsg":"Value should be between 2 and 6 symbols."
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"StringValidation",
+                     "DefaultValue":null,
+                     "Title":"StringValidation",
+                     "Type":"string",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Validations_MinValue":"2",
+                        "Validations_MinLengthErrorMsg":"The message length must be at least 2 symbols.",
+                        "Validations_MaxValue":"10",
+                        "Validations_MaxLengthErrorMsg":"The message must be less than 10 symbols."
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"StringFieldRequired",
+                     "DefaultValue":null,
+                     "Title":"StringFieldRequired",
+                     "Type":"string",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Validations_Required":"True"
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"DateFieldRequired",
+                     "DefaultValue":null,
+                     "Title":"DateFieldRequired",
+                     "Type":"datetime",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Validations_Required":"True",
+                        "Validations_RequiredErrorMsg":"This is required date."
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"NullableDate",
+                     "DefaultValue":null,
+                     "Title":"NullableDate",
+                     "Type":"datetime",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"DefaultValueDateTimeFromString",
+                     "DefaultValue":"2020-09-11T06:38:11.170Z",
+                     "Title":"DefaultValueDateTimeFromString",
+                     "Type":"datetime",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"DefaultValueDateTimeFromDate",
+                     "DefaultValue":"2020-09-11T06:38:11.170Z",
+                     "Title":"DefaultValueDateTimeFromDate",
+                     "Type":"datetime",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"DefaultValueDateTimeInvalid",
+                     "DefaultValue":null,
+                     "Title":"DefaultValueDateTimeInvalid",
+                     "Type":"datetime",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"IntFieldRequired",
+                     "DefaultValue":"0",
+                     "Title":"IntFieldRequired",
+                     "Type":"number",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Validations_Required":"True",
+                        "Validations_RequiredErrorMsg":"This is required int."
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"IntegerValidation",
+                     "DefaultValue":"0",
+                     "Title":"IntegerValidation",
+                     "Type":"number",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Validations_MaxValue":"20",
+                        "Validations_MinValue":"1",
+                        "Validations_RangeErrorMsg":"Value should be between 1 and 20."
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"IntDefaultValue",
+                     "DefaultValue":"42",
+                     "Title":"IntDefaultValue",
+                     "Type":"number",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"PlainInt",
+                     "DefaultValue":"0",
+                     "Title":"PlainInt",
+                     "Type":"number",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"NullableInt",
+                     "DefaultValue":null,
+                     "Title":"NullableInt",
+                     "Type":"number",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"NullableIntWithDefault",
+                     "DefaultValue":"42",
+                     "Title":"NullableIntWithDefault",
+                     "Type":"number",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"BoolFieldRequired",
+                     "DefaultValue":"False",
+                     "Title":"BoolFieldRequired",
+                     "Type":"bool",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Validations_Required":"True",
+                        "Validations_RequiredErrorMsg":"This is required bool."
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"ConditionalProp",
+                     "DefaultValue":"False",
+                     "Title":"ConditionalProp",
+                     "Type":"bool",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Meta_ConditionalVisibility_Condition":"{\u0022conditions\u0022:[{\u0022fieldName\u0022:\u0022BoolFieldRequired\u0022,\u0022operator\u0022:\u0022Equals\u0022,\u0022value\u0022:\u0022true\u0022}]}"
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"BoolDefaultValue",
+                     "DefaultValue":"True",
+                     "Title":"BoolDefaultValue",
+                     "Type":"bool",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"PlainBool",
+                     "DefaultValue":"False",
+                     "Title":"PlainBool",
+                     "Type":"bool",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"NullableBool",
+                     "DefaultValue":null,
+                     "Title":"NullableBool",
+                     "Type":"bool",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"NullableBoolWithDefault",
+                     "DefaultValue":"True",
+                     "Title":"NullableBoolWithDefault",
+                     "Type":"bool",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"CheckboxField",
+                     "DefaultValue":"True",
+                     "Title":"Checkbox field",
+                     "Type":"choiceYesNo",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Meta_Group_Name":"Options"
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"CheckboxField2",
+                     "DefaultValue":"True",
+                     "Title":"Checkbox field",
+                     "Type":"choiceYesNo",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Meta_Group_Name":"Options"
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"EnumDefaultValue",
+                     "DefaultValue":"Value2",
+                     "Title":"EnumDefaultValue",
+                     "Type":"choices",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Meta_Choices":"[{\u0022Title\u0022:\u0022Value1\u0022,\u0022Name\u0022:\u0022Value1\u0022,\u0022Value\u0022:\u0022Value1\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Value2\u0022,\u0022Name\u0022:\u0022Value2\u0022,\u0022Value\u0022:\u0022Value2\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Value3\u0022,\u0022Name\u0022:\u0022Value3\u0022,\u0022Value\u0022:\u0022Value3\u0022,\u0022Icon\u0022:null}]",
+                        "Meta_Choices_AllowMultiple":"False"
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"NullableEnumDefaultValue",
+                     "DefaultValue":"Value2",
+                     "Title":"NullableEnumDefaultValue",
+                     "Type":"choices",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Meta_Choices":"[{\u0022Title\u0022:\u0022Value1\u0022,\u0022Name\u0022:\u0022Value1\u0022,\u0022Value\u0022:\u0022Value1\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Value2\u0022,\u0022Name\u0022:\u0022Value2\u0022,\u0022Value\u0022:\u0022Value2\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Value3\u0022,\u0022Name\u0022:\u0022Value3\u0022,\u0022Value\u0022:\u0022Value3\u0022,\u0022Icon\u0022:null}]",
+                        "Meta_Choices_AllowMultiple":"False"
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"EnumDefaultValueInvalid",
+                     "DefaultValue":null,
+                     "Title":"EnumDefaultValueInvalid",
+                     "Type":"choices",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Meta_Choices":"[{\u0022Title\u0022:\u0022Value1\u0022,\u0022Name\u0022:\u0022Value1\u0022,\u0022Value\u0022:\u0022Value1\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Value2\u0022,\u0022Name\u0022:\u0022Value2\u0022,\u0022Value\u0022:\u0022Value2\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Value3\u0022,\u0022Name\u0022:\u0022Value3\u0022,\u0022Value\u0022:\u0022Value3\u0022,\u0022Icon\u0022:null}]",
+                        "Meta_Choices_AllowMultiple":"False"
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"EnumDefaultValueMultipleInvalid",
+                     "DefaultValue":null,
+                     "Title":"EnumDefaultValueMultipleInvalid",
+                     "Type":"multipleChoices",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Meta_Choices":"[{\u0022Title\u0022:\u0022Value1\u0022,\u0022Name\u0022:\u0022Value1\u0022,\u0022Value\u0022:\u0022Value1\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Value2\u0022,\u0022Name\u0022:\u0022Value2\u0022,\u0022Value\u0022:\u0022Value2\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Value3\u0022,\u0022Name\u0022:\u0022Value3\u0022,\u0022Value\u0022:\u0022Value3\u0022,\u0022Icon\u0022:null}]",
+                        "Meta_Choices_AllowMultiple":"True"
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"EnumDefaultValueMultiple",
+                     "DefaultValue":"Value1, Value2",
+                     "Title":"EnumDefaultValueMultiple",
+                     "Type":"multipleChoices",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Meta_Choices":"[{\u0022Title\u0022:\u0022Value1\u0022,\u0022Name\u0022:\u0022Value1\u0022,\u0022Value\u0022:\u0022Value1\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Value2\u0022,\u0022Name\u0022:\u0022Value2\u0022,\u0022Value\u0022:\u0022Value2\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Value3\u0022,\u0022Name\u0022:\u0022Value3\u0022,\u0022Value\u0022:\u0022Value3\u0022,\u0022Icon\u0022:null}]",
+                        "Meta_Choices_AllowMultiple":"True"
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"NullableEnumDefaultValueMultiple",
+                     "DefaultValue":"Value1, Value2",
+                     "Title":"NullableEnumDefaultValueMultiple",
+                     "Type":"multipleChoices",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Meta_Choices":"[{\u0022Title\u0022:\u0022Value1\u0022,\u0022Name\u0022:\u0022Value1\u0022,\u0022Value\u0022:\u0022Value1\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Value2\u0022,\u0022Name\u0022:\u0022Value2\u0022,\u0022Value\u0022:\u0022Value2\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Value3\u0022,\u0022Name\u0022:\u0022Value3\u0022,\u0022Value\u0022:\u0022Value3\u0022,\u0022Icon\u0022:null}]",
+                        "Meta_Choices_AllowMultiple":"True"
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"EnumNoDefaultValue",
+                     "DefaultValue":"Value1",
+                     "Title":"EnumNoDefaultValue",
+                     "Type":"choices",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Meta_Choices":"[{\u0022Title\u0022:\u0022Value1\u0022,\u0022Name\u0022:\u0022Value1\u0022,\u0022Value\u0022:\u0022Value1\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Value2\u0022,\u0022Name\u0022:\u0022Value2\u0022,\u0022Value\u0022:\u0022Value2\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Value3\u0022,\u0022Name\u0022:\u0022Value3\u0022,\u0022Value\u0022:\u0022Value3\u0022,\u0022Icon\u0022:null}]",
+                        "Meta_Choices_AllowMultiple":"False"
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"EnumChipChoice",
+                     "DefaultValue":"Value1",
+                     "Title":"EnumChipChoice",
+                     "Type":"chipchoice",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Meta_Choices":"[{\u0022Title\u0022:\u0022Value1\u0022,\u0022Name\u0022:\u0022Value1\u0022,\u0022Value\u0022:\u0022Value1\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Value2\u0022,\u0022Name\u0022:\u0022Value2\u0022,\u0022Value\u0022:\u0022Value2\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Value3\u0022,\u0022Name\u0022:\u0022Value3\u0022,\u0022Value\u0022:\u0022Value3\u0022,\u0022Icon\u0022:null}]",
+                        "Meta_Choices_AllowMultiple":"False"
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"Complex",
+                     "DefaultValue":null,
+                     "Title":"Complex",
+                     "Type":"complex",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        
+                     },
+                     "TypeChildProperties":[
+                        {
+                           "Name":"ChildString",
+                           "DefaultValue":"test",
+                           "Title":"String prop",
+                           "Type":"string",
+                           "SectionName":null,
+                           "CategoryName":null,
+                           "Properties":{
+                              
+                           },
+                           "TypeChildProperties":[
+                              
+                           ],
+                           "Position":0
+                        },
+                        {
+                           "Name":"ChildInt",
+                           "DefaultValue":"42",
+                           "Title":"Int prop",
+                           "Type":"number",
+                           "SectionName":null,
+                           "CategoryName":null,
+                           "Properties":{
+                              
+                           },
+                           "TypeChildProperties":[
+                              
+                           ],
+                           "Position":0
+                        }
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"ComplexWithContent",
+                     "DefaultValue":null,
+                     "Title":"ComplexWithContent",
+                     "Type":"complex",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        
+                     },
+                     "TypeChildProperties":[
+                        {
+                           "Name":"Events",
+                           "DefaultValue":null,
+                           "Title":"Events",
+                           "Type":"content",
+                           "SectionName":null,
+                           "CategoryName":null,
+                           "Properties":{
+                              "Meta_Content_Type":"Telerik.Sitefinity.Events.Model.Event",
+                              "Meta_Content_AllowMultipleItemsSelection":"True",
+                              "Meta_Content_LiveData":"False",
+                              "Meta_Content_DisableInteraction":"False",
+                              "Meta_Content_ShowSiteSelector":"False",
+                              "Meta_Content_OpenMultipleItemsSelection":"False",
+                              "Meta_Content_Provider":null
+                           },
+                           "TypeChildProperties":[
+                              
+                           ],
+                           "Position":0
+                        }
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"ComplexTable",
+                     "DefaultValue":null,
+                     "Title":"ComplexTable",
+                     "Type":"complex",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Meta_TableView_Reorderable":"False",
+                        "Meta_TableView_Selectable":"False",
+                        "Meta_TableView_MultipleSelect":"False",
+                        "Meta_TableView_ColumnTitle":"TableTitle",
+                        "Meta_TableView_Enabled":"True"
+                     },
+                     "TypeChildProperties":[
+                        {
+                           "Name":"ChildString",
+                           "DefaultValue":"test",
+                           "Title":"String prop",
+                           "Type":"string",
+                           "SectionName":null,
+                           "CategoryName":null,
+                           "Properties":{
+                              
+                           },
+                           "TypeChildProperties":[
+                              
+                           ],
+                           "Position":0
+                        },
+                        {
+                           "Name":"ChildInt",
+                           "DefaultValue":"42",
+                           "Title":"Int prop",
+                           "Type":"number",
+                           "SectionName":null,
+                           "CategoryName":null,
+                           "Properties":{
+                              
+                           },
+                           "TypeChildProperties":[
+                              
+                           ],
+                           "Position":0
+                        }
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"MultiLevelComplexObject",
+                     "DefaultValue":null,
+                     "Title":"MultiLevelComplexObject",
+                     "Type":"complex",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        
+                     },
+                     "TypeChildProperties":[
+                        {
+                           "Name":"ChildString",
+                           "DefaultValue":"testouter",
+                           "Title":"String prop",
+                           "Type":"string",
+                           "SectionName":null,
+                           "CategoryName":null,
+                           "Properties":{
+                              
+                           },
+                           "TypeChildProperties":[
+                              
+                           ],
+                           "Position":0
+                        },
+                        {
+                           "Name":"ChildComplexObject",
+                           "DefaultValue":null,
+                           "Title":"Child complex prop",
+                           "Type":"complex",
+                           "SectionName":null,
+                           "CategoryName":null,
+                           "Properties":{
+                              
+                           },
+                           "TypeChildProperties":[
+                              {
+                                 "Name":"ChildString",
+                                 "DefaultValue":"test",
+                                 "Title":"String prop",
+                                 "Type":"string",
+                                 "SectionName":null,
+                                 "CategoryName":null,
+                                 "Properties":{
+                                    
+                                 },
+                                 "TypeChildProperties":[
+                                    
+                                 ],
+                                 "Position":0
+                              },
+                              {
+                                 "Name":"ChildInt",
+                                 "DefaultValue":"42",
+                                 "Title":"Int prop",
+                                 "Type":"number",
+                                 "SectionName":null,
+                                 "CategoryName":null,
+                                 "Properties":{
+                                    
+                                 },
+                                 "TypeChildProperties":[
+                                    
+                                 ],
+                                 "Position":0
+                              }
+                           ],
+                           "Position":0
+                        }
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"BigComplexTable",
+                     "DefaultValue":null,
+                     "Title":"BigComplexTable",
+                     "Type":"complex",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Meta_TableView_Reorderable":"False",
+                        "Meta_TableView_Selectable":"False",
+                        "Meta_TableView_MultipleSelect":"False",
+                        "Meta_TableView_ColumnTitle":"BigTableTitle",
+                        "Meta_TableView_Enabled":"True"
+                     },
+                     "TypeChildProperties":[
+                        {
+                           "Name":"ChildString1",
+                           "DefaultValue":"test1",
+                           "Title":"String prop1",
+                           "Type":"string",
+                           "SectionName":null,
+                           "CategoryName":null,
+                           "Properties":{
+                              
+                           },
+                           "TypeChildProperties":[
+                              
+                           ],
+                           "Position":0
+                        },
+                        {
+                           "Name":"ChildString2",
+                           "DefaultValue":"test2",
+                           "Title":"String prop2",
+                           "Type":"string",
+                           "SectionName":null,
+                           "CategoryName":null,
+                           "Properties":{
+                              
+                           },
+                           "TypeChildProperties":[
+                              
+                           ],
+                           "Position":0
+                        },
+                        {
+                           "Name":"ChildString3",
+                           "DefaultValue":"test3",
+                           "Title":"String prop3",
+                           "Type":"string",
+                           "SectionName":null,
+                           "CategoryName":null,
+                           "Properties":{
+                              
+                           },
+                           "TypeChildProperties":[
+                              
+                           ],
+                           "Position":0
+                        },
+                        {
+                           "Name":"ChildString4",
+                           "DefaultValue":"test4",
+                           "Title":"String prop4",
+                           "Type":"string",
+                           "SectionName":null,
+                           "CategoryName":null,
+                           "Properties":{
+                              
+                           },
+                           "TypeChildProperties":[
+                              
+                           ],
+                           "Position":0
+                        },
+                        {
+                           "Name":"ChildString5",
+                           "DefaultValue":"test5",
+                           "Title":"String prop5",
+                           "Type":"string",
+                           "SectionName":null,
+                           "CategoryName":null,
+                           "Properties":{
+                              
+                           },
+                           "TypeChildProperties":[
+                              
+                           ],
+                           "Position":0
+                        },
+                        {
+                           "Name":"ChildString6",
+                           "DefaultValue":"test6",
+                           "Title":"String prop6",
+                           "Type":"string",
+                           "SectionName":null,
+                           "CategoryName":null,
+                           "Properties":{
+                              
+                           },
+                           "TypeChildProperties":[
+                              
+                           ],
+                           "Position":0
+                        }
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"DictionaryWithInitializer",
+                     "DefaultValue":null,
+                     "Title":"DictionaryWithInitializer",
+                     "Type":null,
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        
+                     },
+                     "TypeChildProperties":[
+                        {
+                           "Name":"ChildString",
+                           "DefaultValue":"test",
+                           "Title":"String prop",
+                           "Type":"string",
+                           "SectionName":null,
+                           "CategoryName":null,
+                           "Properties":{
+                              
+                           },
+                           "TypeChildProperties":[
+                              
+                           ],
+                           "Position":0
+                        },
+                        {
+                           "Name":"ChildInt",
+                           "DefaultValue":"42",
+                           "Title":"Int prop",
+                           "Type":"number",
+                           "SectionName":null,
+                           "CategoryName":null,
+                           "Properties":{
+                              
+                           },
+                           "TypeChildProperties":[
+                              
+                           ],
+                           "Position":0
+                        }
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"Dictionary",
+                     "DefaultValue":null,
+                     "Title":"Dictionary",
+                     "Type":null,
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        
+                     },
+                     "TypeChildProperties":[
+                        {
+                           "Name":"ChildString",
+                           "DefaultValue":"test",
+                           "Title":"String prop",
+                           "Type":"string",
+                           "SectionName":null,
+                           "CategoryName":null,
+                           "Properties":{
+                              
+                           },
+                           "TypeChildProperties":[
+                              
+                           ],
+                           "Position":0
+                        },
+                        {
+                           "Name":"ChildInt",
+                           "DefaultValue":"42",
+                           "Title":"Int prop",
+                           "Type":"number",
+                           "SectionName":null,
+                           "CategoryName":null,
+                           "Properties":{
+                              
+                           },
+                           "TypeChildProperties":[
+                              
+                           ],
+                           "Position":0
+                        }
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"DictionaryComplexKey",
+                     "DefaultValue":null,
+                     "Title":"DictionaryComplexKey",
+                     "Type":null,
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"List",
+                     "DefaultValue":null,
+                     "Title":"List",
+                     "Type":"enumerable",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"ListBool",
+                     "DefaultValue":null,
+                     "Title":"ListBool",
+                     "Type":null,
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"ListComplexObject",
+                     "DefaultValue":null,
+                     "Title":"ListComplexObject",
+                     "Type":"enumerable",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        
+                     },
+                     "TypeChildProperties":[
+                        {
+                           "Name":"ChildString",
+                           "DefaultValue":"test",
+                           "Title":"String prop",
+                           "Type":"string",
+                           "SectionName":null,
+                           "CategoryName":null,
+                           "Properties":{
+                              
+                           },
+                           "TypeChildProperties":[
+                              
+                           ],
+                           "Position":0
+                        },
+                        {
+                           "Name":"ChildInt",
+                           "DefaultValue":"42",
+                           "Title":"Int prop",
+                           "Type":"number",
+                           "SectionName":null,
+                           "CategoryName":null,
+                           "Properties":{
+                              
+                           },
+                           "TypeChildProperties":[
+                              
+                           ],
+                           "Position":0
+                        }
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"ListTableView",
+                     "DefaultValue":null,
+                     "Title":"ListTableView",
+                     "Type":"enumerable",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Meta_TableView_Reorderable":"True",
+                        "Meta_TableView_Selectable":"True",
+                        "Meta_TableView_MultipleSelect":"True",
+                        "Meta_TableView_ColumnTitle":null,
+                        "Meta_TableView_Enabled":"True"
+                     },
+                     "TypeChildProperties":[
+                        {
+                           "Name":"ChildString",
+                           "DefaultValue":"test",
+                           "Title":"String prop",
+                           "Type":"string",
+                           "SectionName":null,
+                           "CategoryName":null,
+                           "Properties":{
+                              
+                           },
+                           "TypeChildProperties":[
+                              
+                           ],
+                           "Position":0
+                        },
+                        {
+                           "Name":"ChildInt",
+                           "DefaultValue":"42",
+                           "Title":"Int prop",
+                           "Type":"number",
+                           "SectionName":null,
+                           "CategoryName":null,
+                           "Properties":{
+                              
+                           },
+                           "TypeChildProperties":[
+                              
+                           ],
+                           "Position":0
+                        }
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"ListComplexObjectNoDefaults",
+                     "DefaultValue":null,
+                     "Title":"ListComplexObjectNoDefaults",
+                     "Type":"enumerable",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        
+                     },
+                     "TypeChildProperties":[
+                        {
+                           "Name":"BoolProp",
+                           "DefaultValue":null,
+                           "Title":"Boolean prop",
+                           "Type":"bool",
+                           "SectionName":null,
+                           "CategoryName":null,
+                           "Properties":{
+                              
+                           },
+                           "TypeChildProperties":[
+                              
+                           ],
+                           "Position":0
+                        },
+                        {
+                           "Name":"ChildInt",
+                           "DefaultValue":null,
+                           "Title":"Int prop",
+                           "Type":"number",
+                           "SectionName":null,
+                           "CategoryName":null,
+                           "Properties":{
+                              
+                           },
+                           "TypeChildProperties":[
+                              
+                           ],
+                           "Position":0
+                        }
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"ListMultiLevelComplexObject",
+                     "DefaultValue":null,
+                     "Title":"ListMultiLevelComplexObject",
+                     "Type":null,
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        
+                     },
+                     "TypeChildProperties":[
+                        {
+                           "Name":"ChildString",
+                           "DefaultValue":"testouter",
+                           "Title":"String prop",
+                           "Type":"string",
+                           "SectionName":null,
+                           "CategoryName":null,
+                           "Properties":{
+                              
+                           },
+                           "TypeChildProperties":[
+                              
+                           ],
+                           "Position":0
+                        },
+                        {
+                           "Name":"ChildComplexObject",
+                           "DefaultValue":null,
+                           "Title":"Child complex prop",
+                           "Type":"complex",
+                           "SectionName":null,
+                           "CategoryName":null,
+                           "Properties":{
+                              
+                           },
+                           "TypeChildProperties":[
+                              {
+                                 "Name":"ChildString",
+                                 "DefaultValue":"test",
+                                 "Title":"String prop",
+                                 "Type":"string",
+                                 "SectionName":null,
+                                 "CategoryName":null,
+                                 "Properties":{
+                                    
+                                 },
+                                 "TypeChildProperties":[
+                                    
+                                 ],
+                                 "Position":0
+                              },
+                              {
+                                 "Name":"ChildInt",
+                                 "DefaultValue":"42",
+                                 "Title":"Int prop",
+                                 "Type":"number",
+                                 "SectionName":null,
+                                 "CategoryName":null,
+                                 "Properties":{
+                                    
+                                 },
+                                 "TypeChildProperties":[
+                                    
+                                 ],
+                                 "Position":0
+                              }
+                           ],
+                           "Position":0
+                        }
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"Images",
+                     "DefaultValue":null,
+                     "Title":"Images",
+                     "Type":"content",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Meta_Content_Type":"Telerik.Sitefinity.Libraries.Model.Image",
+                        "Meta_Content_AllowMultipleItemsSelection":"True",
+                        "Meta_Content_LiveData":"False",
+                        "Meta_Content_DisableInteraction":"False",
+                        "Meta_Content_ShowSiteSelector":"False",
+                        "Meta_Content_OpenMultipleItemsSelection":"False",
+                        "Meta_Content_Provider":null
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"Pages",
+                     "DefaultValue":null,
+                     "Title":"Pages",
+                     "Type":"content",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Meta_Content_Type":"Telerik.Sitefinity.Pages.Model.PageNode",
+                        "Meta_Content_AllowMultipleItemsSelection":"True",
+                        "Meta_Content_LiveData":"False",
+                        "Meta_Content_DisableInteraction":"False",
+                        "Meta_Content_ShowSiteSelector":"False",
+                        "Meta_Content_OpenMultipleItemsSelection":"False",
+                        "Meta_Content_Provider":null
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"News",
+                     "DefaultValue":null,
+                     "Title":"News",
+                     "Type":"content",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Meta_Content_Type":"Telerik.Sitefinity.News.Model.NewsItem",
+                        "Meta_Content_AllowMultipleItemsSelection":"True",
+                        "Meta_Content_LiveData":"False",
+                        "Meta_Content_DisableInteraction":"False",
+                        "Meta_Content_ShowSiteSelector":"False",
+                        "Meta_Content_OpenMultipleItemsSelection":"False",
+                        "Meta_Content_Provider":null
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"NewsLive",
+                     "DefaultValue":null,
+                     "Title":"NewsLive",
+                     "Type":"content",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Meta_Content_Type":"Telerik.Sitefinity.News.Model.NewsItem",
+                        "Meta_Content_AllowMultipleItemsSelection":"True",
+                        "Meta_Content_LiveData":"True",
+                        "Meta_Content_DisableInteraction":"False",
+                        "Meta_Content_ShowSiteSelector":"False",
+                        "Meta_Content_OpenMultipleItemsSelection":"False",
+                        "Meta_Content_Provider":null
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"Page",
+                     "DefaultValue":null,
+                     "Title":"Page",
+                     "Type":"content",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Meta_Content_Type":"Telerik.Sitefinity.Pages.Model.PageNode",
+                        "Meta_Content_AllowMultipleItemsSelection":"False",
+                        "Meta_Content_LiveData":"False",
+                        "Meta_Content_DisableInteraction":"True",
+                        "Meta_Content_ShowSiteSelector":"True",
+                        "Meta_Content_OpenMultipleItemsSelection":"False",
+                        "Meta_Content_Provider":null
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"PressReleases",
+                     "DefaultValue":null,
+                     "Title":"PressReleases",
+                     "Type":"content",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Meta_Content_Type":"Telerik.Sitefinity.DynamicTypes.Model.Pressreleases.PressRelease",
+                        "Meta_Content_AllowMultipleItemsSelection":"True",
+                        "Meta_Content_LiveData":"False",
+                        "Meta_Content_DisableInteraction":"False",
+                        "Meta_Content_ShowSiteSelector":"False",
+                        "Meta_Content_OpenMultipleItemsSelection":"False",
+                        "Meta_Content_Provider":null
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"Tags",
+                     "DefaultValue":null,
+                     "Title":"Tags",
+                     "Type":"content",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Meta_Content_Type":"Taxonomy_Tags",
+                        "Meta_Content_AllowMultipleItemsSelection":"True",
+                        "Meta_Content_OpenMultipleItemsSelection":"False",
+                        "Meta_Content_LiveData":"False",
+                        "Meta_Content_Provider":null,
+                        "Meta_Content_DisableInteraction":"False",
+                        "Meta_Content_ShowSiteSelector":"False"
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"Categories",
+                     "DefaultValue":null,
+                     "Title":"Categories",
+                     "Type":"content",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Meta_Content_Type":"Taxonomy_Categories",
+                        "Meta_Content_AllowMultipleItemsSelection":"True",
+                        "Meta_Content_OpenMultipleItemsSelection":"False",
+                        "Meta_Content_LiveData":"False",
+                        "Meta_Content_Provider":null,
+                        "Meta_Content_DisableInteraction":"False",
+                        "Meta_Content_ShowSiteSelector":"False"
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"CustomTaxonomy",
+                     "DefaultValue":null,
+                     "Title":"CustomTaxonomy",
+                     "Type":"content",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Meta_Content_Type":"Taxonomy_geographical-regions",
+                        "Meta_Content_AllowMultipleItemsSelection":"True",
+                        "Meta_Content_OpenMultipleItemsSelection":"False",
+                        "Meta_Content_LiveData":"False",
+                        "Meta_Content_Provider":null,
+                        "Meta_Content_DisableInteraction":"False",
+                        "Meta_Content_ShowSiteSelector":"False"
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"EnumRadioChoice",
+                     "DefaultValue":"Value1",
+                     "Title":"Enum as radio choice field",
+                     "Type":"radioChoices",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Meta_Choices":"[{\u0022Title\u0022:\u0022Value1\u0022,\u0022Name\u0022:\u0022Value1\u0022,\u0022Value\u0022:\u0022Value1\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Value2\u0022,\u0022Name\u0022:\u0022Value2\u0022,\u0022Value\u0022:\u0022Value2\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Value3\u0022,\u0022Name\u0022:\u0022Value3\u0022,\u0022Value\u0022:\u0022Value3\u0022,\u0022Icon\u0022:null}]",
+                        "Meta_Choices_AllowMultiple":"False"
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"IntAsChoice",
+                     "DefaultValue":"1",
+                     "Title":"Integer as choice field",
+                     "Type":"chipchoice",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Meta_Choice_Choices":"[{\u0022Title\u0022:\u00221 level\u0022,\u0022Name\u0022:\u00221\u0022,\u0022Value\u0022:1,\u0022Icon\u0022:null},{\u0022Title\u0022:\u00222 levels\u0022,\u0022Name\u0022:\u00222\u0022,\u0022Value\u0022:2,\u0022Icon\u0022:null},{\u0022Title\u0022:\u00223 levels\u0022,\u0022Name\u0022:\u00223\u0022,\u0022Value\u0022:3,\u0022Icon\u0022:null}]",
+                        "Meta_Choice_ServiceUrl":null,
+                        "Meta_Choice_ServiceCallParameters":null,
+                        "Meta_Choice_ServiceWarningMessage":null,
+                        "Meta_Choice_ActionTitle":null,
+                        "Meta_Choice_ButtonTitle":null,
+                        "Meta_Choice_NotResponsive":"False",
+                        "Meta_Choice_SideLabel":null
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"IntAsDropdownChoice",
+                     "DefaultValue":"1",
+                     "Title":"Integer as multiple choice field",
+                     "Type":"choices",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Meta_Choice_Choices":"[{\u0022Title\u0022:\u00221 level\u0022,\u0022Name\u0022:\u00221\u0022,\u0022Value\u0022:1,\u0022Icon\u0022:null},{\u0022Title\u0022:\u00222 levels\u0022,\u0022Name\u0022:\u00222\u0022,\u0022Value\u0022:2,\u0022Icon\u0022:null},{\u0022Title\u0022:\u00223 levels\u0022,\u0022Name\u0022:\u00223\u0022,\u0022Value\u0022:3,\u0022Icon\u0022:null}]",
+                        "Meta_Choice_ServiceUrl":null,
+                        "Meta_Choice_ServiceCallParameters":null,
+                        "Meta_Choice_ServiceWarningMessage":null,
+                        "Meta_Choice_ActionTitle":null,
+                        "Meta_Choice_ButtonTitle":null,
+                        "Meta_Choice_NotResponsive":"False",
+                        "Meta_Choice_SideLabel":null
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"AllTypesSelector",
+                     "DefaultValue":null,
+                     "Title":"AllTypesSelector",
+                     "Type":"content",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        "Meta_Content_Type":null,
+                        "Meta_Content_AllowMultipleItemsSelection":"True",
+                        "Meta_Content_LiveData":"False",
+                        "Meta_Content_DisableInteraction":"False",
+                        "Meta_Content_ShowSiteSelector":"False",
+                        "Meta_Content_OpenMultipleItemsSelection":"False",
+                        "Meta_Content_Provider":null
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  }
+               ],
+               "CategoryName":"Basic"
+            },
+            {
+               "Name":"First basic section",
+               "Title":"First basic section",
+               "Properties":[
+                  {
+                     "Name":"DefaultValueString",
+                     "DefaultValue":"custom",
+                     "Title":"DefaultValueString",
+                     "Type":"string",
+                     "SectionName":"First basic section",
+                     "CategoryName":null,
+                     "Properties":{
+                        
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"PlainString",
+                     "DefaultValue":null,
+                     "Title":"PlainString",
+                     "Type":"string",
+                     "SectionName":"First basic section",
+                     "CategoryName":null,
+                     "Properties":{
+                        
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"DefaultValueStringWithFallback",
+                     "DefaultValue":"custom",
+                     "Title":"DefaultValueStringWithFallback",
+                     "Type":"string",
+                     "SectionName":"First basic section",
+                     "CategoryName":null,
+                     "Properties":{
+                        "Meta_EmptyValues_EmptyValues":"[\u0022\u0022]"
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":1
+                  }
+               ],
+               "CategoryName":"Basic"
+            },
+            {
+               "Name":"Second basic section",
+               "Title":"Second basic section",
+               "Properties":[
+                  {
+                     "Name":"MirroredField",
+                     "DefaultValue":null,
+                     "Title":"MirroredField",
+                     "Type":"string",
+                     "SectionName":"Second basic section",
+                     "CategoryName":null,
+                     "Properties":{
+                        "Meta_Mirror_FieldName":"PlainString",
+                        "Meta_Mirror_FieldProperty":null,
+                        "Meta_Mirror_EnableMirroring":"True"
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":2
+                  },
+                  {
+                     "Name":"NullableDateWithDefault",
+                     "DefaultValue":"2020-09-11T06:38:11.170Z",
+                     "Title":"NullableDateWithDefault",
+                     "Type":"datetime",
+                     "SectionName":"Second basic section",
+                     "CategoryName":null,
+                     "Properties":{
+                        
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":3
+                  }
+               ],
+               "CategoryName":"Basic"
+            }
+         ]
+      },
+      {
+         "Name":"Advanced",
+         "Sections":[
+            {
+               "Name":"Main",
+               "Title":null,
+               "Properties":[
+                  {
+                     "Name":"DescriptionProp",
+                     "DefaultValue":null,
+                     "Title":"Plain description",
+                     "Type":"string",
+                     "SectionName":"Main",
+                     "CategoryName":"Advanced",
+                     "Properties":{
+                        "Meta_Description_Description":"This is the description"
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  }
+               ],
+               "CategoryName":"Advanced"
+            },
+            {
+               "Name":"AdvancedMain",
+               "Title":null,
+               "Properties":[
+                  {
+                     "Name":"SfWidgetLabel",
+                     "DefaultValue":"AllProperties",
+                     "Title":"Label",
+                     "Type":null,
+                     "SectionName":null,
+                     "CategoryName":"Advanced",
+                     "Properties":{
+                        "Meta_Description_Description":"Custom labels are displayed in the page editor for your convenience. You can change the generic name with a specific one only for this widget.",
+                        "Meta_MaxLength_Length":"30"
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"UrlField",
+                     "DefaultValue":null,
+                     "Title":"URL field",
+                     "Type":"string",
+                     "SectionName":null,
+                     "CategoryName":"Advanced",
+                     "Properties":{
+                        "Validations_Regex":"^(https?|ftp):\\/\\/(((([a-zA-Z]|\\d|-|\\.|_|~|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])|(%[\\da-fA-F]{2})|[!\\$\u0026\u0027\\(\\)\\*\\\u002B,;=]|:)*@)?(((\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5]))|((([a-zA-Z]|\\d|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])|(([a-zA-Z]|\\d|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])([a-zA-Z]|\\d|-|\\.|_|~|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])*([a-zA-Z]|\\d|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])))\\.)\u002B(([a-zA-Z]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])|(([a-zA-Z]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])([a-zA-Z]|\\d|-|\\.|_|~|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])*([a-zA-Z]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])))\\.?)(:\\d*)?)(\\/((([a-zA-Z]|\\d|-|\\.|_|~|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])|(%[\\da-fA-F]{2})|[!\\$\u0026\u0027\\(\\)\\*\\\u002B,;=]|:|@)\u002B(\\/(([a-zA-Z]|\\d|-|\\.|_|~|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])|(%[\\da-fA-F]{2})|[!\\$\u0026\u0027\\(\\)\\*\\\u002B,;=]|:|@)*)*)?)?(\\?((([a-zA-Z]|\\d|-|\\.|_|~|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])|(%[\\da-fA-F]{2})|[!\\$\u0026\u0027\\(\\)\\*\\\u002B,;=]|:|@)|[\\uE000-\\uF8FF]|\\/|\\?)*)?(\\#((([a-zA-Z]|\\d|-|\\.|_|~|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])|(%[\\da-fA-F]{2})|[!\\$\u0026\u0027\\(\\)\\*\\\u002B,;=]|:|@)|\\/|\\?)*)?$",
+                        "Validations_RegexErrorMsg":"Enter valid URL."
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  }
+               ],
+               "CategoryName":"Advanced"
+            },
+            {
+               "Name":"Attributes",
+               "Title":"Attributes",
+               "Properties":[
+                  {
+                     "Name":"Attributes",
+                     "DefaultValue":null,
+                     "Title":"Attributes for...",
+                     "Type":"attributes",
+                     "SectionName":"Attributes",
+                     "CategoryName":"Advanced",
+                     "Properties":{
+                        "Meta_LengthDependsOn_ExtraRecords":"[{\u0022Name\u0022: \u0022AllPropertiesWidget\u0022, \u0022Title\u0022: \u0022AllPropertiesWidget\u0022}]",
+                        "Meta_LengthDependsOn_PropertyName":null,
+                        "Meta_LengthDependsOn_DisplayName":"",
+                        "Meta_LengthDependsOn_DisplayTitle":""
+                     },
+                     "TypeChildProperties":[
+                        {
+                           "Name":"Keys",
+                           "DefaultValue":null,
+                           "Title":"Keys",
+                           "Type":null,
+                           "SectionName":null,
+                           "CategoryName":null,
+                           "Properties":{
+                              "Validations_Readonly":"True"
+                           },
+                           "TypeChildProperties":[
+                              
+                           ],
+                           "Position":0
+                        },
+                        {
+                           "Name":"Values",
+                           "DefaultValue":null,
+                           "Title":"Values",
+                           "Type":null,
+                           "SectionName":null,
+                           "CategoryName":null,
+                           "Properties":{
+                              "Validations_Readonly":"True"
+                           },
+                           "TypeChildProperties":[
+                              
+                           ],
+                           "Position":0
+                        }
+                     ],
+                     "Position":2
+                  }
+               ],
+               "CategoryName":"Advanced"
+            },
+            {
+               "Name":"First advanced section",
+               "Title":"First advanced section",
+               "Properties":[
+                  {
+                     "Name":"BFirstAdvancedProp",
+                     "DefaultValue":null,
+                     "Title":"BFirstAdvancedProp",
+                     "Type":"string",
+                     "SectionName":"First advanced section",
+                     "CategoryName":"Advanced",
+                     "Properties":{
+                        
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"AFirstAdvancedProp",
+                     "DefaultValue":null,
+                     "Title":"AFirstAdvancedProp",
+                     "Type":"string",
+                     "SectionName":"First advanced section",
+                     "CategoryName":"Advanced",
+                     "Properties":{
+                        
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":3
+                  }
+               ],
+               "CategoryName":"Advanced"
+            },
+            {
+               "Name":"Second advanced section",
+               "Title":"Second advanced section",
+               "Properties":[
+                  {
+                     "Name":"ASecondAdvancedProp",
+                     "DefaultValue":null,
+                     "Title":"ASecondAdvancedProp",
+                     "Type":"string",
+                     "SectionName":"Second advanced section",
+                     "CategoryName":"Advanced",
+                     "Properties":{
+                        
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"BSecondAdvancedProp",
+                     "DefaultValue":null,
+                     "Title":"BSecondAdvancedProp",
+                     "Type":"string",
+                     "SectionName":"Second advanced section",
+                     "CategoryName":"Advanced",
+                     "Properties":{
+                        
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":2
+                  }
+               ],
+               "CategoryName":"Advanced"
+            }
+         ]
+      }
+   ],
+   "PropertyMetadataFlat":[
+      {
+         "Name":"Readonly",
+         "DefaultValue":null,
+         "Title":"Readonly",
+         "Type":"string",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Validations_Readonly":"True"
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"EmailField",
+         "DefaultValue":null,
+         "Title":"Email field",
+         "Type":"string",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Validations_Regex":"^((([a-zA-Z]|\\d|[!#\\$%\u0026\u0027\\*\\\u002B\\-\\/=\\?\\^_\u0060{\\|}~]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])\u002B(\\.([a-zA-Z]|\\d|[!#\\$%\u0026\u0027\\*\\\u002B\\-\\/=\\?\\^_\u0060{\\|}~]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])\u002B)*)|((\\x22)((((\\x20|\\x09)*(\\x0d\\x0a))?(\\x20|\\x09)\u002B)?(([\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x7f]|\\x21|[\\x23-\\x5b]|[\\x5d-\\x7e]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])|(\\\\([\\x01-\\x09\\x0b\\x0c\\x0d-\\x7f]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF]))))*(((\\x20|\\x09)*(\\x0d\\x0a))?(\\x20|\\x09)\u002B)?(\\x22)))@((([a-zA-Z]|\\d|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])|(([a-zA-Z]|\\d|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])([a-zA-Z]|\\d|-|\\.|_|~|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])*([a-zA-Z]|\\d|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])))\\.)\u002B(([a-zA-Z]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])|(([a-zA-Z]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])([a-zA-Z]|\\d|-|\\.|_|~|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])*([a-zA-Z]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])))\\.?$",
+            "Validations_RegexErrorMsg":"Enter valid email."
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"PlaceHolderProp",
+         "DefaultValue":null,
+         "Title":"PlaceHolderProp",
+         "Type":"string",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Meta_Placeholder_Text":"This is the placeholder"
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"DescriptionExtendedProp",
+         "DefaultValue":null,
+         "Title":"Description",
+         "Type":"string",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Meta_Description_InlineDescription":"Inline description",
+            "Meta_Description_InstructionalNotes":"Instructional notes",
+            "Meta_Description_Description":"This is the extended description"
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"ExcludedFromCopyProp",
+         "DefaultValue":"0",
+         "Title":"ExcludedFromCopyProp",
+         "Type":"number",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Meta_Copy_Exclude":"True"
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"DoubleValidation",
+         "DefaultValue":"0",
+         "Title":"DoubleValidation",
+         "Type":"number",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Validations_DecimalPlaces":"10",
+            "Validations_MaxValue":"20",
+            "Validations_MinValue":"1",
+            "Validations_RangeErrorMsg":"\u0421\u0442\u043E\u0439\u043D\u043E\u0441\u0442 \u043C\u0435\u0436\u0434\u0443 1 \u0438 20."
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"HtmlField",
+         "DefaultValue":null,
+         "Title":"HtmlField",
+         "Type":"html",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Meta_DynamicLinksContainer_HasLinks":"True",
+            "Meta_Placeholder_Text":"This is the placeholder",
+            "Meta_ContentContainer_HasContent":"True"
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"TextAreaField",
+         "DefaultValue":"This is some text.",
+         "Title":"TextAreaField",
+         "Type":"textArea",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"Password",
+         "DefaultValue":null,
+         "Title":"Password",
+         "Type":"password",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"ColorField",
+         "DefaultValue":"#AABBCC",
+         "Title":"ColorField",
+         "Type":"color",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"Range",
+         "DefaultValue":null,
+         "Title":"Range",
+         "Type":"range",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Meta_Suffix_Value":"MB"
+         },
+         "TypeChildProperties":[
+            {
+               "Name":"Min",
+               "DefaultValue":null,
+               "Title":"Min",
+               "Type":"number",
+               "SectionName":null,
+               "CategoryName":null,
+               "Properties":{
+                  
+               },
+               "TypeChildProperties":[
+                  
+               ],
+               "Position":0
+            },
+            {
+               "Name":"Max",
+               "DefaultValue":null,
+               "Title":"Max",
+               "Type":"number",
+               "SectionName":null,
+               "CategoryName":null,
+               "Properties":{
+                  
+               },
+               "TypeChildProperties":[
+                  
+               ],
+               "Position":0
+            }
+         ],
+         "Position":0
+      },
+      {
+         "Name":"FileTypes",
+         "DefaultValue":null,
+         "Title":"File types",
+         "Type":"fileTypes",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            
+         },
+         "TypeChildProperties":[
+            {
+               "Name":"Type",
+               "DefaultValue":null,
+               "Title":"Type",
+               "Type":"string",
+               "SectionName":null,
+               "CategoryName":null,
+               "Properties":{
+                  
+               },
+               "TypeChildProperties":[
+                  
+               ],
+               "Position":0
+            },
+            {
+               "Name":"Other",
+               "DefaultValue":null,
+               "Title":"Other",
+               "Type":"string",
+               "SectionName":null,
+               "CategoryName":null,
+               "Properties":{
+                  
+               },
+               "TypeChildProperties":[
+                  
+               ],
+               "Position":0
+            }
+         ],
+         "Position":0
+      },
+      {
+         "Name":"ViewName",
+         "DefaultValue":"Default",
+         "Title":"ViewName",
+         "Type":"viewSelector",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Meta_Choices":"[{\u0022Title\u0022:\u0022Default\u0022,\u0022Name\u0022:\u0022Default\u0022,\u0022Value\u0022:\u0022Default\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Second\u0022,\u0022Name\u0022:\u0022Second\u0022,\u0022Value\u0022:\u0022Second\u0022,\u0022Icon\u0022:null}]",
+            "Meta_Choices_AllowMultiple":"False"
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"ViewNameDefaultValue",
+         "DefaultValue":"Second",
+         "Title":"ViewNameDefaultValue",
+         "Type":"viewSelector",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Meta_Choices":"[{\u0022Title\u0022:\u0022Default\u0022,\u0022Name\u0022:\u0022Default\u0022,\u0022Value\u0022:\u0022Default\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Second\u0022,\u0022Name\u0022:\u0022Second\u0022,\u0022Value\u0022:\u0022Second\u0022,\u0022Icon\u0022:null}]",
+            "Meta_Choices_AllowMultiple":"False"
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"ViewNameDefaultValueInvalid",
+         "DefaultValue":"invalid",
+         "Title":"ViewNameDefaultValueInvalid",
+         "Type":"viewSelector",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Meta_Choices":"[{\u0022Title\u0022:\u0022Default\u0022,\u0022Name\u0022:\u0022Default\u0022,\u0022Value\u0022:\u0022Default\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Second\u0022,\u0022Name\u0022:\u0022Second\u0022,\u0022Value\u0022:\u0022Second\u0022,\u0022Icon\u0022:null}]",
+            "Meta_Choices_AllowMultiple":"False"
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"ObjectWithLinks",
+         "DefaultValue":null,
+         "Title":"ObjectWithLinks",
+         "Type":"complex",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Meta_DynamicLinksContainer_HasLinks":"True"
+         },
+         "TypeChildProperties":[
+            {
+               "Name":"Link",
+               "DefaultValue":null,
+               "Title":"Link",
+               "Type":"linkInsert",
+               "SectionName":null,
+               "CategoryName":null,
+               "Properties":{
+                  
+               },
+               "TypeChildProperties":[
+                  
+               ],
+               "Position":0
+            }
+         ],
+         "Position":0
+      },
+      {
+         "Name":"Link",
+         "DefaultValue":null,
+         "Title":"Link",
+         "Type":"linkInsert",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"LinkRequired",
+         "DefaultValue":null,
+         "Title":"LinkRequired",
+         "Type":"linkInsert",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Validations_Required":"True"
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"StringLengthValidation",
+         "DefaultValue":null,
+         "Title":"String length validation",
+         "Type":"string",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Validations_MaxValue":"6",
+            "Validations_MinValue":"2",
+            "Validations_StringLengthErrorMsg":"Value should be between 2 and 6 symbols."
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"StringValidation",
+         "DefaultValue":null,
+         "Title":"StringValidation",
+         "Type":"string",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Validations_MinValue":"2",
+            "Validations_MinLengthErrorMsg":"The message length must be at least 2 symbols.",
+            "Validations_MaxValue":"10",
+            "Validations_MaxLengthErrorMsg":"The message must be less than 10 symbols."
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"StringFieldRequired",
+         "DefaultValue":null,
+         "Title":"StringFieldRequired",
+         "Type":"string",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Validations_Required":"True"
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"DateFieldRequired",
+         "DefaultValue":null,
+         "Title":"DateFieldRequired",
+         "Type":"datetime",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Validations_Required":"True",
+            "Validations_RequiredErrorMsg":"This is required date."
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"NullableDate",
+         "DefaultValue":null,
+         "Title":"NullableDate",
+         "Type":"datetime",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"DefaultValueDateTimeFromString",
+         "DefaultValue":"2020-09-11T06:38:11.170Z",
+         "Title":"DefaultValueDateTimeFromString",
+         "Type":"datetime",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"DefaultValueDateTimeFromDate",
+         "DefaultValue":"2020-09-11T06:38:11.170Z",
+         "Title":"DefaultValueDateTimeFromDate",
+         "Type":"datetime",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"DefaultValueDateTimeInvalid",
+         "DefaultValue":null,
+         "Title":"DefaultValueDateTimeInvalid",
+         "Type":"datetime",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"IntFieldRequired",
+         "DefaultValue":"0",
+         "Title":"IntFieldRequired",
+         "Type":"number",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Validations_Required":"True",
+            "Validations_RequiredErrorMsg":"This is required int."
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"IntegerValidation",
+         "DefaultValue":"0",
+         "Title":"IntegerValidation",
+         "Type":"number",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Validations_MaxValue":"20",
+            "Validations_MinValue":"1",
+            "Validations_RangeErrorMsg":"Value should be between 1 and 20."
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"IntDefaultValue",
+         "DefaultValue":"42",
+         "Title":"IntDefaultValue",
+         "Type":"number",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"PlainInt",
+         "DefaultValue":"0",
+         "Title":"PlainInt",
+         "Type":"number",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"NullableInt",
+         "DefaultValue":null,
+         "Title":"NullableInt",
+         "Type":"number",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"NullableIntWithDefault",
+         "DefaultValue":"42",
+         "Title":"NullableIntWithDefault",
+         "Type":"number",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"BoolFieldRequired",
+         "DefaultValue":"False",
+         "Title":"BoolFieldRequired",
+         "Type":"bool",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Validations_Required":"True",
+            "Validations_RequiredErrorMsg":"This is required bool."
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"ConditionalProp",
+         "DefaultValue":"False",
+         "Title":"ConditionalProp",
+         "Type":"bool",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Meta_ConditionalVisibility_Condition":"{\u0022conditions\u0022:[{\u0022fieldName\u0022:\u0022BoolFieldRequired\u0022,\u0022operator\u0022:\u0022Equals\u0022,\u0022value\u0022:\u0022true\u0022}]}"
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"BoolDefaultValue",
+         "DefaultValue":"True",
+         "Title":"BoolDefaultValue",
+         "Type":"bool",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"PlainBool",
+         "DefaultValue":"False",
+         "Title":"PlainBool",
+         "Type":"bool",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"NullableBool",
+         "DefaultValue":null,
+         "Title":"NullableBool",
+         "Type":"bool",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"NullableBoolWithDefault",
+         "DefaultValue":"True",
+         "Title":"NullableBoolWithDefault",
+         "Type":"bool",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"CheckboxField",
+         "DefaultValue":"True",
+         "Title":"Checkbox field",
+         "Type":"choiceYesNo",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Meta_Group_Name":"Options"
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"CheckboxField2",
+         "DefaultValue":"True",
+         "Title":"Checkbox field",
+         "Type":"choiceYesNo",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Meta_Group_Name":"Options"
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"EnumDefaultValue",
+         "DefaultValue":"Value2",
+         "Title":"EnumDefaultValue",
+         "Type":"choices",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Meta_Choices":"[{\u0022Title\u0022:\u0022Value1\u0022,\u0022Name\u0022:\u0022Value1\u0022,\u0022Value\u0022:\u0022Value1\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Value2\u0022,\u0022Name\u0022:\u0022Value2\u0022,\u0022Value\u0022:\u0022Value2\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Value3\u0022,\u0022Name\u0022:\u0022Value3\u0022,\u0022Value\u0022:\u0022Value3\u0022,\u0022Icon\u0022:null}]",
+            "Meta_Choices_AllowMultiple":"False"
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"NullableEnumDefaultValue",
+         "DefaultValue":"Value2",
+         "Title":"NullableEnumDefaultValue",
+         "Type":"choices",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Meta_Choices":"[{\u0022Title\u0022:\u0022Value1\u0022,\u0022Name\u0022:\u0022Value1\u0022,\u0022Value\u0022:\u0022Value1\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Value2\u0022,\u0022Name\u0022:\u0022Value2\u0022,\u0022Value\u0022:\u0022Value2\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Value3\u0022,\u0022Name\u0022:\u0022Value3\u0022,\u0022Value\u0022:\u0022Value3\u0022,\u0022Icon\u0022:null}]",
+            "Meta_Choices_AllowMultiple":"False"
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"EnumDefaultValueInvalid",
+         "DefaultValue":null,
+         "Title":"EnumDefaultValueInvalid",
+         "Type":"choices",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Meta_Choices":"[{\u0022Title\u0022:\u0022Value1\u0022,\u0022Name\u0022:\u0022Value1\u0022,\u0022Value\u0022:\u0022Value1\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Value2\u0022,\u0022Name\u0022:\u0022Value2\u0022,\u0022Value\u0022:\u0022Value2\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Value3\u0022,\u0022Name\u0022:\u0022Value3\u0022,\u0022Value\u0022:\u0022Value3\u0022,\u0022Icon\u0022:null}]",
+            "Meta_Choices_AllowMultiple":"False"
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"EnumDefaultValueMultipleInvalid",
+         "DefaultValue":null,
+         "Title":"EnumDefaultValueMultipleInvalid",
+         "Type":"multipleChoices",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Meta_Choices":"[{\u0022Title\u0022:\u0022Value1\u0022,\u0022Name\u0022:\u0022Value1\u0022,\u0022Value\u0022:\u0022Value1\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Value2\u0022,\u0022Name\u0022:\u0022Value2\u0022,\u0022Value\u0022:\u0022Value2\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Value3\u0022,\u0022Name\u0022:\u0022Value3\u0022,\u0022Value\u0022:\u0022Value3\u0022,\u0022Icon\u0022:null}]",
+            "Meta_Choices_AllowMultiple":"True"
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"EnumDefaultValueMultiple",
+         "DefaultValue":"Value1, Value2",
+         "Title":"EnumDefaultValueMultiple",
+         "Type":"multipleChoices",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Meta_Choices":"[{\u0022Title\u0022:\u0022Value1\u0022,\u0022Name\u0022:\u0022Value1\u0022,\u0022Value\u0022:\u0022Value1\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Value2\u0022,\u0022Name\u0022:\u0022Value2\u0022,\u0022Value\u0022:\u0022Value2\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Value3\u0022,\u0022Name\u0022:\u0022Value3\u0022,\u0022Value\u0022:\u0022Value3\u0022,\u0022Icon\u0022:null}]",
+            "Meta_Choices_AllowMultiple":"True"
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"NullableEnumDefaultValueMultiple",
+         "DefaultValue":"Value1, Value2",
+         "Title":"NullableEnumDefaultValueMultiple",
+         "Type":"multipleChoices",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Meta_Choices":"[{\u0022Title\u0022:\u0022Value1\u0022,\u0022Name\u0022:\u0022Value1\u0022,\u0022Value\u0022:\u0022Value1\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Value2\u0022,\u0022Name\u0022:\u0022Value2\u0022,\u0022Value\u0022:\u0022Value2\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Value3\u0022,\u0022Name\u0022:\u0022Value3\u0022,\u0022Value\u0022:\u0022Value3\u0022,\u0022Icon\u0022:null}]",
+            "Meta_Choices_AllowMultiple":"True"
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"EnumNoDefaultValue",
+         "DefaultValue":"Value1",
+         "Title":"EnumNoDefaultValue",
+         "Type":"choices",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Meta_Choices":"[{\u0022Title\u0022:\u0022Value1\u0022,\u0022Name\u0022:\u0022Value1\u0022,\u0022Value\u0022:\u0022Value1\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Value2\u0022,\u0022Name\u0022:\u0022Value2\u0022,\u0022Value\u0022:\u0022Value2\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Value3\u0022,\u0022Name\u0022:\u0022Value3\u0022,\u0022Value\u0022:\u0022Value3\u0022,\u0022Icon\u0022:null}]",
+            "Meta_Choices_AllowMultiple":"False"
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"EnumChipChoice",
+         "DefaultValue":"Value1",
+         "Title":"EnumChipChoice",
+         "Type":"chipchoice",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Meta_Choices":"[{\u0022Title\u0022:\u0022Value1\u0022,\u0022Name\u0022:\u0022Value1\u0022,\u0022Value\u0022:\u0022Value1\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Value2\u0022,\u0022Name\u0022:\u0022Value2\u0022,\u0022Value\u0022:\u0022Value2\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Value3\u0022,\u0022Name\u0022:\u0022Value3\u0022,\u0022Value\u0022:\u0022Value3\u0022,\u0022Icon\u0022:null}]",
+            "Meta_Choices_AllowMultiple":"False"
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"Complex",
+         "DefaultValue":null,
+         "Title":"Complex",
+         "Type":"complex",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            
+         },
+         "TypeChildProperties":[
+            {
+               "Name":"ChildString",
+               "DefaultValue":"test",
+               "Title":"String prop",
+               "Type":"string",
+               "SectionName":null,
+               "CategoryName":null,
+               "Properties":{
+                  
+               },
+               "TypeChildProperties":[
+                  
+               ],
+               "Position":0
+            },
+            {
+               "Name":"ChildInt",
+               "DefaultValue":"42",
+               "Title":"Int prop",
+               "Type":"number",
+               "SectionName":null,
+               "CategoryName":null,
+               "Properties":{
+                  
+               },
+               "TypeChildProperties":[
+                  
+               ],
+               "Position":0
+            }
+         ],
+         "Position":0
+      },
+      {
+         "Name":"ComplexWithContent",
+         "DefaultValue":null,
+         "Title":"ComplexWithContent",
+         "Type":"complex",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            
+         },
+         "TypeChildProperties":[
+            {
+               "Name":"Events",
+               "DefaultValue":null,
+               "Title":"Events",
+               "Type":"content",
+               "SectionName":null,
+               "CategoryName":null,
+               "Properties":{
+                  "Meta_Content_Type":"Telerik.Sitefinity.Events.Model.Event",
+                  "Meta_Content_AllowMultipleItemsSelection":"True",
+                  "Meta_Content_LiveData":"False",
+                  "Meta_Content_DisableInteraction":"False",
+                  "Meta_Content_ShowSiteSelector":"False",
+                  "Meta_Content_OpenMultipleItemsSelection":"False",
+                  "Meta_Content_Provider":null
+               },
+               "TypeChildProperties":[
+                  
+               ],
+               "Position":0
+            }
+         ],
+         "Position":0
+      },
+      {
+         "Name":"ComplexTable",
+         "DefaultValue":null,
+         "Title":"ComplexTable",
+         "Type":"complex",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Meta_TableView_Reorderable":"False",
+            "Meta_TableView_Selectable":"False",
+            "Meta_TableView_MultipleSelect":"False",
+            "Meta_TableView_ColumnTitle":"TableTitle",
+            "Meta_TableView_Enabled":"True"
+         },
+         "TypeChildProperties":[
+            {
+               "Name":"ChildString",
+               "DefaultValue":"test",
+               "Title":"String prop",
+               "Type":"string",
+               "SectionName":null,
+               "CategoryName":null,
+               "Properties":{
+                  
+               },
+               "TypeChildProperties":[
+                  
+               ],
+               "Position":0
+            },
+            {
+               "Name":"ChildInt",
+               "DefaultValue":"42",
+               "Title":"Int prop",
+               "Type":"number",
+               "SectionName":null,
+               "CategoryName":null,
+               "Properties":{
+                  
+               },
+               "TypeChildProperties":[
+                  
+               ],
+               "Position":0
+            }
+         ],
+         "Position":0
+      },
+      {
+         "Name":"MultiLevelComplexObject",
+         "DefaultValue":null,
+         "Title":"MultiLevelComplexObject",
+         "Type":"complex",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            
+         },
+         "TypeChildProperties":[
+            {
+               "Name":"ChildString",
+               "DefaultValue":"testouter",
+               "Title":"String prop",
+               "Type":"string",
+               "SectionName":null,
+               "CategoryName":null,
+               "Properties":{
+                  
+               },
+               "TypeChildProperties":[
+                  
+               ],
+               "Position":0
+            },
+            {
+               "Name":"ChildComplexObject",
+               "DefaultValue":null,
+               "Title":"Child complex prop",
+               "Type":"complex",
+               "SectionName":null,
+               "CategoryName":null,
+               "Properties":{
+                  
+               },
+               "TypeChildProperties":[
+                  {
+                     "Name":"ChildString",
+                     "DefaultValue":"test",
+                     "Title":"String prop",
+                     "Type":"string",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"ChildInt",
+                     "DefaultValue":"42",
+                     "Title":"Int prop",
+                     "Type":"number",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  }
+               ],
+               "Position":0
+            }
+         ],
+         "Position":0
+      },
+      {
+         "Name":"BigComplexTable",
+         "DefaultValue":null,
+         "Title":"BigComplexTable",
+         "Type":"complex",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Meta_TableView_Reorderable":"False",
+            "Meta_TableView_Selectable":"False",
+            "Meta_TableView_MultipleSelect":"False",
+            "Meta_TableView_ColumnTitle":"BigTableTitle",
+            "Meta_TableView_Enabled":"True"
+         },
+         "TypeChildProperties":[
+            {
+               "Name":"ChildString1",
+               "DefaultValue":"test1",
+               "Title":"String prop1",
+               "Type":"string",
+               "SectionName":null,
+               "CategoryName":null,
+               "Properties":{
+                  
+               },
+               "TypeChildProperties":[
+                  
+               ],
+               "Position":0
+            },
+            {
+               "Name":"ChildString2",
+               "DefaultValue":"test2",
+               "Title":"String prop2",
+               "Type":"string",
+               "SectionName":null,
+               "CategoryName":null,
+               "Properties":{
+                  
+               },
+               "TypeChildProperties":[
+                  
+               ],
+               "Position":0
+            },
+            {
+               "Name":"ChildString3",
+               "DefaultValue":"test3",
+               "Title":"String prop3",
+               "Type":"string",
+               "SectionName":null,
+               "CategoryName":null,
+               "Properties":{
+                  
+               },
+               "TypeChildProperties":[
+                  
+               ],
+               "Position":0
+            },
+            {
+               "Name":"ChildString4",
+               "DefaultValue":"test4",
+               "Title":"String prop4",
+               "Type":"string",
+               "SectionName":null,
+               "CategoryName":null,
+               "Properties":{
+                  
+               },
+               "TypeChildProperties":[
+                  
+               ],
+               "Position":0
+            },
+            {
+               "Name":"ChildString5",
+               "DefaultValue":"test5",
+               "Title":"String prop5",
+               "Type":"string",
+               "SectionName":null,
+               "CategoryName":null,
+               "Properties":{
+                  
+               },
+               "TypeChildProperties":[
+                  
+               ],
+               "Position":0
+            },
+            {
+               "Name":"ChildString6",
+               "DefaultValue":"test6",
+               "Title":"String prop6",
+               "Type":"string",
+               "SectionName":null,
+               "CategoryName":null,
+               "Properties":{
+                  
+               },
+               "TypeChildProperties":[
+                  
+               ],
+               "Position":0
+            }
+         ],
+         "Position":0
+      },
+      {
+         "Name":"DictionaryWithInitializer",
+         "DefaultValue":null,
+         "Title":"DictionaryWithInitializer",
+         "Type":null,
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            
+         },
+         "TypeChildProperties":[
+            {
+               "Name":"ChildString",
+               "DefaultValue":"test",
+               "Title":"String prop",
+               "Type":"string",
+               "SectionName":null,
+               "CategoryName":null,
+               "Properties":{
+                  
+               },
+               "TypeChildProperties":[
+                  
+               ],
+               "Position":0
+            },
+            {
+               "Name":"ChildInt",
+               "DefaultValue":"42",
+               "Title":"Int prop",
+               "Type":"number",
+               "SectionName":null,
+               "CategoryName":null,
+               "Properties":{
+                  
+               },
+               "TypeChildProperties":[
+                  
+               ],
+               "Position":0
+            }
+         ],
+         "Position":0
+      },
+      {
+         "Name":"Dictionary",
+         "DefaultValue":null,
+         "Title":"Dictionary",
+         "Type":null,
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            
+         },
+         "TypeChildProperties":[
+            {
+               "Name":"ChildString",
+               "DefaultValue":"test",
+               "Title":"String prop",
+               "Type":"string",
+               "SectionName":null,
+               "CategoryName":null,
+               "Properties":{
+                  
+               },
+               "TypeChildProperties":[
+                  
+               ],
+               "Position":0
+            },
+            {
+               "Name":"ChildInt",
+               "DefaultValue":"42",
+               "Title":"Int prop",
+               "Type":"number",
+               "SectionName":null,
+               "CategoryName":null,
+               "Properties":{
+                  
+               },
+               "TypeChildProperties":[
+                  
+               ],
+               "Position":0
+            }
+         ],
+         "Position":0
+      },
+      {
+         "Name":"DictionaryComplexKey",
+         "DefaultValue":null,
+         "Title":"DictionaryComplexKey",
+         "Type":null,
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"List",
+         "DefaultValue":null,
+         "Title":"List",
+         "Type":"enumerable",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"ListBool",
+         "DefaultValue":null,
+         "Title":"ListBool",
+         "Type":null,
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"ListComplexObject",
+         "DefaultValue":null,
+         "Title":"ListComplexObject",
+         "Type":"enumerable",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            
+         },
+         "TypeChildProperties":[
+            {
+               "Name":"ChildString",
+               "DefaultValue":"test",
+               "Title":"String prop",
+               "Type":"string",
+               "SectionName":null,
+               "CategoryName":null,
+               "Properties":{
+                  
+               },
+               "TypeChildProperties":[
+                  
+               ],
+               "Position":0
+            },
+            {
+               "Name":"ChildInt",
+               "DefaultValue":"42",
+               "Title":"Int prop",
+               "Type":"number",
+               "SectionName":null,
+               "CategoryName":null,
+               "Properties":{
+                  
+               },
+               "TypeChildProperties":[
+                  
+               ],
+               "Position":0
+            }
+         ],
+         "Position":0
+      },
+      {
+         "Name":"ListTableView",
+         "DefaultValue":null,
+         "Title":"ListTableView",
+         "Type":"enumerable",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Meta_TableView_Reorderable":"True",
+            "Meta_TableView_Selectable":"True",
+            "Meta_TableView_MultipleSelect":"True",
+            "Meta_TableView_ColumnTitle":null,
+            "Meta_TableView_Enabled":"True"
+         },
+         "TypeChildProperties":[
+            {
+               "Name":"ChildString",
+               "DefaultValue":"test",
+               "Title":"String prop",
+               "Type":"string",
+               "SectionName":null,
+               "CategoryName":null,
+               "Properties":{
+                  
+               },
+               "TypeChildProperties":[
+                  
+               ],
+               "Position":0
+            },
+            {
+               "Name":"ChildInt",
+               "DefaultValue":"42",
+               "Title":"Int prop",
+               "Type":"number",
+               "SectionName":null,
+               "CategoryName":null,
+               "Properties":{
+                  
+               },
+               "TypeChildProperties":[
+                  
+               ],
+               "Position":0
+            }
+         ],
+         "Position":0
+      },
+      {
+         "Name":"ListComplexObjectNoDefaults",
+         "DefaultValue":null,
+         "Title":"ListComplexObjectNoDefaults",
+         "Type":"enumerable",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            
+         },
+         "TypeChildProperties":[
+            {
+               "Name":"BoolProp",
+               "DefaultValue":null,
+               "Title":"Boolean prop",
+               "Type":"bool",
+               "SectionName":null,
+               "CategoryName":null,
+               "Properties":{
+                  
+               },
+               "TypeChildProperties":[
+                  
+               ],
+               "Position":0
+            },
+            {
+               "Name":"ChildInt",
+               "DefaultValue":null,
+               "Title":"Int prop",
+               "Type":"number",
+               "SectionName":null,
+               "CategoryName":null,
+               "Properties":{
+                  
+               },
+               "TypeChildProperties":[
+                  
+               ],
+               "Position":0
+            }
+         ],
+         "Position":0
+      },
+      {
+         "Name":"ListMultiLevelComplexObject",
+         "DefaultValue":null,
+         "Title":"ListMultiLevelComplexObject",
+         "Type":null,
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            
+         },
+         "TypeChildProperties":[
+            {
+               "Name":"ChildString",
+               "DefaultValue":"testouter",
+               "Title":"String prop",
+               "Type":"string",
+               "SectionName":null,
+               "CategoryName":null,
+               "Properties":{
+                  
+               },
+               "TypeChildProperties":[
+                  
+               ],
+               "Position":0
+            },
+            {
+               "Name":"ChildComplexObject",
+               "DefaultValue":null,
+               "Title":"Child complex prop",
+               "Type":"complex",
+               "SectionName":null,
+               "CategoryName":null,
+               "Properties":{
+                  
+               },
+               "TypeChildProperties":[
+                  {
+                     "Name":"ChildString",
+                     "DefaultValue":"test",
+                     "Title":"String prop",
+                     "Type":"string",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  },
+                  {
+                     "Name":"ChildInt",
+                     "DefaultValue":"42",
+                     "Title":"Int prop",
+                     "Type":"number",
+                     "SectionName":null,
+                     "CategoryName":null,
+                     "Properties":{
+                        
+                     },
+                     "TypeChildProperties":[
+                        
+                     ],
+                     "Position":0
+                  }
+               ],
+               "Position":0
+            }
+         ],
+         "Position":0
+      },
+      {
+         "Name":"Images",
+         "DefaultValue":null,
+         "Title":"Images",
+         "Type":"content",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Meta_Content_Type":"Telerik.Sitefinity.Libraries.Model.Image",
+            "Meta_Content_AllowMultipleItemsSelection":"True",
+            "Meta_Content_LiveData":"False",
+            "Meta_Content_DisableInteraction":"False",
+            "Meta_Content_ShowSiteSelector":"False",
+            "Meta_Content_OpenMultipleItemsSelection":"False",
+            "Meta_Content_Provider":null
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"Pages",
+         "DefaultValue":null,
+         "Title":"Pages",
+         "Type":"content",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Meta_Content_Type":"Telerik.Sitefinity.Pages.Model.PageNode",
+            "Meta_Content_AllowMultipleItemsSelection":"True",
+            "Meta_Content_LiveData":"False",
+            "Meta_Content_DisableInteraction":"False",
+            "Meta_Content_ShowSiteSelector":"False",
+            "Meta_Content_OpenMultipleItemsSelection":"False",
+            "Meta_Content_Provider":null
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"News",
+         "DefaultValue":null,
+         "Title":"News",
+         "Type":"content",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Meta_Content_Type":"Telerik.Sitefinity.News.Model.NewsItem",
+            "Meta_Content_AllowMultipleItemsSelection":"True",
+            "Meta_Content_LiveData":"False",
+            "Meta_Content_DisableInteraction":"False",
+            "Meta_Content_ShowSiteSelector":"False",
+            "Meta_Content_OpenMultipleItemsSelection":"False",
+            "Meta_Content_Provider":null
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"NewsLive",
+         "DefaultValue":null,
+         "Title":"NewsLive",
+         "Type":"content",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Meta_Content_Type":"Telerik.Sitefinity.News.Model.NewsItem",
+            "Meta_Content_AllowMultipleItemsSelection":"True",
+            "Meta_Content_LiveData":"True",
+            "Meta_Content_DisableInteraction":"False",
+            "Meta_Content_ShowSiteSelector":"False",
+            "Meta_Content_OpenMultipleItemsSelection":"False",
+            "Meta_Content_Provider":null
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"Page",
+         "DefaultValue":null,
+         "Title":"Page",
+         "Type":"content",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Meta_Content_Type":"Telerik.Sitefinity.Pages.Model.PageNode",
+            "Meta_Content_AllowMultipleItemsSelection":"False",
+            "Meta_Content_LiveData":"False",
+            "Meta_Content_DisableInteraction":"True",
+            "Meta_Content_ShowSiteSelector":"True",
+            "Meta_Content_OpenMultipleItemsSelection":"False",
+            "Meta_Content_Provider":null
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"PressReleases",
+         "DefaultValue":null,
+         "Title":"PressReleases",
+         "Type":"content",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Meta_Content_Type":"Telerik.Sitefinity.DynamicTypes.Model.Pressreleases.PressRelease",
+            "Meta_Content_AllowMultipleItemsSelection":"True",
+            "Meta_Content_LiveData":"False",
+            "Meta_Content_DisableInteraction":"False",
+            "Meta_Content_ShowSiteSelector":"False",
+            "Meta_Content_OpenMultipleItemsSelection":"False",
+            "Meta_Content_Provider":null
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"Tags",
+         "DefaultValue":null,
+         "Title":"Tags",
+         "Type":"content",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Meta_Content_Type":"Taxonomy_Tags",
+            "Meta_Content_AllowMultipleItemsSelection":"True",
+            "Meta_Content_OpenMultipleItemsSelection":"False",
+            "Meta_Content_LiveData":"False",
+            "Meta_Content_Provider":null,
+            "Meta_Content_DisableInteraction":"False",
+            "Meta_Content_ShowSiteSelector":"False"
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"Categories",
+         "DefaultValue":null,
+         "Title":"Categories",
+         "Type":"content",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Meta_Content_Type":"Taxonomy_Categories",
+            "Meta_Content_AllowMultipleItemsSelection":"True",
+            "Meta_Content_OpenMultipleItemsSelection":"False",
+            "Meta_Content_LiveData":"False",
+            "Meta_Content_Provider":null,
+            "Meta_Content_DisableInteraction":"False",
+            "Meta_Content_ShowSiteSelector":"False"
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"CustomTaxonomy",
+         "DefaultValue":null,
+         "Title":"CustomTaxonomy",
+         "Type":"content",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Meta_Content_Type":"Taxonomy_geographical-regions",
+            "Meta_Content_AllowMultipleItemsSelection":"True",
+            "Meta_Content_OpenMultipleItemsSelection":"False",
+            "Meta_Content_LiveData":"False",
+            "Meta_Content_Provider":null,
+            "Meta_Content_DisableInteraction":"False",
+            "Meta_Content_ShowSiteSelector":"False"
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"EnumRadioChoice",
+         "DefaultValue":"Value1",
+         "Title":"Enum as radio choice field",
+         "Type":"radioChoices",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Meta_Choices":"[{\u0022Title\u0022:\u0022Value1\u0022,\u0022Name\u0022:\u0022Value1\u0022,\u0022Value\u0022:\u0022Value1\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Value2\u0022,\u0022Name\u0022:\u0022Value2\u0022,\u0022Value\u0022:\u0022Value2\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Value3\u0022,\u0022Name\u0022:\u0022Value3\u0022,\u0022Value\u0022:\u0022Value3\u0022,\u0022Icon\u0022:null}]",
+            "Meta_Choices_AllowMultiple":"False"
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"IntAsChoice",
+         "DefaultValue":"1",
+         "Title":"Integer as choice field",
+         "Type":"chipchoice",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Meta_Choice_Choices":"[{\u0022Title\u0022:\u00221 level\u0022,\u0022Name\u0022:\u00221\u0022,\u0022Value\u0022:1,\u0022Icon\u0022:null},{\u0022Title\u0022:\u00222 levels\u0022,\u0022Name\u0022:\u00222\u0022,\u0022Value\u0022:2,\u0022Icon\u0022:null},{\u0022Title\u0022:\u00223 levels\u0022,\u0022Name\u0022:\u00223\u0022,\u0022Value\u0022:3,\u0022Icon\u0022:null}]",
+            "Meta_Choice_ServiceUrl":null,
+            "Meta_Choice_ServiceCallParameters":null,
+            "Meta_Choice_ServiceWarningMessage":null,
+            "Meta_Choice_ActionTitle":null,
+            "Meta_Choice_ButtonTitle":null,
+            "Meta_Choice_NotResponsive":"False",
+            "Meta_Choice_SideLabel":null
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"IntAsDropdownChoice",
+         "DefaultValue":"1",
+         "Title":"Integer as multiple choice field",
+         "Type":"choices",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Meta_Choice_Choices":"[{\u0022Title\u0022:\u00221 level\u0022,\u0022Name\u0022:\u00221\u0022,\u0022Value\u0022:1,\u0022Icon\u0022:null},{\u0022Title\u0022:\u00222 levels\u0022,\u0022Name\u0022:\u00222\u0022,\u0022Value\u0022:2,\u0022Icon\u0022:null},{\u0022Title\u0022:\u00223 levels\u0022,\u0022Name\u0022:\u00223\u0022,\u0022Value\u0022:3,\u0022Icon\u0022:null}]",
+            "Meta_Choice_ServiceUrl":null,
+            "Meta_Choice_ServiceCallParameters":null,
+            "Meta_Choice_ServiceWarningMessage":null,
+            "Meta_Choice_ActionTitle":null,
+            "Meta_Choice_ButtonTitle":null,
+            "Meta_Choice_NotResponsive":"False",
+            "Meta_Choice_SideLabel":null
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"AllTypesSelector",
+         "DefaultValue":null,
+         "Title":"AllTypesSelector",
+         "Type":"content",
+         "SectionName":null,
+         "CategoryName":null,
+         "Properties":{
+            "Meta_Content_Type":null,
+            "Meta_Content_AllowMultipleItemsSelection":"True",
+            "Meta_Content_LiveData":"False",
+            "Meta_Content_DisableInteraction":"False",
+            "Meta_Content_ShowSiteSelector":"False",
+            "Meta_Content_OpenMultipleItemsSelection":"False",
+            "Meta_Content_Provider":null
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"DefaultValueString",
+         "DefaultValue":"custom",
+         "Title":"DefaultValueString",
+         "Type":"string",
+         "SectionName":"First basic section",
+         "CategoryName":null,
+         "Properties":{
+            
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"PlainString",
+         "DefaultValue":null,
+         "Title":"PlainString",
+         "Type":"string",
+         "SectionName":"First basic section",
+         "CategoryName":null,
+         "Properties":{
+            
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"DefaultValueStringWithFallback",
+         "DefaultValue":"custom",
+         "Title":"DefaultValueStringWithFallback",
+         "Type":"string",
+         "SectionName":"First basic section",
+         "CategoryName":null,
+         "Properties":{
+            "Meta_EmptyValues_EmptyValues":"[\u0022\u0022]"
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":1
+      },
+      {
+         "Name":"MirroredField",
+         "DefaultValue":null,
+         "Title":"MirroredField",
+         "Type":"string",
+         "SectionName":"Second basic section",
+         "CategoryName":null,
+         "Properties":{
+            "Meta_Mirror_FieldName":"PlainString",
+            "Meta_Mirror_FieldProperty":null,
+            "Meta_Mirror_EnableMirroring":"True"
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":2
+      },
+      {
+         "Name":"NullableDateWithDefault",
+         "DefaultValue":"2020-09-11T06:38:11.170Z",
+         "Title":"NullableDateWithDefault",
+         "Type":"datetime",
+         "SectionName":"Second basic section",
+         "CategoryName":null,
+         "Properties":{
+            
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":3
+      },
+      {
+         "Name":"DescriptionProp",
+         "DefaultValue":null,
+         "Title":"Plain description",
+         "Type":"string",
+         "SectionName":"Main",
+         "CategoryName":"Advanced",
+         "Properties":{
+            "Meta_Description_Description":"This is the description"
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"SfWidgetLabel",
+         "DefaultValue":"AllProperties",
+         "Title":"Label",
+         "Type":null,
+         "SectionName":null,
+         "CategoryName":"Advanced",
+         "Properties":{
+            "Meta_Description_Description":"Custom labels are displayed in the page editor for your convenience. You can change the generic name with a specific one only for this widget.",
+            "Meta_MaxLength_Length":"30"
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"UrlField",
+         "DefaultValue":null,
+         "Title":"URL field",
+         "Type":"string",
+         "SectionName":null,
+         "CategoryName":"Advanced",
+         "Properties":{
+            "Validations_Regex":"^(https?|ftp):\\/\\/(((([a-zA-Z]|\\d|-|\\.|_|~|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])|(%[\\da-fA-F]{2})|[!\\$\u0026\u0027\\(\\)\\*\\\u002B,;=]|:)*@)?(((\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5]))|((([a-zA-Z]|\\d|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])|(([a-zA-Z]|\\d|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])([a-zA-Z]|\\d|-|\\.|_|~|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])*([a-zA-Z]|\\d|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])))\\.)\u002B(([a-zA-Z]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])|(([a-zA-Z]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])([a-zA-Z]|\\d|-|\\.|_|~|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])*([a-zA-Z]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])))\\.?)(:\\d*)?)(\\/((([a-zA-Z]|\\d|-|\\.|_|~|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])|(%[\\da-fA-F]{2})|[!\\$\u0026\u0027\\(\\)\\*\\\u002B,;=]|:|@)\u002B(\\/(([a-zA-Z]|\\d|-|\\.|_|~|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])|(%[\\da-fA-F]{2})|[!\\$\u0026\u0027\\(\\)\\*\\\u002B,;=]|:|@)*)*)?)?(\\?((([a-zA-Z]|\\d|-|\\.|_|~|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])|(%[\\da-fA-F]{2})|[!\\$\u0026\u0027\\(\\)\\*\\\u002B,;=]|:|@)|[\\uE000-\\uF8FF]|\\/|\\?)*)?(\\#((([a-zA-Z]|\\d|-|\\.|_|~|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])|(%[\\da-fA-F]{2})|[!\\$\u0026\u0027\\(\\)\\*\\\u002B,;=]|:|@)|\\/|\\?)*)?$",
+            "Validations_RegexErrorMsg":"Enter valid URL."
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"Attributes",
+         "DefaultValue":null,
+         "Title":"Attributes for...",
+         "Type":"attributes",
+         "SectionName":"Attributes",
+         "CategoryName":"Advanced",
+         "Properties":{
+            "Meta_LengthDependsOn_ExtraRecords":"[{\u0022Name\u0022: \u0022AllPropertiesWidget\u0022, \u0022Title\u0022: \u0022AllPropertiesWidget\u0022}]",
+            "Meta_LengthDependsOn_PropertyName":null,
+            "Meta_LengthDependsOn_DisplayName":"",
+            "Meta_LengthDependsOn_DisplayTitle":""
+         },
+         "TypeChildProperties":[
+            {
+               "Name":"Keys",
+               "DefaultValue":null,
+               "Title":"Keys",
+               "Type":null,
+               "SectionName":null,
+               "CategoryName":null,
+               "Properties":{
+                  "Validations_Readonly":"True"
+               },
+               "TypeChildProperties":[
+                  
+               ],
+               "Position":0
+            },
+            {
+               "Name":"Values",
+               "DefaultValue":null,
+               "Title":"Values",
+               "Type":null,
+               "SectionName":null,
+               "CategoryName":null,
+               "Properties":{
+                  "Validations_Readonly":"True"
+               },
+               "TypeChildProperties":[
+                  
+               ],
+               "Position":0
+            }
+         ],
+         "Position":2
+      },
+      {
+         "Name":"BFirstAdvancedProp",
+         "DefaultValue":null,
+         "Title":"BFirstAdvancedProp",
+         "Type":"string",
+         "SectionName":"First advanced section",
+         "CategoryName":"Advanced",
+         "Properties":{
+            
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"AFirstAdvancedProp",
+         "DefaultValue":null,
+         "Title":"AFirstAdvancedProp",
+         "Type":"string",
+         "SectionName":"First advanced section",
+         "CategoryName":"Advanced",
+         "Properties":{
+            
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":3
+      },
+      {
+         "Name":"ASecondAdvancedProp",
+         "DefaultValue":null,
+         "Title":"ASecondAdvancedProp",
+         "Type":"string",
+         "SectionName":"Second advanced section",
+         "CategoryName":"Advanced",
+         "Properties":{
+            
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":0
+      },
+      {
+         "Name":"BSecondAdvancedProp",
+         "DefaultValue":null,
+         "Title":"BSecondAdvancedProp",
+         "Type":"string",
+         "SectionName":"Second advanced section",
+         "CategoryName":"Advanced",
+         "Properties":{
+            
+         },
+         "TypeChildProperties":[
+            
+         ],
+         "Position":2
+      }
+   ]
+}
