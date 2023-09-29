@@ -44,15 +44,3 @@ If you wish to run the local node dev server under https, generate an ssl certif
 * **'SSL_CRT_FILE'** -> The crt file for https [See](./SSL.md).
 * **'SSL_KEY_FILE'** -> The key file for https [See](./SSL.md).
 
-# Deployment
-
-When you are ready with the development phase, you must deploy the files to the CMS, so that content editors can start working on building the layout of the pages. This minimizes the cost not host two applications (React Renderer + CMS). The developer hosts the production files on the file system of the CMS application under the following folder template(casing is important for the renderer folder):
-
-/sitefinity/public/renderers/React
-
-Run in the console
-``` bash
-    npm run build
-```
-
-The files are deployed to the build folder. All of the resource URLs are prefixed with '/sitefinity/public/renderers/React' as set in the 'PUBLIC_URL' environment variable.
