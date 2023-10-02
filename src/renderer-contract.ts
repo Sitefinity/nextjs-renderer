@@ -13,7 +13,29 @@ export class RendererContractImpl implements RendererContract {
 
     // html string to change the widget and rerender it
     renderWidget(args: RenderWidgetArgs): Promise<RenderResult> {
-        return new Promise((resolve) => {``
+        const widgetMetadata = widgetRegistry.widgets[args.model.Name];
+
+        if ((widgetMetadata as any).ssr) {
+            return new Promise((resolve) => {
+                const serializedModel = JSON.stringify(args.model);
+                const modelAsBase64String = btoa(serializedModel);
+                fetch(`/render?sfaction=edit&sf_culture=${args.dataItem.culture}&sf_site=${args.siteId}&sf_page_node=${args.dataItem.key}&model=${modelAsBase64String}`).then((response) => {
+                    response.text().then((html) => {
+                        var rootDoc = document.createElement('html');
+                        rootDoc.innerHTML = html;
+                        const renderedElement = rootDoc.lastElementChild?.firstChild?.firstChild as HTMLElement;
+
+                        resolve(<RenderResult>{
+                            element: renderedElement,
+                            content: "",
+                            scripts: []
+                        });
+                    });
+                });
+            });
+        }
+
+        return new Promise((resolve) => {
             const tempElement = document.createElement("div");
             const context: RequestContext = {
                 detailItem: null,
@@ -25,7 +47,6 @@ export class RendererContractImpl implements RendererContract {
             const component = RenderWidgetService.createComponent(args.model, context);
 
             createRoot(tempElement).render(component);
-            // ReactDOM.render(component, tempElement);
             setTimeout(() => {
                 resolve({
                     element: tempElement.firstElementChild as HTMLElement,

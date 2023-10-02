@@ -9,14 +9,15 @@ import sitefinityContentListJson from './components/content-list/designer-metada
 
 export const widgetRegistry: WidgetRegistry = {
     widgets: {
-        "SitefinityContentBlock":  {
+        "SitefinityContentBlock":  <any>{
             designerMetadata: sitefinityContentBlockJson,
             componentType: ContentBlock,
             editorMetadata: {
                 Title: "Content block"
-            }
+            },
+            ssr: true
         },
-        "SitefinitySection": {
+        "SitefinitySection": <any>{
             designerMetadata: sitefinitySectionJson,
             componentType: Section,
             selectorCategory: 'Layout',
