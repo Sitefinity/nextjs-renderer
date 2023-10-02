@@ -3,6 +3,7 @@ import { RequestContext } from "./request-context";
 import { WidgetContext } from "../widgets/widget-context";
 import { WidgetModel } from "../widgets/widget-model";
 import { WidgetRegistry } from "../widgets/widget-registry";
+import { WidgetExecutionError } from "@/components/error/widget-execution-error-component";
 
 export class RenderWidgetService {
     public static widgetRegistry: WidgetRegistry;
@@ -18,8 +19,23 @@ export class RenderWidgetService {
             requestContext: requestContext
         };
 
-        const element = React.createElement(registeredType.componentType, { key: widgetModel.Id, ...propsForWidget }, );
-        return element;
+        try {
+            const element = React.createElement(registeredType.componentType, { key: widgetModel.Id, ...propsForWidget });
+            return element;
+        } catch (err) {
+            if (requestContext.isEdit) {
+                const errCast = err as Error;
+                const errorProps = {
+                    context: propsForWidget,
+                    error: errCast.message
+                }
+
+                const errorElement = React.createElement(WidgetExecutionError, errorProps);
+                return errorElement;
+            }
+
+            return null;
+        }
     }
 }
 
