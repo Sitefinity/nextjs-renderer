@@ -10,10 +10,3 @@ export async function WidgetExecutionError(props: { error: string, context: Widg
     );
 }
 
-export class ContentBlockEntity {
-    Content!: string;
-    ExcludeFromSearchIndex!: boolean;
-    ProviderName!: string;
-    SharedContentID!: string;
-    WrapperCssClass!: string;
-}
