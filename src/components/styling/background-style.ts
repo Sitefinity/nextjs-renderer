@@ -1,5 +1,5 @@
 import { SdkItem } from "@/framework/sdk/dto/sdk-item";
-import { ImagePosition } from "./position";
+import { ImagePosition } from "./image-position";
 
 export interface BackgroundStyle {
     BackgroundType: "None" | "Color" | "Image" | "Video";
