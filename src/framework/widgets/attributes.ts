@@ -3,10 +3,10 @@ import { LinkModel } from "../interfaces/LinkModel";
 import { WidgetContext } from "./widget-context";
 import { CTAPart } from "@/components/call-to-action/call-to-action";
 
-export function htmlAttributes(widgetContext: WidgetContext<any>) {
+export function htmlAttributes(widgetContext: WidgetContext<any>, error: string | undefined = undefined) {
     const model = widgetContext.model;
     const metadata = widgetContext.metadata;
-    const editorMetadata = metadata.editorMetadata;
+    const editorMetadata = metadata?.editorMetadata;
 
     const attributes: any = {
         "data-sfname": model.Name,
@@ -29,11 +29,15 @@ export function htmlAttributes(widgetContext: WidgetContext<any>) {
         }
     }
 
-    attributes["data-sfiscontentwidget"] = widgetContext.metadata.selectorCategory !== "Layout";
+    attributes["data-sfiscontentwidget"] = widgetContext.metadata?.selectorCategory !== "Layout";
     attributes["data-sfisemptyvisualhidden"] = false;
     attributes["data-sfisempty"] = false;
     attributes["draggable"] = true;
     attributes["data-sfhasquickeditoperation"] = true;
+
+    if (error) {
+        attributes["data-sferror"] = error;
+    }
 
     return attributes;
 }
