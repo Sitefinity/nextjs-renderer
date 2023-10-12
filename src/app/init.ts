@@ -1,6 +1,6 @@
-import { RootUrlService } from "@/framework/sdk/root-url.service";
-import { ServiceMetadata } from "@/framework/sdk/service-metadata";
-import { RenderWidgetService } from "@/framework/services/render-widget-service";
+import { RootUrlService } from "sitefinity-react-framework/sdk/root-url.service";
+import { ServiceMetadata } from "sitefinity-react-framework/sdk/service-metadata";
+import { RenderWidgetService } from "sitefinity-react-framework/services/render-widget-service";
 import { widgetRegistry } from "@/widget-registry";
 
 export async function initStaticParams() {

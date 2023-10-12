@@ -1,12 +1,13 @@
 import React from "react";
-import { generateAnchorAttrsFromLink, getCustomAttributes, htmlAttributes } from "@/framework/widgets/attributes";
-import { WidgetContext } from "@/framework/widgets/widget-context";
-import { classNames } from "@/framework/utils/classNames";
-import { LinkModel } from "@/framework/interfaces/LinkModel";
 import { StyleGenerator } from "../styling/style-generator.service";
 import { OffsetStyle } from "../styling/offset-style";
 import { Alignment } from "../styling/alignment";
 import { ButtonType } from "../styling/button-types";
+import { generateAnchorAttrsFromLink, htmlAttributes } from "sitefinity-react-framework/widgets/attributes";
+import { classNames } from "sitefinity-react-framework/utils/classNames";
+import { WidgetContext } from "sitefinity-react-framework/widgets/widget-context";
+import { CustomAttribute } from "../styling/custom-attribute";
+import { LinkModel } from "sitefinity-react-framework/interfaces/LinkModel";
 
 export type CTAPart = "Wrapper" | "Primary" | "Secondary";
 
@@ -80,4 +81,15 @@ export class CallToActionEntity {
     };
     CssClass?: string;
     Margins?: OffsetStyle;
+}
+
+const getCustomAttributes = (attributes: any, part: CTAPart) => {
+    if (!attributes || !attributes[part]){
+        return {};
+    }
+
+    return attributes[part].reduce(
+        (current: object, customAttribute: CustomAttribute) => {
+            return ({ ...current, [customAttribute.Key]: customAttribute.Value})
+        }, {});
 }

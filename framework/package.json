@@ -1,0 +1,13 @@
+{
+  "name": "sitefinity-react-renderer-framework",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@types/react": "18.2.28",
+    "react": "18.2.0",
+    "typescript": "5.2.2"
+  },
+  "scripts": {
+    "build": "tsc"
+  }
+}
