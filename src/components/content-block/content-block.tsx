@@ -2,10 +2,12 @@ import React from "react";
 import { htmlAttributes } from "sitefinity-react-framework/widgets/attributes";
 import { RestService } from "sitefinity-react-framework/sdk/rest-service";
 import { WidgetContext } from "sitefinity-react-framework/widgets/widget-context";
+import dompurify from "isomorphic-dompurify";
 
 export async function ContentBlock(props: WidgetContext<ContentBlockEntity>) {
 
     const dataAttributes = htmlAttributes(props);
+    const sanitizer = dompurify.sanitize;
     if (props.model.Properties.WrapperCssClass)
         dataAttributes["class"] = props.model.Properties.WrapperCssClass;
 
@@ -16,7 +18,7 @@ export async function ContentBlock(props: WidgetContext<ContentBlockEntity>) {
     }
 
     return (
-        <div {...dataAttributes as any} dangerouslySetInnerHTML={{ __html: content || "" }} />
+        <div {...dataAttributes as any} dangerouslySetInnerHTML={{ __html: sanitizer(content) || "" }} />
     );
 }
 

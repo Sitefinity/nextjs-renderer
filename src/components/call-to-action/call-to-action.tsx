@@ -34,7 +34,7 @@ export async function CallToAction(props: WidgetContext<CallToActionEntity>) {
         marginClass
         );
     dataAttributes["data-sfemptyicontext"] = "Create call to action";
-
+    dataAttributes["data-sfhasquickeditoperation"] = true;
     return (
         <div
             {...dataAttributes}
