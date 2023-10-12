@@ -11,46 +11,37 @@ import { NavigationRestService } from "./navigation.service";
 import { Horizontal } from "./horizontal.tsx";
 import { Accordion } from "./accordion.tsx";
 import { Vertical } from "./vertical.tsx";
+import { VerticalSitemap } from "./vertical-sitemap.tsx";
 import { Tabs } from "./tabs.tsx";
 
-export type NavgationViewName = "Horizontal" | "Tabs" | "Accordion" | "Vertical";
+export type NavgationViewName = "Horizontal" | "Tabs" | "Accordion" | "Vertical" | "VerticalSitemap";
 
 export async function Navigation(props: WidgetContext<NavigationEntity>) {
     const properties = props.model.Properties;
     const dataAttributes = htmlAttributes(props);
     const viewName = props.model.Properties.SfViewName;
-
     const items = await NavigationRestService.getItems(props.model.Properties, props.model);
+    const marginClass = properties.Margins && StyleGenerator.getMarginClasses(properties.Margins);
+    const primaryCustomAttributes = getCustomAttributes(properties.Attributes, 'Navigation');
 
-    // const defaultClass =  `d-flex align-items-center ${properties.CssClass}`.trim();
-    // const positionClass = StyleGenerator.getAlignmentClasses(properties.Position ? properties.Position.CTA.Alignment : 'Left');
-    // const marginClass = properties.Margins && StyleGenerator.getMarginClasses(properties.Margins);
-    // const primaryAnchorAttributes = generateAnchorAttrsFromLink(properties.PrimaryActionLink);
-    // const secondaryAnchorAttributes =generateAnchorAttrsFromLink(properties.PrimaryActionLink);
-    // const wrapperCustomAttributes = getCustomAttributes(properties.Attributes, 'Wrapper');
-    // const primaryCustomAttributes = getCustomAttributes(properties.Attributes, 'Primary');
-    // const secondaryCustomAttributes = getCustomAttributes(properties.Attributes, 'Secondary');
-    // const primaryClass = properties.Style ? properties.Style.Primary.DisplayStyle : 'Primary';
-    // const secondaryClass = properties.Style ? properties.Style.Secondary.DisplayStyle : 'Secondary';
-    // const primaryButtonClass = StyleGenerator.getButtonClasses(primaryClass)
-    // const secondaryButtonClass = StyleGenerator.getButtonClasses(secondaryClass)
-
-    // dataAttributes["className"] = classNames(
-    //     defaultClass,
-    //     positionClass,
-    //     marginClass
-    //     );
-    // dataAttributes["data-sfemptyicontext"] = "Create call to action";
+    dataAttributes["className"] = classNames(
+        marginClass
+    );
+    dataAttributes["data-sfemptyicontext"] = "No pages have been published";
+    dataAttributes["data-sfhasquickeditoperation"] = true;
+    dataAttributes["data-sfemptyiconaction"] = 'None';
+    dataAttributes["data-sfemptyicon"] = 'file-text-o';
 
     return (
         <div
             {...dataAttributes}
-      //      {...wrapperCustomAttributes}
+            {...primaryCustomAttributes}
         >
-            { !viewName && <Accordion items={items.value} />}
-            { viewName === 'Horizontal' && <Horizontal items={items.value} />}
-            { viewName === 'Tabs' && <Tabs items={items.value} />}
-            { viewName === 'Vertical' && <Vertical items={items.value} />}
+            { !viewName && <Accordion items={items.value || []} />}
+            { viewName === 'Horizontal' && <Horizontal items={items.value || []} />}
+            { viewName === 'Tabs' && <Tabs items={items.value || []} />}
+            { viewName === 'Vertical' && <Vertical items={items.value || []} />}
+            { viewName === 'VerticalSitemap' && <VerticalSitemap items={items.value || []} />}
         </div>
     );
 }

@@ -2,15 +2,7 @@ import React from "react";
 import { classNames } from '../../framework/utils/classNames'
 import { getUniqueId } from '../../framework/utils/getUniqueId'
 import { PageViewModel } from './interfaces/PageViewModel'
-
-const getClass = (node: PageViewModel) => {
-    if (node.IsCurrentlyOpened)
-    {
-        return "active";
-    }
-
-    return null;
-}
+import { getClass } from './utils';
 
 const getAccordionButtonStateClass = (node: PageViewModel) =>{
     if (!node.IsCurrentlyOpened && !node.HasChildOpen)

@@ -17,11 +17,11 @@ export class NavigationRestService {
     static getItems(entity: NavigationEntity, model?: any): Promise<CollectionResponse<SdkItem>> {
         const getAllArgs: any = {
             selectionModeString: entity.SelectionMode || "",
-            levelsToInclude: entity.LevelsToInclude || "",
-            showParentPage: entity.ShowParentPage || "",
+            levelsToInclude: entity.LevelsToInclude || 1,
+            showParentPage: entity.ShowParentPage || false,
        //     selectedPageId: "", // selectedPageId || "",
-            'sf_page_node': model.Id
-            //  selectedPages: entity.CustomSelectedPages.ItemIdsOrdered,
+            'sf_page_node': model.Id,
+           //  selectedPages: entity.CustomSelectedPages.ItemIdsOrdered
         };
 
         return RestService.getPages(getAllArgs);
