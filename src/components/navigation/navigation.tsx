@@ -30,7 +30,7 @@ export async function Navigation(props: WidgetContext<NavigationEntity>) {
     dataAttributes["data-sfemptyicontext"] = "No pages have been published";
     dataAttributes["data-sfhasquickeditoperation"] = true;
     dataAttributes["data-sfemptyiconaction"] = 'None';
-    dataAttributes["data-sfemptyicon"] = 'file-text-o';
+    dataAttributes["data-sfemptyicon"] = 'tag';
 
     return (
         <div

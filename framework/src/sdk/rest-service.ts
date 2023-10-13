@@ -17,6 +17,13 @@ export class RestService {
         return fetch(wholeUrl, { headers: { "X-Requested-With": "react" } }).then(x => x.json());
     }
 
+    public static getTokens(taxonomyUrl: string, queryParamsForMethod: any, contentText: string): any{
+        const wholeUrl = `${RestService.buildItemBaseUrl(taxonomyUrl)}/Default.GetTaxons(${contentText})${RestService.buildQueryParams(queryParamsForMethod)}`;
+        console.log('wholeUrl', wholeUrl)
+        return fetch(wholeUrl,
+         { headers: { "X-Requested-With": "react" } }).then(x => x.json());
+    }
+
     public static getPages(queryParamsForMethod: any): any{
         const wholeUrl = `${RestService.buildItemBaseUrl(RestSdkTypes.Pages)}/Default.HierarhicalByLevelsResponse()${RestService.buildQueryParams(queryParamsForMethod)}`;
         return fetch(wholeUrl,
