@@ -6,6 +6,7 @@ import { WidgetRegistry } from "../widgets/widget-registry";
 
 export class RenderWidgetService {
     public static widgetRegistry: WidgetRegistry;
+    public static errorComponentType: any;
 
     public static createComponent(widgetModel: WidgetModel<any>, requestContext: RequestContext) {
         const registeredType = RenderWidgetService.widgetRegistry.widgets[widgetModel.Name];
@@ -18,8 +19,23 @@ export class RenderWidgetService {
             requestContext: requestContext
         };
 
-        const element = React.createElement(registeredType.componentType, { key: widgetModel.Id, ...propsForWidget });
-        return element;
+        try {
+            const element = React.createElement(registeredType.componentType, { key: widgetModel.Id, ...propsForWidget });
+            return element;
+        } catch (err) {
+            if (requestContext.isEdit) {
+                const errCast = err as Error;
+                const errorProps = {
+                    context: propsForWidget,
+                    error: errCast.message
+                }
+
+                const errorElement = React.createElement(RenderWidgetService.errorComponentType, errorProps);
+                return errorElement;
+            }
+
+            return null;
+        }
     }
 }
 
