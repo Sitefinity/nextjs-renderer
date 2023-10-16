@@ -16,8 +16,9 @@ export class NavigationRestService {
                 'sf_page_node': model.Id,
             //  selectedPages: entity.CustomSelectedPages.ItemIdsOrdered
             };
+            const action = 'Default.HierarhicalByLevelsResponse()'
 
-            return RestService.getPages(getAllArgs);
+            return RestService.getPages(action, getAllArgs);
         }
        return Promise.resolve(({ Items: [], TotalCount: 0 }));
     }
