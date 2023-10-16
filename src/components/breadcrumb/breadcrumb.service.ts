@@ -1,5 +1,5 @@
 import { CollectionResponse } from "@/framework/sdk/dto/collection-response";
-import { RestService } from "@/framework/sdk/rest-service";
+import { RestService, RestSdkTypes } from "@/framework/sdk/rest-service";
 import { SdkItem } from "@/framework/sdk/dto/sdk-item";
 import { BreadcrumbEntity } from "./breadcrumb";
 
@@ -28,9 +28,9 @@ export class BreadcrumbRestService {
 
 
 
-            const action = 'Default.GetBreadcrumb()'
+            const action = 'Default.GetBreadcrumb';
 
-            return RestService.getPages(action, getAllArgs);
+            return RestService.getCustomItems(RestSdkTypes.Pages, action, getAllArgs);
         }
        return Promise.resolve(({ Items: [], TotalCount: 0 }));
     }

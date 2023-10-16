@@ -5,7 +5,7 @@ import { ClassificationEntity } from "./classification";
 
 export class ClassificationRestService {
 
-    static getTokens(entity: ClassificationEntity, model?: any): Promise<CollectionResponse<SdkItem>> {
+    static getTaxons(entity: ClassificationEntity, model?: any): Promise<CollectionResponse<SdkItem>> {
         const settings = entity.ClassificationSettings;
         if(settings &&  settings.selectedTaxonomyId) {
             const showEmpty = entity.ShowEmpty || false;
@@ -26,8 +26,8 @@ export class ClassificationRestService {
             };
             const taxonomyUrl = settings.selectedTaxonomyUrl;
             const contentText = `taxonomyId=${settings.selectedTaxonomyId},selectedTaxaIds=@param,selectionMode='${settings.selectionMode}',contentType='${settings.byContentType}'`
-
-            return RestService.getTokens(taxonomyUrl, additionalParams, contentText);
+            const action = 'Default.GetTaxons';
+            return RestService.getCustomItems(taxonomyUrl, action, additionalParams, contentText);
 
         }
         return Promise.resolve(({ Items: [], TotalCount: 0 }));

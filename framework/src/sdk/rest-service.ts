@@ -17,14 +17,9 @@ export class RestService {
         return fetch(wholeUrl, { headers: { "X-Requested-With": "react" } }).then(x => x.json());
     }
 
-    public static getTokens(taxonomyUrl: string, queryParamsForMethod: any, contentText: string): any{
-        const wholeUrl = `${RestService.buildItemBaseUrl(taxonomyUrl)}/Default.GetTaxons(${contentText})${RestService.buildQueryParams(queryParamsForMethod)}`;
-        return fetch(wholeUrl,
-         { headers: { "X-Requested-With": "react" } }).then(x => x.json());
-    }
-
-    public static getPages(action: string, queryParamsForMethod: any): any{
-        const wholeUrl = `${RestService.buildItemBaseUrl(RestSdkTypes.Pages)}/${action}${RestService.buildQueryParams(queryParamsForMethod)}`;
+    public static getCustomItems<T extends SdkItem>(baseURL: string, action: string, queryParamsForMethod: any, contentText: string = ''): any{
+        const actionName = `${action}(${contentText})`;
+        const wholeUrl = `${RestService.buildItemBaseUrl(baseURL)}/${actionName}${RestService.buildQueryParams(queryParamsForMethod)}`;
         return fetch(wholeUrl,
          { headers: { "X-Requested-With": "react" } }).then(x => x.json());
     }

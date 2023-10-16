@@ -51,7 +51,7 @@ export async function Classification(props: WidgetContext<ClassificationEntity>)
     const settings = properties.ClassificationSettings;
     const pageNode = props.requestContext.pageNode
     const dataAttributes = htmlAttributes(props);
-    const tokens = await ClassificationRestService.getTokens(model.Properties, model);
+    const tokens = await ClassificationRestService.getTaxons(model.Properties, model);
     const viewUrl = pageNode ? pageNode.Fields.ViewUrl : '';
 
     const updatedTokens = tokens.value.map (taxon => {
