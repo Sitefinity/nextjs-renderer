@@ -22,7 +22,7 @@ export async function Navigation(props: WidgetContext<NavigationEntity>) {
     const viewName = props.model.Properties.SfViewName;
     const items = await NavigationRestService.getItems(props.model.Properties, props.model);
     const marginClass = properties.Margins && StyleGenerator.getMarginClasses(properties.Margins);
-    const primaryCustomAttributes = getCustomAttributes(properties.Attributes, 'Navigation');
+    const navCustomAttributes = getCustomAttributes(properties.Attributes, 'Navigation');
 
     dataAttributes["className"] = classNames(
         marginClass
@@ -35,13 +35,12 @@ export async function Navigation(props: WidgetContext<NavigationEntity>) {
     return (
         <div
             {...dataAttributes}
-            {...primaryCustomAttributes}
         >
-            { !viewName && <Accordion items={items.value || []} />}
-            { viewName === 'Horizontal' && <Horizontal items={items.value || []} />}
-            { viewName === 'Tabs' && <Tabs items={items.value || []} />}
-            { viewName === 'Vertical' && <Vertical items={items.value || []} />}
-            { viewName === 'VerticalSitemap' && <VerticalSitemap items={items.value || []} />}
+            { !viewName && <Accordion items={items.value || []} {...navCustomAttributes}/>}
+            { viewName === 'Horizontal' && <Horizontal items={items.value || []} {...navCustomAttributes}/>}
+            { viewName === 'Tabs' && <Tabs items={items.value || []} {...navCustomAttributes}/>}
+            { viewName === 'Vertical' && <Vertical items={items.value || []}{...navCustomAttributes}/>}
+            { viewName === 'VerticalSitemap' && <VerticalSitemap items={items.value || []}{...navCustomAttributes}/>}
         </div>
     );
 }

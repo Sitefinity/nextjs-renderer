@@ -38,7 +38,7 @@ export function Accordion(props: {
     className?: string;
  }) {
     var accordionId = getUniqueId('accordion');
-    const items = props.items;
+    const {items, ...customAttrs } = props;
 
     const renderSubLevelsRecursive = (node: PageViewModel, nested: boolean = false) => {
         { node.ChildNodes.Count > 0 &&
@@ -61,7 +61,7 @@ export function Accordion(props: {
     return (
         <nav className="accordion"
             id={accordionId}
-            //  @Html.BuildAttributes(Model.Attributes)
+            {...customAttrs}
         >
             {
                 items.map((node: PageViewModel, idx: number) => {

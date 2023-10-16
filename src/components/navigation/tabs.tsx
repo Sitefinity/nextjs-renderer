@@ -8,7 +8,7 @@ export function Tabs(props: {
     items: any;
     className?: string;
  }) {
-    const items = props.items;
+    const {items, ...customAttrs } = props;
     const renderSubLevelsRecursive = (nodes: PageViewModel[]) => {
 
         var selectedNode = nodes.some(node => node.IsCurrentlyOpened || node.HasChildOpen);
@@ -28,7 +28,7 @@ export function Tabs(props: {
     }
     return (
         <nav
-       // @Html.BuildAttributes(Model.Attributes)
+        {...customAttrs}
         >
             <ul className="nav nav-tabs">
             {

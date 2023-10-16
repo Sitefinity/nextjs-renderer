@@ -9,7 +9,7 @@ export function Horizontal(props: {
     className?: string;
  }) {
     var navbarId = getUniqueId('navbar');
-    const items = props.items;
+    const {items, ...customAttrs } = props;
 
     const renderSubLevelsRecursive = (node: PageViewModel) => {
         { node.ChildNodes.length > 0 &&
@@ -41,7 +41,7 @@ export function Horizontal(props: {
 
     return (
             <nav className="navbar navbar-expand-md navbar-light bg-light"
-           //  @Html.BuildAttributes(Model.Attributes)
+            {...customAttrs}
              >
                 <div className="container-fluid">
                     <a className="navbar-brand" href="#">Navbar</a>

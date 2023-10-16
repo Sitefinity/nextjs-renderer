@@ -8,7 +8,7 @@ export function Vertical(props: {
     items: any;
     className?: string;
  }) {
-    const items = props.items;
+    const {items, ...customAttrs } = props;
     const renderSubLevelsRecursive = (node: PageViewModel) => {
 
         return <li className="nav-item">
@@ -25,7 +25,7 @@ export function Vertical(props: {
     }
     return (
         <nav
-        //@Html.BuildAttributes(Model.Attributes)
+        {...customAttrs}
         >
 
         <ul className="nav flex-column">
