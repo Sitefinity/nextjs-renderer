@@ -1,7 +1,7 @@
 import { CardsListModel } from "./cards-list-model";
 import React from "react"
 import Image from "next/image";
-import { SdkItem } from "@/framework/sdk/dto/sdk-item";
+import { SdkItem } from "sitefinity-react-framework/sdk/dto/sdk-item";
 
 export function CardsList(props: { model: CardsListModel }) {
     const model = props.model;

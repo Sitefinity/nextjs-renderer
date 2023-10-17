@@ -1,11 +1,11 @@
 
 'use client'
 
-import { RootUrlService } from "@/framework/sdk/root-url.service";
-import { ServiceMetadata, ServiceMetadataDefinition } from "@/framework/sdk/service-metadata";
-import { PageLayoutServiceResponse } from "@/framework/sdk/services/layout-service.response";
-import { RenderWidgetService } from "@/framework/services/render-widget-service";
-import { RequestContext } from "@/framework/services/request-context";
+import { RootUrlService } from "sitefinity-react-framework/sdk/root-url.service";
+import { ServiceMetadata, ServiceMetadataDefinition } from "sitefinity-react-framework/sdk/service-metadata";
+import { PageLayoutServiceResponse } from "sitefinity-react-framework/sdk/services/layout-service.response";
+import { RenderWidgetService } from "sitefinity-react-framework/services/render-widget-service";
+import { RequestContext } from "sitefinity-react-framework/services/request-context";
 import { RendererContractImpl } from "@/renderer-contract";
 import { widgetRegistry } from "@/widget-registry";
 

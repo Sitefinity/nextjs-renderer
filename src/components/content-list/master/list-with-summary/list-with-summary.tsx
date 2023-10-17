@@ -1,6 +1,6 @@
 import React, { Fragment } from "react"
 import { ListWithSummaryModel } from "./list-with-summary-model";
-import { SdkItem } from "@/framework/sdk/dto/sdk-item";
+import { SdkItem } from "sitefinity-react-framework/sdk/dto/sdk-item";
 
 export function ListWithSummary(props: { model: ListWithSummaryModel }) {
     const model = props.model;

@@ -1,19 +1,19 @@
 'use client'
 
-import { ImageItem } from "@/framework/sdk/dto/image-item";
-import { VideoItem } from "@/framework/sdk/dto/video-item";
-import { RestService, RestSdkTypes } from "@/framework/sdk/rest-service";
-import { RootUrlService } from "@/framework/sdk/root-url.service";
-import { htmlAttributes } from "@/framework/widgets/attributes";
-import { WidgetContext } from "@/framework/widgets/widget-context";
+import { ImageItem } from "sitefinity-react-framework/sdk/dto/image-item";
+import { VideoItem } from "sitefinity-react-framework/sdk/dto/video-item";
+import { RestService, RestSdkTypes } from "sitefinity-react-framework/sdk/rest-service";
+import { RootUrlService } from "sitefinity-react-framework/sdk/root-url.service";
+import { htmlAttributes } from "sitefinity-react-framework/widgets/attributes";
+import { WidgetContext } from "sitefinity-react-framework/widgets/widget-context";
 import { useState, useEffect } from "react";
 import { StyleGenerator } from "../styling/style-generator.service";
 import { StylingConfig } from "../styling/styling-config";
 import { ColumnHolder, ComponentContainer } from "./column-holder";
 import { SectionHolder } from "./section-holder";
 import { SectionEntity } from "./section.entity";
-import { RequestContext } from "@/framework/services/request-context";
-import { RenderWidgetService } from "@/framework/services/render-widget-service";
+import { RequestContext } from "sitefinity-react-framework/services/request-context";
+import { RenderWidgetService } from "sitefinity-react-framework/services/render-widget-service";
 import { widgetRegistry } from "@/widget-registry";
 
 const ColumnNamePrefix = "Column";
