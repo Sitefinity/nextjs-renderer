@@ -20,7 +20,7 @@ export async function Navigation(props: WidgetContext<NavigationEntity>) {
     const properties = props.model.Properties;
     const dataAttributes = htmlAttributes(props);
     const viewName = props.model.Properties.SfViewName;
-    const items = await NavigationRestService.getItems(props.model.Properties, props.model);
+    const items = await NavigationRestService.getItems(props.model.Properties, props.model, props.requestContext);
     const marginClass = properties.Margins && StyleGenerator.getMarginClasses(properties.Margins);
     const navCustomAttributes = getCustomAttributes(properties.Attributes, 'Navigation');
 

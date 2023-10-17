@@ -55,7 +55,7 @@ export async function Breadcrumb(props: WidgetContext<BreadcrumbEntity>) {
     );
 }
 
-enum BreadcrumbIncludeOption {
+export enum BreadcrumbIncludeOption {
     CurrentPageFullPath,
     SpecificPagePath,
 }

@@ -1,12 +1,11 @@
 import { CollectionResponse } from "@/framework/sdk/dto/collection-response";
 import { RestService, RestSdkTypes } from "@/framework/sdk/rest-service";
 import { SdkItem } from "@/framework/sdk/dto/sdk-item";
-import { BreadcrumbEntity } from "./breadcrumb";
+import { BreadcrumbEntity, BreadcrumbIncludeOption } from "./breadcrumb";
 
 export class BreadcrumbRestService {
 
     static getItems(entity: BreadcrumbEntity, model?: any, requestContext?: any): Promise<CollectionResponse<SdkItem>> {
-
         if(entity && requestContext.pageNode) {
             const getAllArgs: any = {
                 addStartingPageAtEnd: entity.AddCurrentPageLinkAtTheEnd || true,
@@ -21,9 +20,9 @@ export class BreadcrumbRestService {
                     getAllArgs['detailItemInfo'] = stringifiedItem;
                 }
 
-            // if (entity.BreadcrumbIncludeOption == BreadcrumbIncludeOption.SpecificPagePath && entity.SelectedPage.ItemIdsOrdered.Length > 0)
-            // args.AdditionalQueryParams.Add("startingPageId", entity.SelectedPage.ItemIdsOrdered[0]);
-
+            if (entity.BreadcrumbIncludeOption == BreadcrumbIncludeOption.SpecificPagePath && entity.SelectedPage.ItemIdsOrdered.Length > 0) {
+                 getAllArgs["startingPageId"] = entity.SelectedPage.ItemIdsOrdered[0];
+            }
             //     args.AdditionalQueryParams.Add("currentPageUrl", HttpUtility.UrlEncode(this.httpContextAccessor.HttpContext.Request.GetEncodedUrl()));
 
 
