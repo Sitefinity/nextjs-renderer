@@ -1,6 +1,6 @@
-import { CollectionResponse } from "@/framework/sdk/dto/collection-response";
-import { RestService, RestSdkTypes } from "@/framework/sdk/rest-service";
-import { SdkItem } from "@/framework/sdk/dto/sdk-item";
+import { CollectionResponse } from "sitefinity-react-framework/sdk/dto/collection-response";
+import { RestService, RestSdkTypes } from "sitefinity-react-framework/sdk/rest-service";
+import { SdkItem } from "sitefinity-react-framework/sdk/dto/sdk-item";
 import { BreadcrumbEntity, BreadcrumbIncludeOption } from "./breadcrumb";
 
 export class BreadcrumbRestService {

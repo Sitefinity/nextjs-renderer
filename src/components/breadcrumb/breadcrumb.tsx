@@ -1,8 +1,8 @@
 import React from "react";
-import { generateAnchorAttrsFromLink, getCustomAttributes, htmlAttributes } from "@/framework/widgets/attributes";
-import { WidgetContext } from "@/framework/widgets/widget-context";
-import { classNames } from "@/framework/utils/classNames";
-import { LinkModel } from "@/framework/interfaces/LinkModel";
+import { generateAnchorAttrsFromLink, getCustomAttributes, htmlAttributes } from "sitefinity-react-framework/widgets/attributes";
+import { WidgetContext } from "sitefinity-react-framework/widgets/widget-context";
+import { classNames } from "sitefinity-react-framework/utils/classNames";
+import { LinkModel } from "sitefinity-react-framework/interfaces/LinkModel";
 import { StyleGenerator } from "../styling/style-generator.service";
 import { OffsetStyle } from "../styling/offset-style";
 import { Alignment } from "../styling/alignment";

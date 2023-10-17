@@ -2,6 +2,11 @@
 import { LinkModel } from "../interfaces/LinkModel";
 import { WidgetContext } from "./widget-context";
 
+export type CustomAttribute = {
+    Key: string;
+    Value: string;
+};
+
 export function htmlAttributes(widgetContext: WidgetContext<any>, error: string | undefined = undefined) {
     const model = widgetContext.model;
     const metadata = widgetContext.metadata;
@@ -53,4 +58,15 @@ export const generateAnchorAttrsFromLink = (linkModel?: LinkModel | null, classL
     attributes.className = linkModel.classList.join(' ') + classList ? ' ' + classList : '';
 
     return attributes;
+}
+
+export const getCustomAttributes = (attributes: any, part: string) => {
+    if(!attributes || !attributes[part]){
+        return {};
+    }
+
+    return attributes[part].reduce(
+        (current: object, customAttribute: CustomAttribute) => {
+            return ({ ...current, [customAttribute.Key]: customAttribute.Value})
+        }, {});
 }

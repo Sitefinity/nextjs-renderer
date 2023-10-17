@@ -1,8 +1,8 @@
 import React from "react";
-import { generateAnchorAttrsFromLink, getCustomAttributes, htmlAttributes } from "@/framework/widgets/attributes";
-import { WidgetContext } from "@/framework/widgets/widget-context";
-import { classNames } from "@/framework/utils/classNames";
-import { LinkModel } from "@/framework/interfaces/LinkModel";
+import { generateAnchorAttrsFromLink, getCustomAttributes, htmlAttributes } from "sitefinity-react-framework/widgets/attributes";
+import { WidgetContext } from "sitefinity-react-framework/widgets/widget-context";
+import { classNames } from "sitefinity-react-framework/utils/classNames";
+import { LinkModel } from "sitefinity-react-framework/interfaces/LinkModel";
 import { StyleGenerator } from "../styling/style-generator.service";
 import { OffsetStyle } from "../styling/offset-style";
 import { Alignment } from "../styling/alignment";
@@ -10,39 +10,46 @@ import { ButtonType } from "../styling/button-types";
 import { ClassificationRestService } from './classification.service'
 import dompurify from "isomorphic-dompurify";
 
-const mapTaxonProperties = (taxon: any, taxonomyName: string, viewUrl?: string) =>{
+const mapTaxonProperties = (taxon: any, taxonomyName: string, viewUrl?: string, searchParams?: any) =>{
     const children = [];
 
     taxon.SubTaxa.forEach((t) =>{
         child.SubTaxa = mapTaxonProperties(child, taxonomyName);
-        child.UrlName = getTaxaUrl(taxonomyName, child.UrlName, viewUrl);
+        child.UrlName = getTaxaUrl(taxonomyName, child.UrlName, viewUrl, searchParams);
         children.push(child);
     });
 
     return children;
 }
 
-const getTaxaUrl = (taxonomyName: string, taxonUrl: string, viewUrl?: string) => {
+const getTaxaUrl = (taxonomyName: string, taxonUrl: string, viewUrl?: string, searchParams?: any) => {
     if (viewUrl === null)
     {
         return "#";
     }
+
     let queryString = ''
-    // we need to think how to add the query
-    // IQueryCollection queryCollection = this.httpContextAccessor.HttpContext.Request.Query;
-    // if (queryCollection != null && queryCollection.Count > 0)
-    // {
-    //     var whitelistedQueryParams = new[] { QueryParams.Action, QueryParamNames.Site, QueryParamNames.Provider, QueryParamNames.Culture };
-    //     var filteredQueryCollection = queryCollection?.Where(x => whitelistedQueryParams.Contains(x.Key));
-    //     queryString = QueryString.Create(filteredQueryCollection).ToString();
-    // }
+
+    if (searchParams && Object.keys(searchParams).length)
+    {
+        const whitelistedQueryParams = ["sf_site","sfaction","sf_provider","sf_culture"];
+        const filteredQueryCollection = {};
+        whitelistedQueryParams.forEach(param => {
+            const searchParamValue = searchParams[param];
+            if(searchParamValue) {
+                filteredQueryCollection[param] = searchParamValue;
+            }
+        });
+
+        queryString =  new URLSearchParams(filteredQueryCollection);
+    }
 
     if (taxonUrl.startsWith('/'))
     {
         taxonUrl = taxonUrl.substring(1);
     }
 
-     return `${viewUrl}/-in-${taxonomyName},${taxonUrl.replaceAll("/", ",")}` + queryString;
+     return `${viewUrl}/-in-${taxonomyName},${taxonUrl.replaceAll("/", ",")}?` + queryString;
 }
 
 export async function Classification(props: WidgetContext<ClassificationEntity>) {
@@ -53,12 +60,13 @@ export async function Classification(props: WidgetContext<ClassificationEntity>)
     const dataAttributes = htmlAttributes(props);
     const tokens = await ClassificationRestService.getTaxons(model.Properties, model);
     const viewUrl = pageNode ? pageNode.Fields.ViewUrl : '';
+    const searchParams = props.requestContext.searchParams;
 
     const updatedTokens = tokens.value.map (taxon => {
         return {
             ...taxon,
-            SubTaxa: mapTaxonProperties(taxon, settings.selectedTaxonomyName, viewUrl),
-            UrlName: getTaxaUrl(settings.selectedTaxonomyName, taxon.UrlName, viewUrl),
+            SubTaxa: mapTaxonProperties(taxon, settings.selectedTaxonomyName, viewUrl, searchParams),
+            UrlName: getTaxaUrl(settings.selectedTaxonomyName, taxon.UrlName, viewUrl, searchParams),
         }
     })
 

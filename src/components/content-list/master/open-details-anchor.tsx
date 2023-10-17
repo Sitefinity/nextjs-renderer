@@ -1,7 +1,7 @@
 'use client'
 
 import React from "react";
-import { RestSdkTypes, RestService } from "@/framework/sdk/rest-service";
+import { RestSdkTypes, RestService } from "sitefinity-react-framework/sdk/rest-service";
 
 export function OpenDetailsAnchor(props: {
     item: any;

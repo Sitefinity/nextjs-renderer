@@ -1,6 +1,6 @@
-import { CollectionResponse } from "@/framework/sdk/dto/collection-response";
-import { SdkItem } from "@/framework/sdk/dto/sdk-item";
-import { RestService, RestSdkTypes } from "@/framework/sdk/rest-service";
+import { CollectionResponse } from "sitefinity-react-framework/sdk/dto/collection-response";
+import { SdkItem } from "sitefinity-react-framework/sdk/dto/sdk-item";
+import { RestService, RestSdkTypes } from "sitefinity-react-framework/sdk/rest-service";
 import { NavigationEntity } from "./navigation";
 import { RequestContext } from "next/dist/server/base-server";
 

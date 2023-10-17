@@ -1,6 +1,6 @@
 import React from "react";
-import { classNames } from '../../framework/utils/classNames'
-import { getUniqueId } from '../../framework/utils/getUniqueId'
+import { classNames } from 'sitefinity-react-framework/utils/classNames'
+import { getUniqueId } from 'sitefinity-react-framework/utils/getUniqueId'
 import { PageViewModel } from './interfaces/PageViewModel'
 import { getClass } from './utils';
 
