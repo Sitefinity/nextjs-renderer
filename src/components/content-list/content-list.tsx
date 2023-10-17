@@ -9,7 +9,6 @@ import { WidgetContext } from "sitefinity-react-framework/widgets/widget-context
 import { htmlAttributes } from "sitefinity-react-framework/widgets/attributes";
 import { DetailItem } from "sitefinity-react-framework/sdk/services/detail-item";
 import { RestSdkTypes, RestService } from "sitefinity-react-framework/sdk/rest-service";
-import { PageItem } from "sitefinity-react-framework/sdk/dto/page-item";
 import { SdkItem } from "sitefinity-react-framework/sdk/dto/sdk-item";
 
 export async function ContentList(props: WidgetContext<ContentListEntity>) {
@@ -58,8 +57,8 @@ export async function ContentList(props: WidgetContext<ContentListEntity>) {
 
     return (
         <div {...data.attributes as any}>
-            {data.detailModel && <ContentListDetail detailModel={data.detailModel}></ContentListDetail>}
-            {data.listModel && <ContentListMaster model={data.listModel}></ContentListMaster>}
+            {data.detailModel && <ContentListDetail entity={properties} detailModel={data.detailModel}></ContentListDetail>}
+            {data.listModel && <ContentListMaster  entity={properties} model={data.listModel}></ContentListMaster>}
         </div>
     );
 }

@@ -2,7 +2,6 @@ import { CollectionResponse } from "sitefinity-react-framework/sdk/dto/collectio
 import { SdkItem } from "sitefinity-react-framework/sdk/dto/sdk-item";
 
 export interface ContentListModelMaster {
-    OnDetailsOpen: (sdkItem: SdkItem) => void;
     OpenDetails: boolean;
     FieldCssClassMap: { [key: string]: string };
     FieldMap: { [key: string]: string };

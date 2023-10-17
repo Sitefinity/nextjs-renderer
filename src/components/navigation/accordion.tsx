@@ -40,16 +40,16 @@ export function Accordion(props: {
     var accordionId = getUniqueId('accordion');
     const {items, ...customAttrs } = props;
 
-    const renderSubLevelsRecursive = (node: PageViewModel, nested: boolean = false) => {
-        { node.ChildNodes.Count > 0 &&
-            <ul class={classNames('nav', 'flex-column', {"ms-3" : nested})}>
+    const renderSubLevelsRecursive: any = (node: PageViewModel, nested: boolean = false) => {
+        { node.ChildNodes.length > 0 &&
+            <ul className={classNames('nav', 'flex-column', {"ms-3" : nested})}>
                {
                     node.ChildNodes.map((childNode, idx: number) =>
                         {
                             return <li key={idx} className="nav-item">
                                     <a className={classNames('nav-link', 'd-inline-block', getClass(childNode))}
                                 href={childNode.Url} target={childNode.LinkTarget}>{childNode.Title}</a>
-                                {renderSubLevelsRecursive(childNode, true)}
+                                { renderSubLevelsRecursive(childNode, true)}
                             </li>
                         }
                     )

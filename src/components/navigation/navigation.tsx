@@ -8,11 +8,11 @@ import { OffsetStyle } from "../styling/offset-style";
 import { Alignment } from "../styling/alignment";
 import { ButtonType } from "../styling/button-types";
 import { NavigationRestService } from "./navigation.service";
-import { Horizontal } from "./horizontal.tsx";
-import { Accordion } from "./accordion.tsx";
-import { Vertical } from "./vertical.tsx";
-import { VerticalSitemap } from "./vertical-sitemap.tsx";
-import { Tabs } from "./tabs.tsx";
+import { Horizontal } from "./horizontal";
+import { Accordion } from "./accordion";
+import { Vertical } from "./vertical";
+import { VerticalSitemap } from "./vertical-sitemap";
+import { Tabs } from "./tabs";
 
 export type NavgationViewName = "Horizontal" | "Tabs" | "Accordion" | "Vertical" | "VerticalSitemap";
 
