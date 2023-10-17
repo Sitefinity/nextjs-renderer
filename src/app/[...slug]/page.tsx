@@ -3,12 +3,12 @@ import { Fragment } from 'react';
 import { notFound } from 'next/navigation';
 import PageClient from './page-client';
 import { cookies } from 'next/headers';
-import { ServiceMetadata } from '@/framework/sdk/service-metadata';
-import { PageLayoutServiceResponse } from '@/framework/sdk/services/layout-service.response';
-import { LayoutService } from '@/framework/sdk/services/layout.service';
-import { RenderWidgetService } from '@/framework/services/render-widget-service';
-import { WidgetModel } from '@/framework/widgets/widget-model';
-import { RequestContext } from '@/framework/services/request-context';
+import { ServiceMetadata } from 'sitefinity-react-framework/sdk/service-metadata';
+import { PageLayoutServiceResponse } from 'sitefinity-react-framework/sdk/services/layout-service.response';
+import { LayoutService } from 'sitefinity-react-framework/sdk/services/layout.service';
+import { RenderWidgetService } from 'sitefinity-react-framework/services/render-widget-service';
+import { WidgetModel } from 'sitefinity-react-framework/widgets/widget-model';
+import { RequestContext } from 'sitefinity-react-framework/services/request-context';
 import { initStaticParams } from '../init';
 
 // export async function generateStaticParams() {

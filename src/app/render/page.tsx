@@ -1,6 +1,6 @@
-import { RenderWidgetService } from "@/framework/services/render-widget-service";
-import { RequestContext } from "@/framework/services/request-context";
-import { WidgetModel } from "@/framework/widgets/widget-model";
+import { RenderWidgetService } from "sitefinity-react-framework/services/render-widget-service";
+import { RequestContext } from "sitefinity-react-framework/services/request-context";
+import { WidgetModel } from "sitefinity-react-framework/widgets/widget-model";
 import { initStaticParams } from "../init";
 
 export default async function Render({ searchParams }: { searchParams: { [key: string]: string } }) {
