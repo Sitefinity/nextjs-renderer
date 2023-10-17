@@ -23,9 +23,14 @@ export class BreadcrumbRestService {
             if (entity.BreadcrumbIncludeOption == BreadcrumbIncludeOption.SpecificPagePath && entity.SelectedPage.ItemIdsOrdered.Length > 0) {
                  getAllArgs["startingPageId"] = entity.SelectedPage.ItemIdsOrdered[0];
             }
-            //     args.AdditionalQueryParams.Add("currentPageUrl", HttpUtility.UrlEncode(this.httpContextAccessor.HttpContext.Request.GetEncodedUrl()));
 
+            if(requestContext) {
+                const queryString =  new URLSearchParams(requestContext.searchParams);
+                const url = `${requestContext.pageNode.MetaInfo.CanonicalUrl}?${queryString}`;
+                const currentPageUrl = encodeURIComponent(url).toLowerCase();
 
+                getAllArgs["currentPageUrl"] = encodeURIComponent(url).toLowerCase();
+            }
 
             const action = 'Default.GetBreadcrumb';
 
