@@ -27,7 +27,6 @@ export class BreadcrumbRestService {
             if(requestContext) {
                 const queryString =  new URLSearchParams(requestContext.searchParams);
                 const url = `${requestContext.pageNode.MetaInfo.CanonicalUrl}?${queryString}`;
-                const currentPageUrl = encodeURIComponent(url).toLowerCase();
 
                 getAllArgs["currentPageUrl"] = encodeURIComponent(url).toLowerCase();
             }
