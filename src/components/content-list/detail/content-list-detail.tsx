@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { ContentListModelDetail } from "./content-list-detail-model";
 import { RestService } from "sitefinity-react-framework/sdk/rest-service";
 import { SdkItem } from "sitefinity-react-framework/sdk/dto/sdk-item";
 
-export function ContentListDetail(props: { detailModel: ContentListModelDetail }) {
-    const [data, setData] = useState<State>();
+export async function ContentListDetail(props: { detailModel: ContentListModelDetail }) {
     const model = props.detailModel;
 
     let queryParams: { [key: string]: string } = {};
@@ -12,41 +11,41 @@ export function ContentListDetail(props: { detailModel: ContentListModelDetail }
         queryParams[key] = val;
     });
 
-    let item$: Promise<SdkItem>;
+    let dataItem: SdkItem;
     if (queryParams.hasOwnProperty("sf-content-action")) {
-        item$ = RestService.getItemWithStatus(model.DetailItem.ItemType, model.DetailItem.Id, model.DetailItem.ProviderName, queryParams)
+        dataItem = await RestService.getItemWithStatus(
+            model.DetailItem.ItemType, model.DetailItem.Id,
+            model.DetailItem.ProviderName, queryParams
+        )
     } else {
-        item$ = RestService.getItem(model.DetailItem.ItemType, model.DetailItem.Id, model.DetailItem.ProviderName);
+        dataItem = await RestService.getItem(
+            model.DetailItem.ItemType,
+            model.DetailItem.Id,
+            model.DetailItem.ProviderName
+        );
+    }
+    let detailViewModel: State
+    let attributes: { [key: string]: string } = {};
+    if (model.Attributes) {
+        model.Attributes.forEach((pair) => {
+            attributes[pair.Key] = pair.Value;
+        });
     }
 
-    useEffect((() => {
-        item$.then((dataItem) => {
-            let attributes: { [key: string]: string } = {};
-            if (model.Attributes) {
-                model.Attributes.forEach((pair) => {
-                    attributes[pair.Key] = pair.Value;
-                });
-            }
-
-            let detailViewModel: State = {
-                Attributes: attributes,
-                ViewName: model.ViewName,
-                DetailItem: dataItem
-            };
-
-            setData(detailViewModel);
-        });
-    }), [props.detailModel, item$, model.Attributes, model.ViewName]);
+    detailViewModel = {
+        Attributes: attributes,
+        ViewName: model.ViewName,
+        DetailItem: dataItem
+    };
 
     return (
-        <div {...data?.Attributes as any}>
-            {data?.ViewName === 'News' &&
+        <div {...detailViewModel?.Attributes as any}>
+            {detailViewModel?.ViewName === 'News' &&
             <h3>
-                <span>{data?.DetailItem.Title}</span>
+                <span>{detailViewModel?.DetailItem.Title}</span>
             </h3>
             }
         </div>
-
     )
 }
 

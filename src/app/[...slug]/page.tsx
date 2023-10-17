@@ -76,6 +76,8 @@ export default async function Page({ params, searchParams }: PageParams) {
 
     let appState : AppState = {
         requestContext: {
+            pageNode: layout,
+            searchParams: searchParams,
             detailItem: layout.DetailItem,
             culture: layout.Culture,
             isEdit: searchParams["sfaction"] === "edit",

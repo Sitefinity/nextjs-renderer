@@ -11,6 +11,7 @@ export default async function Render({ searchParams }: { searchParams: { [key: s
 
     const requestContext: RequestContext = {
         detailItem: null,
+        searchParams: searchParams,
         isEdit: searchParams["sfaction"] === "edit",
         isPreview: searchParams["sfaction"] === "preview",
         culture: searchParams["sf_culture"]
