@@ -2,8 +2,9 @@ import React from "react";
 import { ContentListModelDetail } from "./content-list-detail-model";
 import { RestService } from "sitefinity-react-framework/sdk/rest-service";
 import { SdkItem } from "sitefinity-react-framework/sdk/dto/sdk-item";
+import { ContentListEntity } from "../content-list-entity";
 
-export async function ContentListDetail(props: { detailModel: ContentListModelDetail }) {
+export async function ContentListDetail(props: { detailModel: ContentListModelDetail, entity?: ContentListEntity }) {
     const model = props.detailModel;
 
     let queryParams: { [key: string]: string } = {};

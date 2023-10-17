@@ -2,21 +2,15 @@ import React, { Fragment } from "react"
 import { ListWithImageModel } from "./list-with-image-model";
 import Image from "next/image";
 import { SdkItem } from "sitefinity-react-framework/sdk/dto/sdk-item";
-import { OpenDetailsAnchor } from '../open-details-anchor.tsx';
+import { OpenDetailsAnchor } from '../open-details-anchor';
+import { ContentListEntity } from "../../content-list-entity";
 
-export function ListWithImage(props: { model: ListWithImageModel }) {
-    const model = props.model;
-
-    function onDetailItemOpenHandler(event: React.MouseEvent<HTMLAnchorElement>, item: SdkItem) {
-        event.preventDefault();
-        event.stopPropagation();
-
-        model.OnDetailsOpen(item);
-    }
+export function ListWithImage(props: { model: ListWithImageModel, entity?: ContentListEntity }) {
+    const model = props.model as any;
 
     return (
         <Fragment>
-            {model.Items.map((item, index) => {
+            {model.Items.map((item: any, index: number) => {
                 return (
                     <Fragment key={item.Original.Id}>
                         {index !== 0 && <hr />}
@@ -31,7 +25,7 @@ export function ListWithImage(props: { model: ListWithImageModel }) {
                             <div className="flex-grow-1 ms-3">
                                 {item.Title && <h5 className={item.Title.Css}>{item.Title.Value}</h5>}
                                 {item.Text && <p className={item.Text.Css}>{item.Text.Value}</p>}
-                                {model.OpenDetails && <OpenDetailsAnchor className="btn btn-primary" item={item} model={model} text={'Learn more'} />}
+                                {model.OpenDetails && <OpenDetailsAnchor entity={props.entity} className="btn btn-primary" item={item} model={model} text={'Learn more'} />}
                             </div>
                         </div>
                     </Fragment>

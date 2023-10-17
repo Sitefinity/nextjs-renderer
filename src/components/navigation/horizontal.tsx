@@ -11,7 +11,7 @@ export function Horizontal(props: {
     var navbarId = getUniqueId('navbar');
     const {items, ...customAttrs } = props;
 
-    const renderSubLevelsRecursive = (node: PageViewModel) => {
+    const renderSubLevelsRecursive: any = (node: PageViewModel) => {
         { node.ChildNodes.length > 0 &&
             node.ChildNodes.map((childNode, idx: number) =>
                 {

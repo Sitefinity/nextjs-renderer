@@ -5,7 +5,7 @@ import { BreadcrumbEntity, BreadcrumbIncludeOption } from "./breadcrumb";
 
 export class BreadcrumbRestService {
 
-    static getItems(entity: BreadcrumbEntity, model?: any, requestContext?: any): Promise<CollectionResponse<SdkItem>> {
+    static getItems(entity: BreadcrumbEntity, model?: any, requestContext?: any): {value: CollectionResponse<SdkItem>[]} {
         if(entity && requestContext.pageNode) {
             const getAllArgs: any = {
                 addStartingPageAtEnd: entity.AddCurrentPageLinkAtTheEnd || true,
@@ -16,7 +16,7 @@ export class BreadcrumbRestService {
 
             if (requestContext.pageNode.DetailItem !== null && entity.AllowVirtualNodes)
                 {
-                    var stringifiedItem = this.requestContext.pageNode.DetailItem;
+                    var stringifiedItem = requestContext.pageNode.DetailItem;
                     getAllArgs['detailItemInfo'] = stringifiedItem;
                 }
 
@@ -35,6 +35,6 @@ export class BreadcrumbRestService {
 
             return RestService.getCustomItems(RestSdkTypes.Pages, action, getAllArgs);
         }
-       return Promise.resolve(({ Items: [], TotalCount: 0 }));
+       return { value: [] as any };
     }
 }

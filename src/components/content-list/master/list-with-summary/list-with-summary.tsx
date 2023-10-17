@@ -1,14 +1,14 @@
 import React, { Fragment } from "react"
 import { ListWithSummaryModel } from "./list-with-summary-model";
 import { SdkItem } from "sitefinity-react-framework/sdk/dto/sdk-item";
-import { OpenDetailsAnchor } from '../open-details-anchor.tsx';
+import { OpenDetailsAnchor } from '../open-details-anchor';
+import { ContentListEntity } from "../../content-list-entity";
 
-export function ListWithSummary(props: { model: ListWithSummaryModel }) {
-    const model = props.model;
-
+export function ListWithSummary(props: { model: ListWithSummaryModel, entity?: ContentListEntity }) {
+    const model = props.model as any;
     return (
         <Fragment>
-            {model.Items.map((item, index) => {
+            {model.Items.map((item: any, index: number) => {
                 return (
                     <Fragment key={item.Original.Id}>
                         {index !== 0 && <hr />}
@@ -16,7 +16,7 @@ export function ListWithSummary(props: { model: ListWithSummaryModel }) {
                             {item.Title &&
                                 <h5 className={item.Title.Css}>
                                     {model.OpenDetails ?
-                                        <OpenDetailsAnchor item={item} model={model} /> :
+                                        <OpenDetailsAnchor entity={props.entity} item={item} model={model} /> :
                                         (item.Title.Value)
                                     }
                                 </h5>}

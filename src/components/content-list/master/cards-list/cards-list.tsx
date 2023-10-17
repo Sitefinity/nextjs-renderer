@@ -3,15 +3,16 @@ import React from "react";
 import dompurify from "isomorphic-dompurify";
 import Image from "next/image";
 import { SdkItem } from "sitefinity-react-framework/sdk/dto/sdk-item";
-import { OpenDetailsAnchor } from '../open-details-anchor.tsx';
+import { OpenDetailsAnchor } from '../open-details-anchor';
+import { ContentListEntity } from "../../content-list-entity";
 
-export async function CardsList(props: { model: CardsListModel }) {
-    const model = props.model;
+export async function CardsList(props: { model: CardsListModel, entity?: ContentListEntity }) {
+    const model = props.model as any;
     const sanitizer = dompurify.sanitize;
     const items = await model.Items;
     return (
         <div {...model.Attributes as any}>
-            {items.map((item) => {
+            {items.map((item: any) => {
                 const content = sanitizer(item.Text.Value);
                 return (<div key={item.Original.Id} className="col">
                     <div className="card h-100">
@@ -25,7 +26,7 @@ export async function CardsList(props: { model: CardsListModel }) {
                         <div className="card-body">
                             <h5 className={item.Title.Css}>
                                 {model.OpenDetails ?
-                                    <OpenDetailsAnchor item={item} model={model} /> :
+                                    <OpenDetailsAnchor entity={props.entity} item={item} model={model} /> :
                                     (item.Title.Value)
                                 }
                             </h5>

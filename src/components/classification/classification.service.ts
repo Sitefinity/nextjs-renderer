@@ -5,7 +5,7 @@ import { ClassificationEntity } from "./classification";
 
 export class ClassificationRestService {
 
-    static getTaxons(entity: ClassificationEntity, model?: any): Promise<CollectionResponse<SdkItem>> {
+    static getTaxons(entity: ClassificationEntity, model?: any): {value: SdkItem[]} {
         const settings = entity.ClassificationSettings;
         if(settings &&  settings.selectedTaxonomyId) {
             const showEmpty = entity.ShowEmpty || false;
@@ -14,7 +14,7 @@ export class ClassificationRestService {
 
             if (orderBy === "Custom")
             {
-                orderBy = entity.SortExpression;
+                orderBy = entity.SortExpression || '';
             } else if (orderBy === "Manually"){
                 orderBy = "Ordinal";
             }
@@ -30,6 +30,6 @@ export class ClassificationRestService {
             return RestService.getCustomItems(taxonomyUrl, action, additionalParams, contentText);
 
         }
-        return Promise.resolve(({ Items: [], TotalCount: 0 }));
+        return { value: [] as any };
     }
 }

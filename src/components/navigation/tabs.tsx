@@ -9,7 +9,7 @@ export function Tabs(props: {
     className?: string;
  }) {
     const {items, ...customAttrs } = props;
-    const renderSubLevelsRecursive = (nodes: PageViewModel[]) => {
+    const renderSubLevelsRecursive: any = (nodes: PageViewModel[]) => {
         const selectedNode = nodes.find(node => node.IsCurrentlyOpened || node.HasChildOpen);
 
         if (selectedNode)

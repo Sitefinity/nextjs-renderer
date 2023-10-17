@@ -5,12 +5,13 @@ import { ItemModel, ListWithSummaryModel } from "./list-with-summary/list-with-s
 import { ListWithImage } from "./list-with-image/list-with-image";
 import { ListWithImageModel } from "./list-with-image/list-with-image-model";
 import { ListWithSummary } from "./list-with-summary/list-with-summary";
+import { ContentListEntity } from "../content-list-entity";
 import { CardsList } from "./cards-list/cards-list";
 import { CardsListModel } from "./cards-list/cards-list-model";
 import { ImageItem } from "sitefinity-react-framework/sdk/dto/image-item";
 
-export async function ContentListMaster(props: { model: ContentListModelMaster }) {
-    let data: { viewName?: string, model?: ContentListModelbase } = {};
+export async function ContentListMaster(props: { model: ContentListModelMaster, entity?: ContentListEntity }) {
+    let data: { viewName?: string, model?: ContentListModelbase} = {};
     const model = props.model;
 
     let attributes: { [key: string]: string } = {};
@@ -23,7 +24,6 @@ export async function ContentListMaster(props: { model: ContentListModelMaster }
 
     if (model.ViewName === 'CardsList' || model.ViewName === 'ListWithImage') {
         const viewModel = {
-            OnDetailsOpen: model.OnDetailsOpen,
             Attributes: attributes,
             OpenDetails: model.OpenDetails,
             Items: dataItems.Items.map((x) => {
@@ -63,7 +63,6 @@ export async function ContentListMaster(props: { model: ContentListModelMaster }
         data = { viewName: model.ViewName, model: viewModel };
     } else if (model.ViewName === 'ListWithSummary') {
         const viewModel = {
-            OnDetailsOpen: model.OnDetailsOpen,
             Attributes: attributes,
             OpenDetails: model.OpenDetails,
             Items: dataItems.Items.map((x) => {
@@ -97,15 +96,15 @@ export async function ContentListMaster(props: { model: ContentListModelMaster }
     return (
         <Fragment>
             {(data?.model && data?.viewName === 'ListWithImage') &&
-                <ListWithImage model={data?.model as ListWithImageModel}></ListWithImage>
+                <ListWithImage entity={props.entity} model={data?.model as ListWithImageModel}></ListWithImage>
             }
 
             {(data?.model && data?.viewName === 'ListWithSummary') &&
-                <ListWithSummary model={data?.model as ListWithSummaryModel}></ListWithSummary>
+                <ListWithSummary entity={props.entity} model={data?.model as ListWithSummaryModel}></ListWithSummary>
             }
 
             {(data?.model && data?.viewName === 'CardsList') &&
-                <CardsList model={data?.model as CardsListModel}></CardsList>
+                <CardsList entity={props.entity} model={data?.model as CardsListModel}></CardsList>
             }
         </Fragment>
     )

@@ -9,7 +9,7 @@ export function Vertical(props: {
     className?: string;
  }) {
     const {items, ...customAttrs } = props;
-    const renderSubLevelsRecursive = (node: PageViewModel) => {
+    const renderSubLevelsRecursive: any = (node: PageViewModel) => {
 
         return <li className="nav-item">
                 <a className={classNames('nav-link',  getClass(node))} href={node.Url} target={node.LinkTarget}>{node.Title}</a>

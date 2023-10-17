@@ -7,6 +7,6 @@ export interface PageSiteMapNode {
     Breadcrumb: any[];
     IsHomePage: boolean;
     ViewUrl: string;
-    PageType: PageType;
+    PageType: any;
     Children: any[];
   }
