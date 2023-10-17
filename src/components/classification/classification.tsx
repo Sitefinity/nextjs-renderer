@@ -8,12 +8,13 @@ import { OffsetStyle } from "../styling/offset-style";
 import { Alignment } from "../styling/alignment";
 import { ButtonType } from "../styling/button-types";
 import { ClassificationRestService } from './classification.service'
+import { PageViewModel } from '../navigation/interfaces/PageViewModel'
 import dompurify from "isomorphic-dompurify";
 
 const mapTaxonProperties = (taxon: any, taxonomyName: string, viewUrl?: string, searchParams?: any) =>{
-    const children = [];
+    const children: any[] = [];
 
-    taxon.SubTaxa.forEach((t) =>{
+    taxon.SubTaxa.forEach((child: any) =>{
         child.SubTaxa = mapTaxonProperties(child, taxonomyName);
         child.UrlName = getTaxaUrl(taxonomyName, child.UrlName, viewUrl, searchParams);
         children.push(child);
@@ -33,15 +34,15 @@ const getTaxaUrl = (taxonomyName: string, taxonUrl: string, viewUrl?: string, se
     if (searchParams && Object.keys(searchParams).length)
     {
         const whitelistedQueryParams = ["sf_site","sfaction","sf_provider","sf_culture"];
-        const filteredQueryCollection = {};
+        const filteredQueryCollection: any = {};
         whitelistedQueryParams.forEach(param => {
             const searchParamValue = searchParams[param];
             if(searchParamValue) {
                 filteredQueryCollection[param] = searchParamValue;
             }
         });
-
-        queryString =  new URLSearchParams(filteredQueryCollection);
+        const queryList = new URLSearchParams(filteredQueryCollection)
+        queryString = queryList.toString();
     }
 
     if (taxonUrl.startsWith('/'))
@@ -65,13 +66,13 @@ export async function Classification(props: WidgetContext<ClassificationEntity>)
     const updatedTokens = tokens.value.map (taxon => {
         return {
             ...taxon,
-            SubTaxa: mapTaxonProperties(taxon, settings.selectedTaxonomyName, viewUrl, searchParams),
-            UrlName: getTaxaUrl(settings.selectedTaxonomyName, taxon.UrlName, viewUrl, searchParams),
+            SubTaxa: mapTaxonProperties(taxon, settings!.selectedTaxonomyName, viewUrl, searchParams),
+            UrlName: getTaxaUrl(settings!.selectedTaxonomyName, taxon.UrlName, viewUrl, searchParams),
         }
     })
 
     const sanitizer = dompurify.sanitize;
-    const showItemCount = model.ShowItemCount || true;
+    const showItemCount = properties.ShowItemCount || true;
     const defaultClass =  properties.CssClass;
     const marginClass = properties.Margins && StyleGenerator.getMarginClasses(properties.Margins);
     const classificationCustomAttributes = getCustomAttributes(properties.Attributes, 'Classification');
@@ -90,7 +91,7 @@ export async function Classification(props: WidgetContext<ClassificationEntity>)
             taxa.map((t: any, idx: number) =>{
                const count = show ? `(${t.AppliedTo})` : '';
                return <li key={idx} className="list-unstyled">
-                    <a className="text-decoration-none" href={t.UrlName}>{sanitise(t.Title)}</a>
+                    <a className="text-decoration-none" href={t.UrlName}>{sanitizer(t.Title)}</a>
                     {count}
                     {
                         t.SubTaxa && renderSubTaxa(t.SubTaxa, show)
@@ -134,10 +135,10 @@ export interface ClassificationSettingsInterface {
   }
 
 export class ClassificationEntity {
-    ClassificationSettings: ClassificationSettingsInterface;
+    ClassificationSettings?: ClassificationSettingsInterface;
     CssClass?: string;
     Margins?: OffsetStyle;
-    OrderBy: string;
+    OrderBy?: string;
     ShowItemCount?: boolean;
     ShowEmpty?: boolean;
     SfViewName?: string;

@@ -6,7 +6,7 @@ import { RequestContext } from "next/dist/server/base-server";
 
 export class NavigationRestService {
 
-    static getItems(entity: NavigationEntity, model?: any, requestContext: any): Promise<CollectionResponse<SdkItem>> {
+    static getItems(entity: NavigationEntity, model: any, requestContext: any): {value: SdkItem[]} {
         if(entity) {
             let selectedPageId = entity.SelectedPage && entity.SelectedPage.ItemIdsOrdered !== null && entity.SelectedPage.ItemIdsOrdered.length == 1
                 ? entity.SelectedPage.ItemIdsOrdered[0]
@@ -27,6 +27,6 @@ export class NavigationRestService {
 
             return RestService.getCustomItems(RestSdkTypes.Pages, action, getAllArgs);
         }
-       return Promise.resolve(({ Items: [], TotalCount: 0 }));
+        return { value: [] as any };
     }
 }

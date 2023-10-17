@@ -9,7 +9,7 @@ export function VerticalSitemap(props: {
     className?: string;
  }) {
     const {items, ...customAttrs } = props;
-    const renderSubLevelsRecursive = (node: PageViewModel) => {
+    const renderSubLevelsRecursive: any = (node: PageViewModel) => {
 
         return <li className="nav-item">
                 <a className={classNames('nav-link qu-nav-sitemap__link -wrapper',  getClass(node))} href={node.Url} target={node.LinkTarget}>{node.Title}</a>
