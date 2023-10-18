@@ -19,7 +19,8 @@ export class RendererContractImpl implements RendererContract {
             return new Promise((resolve) => {
                 const serializedModel = JSON.stringify(args.model);
                 const modelAsBase64String = btoa(serializedModel);
-                fetch(`/render?sfaction=edit&sf_culture=${args.dataItem.culture}&sf_site=${args.siteId}&sf_page_node=${args.dataItem.key}&model=${modelAsBase64String}`).then((response) => {
+                const modedelAsUrlEncodedString = encodeURIComponent(modelAsBase64String);
+                fetch(`/render?sfaction=edit&sf_culture=${args.dataItem.culture}&sf_site=${args.siteId}&sf_page_node=${args.dataItem.key}&model=${modedelAsUrlEncodedString}`).then((response) => {
                     response.text().then((html) => {
                         var rootDoc = document.createElement('html');
                         rootDoc.innerHTML = html;

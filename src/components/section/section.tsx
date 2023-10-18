@@ -1,55 +1,41 @@
-'use client'
-
 import { ImageItem } from "sitefinity-react-framework/sdk/dto/image-item";
 import { VideoItem } from "sitefinity-react-framework/sdk/dto/video-item";
 import { RestService, RestSdkTypes } from "sitefinity-react-framework/sdk/rest-service";
 import { RootUrlService } from "sitefinity-react-framework/sdk/root-url.service";
 import { htmlAttributes } from "sitefinity-react-framework/widgets/attributes";
 import { WidgetContext } from "sitefinity-react-framework/widgets/widget-context";
-import { useState, useEffect } from "react";
 import { StyleGenerator } from "../styling/style-generator.service";
 import { StylingConfig } from "../styling/styling-config";
 import { ColumnHolder, ComponentContainer } from "./column-holder";
 import { SectionHolder } from "./section-holder";
 import { SectionEntity } from "./section.entity";
-import { RequestContext } from "sitefinity-react-framework/services/request-context";
 import { RenderWidgetService } from "sitefinity-react-framework/services/render-widget-service";
 import { widgetRegistry } from "@/widget-registry";
 
 const ColumnNamePrefix = "Column";
 const sectionKey = "Section";
 
-export function Section(props: WidgetContext<SectionEntity>) {
+export async function Section(props: WidgetContext<SectionEntity>) {
+    props.model.Properties.ColumnsCount = props.model.Properties.ColumnsCount || 1;
+    props.model.Properties.ColumnProportionsInfo = props.model.Properties.ColumnProportionsInfo || "[12]";
+    const columns = populateColumns(props);
+    const section = await populateSection(props.model.Properties);
 
-    const [data, setData] = useState<State>({ columns: [], section: { Attributes: {} }, requestContext: props.requestContext });
-
-    useEffect(() => {
-        props.model.Properties.ColumnsCount = props.model.Properties.ColumnsCount || 1;
-        props.model.Properties.ColumnProportionsInfo = props.model.Properties.ColumnProportionsInfo || "[12]";
-        const columns = populateColumns(props);
-        populateSection(props.model.Properties).then((section) => {
-            const dataAttributes = htmlAttributes(props);
-            section.Attributes = Object.assign(section.Attributes, dataAttributes);
-            setData({
-                columns: columns,
-                section: section,
-                requestContext: props.requestContext
-            })
-        });
-    }, [props]);
+    const dataAttributes = htmlAttributes(props);
+    section.Attributes = Object.assign(section.Attributes, dataAttributes);
 
     return (
-        <section {...data.section.Attributes } style={data.section.Style}>
-            {data.section.ShowVideo && data.section.VideoUrl &&
+        <section {...section.Attributes } style={section.Style}>
+            {section.ShowVideo && section.VideoUrl &&
                 <video className="sc-video__element" autoPlay muted loop>
-                    <source src="{{viewModel.Section.VideoUrl}}" />
+                    <source src={section.VideoUrl} />
                 </video>
             }
-            {data.columns.map((x, i) => {
+            {columns.map((x, i) => {
                 return (
-                    <div key={i} {...x.Attributes} style={data.section.Style}>
+                    <div key={i} {...x.Attributes} style={section.Style}>
                         {x.Children.map(y => {
-                            return RenderWidgetService.createComponent(y.model, data.requestContext)
+                            return RenderWidgetService.createComponent(y.model, props.requestContext)
                         })}
                     </div>
                 )
@@ -218,8 +204,3 @@ function populateSection(properties: SectionEntity): Promise<SectionHolder> {
     return Promise.resolve(sectionObject);
 }
 
-interface State {
-    columns: ColumnHolder[],
-    section: SectionHolder,
-    requestContext: RequestContext
-}
