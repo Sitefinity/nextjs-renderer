@@ -10,11 +10,11 @@ import { RendererContractImpl } from "@/renderer-contract";
 import { widgetRegistry } from "@/widget-registry";
 
 export default function PageClient({ layout, metadata, context }: { layout: PageLayoutServiceResponse, metadata: ServiceMetadataDefinition, context: RequestContext }) {
-    RootUrlService.rootUrl = `${process.env["NEXT_CMS_URL"]}`;
+    RootUrlService.rootUrl = `${process.env["NEXT_PUBLIC_CMS_URL"]}`;
     RenderWidgetService.widgetRegistry = widgetRegistry;
+    ServiceMetadata.serviceMetadataCache = metadata;
 
     if (context.isEdit && typeof window !== 'undefined') {
-        ServiceMetadata.serviceMetadataCache = metadata;
         const timeout = 2000;
         const start = new Date().getTime();
         const handle = window.setInterval(() => {

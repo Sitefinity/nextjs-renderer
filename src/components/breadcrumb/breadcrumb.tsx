@@ -1,14 +1,10 @@
 import React from "react";
-import { generateAnchorAttrsFromLink, getCustomAttributes, htmlAttributes } from "sitefinity-react-framework/widgets/attributes";
+import { getCustomAttributes, htmlAttributes } from "sitefinity-react-framework/widgets/attributes";
 import { WidgetContext } from "sitefinity-react-framework/widgets/widget-context";
 import { classNames } from "sitefinity-react-framework/utils/classNames";
-import { LinkModel } from "sitefinity-react-framework/interfaces/LinkModel";
 import { StyleGenerator } from "../styling/style-generator.service";
 import { OffsetStyle } from "../styling/offset-style";
-import { Alignment } from "../styling/alignment";
-import { ButtonType } from "../styling/button-types";
 import { BreadcrumbRestService } from './breadcrumb.service'
-import dompurify from "isomorphic-dompurify";
 
 const PAGE_MISSING_MESSAGE = "Breadcrumb is visible when you are on a particular page.";
 
