@@ -1,0 +1,47 @@
+{
+    "Name":"SitefinityKendoTextBox",
+    "Caption":"TextBox",
+    "PropertyMetadata":[
+       {
+          "Name":"Basic",
+          "Sections":[
+             {
+                "Name":"Main",
+                "Title":null,
+                "Properties":[
+                   {
+                      "Name":"Value",
+                      "DefaultValue":"",
+                      "Title":"Value",
+                      "Type":"string",
+                      "SectionName":null,
+                      "CategoryName":null,
+                      "Properties":{
+
+                      },
+                      "TypeChildProperties":[
+
+                      ],
+                      "Position":0
+                   },
+                   {
+                    "Name":"Placeholder",
+                    "DefaultValue":"",
+                    "Title":"Placeholder",
+                    "Type":"string",
+                    "SectionName":null,
+                    "CategoryName":null,
+                    "Properties":{
+
+                    },
+                    "TypeChildProperties":[
+
+                    ],
+                    "Position":1
+                 }],
+                "CategoryName":"Basic"
+             }
+          ]
+       }
+    ]
+ }

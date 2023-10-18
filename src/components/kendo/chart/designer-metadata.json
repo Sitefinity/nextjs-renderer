@@ -1,0 +1,139 @@
+{
+    "Name":"SitefinityChart",
+    "Caption":"Chart",
+    "PropertyMetadata":[
+       {
+          "Name":"Basic",
+          "Sections":[
+             {
+                "Name":"Main",
+                "Title":null,
+                "Properties":[
+                   {
+                      "Name":"ShowLegend",
+                      "DefaultValue":null,
+                      "Title":"Show Legend",
+                      "Type":"bool",
+                      "SectionName":null,
+                      "CategoryName":null,
+                      "Properties":{
+
+                      },
+                      "TypeChildProperties":[
+
+                      ],
+                      "Position":0
+                   },
+                   {
+                      "Name":"ChartTitle",
+                      "DefaultValue":"",
+                      "Title":"Title",
+                      "Type":"string",
+                      "SectionName":null,
+                      "CategoryName":null,
+                      "Properties":{
+
+                      },
+                      "TypeChildProperties":[
+
+                      ],
+                      "Position":1
+                    },
+                    {
+                      "Name":"ChartCategoryAxisTitle",
+                      "DefaultValue":"",
+                      "Title":"Category Title",
+                      "Type":"string",
+                      "SectionName":null,
+                      "CategoryName":null,
+                      "Properties":{
+
+                      },
+                      "TypeChildProperties":[
+
+                      ],
+                      "Position":1
+                  },
+                  {
+                    "Name":"FirstSeriesName",
+                    "DefaultValue":"",
+                    "Title":"First Series Name",
+                    "Type":"string",
+                    "SectionName":null,
+                    "CategoryName":null,
+                    "Properties":{
+
+                    },
+                    "TypeChildProperties":[
+
+                    ],
+                    "Position":1
+                },
+                {
+                    "Name":"SecondSeriesName",
+                    "DefaultValue":"",
+                    "Title":"Second Series Name",
+                    "Type":"string",
+                    "SectionName":null,
+                    "CategoryName":null,
+                    "Properties":{
+
+                    },
+                    "TypeChildProperties":[
+
+                    ],
+                    "Position":1
+                  },
+                  {
+                    "Name":"ThirdSeriesName",
+                    "DefaultValue":"",
+                    "Title":"Third Series Name",
+                    "Type":"string",
+                    "SectionName":null,
+                    "CategoryName":null,
+                    "Properties":{
+
+                    },
+                    "TypeChildProperties":[
+
+                    ],
+                    "Position":1
+                },
+                {
+                  "Name":"FourthSeriesName",
+                  "DefaultValue":"",
+                  "Title":"Fourth Series Name",
+                  "Type":"string",
+                  "SectionName":null,
+                  "CategoryName":null,
+                  "Properties":{
+
+                  },
+                  "TypeChildProperties":[
+
+                  ],
+                  "Position":1
+              },
+                  {
+                  "Name":"SeriesType",
+                  "DefaultValue":"Column",
+                  "Title":"Series Type",
+                  "Type":"radioChoices",
+                  "SectionName":"Series Type",
+                  "CategoryName":null,
+                  "Properties":{
+                    "Meta_Choices":"[{\u0022Title\u0022:\u0022Column\u0022,\u0022Name\u0022:\u0022Column\u0022,\u0022Value\u0022:\u0022column\u0022}, {\u0022Title\u0022:\u0022Line\u0022,\u0022Name\u0022:\u0022Line\u0022,\u0022Value\u0022:\u0022line\u0022}]",
+                    "Meta_Choices_AllowMultiple":"False"
+                  },
+                  "TypeChildProperties":[
+
+                  ],
+                  "Position":2
+                }
+                ],
+                "CategoryName":"Basic"
+             }
+          ]
+       }
+    ]
+ }

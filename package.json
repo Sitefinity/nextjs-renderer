@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@progress/kendo-react-buttons": "6.0.2",
+    "@progress/kendo-react-charts": "6.0.2",
+    "@progress/kendo-react-grid": "6.0.2",
     "@types/node": "20.6.2",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
@@ -13,8 +16,8 @@
     "next": "13.4.19",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "typescript": "5.2.2",
-    "sitefinity-react-framework": "file:./framework/build/sitefinity-react-framework-0.1.0.tgz"
+    "sitefinity-react-framework": "file:./framework/build/sitefinity-react-framework-0.1.0.tgz",
+    "typescript": "5.2.2"
   },
   "scripts": {
     "prod": "next start",
