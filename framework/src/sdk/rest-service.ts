@@ -17,6 +17,13 @@ export class RestService {
         return fetch(wholeUrl, { headers: { "X-Requested-With": "react" } }).then(x => x.json());
     }
 
+    public static getCustomItems<T extends SdkItem>(baseURL: string, action: string, queryParamsForMethod: any, contentText: string = ''): any{
+        const actionName = `${action}(${contentText})`;
+        const wholeUrl = `${RestService.buildItemBaseUrl(baseURL)}/${actionName}${RestService.buildQueryParams(queryParamsForMethod)}`;
+        return fetch(wholeUrl,
+         { headers: { "X-Requested-With": "react" } }).then(x => x.json());
+    }
+
     public static getItemWithStatus<T extends SdkItem>(itemType: string, id: string, provider: string, queryParams: {[key: string]: string}): Promise<T> {
         let queryParamsForMethod = {
             sf_provider: provider,
@@ -69,6 +76,7 @@ export class RestService {
         queryParamsForMethod = Object.assign(queryParamsForMethod, args.AdditionalQueryParams);
 
         const wholeUrl = `${this.buildItemBaseUrl(args.Type)}${this.buildQueryParams(queryParamsForMethod)}`;
+
         return fetch(wholeUrl, { headers: { "X-Requested-With": "react" } }).then((x => x.json())).then((x) => {
             return <CollectionResponse<T>>{ Items: x.value, TotalCount: x["@odata.count"] }
         });

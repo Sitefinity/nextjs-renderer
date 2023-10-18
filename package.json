@@ -16,8 +16,8 @@
     "next": "13.4.19",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "sitefinity-react-framework": "file:./framework/build/sitefinity-react-framework-0.1.0.tgz",
-    "typescript": "5.2.2"
+    "typescript": "5.2.2",
+    "sitefinity-react-framework": "file:./framework/build/sitefinity-react-framework-0.1.1.tgz"
   },
   "scripts": {
     "prod": "next start",

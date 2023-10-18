@@ -1,20 +1,14 @@
 import React, { Fragment } from "react"
 import { ListWithSummaryModel } from "./list-with-summary-model";
 import { SdkItem } from "sitefinity-react-framework/sdk/dto/sdk-item";
+import { OpenDetailsAnchor } from '../open-details-anchor';
+import { ContentListEntity } from "../../content-list-entity";
 
-export function ListWithSummary(props: { model: ListWithSummaryModel }) {
-    const model = props.model;
-
-    function onDetailItemOpenHandler(event: React.MouseEvent<HTMLAnchorElement>, item: SdkItem) {
-        event.preventDefault();
-        event.stopPropagation();
-
-        model.OnDetailsOpen(item);
-    }
-
+export function ListWithSummary(props: { model: ListWithSummaryModel, entity?: ContentListEntity }) {
+    const model = props.model as any;
     return (
         <Fragment>
-            {model.Items.map((item, index) => {
+            {model.Items.map((item: any, index: number) => {
                 return (
                     <Fragment key={item.Original.Id}>
                         {index !== 0 && <hr />}
@@ -22,7 +16,7 @@ export function ListWithSummary(props: { model: ListWithSummaryModel }) {
                             {item.Title &&
                                 <h5 className={item.Title.Css}>
                                     {model.OpenDetails ?
-                                        (<a href="#" onClick={(e) => onDetailItemOpenHandler(e, item.Original)}>{item.Title.Value}</a>) :
+                                        <OpenDetailsAnchor entity={props.entity} item={item} model={model} /> :
                                         (item.Title.Value)
                                     }
                                 </h5>}

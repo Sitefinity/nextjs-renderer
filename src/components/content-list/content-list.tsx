@@ -1,6 +1,4 @@
-'use client'
-
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { ContentListEntity } from "./content-list-entity";
 import { ContentListRestService } from "./content-list-rest.service";
 import { ContentListDetail } from "./detail/content-list-detail";
@@ -11,57 +9,56 @@ import { WidgetContext } from "sitefinity-react-framework/widgets/widget-context
 import { htmlAttributes } from "sitefinity-react-framework/widgets/attributes";
 import { DetailItem } from "sitefinity-react-framework/sdk/services/detail-item";
 import { RestSdkTypes, RestService } from "sitefinity-react-framework/sdk/rest-service";
-import { PageItem } from "sitefinity-react-framework/sdk/dto/page-item";
 import { SdkItem } from "sitefinity-react-framework/sdk/dto/sdk-item";
 
-export function ContentList(props: WidgetContext<ContentListEntity>) {
+export async function ContentList(props: WidgetContext<ContentListEntity>) {
     const attributes = htmlAttributes(props);
-    const [data, setData] = useState<State>({ detailModel: null, listModel: null, attributes });
+    const properties = props.model.Properties;
 
-    props.model.Properties.DetailPageMode = props.model.Properties.DetailPageMode || "SamePage";
-    props.model.Properties.ContentViewDisplayMode = props.model.Properties.ContentViewDisplayMode || "Automatic";
-    props.model.Properties.Attributes = props.model.Properties.Attributes || {};
-    props.model.Properties.CssClasses = props.model.Properties.CssClasses || [];
-    props.model.Properties.ListFieldMapping = props.model.Properties.ListFieldMapping || [];
-    props.model.Properties.OrderBy = props.model.Properties.OrderBy || "PublicationDate DESC";
-    props.model.Properties.ListSettings = props.model.Properties.ListSettings || {};
-    props.model.Properties.ListSettings.DisplayMode = props.model.Properties.ListSettings.DisplayMode || "All";
-    props.model.Properties.ListSettings.ItemsPerPage = props.model.Properties.ListSettings.ItemsPerPage || 20;
-    props.model.Properties.ListSettings.LimitItemsCount = props.model.Properties.ListSettings.LimitItemsCount || 20;
-    props.model.Properties.SelectExpression = props.model.Properties.SelectExpression || "*";
-    props.model.Properties.SelectionGroupLogicalOperator = props.model.Properties.SelectionGroupLogicalOperator || "AND";
-    props.model.Properties.SfViewName = props.model.Properties.SfViewName || "CardsList";
+    let data: any = {
+        detailModel: null,
+        listModel: null,
+        attributes
+    };
 
-    useEffect(() => {
-        if (props.model.Properties.ContentViewDisplayMode === "Automatic") {
-            if (props.requestContext.detailItem) {
-                const detailModel = handleDetailView(props.requestContext.detailItem, props);
-                setData({ detailModel, listModel: null, attributes });
-            } else {
-                const listModel = handleListView(props);
-                setData({ detailModel: null, listModel, attributes });
-            }
-        } else if (props.model.Properties.ContentViewDisplayMode === "Detail") {
-            if (props.model.Properties.SelectedItems && props.model.Properties.SelectedItems.Content && props.model.Properties.SelectedItems.Content.length > 0) {
-                const selectedContent = props.model.Properties.SelectedItems.Content[0];
-                const detailModel = handleDetailView({
-                    Id: props.model.Properties.SelectedItems.ItemIdsOrdered[0],
-                    ItemType: selectedContent.Type,
-                    ProviderName: selectedContent.Variations[0].Source
-                }, props);
-                setData({ detailModel, listModel: null, attributes });
-            }
-        } else if (props.model.Properties.ContentViewDisplayMode === "Master") {
-            const listModel = handleListView(props);
-            setData({ detailModel: null, listModel, attributes });
+    properties.DetailPageMode = properties.DetailPageMode || "SamePage";
+    properties.ContentViewDisplayMode = properties.ContentViewDisplayMode || "Automatic";
+    properties.Attributes = properties.Attributes || {};
+    properties.CssClasses = properties.CssClasses || [];
+    properties.ListFieldMapping = properties.ListFieldMapping || [];
+    properties.OrderBy = properties.OrderBy || "PublicationDate DESC";
+    properties.ListSettings = properties.ListSettings || {};
+    properties.ListSettings.DisplayMode = properties.ListSettings.DisplayMode || "All";
+    properties.ListSettings.ItemsPerPage = properties.ListSettings.ItemsPerPage || 20;
+    properties.ListSettings.LimitItemsCount = properties.ListSettings.LimitItemsCount || 20;
+    properties.SelectExpression = properties.SelectExpression || "*";
+    properties.SelectionGroupLogicalOperator = properties.SelectionGroupLogicalOperator || "AND";
+    properties.SfViewName = properties.SfViewName || "CardsList";
+
+    if (properties.ContentViewDisplayMode === "Automatic") {
+        if (props.requestContext.detailItem) {
+            data.detailModel = await handleDetailView(props.requestContext.detailItem, props);
+        } else {
+            data.listModel = await handleListView(props);
         }
-    }, [props]);
-
+    } else if (properties.ContentViewDisplayMode === "Detail") {
+        if (properties.SelectedItems && properties.SelectedItems.Content && properties.SelectedItems.Content.length > 0) {
+            const selectedContent = properties.SelectedItems.Content[0];
+            const detailModel = await handleDetailView({
+                Id: properties.SelectedItems.ItemIdsOrdered[0],
+                ItemType: selectedContent.Type,
+                ProviderName: selectedContent.Variations[0].Source
+            }, props);
+            data.detailModel = detailModel;
+        }
+    } else if (properties.ContentViewDisplayMode === "Master") {
+        data.listModel = await handleListView(props);
+    }
 
     return (
         <div {...data.attributes as any}>
-            {data.detailModel && <ContentListDetail detailModel={data.detailModel}></ContentListDetail>}
-            {data.listModel && <ContentListMaster model={data.listModel}></ContentListMaster>}
+            {data.detailModel && <ContentListDetail entity={properties} detailModel={data.detailModel}></ContentListDetail>}
+            {data.listModel && <ContentListMaster  entity={properties} model={data.listModel}></ContentListMaster>}
         </div>
     );
 }
@@ -73,7 +70,7 @@ function getAttributesWithClasses(props: WidgetContext<ContentListEntity>, field
     let classAttribute = contentListAttributes.find(x => x.Key === "class");
     if (!classAttribute) {
         classAttribute = {
-            Key: "class",
+            Key: "className",
             Value: ''
         };
 
@@ -116,26 +113,7 @@ function handleListView(props: WidgetContext<ContentListEntity>) {
     const items = ContentListRestService.getItems(props.model.Properties, props.requestContext.detailItem);
 
     let contentListMasterModel: ContentListModelMaster = {
-        OnDetailsOpen: ((sdkItem) => {
-            const selectedContent = props.model.Properties.SelectedItems.Content[0];
-            const detailItem: DetailItem = {
-                Id: sdkItem.Id,
-                ProviderName: sdkItem.Provider,
-                ItemType: selectedContent.Type
-            };
 
-            if (props.model.Properties.DetailPageMode === "SamePage") {
-                handleDetailView(detailItem, props);
-
-                const newUrl = window.location.origin + window.location.pathname + sdkItem.ItemDefaultUrl + window.location.search;
-                window.history.pushState(detailItem, '', newUrl);
-            } else if (props.model.Properties.DetailPage) {
-                RestService.getItem(RestSdkTypes.Pages, props.model.Properties.DetailPage.ItemIdsOrdered[0], props.model.Properties.DetailPage.Content[0].Variations[0].Source).then((page: SdkItem) => {
-                    const newUrl = (page as PageItem).ViewUrl + sdkItem.ItemDefaultUrl;
-                    window.location.href = newUrl;
-                });
-            }
-        }),
         OpenDetails: !(props.model.Properties.ContentViewDisplayMode === "Master" && props.model.Properties.DetailPageMode === "SamePage"),
         FieldCssClassMap: fieldCssClassMap,
         FieldMap: listFieldMapping,
