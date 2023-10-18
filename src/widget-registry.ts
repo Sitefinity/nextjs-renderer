@@ -25,34 +25,6 @@ import chartMetadataJson from "./components/kendo/chart/designer-metadata.json";
 
 export const widgetRegistry: WidgetRegistry = {
     widgets: {
-        "SitefinityKendoGrid": {
-            designerMetadata: gridMetadataJson,
-            componentType: GridComponent,
-            editorMetadata: {
-                Title: "Kendo Grid"
-            },
-        },
-        "SitefinityKendoButton": {
-            designerMetadata: buttonMetadataJson,
-            componentType: ButtonComponent,
-            editorMetadata: {
-                Title: "Kendo Button"
-            },
-        },
-        "SitefinityChart": {
-            designerMetadata: chartMetadataJson,
-            componentType: ChartComponent,
-            editorMetadata: {
-                Title: "Kendo Chart"
-            },
-        },
-        "KendoTextBox": {
-            designerMetadata: textBoxMetadataJson,
-            componentType: TextBoxComponent,
-            editorMetadata: {
-                Title: "Kendo Textbox"
-            }
-        },
         "SitefinityBreadcrumb":  <any>{
             designerMetadata: sitefinityBreadcrumbJson,
             componentType: Breadcrumb,
@@ -111,6 +83,34 @@ export const widgetRegistry: WidgetRegistry = {
                 EmptyIcon: "plus-circle",
             },
             ssr: true
-        }
+        },
+        "SitefinityKendoGrid": {
+            designerMetadata: gridMetadataJson,
+            componentType: GridComponent,
+            editorMetadata: {
+                Title: "Kendo Grid"
+            },
+        },
+        "SitefinityKendoButton": {
+            designerMetadata: buttonMetadataJson,
+            componentType: ButtonComponent,
+            editorMetadata: {
+                Title: "Kendo Button"
+            },
+        },
+        "SitefinityChart": {
+            designerMetadata: chartMetadataJson,
+            componentType: ChartComponent,
+            editorMetadata: {
+                Title: "Kendo Chart"
+            },
+        },
+        "KendoTextBox": {
+            designerMetadata: textBoxMetadataJson,
+            componentType: TextBoxComponent,
+            editorMetadata: {
+                Title: "Kendo Textbox"
+            }
+        },
     }
 }
