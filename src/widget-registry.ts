@@ -3,6 +3,7 @@ import { ContentBlock } from "./components/content-block/content-block";
 import { ContentList } from "./components/content-list/content-list";
 import { CallToAction } from "./components/call-to-action/call-to-action";
 import { Classification } from "./components/classification/classification";
+import { Image } from "./components/image/image";
 import { Breadcrumb } from "./components/breadcrumb/breadcrumb";
 import { Navigation } from "./components/navigation/navigation";
 import { Section } from "./components/section/section";
@@ -12,6 +13,7 @@ import sitefinitySectionJson from './components/section/designer-metadata.json';
 import sitefinityContentListJson from './components/content-list/designer-metadata.json';
 import sitefinityCallToActionJson from './components/call-to-action/designer-metadata.json';
 import sitefinityClassificationJson from './components/classification/designer-metadata.json';
+import sitefinityImageJson from './components/image/designer-metadata.json';
 import sitefinityBreadcrumbJson from './components/breadcrumb/designer-metadata.json';
 import sitefinityNavigationJson from './components/navigation/designer-metadata.json';
 
@@ -30,6 +32,14 @@ export const widgetRegistry: WidgetRegistry = {
             componentType: Classification,
             editorMetadata: {
                 Title: "Classification"
+            },
+            ssr: true
+        },
+        "SitefinityImage":  <any>{
+            designerMetadata: sitefinityImageJson,
+            componentType: Image,
+            editorMetadata: {
+                Title: "Image"
             },
             ssr: true
         },
@@ -63,8 +73,7 @@ export const widgetRegistry: WidgetRegistry = {
             selectorCategory: 'Layout',
             editorMetadata: {
                 Title: "Section"
-            },
-            ssr: true
+            }
         },
         "SitefinityContentList":  <any>{
             designerMetadata: sitefinityContentListJson,
