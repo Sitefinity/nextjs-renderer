@@ -17,7 +17,7 @@ const sectionKey = "Section";
 
 export async function Section(props: WidgetContext<SectionEntity>) {
     props.model.Properties.ColumnsCount = props.model.Properties.ColumnsCount || 1;
-    props.model.Properties.ColumnProportionsInfo = props.model.Properties.ColumnProportionsInfo || "[12]";
+    props.model.Properties.ColumnProportionsInfo = props.model.Properties.ColumnProportionsInfo || [12];
     const columns = populateColumns(props);
     const section = await populateSection(props.model.Properties);
 

@@ -105,7 +105,7 @@
 
 .-sf-facebook-button:hover {
   color: #fff;
-  background-color: #3E86B4;   
+  background-color: #3E86B4;
 }
 
 .-sf-github-button {
@@ -114,7 +114,7 @@
 
 .-sf-github-button:hover {
   color: #fff;
-  background-color: #333;   
+  background-color: #333;
 }
 
 .-sf-yahoo-button {
@@ -123,7 +123,7 @@
 
 .-sf-yahoo-button:hover {
   color: #fff;
-  background-color: #410093;   
+  background-color: #410093;
 }
 
 .-sf-linkedin-button {
@@ -132,7 +132,7 @@
 
 .-sf-linkedin-button:hover {
   color: #fff;
-  background-color: #0077b5;   
+  background-color: #0077b5;
 }
 
 .-sf-microsoft-button {
@@ -141,7 +141,7 @@
 
 .-sf-microsoft-button:hover {
   color: #fff;
-  background-color: #00a1f1;   
+  background-color: #00a1f1;
 }
 
 .-sf-adfs-button {
@@ -150,7 +150,7 @@
 
 .-sf-adfs-button:hover {
   color: #fff;
-  background-color: #00a1f1;   
+  background-color: #00a1f1;
 }
 
 .-sf-windows-button {
@@ -159,7 +159,7 @@
 
 .-sf-windows-button:hover {
   color: #fff;
-  background-color: #00bcf2;   
+  background-color: #00bcf2;
 }
 
 .-sf-twitter-button {
@@ -168,6 +168,52 @@
 
 .-sf-twitter-button:hover {
   color: #fff;
-  background-color: #1da1f2;   
+  background-color: #1da1f2;
 }
 /*#endregion External login buttons*/
+/*#region DX styling */
+.dx-logo {
+    max-width: 420px;
+  }
+
+  .dx-container {
+    color: #fff;
+    height: 100vh;
+    align-items: center;
+    background: var(--tb-container-bg, #3d551f);
+  }
+
+  .dx-home-image img {
+    border-radius: 25px;
+  }
+
+  .dx-home-heading h1 {
+    font-size: calc(1.525rem + 3.3vw);
+  }
+
+  @media (min-width: 1200px) {
+    .dx-home-heading h1 {
+      font-size: 4rem;
+    }
+  }
+
+  .dx-home-heading p {
+    font-size: 20px
+  }
+
+  .dx-example {
+    margin: 60px auto;
+  }
+
+  .dx-example-section > div:not(.dx-logo) {
+    background: #fff;
+    border: 1px solid #7d7e7b;
+    border-radius: 15px;
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+  .dx-button img {
+    width: 1em;
+    height: 1em;
+  }
+  /*#endregion DX styling */
