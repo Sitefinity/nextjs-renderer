@@ -78,6 +78,27 @@
 
                   "Position":3
 
+               },
+               {
+                  "Name":"Image",
+                  "DefaultValue":null,
+                  "Title":"Image",
+                  "Type":"content",
+                  "SectionName":null,
+                  "CategoryName":null,
+                  "Properties":{
+                     "Meta_Content_Type":"Telerik.Sitefinity.Libraries.Model.Image",
+                     "Meta_Content_AllowMultipleItemsSelection":"False",
+                     "Meta_Content_LiveData":"False",
+                     "Meta_Content_DisableInteraction":"False",
+                     "Meta_Content_ShowSiteSelector":"False",
+                     "Meta_Content_OpenMultipleItemsSelection":"False",
+                     "Meta_Content_Provider":null
+                  },
+                  "TypeChildProperties":[
+
+                  ],
+                  "Position":0
                }],
                 "CategoryName":"Basic"
              }
