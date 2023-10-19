@@ -63,7 +63,8 @@ export const widgetRegistry: WidgetRegistry = {
             selectorCategory: 'Layout',
             editorMetadata: {
                 Title: "Section"
-            }
+            },
+            ssr: true
         },
         "SitefinityContentList":  <any>{
             designerMetadata: sitefinityContentListJson,

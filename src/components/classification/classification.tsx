@@ -9,7 +9,6 @@ import { Alignment } from "../styling/alignment";
 import { ButtonType } from "../styling/button-types";
 import { ClassificationRestService } from './classification.service'
 import { PageViewModel } from '../navigation/interfaces/PageViewModel'
-import dompurify from "isomorphic-dompurify";
 
 const mapTaxonProperties = (taxon: any, taxonomyName: string, viewUrl?: string, searchParams?: any) =>{
     const children: any[] = [];
@@ -71,7 +70,6 @@ export async function Classification(props: WidgetContext<ClassificationEntity>)
         }
     })
 
-    const sanitizer = dompurify.sanitize;
     const showItemCount = properties.ShowItemCount || true;
     const defaultClass =  properties.CssClass;
     const marginClass = properties.Margins && StyleGenerator.getMarginClasses(properties.Margins);
@@ -91,7 +89,7 @@ export async function Classification(props: WidgetContext<ClassificationEntity>)
             taxa.map((t: any, idx: number) =>{
                const count = show ? `(${t.AppliedTo})` : '';
                return <li key={idx} className="list-unstyled">
-                    <a className="text-decoration-none" href={t.UrlName}>{sanitizer(t.Title)}</a>
+                    <a className="text-decoration-none" href={t.UrlName}>{t.Title}</a>
                     {count}
                     {
                         t.SubTaxa && renderSubTaxa(t.SubTaxa, show)
@@ -111,7 +109,7 @@ export async function Classification(props: WidgetContext<ClassificationEntity>)
             updatedTokens.map((item: any, idx: number) => {
                     const count = showItemCount ? `(${item.AppliedTo})` : '';
                     return <li key={idx} className="list-unstyled">
-                        <a className="text-decoration-none" href={item.UrlName}>{sanitizer(item.Title)}</a>
+                        <a className="text-decoration-none" href={item.UrlName}>{item.Title}</a>
                         {count}
                         {
                            item.SubTaxa && renderSubTaxa(item.SubTaxa, showItemCount)
