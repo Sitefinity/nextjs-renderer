@@ -1,30 +1,30 @@
-import { VisibilityStyle } from "./visibility-style"
+import { VisibilityStyle } from './visibility-style';
 
 export const StylingConfig = {
-    "ActiveClass": "active",
-    "InvalidClass": "is-invalid",
-    "CssGridSystemColumnCount": 12,
-    "VideoBackgroundClass": "-sc-video",
-    "ImageBackgroundClass": "-sc-image",
-    "DefaultPadding": "None",
-    "DefaultMargin": "None",
+    'ActiveClass': 'active',
+    'InvalidClass': 'is-invalid',
+    'CssGridSystemColumnCount': 12,
+    'VideoBackgroundClass': '-sc-video',
+    'ImageBackgroundClass': '-sc-image',
+    'DefaultPadding': 'None',
+    'DefaultMargin': 'None',
 
-    "AlignmentClasses": {
-        "Left": "justify-content-start",
-        "Center": "justify-content-center",
-        "Right": "justify-content-end",
-        "Justify": "justify-content-between"
+    'AlignmentClasses': {
+        'Left': 'justify-content-start',
+        'Center': 'justify-content-center',
+        'Right': 'justify-content-end',
+        'Justify': 'justify-content-between'
     },
-    "VisibilityClasses": {
-        [VisibilityStyle.Visible]:  "d-block",
-        [VisibilityStyle.InlineVisible]: "d-inline-block",
-        [VisibilityStyle.Hidden]: "d-none",
+    'VisibilityClasses': {
+        [VisibilityStyle.Visible]:  'd-block',
+        [VisibilityStyle.InlineVisible]: 'd-inline-block',
+        [VisibilityStyle.Hidden]: 'd-none'
     },
-    "SearchAutocompleteItemClass": "dropdown-item text-truncate",
-    "ButtonClasses": {
-        "Primary": {
-            "Title": "Primary action",
-            "Value": "btn btn-primary"
+    'SearchAutocompleteItemClass': 'dropdown-item text-truncate',
+    'ButtonClasses': {
+        'Primary': {
+            'Title': 'Primary action',
+            'Value': 'btn btn-primary'
         },
 
         'Secondary': {
