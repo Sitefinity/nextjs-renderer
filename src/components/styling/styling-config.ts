@@ -1,19 +1,30 @@
+import { VisibilityStyle } from "./visibility-style"
+
 export const StylingConfig = {
-    'CssGridSystemColumnCount': 12,
-    'VideoBackgroundClass': '-sc-video',
-    'ImageBackgroundClass': '-sc-image',
-    'DefaultPadding': 'None',
-    'DefaultMargin': 'None',
-    'AlignmentClasses': {
-        'Left': 'justify-content-start',
-        'Center': 'justify-content-center',
-        'Right': 'justify-content-end',
-        'Justify': 'justify-content-between'
+    "ActiveClass": "active",
+    "InvalidClass": "is-invalid",
+    "CssGridSystemColumnCount": 12,
+    "VideoBackgroundClass": "-sc-video",
+    "ImageBackgroundClass": "-sc-image",
+    "DefaultPadding": "None",
+    "DefaultMargin": "None",
+
+    "AlignmentClasses": {
+        "Left": "justify-content-start",
+        "Center": "justify-content-center",
+        "Right": "justify-content-end",
+        "Justify": "justify-content-between"
     },
-    'ButtonClasses': {
-        'Primary': {
-            'Title': 'Primary action',
-            'Value': 'btn btn-primary'
+    "VisibilityClasses": {
+        [VisibilityStyle.Visible]:  "d-block",
+        [VisibilityStyle.InlineVisible]: "d-inline-block",
+        [VisibilityStyle.Hidden]: "d-none",
+    },
+    "SearchAutocompleteItemClass": "dropdown-item text-truncate",
+    "ButtonClasses": {
+        "Primary": {
+            "Title": "Primary action",
+            "Value": "btn btn-primary"
         },
 
         'Secondary': {
