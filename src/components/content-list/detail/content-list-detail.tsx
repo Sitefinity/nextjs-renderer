@@ -1,8 +1,8 @@
-import React from "react";
-import { ContentListModelDetail } from "./content-list-detail-model";
-import { RestService } from "sitefinity-react-framework/sdk/rest-service";
-import { SdkItem } from "sitefinity-react-framework/sdk/dto/sdk-item";
-import { ContentListEntity } from "../content-list-entity";
+import React from 'react';
+import { ContentListModelDetail } from './content-list-detail-model';
+import { RestService } from 'sitefinity-react-framework/sdk/rest-service';
+import { SdkItem } from 'sitefinity-react-framework/sdk/dto/sdk-item';
+import { ContentListEntity } from '../content-list-entity';
 
 export async function ContentListDetail(props: { detailModel: ContentListModelDetail, entity?: ContentListEntity }) {
     const model = props.detailModel;
@@ -13,11 +13,11 @@ export async function ContentListDetail(props: { detailModel: ContentListModelDe
     });
 
     let dataItem: SdkItem;
-    if (queryParams.hasOwnProperty("sf-content-action")) {
+    if (queryParams.hasOwnProperty('sf-content-action')) {
         dataItem = await RestService.getItemWithStatus(
             model.DetailItem.ItemType, model.DetailItem.Id,
             model.DetailItem.ProviderName, queryParams
-        )
+        );
     } else {
         dataItem = await RestService.getItem(
             model.DetailItem.ItemType,
@@ -25,7 +25,7 @@ export async function ContentListDetail(props: { detailModel: ContentListModelDe
             model.DetailItem.ProviderName
         );
     }
-    let detailViewModel: State
+    let detailViewModel: State;
     let attributes: { [key: string]: string } = {};
     if (model.Attributes) {
         model.Attributes.forEach((pair) => {
@@ -40,14 +40,14 @@ export async function ContentListDetail(props: { detailModel: ContentListModelDe
     };
 
     return (
-        <div {...detailViewModel?.Attributes as any}>
-            {detailViewModel?.ViewName === 'News' &&
-            <h3>
-                <span>{detailViewModel?.DetailItem.Title}</span>
-            </h3>
+      <div {...detailViewModel?.Attributes as any}>
+        {detailViewModel?.ViewName === 'News' &&
+        <h3>
+          <span>{detailViewModel?.DetailItem.Title}</span>
+        </h3>
             }
-        </div>
-    )
+      </div>
+    );
 }
 
 interface State {

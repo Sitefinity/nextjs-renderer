@@ -1,14 +1,14 @@
-import { WidgetRegistry } from "sitefinity-react-framework/widgets/widget-registry";
-import { ContentBlock } from "./components/content-block/content-block";
-import { ContentList } from "./components/content-list/content-list";
-import { CallToAction } from "./components/call-to-action/call-to-action";
-import { Classification } from "./components/classification/classification";
-import { Image } from "./components/image/image";
-import { Breadcrumb } from "./components/breadcrumb/breadcrumb";
-import { Navigation } from "./components/navigation/navigation";
-import { Section } from "./components/section/section";
+import { WidgetRegistry } from 'sitefinity-react-framework/widgets/widget-registry';
+import { ContentBlock } from './components/content-block/content-block';
+import { ContentList } from './components/content-list/content-list';
+import { CallToAction } from './components/call-to-action/call-to-action';
+import { Classification } from './components/classification/classification';
+import { Image } from './components/image/image';
+import { Breadcrumb } from './components/breadcrumb/breadcrumb';
+import { Navigation } from './components/navigation/navigation';
+import { Section } from './components/section/section';
 
-import sitefinityContentBlockJson from './components/content-block/designer-metadata.json'
+import sitefinityContentBlockJson from './components/content-block/designer-metadata.json';
 import sitefinitySectionJson from './components/section/designer-metadata.json';
 import sitefinityContentListJson from './components/content-list/designer-metadata.json';
 import sitefinityCallToActionJson from './components/call-to-action/designer-metadata.json';
@@ -19,71 +19,71 @@ import sitefinityNavigationJson from './components/navigation/designer-metadata.
 
 export const widgetRegistry: WidgetRegistry = {
     widgets: {
-        "SitefinityBreadcrumb":  <any>{
+        'SitefinityBreadcrumb':  <any>{
             designerMetadata: sitefinityBreadcrumbJson,
             componentType: Breadcrumb,
             editorMetadata: {
-                Title: "Breadcrumb"
+                Title: 'Breadcrumb'
             },
             ssr: true
         },
-        "SitefinityClassification":  <any>{
+        'SitefinityClassification':  <any>{
             designerMetadata: sitefinityClassificationJson,
             componentType: Classification,
             editorMetadata: {
-                Title: "Classification"
+                Title: 'Classification'
             },
             ssr: true
         },
-        "SitefinityImage":  <any>{
+        'SitefinityImage':  <any>{
             designerMetadata: sitefinityImageJson,
             componentType: Image,
             editorMetadata: {
-                Title: "Image"
+                Title: 'Image'
             },
             ssr: true
         },
-        "SitefinityNavigation":  <any>{
+        'SitefinityNavigation':  <any>{
             designerMetadata: sitefinityNavigationJson,
             componentType: Navigation,
             editorMetadata: {
-                Title: "Navigation"
+                Title: 'Navigation'
             },
             ssr: true
         },
-        "SitefinityButton":  <any>{
+        'SitefinityButton':  <any>{
             designerMetadata: sitefinityCallToActionJson,
             componentType: CallToAction,
             editorMetadata: {
-                Title: "Call to action"
+                Title: 'Call to action'
             },
             ssr: true
         },
-        "SitefinityContentBlock":  <any>{
+        'SitefinityContentBlock':  <any>{
             designerMetadata: sitefinityContentBlockJson,
             componentType: ContentBlock,
             editorMetadata: {
-                Title: "Content block"
+                Title: 'Content block'
             },
             ssr: true
         },
-        "SitefinitySection": <any>{
+        'SitefinitySection': <any>{
             designerMetadata: sitefinitySectionJson,
             componentType: Section,
             selectorCategory: 'Layout',
             editorMetadata: {
-                Title: "Section"
+                Title: 'Section'
             }
         },
-        "SitefinityContentList":  <any>{
+        'SitefinityContentList':  <any>{
             designerMetadata: sitefinityContentListJson,
             componentType: ContentList,
             editorMetadata: {
-                Title: "Content list",
-                EmptyIconText: "Select content",
-                EmptyIcon: "plus-circle",
+                Title: 'Content list',
+                EmptyIconText: 'Select content',
+                EmptyIcon: 'plus-circle'
             },
             ssr: true
         }
     }
-}
+};

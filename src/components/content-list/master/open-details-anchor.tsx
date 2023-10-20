@@ -1,12 +1,12 @@
-'use client'
+'use client';
 
-import React from "react";
-import { RestSdkTypes, RestService } from "sitefinity-react-framework/sdk/rest-service";
-import { ContentListEntity } from "../content-list-entity";
-import { ListWithSummaryModel } from "./list-with-summary/list-with-summary-model";
-import { DetailItem } from "sitefinity-react-framework/sdk/services/detail-item";
-import { SdkItem } from "sitefinity-react-framework/sdk/dto/sdk-item";
-import { PageItem } from "sitefinity-react-framework/sdk/dto/page-item";
+import React from 'react';
+import { RestSdkTypes, RestService } from 'sitefinity-react-framework/sdk/rest-service';
+import { ContentListEntity } from '../content-list-entity';
+import { ListWithSummaryModel } from './list-with-summary/list-with-summary-model';
+import { DetailItem } from 'sitefinity-react-framework/sdk/services/detail-item';
+import { SdkItem } from 'sitefinity-react-framework/sdk/dto/sdk-item';
+import { PageItem } from 'sitefinity-react-framework/sdk/dto/page-item';
 
 export function OpenDetailsAnchor(props: {
     item: any;
@@ -27,7 +27,7 @@ export function OpenDetailsAnchor(props: {
             ItemType: selectedContent.Type
         };
 
-        if (entity && entity.DetailPageMode === "SamePage") {
+        if (entity && entity.DetailPageMode === 'SamePage') {
 
             const newUrl = window.location.origin + window.location.pathname + sdkItem.ItemDefaultUrl + window.location.search;
             window.history.pushState(detailItem, '', newUrl);
@@ -47,9 +47,9 @@ export function OpenDetailsAnchor(props: {
     }
 
     return (
-        <a href="#"
-            className={props.className}
-            onClick={(e) => onDetailItemOpenHandler(e, item.Original)}
+      <a href="#"
+        className={props.className}
+        onClick={(e) => onDetailItemOpenHandler(e, item.Original)}
         >{props.text || item.Title.Value}</a>
-    )
+    );
 }

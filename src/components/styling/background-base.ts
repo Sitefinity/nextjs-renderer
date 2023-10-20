@@ -1,1 +1,1 @@
-export type BackgroundBase = "Color" | "None";
+export type BackgroundBase = 'Color' | 'None';

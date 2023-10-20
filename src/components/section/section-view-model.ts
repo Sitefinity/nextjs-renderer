@@ -1,5 +1,5 @@
-import { ColumnHolder } from "./column-holder";
-import { SectionHolder } from "./section-holder";
+import { ColumnHolder } from './column-holder';
+import { SectionHolder } from './section-holder';
 
 export interface SectionViewModel {
     Columns: ColumnHolder[],

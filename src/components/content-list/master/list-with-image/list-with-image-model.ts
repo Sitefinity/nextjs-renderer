@@ -1,5 +1,5 @@
-import { SdkItem } from "sitefinity-react-framework/sdk/dto/sdk-item";
-import { ContentListModelbase } from "../content-list-model-base";
+import { SdkItem } from 'sitefinity-react-framework/sdk/dto/sdk-item';
+import { ContentListModelbase } from '../content-list-model-base';
 
 export interface ListWithImageModel extends ContentListModelbase {
     Items: Array<ItemModel>

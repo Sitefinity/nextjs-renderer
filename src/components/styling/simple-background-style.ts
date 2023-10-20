@@ -1,4 +1,4 @@
-import { BackgroundBase } from "./background-base";
+import { BackgroundBase } from './background-base';
 
 export interface SimpleBackgroundStyle {
     BackgroundType: BackgroundBase,

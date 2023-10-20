@@ -1,4 +1,4 @@
-import { PageSiteMapNode } from "./PageSiteMapNode";
+import { PageSiteMapNode } from './PageSiteMapNode';
 
 export interface PageViewModel {
     Key: string;

@@ -1,14 +1,14 @@
-import React from "react";
-import { StyleGenerator } from "../styling/style-generator.service";
-import { OffsetStyle } from "../styling/offset-style";
-import { Alignment } from "../styling/alignment";
-import { ButtonType } from "../styling/button-types";
-import { generateAnchorAttrsFromLink, getCustomAttributes, htmlAttributes } from "sitefinity-react-framework/widgets/attributes";
-import { classNames } from "sitefinity-react-framework/utils/classNames";
-import { WidgetContext } from "sitefinity-react-framework/widgets/widget-context";
-import { LinkModel } from "sitefinity-react-framework/interfaces/LinkModel";
+import React from 'react';
+import { StyleGenerator } from '../styling/style-generator.service';
+import { OffsetStyle } from '../styling/offset-style';
+import { Alignment } from '../styling/alignment';
+import { ButtonType } from '../styling/button-types';
+import { generateAnchorAttrsFromLink, getCustomAttributes, htmlAttributes } from 'sitefinity-react-framework/widgets/attributes';
+import { classNames } from 'sitefinity-react-framework/utils/classNames';
+import { WidgetContext } from 'sitefinity-react-framework/widgets/widget-context';
+import { LinkModel } from 'sitefinity-react-framework/interfaces/LinkModel';
 
-export type CTAPart = "Wrapper" | "Primary" | "Secondary";
+export type CTAPart = 'Wrapper' | 'Primary' | 'Secondary';
 
 export async function CallToAction(props: WidgetContext<CallToActionEntity>) {
     const properties = props.model.Properties;
@@ -24,38 +24,38 @@ export async function CallToAction(props: WidgetContext<CallToActionEntity>) {
     const secondaryCustomAttributes = getCustomAttributes(properties.Attributes, 'Secondary');
     const primaryClass = properties.Style ? properties.Style.Primary.DisplayStyle : 'Primary';
     const secondaryClass = properties.Style ? properties.Style.Secondary.DisplayStyle : 'Secondary';
-    const primaryButtonClass = StyleGenerator.getButtonClasses(primaryClass)
-    const secondaryButtonClass = StyleGenerator.getButtonClasses(secondaryClass)
+    const primaryButtonClass = StyleGenerator.getButtonClasses(primaryClass);
+    const secondaryButtonClass = StyleGenerator.getButtonClasses(secondaryClass);
 
-    dataAttributes["className"] = classNames(
+    dataAttributes['className'] = classNames(
         defaultClass,
         positionClass,
         marginClass
         );
-    dataAttributes["data-sfemptyicontext"] = "Create call to action";
-    dataAttributes["data-sfhasquickeditoperation"] = true;
+    dataAttributes['data-sfemptyicontext'] = 'Create call to action';
+    dataAttributes['data-sfhasquickeditoperation'] = true;
     return (
-        <div
-            {...dataAttributes}
-            {...wrapperCustomAttributes}
+      <div
+        {...dataAttributes}
+        {...wrapperCustomAttributes}
         >
-            {
+        {
              props.model.Properties.PrimaryActionLabel && <a {...primaryAnchorAttributes}
-                className={classNames('me-3', primaryButtonClass)}
-                data-call-to-action=''
-                {...primaryCustomAttributes}>
+               className={classNames('me-3', primaryButtonClass)}
+               data-call-to-action=""
+               {...primaryCustomAttributes}>
                {props.model.Properties.PrimaryActionLabel}
-                </a>
+             </a>
             }
-            {
+        {
              props.model.Properties.SecondaryActionLabel && <a {...secondaryAnchorAttributes}
-                className={secondaryButtonClass}
-                data-call-to-action=''
-                {...secondaryCustomAttributes}>
+               className={secondaryButtonClass}
+               data-call-to-action=""
+               {...secondaryCustomAttributes}>
                {props.model.Properties.SecondaryActionLabel}
-                </a>
+             </a>
             }
-        </div>
+      </div>
     );
 }
 

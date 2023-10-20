@@ -1,7 +1,8 @@
-import { Alignment } from "./alignment";
-import { ButtonType } from "./button-types";
-import { OffsetStyle } from "./offset-style";
-import { StylingConfig } from "./styling-config";
+import { Alignment } from './alignment';
+import { ButtonType } from './button-types';
+import { OffsetStyle } from './offset-style';
+import { StylingConfig } from './styling-config';
+
 
 export class StyleGenerator {
     public static getPaddingClasses(offsetStyle: OffsetStyle) {
@@ -16,7 +17,7 @@ export class StyleGenerator {
             return className;
         });
 
-        const joinedClasses = allClassNames.filter(x => x).join(" ");
+        const joinedClasses = allClassNames.filter(x => x).join(' ');
         return joinedClasses;
     }
 
@@ -32,7 +33,7 @@ export class StyleGenerator {
             return className;
         });
 
-        const joinedClasses = allClassNames.filter(x => x).join(" ");
+        const joinedClasses = allClassNames.filter(x => x).join(' ');
         return joinedClasses;
     }
 

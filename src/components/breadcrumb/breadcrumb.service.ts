@@ -1,7 +1,7 @@
-import { CollectionResponse } from "sitefinity-react-framework/sdk/dto/collection-response";
-import { RestService, RestSdkTypes } from "sitefinity-react-framework/sdk/rest-service";
-import { SdkItem } from "sitefinity-react-framework/sdk/dto/sdk-item";
-import { BreadcrumbEntity, BreadcrumbIncludeOption } from "./breadcrumb";
+import { CollectionResponse } from 'sitefinity-react-framework/sdk/dto/collection-response';
+import { RestService, RestSdkTypes } from 'sitefinity-react-framework/sdk/rest-service';
+import { SdkItem } from 'sitefinity-react-framework/sdk/dto/sdk-item';
+import { BreadcrumbEntity, BreadcrumbIncludeOption } from './breadcrumb';
 
 export class BreadcrumbRestService {
 
@@ -11,24 +11,23 @@ export class BreadcrumbRestService {
                 addStartingPageAtEnd: entity.AddCurrentPageLinkAtTheEnd || true,
                 addHomePageAtBeginning: entity.AddHomePageLinkAtBeginning || true,
                 includeGroupPages: entity.IncludeGroupPages || false,
-                currentPageId: requestContext.pageNode.Id,
-            }
+                currentPageId: requestContext.pageNode.Id
+            };
 
-            if (requestContext.pageNode.DetailItem !== null && entity.AllowVirtualNodes)
-                {
-                    var stringifiedItem = requestContext.pageNode.DetailItem;
+            if (requestContext.pageNode.DetailItem !== null && entity.AllowVirtualNodes) {
+                    let stringifiedItem = requestContext.pageNode.DetailItem;
                     getAllArgs['detailItemInfo'] = stringifiedItem;
                 }
 
-            if (entity.BreadcrumbIncludeOption == BreadcrumbIncludeOption.SpecificPagePath && entity.SelectedPage.ItemIdsOrdered.Length > 0) {
-                 getAllArgs["startingPageId"] = entity.SelectedPage.ItemIdsOrdered[0];
+            if (entity.BreadcrumbIncludeOption === BreadcrumbIncludeOption.SpecificPagePath && entity.SelectedPage.ItemIdsOrdered.Length > 0) {
+                 getAllArgs['startingPageId'] = entity.SelectedPage.ItemIdsOrdered[0];
             }
 
             if(requestContext) {
                 const queryString =  new URLSearchParams(requestContext.searchParams);
                 const url = `${requestContext.pageNode.MetaInfo.CanonicalUrl}?${queryString}`;
 
-                getAllArgs["currentPageUrl"] = encodeURIComponent(url).toLowerCase();
+                getAllArgs['currentPageUrl'] = encodeURIComponent(url).toLowerCase();
             }
 
             const action = 'Default.GetBreadcrumb';

@@ -1,18 +1,16 @@
-import React from "react";
-import { StyleGenerator } from "../styling/style-generator.service";
-import { OffsetStyle } from "../styling/offset-style";
-import { Alignment } from "../styling/alignment";
-import { ButtonType } from "../styling/button-types";
-import { generateAnchorAttrsFromLink, getCustomAttributes, htmlAttributes } from "sitefinity-react-framework/widgets/attributes";
-import { classNames } from "sitefinity-react-framework/utils/classNames";
-import { WidgetContext } from "sitefinity-react-framework/widgets/widget-context";
-import { LinkModel } from "sitefinity-react-framework/interfaces/LinkModel";
-import { RestService, RestSdkTypes } from "sitefinity-react-framework/sdk/rest-service";
-import { ImageTag } from "./image-tag";
-import { ImageClickAction } from "./interfaces/ImageClickAction";
-import { ImageDisplayMode } from "./interfaces/ImageDisplayMode";
+import React from 'react';
+import { StyleGenerator } from '../styling/style-generator.service';
+import { OffsetStyle } from '../styling/offset-style';
+import { generateAnchorAttrsFromLink, htmlAttributes } from 'sitefinity-react-framework/widgets/attributes';
+import { classNames } from 'sitefinity-react-framework/utils/classNames';
+import { WidgetContext } from 'sitefinity-react-framework/widgets/widget-context';
+import { LinkModel } from 'sitefinity-react-framework/interfaces/LinkModel';
+import { RestService, RestSdkTypes } from 'sitefinity-react-framework/sdk/rest-service';
+import { ImageTag } from './image-tag';
+import { ImageClickAction } from './interfaces/ImageClickAction';
+import { ImageDisplayMode } from './interfaces/ImageDisplayMode';
 
-const imageWrapperClass = "d-inline-block";
+const imageWrapperClass = 'd-inline-block';
 
 export async function Image(props: WidgetContext<ImageEntity>) {
     const entity = {
@@ -23,18 +21,18 @@ export async function Image(props: WidgetContext<ImageEntity>) {
     const defaultClass = classNames(imageWrapperClass, entity.CssClass);
     const marginClass = entity.Margins && StyleGenerator.getMarginClasses(entity.Margins);
     const anchorAttributes = generateAnchorAttrsFromLink(entity.ActionLink);
-    dataAttributes["className"] = classNames(
+    dataAttributes['className'] = classNames(
         defaultClass,
         marginClass
     );
 
     if(props.requestContext && props.requestContext.isEdit) {
-        dataAttributes["data-sfemptyicon"] = "picture-o";
-        dataAttributes["data-sfemptyiconaction"] = "Edit";
+        dataAttributes['data-sfemptyicon'] = 'picture-o';
+        dataAttributes['data-sfemptyiconaction'] = 'Edit';
     }
 
-    dataAttributes["data-sfemptyicontext"] = "Select image";
-    dataAttributes["data-sfhasquickeditoperation"] = true;
+    dataAttributes['data-sfemptyicontext'] = 'Select image';
+    dataAttributes['data-sfhasquickeditoperation'] = true;
     let imageItem = null;
     if (entity.Item && entity.Item.Id){
         imageItem =  await RestService.getItemWithFallback(RestSdkTypes.Image, entity.Item.Id.toString(), entity.Item.Provider);
@@ -44,23 +42,20 @@ export async function Image(props: WidgetContext<ImageEntity>) {
         return null;
     }
 
-    const isSvg = imageItem.MimeType === "image/svg+xml";
-    const hasZeroDimensions = imageItem.Width == 0 && imageItem.Height == 0;
+    const isSvg = imageItem.MimeType === 'image/svg+xml';
+    const hasZeroDimensions = imageItem.Width === 0 && imageItem.Height === 0;
     let width = isSvg && hasZeroDimensions ? null : imageItem.Width;
     let height = isSvg && hasZeroDimensions ? null : imageItem.Height;
     let thumbnails;
     let selectedImageUrl =  imageItem.Url;
 
-    if (imageItem.Thumbnails)
-    {
+    if (imageItem.Thumbnails) {
         thumbnails = imageItem.Thumbnails.sort((a: any,b: any) => a.Width - b.Width);
-        if (entity.ImageSize == ImageDisplayMode.Thumbnail && imageItem.Thumnail)
-        {
-            var selectedThumbnail = thumbnails.find((t: any) => t.Title === entity.Thumnail.Name);
+        if (entity.ImageSize === ImageDisplayMode.Thumbnail && imageItem.Thumnail) {
+            let selectedThumbnail = thumbnails.find((t: any) => t.Title === entity.Thumnail.Name);
             selectedImageUrl = imageItem.Thumnail.Url;
 
-            if (selectedThumbnail)
-            {
+            if (selectedThumbnail) {
                 selectedImageUrl = selectedThumbnail.Url;
                 width = selectedThumbnail.Width;
                 height = selectedThumbnail.Height;
@@ -70,14 +65,12 @@ export async function Image(props: WidgetContext<ImageEntity>) {
 
     // Thumbnails for images imported from DAM providers are not stored in Sitefinity and we do not know their width and height.
     // We have to set width and heigth to null otherwise the image is zoomed and selected thumbnail not applied correctly.
-    if (entity.ImageSize === ImageDisplayMode.Thumbnail && imageItem.IsDamMedia)
-    {
+    if (entity.ImageSize === ImageDisplayMode.Thumbnail && imageItem.IsDamMedia) {
         width = null;
         height = null;
     }
 
-    if (entity.CustomSize && entity.ImageSize === ImageDisplayMode.CustomSize)
-    {
+    if (entity.CustomSize && entity.ImageSize === ImageDisplayMode.CustomSize) {
         width = entity.CustomSize.Width;
         height = entity.CustomSize.Height;
     }
@@ -90,19 +83,19 @@ export async function Image(props: WidgetContext<ImageEntity>) {
         Height: height,
         Thumbnails: thumbnails,
         SelectedImageUrl: selectedImageUrl
-    }
+    };
 
     return  entity.ClickAction === ImageClickAction.OpenOriginalSize
                 ? <a href={entity.Item.Url}
                     {...dataAttributes}>
-                    {<ImageTag imageModel={imageModel} />}
-                    </a>
+                  {<ImageTag imageModel={imageModel} />}
+                </a>
                 : entity.ClickAction === ImageClickAction.OpenLink && entity.ActionLink!.href
                     ?  <a {...anchorAttributes} {...dataAttributes}>
-                        {<ImageTag imageModel={imageModel}  />}
+                      {<ImageTag imageModel={imageModel}  />}
                     </a>
                     :  <ImageTag imageModel={imageModel} className={entity.CssClass}
-                     {...dataAttributes} />
+                        {...dataAttributes} />
              ;
 }
 

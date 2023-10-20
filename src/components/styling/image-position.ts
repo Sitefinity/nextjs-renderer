@@ -1,1 +1,1 @@
-export type ImagePosition = "Fill" | "Center" | "Cover";
+export type ImagePosition = 'Fill' | 'Center' | 'Cover';

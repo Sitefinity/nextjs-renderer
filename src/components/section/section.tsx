@@ -1,23 +1,23 @@
-import { ImageItem } from "sitefinity-react-framework/sdk/dto/image-item";
-import { VideoItem } from "sitefinity-react-framework/sdk/dto/video-item";
-import { RestService, RestSdkTypes } from "sitefinity-react-framework/sdk/rest-service";
-import { RootUrlService } from "sitefinity-react-framework/sdk/root-url.service";
-import { htmlAttributes } from "sitefinity-react-framework/widgets/attributes";
-import { WidgetContext } from "sitefinity-react-framework/widgets/widget-context";
-import { StyleGenerator } from "../styling/style-generator.service";
-import { StylingConfig } from "../styling/styling-config";
-import { ColumnHolder, ComponentContainer } from "./column-holder";
-import { SectionHolder } from "./section-holder";
-import { SectionEntity } from "./section.entity";
-import { RenderWidgetService } from "sitefinity-react-framework/services/render-widget-service";
-import { widgetRegistry } from "@/widget-registry";
+import { ImageItem } from 'sitefinity-react-framework/sdk/dto/image-item';
+import { VideoItem } from 'sitefinity-react-framework/sdk/dto/video-item';
+import { RestService, RestSdkTypes } from 'sitefinity-react-framework/sdk/rest-service';
+import { RootUrlService } from 'sitefinity-react-framework/sdk/root-url.service';
+import { htmlAttributes } from 'sitefinity-react-framework/widgets/attributes';
+import { WidgetContext } from 'sitefinity-react-framework/widgets/widget-context';
+import { StyleGenerator } from '../styling/style-generator.service';
+import { StylingConfig } from '../styling/styling-config';
+import { ColumnHolder, ComponentContainer } from './column-holder';
+import { SectionHolder } from './section-holder';
+import { SectionEntity } from './section.entity';
+import { RenderWidgetService } from 'sitefinity-react-framework/services/render-widget-service';
+import { widgetRegistry } from '@/widget-registry';
 
-const ColumnNamePrefix = "Column";
-const sectionKey = "Section";
+const ColumnNamePrefix = 'Column';
+const sectionKey = 'Section';
 
 export async function Section(props: WidgetContext<SectionEntity>) {
     props.model.Properties.ColumnsCount = props.model.Properties.ColumnsCount || 1;
-    props.model.Properties.ColumnProportionsInfo = props.model.Properties.ColumnProportionsInfo || "[12]";
+    props.model.Properties.ColumnProportionsInfo = props.model.Properties.ColumnProportionsInfo || '[12]';
     const columns = populateColumns(props);
     const section = await populateSection(props.model.Properties);
 
@@ -25,22 +25,22 @@ export async function Section(props: WidgetContext<SectionEntity>) {
     section.Attributes = Object.assign(section.Attributes, dataAttributes);
 
     return (
-        <section {...section.Attributes } style={section.Style}>
-            {section.ShowVideo && section.VideoUrl &&
-                <video className="sc-video__element" autoPlay muted loop>
-                    <source src={section.VideoUrl} />
-                </video>
+      <section {...section.Attributes} style={section.Style}>
+        {section.ShowVideo && section.VideoUrl &&
+        <video className="sc-video__element" autoPlay={true} muted={true} loop={true}>
+          <source src={section.VideoUrl} />
+        </video>
             }
-            {columns.map((x, i) => {
+        {columns.map((x, i) => {
                 return (
-                    <div key={i} {...x.Attributes} style={section.Style}>
-                        {x.Children.map(y => {
-                            return RenderWidgetService.createComponent(y.model, props.requestContext)
+                  <div key={i} {...x.Attributes} style={section.Style}>
+                    {x.Children.map(y => {
+                            return RenderWidgetService.createComponent(y.model, props.requestContext);
                         })}
-                    </div>
-                )
+                  </div>
+                );
             })}
-        </section>
+      </section>
     );
 }
 
@@ -60,7 +60,7 @@ function populateColumns(context: WidgetContext<SectionEntity>): ColumnHolder[] 
                     model: x,
                     metadata: widgetRegistry.widgets[x.Name],
                     requestContext: context.requestContext
-                }
+                };
 
                 return ret;
             }));
@@ -72,16 +72,16 @@ function populateColumns(context: WidgetContext<SectionEntity>): ColumnHolder[] 
         };
 
         if (context.requestContext.isEdit) {
-            column.Attributes["data-sfcontainer"] = currentName;
+            column.Attributes['data-sfcontainer'] = currentName;
 
             let currentTitle = null;
             if (properties.Labels && properties.Labels.hasOwnProperty(currentName)) {
                 currentTitle = properties.Labels[currentName].Label;
             } else {
-                currentTitle = currentName
+                currentTitle = currentName;
             }
 
-            column.Attributes["data-sfplaceholderlabel"] = currentTitle;
+            column.Attributes['data-sfplaceholderlabel'] = currentTitle;
         }
 
         if (properties.Attributes && properties.Attributes.hasOwnProperty(currentName)) {
@@ -92,8 +92,8 @@ function populateColumns(context: WidgetContext<SectionEntity>): ColumnHolder[] 
 
         if (properties.ColumnsBackground && properties.ColumnsBackground.hasOwnProperty(currentName)) {
             const backgroundStyle = properties.ColumnsBackground[currentName];
-            if (backgroundStyle.BackgroundType == "Color") {
-                column.Style = { "--sf-background-color": `${backgroundStyle.Color}` };
+            if (backgroundStyle.BackgroundType === 'Color') {
+                column.Style = { '--sf-background-color': `${backgroundStyle.Color}` };
             }
         }
 
@@ -101,7 +101,7 @@ function populateColumns(context: WidgetContext<SectionEntity>): ColumnHolder[] 
             const columnPadding = properties.ColumnsPadding[currentName];
             const paddings = StyleGenerator.getPaddingClasses(columnPadding);
             if (paddings) {
-                column.Attributes["className"] = paddings;
+                column.Attributes['className'] = paddings;
                 classAttributes.push(paddings);
             }
         }
@@ -113,10 +113,9 @@ function populateColumns(context: WidgetContext<SectionEntity>): ColumnHolder[] 
             }
         }
 
-        if (column.Attributes["className"])
-            classAttributes.push(column.Attributes["className"]);
+        if (column.Attributes['className']) {classAttributes.push(column.Attributes['className']);}
 
-        column.Attributes["className"] = classAttributes.filter(x => x).join(" ");
+        column.Attributes['className'] = classAttributes.filter(x => x).join(' ');
 
         columns.push(column);
     }
@@ -127,7 +126,7 @@ function populateColumns(context: WidgetContext<SectionEntity>): ColumnHolder[] 
 function populateSection(properties: SectionEntity): Promise<SectionHolder> {
     const sectionObject: SectionHolder = {
         Attributes: {}
-    }
+    };
 
     let attributes = properties.Attributes;
     if (attributes && attributes.hasOwnProperty(sectionKey)) {
@@ -136,7 +135,7 @@ function populateSection(properties: SectionEntity): Promise<SectionHolder> {
         });
     }
 
-    const sectionClasses: string[] = ["row"];
+    const sectionClasses: string[] = ['row'];
     if (properties.SectionPadding) {
         const paddingClasses = StyleGenerator.getPaddingClasses(properties.SectionPadding);
         sectionClasses.push(paddingClasses);
@@ -152,55 +151,55 @@ function populateSection(properties: SectionEntity): Promise<SectionHolder> {
     }
 
     if (!properties.SectionBackground) {
-        sectionObject.Attributes["className"] = sectionClasses.filter(x => x).join(" ");
+        sectionObject.Attributes['className'] = sectionClasses.filter(x => x).join(' ');
         return Promise.resolve(sectionObject);
     }
 
     if (!properties.SectionBackground) {
-        sectionObject.Attributes["className"] = sectionClasses.filter(x => x).join(" ");
+        sectionObject.Attributes['className'] = sectionClasses.filter(x => x).join(' ');
         return Promise.resolve(sectionObject);
     }
 
-    if (properties.SectionBackground.BackgroundType === "Video") {
+    if (properties.SectionBackground.BackgroundType === 'Video') {
         if (properties.SectionBackground.VideoItem && properties.SectionBackground.VideoItem.Id) {
             sectionClasses.push(StylingConfig.VideoBackgroundClass);
             return RestService.getItemWithFallback<VideoItem>(RestSdkTypes.Video, properties.SectionBackground.VideoItem.Id, properties.SectionBackground.VideoItem.Provider).then((video) => {
                 sectionObject.ShowVideo = true;
                 const videoUrl = `${RootUrlService.rootUrl}${video.Url.substring(1)}`;
                 sectionObject.VideoUrl = videoUrl;
-                sectionObject.Attributes["className"] = sectionClasses.filter(x => x).join(" ");
+                sectionObject.Attributes['className'] = sectionClasses.filter(x => x).join(' ');
 
                 return sectionObject;
             });
         }
-    } else if (properties.SectionBackground.BackgroundType === "Image" && properties.SectionBackground.ImageItem && properties.SectionBackground.ImageItem.Id) {
-        const imagePosition = properties.SectionBackground.Position || "Fill";
+    } else if (properties.SectionBackground.BackgroundType === 'Image' && properties.SectionBackground.ImageItem && properties.SectionBackground.ImageItem.Id) {
+        const imagePosition = properties.SectionBackground.Position || 'Fill';
         sectionClasses.push(StylingConfig.ImageBackgroundClass);
         return RestService.getItemWithFallback<ImageItem>(RestSdkTypes.Image, properties.SectionBackground.ImageItem.Id, properties.SectionBackground.ImageItem.Provider).then((image) => {
             let style: { [key: string]: string } = {};
             switch (imagePosition) {
-                case "Fill":
-                    style["--sf-background-size"] = "100% auto";
+                case 'Fill':
+                    style['--sf-background-size'] = '100% auto';
                     break;
-                case "Center":
-                    style["--sf-background-position"] = "center";
+                case 'Center':
+                    style['--sf-background-position'] = 'center';
                     break;
                 default:
-                    style["--sf-background-size"] = "cover";
+                    style['--sf-background-size'] = 'cover';
                     break;
             }
 
             const imageUrl = `${RootUrlService.rootUrl}${image.Url.substring(1)}`;
             style['--sf-background-image'] = `url(${imageUrl})`;
             sectionObject.Style = style;
-            sectionObject.Attributes["className"] = sectionClasses.filter(x => x).join(" ");
+            sectionObject.Attributes['className'] = sectionClasses.filter(x => x).join(' ');
             return sectionObject;
         });
-    } else if (properties.SectionBackground.BackgroundType === "Color" && properties.SectionBackground.Color) {
-        sectionObject.Style = { "--sf-background-color": `${properties.SectionBackground.Color}` }
+    } else if (properties.SectionBackground.BackgroundType === 'Color' && properties.SectionBackground.Color) {
+        sectionObject.Style = { '--sf-background-color': `${properties.SectionBackground.Color}` };
     }
 
-    sectionObject.Attributes["className"] = sectionClasses.filter(x => x).join(" ");
+    sectionObject.Attributes['className'] = sectionClasses.filter(x => x).join(' ');
     return Promise.resolve(sectionObject);
 }
 
