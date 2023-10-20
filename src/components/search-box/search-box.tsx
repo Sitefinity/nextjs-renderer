@@ -1,5 +1,4 @@
 import React from "react";
-import Script from "next/script";
 import { StyleGenerator } from "../styling/style-generator.service";
 import { OffsetStyle } from "../styling/offset-style";
 import { StylingConfig } from "../styling/styling-config";
@@ -69,8 +68,7 @@ export async function SearchBox(props: WidgetContext<SearchBoxEntity>) {
     dataAttributes["data-sf-visibility-hidden"] = searchModel.VisibilityClasses[VisibilityStyle.Hidden];
     dataAttributes["data-sf-active-class"] = searchModel.ActiveClass;
 
-    return <>
-    <div   {...dataAttributes}
+    return <div   {...dataAttributes}
     >
         {
             searchModel.SearchIndex &&
@@ -102,9 +100,7 @@ export async function SearchBox(props: WidgetContext<SearchBoxEntity>) {
                     </ul>
                 )
         }
-    </div>
-       <Script type="text/javascript" src={scriptUrl} />
-    </>;
+    </div>;
 }
 
 export class SearchBoxEntity {
