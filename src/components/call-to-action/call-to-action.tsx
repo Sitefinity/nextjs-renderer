@@ -18,7 +18,7 @@ export async function CallToAction(props: WidgetContext<CallToActionEntity>) {
     const positionClass = StyleGenerator.getAlignmentClasses(properties.Position ? properties.Position.CTA.Alignment : 'Left');
     const marginClass = properties.Margins && StyleGenerator.getMarginClasses(properties.Margins);
     const primaryAnchorAttributes = generateAnchorAttrsFromLink(properties.PrimaryActionLink);
-    const secondaryAnchorAttributes =generateAnchorAttrsFromLink(properties.PrimaryActionLink);
+    const secondaryAnchorAttributes =generateAnchorAttrsFromLink(properties.SecondaryActionLink);
     const wrapperCustomAttributes = getCustomAttributes(properties.Attributes, 'Wrapper');
     const primaryCustomAttributes = getCustomAttributes(properties.Attributes, 'Primary');
     const secondaryCustomAttributes = getCustomAttributes(properties.Attributes, 'Secondary');
