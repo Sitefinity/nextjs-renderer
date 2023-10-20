@@ -1,3 +1,74 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "plugin:react/recommended",
+    "next/core-web-vitals"
+   ],
+   "rules": {
+        "react-hooks/exhaustive-deps": "warn",
+        "brace-style": [
+            "error",
+            "1tbs",
+            { "allowSingleLine": true }
+        ],
+        "quotes": ["error", "single"],
+        "jsx-quotes": [2, "prefer-double"],
+        "semi": "error",
+        "comma-dangle": "error",
+        "curly": "error",
+        "default-case": "error",
+        "eol-last": "error",
+        "eqeqeq": [
+            "error",
+            "smart"
+        ],
+        "react/no-children-prop": "off",
+        "react/no-find-dom-node": "warn",
+        "guard-for-in": "error",
+        "id-blacklist": [
+            "error",
+            "any",
+            "Number",
+            "number",
+            "String",
+            "string",
+            "Boolean"
+        ],
+        "id-match": "error",
+        "max-len": "off",
+        "react/jsx-key": "warn",
+        "no-bitwise": "error",
+        "no-caller": "error",
+        "no-console": "off",
+        "no-debugger": "error",
+        "no-empty": "error",
+        "no-eval": "error",
+        "no-fallthrough": "error",
+        "no-multiple-empty-lines": "error",
+        "no-new-wrappers": "error",
+        "no-redeclare": "off",
+        "no-trailing-spaces": "off",
+        "no-underscore-dangle": "off",
+        "no-unused-labels": "error",
+        "no-var": "error",
+        "radix": "warn",
+        "react/prop-types": "off",
+        "react/display-name": "off",
+        "react/jsx-boolean-value": ["error", "always"],
+        "react/no-unescaped-entities": "warn",
+        "react/jsx-indent": [2, 2],
+        "react/jsx-indent-props": [2, 2],
+        "react/jsx-curly-spacing": [
+            "error",
+            {
+                "when": "never"
+            }
+        ],
+        "react/jsx-equals-spacing": [
+            "error",
+            "never"
+        ],
+        "react/jsx-no-bind": "off",
+        "react/jsx-wrap-multilines": "error",
+        "react/self-closing-comp": "error"
+    }
 }

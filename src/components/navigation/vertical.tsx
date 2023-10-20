@@ -1,7 +1,6 @@
-import React from "react";
-import { classNames } from 'sitefinity-react-framework/utils/classNames'
-import { getUniqueId } from 'sitefinity-react-framework/utils/getUniqueId'
-import { PageViewModel } from './interfaces/PageViewModel'
+import React from 'react';
+import { classNames } from 'sitefinity-react-framework/utils/classNames';
+import { PageViewModel } from './interfaces/PageViewModel';
 import { getClass } from './utils';
 
 export function Vertical(props: {
@@ -11,30 +10,30 @@ export function Vertical(props: {
     const {items, ...customAttrs } = props;
     const renderSubLevelsRecursive: any = (node: PageViewModel) => {
 
-        return <li className="nav-item">
-                <a className={classNames('nav-link',  getClass(node))} href={node.Url} target={node.LinkTarget}>{node.Title}</a>
+        return (<li className="nav-item">
+          <a className={classNames('nav-link',  getClass(node))} href={node.Url} target={node.LinkTarget}>{node.Title}</a>
 
-                { node.ChildNodes.length > 0 &&
-                    <ul className="nav flex-column ms-3">
-                        {node.ChildNodes.map((node:PageViewModel, idx: number)=> {
-                            return renderSubLevelsRecursive(node)
+          { node.ChildNodes.length > 0 &&
+          <ul className="nav flex-column ms-3">
+            {node.ChildNodes.map((node:PageViewModel, idx: number)=> {
+                            return renderSubLevelsRecursive(node);
                             })
                         }
-                    </ul>}
-            </li>;
-    }
+          </ul>}
+        </li>);
+    };
     return (
-        <nav
+      <nav
         {...customAttrs}
         >
 
         <ul className="nav flex-column">
-            {
+          {
                 items.map((node:PageViewModel, idx: number)=> {
-                    return renderSubLevelsRecursive(node)
+                    return renderSubLevelsRecursive(node);
                 })
             }
         </ul>
-    </nav>
-    )
+      </nav>
+    );
 }

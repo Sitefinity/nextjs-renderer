@@ -1,16 +1,16 @@
 
-'use client'
+'use client';
 
-import { RootUrlService } from "sitefinity-react-framework/sdk/root-url.service";
-import { ServiceMetadata, ServiceMetadataDefinition } from "sitefinity-react-framework/sdk/service-metadata";
-import { PageLayoutServiceResponse } from "sitefinity-react-framework/sdk/services/layout-service.response";
-import { RenderWidgetService } from "sitefinity-react-framework/services/render-widget-service";
-import { RequestContext } from "sitefinity-react-framework/services/request-context";
-import { RendererContractImpl } from "@/renderer-contract";
-import { widgetRegistry } from "@/widget-registry";
+import { RootUrlService } from 'sitefinity-react-framework/sdk/root-url.service';
+import { ServiceMetadata, ServiceMetadataDefinition } from 'sitefinity-react-framework/sdk/service-metadata';
+import { PageLayoutServiceResponse } from 'sitefinity-react-framework/sdk/services/layout-service.response';
+import { RenderWidgetService } from 'sitefinity-react-framework/services/render-widget-service';
+import { RequestContext } from 'sitefinity-react-framework/services/request-context';
+import { RendererContractImpl } from '@/renderer-contract';
+import { widgetRegistry } from '@/widget-registry';
 
 export default function PageClient({ layout, metadata, context }: { layout: PageLayoutServiceResponse, metadata: ServiceMetadataDefinition, context: RequestContext }) {
-    RootUrlService.rootUrl = `${process.env["NEXT_PUBLIC_CMS_URL"]}`;
+    RootUrlService.rootUrl = `${process.env['NEXT_PUBLIC_CMS_URL']}`;
     RenderWidgetService.widgetRegistry = widgetRegistry;
     ServiceMetadata.serviceMetadataCache = metadata;
 
@@ -26,7 +26,7 @@ export default function PageClient({ layout, metadata, context }: { layout: Page
             if ((layout.ComponentContext.Components.length > 0 && document.body.childElementCount > 0) || layout.ComponentContext.Components.length === 0 || timePassed > timeout) {
                 window.clearInterval(handle);
 
-                (window as any)["rendererContract"] = new RendererContractImpl();
+                (window as any)['rendererContract'] = new RendererContractImpl();
                 window.dispatchEvent(new Event('contractReady'));
             }
         }, 1000);

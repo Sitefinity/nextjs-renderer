@@ -1,4 +1,4 @@
-import { OffsetSize } from "./offset-size";
+import { OffsetSize } from './offset-size';
 
 export interface VerticalOffsetStyle {
     Top: OffsetSize,

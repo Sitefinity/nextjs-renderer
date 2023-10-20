@@ -53,19 +53,19 @@ export default async function Page({ params, searchParams }: PageParams) {
     let headers: { [key: string]: string } = {};
     if (process.env.NODE_ENV === 'development' && actionParam) {
         const cookie = cookies().toString();
-        headers = { "Cookie": cookie };
+        headers = { 'Cookie': cookie };
         if (process.env.SF_CLOUD_KEY) {
             headers['X-SF-BYPASS-HOST'] = `${process.env.PROXY_ORIGINAL_HOST}:${process.env.PORT}`;
             headers['X-SF-BYPASS-HOST-VALIDATION-KEY'] = process.env.SF_CLOUD_KEY;
         } else {
-            headers["X-ORIGINAL-HOST"] = `${process.env.PROXY_ORIGINAL_HOST}:${process.env.PORT}`;
+            headers['X-ORIGINAL-HOST'] = `${process.env.PROXY_ORIGINAL_HOST}:${process.env.PORT}`;
         }
     }
 
-    const layoutOrError = await LayoutService.get(params.slug.join("/"), actionParam, headers);
+    const layoutOrError = await LayoutService.get(params.slug.join('/'), actionParam, headers);
     const errorResponse = layoutOrError as any;
     if (errorResponse.error && errorResponse.error.code) {
-        if (errorResponse.error.code === "NotFound") {
+        if (errorResponse.error.code === 'NotFound') {
             return notFound();
         }
 
@@ -80,20 +80,20 @@ export default async function Page({ params, searchParams }: PageParams) {
             searchParams: searchParams,
             detailItem: layout.DetailItem,
             culture: layout.Culture,
-            isEdit: searchParams["sfaction"] === "edit",
-            isPreview: searchParams["sfaction"] === "preview",
+            isEdit: searchParams['sfaction'] === 'edit',
+            isPreview: searchParams['sfaction'] === 'preview'
         },
         widgets: layout.ComponentContext.Components
     };
 
     return (
-        <Fragment>
-            <PageClient metadata={ServiceMetadata.serviceMetadataCache} layout={layout} context={appState.requestContext} />
-            {appState.widgets.map((child) => {
+      <Fragment>
+        <PageClient metadata={ServiceMetadata.serviceMetadataCache} layout={layout} context={appState.requestContext} />
+        {appState.widgets.map((child) => {
                 return RenderWidgetService.createComponent(child, appState.requestContext);
             })}
-        </Fragment>
-    )
+      </Fragment>
+    );
 }
 
 interface AppState {

@@ -1,6 +1,6 @@
-import { ImageClickAction } from "./ImageClickAction";
-import { ImageDisplayMode } from "./ImageDisplayMode";
-import { LinkModel } from "sitefinity-react-framework/interfaces/LinkModel";
+import { ImageClickAction } from './ImageClickAction';
+import { ImageDisplayMode } from './ImageDisplayMode';
+import { LinkModel } from 'sitefinity-react-framework/interfaces/LinkModel';
 
 export interface ImageViewModel
     {

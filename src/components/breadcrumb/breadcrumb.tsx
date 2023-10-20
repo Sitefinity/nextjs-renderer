@@ -1,12 +1,12 @@
-import React from "react";
-import { getCustomAttributes, htmlAttributes } from "sitefinity-react-framework/widgets/attributes";
-import { WidgetContext } from "sitefinity-react-framework/widgets/widget-context";
-import { classNames } from "sitefinity-react-framework/utils/classNames";
-import { StyleGenerator } from "../styling/style-generator.service";
-import { OffsetStyle } from "../styling/offset-style";
-import { BreadcrumbRestService } from './breadcrumb.service'
+import React from 'react';
+import { getCustomAttributes, htmlAttributes } from 'sitefinity-react-framework/widgets/attributes';
+import { WidgetContext } from 'sitefinity-react-framework/widgets/widget-context';
+import { classNames } from 'sitefinity-react-framework/utils/classNames';
+import { StyleGenerator } from '../styling/style-generator.service';
+import { OffsetStyle } from '../styling/offset-style';
+import { BreadcrumbRestService } from './breadcrumb.service';
 
-const PAGE_MISSING_MESSAGE = "Breadcrumb is visible when you are on a particular page.";
+const PAGE_MISSING_MESSAGE = 'Breadcrumb is visible when you are on a particular page.';
 
 export async function Breadcrumb(props: WidgetContext<BreadcrumbEntity>) {
     const model = props.model;
@@ -17,37 +17,37 @@ export async function Breadcrumb(props: WidgetContext<BreadcrumbEntity>) {
     const marginClass = properties.Margins && StyleGenerator.getMarginClasses(properties.Margins);
     const breadcrumbCustomAttributes = getCustomAttributes(properties.Attributes, 'Breadcrumb');
 
-    dataAttributes["className"] = classNames(
+    dataAttributes['className'] = classNames(
         defaultClass,
         marginClass
     );
-    dataAttributes["data-sfhasquickeditoperation"] = true;
+    dataAttributes['data-sfhasquickeditoperation'] = true;
 
     if(!props.requestContext.pageNode && props.requestContext.isEdit) {
-        return  <div c {...dataAttributes}>
-            {PAGE_MISSING_MESSAGE}
-        </div>
+        return  (<div {...dataAttributes}>
+          {PAGE_MISSING_MESSAGE}
+        </div>);
     }
 
     return (
-        <div
-            {...dataAttributes}
-            {...breadcrumbCustomAttributes}
+      <div
+        {...dataAttributes}
+        {...breadcrumbCustomAttributes}
             >
 
-            <nav aria-label="Full path to the current page">
-                <ol className="breadcrumb">
-                    {
+        <nav aria-label="Full path to the current page">
+          <ol className="breadcrumb">
+            {
                         items.value.map((node: any, idx: number) => {
                             if(idx === items.value.length - 1) {
                                 return  <li key={idx} className="breadcrumb-item active" aria-current="page">{node.Title}</li>;
                             }
-                            return <li key={idx} className="breadcrumb-item"><a href={node.ViewUrl}>{node.Title}</a></li>
+                            return <li key={idx} className="breadcrumb-item"><a href={node.ViewUrl}>{node.Title}</a></li>;
                         })
                     }
-                </ol>
-            </nav>
-        </div>
+          </ol>
+        </nav>
+      </div>
     );
 }
 
