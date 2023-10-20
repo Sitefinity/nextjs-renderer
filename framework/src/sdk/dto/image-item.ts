@@ -1,5 +1,5 @@
-import { SdkItem } from "./sdk-item";
-import { ThumbnailItem } from "./thumbnail-item";
+import { SdkItem } from './sdk-item';
+import { ThumbnailItem } from './thumbnail-item';
 
 export interface ImageItem extends SdkItem {
     Url: string;

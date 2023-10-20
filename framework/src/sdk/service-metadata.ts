@@ -1,4 +1,4 @@
-import { RootUrlService } from "./root-url.service";
+import { RootUrlService } from './root-url.service';
 
 export class ServiceMetadata {
     public static serviceMetadataCache: ServiceMetadataDefinition;
@@ -6,7 +6,7 @@ export class ServiceMetadata {
     public static fetch(): Promise<ServiceMetadataDefinition> {
         const serviceUrl = RootUrlService.getServiceUrl();
         const metadataUrl = `${serviceUrl}sfmeta`;
-        return fetch(metadataUrl, { headers: { "X-Requested-With": "react" } }).then(x => x.json()).then(x => {
+        return fetch(metadataUrl, { headers: { 'X-Requested-With': 'react' } }).then(x => x.json()).then(x => {
             this.serviceMetadataCache = x;
             return x;
         });
@@ -17,7 +17,7 @@ export class ServiceMetadata {
         if (definition != null) {
             const sets = ServiceMetadata.serviceMetadataCache.entityContainer.entitySets;
             const setName = Object.keys(sets).find((x) => {
-                return sets[x]["entityType"]["$ref"].endsWith(itemType);
+                return sets[x]['entityType']['$ref'].endsWith(itemType);
             });
 
             return setName;
@@ -29,13 +29,13 @@ export class ServiceMetadata {
     public static getParentType(itemType: string) {
         const definition = ServiceMetadata.serviceMetadataCache.definitions[itemType];
         if (definition != null) {
-            const parent = definition["properties"]["Parent"];
+            const parent = definition['properties']['Parent'];
             if (parent != null) {
-                const anyOfProperty = parent["anyOf"] as Array<{ $ref: string }>;
+                const anyOfProperty = parent['anyOf'] as Array<{ $ref: string }>;
                 if (anyOfProperty != null && anyOfProperty.length > 0) {
-                    var refProperty = anyOfProperty.find(x => x.$ref != null);
+                    let refProperty = anyOfProperty.find(x => x.$ref != null);
                     if (refProperty != null) {
-                        return refProperty.$ref.replace("#/definitions/", "");
+                        return refProperty.$ref.replace('#/definitions/', '');
                     }
                 }
             }
@@ -45,15 +45,13 @@ export class ServiceMetadata {
     }
 
     public static isPropertyACollection(type: string, propName: string) {
-        var entityTypeDef = ServiceMetadata.serviceMetadataCache.definitions[type];
-        var propMeta = entityTypeDef["properties"][propName];
-        var propType = propMeta["type"];
+        let entityTypeDef = ServiceMetadata.serviceMetadataCache.definitions[type];
+        let propMeta = entityTypeDef['properties'][propName];
+        let propType = propMeta['type'];
 
-        if (!propType)
-            return false;
+        if (!propType) {return false;}
 
-        if (Array.isArray(propType) || propType == "array")
-            return true;
+        if (Array.isArray(propType) || propType == 'array') {return true;}
 
         return false;
     }
@@ -61,33 +59,31 @@ export class ServiceMetadata {
     public static getRelatedType(type: string, relationName: string): string | null {
         const typeDefinition = ServiceMetadata.serviceMetadataCache.definitions[type];
 
-        var properties = typeDefinition["properties"];
-        var property = properties[relationName];
-        if (typeof property !== 'object')
-            return null;
+        let properties = typeDefinition['properties'];
+        let property = properties[relationName];
+        if (typeof property !== 'object') {return null;}
 
-        var relatedReferenceType = property["$ref"];
+        let relatedReferenceType = property['$ref'];
         if (relatedReferenceType == null) {
-            var itemsProperty = property["items"];
+            let itemsProperty = property['items'];
             if (itemsProperty != null) {
-                relatedReferenceType = itemsProperty["$ref"];
+                relatedReferenceType = itemsProperty['$ref'];
             }
         }
 
         if (relatedReferenceType == null) {
-            var anyOfProperty: Array<any> = property["anyOf"];
+            let anyOfProperty: Array<any> = property['anyOf'];
             if (anyOfProperty && anyOfProperty.length > 0) {
-                var relatedItemProperty = anyOfProperty.find(x => x["$ref"] != null);
+                let relatedItemProperty = anyOfProperty.find(x => x['$ref'] != null);
                 if (relatedItemProperty != null) {
-                    relatedReferenceType = relatedItemProperty["$ref"];
+                    relatedReferenceType = relatedItemProperty['$ref'];
                 }
             }
         }
 
-        if (relatedReferenceType == null)
-            return null;
+        if (relatedReferenceType == null) {return null;}
 
-        relatedReferenceType = relatedReferenceType.replace("#/definitions/", "");
+        relatedReferenceType = relatedReferenceType.replace('#/definitions/', '');
 
         if (this.serviceMetadataCache.definitions.hasOwnProperty(relatedReferenceType)) {
             return relatedReferenceType;
@@ -100,13 +96,11 @@ export class ServiceMetadata {
         return !!this.getRelatedType(type, propName);
     }
 
-    private static isPrimitiveProperty(type: string, propName: string)
-    {
+    private static isPrimitiveProperty(type: string, propName: string) {
         const definition = ServiceMetadata.serviceMetadataCache.definitions[type];
-        var properties = definition["properties"];
-        var property = properties[propName];
-        if (property == null)
-            throw new Error(`The field - ${propName} is not recognized as a property of the current type - ${type}`);
+        let properties = definition['properties'];
+        let property = properties[propName];
+        if (property == null) {throw new Error(`The field - ${propName} is not recognized as a property of the current type - ${type}`);}
 
         return (typeof property === 'object') && !this.isRelatedProperty(type, propName);
     }
@@ -114,17 +108,14 @@ export class ServiceMetadata {
     public static serializeFilterValue(type: string, propName: string, value: any) {
         const definition = ServiceMetadata.serviceMetadataCache.definitions[type];
 
-        if (this.isPrimitiveProperty(type, propName))
-        {
-            const propMeta = definition["properties"][propName];
-            const propType = propMeta["type"];
-            const propFormat = propMeta["format"];
+        if (this.isPrimitiveProperty(type, propName)) {
+            const propMeta = definition['properties'][propName];
+            const propType = propMeta['type'];
+            const propFormat = propMeta['format'];
             let propFormatToString = null;
-            if (propFormat != null)
-                propFormatToString = propFormat.toString();
+            if (propFormat != null) {propFormatToString = propFormat.toString();}
 
-            if (propType == null)
-                return null;
+            if (propType == null) {return null;}
 
             const propTypeArray: string[] = propType;
             const propTypeString = propType.toString();
@@ -136,8 +127,7 @@ export class ServiceMetadata {
                 if (propTypeArray.some(x => x === 'string')) {
                     return `'${value}'`;
                 }
-            }
-            else if (propTypeString == "array") {
+            } else if (propTypeString == 'array') {
                 if (propMeta.items && propMeta.items.format) {
                     switch (propMeta.items.format) {
                         case 'string':
@@ -146,11 +136,9 @@ export class ServiceMetadata {
                             return value.toString();
                     }
                 }
-            }
-            else if (propFormatToString == "date-time" && value instanceof Date) {
+            } else if (propFormatToString == 'date-time' && value instanceof Date) {
                 return value.toISOString();
-            }
-            else if (value !== null) {
+            } else if (value !== null) {
                 return value.toString();
             }
         }
@@ -159,8 +147,8 @@ export class ServiceMetadata {
     }
 
     public static getSimpleFields(type: string): string[] {
-        var definition = ServiceMetadata.serviceMetadataCache.definitions[type];
-        var propertiesObject = definition["properties"];
+        let definition = ServiceMetadata.serviceMetadataCache.definitions[type];
+        let propertiesObject = definition['properties'];
 
         return <string[]>Object.keys(propertiesObject).map((key) => {
             if (this.isPrimitiveProperty(type, key)) {
@@ -172,8 +160,8 @@ export class ServiceMetadata {
     }
 
     public static getRelationFields(type: string): string[] {
-        var definition = ServiceMetadata.serviceMetadataCache.definitions[type];
-        var propertiesObject = definition["properties"];
+        let definition = ServiceMetadata.serviceMetadataCache.definitions[type];
+        let propertiesObject = definition['properties'];
 
         return <string[]>Object.keys(propertiesObject).map((key) => {
             if (this.isRelatedProperty(type, key)) {

@@ -8,4 +8,4 @@ export const getUniqueId = (name?: string) =>{
         return guid();
     }
     return `${name}-${guid().substring(0,4)}`;
-}
+};

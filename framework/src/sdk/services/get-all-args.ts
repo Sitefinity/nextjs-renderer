@@ -1,4 +1,4 @@
-import { OrderBy } from "../filters/orderby";
+import { OrderBy } from '../filters/orderby';
 
 export interface GetAllArgs extends GetCommonArgs {
     Count?: boolean;
