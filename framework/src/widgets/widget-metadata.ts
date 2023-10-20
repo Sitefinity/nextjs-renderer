@@ -1,4 +1,4 @@
-import { EditorMetadata } from "./widget-editor-metadata";
+import { EditorMetadata } from './widget-editor-metadata';
 
 export interface WidgetMetadata {
     componentType: any;

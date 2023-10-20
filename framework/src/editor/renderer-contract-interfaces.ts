@@ -1,4 +1,4 @@
-import { WidgetModel } from "../widgets/widget-model";
+import { WidgetModel } from '../widgets/widget-model';
 
 export interface RendererContract {
     getWidgetMetadata(args: GetWidgetMetadataArgs): Promise<ComponentMetadata>;

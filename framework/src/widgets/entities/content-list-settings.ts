@@ -1,5 +1,5 @@
 export interface ContentListSettings {
     ItemsPerPage: number;
     LimitItemsCount: number;
-    DisplayMode: "Paging" | "Limit" | "All";
+    DisplayMode: 'Paging' | 'Limit' | 'All';
 }
