@@ -1,14 +1,12 @@
-import { CollectionResponse } from "sitefinity-react-framework/sdk/dto/collection-response";
-import { SdkItem } from "sitefinity-react-framework/sdk/dto/sdk-item";
-import { RestService, RestSdkTypes } from "sitefinity-react-framework/sdk/rest-service";
-import { NavigationEntity } from "./navigation";
-import { RequestContext } from "next/dist/server/base-server";
+import { SdkItem } from 'sitefinity-react-framework/sdk/dto/sdk-item';
+import { RestService, RestSdkTypes } from 'sitefinity-react-framework/sdk/rest-service';
+import { NavigationEntity } from './navigation';
 
 export class NavigationRestService {
 
     static getItems(entity: NavigationEntity, model: any, requestContext: any): {value: SdkItem[]} {
         if(entity) {
-            let selectedPageId = entity.SelectedPage && entity.SelectedPage.ItemIdsOrdered !== null && entity.SelectedPage.ItemIdsOrdered.length == 1
+            let selectedPageId = entity.SelectedPage && entity.SelectedPage.ItemIdsOrdered !== null && entity.SelectedPage.ItemIdsOrdered.length === 1
                 ? entity.SelectedPage.ItemIdsOrdered[0]
                 : null;
             if (!selectedPageId){
@@ -16,14 +14,14 @@ export class NavigationRestService {
             }
 
             const getAllArgs: any = {
-                selectionModeString: entity.SelectionMode || "",
+                selectionModeString: entity.SelectionMode || '',
                 levelsToInclude: entity.LevelsToInclude || 1,
                 showParentPage: entity.ShowParentPage || false,
                 selectedPageId: selectedPageId,
                 'sf_page_node':requestContext.pageNode.Id,
                 selectedPages: JSON.stringify(entity.CustomSelectedPages.ItemIdsOrdered)
             };
-            const action = 'Default.HierarhicalByLevelsResponse'
+            const action = 'Default.HierarhicalByLevelsResponse';
 
             return RestService.getCustomItems(RestSdkTypes.Pages, action, getAllArgs);
         }

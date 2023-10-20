@@ -1,16 +1,16 @@
-import { CollectionResponse } from "sitefinity-react-framework/sdk/dto/collection-response";
-import { SdkItem } from "sitefinity-react-framework/sdk/dto/sdk-item";
-import { CombinedFilter } from "sitefinity-react-framework/sdk/filters/combined-filter";
-import { FilterClause, FilterOperators } from "sitefinity-react-framework/sdk/filters/filter-clause";
-import { OrderBy } from "sitefinity-react-framework/sdk/filters/orderby";
-import { RelationFilter } from "sitefinity-react-framework/sdk/filters/relation-filter";
-import { RestService } from "sitefinity-react-framework/sdk/rest-service";
-import { ServiceMetadata } from "sitefinity-react-framework/sdk/service-metadata";
-import { DetailItem } from "sitefinity-react-framework/sdk/services/detail-item";
-import { GetAllArgs } from "sitefinity-react-framework/sdk/services/get-all-args";
-import { ContentVariation, ContentContext } from "sitefinity-react-framework/widgets/entities/mixed-content-context";
-import { ContentListEntity } from "./content-list-entity";
-import { DateOffsetPeriod } from "./date-offset-period";
+import { CollectionResponse } from 'sitefinity-react-framework/sdk/dto/collection-response';
+import { SdkItem } from 'sitefinity-react-framework/sdk/dto/sdk-item';
+import { CombinedFilter } from 'sitefinity-react-framework/sdk/filters/combined-filter';
+import { FilterClause, FilterOperators } from 'sitefinity-react-framework/sdk/filters/filter-clause';
+import { OrderBy } from 'sitefinity-react-framework/sdk/filters/orderby';
+import { RelationFilter } from 'sitefinity-react-framework/sdk/filters/relation-filter';
+import { RestService } from 'sitefinity-react-framework/sdk/rest-service';
+import { ServiceMetadata } from 'sitefinity-react-framework/sdk/service-metadata';
+import { DetailItem } from 'sitefinity-react-framework/sdk/services/detail-item';
+import { GetAllArgs } from 'sitefinity-react-framework/sdk/services/get-all-args';
+import { ContentVariation, ContentContext } from 'sitefinity-react-framework/widgets/entities/mixed-content-context';
+import { ContentListEntity } from './content-list-entity';
+import { DateOffsetPeriod } from './date-offset-period';
 
 export class ContentListRestService {
 
@@ -39,7 +39,7 @@ export class ContentListRestService {
                 Provider: variation.Source,
                 OrderBy: <OrderBy[]>[this.getOrderByExpression(entity)].filter(x => x),
                 Fields: this.getSelectExpression(entity),
-                Filter: bigFilter,
+                Filter: bigFilter
             };
 
             return RestService.getItems(getAllArgs);
@@ -52,23 +52,23 @@ export class ContentListRestService {
         let filter: CombinedFilter | FilterClause | RelationFilter | null = null;
         if (variation.Filter && variation.Filter.Value) {
             switch (variation.Filter.Key) {
-                case "Complex":
-                    filter = this.parseComplexFilter(JSON.parse(variation.Filter.Value))
+                case 'Complex':
+                    filter = this.parseComplexFilter(JSON.parse(variation.Filter.Value));
                     break;
-                case "Ids":
+                case 'Ids':
                     const itemIds = variation.Filter.Value.split(',');
                     const filters = itemIds.map((x) => {
                         return <FilterClause>{
-                            FieldName: "Id",
+                            FieldName: 'Id',
                             FieldValue: x.trim(),
                             Operator: FilterOperators.Equal
-                        }
+                        };
                     });
 
                     filter = <CombinedFilter>{
-                        Operator: "OR",
+                        Operator: 'OR',
                         ChildFilters: filters
-                    }
+                    };
                     break;
                 default:
                     break;
@@ -79,37 +79,39 @@ export class ContentListRestService {
     }
 
     private static parseComplexFilter(filter: any): CombinedFilter | FilterClause | RelationFilter {
-        if (filter.hasOwnProperty("FieldName") && filter.hasOwnProperty("FieldValue")) {
+        if (filter.hasOwnProperty('FieldName') && filter.hasOwnProperty('FieldValue')) {
             const filterClause = <FilterClause>filter;
             return filterClause;
-        } else if (filter.hasOwnProperty("Name") && filter.hasOwnProperty("Operator")) {
-            var relationFilter = <RelationFilter>filter;
+        } else if (filter.hasOwnProperty('Name') && filter.hasOwnProperty('Operator')) {
+            let relationFilter = <RelationFilter>filter;
             if (relationFilter.ChildFilter) {
                 relationFilter.ChildFilter = this.parseComplexFilter(relationFilter.ChildFilter);
             }
 
             return relationFilter;
-        } else if (filter.hasOwnProperty("DateFieldName")) {
+        } else if (filter.hasOwnProperty('DateFieldName')) {
 
             const datePeriod = <DateOffsetPeriod>filter;
             const combinedFilter: CombinedFilter = {
-                Operator: "AND",
+                Operator: 'AND',
                 ChildFilters: []
             };
 
             const currentTime = new Date();
             switch (datePeriod.OffsetType) {
-                case "years":
+                case 'years':
                     currentTime.setFullYear(currentTime.getFullYear() - datePeriod.OffsetValue);
                     break;
-                case "months":
+                case 'months':
                     currentTime.setMonth(currentTime.getMonth() - datePeriod.OffsetValue);
                     break;
-                case "weeks":
+                case 'weeks':
                     currentTime.setDate(currentTime.getDate() - (datePeriod.OffsetValue * 7));
                     break;
-                case "days":
+                case 'days':
                     currentTime.setDate(currentTime.getDate() - datePeriod.OffsetValue);
+                    break;
+                default:
                     break;
             }
 
@@ -132,7 +134,7 @@ export class ContentListRestService {
             const newCollection = new Array(parsedCombined.ChildFilters.length);
 
             for (let i = 0; i < parsedCombined.ChildFilters.length; i++) {
-                var currentChildFilter = parsedCombined.ChildFilters[i];
+                let currentChildFilter = parsedCombined.ChildFilters[i];
                 const parsed = this.parseComplexFilter(currentChildFilter);
                 newCollection[i] = parsed;
             }
@@ -146,13 +148,13 @@ export class ContentListRestService {
     private static getParentFilterExpression(selectedContent: ContentContext, variation: ContentVariation, detailItem: DetailItem | null): FilterClause | null {
         let filterByParentExpressionSerialized = null;
         if (variation.DynamicFilterByParent) {
-            var parentType = ServiceMetadata.getParentType(selectedContent.Type);
+            let parentType = ServiceMetadata.getParentType(selectedContent.Type);
 
             if (parentType != null && detailItem != null && detailItem.ItemType === parentType) {
                 return <FilterClause>{
-                    FieldName: "ParentId",
+                    FieldName: 'ParentId',
                     FieldValue: detailItem.Id,
-                    Operator: FilterOperators.Equal,
+                    Operator: FilterOperators.Equal
                 };
             }
         }
@@ -163,23 +165,23 @@ export class ContentListRestService {
     private static getSkipAndTake(entity: ContentListEntity, pageNumber: number): { Skip?: number, Take?: number, Count?: boolean, ShowPager?: boolean } {
         let retVal: { Skip?: number, Take?: number, ShowPager?: boolean, Count?: boolean } | null = {};
         let currentPage = 1;
-        switch (entity.ListSettings.DisplayMode)
-        {
-            case "Paging":
+        switch (entity.ListSettings.DisplayMode) {
+            case 'Paging':
                 retVal.ShowPager = true;
                 retVal.Take = entity.ListSettings.ItemsPerPage;
 
                 currentPage = pageNumber;
 
-                if (currentPage > 1)
-                {
+                if (currentPage > 1) {
                     retVal.Skip = entity.ListSettings.ItemsPerPage * (currentPage - 1);
                 }
 
                 retVal.Count = true;
                 break;
-            case "Limit":
+            case 'Limit':
                 retVal.Take = entity.ListSettings.LimitItemsCount;
+                break;
+            default:
                 break;
         }
 
@@ -187,23 +189,20 @@ export class ContentListRestService {
     }
 
     private static getOrderByExpression(entity: ContentListEntity): OrderBy | null {
-        if (entity.OrderBy == "Manually")
-            return null;
+        if (entity.OrderBy === 'Manually') {return null;}
 
-        const sortExpression = entity.OrderBy == "Custom" ?
+        const sortExpression = entity.OrderBy === 'Custom' ?
             entity.SortExpression :
             entity.OrderBy;
 
-        if (!sortExpression)
-            return null;
+        if (!sortExpression) {return null;}
 
-        var sortExpressionParts = sortExpression.split(" ");
-        if (sortExpressionParts.length != 2)
-            return null;
+        let sortExpressionParts = sortExpression.split(' ');
+        if (sortExpressionParts.length !== 2) {return null;}
 
-        var sortOrder = sortExpressionParts[1].toUpperCase();
+        let sortOrder = sortExpressionParts[1].toUpperCase();
 
-        var orderBy: OrderBy = {
+        let orderBy: OrderBy = {
             Name: sortExpressionParts[0],
             Type: sortOrder
         };
@@ -212,7 +211,7 @@ export class ContentListRestService {
     }
 
     private static getSelectExpression(entity: ContentListEntity): string[] {
-        var splitExpressions = entity.SelectExpression.split(';');
+        let splitExpressions = entity.SelectExpression.split(';');
         const fields = splitExpressions.map((split) => {
             return split.trim();
         });

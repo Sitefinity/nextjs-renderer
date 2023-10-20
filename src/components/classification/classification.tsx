@@ -1,14 +1,14 @@
-import React from "react";
-import { generateAnchorAttrsFromLink, getCustomAttributes, htmlAttributes } from "sitefinity-react-framework/widgets/attributes";
-import { WidgetContext } from "sitefinity-react-framework/widgets/widget-context";
-import { classNames } from "sitefinity-react-framework/utils/classNames";
-import { LinkModel } from "sitefinity-react-framework/interfaces/LinkModel";
-import { StyleGenerator } from "../styling/style-generator.service";
-import { OffsetStyle } from "../styling/offset-style";
-import { Alignment } from "../styling/alignment";
-import { ButtonType } from "../styling/button-types";
-import { ClassificationRestService } from './classification.service'
-import { PageViewModel } from '../navigation/interfaces/PageViewModel'
+import React from 'react';
+import { generateAnchorAttrsFromLink, getCustomAttributes, htmlAttributes } from 'sitefinity-react-framework/widgets/attributes';
+import { WidgetContext } from 'sitefinity-react-framework/widgets/widget-context';
+import { classNames } from 'sitefinity-react-framework/utils/classNames';
+import { LinkModel } from 'sitefinity-react-framework/interfaces/LinkModel';
+import { StyleGenerator } from '../styling/style-generator.service';
+import { OffsetStyle } from '../styling/offset-style';
+import { Alignment } from '../styling/alignment';
+import { ButtonType } from '../styling/button-types';
+import { ClassificationRestService } from './classification.service';
+import { PageViewModel } from '../navigation/interfaces/PageViewModel';
 
 const mapTaxonProperties = (taxon: any, taxonomyName: string, viewUrl?: string, searchParams?: any) =>{
     const children: any[] = [];
@@ -20,19 +20,17 @@ const mapTaxonProperties = (taxon: any, taxonomyName: string, viewUrl?: string, 
     });
 
     return children;
-}
+};
 
 const getTaxaUrl = (taxonomyName: string, taxonUrl: string, viewUrl?: string, searchParams?: any) => {
-    if (viewUrl === null)
-    {
-        return "#";
+    if (viewUrl === null) {
+        return '#';
     }
 
-    let queryString = ''
+    let queryString = '';
 
-    if (searchParams && Object.keys(searchParams).length)
-    {
-        const whitelistedQueryParams = ["sf_site","sfaction","sf_provider","sf_culture"];
+    if (searchParams && Object.keys(searchParams).length) {
+        const whitelistedQueryParams = ['sf_site','sfaction','sf_provider','sf_culture'];
         const filteredQueryCollection: any = {};
         whitelistedQueryParams.forEach(param => {
             const searchParamValue = searchParams[param];
@@ -40,23 +38,22 @@ const getTaxaUrl = (taxonomyName: string, taxonUrl: string, viewUrl?: string, se
                 filteredQueryCollection[param] = searchParamValue;
             }
         });
-        const queryList = new URLSearchParams(filteredQueryCollection)
+        const queryList = new URLSearchParams(filteredQueryCollection);
         queryString = queryList.toString();
     }
 
-    if (taxonUrl.startsWith('/'))
-    {
+    if (taxonUrl.startsWith('/')) {
         taxonUrl = taxonUrl.substring(1);
     }
 
-     return `${viewUrl}/-in-${taxonomyName},${taxonUrl.replaceAll("/", ",")}?` + queryString;
-}
+     return `${viewUrl}/-in-${taxonomyName},${taxonUrl.replaceAll('/', ',')}?` + queryString;
+};
 
 export async function Classification(props: WidgetContext<ClassificationEntity>) {
     const model = props.model;
     const properties = model.Properties;
     const settings = properties.ClassificationSettings;
-    const pageNode = props.requestContext.pageNode
+    const pageNode = props.requestContext.pageNode;
     const dataAttributes = htmlAttributes(props);
     const tokens = await ClassificationRestService.getTaxons(model.Properties, model);
     const viewUrl = pageNode ? pageNode.Fields.ViewUrl : '';
@@ -66,59 +63,59 @@ export async function Classification(props: WidgetContext<ClassificationEntity>)
         return {
             ...taxon,
             SubTaxa: mapTaxonProperties(taxon, settings!.selectedTaxonomyName, viewUrl, searchParams),
-            UrlName: getTaxaUrl(settings!.selectedTaxonomyName, taxon.UrlName, viewUrl, searchParams),
-        }
-    })
+            UrlName: getTaxaUrl(settings!.selectedTaxonomyName, taxon.UrlName, viewUrl, searchParams)
+        };
+    });
 
     const showItemCount = properties.ShowItemCount || true;
     const defaultClass =  properties.CssClass;
     const marginClass = properties.Margins && StyleGenerator.getMarginClasses(properties.Margins);
     const classificationCustomAttributes = getCustomAttributes(properties.Attributes, 'Classification');
-    dataAttributes["className"] = classNames(
+    dataAttributes['className'] = classNames(
         defaultClass,
         marginClass
         );
-    dataAttributes["data-sfemptyicontext"] = "Select classification";
-    dataAttributes["data-sfhasquickeditoperation"] = true;
-    dataAttributes["data-sf-role"] = "classification";
+    dataAttributes['data-sfemptyicontext'] = 'Select classification';
+    dataAttributes['data-sfhasquickeditoperation'] = true;
+    dataAttributes['data-sf-role'] = 'classification';
 
     const renderSubTaxa = (taxa: PageViewModel[], show: boolean) => {
 
-        return <ul>
-            {
+        return (<ul>
+          {
             taxa.map((t: any, idx: number) =>{
                const count = show ? `(${t.AppliedTo})` : '';
-               return <li key={idx} className="list-unstyled">
-                    <a className="text-decoration-none" href={t.UrlName}>{t.Title}</a>
-                    {count}
-                    {
+               return (<li key={idx} className="list-unstyled">
+                 <a className="text-decoration-none" href={t.UrlName}>{t.Title}</a>
+                 {count}
+                 {
                         t.SubTaxa && renderSubTaxa(t.SubTaxa, show)
                     }
-                </li>
+               </li>);
               })
             }
-            </ul>
-    }
+        </ul>);
+    };
 
     return (
-        <ul
-            {...dataAttributes}
-            {...classificationCustomAttributes}
+      <ul
+        {...dataAttributes}
+        {...classificationCustomAttributes}
             >
-            {
+        {
             updatedTokens.map((item: any, idx: number) => {
                     const count = showItemCount ? `(${item.AppliedTo})` : '';
-                    return <li key={idx} className="list-unstyled">
-                        <a className="text-decoration-none" href={item.UrlName}>{item.Title}</a>
-                        {count}
-                        {
+                    return (<li key={idx} className="list-unstyled">
+                      <a className="text-decoration-none" href={item.UrlName}>{item.Title}</a>
+                      {count}
+                      {
                            item.SubTaxa && renderSubTaxa(item.SubTaxa, showItemCount)
                         }
-                    </li>
+                    </li>);
                 }
             )
             }
-        </ul>
+      </ul>
     );
 }
 

@@ -1,8 +1,8 @@
-import { RendererContract, ComponentMetadata, GetWidgetMetadataArgs, RenderWidgetArgs, GetWidgetsArgs, TotalCountResult, WidgetSection, RenderResult, GetCategoriesArgs, WidgetItem } from "sitefinity-react-framework/editor/renderer-contract-interfaces";
-import { RenderWidgetService } from "sitefinity-react-framework/services/render-widget-service";
-import { createRoot } from "react-dom/client";
-import { RequestContext } from "sitefinity-react-framework/services/request-context";
-import { widgetRegistry } from "./widget-registry";
+import { RendererContract, ComponentMetadata, GetWidgetMetadataArgs, RenderWidgetArgs, GetWidgetsArgs, TotalCountResult, WidgetSection, RenderResult, GetCategoriesArgs, WidgetItem } from 'sitefinity-react-framework/editor/renderer-contract-interfaces';
+import { RenderWidgetService } from 'sitefinity-react-framework/services/render-widget-service';
+import { createRoot } from 'react-dom/client';
+import { RequestContext } from 'sitefinity-react-framework/services/request-context';
+import { widgetRegistry } from './widget-registry';
 
 export class RendererContractImpl implements RendererContract {
 
@@ -22,13 +22,13 @@ export class RendererContractImpl implements RendererContract {
                 const modedelAsUrlEncodedString = encodeURIComponent(modelAsBase64String);
                 fetch(`/render?sfaction=edit&sf_culture=${args.dataItem.culture}&sf_site=${args.siteId}&sf_page_node=${args.dataItem.key}&model=${modedelAsUrlEncodedString}`).then((response) => {
                     response.text().then((html) => {
-                        var rootDoc = document.createElement('html');
+                        let rootDoc = document.createElement('html');
                         rootDoc.innerHTML = html;
                         const renderedElement = rootDoc.lastElementChild?.firstChild?.firstChild as HTMLElement;
 
                         resolve(<RenderResult>{
                             element: renderedElement,
-                            content: "",
+                            content: '',
                             scripts: []
                         });
                     });
@@ -37,7 +37,7 @@ export class RendererContractImpl implements RendererContract {
         }
 
         return new Promise((resolve) => {
-            const tempElement = document.createElement("div");
+            const tempElement = document.createElement('div');
             const context: RequestContext = {
                 detailItem: null,
                 isEdit: true,
@@ -53,7 +53,7 @@ export class RendererContractImpl implements RendererContract {
                     element: tempElement.firstElementChild as HTMLElement,
                     content: '',
                     scripts: []
-                })
+                });
             }, 500);
         });
     }
@@ -63,10 +63,10 @@ export class RendererContractImpl implements RendererContract {
 
         Object.keys(widgetRegistry.widgets).forEach((key) => {
             const widgetEntry = widgetRegistry.widgets[key];
-            if ((widgetEntry.selectorCategory === args.category) || (!widgetEntry.selectorCategory && args.category === "Content")) {
+            if ((widgetEntry.selectorCategory === args.category) || (!widgetEntry.selectorCategory && args.category === 'Content')) {
                 filteredWidgets.push({
                     name: key,
-                    title: widgetEntry.editorMetadata?.Title || key,
+                    title: widgetEntry.editorMetadata?.Title || key
                 });
             }
         });
@@ -75,7 +75,7 @@ export class RendererContractImpl implements RendererContract {
             totalCount: filteredWidgets.length,
             dataItems: [
                 {
-                    title: "Default",
+                    title: 'Default',
                     widgets: filteredWidgets
                 }
             ]
@@ -83,6 +83,6 @@ export class RendererContractImpl implements RendererContract {
     }
 
     getCategories(args: GetCategoriesArgs): Promise<Array<string>> {
-        return Promise.resolve(["Content", "Layout"]);
+        return Promise.resolve(['Content', 'Layout']);
     }
 }
