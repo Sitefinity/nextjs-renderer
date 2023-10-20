@@ -41,11 +41,11 @@ export class ODataFilterSerializer {
             return null;
         })).filter(x => x);
 
-        if (serializedChildFilters.length === 1 && filter.Operator != 'NOT') {
+        if (serializedChildFilters.length === 1 && filter.Operator !== 'NOT') {
             return serializedChildFilters[0];
         }
 
-        if (filter.Operator == 'NOT') {
+        if (filter.Operator === 'NOT') {
             return `(not ${serializedChildFilters[0]})`;
         }
 
@@ -73,9 +73,9 @@ export class ODataFilterSerializer {
                 return `(${filter.FieldName} ${filter.Operator} ${serializedValue})`;
             case FilterOperators.ContainsOr:
             case FilterOperators.DoesNotContain:
-                var serializedValues = this.serializeFilterValuesArray(filter.FieldValue, filter.FieldName, filterContext);
+                const serializedValues = this.serializeFilterValuesArray(filter.FieldValue, filter.FieldName, filterContext);
                 if (serializedValues.length > 0) {
-                    var serialziedValuesAsString = '';
+                    let serialziedValuesAsString = '';
                     if (ServiceMetadata.isPropertyACollection(filterContext.Type, filter.FieldName)) {
                         serialziedValuesAsString = serializedValues.map(x => `${this.lambdaVariableName} eq ${x}`).join(' or ');
                         serialziedValuesAsString = `${fieldNameWithPrefix}/any(x: ${serialziedValuesAsString})`;
@@ -83,18 +83,18 @@ export class ODataFilterSerializer {
                         serialziedValuesAsString = serializedValues.map(x => `${fieldNameWithPrefix} eq ${x}`).join(' or ');
                     }
 
-                    if (filter.Operator == FilterOperators.DoesNotContain) {serialziedValuesAsString = 'not ' + serialziedValuesAsString;}
+                    if (filter.Operator === FilterOperators.DoesNotContain) {serialziedValuesAsString = 'not ' + serialziedValuesAsString;}
 
                     return serialziedValuesAsString;
                 }
 
                 return null;
             case FilterOperators.ContainsAnd:
-                var serializedValues2 = this.serializeFilterValuesArray(filter.FieldValue, filter.FieldName, filterContext)
+                const serializedValues2 = this.serializeFilterValuesArray(filter.FieldValue, filter.FieldName, filterContext)
                     .map(x => `${fieldNameWithPrefix}/any(${this.lambdaVariableName}: ${this.lambdaVariableName} eq ${x})`);
 
                 if (serializedValues2.length > 0) {
-                    var serialziedValuesAsString = serializedValues2.join(' and ');
+                    let serialziedValuesAsString = serializedValues2.join(' and ');
                     return serialziedValuesAsString;
                 }
 
@@ -102,7 +102,7 @@ export class ODataFilterSerializer {
             case StringOperators.StartsWith:
             case StringOperators.EndsWith:
             case StringOperators.Contains:
-                var serializedValueForString = this.serializeFilterValue(filter.FieldValue, filter.FieldName, filterContext);
+                const serializedValueForString = this.serializeFilterValue(filter.FieldValue, filter.FieldName, filterContext);
                 return `${filter.Operator}(${fieldNameWithPrefix}, ${serializedValueForString})`;
             default:
                 throw new Error(`The value provided for the operator filter clause: ${filter.Operator} is not supported`);
@@ -124,8 +124,9 @@ export class ODataFilterSerializer {
                 return `${filter.Name}/any(y:${serializedChildFilter})`;
             case 'All':
                 return `${filter.Name}/all(y:${serializedChildFilter})`;
+            default:
+                break;
         }
-
         return null;
     }
 
@@ -133,6 +134,7 @@ export class ODataFilterSerializer {
         return ServiceMetadata.serializeFilterValue(filterContext.Type, propName, value);
     }
 
+    private serializeFilterValuesArray(value: any, propName: string, filterContext: FilterContext): string[] {
         if (typeof value === 'string') {return [value];}
 
         if (Array.isArray(value)) {

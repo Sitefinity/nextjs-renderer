@@ -84,7 +84,7 @@ export class RestService {
 
     private static getSimpleFields(type: string, fields: string[]): string[] {
         let star = '*';
-        if (fields != null && fields.length == 1 && fields[0] == star) {return [star];}
+        if (fields != null && fields.length === 1 && fields[0] === star) {return [star];}
 
         let simpleFields = ServiceMetadata.getSimpleFields(type);
         return fields.filter(x => simpleFields.some(y => y === x));
@@ -92,7 +92,7 @@ export class RestService {
 
     private static getRelatedFields(type: string, fields: string[]): string[] {
         let star = '*';
-        if (fields != null && fields.length == 1 && fields[0] == star) {return [star];}
+        if (fields != null && fields.length === 1 && fields[0] === star) {return [star];}
 
         const result: string[] = [];
         const relatedFields = ServiceMetadata.getRelationFields(type);

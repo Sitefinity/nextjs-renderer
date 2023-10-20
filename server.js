@@ -1,19 +1,19 @@
-const next = require('next')
+const next = require('next');
 const { createProxyMiddleware, responseInterceptor } = require('http-proxy-middleware');
 
 // note the "https" not "http" required module. You will get an error if trying to connect with https
-const https = require('https')
-const fs = require("fs");
+const https = require('https');
+const fs = require('fs');
 
 process.env.NODE_ENV = 'development';
 const app = next({ dev: true });
 
 const sslOptions = {
-    key: fs.readFileSync("./cert/cert.key"),
-    cert: fs.readFileSync("./cert/cert.crt")
-}
+    key: fs.readFileSync('./cert/cert.key'),
+    cert: fs.readFileSync('./cert/cert.crt')
+};
 
-const handle = app.getRequestHandler()
+const handle = app.getRequestHandler();
 app.prepare().then(() => {
     const devProxy = {
         secure: false,
@@ -31,20 +31,20 @@ app.prepare().then(() => {
             }
         },
         onProxyRes: responseInterceptor(async (responseBuffer, proxyRes, req, res) => {
-            if ((req.url.indexOf("pages/Default.GetPageTemplates") != -1 || req.url.indexOf("templates/Default.GetPageTemplates") != -1) && res.statusCode === 200) {
+            if ((req.url.indexOf('pages/Default.GetPageTemplates') !== -1 || req.url.indexOf('templates/Default.GetPageTemplates') !== -1) && res.statusCode === 200) {
                 const response = responseBuffer.toString('utf8');
                 let responseAsJson = JSON.parse(response);
                 responseAsJson.value.splice(0, 0, {
-                    Subtitle: "New editor",
-                    Title: "Local React Templates",
+                    Subtitle: 'New editor',
+                    Title: 'Local React Templates',
                     Type: 0,
                     Visible: true,
                     Templates: [{
                         Framework: 1,
-                        Id: "00000000-0000-0000-0000-000000000000",
-                        Name: "React.Default",
-                        ThumbnailUrl: "/assets/thumbnail-default.png",
-                        Title: "Default",
+                        Id: '00000000-0000-0000-0000-000000000000',
+                        Name: 'React.Default',
+                        ThumbnailUrl: '/assets/thumbnail-default.png',
+                        Title: 'Default',
                         UsedByNumberOfPages: 0
                     }]
                 });
@@ -58,9 +58,9 @@ app.prepare().then(() => {
 
     const proxy = createProxyMiddleware(devProxy);
 
-    const paths = ["/adminapp", "/sf/system", "/api/default", "/ws", "/restapi", "/contextual-help", "/res", "/admin-bridge", "/sfres", "/images", "/documents", "/videos"]
+    const paths = ['/adminapp', '/sf/system', '/api/default', '/ws', '/restapi', '/contextual-help', '/res', '/admin-bridge', '/sfres', '/images', '/documents', '/videos'];
     const server = https.createServer(sslOptions, (req, res) => {
-        if (req.url.indexOf(".axd?") !== -1 || paths.some(path => req.url.toUpperCase().startsWith(path.toUpperCase())) || /\/sitefinity(?!\/template)/i.test(req.url)) {
+        if (req.url.indexOf('.axd?') !== -1 || paths.some(path => req.url.toUpperCase().startsWith(path.toUpperCase())) || /\/sitefinity(?!\/template)/i.test(req.url)) {
             return proxy(req, res);
         }
 
@@ -68,7 +68,7 @@ app.prepare().then(() => {
     });
 
     server.listen(process.env.PORT, (err) => {
-        if (err) throw err
+        if (err) {throw err;};
         console.log('> Ready on https://localhost:' + process.env.PORT);
-    })
-})
+    });
+});

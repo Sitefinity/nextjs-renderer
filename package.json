@@ -26,6 +26,6 @@
     "prod": "next start",
     "dev": "node server.js",
     "build": "next build",
-    "lint": "next lint"
+    "lint": "eslint . --quiet"
   }
 }

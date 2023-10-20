@@ -51,7 +51,7 @@ export class ServiceMetadata {
 
         if (!propType) {return false;}
 
-        if (Array.isArray(propType) || propType == 'array') {return true;}
+        if (Array.isArray(propType) || propType === 'array') {return true;}
 
         return false;
     }
@@ -127,7 +127,7 @@ export class ServiceMetadata {
                 if (propTypeArray.some(x => x === 'string')) {
                     return `'${value}'`;
                 }
-            } else if (propTypeString == 'array') {
+            } else if (propTypeString === 'array') {
                 if (propMeta.items && propMeta.items.format) {
                     switch (propMeta.items.format) {
                         case 'string':
@@ -136,7 +136,7 @@ export class ServiceMetadata {
                             return value.toString();
                     }
                 }
-            } else if (propFormatToString == 'date-time' && value instanceof Date) {
+            } else if (propFormatToString === 'date-time' && value instanceof Date) {
                 return value.toISOString();
             } else if (value !== null) {
                 return value.toString();
