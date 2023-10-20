@@ -1,4 +1,4 @@
-import { DetailItem } from "../sdk/services/detail-item";
+import { DetailItem } from '../sdk/services/detail-item';
 
 export interface RequestContext {
     pageNode?: any;

@@ -1,5 +1,5 @@
-import { WidgetModel } from "../../widgets/widget-model";
-import { DetailItem } from "./detail-item";
+import { WidgetModel } from '../../widgets/widget-model';
+import { DetailItem } from './detail-item';
 
 export interface PageLayoutServiceResponse {
     Culture: string;

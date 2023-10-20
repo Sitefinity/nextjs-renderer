@@ -1,4 +1,4 @@
-import { WidgetMetadata } from "./widget-metadata"
+import { WidgetMetadata } from './widget-metadata';
 
 export interface WidgetRegistry {
     widgets: {

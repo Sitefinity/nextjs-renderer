@@ -1,4 +1,4 @@
-import { SdkItem } from "./sdk-item";
+import { SdkItem } from './sdk-item';
 
 export interface PageItem extends SdkItem {
     ViewUrl: string;

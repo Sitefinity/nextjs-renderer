@@ -1,8 +1,8 @@
-import React from "react";
-import { RequestContext } from "./request-context";
-import { WidgetContext } from "../widgets/widget-context";
-import { WidgetModel } from "../widgets/widget-model";
-import { WidgetRegistry } from "../widgets/widget-registry";
+import React from 'react';
+import { RequestContext } from './request-context';
+import { WidgetContext } from '../widgets/widget-context';
+import { WidgetModel } from '../widgets/widget-model';
+import { WidgetRegistry } from '../widgets/widget-registry';
 
 export class RenderWidgetService {
     public static widgetRegistry: WidgetRegistry;
@@ -28,7 +28,7 @@ export class RenderWidgetService {
                 const errorProps = {
                     context: propsForWidget,
                     error: errCast.message
-                }
+                };
 
                 const errorElement = React.createElement(RenderWidgetService.errorComponentType, errorProps);
                 return errorElement;
@@ -42,9 +42,9 @@ export class RenderWidgetService {
 function parseProperties(widgetModel: WidgetModel<any>, requestContext: RequestContext, renderWidgetService: RenderWidgetService) {
     Object.keys(widgetModel.Properties).forEach((key) => {
         try {
-            (widgetModel.Properties as any)[key] = JSON.parse((widgetModel.Properties as any)[key])
+            (widgetModel.Properties as any)[key] = JSON.parse((widgetModel.Properties as any)[key]);
         } catch {
-
+            // console.log('error')
         }
     });
 }
