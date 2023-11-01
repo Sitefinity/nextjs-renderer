@@ -58,7 +58,7 @@ const SearchInput = React.forwardRef((props: any, ref: any) => {
             onFocus.call(undefined);
         }
 
-        if(e.code === 'Escape') {
+        if (e.code === 'Escape') {
             hide();
         }
     };

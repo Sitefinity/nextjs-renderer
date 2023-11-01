@@ -38,7 +38,7 @@ export function SearchContent(props: any) {
     };
 
     const handleHide = (clear: boolean = true) => {
-        if(clear){
+        if (clear){
             handleOnSearch([]);
         }
         setDropDownWidth(undefined);

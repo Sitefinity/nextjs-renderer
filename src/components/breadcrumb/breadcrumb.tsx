@@ -23,7 +23,7 @@ export async function Breadcrumb(props: WidgetContext<BreadcrumbEntity>) {
     );
     dataAttributes['data-sfhasquickeditoperation'] = true;
 
-    if(!props.requestContext.pageNode && props.requestContext.isEdit) {
+    if (!props.requestContext.pageNode && props.requestContext.isEdit) {
         return  (<div {...dataAttributes}>
           {PAGE_MISSING_MESSAGE}
         </div>);
@@ -39,7 +39,7 @@ export async function Breadcrumb(props: WidgetContext<BreadcrumbEntity>) {
           <ol className="breadcrumb">
             {
                         items.value.map((node: any, idx: number) => {
-                            if(idx === items.value.length - 1) {
+                            if (idx === items.value.length - 1) {
                                 return  <li key={idx} className="breadcrumb-item active" aria-current="page">{node.Title}</li>;
                             }
                             return <li key={idx} className="breadcrumb-item"><a href={node.ViewUrl}>{node.Title}</a></li>;
