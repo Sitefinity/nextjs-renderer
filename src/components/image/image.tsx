@@ -26,7 +26,7 @@ export async function Image(props: WidgetContext<ImageEntity>) {
         marginClass
     );
 
-    if(props.requestContext && props.requestContext.isEdit) {
+    if (props.requestContext && props.requestContext.isEdit) {
         dataAttributes['data-sfemptyicon'] = 'picture-o';
         dataAttributes['data-sfemptyiconaction'] = 'Edit';
     }

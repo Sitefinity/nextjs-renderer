@@ -7,7 +7,7 @@ export class ClassificationRestService {
 
     static getTaxons(entity: ClassificationEntity, model?: any): {value: SdkItem[]} {
         const settings = entity.ClassificationSettings;
-        if(settings &&  settings.selectedTaxonomyId) {
+        if (settings &&  settings.selectedTaxonomyId) {
             const showEmpty = entity.ShowEmpty || false;
             const showCount = entity.ShowItemCount || true;
             let orderBy = entity.OrderBy || 'Title ASC';

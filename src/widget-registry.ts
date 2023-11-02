@@ -6,6 +6,7 @@ import { Classification } from './components/classification/classification';
 import { Image } from './components/image/image';
 import { Breadcrumb } from './components/breadcrumb/breadcrumb';
 import { Navigation } from './components/navigation/navigation';
+import { SearchBox } from './components/search-box/search-box';
 import { Section } from './components/section/section';
 
 import sitefinityContentBlockJson from './components/content-block/designer-metadata.json';
@@ -16,6 +17,7 @@ import sitefinityClassificationJson from './components/classification/designer-m
 import sitefinityImageJson from './components/image/designer-metadata.json';
 import sitefinityBreadcrumbJson from './components/breadcrumb/designer-metadata.json';
 import sitefinityNavigationJson from './components/navigation/designer-metadata.json';
+import sitefinitySearchBoxJson from './components/search-box/designer-metadata.json';
 
 export const widgetRegistry: WidgetRegistry = {
     widgets: {
@@ -51,6 +53,14 @@ export const widgetRegistry: WidgetRegistry = {
             },
             ssr: true
         },
+        'SitefinitySearchBox':  <any>{
+            designerMetadata: sitefinitySearchBoxJson,
+            componentType: SearchBox,
+            editorMetadata: {
+                Title: 'SearchBox'
+            },
+            ssr: true
+        },
         'SitefinityButton':  <any>{
             designerMetadata: sitefinityCallToActionJson,
             componentType: CallToAction,
@@ -73,7 +83,8 @@ export const widgetRegistry: WidgetRegistry = {
             selectorCategory: 'Layout',
             editorMetadata: {
                 Title: 'Section'
-            }
+            },
+            ssr: true
         },
         'SitefinityContentList':  <any>{
             designerMetadata: sitefinityContentListJson,

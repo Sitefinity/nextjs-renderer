@@ -6,7 +6,7 @@ import { BreadcrumbEntity, BreadcrumbIncludeOption } from './breadcrumb';
 export class BreadcrumbRestService {
 
     static getItems(entity: BreadcrumbEntity, model?: any, requestContext?: any): {value: CollectionResponse<SdkItem>[]} {
-        if(entity && requestContext.pageNode) {
+        if (entity && requestContext.pageNode) {
             const getAllArgs: any = {
                 addStartingPageAtEnd: entity.AddCurrentPageLinkAtTheEnd || true,
                 addHomePageAtBeginning: entity.AddHomePageLinkAtBeginning || true,
@@ -23,7 +23,7 @@ export class BreadcrumbRestService {
                  getAllArgs['startingPageId'] = entity.SelectedPage.ItemIdsOrdered[0];
             }
 
-            if(requestContext) {
+            if (requestContext) {
                 const queryString =  new URLSearchParams(requestContext.searchParams);
                 const url = `${requestContext.pageNode.MetaInfo.CanonicalUrl}?${queryString}`;
 
