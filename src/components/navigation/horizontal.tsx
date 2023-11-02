@@ -14,7 +14,7 @@ export function Horizontal(props: {
     const renderSubLevelsRecursive: any = (node: PageViewModel) => {
         { node.ChildNodes.length > 0 &&
             node.ChildNodes.map((childNode, idx: number) => {
-                    if(childNode.ChildNodes.length) {
+                    if (childNode.ChildNodes.length) {
                         return  (<li key={idx} className="dropdown-submenu">
                           <a className={classNames('dropdown-item', getClass(childNode))} href={childNode.Url} target={childNode.LinkTarget}>
                             {childNode.Title}
@@ -53,7 +53,7 @@ export function Horizontal(props: {
               {
                                 items.map((node: PageViewModel, idx: number) => {
                                     const navbarDropdownId = getUniqueId(`navbarDropdownMenuLink-${node.Key}`);
-                                    if(node.ChildNodes.length > 0) {
+                                    if (node.ChildNodes.length > 0) {
                                         { return (<li key={idx} className={classNames('nav-item', 'dropdown', getClass(node))}>
                                           <a className="nav-link dropdown-toggle" href="#" id={navbarDropdownId}
                                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{node.Title}</a>

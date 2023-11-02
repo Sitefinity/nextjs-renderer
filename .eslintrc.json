@@ -13,6 +13,7 @@
         "quotes": ["error", "single"],
         "jsx-quotes": [2, "prefer-double"],
         "semi": "error",
+        "keyword-spacing":"error",
         "comma-dangle": "error",
         "curly": "error",
         "default-case": "error",

@@ -34,7 +34,7 @@ const getTaxaUrl = (taxonomyName: string, taxonUrl: string, viewUrl?: string, se
         const filteredQueryCollection: any = {};
         whitelistedQueryParams.forEach(param => {
             const searchParamValue = searchParams[param];
-            if(searchParamValue) {
+            if (searchParamValue) {
                 filteredQueryCollection[param] = searchParamValue;
             }
         });
