@@ -9,7 +9,7 @@ import { StylingConfig } from '../styling/styling-config';
 import { getUniqueId } from 'sitefinity-react-framework/utils/getUniqueId';
 
 const isError = (context: any) => {
-    if (context.searchParams['loginerror']){
+    if (context.searchParams['loginerror']) {
         return context.searchParams['loginerror'].toLowerCase() === 'true';
     }
 

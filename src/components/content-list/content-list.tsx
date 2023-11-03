@@ -81,7 +81,9 @@ function getAttributesWithClasses(props: WidgetContext<ContentListEntity>, field
         classAttribute.Value += ` ${viewCss.CssClass}`;
     }
 
-    if (additionalClasses) {classAttribute.Value += ` ${additionalClasses}`;}
+    if (additionalClasses) {
+        classAttribute.Value += ` ${additionalClasses}`;
+    }
 
     return contentListAttributes;
 }

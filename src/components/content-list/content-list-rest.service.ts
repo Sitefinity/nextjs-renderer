@@ -189,16 +189,22 @@ export class ContentListRestService {
     }
 
     private static getOrderByExpression(entity: ContentListEntity): OrderBy | null {
-        if (entity.OrderBy === 'Manually') {return null;}
+        if (entity.OrderBy === 'Manually') {
+            return null;
+        }
 
         const sortExpression = entity.OrderBy === 'Custom' ?
             entity.SortExpression :
             entity.OrderBy;
 
-        if (!sortExpression) {return null;}
+        if (!sortExpression) {
+            return null;
+        }
 
         let sortExpressionParts = sortExpression.split(' ');
-        if (sortExpressionParts.length !== 2) {return null;}
+        if (sortExpressionParts.length !== 2) {
+            return null;
+        }
 
         let sortOrder = sortExpressionParts[1].toUpperCase();
 

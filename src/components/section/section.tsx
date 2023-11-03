@@ -113,7 +113,9 @@ function populateColumns(context: WidgetContext<SectionEntity>): ColumnHolder[] 
             }
         }
 
-        if (column.Attributes['className']) {classAttributes.push(column.Attributes['className']);}
+        if (column.Attributes['className']) {
+            classAttributes.push(column.Attributes['className']);
+        }
 
         column.Attributes['className'] = classAttributes.filter(x => x).join(' ');
 
