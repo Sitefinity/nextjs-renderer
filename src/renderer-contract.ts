@@ -42,7 +42,9 @@ export class RendererContractImpl implements RendererContract {
                 detailItem: null,
                 isEdit: true,
                 isPreview: false,
-                culture: args.dataItem.culture
+                culture: args.dataItem.culture,
+                siteId: args.siteId,
+                pageId: (args.dataItem as any).data.Id
             };
 
             const component = RenderWidgetService.createComponent(args.model, context);

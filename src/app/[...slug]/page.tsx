@@ -82,6 +82,8 @@ export default async function Page({ params, searchParams }: PageParams) {
             culture: layout.Culture,
             isEdit: searchParams["sfaction"] === "edit",
             isPreview: searchParams["sfaction"] === "preview",
+            pageId: layout.Id,
+            siteId: layout.SiteId
         },
         widgets: layout.ComponentContext.Components
     };

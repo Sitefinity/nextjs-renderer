@@ -10,6 +10,8 @@ import { GridComponent } from "./components/kendo/grid/grid";
 import { ButtonComponent } from "./components/kendo/button/button";
 import { TextBoxComponent } from "./components/kendo/textbox/textbox";
 import { ChartComponent } from "./components/kendo/chart/chart";
+import { TileLayoutComponent } from "./components/kendo/tile-layout/tile-layout";
+import { ContentBlockClient } from "./components/content-block-client/content-block-client";
 
 import sitefinityContentBlockJson from './components/content-block/designer-metadata.json'
 import sitefinitySectionJson from './components/section/designer-metadata.json';
@@ -22,6 +24,8 @@ import gridMetadataJson from "./components/kendo/grid/designer-metadata.json";
 import buttonMetadataJson from "./components/kendo/button/designer-metadata.json";
 import textBoxMetadataJson from "./components/kendo/textbox/designer-metadata.json";
 import chartMetadataJson from "./components/kendo/chart/designer-metadata.json";
+import tileLayoutMetadataJson from "./components/kendo/tile-layout/designer-metadata.json";
+import contentBlockClientMetadataJson from "./components/content-block-client/designer-metadata.json";
 
 export const widgetRegistry: WidgetRegistry = {
     widgets: {
@@ -112,5 +116,20 @@ export const widgetRegistry: WidgetRegistry = {
                 Title: "Kendo Textbox"
             }
         },
+        "SitefinityKendoTileLayout": {
+            designerMetadata: tileLayoutMetadataJson,
+            componentType: TileLayoutComponent,
+            selectorCategory: 'Layout',
+            editorMetadata: {
+                Title: "Kendo Tile Layout"
+            }
+        },
+        "SitefinityContentBlockClient": {
+            designerMetadata: contentBlockClientMetadataJson,
+            componentType: ContentBlockClient,
+            editorMetadata: {
+                Title: "Content Block (client)"
+            }
+        }
     }
 }

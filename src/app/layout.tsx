@@ -1,6 +1,4 @@
-import 'bootstrap/dist/css/bootstrap.css';
-import '../../src/devreach.css';
-import '../../src/index.css';
+import "../styles/styles";
 
 export default function RootLayout({
     children,

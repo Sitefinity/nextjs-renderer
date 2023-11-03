@@ -1,3 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*#region Sitefinity */
 /*sc- is a selector prefix meaning 'sitefinity core'. It can be changed by your preference*/
 :root {
   --sf-background-image: transparent;
@@ -44,7 +49,7 @@
   background-position: var(--sf-background-position);
   background-repeat: no-repeat;
 }
-
+/*#endregion Sitefinity */
 /*#region Bootstrap navigation */
 .nav-link.active {
   color: var(--bs-secondary);
@@ -172,48 +177,39 @@
 }
 /*#endregion External login buttons*/
 /*#region DX styling */
-.dx-logo {
-    max-width: 420px;
-  }
+.k-appbar-section > .-sf-empty,
+.sf-zone-column:has(> .-sf-empty) {
+    width: 100%;
+}
 
-  .dx-container {
-    color: #fff;
-    height: 100vh;
-    align-items: center;
-    background: var(--tb-container-bg, #3d551f);
-  }
-
-  .dx-home-image img {
-    border-radius: 25px;
-  }
-
-  .dx-home-heading h1 {
-    font-size: calc(1.525rem + 3.3vw);
-  }
-
-  @media (min-width: 1200px) {
-    .dx-home-heading h1 {
-      font-size: 4rem;
-    }
-  }
-
-  .dx-home-heading p {
-    font-size: 20px
-  }
-
-  .dx-example {
-    margin: 60px auto;
-  }
-
-  .dx-example-section > div:not(.dx-logo) {
-    background: #fff;
-    border: 1px solid #7d7e7b;
-    border-radius: 15px;
-    padding: 15px;
-    margin-bottom: 15px;
-  }
-  .dx-button img {
-    width: 1em;
-    height: 1em;
-  }
-  /*#endregion DX styling */
+.k-appbar-section {
+    flex: 1;
+}
+/*#endregion DX styling */
+/*#region DX trumps */
+.txt-primary-dark {
+    color: var(--figma-dark);
+}
+/*#endregion DX trumps */
+/* TODO: REMOVE hack for hiding kendo license message */
+div[style*="inset: 0px;"],
+div[style*="top: 16px;"] {
+    display: none !important;
+}
+/* TODO: use Kendo TB */
+.k-tilelayout-item {
+    overflow: visible;
+}
+.k-tilelayout-item .sf-zone-column.-sf-empty {
+    min-height: 105px;
+    height: 100% !important;
+}
+.k-resize-handle {
+    background: repeating-linear-gradient(
+      45deg,
+      #606dbc,
+      #606dbc 10px,
+      #465298 10px,
+      #465298 20px
+    );
+}

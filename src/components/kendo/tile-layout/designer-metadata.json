@@ -1,0 +1,213 @@
+{
+    "Name":"SitefinityTileLayout",
+    "Caption":"Tile Layout",
+    "PropertyMetadata":[
+       {
+          "Name":"Basic",
+          "Sections":[
+             {
+                "Name":"Main",
+                "Title":null,
+                "Properties":[
+                    {
+                        "Name":"Columns",
+                        "DefaultValue":"1",
+                        "Title":"Columns",
+                        "Type":"number",
+                        "SectionName":null,
+                        "CategoryName":null,
+                        "Properties":{
+
+                        },
+                        "TypeChildProperties":[
+
+                        ],
+                        "Position":0
+                    },
+                    {
+                        "Name":"Tiles",
+                        "DefaultValue":"1",
+                        "Title":"Tiles",
+                        "Type":"number",
+                        "SectionName":null,
+                        "CategoryName":null,
+                        "Properties":{
+
+                        },
+                        "TypeChildProperties":[
+
+                        ],
+                        "Position":0
+                    },
+                    {
+                        "Name":"TilesProperties",
+                        "DefaultValue":null,
+                        "Title":"Tiles Properties",
+                        "Type":"enumerable",
+                        "SectionName":null,
+                        "CategoryName":null,
+                        "Properties":{
+                            "Meta_DisplaySettings_HideContent":"True"
+                        },
+                        "TypeChildProperties":[
+                        {
+                            "Name":"order",
+                            "DefaultValue":null,
+                            "Title":"Order",
+                            "Type":"number",
+                            "SectionName":null,
+                            "CategoryName":null,
+                            "Properties":{
+
+                            },
+                            "TypeChildProperties":[
+
+                            ],
+                            "Position":0
+                        },
+                        {
+                            "Name":"rowSpan",
+                            "DefaultValue":null,
+                            "Title":"Row Span",
+                            "Type":"number",
+                            "SectionName":null,
+                            "CategoryName":null,
+                            "Properties":{
+
+                            },
+                            "TypeChildProperties":[
+
+                            ],
+                            "Position":0
+                        },
+                        {
+                            "Name":"colSpan",
+                            "DefaultValue":null,
+                            "Title":"Column Span",
+                            "Type":"number",
+                            "SectionName":null,
+                            "CategoryName":null,
+                            "Properties":{
+
+                            },
+                            "TypeChildProperties":[
+
+                            ],
+                            "Position":0
+                        },
+                        {
+                            "Name":"col",
+                            "DefaultValue":null,
+                            "Title":"Column",
+                            "Type":"number",
+                            "SectionName":null,
+                            "CategoryName":null,
+                            "Properties":{
+
+                            },
+                            "TypeChildProperties":[
+
+                            ],
+                            "Position":0
+                        }
+                        ],
+                        "Position":0
+                   },
+                   {
+                      "Name":"Gaps",
+                      "DefaultValue":null,
+                      "Title":"Gaps",
+                      "Type":"complex",
+                      "SectionName":null,
+                      "CategoryName":null,
+                      "Properties":{
+                         "Meta_TableView_Reorderable":"False",
+                         "Meta_TableView_Selectable":"False",
+                         "Meta_TableView_MultipleSelect":"False",
+                         "Meta_TableView_Enabled":"True"
+                      },
+                      "TypeChildProperties":[
+                        {
+                            "Name":"rows",
+                            "DefaultValue":"0",
+                            "Title":"Rows gap",
+                            "Type":"number",
+                            "SectionName":null,
+                            "CategoryName":null,
+                            "Properties":{
+                            },
+                            "TypeChildProperties":[
+
+                            ],
+                            "Position":0
+                        },
+                        {
+                            "Name":"columns",
+                            "DefaultValue":"0",
+                            "Title":"Columns gap",
+                            "Type":"number",
+                            "SectionName":null,
+                            "CategoryName":null,
+                            "Properties":{
+                            },
+                            "TypeChildProperties":[
+
+                            ],
+                            "Position":0
+                        }
+                    ],
+                      "Position":0
+                   }
+                ],
+                "CategoryName":"Basic"
+             }
+          ]
+       },
+       {
+          "Name":"QuickEdit",
+          "Sections":[
+             {
+                "Name":"Main",
+                "Title":null,
+                "Properties":[
+                   {
+                      "Name":"ColumnsCount",
+                      "DefaultValue":"1",
+                      "Title":"ColumnsCount",
+                      "Type":"number",
+                      "SectionName":null,
+                      "CategoryName":"QuickEdit",
+                      "Properties":{
+                         "Validations_MaxValue":"12",
+                         "Validations_MinValue":"1",
+                         "Validations_RangeErrorMsg":"Column\u0027s count must be between 1 and 12."
+                      },
+                      "TypeChildProperties":[
+
+                      ],
+                      "Position":0
+                   },
+                   {
+                    "Name":"TilesCount",
+                    "DefaultValue":"1",
+                    "Title":"TilesCount",
+                    "Type":"number",
+                    "SectionName":null,
+                    "CategoryName":"QuickEdit",
+                    "Properties":{
+                       "Validations_MaxValue":"12",
+                       "Validations_MinValue":"1",
+                       "Validations_RangeErrorMsg":"Column\u0027s count must be between 1 and 12."
+                    },
+                    "TypeChildProperties":[
+
+                    ],
+                    "Position":0
+                 }
+                ],
+                "CategoryName":"QuickEdit"
+             }
+          ]
+       }
+    ]
+ }
