@@ -10,6 +10,7 @@ import { RenderWidgetService } from 'sitefinity-react-framework/services/render-
 import { WidgetModel } from 'sitefinity-react-framework/widgets/widget-model';
 import { RequestContext } from 'sitefinity-react-framework/services/request-context';
 import { initStaticParams } from '../init';
+import { Metadata } from 'next';
 
 // export async function generateStaticParams() {
 //     const getAllArgs: GetAllArgs = {
@@ -45,34 +46,27 @@ import { initStaticParams } from '../init';
 //     });
 // }
 
+export async function generateMetadata(
+    { params, searchParams }: PageParams
+): Promise<Metadata> {
+    const layout = await initLayout( { params, searchParams });
+
+    return {
+        title: layout.MetaInfo.Title,
+        description: layout.MetaInfo.Description,
+
+        other: {
+            'og-title': layout.MetaInfo.OpenGraphTitle,
+            'og-image': layout.MetaInfo.OpenGraphImage,
+            'og-video': layout.MetaInfo.OpenGraphVideo,
+            'og-type': layout.MetaInfo.OpenGraphType,
+            'og-site': layout.MetaInfo.OpenGraphSite
+        }
+    };
+  }
+
 export default async function Page({ params, searchParams }: PageParams) {
-    await initStaticParams();
-
-    const actionParam = searchParams['sfaction'];
-
-    let headers: { [key: string]: string } = {};
-    if (process.env.NODE_ENV === 'development' && actionParam) {
-        const cookie = cookies().toString();
-        headers = { 'Cookie': cookie };
-        if (process.env.SF_CLOUD_KEY) {
-            headers['X-SF-BYPASS-HOST'] = `${process.env.PROXY_ORIGINAL_HOST}:${process.env.PORT}`;
-            headers['X-SF-BYPASS-HOST-VALIDATION-KEY'] = process.env.SF_CLOUD_KEY;
-        } else {
-            headers['X-ORIGINAL-HOST'] = `${process.env.PROXY_ORIGINAL_HOST}:${process.env.PORT}`;
-        }
-    }
-
-    const layoutOrError = await LayoutService.get(params.slug.join('/'), actionParam, headers);
-    const errorResponse = layoutOrError as any;
-    if (errorResponse.error && errorResponse.error.code) {
-        if (errorResponse.error.code === 'NotFound') {
-            return notFound();
-        }
-
-        throw errorResponse.error.code;
-    }
-
-    const layout = layoutOrError as PageLayoutServiceResponse;
+    const layout = await initLayout( { params, searchParams });
 
     let appState : AppState = {
         requestContext: {
@@ -106,4 +100,30 @@ interface PageParams {
         slug: string[]
     },
     searchParams: { [key:string]: string }
+}
+
+async function initLayout({ params, searchParams }: PageParams): Promise<PageLayoutServiceResponse> {
+    await initStaticParams();
+
+    const actionParam = searchParams['sfaction'];
+
+    let headers: { [key: string]: string } = {};
+    if (process.env.NODE_ENV === 'development' && actionParam) {
+        const cookie = cookies().toString();
+        headers = { 'Cookie': cookie };
+        if (process.env.SF_CLOUD_KEY) {
+            headers['X-SF-BYPASS-HOST'] = `${process.env.PROXY_ORIGINAL_HOST}:${process.env.PORT}`;
+            headers['X-SF-BYPASS-HOST-VALIDATION-KEY'] = process.env.SF_CLOUD_KEY;
+        } else {
+            headers['X-ORIGINAL-HOST'] = `${process.env.PROXY_ORIGINAL_HOST}:${process.env.PORT}`;
+        }
+    }
+
+    const layoutOrError = await LayoutService.get(params.slug.join('/'), actionParam, headers);
+    const errorResponse = layoutOrError as any;
+    if (errorResponse.error && errorResponse.error.code) {
+        throw errorResponse.error.code;
+    }
+
+    return layoutOrError as PageLayoutServiceResponse;
 }

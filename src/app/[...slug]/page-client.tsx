@@ -11,6 +11,10 @@ import { widgetRegistry } from '@/widget-registry';
 
 export default function PageClient({ layout, metadata, context }: { layout: PageLayoutServiceResponse, metadata: ServiceMetadataDefinition, context: RequestContext }) {
     RootUrlService.rootUrl = `${process.env['NEXT_PUBLIC_CMS_URL']}`;
+    if (!RootUrlService.rootUrl.endsWith('/')) {
+        RootUrlService.rootUrl += '/';
+    }
+
     RenderWidgetService.widgetRegistry = widgetRegistry;
     ServiceMetadata.serviceMetadataCache = metadata;
 
