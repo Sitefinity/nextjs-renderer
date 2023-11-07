@@ -1,0 +1,92 @@
+{
+    "Name":"SitefinityAppBar",
+    "Caption":"AppBar",
+    "PropertyMetadata":[
+       {
+          "Name":"Basic",
+          "Sections":[
+             {
+                "Name":"Main",
+                "Title":null,
+                "Properties":[
+                    {
+                        "Name":"Columns",
+                        "DefaultValue":"1",
+                        "Title":"Columns",
+                        "Type":"number",
+                        "SectionName":null,
+                        "CategoryName":null,
+                        "Properties":{
+
+                        },
+                        "TypeChildProperties":[
+
+                        ],
+                        "Position":0
+                    },
+                    {
+                        "Name":"ThemeColor",
+                        "DefaultValue":"light",
+                        "Title":"Theme Color",
+                        "Type":"string",
+                        "SectionName":null,
+                        "CategoryName":null,
+                        "Properties":{
+
+                        },
+                        "TypeChildProperties":[
+
+                        ],
+                        "Position":0
+                    }
+                ],
+                "CategoryName":"Basic"
+             }
+          ]
+       },
+       {
+        "Name": "Advanced",
+        "Sections": [
+            {
+                "Name":"Custom CSS classes",
+                "Title":"Custom CSS classes",
+                "Properties":[
+                   {
+                      "Name":"CustomCssClass",
+                      "DefaultValue":null,
+                      "Title":"Custom CSS class for...",
+                      "Type":"dictionary",
+                      "SectionName":"Custom CSS classes",
+                      "CategoryName":"Advanced",
+                      "Properties":{
+                         "Meta_LengthDependsOn_ExtraRecords":"[{\u0022Name\u0022: \u0022Wrapper\u0022, \u0022Title\u0022: \u0022Wrapper\u0022}]",
+                         "Meta_LengthDependsOn_PropertyName":"Columns",
+                         "Meta_LengthDependsOn_DisplayName":"Column",
+                         "Meta_LengthDependsOn_DisplayTitle":"Column "
+                      },
+                      "TypeChildProperties":[
+                         {
+                            "Name":"Class",
+                            "DefaultValue":null,
+                            "Title":"CLASS",
+                            "Type":"string",
+                            "SectionName":null,
+                            "CategoryName":null,
+                            "Properties":{
+                               "Meta_Placeholder_Text":"type CSS class..."
+                            },
+                            "TypeChildProperties":[
+
+                            ],
+                            "Position":0
+                         }
+                      ],
+                      "Position":0
+                   }
+                ],
+                "CategoryName":"Advanced"
+             }
+        ]
+       }
+    ]
+ }

@@ -15,7 +15,7 @@ export default function PageClient({ layout, metadata, context }: { layout: Page
     ServiceMetadata.serviceMetadataCache = metadata;
 
     if (context.isEdit && typeof window !== 'undefined') {
-        const timeout = 2000;
+        const timeout = 4000;
         const start = new Date().getTime();
         const handle = window.setInterval(() => {
             document.body.setAttribute('data-sfcontainer', 'Body');

@@ -1,0 +1,177 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*#region Sitefinity */
+/*sc- is a selector prefix meaning 'sitefinity core'. It can be changed by your preference*/
+:root {
+  --sf-background-image: transparent;
+  --sf-background-image: none;
+  --sf-background-size: auto;
+  --sf-background-position: 0% 0%;
+}
+
+.row,
+[class^="col-"] {
+  --sf-background-color: transparent;
+  background-color: var(--sf-background-color);
+}
+
+.sc-video__wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.sc-video__element {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -1;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.-sc-video {
+  position: relative;
+}
+
+.row.-sc-image {
+  background-color: var(--sf-background-color);
+  background-image: var(--sf-background-image);
+  background-size: var(--sf-background-size);
+  background-position: var(--sf-background-position);
+  background-repeat: no-repeat;
+}
+/*#endregion Sitefinity */
+/*#region External login buttons */
+.-sf-google-button {
+  color: #D54F50;
+}
+
+.-sf-google-button:hover {
+  color: #fff;
+  background-color: #D54F50;
+}
+
+.-sf-facebook-button {
+  color: #3E86B4;
+}
+
+.-sf-facebook-button:hover {
+  color: #fff;
+  background-color: #3E86B4;
+}
+
+.-sf-github-button {
+  color: #333;
+}
+
+.-sf-github-button:hover {
+  color: #fff;
+  background-color: #333;
+}
+
+.-sf-yahoo-button {
+  color: #410093;
+}
+
+.-sf-yahoo-button:hover {
+  color: #fff;
+  background-color: #410093;
+}
+
+.-sf-linkedin-button {
+  color: #0077b5;
+}
+
+.-sf-linkedin-button:hover {
+  color: #fff;
+  background-color: #0077b5;
+}
+
+.-sf-microsoft-button {
+  color: #00a1f1;
+}
+
+.-sf-microsoft-button:hover {
+  color: #fff;
+  background-color: #00a1f1;
+}
+
+.-sf-adfs-button {
+  color: #00a1f1;
+}
+
+.-sf-adfs-button:hover {
+  color: #fff;
+  background-color: #00a1f1;
+}
+
+.-sf-windows-button {
+  color: #00bcf2;
+}
+
+.-sf-windows-button:hover {
+  color: #fff;
+  background-color: #00bcf2;
+}
+
+.-sf-twitter-button {
+  color: #1da1f2;
+}
+
+.-sf-twitter-button:hover {
+  color: #fff;
+  background-color: #1da1f2;
+}
+/*#endregion External login buttons*/
+/*#region Resets */
+body {
+    margin: 0;
+}
+/*#endregion DX styling */
+/*#region DX styling */
+.k-appbar-section > .-sf-empty,
+.sf-zone-column:has(> .-sf-empty) {
+    width: 100%;
+}
+/*
+.k-appbar-section {
+    flex: 1;
+} */
+/*#endregion DX styling */
+/*#region DX trumps */
+.txt-primary-dark {
+    color: var(--figma-dark);
+}
+/*#endregion DX trumps */
+/* TODO: REMOVE hack for hiding kendo license message */
+div[style*="inset: 0px;"],
+div[style*="top: 16px;"] {
+    display: none !important;
+}
+/* TODO: only in Edit */
+.k-tilelayout-item,
+.k-appbar {
+    overflow: visible;
+}
+.k-tilelayout-item .sf-zone-column.-sf-empty {
+    min-height: 105px;
+    height: 100% !important;
+}
+.k-resize-handle {
+    background: repeating-linear-gradient(
+      45deg,
+      #606dbc,
+      #606dbc 10px,
+      #465298 10px,
+      #465298 20px
+    );
+}

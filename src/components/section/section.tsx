@@ -26,20 +26,23 @@ export async function Section(props: WidgetContext<SectionEntity>) {
 
     return (
       <section {...section.Attributes} style={section.Style}>
-        {section.ShowVideo && section.VideoUrl &&
-        <video className="sc-video__element" autoPlay={true} muted={true} loop={true}>
-          <source src={section.VideoUrl} />
-        </video>
-            }
-        {columns.map((x, i) => {
-                return (
-                  <div key={i} {...x.Attributes} style={section.Style}>
-                    {x.Children.map(y => {
-                            return RenderWidgetService.createComponent(y.model, props.requestContext);
-                        })}
-                  </div>
-                );
-            })}
+        <div>
+          {section.ShowVideo && section.VideoUrl &&
+            <video className="sc-video__element" autoPlay={true} muted={true} loop={true}>
+              <source src={section.VideoUrl} />
+            </video>
+                }
+          {columns.map((x, i) => {
+                    return (
+                      <div key={i} {...x.Attributes} style={section.Style}>
+                        {x.Children.map(y => {
+                                return RenderWidgetService.createComponent(y.model, props.requestContext);
+                            })}
+                      </div>
+                    );
+                })}
+
+        </div>
       </section>
     );
 }
