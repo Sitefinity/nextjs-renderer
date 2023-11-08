@@ -1,0 +1,47 @@
+/*#region Resets */
+body {
+    margin: 0;
+}
+/*#endregion DX styling */
+/*#region DX styling */
+.k-appbar-section > .-sf-empty,
+.sf-zone-column:has(> .-sf-empty) {
+    width: 100%;
+}
+.k-appbar > .-sf-empty {
+    display: flex;
+    flex: 1;
+}
+/*
+.k-appbar-section {
+    flex: 1;
+} */
+/*#endregion DX styling */
+/*#region DX trumps */
+.txt-primary-dark {
+    color: var(--figma-dark);
+}
+/*#endregion DX trumps */
+/* TODO: REMOVE hack for hiding kendo license message */
+div[style*="inset: 0px;"],
+div[style*="top: 16px;"] {
+    display: none !important;
+}
+/* TODO: only in Edit */
+.k-tilelayout-item,
+.k-appbar {
+    overflow: visible !important;
+}
+.k-tilelayout-item .sf-zone-column.-sf-empty {
+    min-height: 105px;
+    height: 100% !important;
+}
+.k-resize-handle {
+    background: repeating-linear-gradient(
+      45deg,
+      #606dbc,
+      #606dbc 10px,
+      #465298 10px,
+      #465298 20px
+    );
+}

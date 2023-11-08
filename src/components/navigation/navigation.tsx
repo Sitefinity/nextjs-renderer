@@ -10,6 +10,7 @@ import { Accordion } from './accordion';
 import { Vertical } from './vertical';
 import { VerticalSitemap } from './vertical-sitemap';
 import { Tabs } from './tabs';
+import { KendoMenu } from './kendo-menu';
 
 export type NavgationViewName = 'Horizontal' | 'Tabs' | 'Accordion' | 'Vertical' | 'VerticalSitemap';
 
@@ -29,6 +30,11 @@ export async function Navigation(props: WidgetContext<NavigationEntity>) {
     dataAttributes['data-sfemptyiconaction'] = 'None';
     dataAttributes['data-sfemptyicon'] = 'tag';
 
+    // TODO: Fix empty widget as this needs to be updated in the sitefinity-react-framework project
+    if (viewName === 'KendoMenu') {
+        dataAttributes['data-sfiscontentwidget'] = false;
+    }
+
     return (
       <div
         {...dataAttributes}
@@ -38,6 +44,7 @@ export async function Navigation(props: WidgetContext<NavigationEntity>) {
         { viewName === 'Tabs' && <Tabs items={items.value || []} {...navCustomAttributes}/>}
         { viewName === 'Vertical' && <Vertical items={items.value || []}{...navCustomAttributes}/>}
         { viewName === 'VerticalSitemap' && <VerticalSitemap items={items.value || []}{...navCustomAttributes}/>}
+        { viewName === 'KendoMenu' && <KendoMenu items={items.value || []}{...navCustomAttributes}/>}
       </div>
     );
 }

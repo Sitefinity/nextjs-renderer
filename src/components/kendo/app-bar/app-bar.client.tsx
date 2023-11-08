@@ -17,12 +17,11 @@ export function AppBarClient(props: AppBarClientModel) {
       <AppBar themeColor={props.themeColor} className={props.wrapperCssClass}>
         {props.children.map((child, index) => {
             const currentName = `Column${index + 1}`;
-            // const columnClasses = props.columnsCssClasses && props.columnsCssClasses[currentName] ? `k-w-full ${props.columnsCssClasses[currentName].Class}` : 'k-w-full';
-            const columnClasses = props.columnsCssClasses && props.columnsCssClasses[currentName] ? props.columnsCssClasses[currentName].Class : null;
+            const columnClasses = props.columnsCssClasses[currentName] ? props.columnsCssClasses[currentName].Class : null;
 
                 return (
                   <Fragment key={index}>
-                    <div data-sfcontainer={currentName} className="k-flex">
+                    <div data-sfcontainer={currentName}>
                       <AppBarSection className={columnClasses}>
                         {child.section}
                       </AppBarSection>

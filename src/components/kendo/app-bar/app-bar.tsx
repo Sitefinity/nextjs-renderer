@@ -6,10 +6,12 @@ import { WidgetContext } from 'sitefinity-react-framework/widgets/widget-context
 import { widgetRegistry } from '@/widget-registry';
 import { RenderWidgetService } from 'sitefinity-react-framework/services/render-widget-service';
 
+// TODO:
+// - when initially adding widget it is rendered outside appsection after refresh its ok
 export function AppBar(props: WidgetContext<AppBarModel>) {
     const themeColor: AppBarThemeColor = props.model.Properties.ThemeColor || 'light';
-    const wrapperCssClass: string = props.model.Properties.WrapperCssClass;
-    const columnsCssClasses: string[] = props.model.Properties.CustomCssClass;
+    const columnsCssClasses: any[] = props.model.Properties.CustomCssClass || [];
+    const wrapperCssClass: string = (columnsCssClasses as any)['Wrapper']?.Class;
     const dataAttributes = htmlAttributes(props);
     // TODO: Fix empty widget as this needs to be updated in the sitefinity-react-framework project
     dataAttributes['data-sfiscontentwidget'] = false;
