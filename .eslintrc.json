@@ -3,6 +3,7 @@
     "plugin:react/recommended",
     "next/core-web-vitals"
    ],
+   "ignorePatterns": ["**/dist/**"],
    "rules": {
         "react-hooks/exhaustive-deps": "warn",
         "brace-style": ["error"],

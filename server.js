@@ -68,7 +68,9 @@ app.prepare().then(() => {
     });
 
     server.listen(process.env.PORT, (err) => {
-        if (err) {throw err;};
+        if (err) {
+            throw err;
+        };
         console.log('> Ready on https://localhost:' + process.env.PORT);
     });
 });

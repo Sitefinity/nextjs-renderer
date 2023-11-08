@@ -17,8 +17,24 @@ const isError = (context: any) => {
 };
 
 export async function LoginForm(props: WidgetContext<LoginFormEntity>) {
-    const entity = props.model.Properties;
+    const entity = {
+        Header: 'Login',
+        EmailLabel: 'Email / Username',
+        PasswordLabel: 'Password',
+        SubmitButtonLabel: 'Log in',
+        ErrorMessage: 'Incorrect credentials.',
+        RememberMeLabel: 'Remember me',
+        ForgottenPasswordLinkLabel: 'Forgotten password',
+        NotRegisteredLabel: 'Not registered yet?',
+        RegisterLinkText: 'Register now',
+        ExternalProvidersHeader: 'or use account in...',
+        ValidationRequiredMessage: 'All fields are required.',
+        ValidationInvalidEmailMessage: 'Invalid email format.',
+        ...props.model.Properties
+    };
     const context = props.requestContext;
+    // console.log('context', context);
+   // console.log('entity', entity);
     const dataAttributes = htmlAttributes(props);
 
     const defaultClass =  entity.CssClass;
@@ -105,9 +121,7 @@ const passResetColumnSize = viewModel.RememberMe ? 'col-md-6 text-end' : 'col-12
           <h2 className="mb-3">{lbls.Header}</h2>
           <div id="errorContainer"
             className={`alert alert-danger my-3 ${isError(context) ? 'd-block' : 'd-none'}`}
-            role="alert" aria-live="assertive" data-sf-role="error-message-container">
-            {lbls.ErrorMessage}
-          </div>
+            role="alert" aria-live="assertive" data-sf-role="error-message-container">{lbls.ErrorMessage}</div>
           <form action="viewModel.LoginHandlerPath" method="post" role="form" noValidate={true}>
             <div className="mb-3">
               <label htmlFor={usernameInputId} className="form-label">{lbls.EmailLabel}</label>
@@ -115,9 +129,9 @@ const passResetColumnSize = viewModel.RememberMe ? 'col-md-6 text-end' : 'col-12
             </div>
             <div className="mb-3">
               <label htmlFor={passwordInputId} className="form-label">{lbls.PasswordLabel}</label>
-              <input type="password" className="form-control" id={passwordInputId} name="password" data-sf-role="required" />
+              <input type="password" className="form-control" id={passwordInputId} name="password" data-sf-role="required"
+                autoComplete="on" />
             </div>
-
             {(viewModel.RememberMe || viewModel.ForgottenPasswordLink) &&
             <div className="row mb-3">
               {viewModel.RememberMe &&
