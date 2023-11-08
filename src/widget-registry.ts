@@ -9,6 +9,7 @@ import { Navigation } from './components/navigation/navigation';
 import { SearchBox } from './components/search-box/search-box';
 import { Section } from './components/section/section';
 import { AppBar } from './components/kendo/app-bar/app-bar';
+import { User } from './components/kendo/user/user';
 
 import sitefinityContentBlockJson from './components/content-block/designer-metadata.json';
 import sitefinitySectionJson from './components/section/designer-metadata.json';
@@ -20,6 +21,7 @@ import sitefinityBreadcrumbJson from './components/breadcrumb/designer-metadata.
 import sitefinityNavigationJson from './components/navigation/designer-metadata.json';
 import sitefinitySearchBoxJson from './components/search-box/designer-metadata.json';
 import appBarJson from './components/kendo/app-bar/designer-metadata.json';
+import userJson from './components/kendo/user/designer-metadata.json';
 
 export const widgetRegistry: WidgetRegistry = {
     widgets: {
@@ -103,6 +105,16 @@ export const widgetRegistry: WidgetRegistry = {
             componentType: AppBar,
             editorMetadata: {
                 Title: 'App Bar',
+                EmptyIconText: 'Select content',
+                EmptyIcon: 'plus-circle'
+            },
+            ssr: true
+        },
+        'User':  <any>{
+            designerMetadata: userJson,
+            componentType: User,
+            editorMetadata: {
+                Title: 'User',
                 EmptyIconText: 'Select content',
                 EmptyIcon: 'plus-circle'
             },

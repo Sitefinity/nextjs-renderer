@@ -7,6 +7,7 @@ import 'font-awesome/css/font-awesome.css';
 import './index.css';
 import './overrides.css';
 import './colors.css';
+import './_icons.css';
 
 // const fontAwesome = localFont({ src: '../../node_modules/font-awesome/fonts/fontawesome-webfont.ttf' });
 // TODO: investigate how to load font
