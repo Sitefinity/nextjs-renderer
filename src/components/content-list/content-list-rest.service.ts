@@ -17,8 +17,7 @@ export class ContentListRestService {
     static getItems(entity: ContentListEntity, detailItem: DetailItem | null): Promise<CollectionResponse<SdkItem>> {
         if (entity.SelectedItems && entity.SelectedItems.Content && entity.SelectedItems.Content.length > 0) {
             const selectedContent = entity.SelectedItems.Content[0];
-            const variation = selectedContent.Variations[0];
-
+            const variation = selectedContent.Variations![0];
 
             const mainFilter = FilterConverterService.getMainFilter(variation);
             const additionalFilter = entity.FilterExpression;

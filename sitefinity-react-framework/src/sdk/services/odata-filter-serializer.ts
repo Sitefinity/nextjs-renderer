@@ -24,14 +24,18 @@ export class ODataFilterSerializer {
     }
 
     private serializeCombinedFilter(filter: CombinedFilter, filterContext: FilterContext): string | null {
-        if (filter.ChildFilters.length === 0) {return null;}
+        if (filter.ChildFilters.length === 0) {
+            return null;
+        }
 
         let serializedChildFilters = filter.ChildFilters.map((x => {
             if (x.hasOwnProperty('FieldName')) {
                 return this.serializeFilterClause(<any>x, filterContext);
             } else if (x.hasOwnProperty('ChildFilters')) {
                 let serializedFilter = this.serializeCombinedFilter(<any>x, filterContext);
-                if (serializedFilter) {serializedFilter = `(${serializedFilter})`;}
+                if (serializedFilter) {
+                    serializedFilter = `(${serializedFilter})`;
+                }
 
                 return serializedFilter;
             } else if (x.hasOwnProperty('Name')) {
@@ -50,9 +54,13 @@ export class ODataFilterSerializer {
         }
 
         serializedChildFilters = serializedChildFilters.map(x => {
-            if (!x) {return null;}
+            if (!x) {
+                return null;
+            }
 
-            if (x.startsWith('(') && x.endsWith(')')) {return x;}
+            if (x.startsWith('(') && x.endsWith(')')) {
+                return x;
+            }
 
             return `(${x})`;
         }).filter(x => x);
@@ -83,7 +91,9 @@ export class ODataFilterSerializer {
                         serialziedValuesAsString = serializedValues.map(x => `${fieldNameWithPrefix} eq ${x}`).join(' or ');
                     }
 
-                    if (filter.Operator === FilterOperators.DoesNotContain) {serialziedValuesAsString = 'not ' + serialziedValuesAsString;}
+                    if (filter.Operator === FilterOperators.DoesNotContain) {
+                        serialziedValuesAsString = 'not ' + serialziedValuesAsString;
+                    }
 
                     return serialziedValuesAsString;
                 }
@@ -111,7 +121,9 @@ export class ODataFilterSerializer {
 
     private serializeRelationFilter(filter: RelationFilter, filterContext: FilterContext): string | null {
         let relatedType = ServiceMetadata.getRelatedType(filterContext.Type, filter.Name);
-        if (!relatedType) {return null;}
+        if (!relatedType) {
+            return null;
+        }
 
         let newFilterContext: FilterContext = {
             Type: relatedType,
@@ -135,7 +147,9 @@ export class ODataFilterSerializer {
     }
 
     private serializeFilterValuesArray(value: any, propName: string, filterContext: FilterContext): string[] {
-        if (typeof value === 'string') {return [value];}
+        if (typeof value === 'string') {
+            return [value];
+        }
 
         if (Array.isArray(value)) {
             return value.map(x => this.serializeFilterValue(x, propName, filterContext));

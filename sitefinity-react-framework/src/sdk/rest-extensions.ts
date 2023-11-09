@@ -14,7 +14,7 @@ export class RestExtensionsService {
             throw new Error(`Cannot have two contexts for different types - ${groupNames}`);
         }
 
-        let allVariations: ContentVariation[] = contentContext.Content
+        let allVariations: any[] = contentContext.Content
             .filter((cxt: ContentContext) => cxt.Variations)
             .map((cxt: ContentContext) => cxt.Variations).flat();
 
@@ -123,4 +123,3 @@ export class RestExtensionsService {
         return contentVariations;
     };
 }
-

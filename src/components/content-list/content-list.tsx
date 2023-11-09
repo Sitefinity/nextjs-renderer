@@ -45,9 +45,9 @@ export async function ContentList(props: WidgetContext<ContentListEntity>) {
         if (properties.SelectedItems && properties.SelectedItems.Content && properties.SelectedItems.Content.length > 0) {
             const selectedContent = properties.SelectedItems.Content[0];
             const detailModel = await handleDetailView({
-                Id: properties.SelectedItems.ItemIdsOrdered[0],
+                Id: properties.SelectedItems.ItemIdsOrdered![0],
                 ItemType: selectedContent.Type,
-                ProviderName: selectedContent.Variations[0].Source
+                ProviderName: selectedContent.Variations![0].Source
             }, props);
             data.detailModel = detailModel;
         }

@@ -32,7 +32,11 @@ export function OpenDetailsAnchor(props: {
             const newUrl = window.location.origin + window.location.pathname + sdkItem.ItemDefaultUrl + window.location.search;
             window.history.pushState(detailItem, '', newUrl);
         } else if (entity && entity.DetailPage) {
-            RestService.getItem(RestSdkTypes.Pages, entity.DetailPage.ItemIdsOrdered[0], entity.DetailPage.Content[0].Variations[0].Source).then((page: SdkItem) => {
+            RestService.getItem(
+                RestSdkTypes.Pages,
+                entity.DetailPage.ItemIdsOrdered![0],
+                entity.DetailPage.Content[0].Variations![0].Source
+            ).then((page: SdkItem) => {
                 const newUrl = (page as PageItem).ViewUrl + sdkItem.ItemDefaultUrl;
                 window.location.href = newUrl;
             });

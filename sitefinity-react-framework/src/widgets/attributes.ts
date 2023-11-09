@@ -47,7 +47,9 @@ export function htmlAttributes(widgetContext: WidgetContext<any>, error: string 
 }
 
 export const generateAnchorAttrsFromLink = (linkModel?: LinkModel | null, classList: string = '') => {
-    if (!linkModel) {return null;}
+    if (!linkModel) {
+return null;
+}
 
     const attributes = {} as React.AnchorHTMLAttributes<HTMLAnchorElement>;
     attributes.target = linkModel.target;
@@ -59,7 +61,7 @@ export const generateAnchorAttrsFromLink = (linkModel?: LinkModel | null, classL
 };
 
 export const getCustomAttributes = (attributes: any, part: string) => {
-    if(!attributes || !attributes[part]){
+    if (!attributes || !attributes[part]){
         return {};
     }
 
