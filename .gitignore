@@ -36,7 +36,7 @@ next-env.d.ts
 
 /cert
 
-/framework/**/*.js
-/framework/**/*.d.ts
-/framework/dist
-/framework/node_modules
+/sitefinity-react-framework/**/*.js
+/sitefinity-react-framework/**/*.d.ts
+/sitefinity-react-framework/dist
+/sitefinity-react-framework/node_modules
