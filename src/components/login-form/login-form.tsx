@@ -33,10 +33,7 @@ export async function LoginForm(props: WidgetContext<LoginFormEntity>) {
         ...props.model.Properties
     };
     const context = props.requestContext;
-    // console.log('context', context);
-   // console.log('entity', entity);
     const dataAttributes = htmlAttributes(props);
-
     const defaultClass =  entity.CssClass;
     const marginClass = entity.Margins && StyleGenerator.getMarginClasses(entity.Margins);
 
@@ -165,6 +162,11 @@ const passResetColumnSize = viewModel.RememberMe ? 'col-md-6 text-end' : 'col-12
           <input type="hidden" name="ValidationRequiredMessage" value={lbls.ValidationRequiredMessage} />
         </div>
 
+        <FormContainer viewModel={viewModel} context={context}
+          usernameInputId={usernameInputId}
+          passwordInputId={passwordInputId}
+          rememberInputId={rememberInputId}
+             />
         {viewModel.RegistrationLink &&
         <div className="row mt-3">
           <div className="col-md-6">{lbls.NotRegisteredLabel}</div>
