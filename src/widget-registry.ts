@@ -10,6 +10,7 @@ import { SearchBox } from './components/search-box/search-box';
 import { Section } from './components/section/section';
 import { AppBar } from './components/kendo/app-bar/app-bar';
 import { User } from './components/kendo/user/user';
+import { ThemeButton } from './components/kendo/theme-button/theme-button';
 
 import sitefinityContentBlockJson from './components/content-block/designer-metadata.json';
 import sitefinitySectionJson from './components/section/designer-metadata.json';
@@ -22,6 +23,7 @@ import sitefinityNavigationJson from './components/navigation/designer-metadata.
 import sitefinitySearchBoxJson from './components/search-box/designer-metadata.json';
 import appBarJson from './components/kendo/app-bar/designer-metadata.json';
 import userJson from './components/kendo/user/designer-metadata.json';
+import themeButtonJson from './components/kendo/theme-button/designer-metadata.json';
 
 export const widgetRegistry: WidgetRegistry = {
     widgets: {
@@ -115,6 +117,16 @@ export const widgetRegistry: WidgetRegistry = {
             componentType: User,
             editorMetadata: {
                 Title: 'User',
+                EmptyIconText: 'Select content',
+                EmptyIcon: 'plus-circle'
+            },
+            ssr: true
+        },
+        'ThemeButton':  <any>{
+            designerMetadata: themeButtonJson,
+            componentType: ThemeButton,
+            editorMetadata: {
+                Title: 'Theme Button',
                 EmptyIconText: 'Select content',
                 EmptyIcon: 'plus-circle'
             },

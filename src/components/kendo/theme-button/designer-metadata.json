@@ -1,0 +1,19 @@
+{
+    "Name":"SitefinityThemeButton",
+    "Caption":"ThemeButton",
+    "PropertyMetadata":[
+       {
+          "Name":"Basic",
+          "Sections":[
+             {
+                "Name":"Main",
+                "Title":null,
+                "Properties":[
+
+                ],
+                "CategoryName":"Basic"
+             }
+          ]
+       }
+    ]
+ }
