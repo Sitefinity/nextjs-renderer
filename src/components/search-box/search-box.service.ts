@@ -6,7 +6,12 @@ import { RestExtensionsService } from 'sitefinity-react-framework/sdk/rest-exten
 export class SearchBoxRestService {
 
     static async GetPageNodeUrl(context: MixedContentContext) {
-        const variations = (context?.Content)[0].Variations;
+        const content = context.Content;
+        if (!content || !content.length) {
+            return '';
+        }
+
+        const variations = content[0].Variations;
         if (variations && variations.length !== 0){
             const mainFilter = FilterConverterService.getMainFilter(variations[0]);
             const pageNodes = await RestExtensionsService.getContextItems(context, {

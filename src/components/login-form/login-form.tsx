@@ -64,78 +64,78 @@ export async function LoginForm(props: WidgetContext<LoginFormEntity>) {
         Labels: {}
     };
 
-if (entity.ExternalProviders && entity.ExternalProviders.length){
-    const argsLocal = {
-        Name: 'Default.GetExternalProviders'
-    };
-    const externalProviders: CollectionResponse<ExternalProvider> = await RestService.getUnboundType(argsLocal);
-    viewModel.ExternalProviders = externalProviders.Items.filter(p => entity.ExternalProviders?.indexOf(p.Name) !== -1);
-}
-
-viewModel.Labels.EmailLabel = entity.EmailLabel;
-viewModel.Labels.ErrorMessage = entity.ErrorMessage;
-viewModel.Labels.ExternalProvidersHeader = entity.ExternalProvidersHeader;
-viewModel.Labels.ForgottenPasswordLinkLabel = entity.ForgottenPasswordLinkLabel;
-viewModel.Labels.Header = entity.Header;
-viewModel.Labels.NotRegisteredLabel = entity.NotRegisteredLabel;
-viewModel.Labels.PasswordLabel = entity.PasswordLabel;
-viewModel.Labels.RegisterLinkText = entity.RegisterLinkText;
-viewModel.Labels.RememberMeLabel = entity.RememberMeLabel;
-viewModel.Labels.SubmitButtonLabel = entity.SubmitButtonLabel;
-viewModel.Labels.ValidationInvalidEmailMessage = entity.ValidationInvalidEmailMessage;
-viewModel.Labels.ValidationRequiredMessage = entity.ValidationRequiredMessage;
-viewModel.VisibilityClasses = StylingConfig.VisibilityClasses;
-viewModel.InvalidClass = StylingConfig.InvalidClass;
-
-const postLoginRedirectVariations = (entity.PostLoginRedirectPage?.Content)[0].Variations;
-if (entity.PostLoginAction === PostLoginAction.RedirectToPage
-   && postLoginRedirectVariations && postLoginRedirectVariations.length !== 0){
-    const mainFilter = FilterConverterService.getMainFilter(postLoginRedirectVariations[0]);
-    const pageNodes = await RestExtensionsService.getContextItems(entity.PostLoginRedirectPage, {
-        Type: RestSdkTypes.Pages,
-        Fields: ['ViewUrl'],
-        Filter: mainFilter
-    });
-    const items = pageNodes.Items;
-    if (items.length === 1){
-        viewModel.RedirectUrl =  items[0].ViewUrl;
+    if (entity.ExternalProviders && entity.ExternalProviders.length){
+        const argsLocal = {
+            Name: 'Default.GetExternalProviders'
+        };
+        const externalProviders: CollectionResponse<ExternalProvider> = await RestService.getUnboundType(argsLocal);
+        viewModel.ExternalProviders = externalProviders.Items.filter(p => entity.ExternalProviders?.indexOf(p.Name) !== -1);
     }
-}
 
-const registrationVariations = (entity.RegistrationPage?.Content)[0].Variations;
-if (registrationVariations && registrationVariations.length !== 0){
-     const mainFilter = FilterConverterService.getMainFilter(registrationVariations[0]);
-     const pageNodes = await RestExtensionsService.getContextItems(entity.RegistrationPage, {
-         Type: RestSdkTypes.Pages,
-         Fields: ['ViewUrl'],
-         Filter: mainFilter
-     });
+    viewModel.Labels.EmailLabel = entity.EmailLabel;
+    viewModel.Labels.ErrorMessage = entity.ErrorMessage;
+    viewModel.Labels.ExternalProvidersHeader = entity.ExternalProvidersHeader;
+    viewModel.Labels.ForgottenPasswordLinkLabel = entity.ForgottenPasswordLinkLabel;
+    viewModel.Labels.Header = entity.Header;
+    viewModel.Labels.NotRegisteredLabel = entity.NotRegisteredLabel;
+    viewModel.Labels.PasswordLabel = entity.PasswordLabel;
+    viewModel.Labels.RegisterLinkText = entity.RegisterLinkText;
+    viewModel.Labels.RememberMeLabel = entity.RememberMeLabel;
+    viewModel.Labels.SubmitButtonLabel = entity.SubmitButtonLabel;
+    viewModel.Labels.ValidationInvalidEmailMessage = entity.ValidationInvalidEmailMessage;
+    viewModel.Labels.ValidationRequiredMessage = entity.ValidationRequiredMessage;
+    viewModel.VisibilityClasses = StylingConfig.VisibilityClasses;
+    viewModel.InvalidClass = StylingConfig.InvalidClass;
 
-     const items = pageNodes.Items;
-     if (items.length === 1){
-         viewModel.RegistrationLink =  items[0].ViewUrl;
-     }
- }
-
-const resetPasswordVariations = (entity.ResetPasswordPage?.Content)[0].Variations;
-if (resetPasswordVariations && resetPasswordVariations.length !== 0){
-    const mainFilter = FilterConverterService.getMainFilter(resetPasswordVariations[0]);
-    const pageNodes = await RestExtensionsService.getContextItems(entity.ResetPasswordPage, {
-        Type: RestSdkTypes.Pages,
-        Fields: ['ViewUrl'],
-        Filter: mainFilter
-    });
-
-    const items = pageNodes.Items;
-    if (items.length === 1){
-        viewModel.ForgottenPasswordLink = items[0].ViewUrl;
+    const postLoginRedirectVariations = (entity.PostLoginRedirectPage.Content)[0].Variations;
+    if (entity.PostLoginAction === PostLoginAction.RedirectToPage
+    && postLoginRedirectVariations && postLoginRedirectVariations.length !== 0){
+        const mainFilter = FilterConverterService.getMainFilter(postLoginRedirectVariations[0]);
+        const pageNodes = await RestExtensionsService.getContextItems(entity.PostLoginRedirectPage, {
+            Type: RestSdkTypes.Pages,
+            Fields: ['ViewUrl'],
+            Filter: mainFilter
+        });
+        const items = pageNodes.Items;
+        if (items.length === 1){
+            viewModel.RedirectUrl =  items[0].ViewUrl;
+        }
     }
-}
 
-const labels = viewModel.Labels;
-const usernameInputId = getUniqueId('sf-username-');
-const passwordInputId = getUniqueId('sf-password-');
-const rememberInputId = getUniqueId('sf-rememeber-');
+    const registrationVariations = (entity.RegistrationPage.Content)[0].Variations;
+    if (registrationVariations && registrationVariations.length !== 0){
+        const mainFilter = FilterConverterService.getMainFilter(registrationVariations[0]);
+        const pageNodes = await RestExtensionsService.getContextItems(entity.RegistrationPage, {
+            Type: RestSdkTypes.Pages,
+            Fields: ['ViewUrl'],
+            Filter: mainFilter
+        });
+
+        const items = pageNodes.Items;
+        if (items.length === 1){
+            viewModel.RegistrationLink =  items[0].ViewUrl;
+        }
+    }
+
+    const resetPasswordVariations = (entity.ResetPasswordPage.Content)[0].Variations;
+    if (resetPasswordVariations && resetPasswordVariations.length !== 0){
+        const mainFilter = FilterConverterService.getMainFilter(resetPasswordVariations[0]);
+        const pageNodes = await RestExtensionsService.getContextItems(entity.ResetPasswordPage, {
+            Type: RestSdkTypes.Pages,
+            Fields: ['ViewUrl'],
+            Filter: mainFilter
+        });
+
+        const items = pageNodes.Items;
+        if (items.length === 1){
+            viewModel.ForgottenPasswordLink = items[0].ViewUrl;
+        }
+    }
+
+    const labels = viewModel.Labels;
+    const usernameInputId = getUniqueId('sf-username-');
+    const passwordInputId = getUniqueId('sf-password-');
+    const rememberInputId = getUniqueId('sf-rememeber-');
 
     return (
       <div
@@ -162,7 +162,7 @@ const rememberInputId = getUniqueId('sf-rememeber-');
                 const providerHref = ExternalLoginBase.GetExternalLoginPath(context, provider.Name);
 
                 return (
-                  <a key={idx} data-sf-test="extPrv"
+                  <a key={idx}
                     className={classNames('btn border fs-5 w-100 mt-2',providerClass)}
                     href={providerHref}>{provider.Value}</a>
                 );

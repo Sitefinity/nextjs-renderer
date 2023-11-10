@@ -48,8 +48,8 @@ export function htmlAttributes(widgetContext: WidgetContext<any>, error: string 
 
 export const generateAnchorAttrsFromLink = (linkModel?: LinkModel | null, classList: string = '') => {
     if (!linkModel) {
-return null;
-}
+        return null;
+    }
 
     const attributes = {} as React.AnchorHTMLAttributes<HTMLAnchorElement>;
     attributes.target = linkModel.target;

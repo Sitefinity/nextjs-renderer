@@ -15,7 +15,8 @@ import { ContentListEntity } from './content-list-entity';
 export class ContentListRestService {
 
     static getItems(entity: ContentListEntity, detailItem: DetailItem | null): Promise<CollectionResponse<SdkItem>> {
-        if (entity.SelectedItems && entity.SelectedItems.Content && entity.SelectedItems.Content.length > 0) {
+        if (entity.SelectedItems && entity.SelectedItems.Content && entity.SelectedItems.Content.length > 0
+                && entity.SelectedItems.Content[0].Variations) {
             const selectedContent = entity.SelectedItems.Content[0];
             const variation = selectedContent.Variations![0];
 

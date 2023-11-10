@@ -9,6 +9,11 @@ import { FilterConverterService } from './filters/filter-converter';
 export class RestExtensionsService {
     public static async getContextItems (contentContext : MixedContentContext, getAllArgsSingle: GetAllArgs) {
         let typeGroups = contentContext.Content;
+
+        if (!typeGroups || !typeGroups.length) {
+            throw new Error('ContentContext item is not passed in MixedContentContext.');
+        }
+
         if (typeGroups.length > 1) {
             let groupNames = typeGroups.join(',');
             throw new Error(`Cannot have two contexts for different types - ${groupNames}`);
