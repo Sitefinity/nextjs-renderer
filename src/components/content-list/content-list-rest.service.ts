@@ -8,19 +8,19 @@ import { RestService } from 'sitefinity-react-framework/sdk/rest-service';
 import { ServiceMetadata } from 'sitefinity-react-framework/sdk/service-metadata';
 import { DetailItem } from 'sitefinity-react-framework/sdk/services/detail-item';
 import { GetAllArgs } from 'sitefinity-react-framework/sdk/services/get-all-args';
+import { FilterConverterService } from 'sitefinity-react-framework/sdk/filters/filter-converter';
 import { ContentVariation, ContentContext } from 'sitefinity-react-framework/widgets/entities/mixed-content-context';
 import { ContentListEntity } from './content-list-entity';
-import { DateOffsetPeriod } from './date-offset-period';
 
 export class ContentListRestService {
 
     static getItems(entity: ContentListEntity, detailItem: DetailItem | null): Promise<CollectionResponse<SdkItem>> {
-        if (entity.SelectedItems && entity.SelectedItems.Content && entity.SelectedItems.Content.length > 0) {
+        if (entity.SelectedItems && entity.SelectedItems.Content && entity.SelectedItems.Content.length > 0
+                && entity.SelectedItems.Content[0].Variations) {
             const selectedContent = entity.SelectedItems.Content[0];
-            const variation = selectedContent.Variations[0];
+            const variation = selectedContent.Variations![0];
 
-
-            const mainFilter = this.getMainFilter(entity, variation);
+            const mainFilter = FilterConverterService.getMainFilter(variation);
             const additionalFilter = entity.FilterExpression;
             const parentFilter = this.getParentFilterExpression(selectedContent, variation, detailItem);
 
@@ -48,102 +48,6 @@ export class ContentListRestService {
         return Promise.resolve(({ Items: [], TotalCount: 0 }));
     }
 
-    private static getMainFilter(entity: ContentListEntity, variation: ContentVariation): CombinedFilter | FilterClause | RelationFilter | null {
-        let filter: CombinedFilter | FilterClause | RelationFilter | null = null;
-        if (variation.Filter && variation.Filter.Value) {
-            switch (variation.Filter.Key) {
-                case 'Complex':
-                    filter = this.parseComplexFilter(JSON.parse(variation.Filter.Value));
-                    break;
-                case 'Ids':
-                    const itemIds = variation.Filter.Value.split(',');
-                    const filters = itemIds.map((x) => {
-                        return <FilterClause>{
-                            FieldName: 'Id',
-                            FieldValue: x.trim(),
-                            Operator: FilterOperators.Equal
-                        };
-                    });
-
-                    filter = <CombinedFilter>{
-                        Operator: 'OR',
-                        ChildFilters: filters
-                    };
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        return filter;
-    }
-
-    private static parseComplexFilter(filter: any): CombinedFilter | FilterClause | RelationFilter {
-        if (filter.hasOwnProperty('FieldName') && filter.hasOwnProperty('FieldValue')) {
-            const filterClause = <FilterClause>filter;
-            return filterClause;
-        } else if (filter.hasOwnProperty('Name') && filter.hasOwnProperty('Operator')) {
-            let relationFilter = <RelationFilter>filter;
-            if (relationFilter.ChildFilter) {
-                relationFilter.ChildFilter = this.parseComplexFilter(relationFilter.ChildFilter);
-            }
-
-            return relationFilter;
-        } else if (filter.hasOwnProperty('DateFieldName')) {
-
-            const datePeriod = <DateOffsetPeriod>filter;
-            const combinedFilter: CombinedFilter = {
-                Operator: 'AND',
-                ChildFilters: []
-            };
-
-            const currentTime = new Date();
-            switch (datePeriod.OffsetType) {
-                case 'years':
-                    currentTime.setFullYear(currentTime.getFullYear() - datePeriod.OffsetValue);
-                    break;
-                case 'months':
-                    currentTime.setMonth(currentTime.getMonth() - datePeriod.OffsetValue);
-                    break;
-                case 'weeks':
-                    currentTime.setDate(currentTime.getDate() - (datePeriod.OffsetValue * 7));
-                    break;
-                case 'days':
-                    currentTime.setDate(currentTime.getDate() - datePeriod.OffsetValue);
-                    break;
-                default:
-                    break;
-            }
-
-            const fromDateFilter: FilterClause = {
-                FieldName: datePeriod.DateFieldName,
-                Operator: FilterOperators.GreaterThanOrEqual,
-                FieldValue: currentTime.toISOString()
-            };
-
-            const toDateFilter: FilterClause = {
-                FieldName: datePeriod.DateFieldName,
-                Operator: FilterOperators.LessThanOrEqual,
-                FieldValue: new Date().toISOString()
-            };
-
-            combinedFilter.ChildFilters = [ fromDateFilter, toDateFilter ];
-            return combinedFilter;
-        } else {
-            const parsedCombined = <CombinedFilter>filter;
-            const newCollection = new Array(parsedCombined.ChildFilters.length);
-
-            for (let i = 0; i < parsedCombined.ChildFilters.length; i++) {
-                let currentChildFilter = parsedCombined.ChildFilters[i];
-                const parsed = this.parseComplexFilter(currentChildFilter);
-                newCollection[i] = parsed;
-            }
-
-            parsedCombined.ChildFilters = newCollection;
-
-            return parsedCombined;
-        }
-    }
 
     private static getParentFilterExpression(selectedContent: ContentContext, variation: ContentVariation, detailItem: DetailItem | null): FilterClause | null {
         let filterByParentExpressionSerialized = null;
@@ -189,16 +93,22 @@ export class ContentListRestService {
     }
 
     private static getOrderByExpression(entity: ContentListEntity): OrderBy | null {
-        if (entity.OrderBy === 'Manually') {return null;}
+        if (entity.OrderBy === 'Manually') {
+            return null;
+        }
 
         const sortExpression = entity.OrderBy === 'Custom' ?
             entity.SortExpression :
             entity.OrderBy;
 
-        if (!sortExpression) {return null;}
+        if (!sortExpression) {
+            return null;
+        }
 
         let sortExpressionParts = sortExpression.split(' ');
-        if (sortExpressionParts.length !== 2) {return null;}
+        if (sortExpressionParts.length !== 2) {
+            return null;
+        }
 
         let sortOrder = sortExpressionParts[1].toUpperCase();
 

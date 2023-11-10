@@ -83,7 +83,9 @@ export async function ContentListMaster(props: { model: ContentListModelMaster, 
                     Original: x
                 } as ItemModel;
 
-                if (!itemModel.PublicationDate.Css) {itemModel.PublicationDate.Css = '';}
+                if (!itemModel.PublicationDate.Css) {
+                    itemModel.PublicationDate.Css = '';
+                }
                 itemModel.PublicationDate.Css += ' text-muted';
                 return itemModel;
             })

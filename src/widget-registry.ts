@@ -7,6 +7,7 @@ import { Image } from './components/image/image';
 import { Breadcrumb } from './components/breadcrumb/breadcrumb';
 import { Navigation } from './components/navigation/navigation';
 import { SearchBox } from './components/search-box/search-box';
+import { LoginForm } from './components/login-form/login-form';
 import { Section } from './components/section/section';
 
 import sitefinityContentBlockJson from './components/content-block/designer-metadata.json';
@@ -18,6 +19,8 @@ import sitefinityImageJson from './components/image/designer-metadata.json';
 import sitefinityBreadcrumbJson from './components/breadcrumb/designer-metadata.json';
 import sitefinityNavigationJson from './components/navigation/designer-metadata.json';
 import sitefinitySearchBoxJson from './components/search-box/designer-metadata.json';
+import sitefinityLoginFormJson from './components/login-form/designer-metadata.json';
+
 
 export const widgetRegistry: WidgetRegistry = {
     widgets: {
@@ -42,6 +45,14 @@ export const widgetRegistry: WidgetRegistry = {
             componentType: Image,
             editorMetadata: {
                 Title: 'Image'
+            },
+            ssr: true
+        },
+        'SitefinityLoginForm':  <any>{
+            designerMetadata: sitefinityLoginFormJson,
+            componentType: LoginForm,
+            editorMetadata: {
+                Title: 'LoginForm'
             },
             ssr: true
         },

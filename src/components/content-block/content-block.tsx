@@ -5,7 +5,9 @@ import { WidgetContext } from 'sitefinity-react-framework/widgets/widget-context
 
 export async function ContentBlock(props: WidgetContext<ContentBlockEntity>) {
     const dataAttributes = htmlAttributes(props);
-    if (props.model.Properties.WrapperCssClass) {dataAttributes['className'] = props.model.Properties.WrapperCssClass;}
+    if (props.model.Properties.WrapperCssClass) {
+        dataAttributes['className'] = props.model.Properties.WrapperCssClass;
+    }
 
     let content = props.model.Properties.Content;
     if (props.model.Properties && props.model.Properties.SharedContentID) {
