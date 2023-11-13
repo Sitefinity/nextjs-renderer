@@ -7,8 +7,8 @@
   --sf-background-position: 0% 0%;
 }
 
-.row,
-[class^="col-"] {
+section,
+[class^="k-flex-basis-"] {
   --sf-background-color: transparent;
   background-color: var(--sf-background-color);
 }
@@ -38,7 +38,7 @@
   position: relative;
 }
 
-.row.-sc-image {
+section.-sc-image {
   background-color: var(--sf-background-color);
   background-image: var(--sf-background-image);
   background-size: var(--sf-background-size);

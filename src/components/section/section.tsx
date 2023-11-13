@@ -17,7 +17,7 @@ const sectionKey = 'Section';
 
 export async function Section(props: WidgetContext<SectionEntity>) {
     props.model.Properties.ColumnsCount = props.model.Properties.ColumnsCount || 1;
-    props.model.Properties.ColumnProportionsInfo = props.model.Properties.ColumnProportionsInfo || '[12]';
+    props.model.Properties.ColumnProportionsInfo = props.model.Properties.ColumnProportionsInfo || ['12'];
     const columns = populateColumns(props);
     const section = await populateSection(props.model.Properties);
 
@@ -26,13 +26,12 @@ export async function Section(props: WidgetContext<SectionEntity>) {
 
     return (
       <section {...section.Attributes} style={section.Style}>
-        <div>
-          {section.ShowVideo && section.VideoUrl &&
-            <video className="sc-video__element" autoPlay={true} muted={true} loop={true}>
-              <source src={section.VideoUrl} />
-            </video>
+        {section.ShowVideo && section.VideoUrl &&
+        <video className="sc-video__element" autoPlay={true} muted={true} loop={true}>
+          <source src={section.VideoUrl} />
+        </video>
                 }
-          {columns.map((x, i) => {
+        {columns.map((x, i) => {
                     return (
                       <div key={i} {...x.Attributes} style={section.Style}>
                         {x.Children.map(y => {
@@ -42,7 +41,6 @@ export async function Section(props: WidgetContext<SectionEntity>) {
                     );
                 })}
 
-        </div>
       </section>
     );
 }
@@ -54,7 +52,12 @@ function populateColumns(context: WidgetContext<SectionEntity>): ColumnHolder[] 
     for (let i = 0; i < properties.ColumnsCount; i++) {
         let currentName = `${ColumnNamePrefix}${i + 1}`;
 
-        const classAttribute = `col-md-${properties.ColumnProportionsInfo[i]}`;
+        let classAttribute = `k-flex-basis-${properties.ColumnProportionsInfo[i]}/12`;
+
+        if (properties.ColumnProportionsInfo.length === 1) {
+            classAttribute = `${classAttribute} k-w-full`;
+        }
+
         const classAttributes = [classAttribute];
         let children: Array<ComponentContainer> = [];
         if (context.model.Children) {
@@ -138,7 +141,7 @@ function populateSection(properties: SectionEntity): Promise<SectionHolder> {
         });
     }
 
-    const sectionClasses: string[] = ['row'];
+    const sectionClasses: string[] = ['k-d-flex'];
     if (properties.SectionPadding) {
         const paddingClasses = StyleGenerator.getPaddingClasses(properties.SectionPadding);
         sectionClasses.push(paddingClasses);
@@ -192,7 +195,7 @@ function populateSection(properties: SectionEntity): Promise<SectionHolder> {
                     break;
             }
 
-            const imageUrl = `${RootUrlService.rootUrl}${image.Url.substring(1)}`;
+            const imageUrl = image.Url;
             style['--sf-background-image'] = `url(${imageUrl})`;
             sectionObject.Style = style;
             sectionObject.Attributes['className'] = sectionClasses.filter(x => x).join(' ');
