@@ -1,5 +1,4 @@
 import { CollectionResponse } from './dto/collection-response';
-import { ExternalProvider } from './dto/external-provider';
 import { GenericContentItem } from './dto/generic-content-item';
 import { SdkItem } from './dto/sdk-item';
 import { RootUrlService } from './root-url.service';
@@ -8,12 +7,16 @@ import { GetAllArgs } from './services/get-all-args';
 import { ODataFilterSerializer } from './services/odata-filter-serializer';
 
 export class RestService {
-    public static getUnboundType<T extends ExternalProvider>(args: { Name: string}): Promise<CollectionResponse<T>> {
-        const wholeUrl = `${RestService.buildItemBaseUrl(args.Name)}`;
+    public static getUnboundType<T>(args: {
+        Name: string,
+        AdditionalQueryParams?: {
+            [key: string]: string;
+        }
+    }): Promise<T> {
+        const queryParams = args.AdditionalQueryParams || {};
+        const wholeUrl = `${RestService.buildItemBaseUrl(args.Name)}${RestService.buildQueryParams(queryParams)}`;
 
-        return fetch(wholeUrl, { headers: { 'X-Requested-With': 'react' } }).then((x => x.json())).then((x) => {
-            return <CollectionResponse<T>>{ Items: x.value, TotalCount: x['@odata.count'] };
-        });
+        return fetch(wholeUrl, { headers: { 'X-Requested-With': 'react' } }).then(x => x.json());
     }
 
 

@@ -9,12 +9,16 @@ export default async function Render({ searchParams }: { searchParams: { [key: s
         const urlDecoded = decodeURIComponent(searchParams.model);
         const decoded = atob(urlDecoded);
         const widgetModel = JSON.parse(decoded) as WidgetModel<any>;
+        const isEdit = searchParams['sfaction'] === 'edit';
+        const isPreview = searchParams['sfaction'] === 'preview';
+        const isLive = !(isEdit || isPreview);
 
         const requestContext: RequestContext = {
             detailItem: null,
             searchParams: searchParams,
-            isEdit: searchParams['sfaction'] === 'edit',
-            isPreview: searchParams['sfaction'] === 'preview',
+            isEdit,
+            isPreview,
+            isLive,
             culture: searchParams['sf_culture']
         };
 

@@ -47,7 +47,6 @@ import { initStaticParams } from '../init';
 
 export default async function Page({ params, searchParams }: PageParams) {
     await initStaticParams();
-
     const actionParam = searchParams['sfaction'];
 
     let headers: { [key: string]: string } = {};
@@ -73,6 +72,9 @@ export default async function Page({ params, searchParams }: PageParams) {
     }
 
     const layout = layoutOrError as PageLayoutServiceResponse;
+    const isEdit = searchParams['sfaction'] === 'edit';
+    const isPreview = searchParams['sfaction'] === 'preview';
+    const isLive = !(isEdit || isPreview);
 
     let appState : AppState = {
         requestContext: {
@@ -80,8 +82,9 @@ export default async function Page({ params, searchParams }: PageParams) {
             searchParams: searchParams,
             detailItem: layout.DetailItem,
             culture: layout.Culture,
-            isEdit: searchParams['sfaction'] === 'edit',
-            isPreview: searchParams['sfaction'] === 'preview'
+            isEdit,
+            isPreview,
+            isLive
         },
         widgets: layout.ComponentContext.Components
     };

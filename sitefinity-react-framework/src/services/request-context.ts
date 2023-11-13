@@ -7,4 +7,5 @@ export interface RequestContext {
     culture: string;
     isEdit: boolean;
     isPreview: boolean;
+    isLive: boolean;
 }

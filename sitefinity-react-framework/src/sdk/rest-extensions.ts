@@ -1,4 +1,4 @@
-import { RestService } from './rest-service';
+import { RestSdkTypes, RestService } from './rest-service';
 import { CollectionResponse } from './dto/collection-response';
 import { SdkItem } from './dto/sdk-item';
 import { ContentContext, ContentVariation, MixedContentContext } from '../widgets/entities/mixed-content-context';
@@ -126,5 +126,27 @@ export class RestExtensionsService {
         });
 
         return contentVariations;
+    };
+
+    public static getPageNodeUrl = async (page: MixedContentContext) => {
+        if (!page.Content || page.Content.length) {
+            return '';
+        }
+
+        const variations = page.Content[0].Variations;
+        if (variations && variations.length !== 0){
+            const mainFilter = FilterConverterService.getMainFilter(variations[0]);
+            const pageNodes = await this.getContextItems(page, {
+                Type: RestSdkTypes.Pages,
+                Fields: ['ViewUrl'],
+                Filter: mainFilter
+            });
+            const items = pageNodes.Items;
+            if (items.length === 1){
+                return  items[0].ViewUrl;
+            }
+        }
+
+        return '';
     };
 }
