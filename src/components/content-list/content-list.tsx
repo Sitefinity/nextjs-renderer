@@ -44,10 +44,11 @@ export async function ContentList(props: WidgetContext<ContentListEntity>) {
     } else if (properties.ContentViewDisplayMode === 'Detail') {
         if (properties.SelectedItems && properties.SelectedItems.Content && properties.SelectedItems.Content.length > 0) {
             const selectedContent = properties.SelectedItems.Content[0];
+            const itemIdsOrdered = properties.SelectedItems.ItemIdsOrdered;
             const detailModel = await handleDetailView({
-                Id: properties.SelectedItems.ItemIdsOrdered[0],
+                Id: itemIdsOrdered ? itemIdsOrdered![0]: '',
                 ItemType: selectedContent.Type,
-                ProviderName: selectedContent.Variations[0].Source
+                ProviderName: selectedContent.Variations![0].Source
             }, props);
             data.detailModel = detailModel;
         }
@@ -81,7 +82,9 @@ function getAttributesWithClasses(props: WidgetContext<ContentListEntity>, field
         classAttribute.Value += ` ${viewCss.CssClass}`;
     }
 
-    if (additionalClasses) {classAttribute.Value += ` ${additionalClasses}`;}
+    if (additionalClasses) {
+        classAttribute.Value += ` ${additionalClasses}`;
+    }
 
     return contentListAttributes;
 }

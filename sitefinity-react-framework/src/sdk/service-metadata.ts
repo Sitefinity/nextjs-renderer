@@ -49,9 +49,13 @@ export class ServiceMetadata {
         let propMeta = entityTypeDef['properties'][propName];
         let propType = propMeta['type'];
 
-        if (!propType) {return false;}
+        if (!propType) {
+            return false;
+        }
 
-        if (Array.isArray(propType) || propType === 'array') {return true;}
+        if (Array.isArray(propType) || propType === 'array') {
+            return true;
+        }
 
         return false;
     }
@@ -61,7 +65,9 @@ export class ServiceMetadata {
 
         let properties = typeDefinition['properties'];
         let property = properties[relationName];
-        if (typeof property !== 'object') {return null;}
+        if (typeof property !== 'object') {
+            return null;
+        }
 
         let relatedReferenceType = property['$ref'];
         if (relatedReferenceType == null) {
@@ -81,7 +87,9 @@ export class ServiceMetadata {
             }
         }
 
-        if (relatedReferenceType == null) {return null;}
+        if (relatedReferenceType == null) {
+            return null;
+        }
 
         relatedReferenceType = relatedReferenceType.replace('#/definitions/', '');
 
@@ -100,7 +108,9 @@ export class ServiceMetadata {
         const definition = ServiceMetadata.serviceMetadataCache.definitions[type];
         let properties = definition['properties'];
         let property = properties[propName];
-        if (property == null) {throw new Error(`The field - ${propName} is not recognized as a property of the current type - ${type}`);}
+        if (property == null) {
+            throw new Error(`The field - ${propName} is not recognized as a property of the current type - ${type}`);
+        }
 
         return (typeof property === 'object') && !this.isRelatedProperty(type, propName);
     }
@@ -113,9 +123,13 @@ export class ServiceMetadata {
             const propType = propMeta['type'];
             const propFormat = propMeta['format'];
             let propFormatToString = null;
-            if (propFormat != null) {propFormatToString = propFormat.toString();}
+            if (propFormat != null) {
+                propFormatToString = propFormat.toString();
+            }
 
-            if (propType == null) {return null;}
+            if (propType == null) {
+                return null;
+            }
 
             const propTypeArray: string[] = propType;
             const propTypeString = propType.toString();
