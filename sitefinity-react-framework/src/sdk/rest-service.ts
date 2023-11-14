@@ -9,14 +9,20 @@ import { ODataFilterSerializer } from './services/odata-filter-serializer';
 export class RestService {
     public static getUnboundType<T>(args: {
         Name: string,
+        BaseURL: string,
         AdditionalQueryParams?: {
+            [key: string]: string;
+        },
+        AdditionalHeaders?: {
             [key: string]: string;
         }
     }): Promise<T> {
+        const headers = args.AdditionalHeaders || {};
         const queryParams = args.AdditionalQueryParams || {};
-        const wholeUrl = `${RestService.buildItemBaseUrl(args.Name)}${RestService.buildQueryParams(queryParams)}`;
+        const baseURL = args.BaseURL || RestService.buildItemBaseUrl(args.Name);
+        const wholeUrl = `${baseURL}${RestService.buildQueryParams(queryParams)}`;
 
-        return fetch(wholeUrl, { headers: { 'X-Requested-With': 'react' } }).then(x => x.json());
+        return fetch(wholeUrl, { headers: { 'X-Requested-With': 'react', ...headers } }).then(x => x.json());
     }
 
 

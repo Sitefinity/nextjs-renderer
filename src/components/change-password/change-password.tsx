@@ -69,11 +69,20 @@ export async function ChangePassword(props: WidgetContext<ChangePasswordEntity>)
 
 
     viewModel.PostPasswordChangeAction = entity.PostPasswordChangeAction;
-
+    let baseURL;
+    if (process.env.NODE_ENV === 'development'){
+        process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+        baseURL = 'https://localhost:5001/sf/system/users/current';
+    }
     const argsLocal = {
-        Name: 'users/current'
+        BaseURL: baseURL,
+        Name: 'users/current',
+        AdditionalHeaders: {
+            'cookie' : context.cookie
+        }
     };
-    const user: any = await RestService.getUnboundType(argsLocal);
+    const response: any = await RestService.getUnboundType(argsLocal);
+    const user: any = response.value;
 
     viewModel.ExternalProviderName = user?.ExternalProviderName;
 
@@ -84,7 +93,7 @@ export async function ChangePassword(props: WidgetContext<ChangePasswordEntity>)
         viewModel.PostPasswordChangeMessage = entity.PostPasswordChangeMessage;
     }
 
-    const hasUser = user || user.Identity || !user.Identity.IsAuthenticated;
+    const hasUser = user || (user && !user.IsAuthenticated);
     const labels = viewModel.Labels;
     const oldPasswordInputId = getUniqueId('sf-old-password-');
     const newPasswordInputId = getUniqueId('sf-new-password-');
@@ -97,7 +106,7 @@ export async function ChangePassword(props: WidgetContext<ChangePasswordEntity>)
         data-sf-invalid={viewModel.InvalidClass}
         {...dataAttributes}
         >
-        { hasUser
+        { !hasUser
         ? <div className="alert alert-danger my-3">{labels.LoginFirstMessage}</div>
         : viewModel.ExternalProviderName
             ? <div>{`${labels.ExternalProviderMessageFormat}${viewModel.ExternalProviderName}`}</div>

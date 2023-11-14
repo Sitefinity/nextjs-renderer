@@ -1,5 +1,5 @@
 
-import { Fragment } from 'react';
+import React from 'react';
 import { notFound } from 'next/navigation';
 import PageClient from './page-client';
 import { cookies } from 'next/headers';
@@ -48,10 +48,9 @@ import { initStaticParams } from '../init';
 export default async function Page({ params, searchParams }: PageParams) {
     await initStaticParams();
     const actionParam = searchParams['sfaction'];
-
+    const cookie = cookies().toString();
     let headers: { [key: string]: string } = {};
     if (process.env.NODE_ENV === 'development' && actionParam) {
-        const cookie = cookies().toString();
         headers = { 'Cookie': cookie };
         if (process.env.SF_CLOUD_KEY) {
             headers['X-SF-BYPASS-HOST'] = `${process.env.PROXY_ORIGINAL_HOST}:${process.env.PORT}`;
@@ -84,18 +83,19 @@ export default async function Page({ params, searchParams }: PageParams) {
             culture: layout.Culture,
             isEdit,
             isPreview,
-            isLive
+            isLive,
+            cookie
         },
         widgets: layout.ComponentContext.Components
     };
 
     return (
-      <Fragment>
+      <>
         <PageClient metadata={ServiceMetadata.serviceMetadataCache} layout={layout} context={appState.requestContext} />
         {appState.widgets.map((child) => {
                 return RenderWidgetService.createComponent(child, appState.requestContext);
             })}
-      </Fragment>
+      </>
     );
 }
 
