@@ -9,7 +9,6 @@ import { StylingConfig } from '../styling/styling-config';
 import { getUniqueId } from 'sitefinity-react-framework/utils/getUniqueId';
 import { RestExtensionsService } from 'sitefinity-react-framework/sdk/rest-extensions';
 import { RestSdkTypes, RestService } from 'sitefinity-react-framework/sdk/rest-service';
-import { FilterConverterService } from 'sitefinity-react-framework/sdk/filters/filter-converter';
 import { MixedContentContext } from 'sitefinity-react-framework/widgets/entities/mixed-content-context';
 import { ExternalLoginBase } from 'sitefinity-react-framework/login/external-login-base';
 import { ExternalProvider } from 'sitefinity-react-framework/sdk/dto/external-provider';
@@ -178,7 +177,7 @@ export async function Registration(props: WidgetContext<RegistrationEntity>) {
             !showSuccessMessage &&
             <>
               <div data-sf-role="form-container">
-                <h2 className="mb-3">labels.Header</h2>
+                <h2 className="mb-3">{labels.Header}</h2>
                 <div data-sf-role="error-message-container" className="alert alert-danger d-none my-3" role="alert" aria-live="assertive" />
                 <form method="post" action={viewModel.RegistrationHandlerPath} role="form" noValidate={true}>
                   <div className="mb-3">

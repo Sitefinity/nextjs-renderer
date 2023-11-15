@@ -10,7 +10,7 @@ import { getUniqueId } from 'sitefinity-react-framework/utils/getUniqueId';
 import { RestExtensionsService } from 'sitefinity-react-framework/sdk/rest-extensions';
 import { RestSdkTypes, RestService } from 'sitefinity-react-framework/sdk/rest-service';
 import { MixedContentContext } from 'sitefinity-react-framework/widgets/entities/mixed-content-context';
-import { FormContainer } from './form-container';
+import { ChangeForm } from './change-form';
 import { VisibilityStyle } from '../styling/visibility-style';
 
 const defaultMixedContent = {
@@ -72,7 +72,7 @@ export async function ChangePassword(props: WidgetContext<ChangePasswordEntity>)
     let baseURL;
     if (process.env.NODE_ENV === 'development'){
         process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
-        baseURL = 'https://localhost:5001/sf/system/users/current';
+        baseURL = `${process.env.NEXT_PUBLIC_CMS_URL}sf/system/users/current`;
     }
     const argsLocal = {
         BaseURL: baseURL,
@@ -111,26 +111,12 @@ export async function ChangePassword(props: WidgetContext<ChangePasswordEntity>)
         : viewModel.ExternalProviderName
             ? <div>{`${labels.ExternalProviderMessageFormat}${viewModel.ExternalProviderName}`}</div>
             :  <>
-              <form action={viewModel.ChangePasswordHandlerPath} method="post" role="form">
-                <h2 className="mb-3">{labels.Header}</h2>
-                <div data-sf-role="error-message-container" className="alert alert-danger my-3 d-none" role="alert" aria-live="assertive" />
-                <div data-sf-role="success-message-container" className="alert alert-success my-3 d-none" role="alert" aria-live="assertive" />
-                <div className="mb-3">
-                  <label htmlFor={oldPasswordInputId} className="form-label">{labels.OldPassword}</label>
-                  <input type="password" className="form-control" id={oldPasswordInputId} name="OldPassword" data-sf-role="required" />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor={newPasswordInputId} className="form-label">{labels.NewPassword}</label>
-                  <input type="password" className="form-control" id={newPasswordInputId} name="NewPassword" data-sf-role="required" />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor={repeatPasswordInputId} className="form-label">{labels.RepeatPassword}</label>
-                  <input type="password" className="form-control" id={repeatPasswordInputId} name="RepeatPassword" data-sf-role="required" />
-                </div>
-
-                <input className="btn btn-primary w-100" type="submit" value={labels.SubmitButtonLabel} />
-              </form>
-
+              <ChangeForm action={viewModel.ChangePasswordHandlerPath} method="post" role="form"
+                viewModel={viewModel}
+                context={context}
+                oldPasswordInputId={oldPasswordInputId}
+                newPasswordInputId={newPasswordInputId}
+                repeatPasswordInputId={repeatPasswordInputId} />
               <input type="hidden" name="redirectUrl" value={viewModel.RedirectUrl} />
               <input type="hidden" name="postChangeMessage" value={viewModel.PostPasswordChangeMessage} />
               <input type="hidden" name="postChangeAction" value={viewModel.PostPasswordChangeAction} />
