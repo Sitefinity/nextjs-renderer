@@ -200,7 +200,9 @@ const RegistrationForm = (props: any) => {
             style={{
             display: !visibilityClassHidden ? errorMessage ? '' : 'none' : ''
           }}
-            role="alert" aria-live="assertive" />
+            role="alert" aria-live="assertive" >
+            {errorMessage}
+          </div>
           <form ref={formRef} {...others} onSubmit={handleSubmit}>
             <div className="mb-3">
               <label htmlFor={firstNameInputId} className="form-label">{labels.FirstNameLabel}</label>

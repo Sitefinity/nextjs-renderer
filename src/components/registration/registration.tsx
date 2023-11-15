@@ -59,8 +59,8 @@ export async function Registration(props: WidgetContext<RegistrationEntity>) {
         LoginLink: 'Log in',
         ExternalProvidersHeader: 'or connect with...',
         ValidationRequiredMessage: 'All fields are required.',
-        ValidationInvalidEmailMessage: 'Password and repeat password don\'t match.',
-        ValidationMismatchMessage: 'Invalid email format.',
+        ValidationInvalidEmailMessage: 'Invalid email format.',
+        ValidationMismatchMessage: 'Password and repeat password don\'t match.',
         ActivationMessage: 'Your account is activated',
         ActivationFailMessage: 'Your account could not be activated',
         ...props.model.Properties
