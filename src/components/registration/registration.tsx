@@ -13,6 +13,7 @@ import { MixedContentContext } from 'sitefinity-react-framework/widgets/entities
 import { ExternalLoginBase } from 'sitefinity-react-framework/login/external-login-base';
 import { ExternalProvider } from 'sitefinity-react-framework/sdk/dto/external-provider';
 import { RegistrationSettingsDto } from 'sitefinity-react-framework/sdk/dto/registration-settings';
+import { RegistrationForm } from './registration-form';
 
 const defaultMixedContent = {
     ItemIdsOrdered:null,
@@ -118,7 +119,8 @@ export async function Registration(props: WidgetContext<RegistrationEntity>) {
     viewModel.VisibilityClasses = StylingConfig.VisibilityClasses;
     viewModel.InvalidClass = StylingConfig.InvalidClass;
 
-    viewModel.LoginPageUrl = RestExtensionsService.getPageNodeUrl(entity.LoginPage);
+    viewModel.LoginPageUrl = await RestExtensionsService.getPageNodeUrl(entity.LoginPage);
+
     if (isAccountActivationRequest(context)) {
         viewModel.IsAccountActivationRequest = true;
         viewModel.Labels.ActivationMessage = entity.ActivationMessage;
@@ -138,7 +140,7 @@ export async function Registration(props: WidgetContext<RegistrationEntity>) {
         }
     } else {
         if (entity.PostRegistrationAction === PostRegistrationAction.RedirectToPage) {
-            viewModel.RedirectUrl = RestExtensionsService.getPageNodeUrl(entity.PostRegistrationRedirectPage);
+            viewModel.RedirectUrl = await RestExtensionsService.getPageNodeUrl(entity.PostRegistrationRedirectPage);
             viewModel.PostRegistrationAction = PostRegistrationAction.RedirectToPage;
         }
 
@@ -163,66 +165,12 @@ export async function Registration(props: WidgetContext<RegistrationEntity>) {
     const questionInputId = getUniqueId('sf-secret-question-');
     const answerInputId = getUniqueId('sf-secret-answer-');
     const showSuccessMessage = ExternalLoginBase.ShowSuccessMessage(context);
-    return (
-      <div
-        {...dataAttributes}
-        >
-        {viewModel.IsAccountActivationRequest && <h2 className="mb-3">
-            {labels.ActivationMessage}
-        </h2>
-        }
-        {showSuccessMessage && <h3>{labels.SuccessHeader}</h3>}
-        {showSuccessMessage && <p>{labels.SuccessLabel}</p>}
-        {
-            !showSuccessMessage &&
-            <>
-              <div data-sf-role="form-container">
-                <h2 className="mb-3">{labels.Header}</h2>
-                <div data-sf-role="error-message-container" className="alert alert-danger d-none my-3" role="alert" aria-live="assertive" />
-                <form method="post" action={viewModel.RegistrationHandlerPath} role="form" noValidate={true}>
-                  <div className="mb-3">
-                    <label htmlFor={firstNameInputId} className="form-label">{labels.FirstNameLabel}</label>
-                    <input id={firstNameInputId} type="text" className="form-control" name="FirstName" data-sf-role="required"/>
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor={lastNameInputId} className="form-label">{labels.LastNameLabel}</label>
-                    <input id={lastNameInputId} type="text" className="form-control" name="LastName" data-sf-role="required"/>
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor={emailInputId} className="form-label">{labels.EmailLabel}</label>
-                    <input id={emailInputId} type="email" className="form-control" name="Email" data-sf-role="required"/>
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor={passwordInputId} className="form-label">{labels.PasswordLabel}</label>
-                    <input id={passwordInputId} type="password" className="form-control" name="Password" data-sf-role="required"/>
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor={repeatPasswordInputId} className="form-label">{labels.RepeatPasswordLabel}</label>
-                    <input id={repeatPasswordInputId} type="password" className="form-control" name="RepeatPassword" data-sf-role="required"/>
-                  </div>
 
-                  {viewModel.RequiresQuestionAndAnswer &&
-                  <div className="mb-3">
-                    <label htmlFor={questionInputId} className="form-label">{labels.SecretQuestionLabel}</label>
-                    <input id={questionInputId} type="text" className="form-control" name="Question" data-sf-role="required"/>
-                  </div>
-                    }
-                  {viewModel.RequiresQuestionAndAnswer &&
-                  <div className="mb-3">
-                    <label htmlFor={answerInputId} className="form-label">{labels.SecretAnswerLabel}</label>
-                    <input id={answerInputId} type="text" className="form-control" name="Answer" data-sf-role="required"/>
-                  </div>
-                    }
+    const formContainerServer = (<>
+      {viewModel.LoginPageUrl && <div className="mt-3">{labels.LoginLabel}</div>}
+      {viewModel.LoginPageUrl && <a href={viewModel.LoginPageUrl} className="text-decoration-none">{labels.LoginLink}</a>}
 
-                  <input className="btn btn-primary w-100" type="submit" defaultValue={labels.RegisterButtonLabel} />
-
-                  <input type="hidden" name="ActivationPageUrl" defaultValue={viewModel.ActivationPageUrl} />
-                </form>
-
-                {viewModel.LoginPageUrl && <div className="mt-3">{labels.LoginLabel}</div>}
-                {viewModel.LoginPageUrl && <a href={viewModel.LoginPageUrl} className="text-decoration-none">{labels.LoginLink}</a>}
-
-                {viewModel.ExternalProviders && viewModel.ExternalProviders.length &&
+      {viewModel.ExternalProviders && viewModel.ExternalProviders.length &&
 
                     [<h3 key={100} className="mt-3">{labels.ExternalProvidersHeader}</h3>,
                         viewModel.ExternalProviders.map((provider: ExternalProvider, idx: number) => {
@@ -238,31 +186,46 @@ export async function Registration(props: WidgetContext<RegistrationEntity>) {
                     ]
                 }
 
-                <input type="hidden" name="RedirectUrl" defaultValue={viewModel.RedirectUrl} />
-                <input type="hidden" name="PostRegistrationAction" defaultValue={viewModel.PostRegistrationAction} />
-                <input type="hidden" name="ActivationMethod" defaultValue={viewModel.ActivationMethod} />
-                <input type="hidden" name="ValidationRequiredMessage" value={labels.ValidationRequiredMessage} />
-                <input type="hidden" name="ValidationMismatchMessage" value={labels.ValidationMismatchMessage} />
-                <input type="hidden" name="ValidationInvalidEmailMessage" value={labels.ValidationInvalidEmailMessage} />
-              </div>
+      <input type="hidden" name="RedirectUrl" defaultValue={viewModel.RedirectUrl} />
+      <input type="hidden" name="PostRegistrationAction" defaultValue={viewModel.PostRegistrationAction} />
+      <input type="hidden" name="ActivationMethod" defaultValue={viewModel.ActivationMethod} />
+      <input type="hidden" name="ValidationRequiredMessage" value={labels.ValidationRequiredMessage} />
+      <input type="hidden" name="ValidationMismatchMessage" value={labels.ValidationMismatchMessage} />
+      <input type="hidden" name="ValidationInvalidEmailMessage" value={labels.ValidationInvalidEmailMessage} />
+    </>);
+    const confirmServer = (<>
+            <input type="hidden" name="ResendConfirmationEmailUrl" value={viewModel.ResendConfirmationEmailHandlerPath} />
+            <input type="hidden" name="ActivationLinkLabel" value={labels.ActivationLinkLabel} />
+            <input type="hidden" name="SendAgainLink" value={labels.SendAgainLink} />
+            <input type="hidden" name="SendAgainLabel" value={labels.SendAgainLabel} />
+    </>);
+    return (
+      <div
+        {...dataAttributes}
+        >
+        {viewModel.IsAccountActivationRequest && <h2 className="mb-3">
+            {labels.ActivationMessage}
+        </h2>
+        }
+        {showSuccessMessage && <h3>{labels.SuccessHeader}</h3>}
+        {showSuccessMessage && <p>{labels.SuccessLabel}</p>}
+        {
+            !showSuccessMessage &&
+            <>
 
-              <div data-sf-role="success-registration-message-container" className="d-none">
-                <h3>{labels.SuccessHeader}</h3>
-                <p>{labels.SuccessLabel}</p>
-              </div>
-
-              <div data-sf-role="confirm-registration-message-container" className="d-none">
-                <h3>{labels.ActivationLinkHeader}</h3>
-                <p data-sf-role="activation-link-message-container" />
-                <a data-sf-role="sendAgainLink" className="btn btn-primary">
-                  {labels.SendAgainLink}
-                </a>
-
-                <input type="hidden" name="ResendConfirmationEmailUrl" value={viewModel.ResendConfirmationEmailHandlerPath} />
-                <input type="hidden" name="ActivationLinkLabel" value={labels.ActivationLinkLabel} />
-                <input type="hidden" name="SendAgainLink" value={labels.SendAgainLink} />
-                <input type="hidden" name="SendAgainLabel" value={labels.SendAgainLabel} />
-              </div>
+              <RegistrationForm method="post" action={viewModel.RegistrationHandlerPath} role="form" noValidate={true}
+                viewModel={viewModel}
+                context={context}
+                firstNameInputId={firstNameInputId}
+                lastNameInputId={lastNameInputId}
+                emailInputId={emailInputId}
+                passwordInputId={passwordInputId}
+                questionInputId={questionInputId}
+                answerInputId={answerInputId}
+                repeatPasswordInputId={repeatPasswordInputId}
+                formContainerServer={formContainerServer}
+                confirmServer={confirmServer}
+                   />
             </>
         }
       </div>

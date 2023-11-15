@@ -88,7 +88,7 @@ export async function ChangePassword(props: WidgetContext<ChangePasswordEntity>)
 
     if (entity.PostPasswordChangeAction === PostPasswordChangeAction.RedirectToPage) {
 
-            viewModel.RedirectUrl = RestExtensionsService.getPageNodeUrl(entity.PostPasswordChangeRedirectPage);
+            viewModel.RedirectUrl = await RestExtensionsService.getPageNodeUrl(entity.PostPasswordChangeRedirectPage);
     } else {
         viewModel.PostPasswordChangeMessage = entity.PostPasswordChangeMessage;
     }

@@ -97,7 +97,7 @@ export async function ResetPassword(props: WidgetContext<ResetPasswordEntity>) {
     viewModel.VisibilityClasses = StylingConfig.VisibilityClasses;
     viewModel.InvalidClass = StylingConfig.InvalidClass;
 
-    viewModel.LoginPageUrl = RestExtensionsService.getPageNodeUrl(entity.LoginPage);
+    viewModel.LoginPageUrl = await RestExtensionsService.getPageNodeUrl(entity.LoginPage);
 
     if (isResetPasswordRequest(context)) {
         viewModel.IsResetPasswordRequest = true;
