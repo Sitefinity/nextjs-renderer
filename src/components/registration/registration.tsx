@@ -91,7 +91,7 @@ export async function Registration(props: WidgetContext<RegistrationEntity>) {
         const argsLocal = {
             Name: 'Default.GetExternalProviders'
         };
-        const externalProviders: any = await RestService.getUnboundType(argsLocal);
+        const externalProviders: { value: ExternalProvider[] } = await RestService.getUnboundType(argsLocal);
         viewModel.ExternalProviders = externalProviders.value.filter((p: ExternalProvider) => entity.ExternalProviders?.indexOf(p.Name) !== -1);
     }
 

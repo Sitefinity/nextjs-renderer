@@ -10,7 +10,7 @@ export class RestService {
     public static getUnboundType<T>(args: {
         Name: string,
         BaseURL?: string,
-        Data: object,
+        Data?: object,
         AdditionalQueryParams?: {
             [key: string]: string;
         },
