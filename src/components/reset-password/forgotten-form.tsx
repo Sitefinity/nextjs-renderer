@@ -73,7 +73,9 @@ const ForgottenForm = (props: any) => {
         style={{
         display: !visibilityClassHidden ? errorMessage ? '' : 'none' : ''
         }}
-        role="alert" aria-live="assertive" />
+        role="alert" aria-live="assertive" >
+        {errorMessage}
+      </div>
       <div data-sf-role="form-container"
         className={classNames({
         [visibilityClassHidden]: !showFormContainer

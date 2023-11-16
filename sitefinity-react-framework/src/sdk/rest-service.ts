@@ -10,6 +10,7 @@ export class RestService {
     public static getUnboundType<T>(args: {
         Name: string,
         BaseURL?: string,
+        Data: object,
         AdditionalQueryParams?: {
             [key: string]: string;
         },
@@ -22,7 +23,10 @@ export class RestService {
         const baseURL = args.BaseURL || RestService.buildItemBaseUrl(args.Name);
         const wholeUrl = `${baseURL}${RestService.buildQueryParams(queryParams)}`;
 
-        return fetch(wholeUrl, { headers: { 'X-Requested-With': 'react', ...headers } }).then(x => x.json());
+        return fetch(wholeUrl, {
+            headers: { 'X-Requested-With': 'react', ...headers },
+            body: JSON.stringify(args.Data)
+        }).then(x => x.json());
     }
 
 

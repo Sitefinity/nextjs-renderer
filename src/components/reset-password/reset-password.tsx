@@ -100,16 +100,18 @@ export async function ResetPassword(props: WidgetContext<ResetPasswordEntity>) {
     viewModel.InvalidClass = StylingConfig.InvalidClass;
 
     viewModel.LoginPageUrl = await RestExtensionsService.getPageNodeUrl(entity.LoginPage);
+    const queryList = new URLSearchParams(context.searchParams);
+    const queryString = '?' + queryList.toString();
 
     if (isResetPasswordRequest(context)) {
         viewModel.IsResetPasswordRequest = true;
 
         try {
             const argsLocal = {
-                Name: 'Default.GetResetPasswordModel'
-                // Data: {
-                //      securityToken = this.httpContextAccessor.HttpContext.Request.QueryString.Value,
-                // }
+                Name: 'Default.GetResetPasswordModel',
+                Data: {
+                      securityToken: queryString
+                }
             };
             const resetPasswordModel: any = await RestService.getUnboundType(argsLocal);
 
