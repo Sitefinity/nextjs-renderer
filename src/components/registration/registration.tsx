@@ -194,10 +194,10 @@ export async function Registration(props: WidgetContext<RegistrationEntity>) {
       <input type="hidden" name="ValidationInvalidEmailMessage" value={labels.ValidationInvalidEmailMessage} />
     </>);
     const confirmServer = (<>
-            <input type="hidden" name="ResendConfirmationEmailUrl" value={viewModel.ResendConfirmationEmailHandlerPath} />
-            <input type="hidden" name="ActivationLinkLabel" value={labels.ActivationLinkLabel} />
-            <input type="hidden" name="SendAgainLink" value={labels.SendAgainLink} />
-            <input type="hidden" name="SendAgainLabel" value={labels.SendAgainLabel} />
+      <input type="hidden" name="ResendConfirmationEmailUrl" value={viewModel.ResendConfirmationEmailHandlerPath} />
+      <input type="hidden" name="ActivationLinkLabel" value={labels.ActivationLinkLabel} />
+      <input type="hidden" name="SendAgainLink" value={labels.SendAgainLink} />
+      <input type="hidden" name="SendAgainLabel" value={labels.SendAgainLabel} />
     </>);
     return (
       <div

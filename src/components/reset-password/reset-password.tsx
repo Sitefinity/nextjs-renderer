@@ -9,6 +9,8 @@ import { getUniqueId } from 'sitefinity-react-framework/utils/getUniqueId';
 import { RestExtensionsService } from 'sitefinity-react-framework/sdk/rest-extensions';
 import { RestSdkTypes, RestService } from 'sitefinity-react-framework/sdk/rest-service';
 import { MixedContentContext } from 'sitefinity-react-framework/widgets/entities/mixed-content-context';
+import { ResetForm } from './reset-form';
+import { ForgottenForm } from './forgotten-form';
 
 const defaultMixedContent = {
     ItemIdsOrdered:null,
@@ -141,63 +143,19 @@ export async function ResetPassword(props: WidgetContext<ResetPasswordEntity>) {
                 <div data-sf-role="error-message-container" className="alert alert-danger" role="alert" aria-live="assertive">{labels.ErrorMessage}</div>
               </>
                 :
-              <>
-                <div data-sf-role="form-container">
-                  <h2 className="mb-3">{labels.ResetPasswordHeader}</h2>
-                  <div data-sf-role="error-message-container" className="alert alert-danger d-none my-3" role="alert" aria-live="assertive" />
-                  <form method="post" action={viewModel.ResetUserPasswordHandlerPath} role="form">
-                    {viewModel.RequiresQuestionAndAnswer && viewModel.SecurityQuestion &&
-                      <div className="mb-3">
-                        <label htmlFor={securityQuestionInputId} className="form-label">{securityQuestionLabel}</label>
-                        <input id={securityQuestionInputId} type="text" className="form-control" name="Answer" data-sf-role="required" />
-                      </div>
-                        }
-                    <div className="mb-3">
-                      <label htmlFor={newPasswordInputId} className="form-label">{labels.NewPasswordLabel}</label>
-                      <input id={newPasswordInputId} type="password" className="form-control" name="NewPassword" data-sf-role="required" />
-                    </div>
-                    <div className="mb-3">
-                      <label htmlFor={repeatPasswordInputId} className="form-label">{labels.RepeatNewPasswordLabel}</label>
-                      <input id={repeatPasswordInputId} type="password" className="form-control" data-sf-role="required" />
-                    </div>
-
-                    <input type="hidden" name="SecurityToken" value={context.searchParams!['value']} />
-                    <input className="btn btn-primary w-100" type="submit" value={labels.SaveButtonLabel} />
-                  </form>
-                  <input type="hidden" name="ErrorMessage" value={labels.ErrorMessage} />
-                  <input type="hidden" name="AllFieldsAreRequiredErrorMessage" value={labels.AllFieldsAreRequiredErrorMessage} />
-                  <input type="hidden" name="PasswordsMismatchErrorMessage" value={labels.PasswordsMismatchErrorMessage} />
-                </div>
-                <div data-sf-role="success-message-container" className="d-none">
-                  <h2>{labels.SuccessMessage}</h2>
-                  {viewModel.LoginPageLink &&
-                    <a href={viewModel.LoginPageLink} className="text-decoration-none">{labels.BackLinkLabel}</a>
-                  }
-                </div>
-              </>
+              <ResetForm
+                viewModel={viewModel}
+                context={context}
+                securityQuestionInputId={securityQuestionInputId}
+                newPasswordInputId={newPasswordInputId}
+                repeatPasswordInputId={repeatPasswordInputId}
+                securityQuestionLabel={securityQuestionLabel}
+                   />
                 }
           </div>
         : <div data-sf-role="sf-forgotten-password-container">
           <h2 className="mb-3">{labels.ForgottenPasswordHeader}</h2>
-          <div data-sf-role="error-message-container" className="alert alert-danger my-3 d-none" role="alert" aria-live="assertive" />
-          <div data-sf-role="form-container">
-            <p>{labels.ForgottenPasswordLabel}</p>
-            <form action={viewModel.SendResetPasswordEmailHandlerPath} role="form" noValidate={true}>
-              <div className="mb-3">
-                <label className="form-label" htmlFor={emailInputId}>{labels.EmailLabel}</label>
-                <input id={emailInputId} type="email" className="form-control" name="Email" data-sf-role="required" />
-              </div>
-              <input className="btn btn-primary w-100" type="submit" value={labels.SendButtonLabel} />
-              <input type="hidden" name="ResetPasswordUrl" value={viewModel.ResetPasswordUrl} />
-            </form>
-
-            <input type="hidden" name="InvalidEmailFormatMessage" value={labels.InvalidEmailFormatMessage} />
-            <input type="hidden" name="FieldIsRequiredMessage" value={labels.FieldIsRequiredMessage} />
-          </div>
-          <div data-sf-role="success-message-container" className="d-none mt-3">
-            <p>{labels.ForgottenPasswordSubmitMessage} <strong data-sf-role="sent-email-label" /></p>
-            <p>{labels.ForgottenPasswordLinkMessage}</p>
-          </div>
+          <ForgottenForm viewModel={viewModel} emailInputId={emailInputId} />
           {viewModel.LoginPageLink &&
             <a href={viewModel.LoginPageLink} className="text-decoration-none">{labels.BackLinkLabel}</a>
             }

@@ -35,7 +35,7 @@ const FormContainer = (props: any) => {
 
     const validateForm = (form: HTMLFormElement) => {
         let isValid = true;
-        resetValidationErrors();
+        setInvalidInputs({});
         setShowErrorMessage(false);
 
         let requiredInputs = form.querySelectorAll('input[data-sf-role=\'required\']');
@@ -73,10 +73,6 @@ const FormContainer = (props: any) => {
         if (element) {
             emptyInputs[element.name] = true;
         }
-    };
-
-    const resetValidationErrors = () => {
-        setInvalidInputs({});
     };
 
     const setAntiforgeryTokens = () => {

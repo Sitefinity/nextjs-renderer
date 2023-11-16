@@ -3,8 +3,7 @@
 import React from 'react';
 import { VisibilityStyle } from '../styling/visibility-style';
 import { classNames } from 'sitefinity-react-framework/utils/classNames';
-
-const invalidDataAttr = 'data-sf-invalid';
+import { invalidDataAttr, invalidateElement, redirect, serializeForm } from '../common/utils';
 
 const ChangeForm = (props: any) => {
     const { viewModel, context, oldPasswordInputId, newPasswordInputId, repeatPasswordInputId, ...others  } = props;
@@ -25,7 +24,7 @@ const ChangeForm = (props: any) => {
         }
 
         const model = { model: serializeForm(formRef.current!) };
-        const submitUrl = formRef.current!.attributes['action'].value;
+        const submitUrl = (formRef.current!.attributes as any)['action'].value;
         window.fetch(submitUrl, { method: 'POST', body: JSON.stringify(model), headers: { 'Content-Type': 'application/json' } })
             .then((response) => {
                 const status = response.status;
@@ -43,7 +42,7 @@ const ChangeForm = (props: any) => {
                             element = oldPassInputRef.current!;
                         }
                         const emptyInputs = {};
-                        invalidateElement(emptyInputs, element);
+                        invalidateElement(emptyInputs, element!);
                         setInvalidInputs(emptyInputs);
                         setErrorMessage(errorMessage);
                     });
@@ -65,17 +64,9 @@ const ChangeForm = (props: any) => {
         }
     };
 
-    const serializeForm = (form: HTMLFormElement) => {
-        const obj = {};
-        const formData = new FormData(form);
-        for (let key of formData.keys()) {
-            obj[key] = formData.get(key);
-        }
-        return obj;
-    };
 
     const validateForm = (form: HTMLFormElement) => {
-        resetValidationErrors();
+        setInvalidInputs({});
         const requiredInputs = form.querySelectorAll('input[data-sf-role=\'required\']');
         const emptyInputs = {};
         let isValid = true;
@@ -108,20 +99,6 @@ const ChangeForm = (props: any) => {
         }
 
         return isValid;
-    };
-
-    const invalidateElement = (emptyInputs: any, element: HTMLInputElement) => {
-        if (element) {
-            emptyInputs[element.name] = true;
-        }
-    };
-
-    const resetValidationErrors = () => {
-        setInvalidInputs({});
-    };
-
-    const redirect = (redirectUrl) => {
-        window.location = redirectUrl;
     };
 
     return (

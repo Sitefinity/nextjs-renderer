@@ -9,7 +9,7 @@ import { ODataFilterSerializer } from './services/odata-filter-serializer';
 export class RestService {
     public static getUnboundType<T>(args: {
         Name: string,
-        BaseURL: string,
+        BaseURL?: string,
         AdditionalQueryParams?: {
             [key: string]: string;
         },

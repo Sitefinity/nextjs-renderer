@@ -3,15 +3,7 @@
 import React from 'react';
 import { VisibilityStyle } from '../styling/visibility-style';
 import { classNames } from 'sitefinity-react-framework/utils/classNames';
-
-const invalidDataAttr = 'data-sf-invalid';
-const isValidEmail = function (email: string) {
-    return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w+)+$/.test(email);
-};
-
-const redirect = function (redirectUrl) {
-    window.location = redirectUrl;
-};
+import { invalidDataAttr, isValidEmail, redirect, serializeForm } from '../common/utils';
 
 const RegistrationForm = (props: any) => {
     const { viewModel, context, firstNameInputId, lastNameInputId,
@@ -20,6 +12,8 @@ const RegistrationForm = (props: any) => {
     const labels = viewModel.Labels;
     const visibilityClassHidden = viewModel.VisibilityClasses[VisibilityStyle.Hidden];
     const formRef = React.useRef<HTMLFormElement>(null);
+    const passwordInputRef = React.useRef<HTMLInputElement>(null);
+    const repeatPasswordInputRef = React.useRef<HTMLInputElement>(null);
     const emailInputRef = React.useRef<HTMLInputElement>(null);
     const [invalidInputs, setInvalidInputs] = React.useState<any>({});
     const [errorMessage, setErrorMessage] = React.useState<string>('');
@@ -44,7 +38,7 @@ const RegistrationForm = (props: any) => {
         }
     };
 
-    const onRegistrationError = (errorMessage) => {
+    const onRegistrationError = (errorMessage: string) => {
         setErrorMessage(errorMessage);
     };
 
@@ -65,7 +59,7 @@ const RegistrationForm = (props: any) => {
         onError?: (err: string)=>void
     ) => {
 
-        url = url || form.attributes['action'].value;
+        url = url || (form.attributes as any)['action'].value;
 
         let model = { model: serializeForm(form) };
 
@@ -104,18 +98,14 @@ const RegistrationForm = (props: any) => {
         }
     };
 
-    const resetValidationErrors = () => {
-        setInvalidInputs({});
-    };
-
-    const validateForm = (form) => {
+    const validateForm = (form: HTMLFormElement) => {
         let isValid = true;
-        resetValidationErrors();
+        setInvalidInputs({});
         const emptyInputs = {};
 
         let requiredInputs = form.querySelectorAll('input[data-sf-role=\'required\']');
 
-        requiredInputs.forEach(function (input) {
+        requiredInputs.forEach(function (input: any) {
             if (!input.value) {
                 invalidateElement(emptyInputs, input);
                 setInvalidInputs(emptyInputs);
@@ -128,7 +118,7 @@ const RegistrationForm = (props: any) => {
             return isValid;
         }
 
-        let emailInput = form.querySelector('input[name=\'Email\']');
+        let emailInput = emailInputRef.current!;
         if (!isValidEmail(emailInput.value)) {
             invalidateElement(emptyInputs, emailInput);
             setInvalidInputs(emptyInputs);
@@ -136,10 +126,8 @@ const RegistrationForm = (props: any) => {
             return false;
         }
 
-        let passwordFields = form.querySelectorAll('[type=\'password\']');
-
-        if (passwordFields[0].value !== passwordFields[1].value) {
-            invalidateElement(emptyInputs, passwordFields[1]);
+        if (passwordInputRef.current!.value !== repeatPasswordInputRef.current!.value) {
+            invalidateElement(emptyInputs, repeatPasswordInputRef.current!);
             setInvalidInputs(emptyInputs);
             setErrorMessage(labels.ValidationMismatchMessage);
 
@@ -164,15 +152,6 @@ const RegistrationForm = (props: any) => {
         const formData = new FormData(formRef.current!);
         const email = formData.get('Email');
         setActivationLinkMessage(activationLinkLabel + ' ' + email);
-    };
-
-    const serializeForm = function (form) {
-        const obj = {};
-        const formData = new FormData(form);
-        for (let key of formData.keys()) {
-            obj[key] = formData.get(key);
-        }
-        return obj;
     };
 
     const handleSendAgain = (event: React.MouseEvent<HTMLAnchorElement>) => {
@@ -230,7 +209,7 @@ const RegistrationForm = (props: any) => {
             </div>
             <div className="mb-3">
               <label htmlFor={emailInputId} className="form-label">{labels.EmailLabel}</label>
-              <input id={emailInputId} type="email"
+              <input ref={emailInputRef} id={emailInputId} type="email"
                 className={classNames('form-control',{
                     [viewModel.InvalidClass]: invalidInputs['Email']
                     }
@@ -242,7 +221,7 @@ const RegistrationForm = (props: any) => {
             </div>
             <div className="mb-3">
               <label htmlFor={passwordInputId} className="form-label">{labels.PasswordLabel}</label>
-              <input id={passwordInputId} type="password"
+              <input ref={passwordInputRef} id={passwordInputId} type="password"
                 className={classNames('form-control',{
                     [viewModel.InvalidClass]: invalidInputs['Password']
                     }
@@ -254,7 +233,7 @@ const RegistrationForm = (props: any) => {
             </div>
             <div className="mb-3">
               <label htmlFor={repeatPasswordInputId} className="form-label">{labels.RepeatPasswordLabel}</label>
-              <input id={repeatPasswordInputId} type="password"
+              <input ref={repeatPasswordInputRef} id={repeatPasswordInputId} type="password"
                 className={classNames('form-control',{
                     [viewModel.InvalidClass]: invalidInputs['RepeatPassword']
                     }
