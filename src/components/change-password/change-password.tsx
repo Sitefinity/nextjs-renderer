@@ -13,6 +13,7 @@ import { MixedContentContext } from 'sitefinity-react-framework/widgets/entities
 import { ChangeForm } from './change-form';
 import { VisibilityStyle } from '../styling/visibility-style';
 import { ChangePasswordViewModel } from './interfaces/ChangePasswordViewModel';
+import { User } from './interfaces/User';
 
 const defaultMixedContent = {
     ItemIdsOrdered:null,
@@ -81,8 +82,8 @@ export async function ChangePassword(props: WidgetContext<ChangePasswordEntity>)
             cookie : context.cookie || ''
         }
     };
-    const response: any = await RestService.getUnboundType(argsLocal);
-    const user: any = response.value;
+    const response: { value: User } = await RestService.getUnboundType(argsLocal);
+    const user: User = response.value;
 
     viewModel.ExternalProviderName = user?.ExternalProviderName;
 
@@ -93,7 +94,7 @@ export async function ChangePassword(props: WidgetContext<ChangePasswordEntity>)
         viewModel.PostPasswordChangeMessage = entity.PostPasswordChangeMessage;
     }
 
-    const hasUser = user || (user && !user.IsAuthenticated);
+    const hasUser = (user && user.IsAuthenticated);
     const labels = viewModel.Labels;
     const oldPasswordInputId = getUniqueId('sf-old-password-');
     const newPasswordInputId = getUniqueId('sf-new-password-');
