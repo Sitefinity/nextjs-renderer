@@ -1,5 +1,4 @@
 import { CollectionResponse } from './dto/collection-response';
-import { ExternalProvider } from './dto/external-provider';
 import { GenericContentItem } from './dto/generic-content-item';
 import { SdkItem } from './dto/sdk-item';
 import { RootUrlService } from './root-url.service';
@@ -8,12 +7,26 @@ import { GetAllArgs } from './services/get-all-args';
 import { ODataFilterSerializer } from './services/odata-filter-serializer';
 
 export class RestService {
-    public static getUnboundType<T extends ExternalProvider>(args: { Name: string}): Promise<CollectionResponse<T>> {
-        const wholeUrl = `${RestService.buildItemBaseUrl(args.Name)}`;
+    public static getUnboundType<T>(args: {
+        Name: string,
+        BaseURL?: string,
+        Data?: object,
+        AdditionalQueryParams?: {
+            [key: string]: string;
+        },
+        AdditionalHeaders?: {
+            [key: string]: string;
+        }
+    }): Promise<T> {
+        const headers = args.AdditionalHeaders || {};
+        const queryParams = args.AdditionalQueryParams || {};
+        const baseURL = args.BaseURL || RestService.buildItemBaseUrl(args.Name);
+        const wholeUrl = `${baseURL}${RestService.buildQueryParams(queryParams)}`;
 
-        return fetch(wholeUrl, { headers: { 'X-Requested-With': 'react' } }).then((x => x.json())).then((x) => {
-            return <CollectionResponse<T>>{ Items: x.value, TotalCount: x['@odata.count'] };
-        });
+        return fetch(wholeUrl, {
+            headers: { 'X-Requested-With': 'react', ...headers },
+            body: JSON.stringify(args.Data)
+        }).then(x => x.json());
     }
 
 
@@ -46,11 +59,15 @@ export class RestService {
         return fetch(wholeUrl, { headers: { 'X-Requested-With': 'react' } }).then(x => x.json());
     }
 
-    public static getItem<T extends SdkItem>(itemType: string, id: string, provider: string): Promise<T> {
-        let queryParamsForMethod = {
+    public static getItem<T extends SdkItem>(itemType: string, id: string, provider: string, culture?: string): Promise<T> {
+        let queryParamsForMethod: {[key: string]: string; } = {
             sf_provider: provider,
             $select: '*'
         };
+
+        if (culture) {
+            queryParamsForMethod['sf_culture'] = culture;
+        }
 
         const wholeUrl = `${this.buildItemBaseUrl(itemType)}(${id})${this.buildQueryParams(queryParamsForMethod)}`;
 

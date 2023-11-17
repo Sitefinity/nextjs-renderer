@@ -42,6 +42,7 @@ export class RendererContractImpl implements RendererContract {
                 detailItem: null,
                 isEdit: true,
                 isPreview: false,
+                isLive: false,
                 culture: args.dataItem.culture
             };
 
