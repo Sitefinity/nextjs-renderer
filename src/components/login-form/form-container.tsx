@@ -40,7 +40,7 @@ const FormContainer = (props: any) => {
 
         let requiredInputs = form.querySelectorAll('input[data-sf-role=\'required\']');
         const emptyInputs = {};
-        requiredInputs.forEach((input: any) => {
+        (requiredInputs as NodeListOf<HTMLInputElement>).forEach((input: HTMLInputElement) => {
             if (!input.value) {
                 invalidateElement(emptyInputs, input);
                 isValid = false;

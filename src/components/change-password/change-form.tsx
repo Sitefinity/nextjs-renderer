@@ -78,7 +78,7 @@ const ChangeForm = (props: ChageFormProps) => {
         const emptyInputs = {};
         let isValid = true;
 
-        requiredInputs.forEach((input: any) => {
+        (requiredInputs as NodeListOf<HTMLInputElement>).forEach((input: HTMLInputElement) => {
             if (!input.value) {
                 invalidateElement(emptyInputs, input);
                 isValid = false;

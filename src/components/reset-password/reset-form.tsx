@@ -69,7 +69,7 @@ const ResetForm = (props: any) => {
 
         const requiredInputs = form.querySelectorAll('input[data-sf-role=\'required\']');
 
-        requiredInputs.forEach((input: any) => {
+        (requiredInputs as NodeListOf<HTMLInputElement>).forEach((input: HTMLInputElement) => {
             if (!input.value) {
                 invalidateElement(emptyInputs, input);
                 setInvalidInputs(emptyInputs);
