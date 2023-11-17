@@ -181,6 +181,17 @@ const RegistrationForm = (props: any) => {
         display: !visibilityClassHidden ? showSuccessContainer ? '' : 'none' : ''
     };
 
+    const inputValidationAttrs = (name: string) => {
+        return {
+            className: classNames('form-control',{
+                [viewModel.InvalidClass]: invalidInputs[name]
+                }
+            ),
+            [invalidDataAttr]: invalidInputs[name],
+            name: name
+        };
+    };
+
     return (
       <>
         <div data-sf-role="form-container"
@@ -198,62 +209,32 @@ const RegistrationForm = (props: any) => {
             <div className="mb-3">
               <label htmlFor={firstNameInputId} className="form-label">{labels.FirstNameLabel}</label>
               <input id={firstNameInputId} type="text"
-                className={classNames('form-control',{
-                    [viewModel.InvalidClass]: invalidInputs['FirstName']
-                    }
-                )}
-                {...{
-                    [invalidDataAttr]: invalidInputs['FirstName']
-                }}
-                name="FirstName" data-sf-role="required"/>
+                data-sf-role="required"
+                {...inputValidationAttrs('FirstName')}/>
             </div>
             <div className="mb-3">
               <label htmlFor={lastNameInputId} className="form-label">{labels.LastNameLabel}</label>
               <input id={lastNameInputId} type="text"
-                className={classNames('form-control',{
-                    [viewModel.InvalidClass]: invalidInputs['LastName']
-                    }
-                )}
-                {...{
-                    [invalidDataAttr]: invalidInputs['LastName']
-                }}
-                name="LastName" data-sf-role="required"/>
+                data-sf-role="required"
+                {...inputValidationAttrs('LastName')}/>
             </div>
             <div className="mb-3">
               <label htmlFor={emailInputId} className="form-label">{labels.EmailLabel}</label>
               <input ref={emailInputRef} id={emailInputId} type="email"
-                className={classNames('form-control',{
-                    [viewModel.InvalidClass]: invalidInputs['Email']
-                    }
-                )}
-                {...{
-                    [invalidDataAttr]: invalidInputs['Email']
-                }}
-                name="Email" data-sf-role="required"/>
+                data-sf-role="required"
+                {...inputValidationAttrs('Email')}/>
             </div>
             <div className="mb-3">
               <label htmlFor={passwordInputId} className="form-label">{labels.PasswordLabel}</label>
               <input ref={passwordInputRef} id={passwordInputId} type="password"
-                className={classNames('form-control',{
-                    [viewModel.InvalidClass]: invalidInputs['Password']
-                    }
-                )}
-                {...{
-                    [invalidDataAttr]: invalidInputs['Password']
-                }}
-                name="Password" data-sf-role="required" autoComplete="on"/>
+                data-sf-role="required" autoComplete="on"
+                {...inputValidationAttrs('Password')}/>
             </div>
             <div className="mb-3">
               <label htmlFor={repeatPasswordInputId} className="form-label">{labels.RepeatPasswordLabel}</label>
               <input ref={repeatPasswordInputRef} id={repeatPasswordInputId} type="password"
-                className={classNames('form-control',{
-                    [viewModel.InvalidClass]: invalidInputs['RepeatPassword']
-                    }
-                )}
-                {...{
-                    [invalidDataAttr]: invalidInputs['RepeatPassword']
-                }}
-                name="RepeatPassword" data-sf-role="required" autoComplete="on"/>
+                data-sf-role="required" autoComplete="on"
+                {...inputValidationAttrs('RepeatPassword')}/>
             </div>
 
             {viewModel.RequiresQuestionAndAnswer &&

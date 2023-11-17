@@ -94,6 +94,17 @@ const ResetForm = (props: any) => {
         return isValid;
     };
 
+    const inputValidationAttrs = (name: string) => {
+        return {
+            className: classNames('form-control',{
+                [viewModel.InvalidClass]: invalidInputs[name]
+                }
+            ),
+            [invalidDataAttr]: invalidInputs[name],
+            name: name
+        };
+    };
+
     const formContainerClass = classNames({
         [visibilityClassHidden]: !showFormContainer
     });
@@ -133,39 +144,21 @@ const ResetForm = (props: any) => {
           <div className="mb-3">
             <label htmlFor={securityQuestionInputId} className="form-label">{securityQuestionLabel}</label>
             <input id={securityQuestionInputId} type="text"
-              className={classNames('form-control',{
-                [viewModel.InvalidClass]: invalidInputs['Answer']
-                }
-              )}
-              {...{
-                [invalidDataAttr]: invalidInputs['Answer']
-              }}
-              name="Answer" data-sf-role="required" />
+              data-sf-role="required"
+              {...inputValidationAttrs('Answer')}/>
           </div>
                         }
           <div className="mb-3">
             <label htmlFor={newPasswordInputId} className="form-label">{labels.NewPasswordLabel}</label>
             <input ref={newPasswordInputRef} id={newPasswordInputId} type="password"
-              className={classNames('form-control',{
-                [viewModel.InvalidClass]: invalidInputs['NewPassword']
-                }
-              )}
-              {...{
-                [invalidDataAttr]: invalidInputs['NewPassword']
-              }}
-              name="NewPassword" data-sf-role="required" />
+              data-sf-role="required"
+              {...inputValidationAttrs('NewPassword')}/>
           </div>
           <div className="mb-3">
             <label htmlFor={repeatPasswordInputId} className="form-label">{labels.RepeatNewPasswordLabel}</label>
             <input ref={repeatPasswordInputRef} id={repeatPasswordInputId} type="password"
-              className={classNames('form-control',{
-                [viewModel.InvalidClass]: invalidInputs['RepeatNewPassword']
-                }
-              )}
-              {...{
-                [invalidDataAttr]: invalidInputs['RepeatNewPassword']
-              }}
-              name="RepeatNewPassword"  data-sf-role="required" />
+              data-sf-role="required"
+              {...inputValidationAttrs('NewPassword')}/>
           </div>
 
           <input type="hidden" name="SecurityToken" value={context.searchParams!['value']} />

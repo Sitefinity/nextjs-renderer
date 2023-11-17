@@ -65,6 +65,17 @@ const ForgottenForm = (props: any) => {
         return true;
     };
 
+    const inputValidationAttrs = (name: string) => {
+        return {
+            className: classNames('form-control',{
+                [viewModel.InvalidClass]: invalidInputs[name]
+                }
+            ),
+            [invalidDataAttr]: invalidInputs[name],
+            name: name
+        };
+    };
+
     const errorMessageClass = classNames('alert alert-danger my-3', {
         [visibilityClassHidden]: !errorMessage
     });
@@ -99,14 +110,8 @@ const ForgottenForm = (props: any) => {
           <div className="mb-3">
             <label className="form-label" htmlFor={emailInputId}>{labels.EmailLabel}</label>
             <input ref={emailInputRef} id={emailInputId} type="email"
-              className={classNames('form-control',{
-                [viewModel.InvalidClass]: invalidInputs['Email']
-                }
-              )}
-              {...{
-                [invalidDataAttr]: invalidInputs['Email']
-              }}
-              name="Email" data-sf-role="required" />
+              data-sf-role="required"
+              {...inputValidationAttrs('Email')}/>
           </div>
           <input className="btn btn-primary w-100" type="submit" value={labels.SendButtonLabel} />
           <input type="hidden" name="ResetPasswordUrl" value={viewModel.ResetPasswordUrl} />

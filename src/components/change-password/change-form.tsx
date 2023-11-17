@@ -108,6 +108,17 @@ const ChangeForm = (props: ChageFormProps) => {
         return isValid;
     };
 
+    const inputValidationAttrs = (name: string) => {
+        return {
+            className: classNames('form-control',{
+                [viewModel.InvalidClass]: invalidInputs[name]
+                }
+            ),
+            [invalidDataAttr]: invalidInputs[name],
+            name: name
+        };
+    };
+
     const errorMessageClass = classNames('alert alert-danger my-3', {
         [visibilityClassHidden]: !errorMessage
     });
@@ -152,26 +163,14 @@ const ChangeForm = (props: ChageFormProps) => {
         <div className="mb-3">
           <label htmlFor={newPasswordInputId} className="form-label">{labels.NewPassword}</label>
           <input ref={newPassInputRef} type="password"
-            className={classNames('form-control',{
-                [viewModel.InvalidClass]: invalidInputs['NewPassword']
-                }
-            )}
-            id={newPasswordInputId} name="NewPassword" data-sf-role="required"
-            {...{
-                [invalidDataAttr]: invalidInputs['NewPassword']
-              }} />
+            id={newPasswordInputId} data-sf-role="required"
+            {...inputValidationAttrs('NewPassword')}/>
         </div>
         <div className="mb-3">
           <label htmlFor={repeatPasswordInputId} className="form-label">{labels.RepeatPassword}</label>
           <input ref={repeatPassInputRef} type="password"
-            className={classNames('form-control',{
-                [viewModel.InvalidClass]: invalidInputs['RepeatPassword']
-                }
-            )}
-            id={repeatPasswordInputId} name="RepeatPassword" data-sf-role="required"
-            {...{
-                [invalidDataAttr]: invalidInputs['RepeatPassword']
-              }} />
+            id={repeatPasswordInputId} data-sf-role="required"
+            {...inputValidationAttrs('RepeatPassword')}/>
         </div>
 
         <input className="btn btn-primary w-100" type="submit" value={labels.SubmitButtonLabel} />
