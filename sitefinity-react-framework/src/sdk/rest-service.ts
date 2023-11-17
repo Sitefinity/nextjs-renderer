@@ -59,9 +59,10 @@ export class RestService {
         return fetch(wholeUrl, { headers: { 'X-Requested-With': 'react' } }).then(x => x.json());
     }
 
-    public static getItem<T extends SdkItem>(itemType: string, id: string, provider: string): Promise<T> {
+    public static getItem<T extends SdkItem>(itemType: string, id: string, provider: string, culture: string): Promise<T> {
         let queryParamsForMethod = {
             sf_provider: provider,
+            sf_culture: culture,
             $select: '*'
         };
 

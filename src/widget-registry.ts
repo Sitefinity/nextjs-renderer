@@ -11,6 +11,7 @@ import { LoginForm } from './components/login-form/login-form';
 import { ChangePassword } from './components/change-password/change-password';
 import { ResetPassword } from './components/reset-password/reset-password';
 import { Registration } from './components/registration/registration';
+import { LanguageSelector } from './components/language-selector/language-selector';
 import { Section } from './components/section/section';
 
 import sitefinityContentBlockJson from './components/content-block/designer-metadata.json';
@@ -26,6 +27,7 @@ import sitefinityLoginFormJson from './components/login-form/designer-metadata.j
 import sitefinityChangePasswordJson from './components/change-password/designer-metadata.json';
 import sitefinityResetPasswordJson from './components/reset-password/designer-metadata.json';
 import sitefinityRegistrationJson from './components/registration/designer-metadata.json';
+import sitefinityLanguageSelectorJson from './components/language-selector/designer-metadata.json';
 
 
 export const widgetRegistry: WidgetRegistry = {
@@ -75,6 +77,14 @@ export const widgetRegistry: WidgetRegistry = {
             componentType: ResetPassword,
             editorMetadata: {
                 Title: 'Reset Password'
+            },
+            ssr: true
+        },
+        'LanguageSelector':  <any>{
+            designerMetadata: sitefinityLanguageSelectorJson,
+            componentType: LanguageSelector,
+            editorMetadata: {
+                Title: 'Language Selector'
             },
             ssr: true
         },
