@@ -25,10 +25,8 @@ const defaultMixedContent = {
 const EncryptedParam = 'qs';
 
 const isAccountActivationRequest = (context: any) => {
-    if (context.IsLive) {
-        if (context.searchParams[EncryptedParam]) {
-            return true;
-        }
+    if (context && context.IsLive && context.searchParams[EncryptedParam]) {
+        return true;
     }
 
     return false;

@@ -11,7 +11,7 @@ const ForgottenForm = (props: any) => {
     const visibilityClassHidden = viewModel.VisibilityClasses[VisibilityStyle.Hidden];
     const formRef = React.useRef<HTMLFormElement>(null);
     const emailInputRef = React.useRef<HTMLInputElement>(null);
-    const [invalidInputs, setInvalidInputs] = React.useState<any>({});
+    const [invalidInputs, setInvalidInputs] = React.useState<{[key: string]: boolean | undefined;}>({});
     const [showFormContainer, setFormContainer] = React.useState<boolean>(true);
     const [showSuccessContainer, setSuccessContainer] = React.useState<boolean>(false);
     const [errorMessage, setErrorMessage] = React.useState<string>(labels.ErrorMessage);
@@ -41,7 +41,7 @@ const ForgottenForm = (props: any) => {
 
         let requiredInputs = form.querySelectorAll('input[data-sf-role=\'required\']');
 
-        requiredInputs.forEach(function (input: any) {
+        (requiredInputs as NodeListOf<HTMLInputElement>).forEach((input: HTMLInputElement) => {
             if (!input.value) {
                 invalidateElement(emptyInputs, input);
                 setInvalidInputs(emptyInputs);
@@ -65,14 +65,24 @@ const ForgottenForm = (props: any) => {
         return true;
     };
 
+    const errorMessageClass = classNames('alert alert-danger my-3', {
+        [visibilityClassHidden]: !errorMessage
+    });
+    const errorMessageStyles = {
+        display: !visibilityClassHidden ? errorMessage ? '' : 'none' : ''
+    };
+
+    const successContainerClass = classNames('mt-3',{
+        [visibilityClassHidden]: !showSuccessContainer
+    });
+    const successContainerStyle = {
+        display: !visibilityClassHidden ? showSuccessContainer ? '' : 'none' : ''
+    };
+
     return (<>
       <div data-sf-role="error-message-container"
-        className={classNames('alert alert-danger my-3', {
-        [visibilityClassHidden]: !errorMessage
-      })}
-        style={{
-        display: !visibilityClassHidden ? errorMessage ? '' : 'none' : ''
-        }}
+        className={errorMessageClass}
+        style={errorMessageStyles}
         role="alert" aria-live="assertive" >
         {errorMessage}
       </div>
@@ -106,12 +116,8 @@ const ForgottenForm = (props: any) => {
         <input type="hidden" name="FieldIsRequiredMessage" value={labels.FieldIsRequiredMessage} />
       </div>
       <div data-sf-role="success-message-container"
-        className={classNames('mt-3',{
-            [visibilityClassHidden]: !showSuccessContainer
-        })}
-        style={{
-        display: !visibilityClassHidden ? showSuccessContainer ? '' : 'none' : ''
-      }}>
+        className={successContainerClass}
+        style={successContainerStyle}>
         <p>{labels.ForgottenPasswordSubmitMessage} <strong data-sf-role="sent-email-label" >{sentEmailLabelMessage}</strong></p>
         <p>{labels.ForgottenPasswordLinkMessage}</p>
       </div>

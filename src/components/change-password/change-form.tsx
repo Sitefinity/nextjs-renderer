@@ -4,16 +4,24 @@ import React from 'react';
 import { VisibilityStyle } from '../styling/visibility-style';
 import { classNames } from 'sitefinity-react-framework/utils/classNames';
 import { invalidDataAttr, invalidateElement, redirect, serializeForm } from '../common/utils';
+import { ChangePasswordViewModel } from './interfaces/ChangePasswordViewModel';
 
-const ChangeForm = (props: any) => {
-    const { viewModel, context, oldPasswordInputId, newPasswordInputId, repeatPasswordInputId, ...others  } = props;
+interface ChageFormProps {
+    viewModel: ChangePasswordViewModel,
+    oldPasswordInputId: string;
+    newPasswordInputId: string;
+    repeatPasswordInputId: string;
+}
+
+const ChangeForm = (props: ChageFormProps) => {
+    const { viewModel, oldPasswordInputId, newPasswordInputId, repeatPasswordInputId  } = props;
     const labels = viewModel.Labels;
     const visibilityClassHidden = viewModel.VisibilityClasses[VisibilityStyle.Hidden];
     const formRef = React.useRef<HTMLFormElement>(null);
     const newPassInputRef = React.useRef<HTMLInputElement>(null);
     const oldPassInputRef = React.useRef<HTMLInputElement>(null);
     const repeatPassInputRef = React.useRef<HTMLInputElement>(null);
-    const [invalidInputs, setInvalidInputs] = React.useState<any>({});
+    const [invalidInputs, setInvalidInputs] = React.useState<{[key: string]: boolean | undefined;}>({});
     const [errorMessage, setErrorMessage] = React.useState<string>('');
     const [successMessage, setSuccessMessage] = React.useState<string>('');
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -54,16 +62,15 @@ const ChangeForm = (props: any) => {
         const action = viewModel.PostPasswordChangeAction;
 
         if (action === 'ViewAMessage') {
-            const message = viewModel.PostPasswordChangeMessage;
+            const message = viewModel.PostPasswordChangeMessage || '';
 
             setSuccessMessage(message);
         } else if (action === 'RedirectToPage') {
-            const redirectUrl = viewModel.RedirectUrl;
+            const redirectUrl = viewModel.RedirectUrl || '';
 
-            redirect(redirectUrl);
+            redirect(redirectUrl as Location | (string & Location));
         }
     };
-
 
     const validateForm = (form: HTMLFormElement) => {
         setInvalidInputs({});
@@ -79,7 +86,7 @@ const ChangeForm = (props: any) => {
         });
 
         if (!isValid) {
-            const errorMessage = labels.ValidationRequiredMessage;
+            const errorMessage = labels.ValidationRequiredMessage || '';
             setErrorMessage(errorMessage);
             setInvalidInputs(emptyInputs);
 
@@ -94,26 +101,29 @@ const ChangeForm = (props: any) => {
             setInvalidInputs(emptyInputs);
             isValid = false;
 
-            const errorMessage = labels.ValidationMismatchMessage;
+            const errorMessage = labels.ValidationMismatchMessage || '';
             setErrorMessage(errorMessage);
         }
 
         return isValid;
     };
 
+    const errorMessageClass = classNames('alert alert-danger my-3', {
+        [visibilityClassHidden]: !errorMessage
+    });
+    const errorMessageStyles = {
+        display: !visibilityClassHidden ? errorMessage ? '' : 'none' : ''
+    };
+
     return (
       <form
         ref={formRef}
         onSubmit={handleSubmit}
-        {...others}>
+        action={viewModel.ChangePasswordHandlerPath} method="post" role="form">
         <h2 className="mb-3">{labels.Header}</h2>
         { <div data-sf-role="error-message-container"
-          className={classNames('alert alert-danger my-3', {
-            [visibilityClassHidden]: !errorMessage
-          })}
-          style={{
-            display: !visibilityClassHidden ? errorMessage ? '' : 'none' : ''
-          }}
+          className={errorMessageClass}
+          style={errorMessageStyles}
           role="alert" aria-live="assertive" >
           {errorMessage}
         </div>}

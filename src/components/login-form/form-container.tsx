@@ -19,7 +19,7 @@ const FormContainer = (props: any) => {
     const passResetColumnSize = viewModel.RememberMe ? 'col-md-6 text-end' : 'col-12';
     const formRef = React.useRef<HTMLFormElement>(null);
     const emailInputRef = React.useRef<HTMLInputElement>(null);
-    const [invalidInputs, setInvalidInputs] = React.useState<any>({});
+    const [invalidInputs, setInvalidInputs] = React.useState<{[key: string]: boolean | undefined;}>({});
     const [showErrorMessage, setShowErrorMessage] = React.useState<boolean>(false);
     const [errorMessage, setErrorMessage] = React.useState<string>(labels.ErrorMessage);
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {

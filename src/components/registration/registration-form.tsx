@@ -15,7 +15,7 @@ const RegistrationForm = (props: any) => {
     const passwordInputRef = React.useRef<HTMLInputElement>(null);
     const repeatPasswordInputRef = React.useRef<HTMLInputElement>(null);
     const emailInputRef = React.useRef<HTMLInputElement>(null);
-    const [invalidInputs, setInvalidInputs] = React.useState<any>({});
+    const [invalidInputs, setInvalidInputs] = React.useState<{[key: string]: boolean | undefined;}>({});
     const [errorMessage, setErrorMessage] = React.useState<string>('');
     const [showFormContainer, setShowFormContainer] = React.useState<boolean>(true);
     const [showSuccessContainer, setSuccessContainer] = React.useState<boolean>(false);
@@ -105,7 +105,7 @@ const RegistrationForm = (props: any) => {
 
         let requiredInputs = form.querySelectorAll('input[data-sf-role=\'required\']');
 
-        requiredInputs.forEach(function (input: any) {
+        (requiredInputs as NodeListOf<HTMLInputElement>).forEach((input: HTMLInputElement) => {
             if (!input.value) {
                 invalidateElement(emptyInputs, input);
                 setInvalidInputs(emptyInputs);
@@ -148,10 +148,9 @@ const RegistrationForm = (props: any) => {
         setSuccessContainer(true);
 
         const activationLinkLabel = labels.ActivationLinkLabel;
-
         const formData = new FormData(formRef.current!);
         const email = formData.get('Email');
-        setActivationLinkMessage(activationLinkLabel + ' ' + email);
+        setActivationLinkMessage(`${activationLinkLabel} ${email}`);
     };
 
     const handleSendAgain = (event: React.MouseEvent<HTMLAnchorElement>) => {
@@ -161,24 +160,37 @@ const RegistrationForm = (props: any) => {
         submitFormHandler(formRef.current!, resendUrl, postResendAction);
     };
 
+    const formContainerClass = classNames({
+        [visibilityClassHidden]: !showFormContainer
+    });
+    const formContainerStyle = {
+        display: !visibilityClassHidden ? showFormContainer ? '' : 'none' : ''
+    };
+
+    const errorMessageClass = classNames('alert alert-danger my-3', {
+        [visibilityClassHidden]: !errorMessage
+    });
+    const errorMessageStyles = {
+        display: !visibilityClassHidden ? errorMessage ? '' : 'none' : ''
+    };
+
+    const confirmContainerClass = classNames({
+        [visibilityClassHidden]: !showSuccessContainer
+    });
+    const confirmContainerStyle = {
+        display: !visibilityClassHidden ? showSuccessContainer ? '' : 'none' : ''
+    };
+
     return (
       <>
         <div data-sf-role="form-container"
-          className={classNames({
-            [visibilityClassHidden]: !showFormContainer
-          })}
-          style={{
-            display: !visibilityClassHidden ? showFormContainer ? '' : 'none' : ''
-          }}
+          className={formContainerClass}
+          style={formContainerStyle}
         >
           <h2 className="mb-3">{labels.Header}</h2>
           <div data-sf-role="error-message-container"
-            className={classNames('alert alert-danger my-3', {
-            [visibilityClassHidden]: !errorMessage
-          })}
-            style={{
-            display: !visibilityClassHidden ? errorMessage ? '' : 'none' : ''
-          }}
+            className={errorMessageClass}
+            style={errorMessageStyles}
             role="alert" aria-live="assertive" >
             {errorMessage}
           </div>
@@ -272,12 +284,8 @@ const RegistrationForm = (props: any) => {
         </div>
 
         <div data-sf-role="confirm-registration-message-container"
-          className={classNames({
-            [visibilityClassHidden]: !showSuccessContainer
-          })}
-          style={{
-            display: !visibilityClassHidden ? showSuccessContainer ? '' : 'none' : ''
-          }}
+          className={confirmContainerClass}
+          style={confirmContainerStyle}
         >
           <h3>{labels.ActivationLinkHeader}</h3>
           <p data-sf-role="activation-link-message-container" >

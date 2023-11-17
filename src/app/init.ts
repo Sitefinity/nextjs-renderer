@@ -6,13 +6,7 @@ import { WidgetExecutionError } from '@/components/error/widget-execution-error-
 
 export async function initStaticParams() {
     RootUrlService.rootUrl = `${process.env['NEXT_CMS_URL']}`;
-    const cloudKey =  process.env.SF_CLOUD_KEY;
-
-    if (cloudKey) {
-       await ServiceMetadata.fetch();
-    } else {
-        console.warn('[Sitefinity] There is no SF_CLOUD_KEY provided');
-    }
+    await ServiceMetadata.fetch();
 
     RenderWidgetService.widgetRegistry = widgetRegistry;
     RenderWidgetService.errorComponentType = WidgetExecutionError;

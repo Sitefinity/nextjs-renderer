@@ -12,6 +12,7 @@ import { RestSdkTypes, RestService } from 'sitefinity-react-framework/sdk/rest-s
 import { MixedContentContext } from 'sitefinity-react-framework/widgets/entities/mixed-content-context';
 import { ChangeForm } from './change-form';
 import { VisibilityStyle } from '../styling/visibility-style';
+import { ChangePasswordViewModel } from './interfaces/ChangePasswordViewModel';
 
 const defaultMixedContent = {
     ItemIdsOrdered:null,
@@ -49,9 +50,11 @@ export async function ChangePassword(props: WidgetContext<ChangePasswordEntity>)
     dataAttributes['data-sfemptyiconaction'] = 'Edit';
     dataAttributes['data-sfhasquickeditoperation'] = true;
 
-    const viewModel: any = {
+    const viewModel: ChangePasswordViewModel = {
         ChangePasswordHandlerPath: `${webServicePath}/ChangePassword`,
         Attributes: entity.Attributes,
+        VisibilityClasses: StylingConfig.VisibilityClasses,
+        InvalidClass: StylingConfig.InvalidClass,
         Labels: {}
     };
 
@@ -64,9 +67,6 @@ export async function ChangePassword(props: WidgetContext<ChangePasswordEntity>)
     viewModel.Labels.ValidationRequiredMessage = entity.ValidationRequiredMessage;
     viewModel.Labels.ValidationMismatchMessage = entity.ValidationMismatchMessage;
     viewModel.Labels.ExternalProviderMessageFormat = entity.ExternalProviderMessageFormat;
-    viewModel.VisibilityClasses = StylingConfig.VisibilityClasses;
-    viewModel.InvalidClass = StylingConfig.InvalidClass;
-
 
     viewModel.PostPasswordChangeAction = entity.PostPasswordChangeAction;
     let baseURL;
@@ -111,9 +111,8 @@ export async function ChangePassword(props: WidgetContext<ChangePasswordEntity>)
         : viewModel.ExternalProviderName
             ? <div>{`${labels.ExternalProviderMessageFormat}${viewModel.ExternalProviderName}`}</div>
             :  <>
-              <ChangeForm action={viewModel.ChangePasswordHandlerPath} method="post" role="form"
+              <ChangeForm
                 viewModel={viewModel}
-                context={context}
                 oldPasswordInputId={oldPasswordInputId}
                 newPasswordInputId={newPasswordInputId}
                 repeatPasswordInputId={repeatPasswordInputId} />

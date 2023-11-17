@@ -14,7 +14,7 @@ const ResetForm = (props: any) => {
     const newPasswordInputRef = React.useRef<HTMLInputElement>(null);
     const repeatPasswordInputRef = React.useRef<HTMLInputElement>(null);
     const answerInputRef = React.useRef<HTMLInputElement>(null);
-    const [invalidInputs, setInvalidInputs] = React.useState<any>({});
+    const [invalidInputs, setInvalidInputs] = React.useState<{[key: string]: boolean | undefined;}>({});
     const [showFormContainer, setFormContainer] = React.useState<boolean>(true);
     const [showSuccessContainer, setSuccessContainer] = React.useState<boolean>(false);
     const [errorMessage, setErrorMessage] = React.useState<string>(labels.ErrorMessage);
@@ -94,23 +94,36 @@ const ResetForm = (props: any) => {
         return isValid;
     };
 
+    const formContainerClass = classNames({
+        [visibilityClassHidden]: !showFormContainer
+    });
+    const formContainerStyle = {
+        display: !visibilityClassHidden ? showFormContainer ? '' : 'none' : ''
+    };
+
+    const errorMessageClass = classNames('alert alert-danger my-3', {
+        [visibilityClassHidden]: !errorMessage
+    });
+    const errorMessageStyles = {
+        display: !visibilityClassHidden ? errorMessage ? '' : 'none' : ''
+    };
+
+    const successContainerClass = classNames({
+        [visibilityClassHidden]: !showSuccessContainer
+      });
+    const successContainerStyle = {
+        display: !visibilityClassHidden ? showSuccessContainer ? '' : 'none' : ''
+    };
+
     return (<>
       <div data-sf-role="form-container"
-        className={classNames({
-        [visibilityClassHidden]: !showFormContainer
-      })}
-        style={{
-        display: !visibilityClassHidden ? showFormContainer ? '' : 'none' : ''
-      }}
+        className={formContainerClass}
+        style={formContainerStyle}
       >
         <h2 className="mb-3">{labels.ResetPasswordHeader}</h2>
         {<div data-sf-role="error-message-container"
-          className={classNames('alert alert-danger my-3', {
-            [visibilityClassHidden]: !errorMessage
-          })}
-          style={{
-            display: !visibilityClassHidden ? errorMessage ? '' : 'none' : ''
-            }}
+          className={errorMessageClass}
+          style={errorMessageStyles}
           role="alert" aria-live="assertive"  >
           {errorMessage}
         </div>
@@ -163,12 +176,8 @@ const ResetForm = (props: any) => {
         <input type="hidden" name="PasswordsMismatchErrorMessage" value={labels.PasswordsMismatchErrorMessage} />
       </div>
       <div data-sf-role="success-message-container"
-        className={classNames({
-            [visibilityClassHidden]: !showSuccessContainer
-          })}
-        style={{
-            display: !visibilityClassHidden ? showSuccessContainer ? '' : 'none' : ''
-          }}>
+        className={successContainerClass}
+        style={successContainerStyle}>
         <h2>{labels.SuccessMessage}</h2>
         {viewModel.LoginPageLink &&
         <a href={viewModel.LoginPageLink} className="text-decoration-none">{labels.BackLinkLabel}</a>
