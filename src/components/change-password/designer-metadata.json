@@ -1,0 +1,357 @@
+{
+    "Name": "SitefinityChangePassword",
+    "Caption": "Change password",
+    "PropertyMetadata": [
+        {
+            "Name": "Basic",
+            "Sections": [
+                {
+                    "Name": "Change password setup",
+                    "Title": "Change password setup",
+                    "Properties": [
+                        {
+                            "Name": "PostPasswordChangeAction",
+                            "DefaultValue": "ViewAMessage",
+                            "Title": "After change users will...",
+                            "Type": "radioChoices",
+                            "SectionName": "Change password setup",
+                            "CategoryName": null,
+                            "Properties": {
+                                "Meta_Choices": "[{\u0022Title\u0022:\u0022View a message\u0022,\u0022Name\u0022:\u0022ViewAMessage\u0022,\u0022Value\u0022:\u0022ViewAMessage\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Redirect to page...\u0022,\u0022Name\u0022:\u0022RedirectToPage\u0022,\u0022Value\u0022:\u0022RedirectToPage\u0022,\u0022Icon\u0022:null}]",
+                                "Meta_Choices_AllowMultiple": "False"
+                            },
+                            "TypeChildProperties": [],
+                            "Position": 0
+                        },
+                        {
+                            "Name": "PostPasswordChangeRedirectPage",
+                            "DefaultValue": null,
+                            "Title": "",
+                            "Type": "content",
+                            "SectionName": "Change password setup",
+                            "CategoryName": null,
+                            "Properties": {
+                                "Meta_Content_Type": "Telerik.Sitefinity.Pages.Model.PageNode",
+                                "Meta_Content_IsFilterable": "False",
+                                "Meta_Content_AllowMultipleItemsSelection": "False",
+                                "Meta_Content_OpenMultipleItemsSelection": "False",
+                                "Meta_Content_LiveData": "False",
+                                "Meta_Content_Provider": null,
+                                "Meta_Content_DisableInteraction": "False",
+                                "Meta_Content_ShowSiteSelector": "False",
+                                "Meta_Content_AllowCreate": "True",
+                                "Meta_Content_ForceShouldShowAll": "False",
+                                "Meta_ConditionalVisibility_Condition": "{\u0022conditions\u0022:[{\u0022fieldName\u0022:\u0022PostPasswordChangeAction\u0022,\u0022operator\u0022:\u0022Equals\u0022,\u0022value\u0022:\u0022RedirectToPage\u0022}],\u0022inline\u0022:\u0022true\u0022}"
+                            },
+                            "TypeChildProperties": [],
+                            "Position": 1
+                        },
+                        {
+                            "Name": "PostPasswordChangeMessage",
+                            "DefaultValue": "Your password was changed successfully!",
+                            "Title": "Message",
+                            "Type": "textArea",
+                            "SectionName": "Change password setup",
+                            "CategoryName": null,
+                            "Properties": {
+                                "Meta_ConditionalVisibility_Condition": "{\u0022conditions\u0022:[{\u0022fieldName\u0022:\u0022PostPasswordChangeAction\u0022,\u0022operator\u0022:\u0022Equals\u0022,\u0022value\u0022:\u0022ViewAMessage\u0022}]}"
+                            },
+                            "TypeChildProperties": [],
+                            "Position": 2
+                        }
+                    ],
+                    "CategoryName": "Basic"
+                },
+                {
+                    "Name": "Display settings",
+                    "Title": "Display settings",
+                    "Properties": [
+                        {
+                            "Name": "SfViewName",
+                            "DefaultValue": "Default",
+                            "Title": "Change password template",
+                            "Type": "viewSelector",
+                            "SectionName": "Display settings",
+                            "CategoryName": null,
+                            "Properties": {
+                                "Meta_Choices": "[{\u0022Title\u0022:\u0022Default\u0022,\u0022Name\u0022:\u0022Default\u0022,\u0022Value\u0022:\u0022Default\u0022,\u0022Icon\u0022:null}]",
+                                "Meta_Choices_AllowMultiple": "False"
+                            },
+                            "TypeChildProperties": [],
+                            "Position": 0
+                        },
+                        {
+                            "Name": "Margins",
+                            "DefaultValue": null,
+                            "Title": "Margins",
+                            "Type": "complex",
+                            "SectionName": "Display settings",
+                            "CategoryName": null,
+                            "Properties": {
+                                "Meta_TableView_ColumnTitle": "Change password",
+                                "Meta_TableView_Enabled": "True",
+                                "Meta_TableView_Reorderable": "False",
+                                "Meta_TableView_Selectable": "False",
+                                "Meta_TableView_MultipleSelect": "False",
+                                "Meta_TableView_AllowEmptyState": "False"
+                            },
+                            "TypeChildProperties": [
+                                {
+                                    "Name": "Top",
+                                    "DefaultValue": "None",
+                                    "Title": "Top",
+                                    "Type": "chipchoice",
+                                    "SectionName": null,
+                                    "CategoryName": null,
+                                    "Properties": {
+                                        "Meta_Choices": "[{\u0022Title\u0022:\u0022None\u0022,\u0022Name\u0022:\u0022None\u0022,\u0022Value\u0022:\u0022None\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Small\u0022,\u0022Name\u0022:\u0022S\u0022,\u0022Value\u0022:\u0022S\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Medium\u0022,\u0022Name\u0022:\u0022M\u0022,\u0022Value\u0022:\u0022M\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Large\u0022,\u0022Name\u0022:\u0022L\u0022,\u0022Value\u0022:\u0022L\u0022,\u0022Icon\u0022:null}]",
+                                        "Meta_Choices_AllowMultiple": "False"
+                                    },
+                                    "TypeChildProperties": [],
+                                    "Position": 0
+                                },
+                                {
+                                    "Name": "Right",
+                                    "DefaultValue": "None",
+                                    "Title": "Right",
+                                    "Type": "chipchoice",
+                                    "SectionName": null,
+                                    "CategoryName": null,
+                                    "Properties": {
+                                        "Meta_Choices": "[{\u0022Title\u0022:\u0022None\u0022,\u0022Name\u0022:\u0022None\u0022,\u0022Value\u0022:\u0022None\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Small\u0022,\u0022Name\u0022:\u0022S\u0022,\u0022Value\u0022:\u0022S\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Medium\u0022,\u0022Name\u0022:\u0022M\u0022,\u0022Value\u0022:\u0022M\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Large\u0022,\u0022Name\u0022:\u0022L\u0022,\u0022Value\u0022:\u0022L\u0022,\u0022Icon\u0022:null}]",
+                                        "Meta_Choices_AllowMultiple": "False"
+                                    },
+                                    "TypeChildProperties": [],
+                                    "Position": 0
+                                },
+                                {
+                                    "Name": "Bottom",
+                                    "DefaultValue": "None",
+                                    "Title": "Bottom",
+                                    "Type": "chipchoice",
+                                    "SectionName": null,
+                                    "CategoryName": null,
+                                    "Properties": {
+                                        "Meta_Choices": "[{\u0022Title\u0022:\u0022None\u0022,\u0022Name\u0022:\u0022None\u0022,\u0022Value\u0022:\u0022None\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Small\u0022,\u0022Name\u0022:\u0022S\u0022,\u0022Value\u0022:\u0022S\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Medium\u0022,\u0022Name\u0022:\u0022M\u0022,\u0022Value\u0022:\u0022M\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Large\u0022,\u0022Name\u0022:\u0022L\u0022,\u0022Value\u0022:\u0022L\u0022,\u0022Icon\u0022:null}]",
+                                        "Meta_Choices_AllowMultiple": "False"
+                                    },
+                                    "TypeChildProperties": [],
+                                    "Position": 0
+                                },
+                                {
+                                    "Name": "Left",
+                                    "DefaultValue": "None",
+                                    "Title": "Left",
+                                    "Type": "chipchoice",
+                                    "SectionName": null,
+                                    "CategoryName": null,
+                                    "Properties": {
+                                        "Meta_Choices": "[{\u0022Title\u0022:\u0022None\u0022,\u0022Name\u0022:\u0022None\u0022,\u0022Value\u0022:\u0022None\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Small\u0022,\u0022Name\u0022:\u0022S\u0022,\u0022Value\u0022:\u0022S\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Medium\u0022,\u0022Name\u0022:\u0022M\u0022,\u0022Value\u0022:\u0022M\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Large\u0022,\u0022Name\u0022:\u0022L\u0022,\u0022Value\u0022:\u0022L\u0022,\u0022Icon\u0022:null}]",
+                                        "Meta_Choices_AllowMultiple": "False"
+                                    },
+                                    "TypeChildProperties": [],
+                                    "Position": 0
+                                }
+                            ],
+                            "Position": 1
+                        }
+                    ],
+                    "CategoryName": "Basic"
+                }
+            ]
+        },
+        {
+            "Name": "Advanced",
+            "Sections": [
+                {
+                    "Name": "AdvancedMain",
+                    "Title": null,
+                    "Properties": [
+                        {
+                            "Name": "SfWidgetLabel",
+                            "DefaultValue": "Change password",
+                            "Title": "Label",
+                            "Type": null,
+                            "SectionName": null,
+                            "CategoryName": "Advanced",
+                            "Properties": {
+                                "Meta_Description_Description": "Custom labels are displayed in the page editor for your convenience. You can change the generic name with a specific one only for this widget.",
+                                "Meta_MaxLength_Length": "30"
+                            },
+                            "TypeChildProperties": [],
+                            "Position": 0
+                        },
+                        {
+                            "Name": "CssClass",
+                            "DefaultValue": null,
+                            "Title": "CSS class",
+                            "Type": "string",
+                            "SectionName": null,
+                            "CategoryName": "Advanced",
+                            "Properties": {},
+                            "TypeChildProperties": [],
+                            "Position": 0
+                        }
+                    ],
+                    "CategoryName": "Advanced"
+                },
+                {
+                    "Name": "Labels and messages",
+                    "Title": "Labels and messages",
+                    "Properties": [
+                        {
+                            "Name": "Header",
+                            "DefaultValue": "Change password",
+                            "Title": "Change password header",
+                            "Type": "string",
+                            "SectionName": "Labels and messages",
+                            "CategoryName": "Advanced",
+                            "Properties": {},
+                            "TypeChildProperties": [],
+                            "Position": 0
+                        },
+                        {
+                            "Name": "CurrentPassword",
+                            "DefaultValue": "Current password",
+                            "Title": "Current password field label",
+                            "Type": "string",
+                            "SectionName": "Labels and messages",
+                            "CategoryName": "Advanced",
+                            "Properties": {},
+                            "TypeChildProperties": [],
+                            "Position": 0
+                        },
+                        {
+                            "Name": "NewPassword",
+                            "DefaultValue": "New password",
+                            "Title": "New password field label",
+                            "Type": "string",
+                            "SectionName": "Labels and messages",
+                            "CategoryName": "Advanced",
+                            "Properties": {},
+                            "TypeChildProperties": [],
+                            "Position": 0
+                        },
+                        {
+                            "Name": "ConfirmPassword",
+                            "DefaultValue": "Repeat new password",
+                            "Title": "Repeat password field label",
+                            "Type": "string",
+                            "SectionName": "Labels and messages",
+                            "CategoryName": "Advanced",
+                            "Properties": {},
+                            "TypeChildProperties": [],
+                            "Position": 0
+                        },
+                        {
+                            "Name": "SubmitButtonLabel",
+                            "DefaultValue": "Save",
+                            "Title": "Submit button",
+                            "Type": "string",
+                            "SectionName": "Labels and messages",
+                            "CategoryName": "Advanced",
+                            "Properties": {},
+                            "TypeChildProperties": [],
+                            "Position": 0
+                        },
+                        {
+                            "Name": "LoginFirstMessage",
+                            "DefaultValue": "You need to be logged in to change your password.",
+                            "Title": "Login error message",
+                            "Type": "string",
+                            "SectionName": "Labels and messages",
+                            "CategoryName": "Advanced",
+                            "Properties": {},
+                            "TypeChildProperties": [],
+                            "Position": 0
+                        },
+                        {
+                            "Name": "ValidationRequiredMessage",
+                            "DefaultValue": "All fields are required.",
+                            "Title": "Required fields error message",
+                            "Type": "string",
+                            "SectionName": "Labels and messages",
+                            "CategoryName": "Advanced",
+                            "Properties": {},
+                            "TypeChildProperties": [],
+                            "Position": 0
+                        },
+                        {
+                            "Name": "ValidationMismatchMessage",
+                            "DefaultValue": "New password and repeat password don\u0027t match.",
+                            "Title": "Password mismatch error message",
+                            "Type": "string",
+                            "SectionName": "Labels and messages",
+                            "CategoryName": "Advanced",
+                            "Properties": {},
+                            "TypeChildProperties": [],
+                            "Position": 0
+                        },
+                        {
+                            "Name": "ExternalProviderMessageFormat",
+                            "DefaultValue": "Your profile does not store any passwords, because you are registered with {0}",
+                            "Title": "External provider message",
+                            "Type": "string",
+                            "SectionName": "Labels and messages",
+                            "CategoryName": "Advanced",
+                            "Properties": {},
+                            "TypeChildProperties": [],
+                            "Position": 0
+                        }
+                    ],
+                    "CategoryName": "Advanced"
+                },
+                {
+                    "Name": "Attributes",
+                    "Title": "Attributes",
+                    "Properties": [
+                        {
+                            "Name": "Attributes",
+                            "DefaultValue": null,
+                            "Title": "Attributes for...",
+                            "Type": "attributes",
+                            "SectionName": "Attributes",
+                            "CategoryName": "Advanced",
+                            "Properties": {
+                                "Meta_LengthDependsOn_PropertyName": null,
+                                "Meta_LengthDependsOn_DisplayName": "",
+                                "Meta_LengthDependsOn_DisplayTitle": " ",
+                                "Meta_LengthDependsOn_ExtraRecords": "[{\u0022Name\u0022: \u0022ChangePassword\u0022, \u0022Title\u0022: \u0022Change password\u0022}]"
+                            },
+                            "TypeChildProperties": [
+                                {
+                                    "Name": "Keys",
+                                    "DefaultValue": null,
+                                    "Title": "Keys",
+                                    "Type": null,
+                                    "SectionName": null,
+                                    "CategoryName": null,
+                                    "Properties": {
+                                        "Validations_Readonly": "True"
+                                    },
+                                    "TypeChildProperties": [],
+                                    "Position": 0
+                                },
+                                {
+                                    "Name": "Values",
+                                    "DefaultValue": null,
+                                    "Title": "Values",
+                                    "Type": null,
+                                    "SectionName": null,
+                                    "CategoryName": null,
+                                    "Properties": {
+                                        "Validations_Readonly": "True"
+                                    },
+                                    "TypeChildProperties": [],
+                                    "Position": 0
+                                }
+                            ],
+                            "Position": 0
+                        }
+                    ],
+                    "CategoryName": "Advanced"
+                }
+            ]
+        }
+    ]
+}

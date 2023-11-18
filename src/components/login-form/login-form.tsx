@@ -13,7 +13,6 @@ import { FilterConverterService } from 'sitefinity-react-framework/sdk/filters/f
 import { MixedContentContext } from 'sitefinity-react-framework/widgets/entities/mixed-content-context';
 import { ExternalLoginBase } from 'sitefinity-react-framework/login/external-login-base';
 import { ExternalProvider } from 'sitefinity-react-framework/sdk/dto/external-provider';
-import { CollectionResponse } from 'sitefinity-react-framework/sdk/dto/collection-response';
 import { FormContainer } from './form-container';
 
 const defaultMixedContent = {
@@ -68,8 +67,8 @@ export async function LoginForm(props: WidgetContext<LoginFormEntity>) {
         const argsLocal = {
             Name: 'Default.GetExternalProviders'
         };
-        const externalProviders: CollectionResponse<ExternalProvider> = await RestService.getUnboundType(argsLocal);
-        viewModel.ExternalProviders = externalProviders.Items.filter(p => entity.ExternalProviders?.indexOf(p.Name) !== -1);
+        const externalProviders: { value: ExternalProvider[] } = await RestService.getUnboundType(argsLocal);
+        viewModel.ExternalProviders = externalProviders.value.filter((p: ExternalProvider) => entity.ExternalProviders?.indexOf(p.Name) !== -1);
     }
 
     viewModel.Labels.EmailLabel = entity.EmailLabel;

@@ -7,6 +7,7 @@ import { WidgetExecutionError } from '@/components/error/widget-execution-error-
 export async function initStaticParams() {
     RootUrlService.rootUrl = `${process.env['NEXT_CMS_URL']}`;
     await ServiceMetadata.fetch();
+
     RenderWidgetService.widgetRegistry = widgetRegistry;
     RenderWidgetService.errorComponentType = WidgetExecutionError;
 }

@@ -19,7 +19,7 @@ const FormContainer = (props: any) => {
     const passResetColumnSize = viewModel.RememberMe ? 'col-md-6 text-end' : 'col-12';
     const formRef = React.useRef<HTMLFormElement>(null);
     const emailInputRef = React.useRef<HTMLInputElement>(null);
-    const [invalidInputs, setInvalidInputs] = React.useState<any>({});
+    const [invalidInputs, setInvalidInputs] = React.useState<{[key: string]: boolean | undefined;}>({});
     const [showErrorMessage, setShowErrorMessage] = React.useState<boolean>(false);
     const [errorMessage, setErrorMessage] = React.useState<string>(labels.ErrorMessage);
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -35,12 +35,12 @@ const FormContainer = (props: any) => {
 
     const validateForm = (form: HTMLFormElement) => {
         let isValid = true;
-        resetValidationErrors();
+        setInvalidInputs({});
         setShowErrorMessage(false);
 
         let requiredInputs = form.querySelectorAll('input[data-sf-role=\'required\']');
         const emptyInputs = {};
-        requiredInputs.forEach((input: any) => {
+        (requiredInputs as NodeListOf<HTMLInputElement>).forEach((input: HTMLInputElement) => {
             if (!input.value) {
                 invalidateElement(emptyInputs, input);
                 isValid = false;
@@ -75,10 +75,6 @@ const FormContainer = (props: any) => {
         }
     };
 
-    const resetValidationErrors = () => {
-        setInvalidInputs({});
-    };
-
     const setAntiforgeryTokens = () => {
         return new Promise((resolve, reject) => {
             let xhr = new XMLHttpRequest();
@@ -106,6 +102,17 @@ const FormContainer = (props: any) => {
         setErrorMessage(err);
     };
 
+    const inputValidationAttrs = (name: string) => {
+        return {
+            className: classNames('form-control',{
+                [viewModel.InvalidClass]: invalidInputs[name]
+                }
+            ),
+            [invalidDataAttr]: invalidInputs[name],
+            name: name
+        };
+    };
+
     return (
       <div data-sf-role="form-container">
         <h2 className="mb-3">{labels.Header}</h2>
@@ -127,29 +134,16 @@ const FormContainer = (props: any) => {
           <div className="mb-3">
             <label htmlFor={props.usernameInputId} className="form-label">{labels.EmailLabel}</label>
             <input type="email" ref={emailInputRef}
-              className={classNames('form-control',{
-                    [viewModel.InvalidClass]: invalidInputs['username']
-                    }
-                )}
-              id={props.usernameInputId} name="username" data-sf-role="required"
-              {...{
-                [invalidDataAttr]: invalidInputs['username']
-              }}/>
+              id={props.usernameInputId} data-sf-role="required"
+              {...inputValidationAttrs('username')}/>
           </div>
 
           <div className="mb-3">
             <label htmlFor={props.passwordInputId} className="form-label">{labels.PasswordLabel}</label>
             <input type="password"
-              className={classNames('form-control',{
-                    [viewModel.InvalidClass]: invalidInputs['password']
-                }
-              )}
-              id={props.passwordInputId} name="password" data-sf-role="required"
+              id={props.passwordInputId} data-sf-role="required"
               autoComplete="on"
-              {...{
-                [invalidDataAttr]: invalidInputs['password']
-              }}
-               />
+              {...inputValidationAttrs('password')}/>
           </div>
           {(viewModel.RememberMe !== undefined || viewModel.ForgottenPasswordLink) &&
           <div className="row mb-3">
@@ -162,23 +156,19 @@ const FormContainer = (props: any) => {
                 <label htmlFor={props.rememberInputId}>{labels.RememberMeLabel}</label>
               </label>
             </div>
-                            }
-
+            }
             {viewModel.ForgottenPasswordLink &&
-
             <div className={passResetColumnSize}>
               <a href={viewModel.ForgottenPasswordLink}
                 className="text-decoration-none">{labels.ForgottenPasswordLinkLabel}</a>
             </div>
-                            }
+            }
           </div>
-                    }
-
+        }
           <input type="hidden" name="RedirectUrl" value={returnUrl} />
           <input type="hidden" name="ErrorRedirectUrl" value={returnErrorUrl} />
           <input type="hidden" name="MembershipProviderName" value={viewModel.MembershipProviderName} />
           <input type="hidden" value="" name="sf_antiforgery" />
-
           <input className="btn btn-primary w-100" type="submit" value={labels.SubmitButtonLabel} />
         </form>
         <input type="hidden" name="ValidationInvalidEmailMessage" value={labels.ValidationInvalidEmailMessage} />
