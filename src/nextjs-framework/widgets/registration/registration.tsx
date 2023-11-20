@@ -9,15 +9,8 @@ import { PostRegistrationAction } from './interfaces/PostRegistrationAction';
 import { RegistrationForm } from './registration-form';
 import { RestSdkTypes, RootUrlService, ExternalProvider, RestService, RegistrationSettingsDto } from '../../rest-sdk';
 import { RestExtensionsService } from '../rest-extensions';
+import { defaultMixedContent } from '../common/defaults';
 
-
-const defaultMixedContent = {
-    ItemIdsOrdered:null,
-    Content:[ {
-        Type: RestSdkTypes.Pages,
-        Variations: null
-    }]
-};
 const EncryptedParam = 'qs';
 
 const isAccountActivationRequest = (context: any) => {
@@ -27,7 +20,6 @@ const isAccountActivationRequest = (context: any) => {
 
     return false;
 };
-
 
 export async function Registration(props: WidgetContext<RegistrationEntity>) {
     const entity = {
