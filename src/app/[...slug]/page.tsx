@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { notFound } from 'next/navigation';
 import PageClient from './page-client';
 import { cookies } from 'next/headers';
 import { ServiceMetadata } from 'sitefinity-react-framework/sdk/service-metadata';
@@ -11,6 +10,7 @@ import { WidgetModel } from 'sitefinity-react-framework/widgets/widget-model';
 import { RequestContext } from 'sitefinity-react-framework/services/request-context';
 import { initStaticParams } from '../init';
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
 // export async function generateStaticParams() {
 //     const getAllArgs: GetAllArgs = {
@@ -63,7 +63,7 @@ export async function generateMetadata(
             'og-site': layout.MetaInfo.OpenGraphSite
         }
     };
-  }
+}
 
 export default async function Page({ params, searchParams }: PageParams) {
     const layout = await initLayout({ params, searchParams });
@@ -127,7 +127,9 @@ async function initLayout({ params, searchParams }: PageParams): Promise<PageLay
     const layoutOrError = await LayoutService.get(params.slug.join('/'), actionParam, headers);
     const errorResponse = layoutOrError as any;
     if (errorResponse.error && errorResponse.error.code) {
-        throw errorResponse.error.code;
+        if (errorResponse.error.code === 'NotFound') {
+            notFound();
+        }
     }
 
     return layoutOrError as PageLayoutServiceResponse;
