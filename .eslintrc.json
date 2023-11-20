@@ -3,13 +3,10 @@
     "plugin:react/recommended",
     "next/core-web-vitals"
    ],
+   "ignorePatterns": ["**/dist/**"],
    "rules": {
         "react-hooks/exhaustive-deps": "warn",
-        "brace-style": [
-            "error",
-            "1tbs",
-            { "allowSingleLine": true }
-        ],
+        "brace-style": ["error"],
         "quotes": ["error", "single"],
         "jsx-quotes": [2, "prefer-double"],
         "semi": "error",

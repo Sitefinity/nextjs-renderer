@@ -1,5 +1,5 @@
 
-import { Fragment } from 'react';
+import React from 'react';
 import { notFound } from 'next/navigation';
 import PageClient from './page-client';
 import { cookies } from 'next/headers';
@@ -66,7 +66,34 @@ export async function generateMetadata(
   }
 
 export default async function Page({ params, searchParams }: PageParams) {
-    const layout = await initLayout( { params, searchParams });
+    await initStaticParams();
+    const actionParam = searchParams['sfaction'];
+    const cookie = cookies().toString();
+    let headers: { [key: string]: string } = {};
+    if (process.env.NODE_ENV === 'development' && actionParam) {
+        headers = { 'Cookie': cookie };
+        if (process.env.SF_CLOUD_KEY) {
+            headers['X-SF-BYPASS-HOST'] = `${process.env.PROXY_ORIGINAL_HOST}:${process.env.PORT}`;
+            headers['X-SF-BYPASS-HOST-VALIDATION-KEY'] = process.env.SF_CLOUD_KEY;
+        } else {
+            headers['X-ORIGINAL-HOST'] = `${process.env.PROXY_ORIGINAL_HOST}:${process.env.PORT}`;
+        }
+    }
+
+    const layoutOrError = await LayoutService.get(params.slug.join('/'), actionParam, headers);
+    const errorResponse = layoutOrError as any;
+    if (errorResponse.error && errorResponse.error.code) {
+        if (errorResponse.error.code === 'NotFound') {
+            return notFound();
+        }
+
+        throw errorResponse.error.code;
+    }
+
+    const layout = layoutOrError as PageLayoutServiceResponse;
+    const isEdit = searchParams['sfaction'] === 'edit';
+    const isPreview = searchParams['sfaction'] === 'preview';
+    const isLive = !(isEdit || isPreview);
 
     let appState : AppState = {
         requestContext: {
@@ -74,19 +101,21 @@ export default async function Page({ params, searchParams }: PageParams) {
             searchParams: searchParams,
             detailItem: layout.DetailItem,
             culture: layout.Culture,
-            isEdit: searchParams['sfaction'] === 'edit',
-            isPreview: searchParams['sfaction'] === 'preview'
+            isEdit,
+            isPreview,
+            isLive,
+            cookie
         },
         widgets: layout.ComponentContext.Components
     };
 
     return (
-      <Fragment>
+      <>
         <PageClient metadata={ServiceMetadata.serviceMetadataCache} layout={layout} context={appState.requestContext} />
         {appState.widgets.map((child) => {
                 return RenderWidgetService.createComponent(child, appState.requestContext);
             })}
-      </Fragment>
+      </>
     );
 }
 

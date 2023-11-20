@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+      "baseUrl": "./src",
+      "target": "ESNext",
+      "lib": ["dom", "esnext"],
+      "outDir": "dist",
+      "skipLibCheck": true,
+      "strict": true,
+      "esModuleInterop": true,
+      "module": "esnext",
+      "moduleResolution": "bundler",
+      "resolveJsonModule": true,
+      "isolatedModules": true,
+      "incremental": true,
+      "declaration": true
+    },
+    "include": ["./src/**/*.ts", "./src/public-api.ts"],
+    "exclude": ["node_modules"]
+  }

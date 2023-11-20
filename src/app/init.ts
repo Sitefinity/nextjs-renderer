@@ -11,6 +11,7 @@ export async function initStaticParams() {
     }
 
     await ServiceMetadata.fetch();
+
     RenderWidgetService.widgetRegistry = widgetRegistry;
     RenderWidgetService.errorComponentType = WidgetExecutionError;
 }
