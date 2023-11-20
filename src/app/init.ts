@@ -5,7 +5,7 @@ import { widgetRegistry } from '@/widget-registry';
 import { WidgetExecutionError } from '@/components/error/widget-execution-error-component';
 
 export async function initStaticParams() {
-    RootUrlService.rootUrl = `${process.env['NEXT_CMS_URL']}`;
+    RootUrlService.rootUrl = `${process.env['PROXY_URL'] || process.env['NEXT_CMS_URL']}`;
     if (!RootUrlService.rootUrl.endsWith('/')) {
         RootUrlService.rootUrl += '/';
     }
