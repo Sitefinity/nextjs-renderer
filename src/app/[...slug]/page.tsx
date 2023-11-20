@@ -66,31 +66,7 @@ export async function generateMetadata(
   }
 
 export default async function Page({ params, searchParams }: PageParams) {
-    await initStaticParams();
-    const actionParam = searchParams['sfaction'];
-    const cookie = cookies().toString();
-    let headers: { [key: string]: string } = {};
-    if (process.env.NODE_ENV === 'development' && actionParam) {
-        headers = { 'Cookie': cookie };
-        if (process.env.SF_CLOUD_KEY) {
-            headers['X-SF-BYPASS-HOST'] = `${process.env.PROXY_ORIGINAL_HOST}:${process.env.PORT}`;
-            headers['X-SF-BYPASS-HOST-VALIDATION-KEY'] = process.env.SF_CLOUD_KEY;
-        } else {
-            headers['X-ORIGINAL-HOST'] = `${process.env.PROXY_ORIGINAL_HOST}:${process.env.PORT}`;
-        }
-    }
-
-    const layoutOrError = await LayoutService.get(params.slug.join('/'), actionParam, headers);
-    const errorResponse = layoutOrError as any;
-    if (errorResponse.error && errorResponse.error.code) {
-        if (errorResponse.error.code === 'NotFound') {
-            return notFound();
-        }
-
-        throw errorResponse.error.code;
-    }
-
-    const layout = layoutOrError as PageLayoutServiceResponse;
+    const layout = await initLayout({ params, searchParams });
     const isEdit = searchParams['sfaction'] === 'edit';
     const isPreview = searchParams['sfaction'] === 'preview';
     const isLive = !(isEdit || isPreview);
@@ -104,7 +80,7 @@ export default async function Page({ params, searchParams }: PageParams) {
             isEdit,
             isPreview,
             isLive,
-            cookie
+            cookie: cookies().toString()
         },
         widgets: layout.ComponentContext.Components
     };
