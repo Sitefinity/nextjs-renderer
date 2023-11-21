@@ -1,4 +1,5 @@
-import { RestService } from 'sitefinity-react-framework/sdk/rest-service';
+
+import { RestService } from './rest-service';
 import { RootUrlService } from './root-url.service';
 
 export class ServiceMetadata {
