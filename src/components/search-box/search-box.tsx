@@ -9,11 +9,12 @@ import { VisibilityStyle } from '../styling/visibility-style';
 import { SearchBoxRestService } from './search-box.service';
 import { SearchContent } from './search-content';
 import { RootUrlService } from 'sitefinity-react-framework/sdk/root-url.service';
+import { RestSdkTypes } from 'sitefinity-react-framework/sdk/rest-service';
 
 const defaultMixedContent = {
     ItemIdsOrdered:null,
     Content:[ {
-        Type:RestSdkTypes.Pages,
+        Type: RestSdkTypes.Pages,
         Variations:null
     }]
 };

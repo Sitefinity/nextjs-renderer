@@ -167,7 +167,7 @@ function populateSection(properties: SectionEntity): Promise<SectionHolder> {
             sectionClasses.push(StylingConfig.VideoBackgroundClass);
             return RestService.getItemWithFallback<VideoItem>(RestSdkTypes.Video, properties.SectionBackground.VideoItem.Id, properties.SectionBackground.VideoItem.Provider).then((video) => {
                 sectionObject.ShowVideo = true;
-                const videoUrl = `${RootUrlService.rootUrl}${video.Url.substring(1)}`;
+                const videoUrl = `${RootUrlService.rootUrl}/${video.Url.substring(1)}`;
                 sectionObject.VideoUrl = videoUrl;
                 sectionObject.Attributes['className'] = sectionClasses.filter(x => x).join(' ');
 
@@ -191,7 +191,7 @@ function populateSection(properties: SectionEntity): Promise<SectionHolder> {
                     break;
             }
 
-            const imageUrl = `${RootUrlService.rootUrl}${image.Url.substring(1)}`;
+            const imageUrl = `${RootUrlService.rootUrl}/${image.Url.substring(1)}`;
             style['--sf-background-image'] = `url(${imageUrl})`;
             sectionObject.Style = style;
             sectionObject.Attributes['className'] = sectionClasses.filter(x => x).join(' ');
