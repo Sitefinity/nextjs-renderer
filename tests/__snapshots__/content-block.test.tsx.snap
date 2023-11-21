@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should render content block 1`] = `
+exports[`should render content block with content 1`] = `
 <div>
   <div
     data-sfhasquickeditoperation="true"
-    data-sfid="f07f4e6a-b827-48f0-b6a2-1305c80d9abb"
+    data-sfid="731d793d-4fe1-4bf6-878d-7cc973c2be3f"
     data-sfiscontentwidget="true"
     data-sfisempty="false"
     data-sfisemptyvisualhidden="false"
@@ -13,36 +13,16 @@ exports[`should render content block 1`] = `
     data-sftitle="Content block"
     draggable="true"
   >
-    <h1
-      style="text-align:center;"
-    >
+    <p>
       Title
+    </p>
+    <h1>
+      Heading 1
     </h1>
     <p>
-       
+      Paragraph 1
     </p>
     <p>
-      First paragraph.
-    </p>
-    <p>
-      <strong>
-        Bold test
-      </strong>
-    </p>
-    <p>
-      <strong />
-      <strong>
-        <a
-          data-sf-ec-immutable=""
-          href="https://www.progress.com/"
-          title="This is link to progress.com"
-        >
-          https://www.progress.com/
-        </a>
-      </strong>
-    </p>
-    <p>
-      <strong />
       <img
         alt=""
         sf-size="2191"
@@ -51,8 +31,76 @@ exports[`should render content block 1`] = `
       />
     </p>
     <p>
+      List
+    </p>
+    <ul>
+      <li>
+        List Item 1
+      </li>
+      <li>
+        List Item 2
+      </li>
+    </ul>
+    <p>
+      <a
+        data-sf-ec-immutable=""
+        href="https://github.com/"
+        title="GitHub"
+      >
+        github.com
+      </a>
+    </p>
+    <table>
+      <tbody>
+        <tr
+          style="height:50%;"
+        >
+          <td
+            style="width:50%;"
+          >
+            cell1
+          </td>
+          <td
+            style="width:50%;"
+          >
+            cell2
+          </td>
+        </tr>
+        <tr
+          style="height:50%;"
+        >
+          <td
+            style="width:50%;"
+          >
+            cell3
+          </td>
+          <td
+            style="width:50%;"
+          >
+             
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
        
     </p>
   </div>
+</div>
+`;
+
+exports[`should render content block with empty model 1`] = `
+<div>
+  <div
+    data-sfhasquickeditoperation="true"
+    data-sfid="731d793d-4fe1-4bf6-878d-7cc973c2be3f"
+    data-sfiscontentwidget="true"
+    data-sfisempty="false"
+    data-sfisemptyvisualhidden="false"
+    data-sfisorphaned="false"
+    data-sfname="SitefinityContentBlock"
+    data-sftitle="Content block"
+    draggable="true"
+  />
 </div>
 `;
