@@ -10,9 +10,19 @@ import { SearchBoxRestService } from './search-box.service';
 import { SearchContent } from './search-content';
 import { RootUrlService } from 'sitefinity-react-framework/sdk/root-url.service';
 
+const defaultMixedContent = {
+    ItemIdsOrdered:null,
+    Content:[ {
+        Type:RestSdkTypes.Pages,
+        Variations:null
+    }]
+};
 
 export async function SearchBox(props: WidgetContext<SearchBoxEntity>) {
-    const entity = props.model.Properties;
+    const entity = {
+        SearchResultsPage: defaultMixedContent,
+        ...props.model.Properties
+    };
     const requestContext = props.requestContext;
     const dataAttributes = htmlAttributes(props);
     const defaultClass = entity.CssClass;
@@ -50,7 +60,6 @@ export async function SearchBox(props: WidgetContext<SearchBoxEntity>) {
     searchModel.SiteId = currentSite.Id;
     searchModel.Culture = requestContext.culture;
 
-
     searchModel.ActiveClass = StylingConfig.ActiveClass;
     searchModel.VisibilityClasses = StylingConfig.VisibilityClasses;
     searchModel.SearchAutocompleteItemClass = StylingConfig.SearchAutocompleteItemClass;
@@ -69,7 +78,7 @@ export class SearchBoxEntity {
     CssClass?: string;
     Margins?: OffsetStyle;
     SearchIndex?: string;
-    SearchResultsPage?: any;
+    SearchResultsPage?: MixedContentContext;
     SuggestionsTriggerCharCount?: number;
     ScoringProfile?: string;
     ScoringParameters?: string[];
