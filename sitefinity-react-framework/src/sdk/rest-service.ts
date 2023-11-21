@@ -23,12 +23,8 @@ export class RestService {
         const baseURL = args.BaseURL || RestService.buildItemBaseUrl(args.Name);
         const wholeUrl = `${baseURL}${RestService.buildQueryParams(queryParams)}`;
 
-        return fetch(wholeUrl, {
-            headers: { 'X-Requested-With': 'react', ...headers },
-            body: JSON.stringify(args.Data)
-        }).then(x => x.json());
+        return this.sendRequest({ url: wholeUrl, headers });
     }
-
 
     public static getItemWithFallback<T extends SdkItem>(itemType: string, id: string, provider: string): Promise<T> {
         const wholeUrl = `${RestService.buildItemBaseUrl(itemType)}(${id})/Default.GetItemWithFallback()${RestService.buildQueryParams({
@@ -37,14 +33,14 @@ export class RestService {
             $select: '*'
         })}`;
 
-        return fetch(wholeUrl, { headers: { 'X-Requested-With': 'react' } }).then(x => x.json());
+        return this.sendRequest<T>({ url: wholeUrl });
     }
 
     public static getCustomItems<T extends SdkItem>(baseURL: string, action: string, queryParamsForMethod: any, contentText: string = ''): any{
         const actionName = `${action}(${contentText})`;
         const wholeUrl = `${RestService.buildItemBaseUrl(baseURL)}/${actionName}${RestService.buildQueryParams(queryParamsForMethod)}`;
-        return fetch(wholeUrl,
-         { headers: { 'X-Requested-With': 'react' } }).then(x => x.json());
+
+        return this.sendRequest<T>({ url: wholeUrl });
     }
 
     public static getItemWithStatus<T extends SdkItem>(itemType: string, id: string, provider: string, queryParams: {[key: string]: string}): Promise<T> {
@@ -56,7 +52,7 @@ export class RestService {
         queryParamsForMethod = Object.assign(queryParamsForMethod, queryParams);
         const wholeUrl = `${RestService.buildItemBaseUrl(itemType)}(${id})/Default.GetItemWithStatus()${RestService.buildQueryParams(queryParamsForMethod)}`;
 
-        return fetch(wholeUrl, { headers: { 'X-Requested-With': 'react' } }).then(x => x.json());
+        return this.sendRequest<T>({ url: wholeUrl });
     }
 
     public static getItem<T extends SdkItem>(itemType: string, id: string, provider: string, culture?: string): Promise<T> {
@@ -71,7 +67,7 @@ export class RestService {
 
         const wholeUrl = `${this.buildItemBaseUrl(itemType)}(${id})${this.buildQueryParams(queryParamsForMethod)}`;
 
-        return fetch(wholeUrl, { headers: { 'X-Requested-With': 'react' } }).then(x => x.json());
+        return this.sendRequest<T>({ url: wholeUrl });
     }
 
     public static getSharedContent(id: string, cultureName: string): Promise<GenericContentItem> {
@@ -80,7 +76,8 @@ export class RestService {
             sf_fallback_prop_names: 'Content'
         };
 
-        return fetch(`${RestService.buildItemBaseUrl(RestSdkTypes.GenericContent)}/Default.GetItemById(itemId=${id})${RestService.buildQueryParams(queryParamsForMethod)}`, { headers: { 'X-Requested-With': 'react' } }).then(x => x.json());
+        const wholeUrl = `${RestService.buildItemBaseUrl(RestSdkTypes.GenericContent)}/Default.GetItemById(itemId=${id})${RestService.buildQueryParams(queryParamsForMethod)}`;
+        return this.sendRequest<GenericContentItem>({ url: wholeUrl });
     }
 
     public static getItems<T extends SdkItem>(args: GetAllArgs): Promise<CollectionResponse<T>> {
@@ -103,8 +100,7 @@ export class RestService {
         queryParamsForMethod = Object.assign(queryParamsForMethod, args.AdditionalQueryParams);
 
         const wholeUrl = `${this.buildItemBaseUrl(args.Type)}${this.buildQueryParams(queryParamsForMethod)}`;
-
-        return fetch(wholeUrl, { headers: { 'X-Requested-With': 'react' } }).then((x => x.json())).then((x) => {
+        return this.sendRequest<{ value: T[], '@odata.count'?: number }>({ url: wholeUrl }).then((x) => {
             return <CollectionResponse<T>>{ Items: x.value, TotalCount: x['@odata.count'] };
         });
     }
@@ -218,7 +214,11 @@ export class RestService {
         return allFields;
     }
 
-    private static buildQueryParams(queryParams: { [key: string]: string }) {
+    private static buildQueryParams(queryParams: { [key: string]: string | undefined }) {
+        if (!queryParams) {
+            return null;
+        }
+
         let result = '';
         Object.keys(queryParams).forEach((key) => {
             const value = queryParams[key];
@@ -235,11 +235,26 @@ export class RestService {
         return result;
     }
 
+    private static buildHeaders(additionalHeaders: { [key: string]: string } | undefined) {
+        let headers = { 'X-Requested-With': 'react' };
+        if (!additionalHeaders) {
+            return headers;
+        }
+
+        return Object.assign(headers, additionalHeaders);
+    }
+
+    public static sendRequest<T>(request: RequestData) {
+        return fetch(request.url, { headers: this.buildHeaders(request.headers), method: request.method, body: request.data, cache: 'no-store' }).then((x => x.json())).then((x) => {
+            return <T>x;
+        });
+    }
+
     public static buildItemBaseUrl(itemType: string): string {
         const serviceUrl = RootUrlService.getServiceUrl();
         const setName = ServiceMetadata.getSetNameFromType(itemType);
 
-        return `${serviceUrl}${setName}`;
+        return `${serviceUrl}/${setName}`;
     }
 }
 
@@ -249,4 +264,11 @@ export class RestSdkTypes {
     public static readonly News: string = 'Telerik.Sitefinity.News.Model.NewsItem';
     public static readonly GenericContent: string = 'Telerik.Sitefinity.GenericContent.Model.ContentItem';
     public static readonly Pages: string = 'Telerik.Sitefinity.Pages.Model.PageNode';
+}
+
+interface RequestData {
+    url: string;
+    method?: string;
+    headers?: { [key: string]: string };
+    data?: any;
 }

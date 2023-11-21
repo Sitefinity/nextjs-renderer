@@ -1,3 +1,4 @@
+import { RestService } from '../rest-service';
 import { RootUrlService } from '../root-url.service';
 import { PageLayoutServiceResponse } from './layout-service.response';
 import { LazyComponentsResponse } from './lazy-components.response';
@@ -32,10 +33,7 @@ export class LayoutService {
             url += `${concatChar}sfaction=${action}`;
         }
 
-        url = RootUrlService.rootUrl + url.substring(1);
-        headers['X-Requested-With'] = 'react';
-
-        return fetch(url, { headers }).then(x => x.json());
+        return RestService.sendRequest({ url: RootUrlService.rootUrl + url, headers });
     }
 
     public static getLazyComponents(pagePathAndQuery: string): Promise<LazyComponentsResponse> {
@@ -47,10 +45,10 @@ export class LayoutService {
             headers['SF_NO_URL_REFERER'] = 'true';
         }
 
-        let serviceUrl = `${RootUrlService.getServiceUrl()}Default.LazyComponents(url=@param)?@param='${encodeURIComponent(pagePathAndQuery)}'`;
+        let serviceUrl = `${RootUrlService.getServiceUrl()}/Default.LazyComponents(url=@param)?@param='${encodeURIComponent(pagePathAndQuery)}'`;
         serviceUrl += '&correlationId=' + (window as any)['sfCorrelationId'];
 
-        return fetch(serviceUrl, { headers }).then(x => x.json());
+        return RestService.sendRequest({ url: serviceUrl, headers });
     }
 }
 

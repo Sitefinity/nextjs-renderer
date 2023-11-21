@@ -8,13 +8,14 @@ import { WidgetContext } from 'sitefinity-react-framework/widgets/widget-context
 import { VisibilityStyle } from '../styling/visibility-style';
 import { SearchBoxRestService } from './search-box.service';
 import { SearchContent } from './search-content';
-import { MixedContentContext } from 'sitefinity-react-framework/widgets/entities/mixed-content-context';
+import { RootUrlService } from 'sitefinity-react-framework/sdk/root-url.service';
 import { RestSdkTypes } from 'sitefinity-react-framework/sdk/rest-service';
+import { MixedContentContext } from 'sitefinity-react-framework/widgets/entities/mixed-content-context';
 
 const defaultMixedContent = {
     ItemIdsOrdered:null,
     Content:[ {
-        Type:RestSdkTypes.Pages,
+        Type: RestSdkTypes.Pages,
         Variations:null
     }]
 };
@@ -49,8 +50,7 @@ export async function SearchBox(props: WidgetContext<SearchBoxEntity>) {
    searchModel.SearchBoxPlaceholder = entity.SearchBoxPlaceholder;
    searchModel.SearchIndex = entity.SearchIndex;
    searchModel.SuggestionFields = entity.SuggestionFields || 'Title,Content';
-   const webServicePath =  process.env.SF_WEB_SERVICE_PATH;
-   searchModel.WebServicePath = `/${webServicePath}`;
+   searchModel.WebServicePath = `${RootUrlService.getServiceUrl()}/`;
    searchModel.SearchResultsPageUrl = await SearchBoxRestService.GetPageNodeUrl(entity.SearchResultsPage);
    searchModel.ShowResultsForAllIndexedSites = entity.ShowResultsForAllIndexedSites || '0';
 
