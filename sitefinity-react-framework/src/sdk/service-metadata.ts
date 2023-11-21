@@ -1,3 +1,4 @@
+import { RestService } from 'sitefinity-react-framework/sdk/rest-service';
 import { RootUrlService } from './root-url.service';
 
 export class ServiceMetadata {
@@ -6,7 +7,7 @@ export class ServiceMetadata {
     public static fetch(): Promise<ServiceMetadataDefinition> {
         const serviceUrl = RootUrlService.getServiceUrl();
         const metadataUrl = `${serviceUrl}/sfmeta`;
-        return fetch(metadataUrl, { headers: { 'X-Requested-With': 'react' } }).then(x => x.json()).then(x => {
+        return RestService.sendRequest<ServiceMetadataDefinition>({ url: metadataUrl }).then(x => {
             this.serviceMetadataCache = x;
             return x;
         });
