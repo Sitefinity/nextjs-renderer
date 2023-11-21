@@ -1,4 +1,4 @@
-import { RestService } from 'sitefinity-react-framework/sdk/rest-service';
+import { RestService } from 'sdk/rest-service';
 import { RootUrlService } from '../root-url.service';
 import { PageLayoutServiceResponse } from './layout-service.response';
 import { LazyComponentsResponse } from './lazy-components.response';
