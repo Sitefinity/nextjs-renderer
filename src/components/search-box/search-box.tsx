@@ -10,6 +10,7 @@ import { SearchBoxRestService } from './search-box.service';
 import { SearchContent } from './search-content';
 import { RootUrlService } from 'sitefinity-react-framework/sdk/root-url.service';
 import { RestSdkTypes } from 'sitefinity-react-framework/sdk/rest-service';
+import { MixedContentContext } from 'sitefinity-react-framework/widgets/entities/mixed-content-context';
 
 const defaultMixedContent = {
     ItemIdsOrdered:null,
