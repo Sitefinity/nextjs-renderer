@@ -239,7 +239,7 @@ export class RestService {
         const serviceUrl = RootUrlService.getServiceUrl();
         const setName = ServiceMetadata.getSetNameFromType(itemType);
 
-        return `${serviceUrl}${setName}`;
+        return `${serviceUrl}/${setName}`;
     }
 }
 

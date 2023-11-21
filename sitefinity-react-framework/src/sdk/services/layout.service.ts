@@ -47,7 +47,7 @@ export class LayoutService {
             headers['SF_NO_URL_REFERER'] = 'true';
         }
 
-        let serviceUrl = `${RootUrlService.getServiceUrl()}Default.LazyComponents(url=@param)?@param='${encodeURIComponent(pagePathAndQuery)}'`;
+        let serviceUrl = `${RootUrlService.getServiceUrl()}/Default.LazyComponents(url=@param)?@param='${encodeURIComponent(pagePathAndQuery)}'`;
         serviceUrl += '&correlationId=' + (window as any)['sfCorrelationId'];
 
         return fetch(serviceUrl, { headers }).then(x => x.json());

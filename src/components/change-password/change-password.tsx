@@ -14,6 +14,7 @@ import { ChangeForm } from './change-form';
 import { VisibilityStyle } from '../styling/visibility-style';
 import { ChangePasswordViewModel } from './interfaces/ChangePasswordViewModel';
 import { User } from './interfaces/User';
+import { RootUrlService } from 'sitefinity-react-framework/sdk/root-url.service';
 
 const defaultMixedContent = {
     ItemIdsOrdered:null,
@@ -42,7 +43,6 @@ export async function ChangePassword(props: WidgetContext<ChangePasswordEntity>)
     const dataAttributes = htmlAttributes(props);
     const defaultClass =  entity.CssClass;
     const marginClass = entity.Margins && StyleGenerator.getMarginClasses(entity.Margins);
-    const webServicePath =  process.env.SF_WEB_SERVICE_PATH;
 
     dataAttributes['className'] = classNames(
         defaultClass,
@@ -52,7 +52,7 @@ export async function ChangePassword(props: WidgetContext<ChangePasswordEntity>)
     dataAttributes['data-sfhasquickeditoperation'] = true;
 
     const viewModel: ChangePasswordViewModel = {
-        ChangePasswordHandlerPath: `${webServicePath}/ChangePassword`,
+        ChangePasswordHandlerPath: `${RootUrlService.getServiceUrl()}}/ChangePassword`,
         Attributes: entity.Attributes,
         VisibilityClasses: StylingConfig.VisibilityClasses,
         InvalidClass: StylingConfig.InvalidClass,

@@ -11,6 +11,7 @@ import { RestSdkTypes, RestService } from 'sitefinity-react-framework/sdk/rest-s
 import { MixedContentContext } from 'sitefinity-react-framework/widgets/entities/mixed-content-context';
 import { ResetForm } from './reset-form';
 import { ForgottenForm } from './forgotten-form';
+import { RootUrlService } from 'sitefinity-react-framework/sdk/root-url.service';
 
 const defaultMixedContent = {
     ItemIdsOrdered:null,
@@ -59,7 +60,6 @@ export async function ResetPassword(props: WidgetContext<ResetPasswordEntity>) {
     const dataAttributes = htmlAttributes(props);
     const defaultClass =  entity.CssClass;
     const marginClass = entity.Margins && StyleGenerator.getMarginClasses(entity.Margins);
-    const webServicePath =  process.env.SF_WEB_SERVICE_PATH;
 
     dataAttributes['className'] = classNames(
         defaultClass,
@@ -73,7 +73,7 @@ export async function ResetPassword(props: WidgetContext<ResetPasswordEntity>) {
         Labels: {}
     };
 
-    viewModel.ResetUserPasswordHandlerPath = `${webServicePath}/ResetUserPassword`;
+    viewModel.ResetUserPasswordHandlerPath = `${RootUrlService.getServiceUrl()}}/ResetUserPassword`;
     viewModel.Attributes = entity.Attributes;
     viewModel.Labels.ResetPasswordHeader = entity.ResetPasswordHeader;
     viewModel.Labels.NewPasswordLabel = entity.NewPasswordLabel;
@@ -86,7 +86,7 @@ export async function ResetPassword(props: WidgetContext<ResetPasswordEntity>) {
     viewModel.Labels.AllFieldsAreRequiredErrorMessage = entity.AllFieldsAreRequiredErrorMessage;
     viewModel.Labels.PasswordsMismatchErrorMessage = entity.PasswordsMismatchErrorMessage;
 
-    viewModel.SendResetPasswordEmailHandlerPath = `${webServicePath}/SendResetPasswordEmail`;
+    viewModel.SendResetPasswordEmailHandlerPath = `${RootUrlService.getServiceUrl()}/SendResetPasswordEmail`;
     viewModel.Labels.ForgottenPasswordHeader = entity.ForgottenPasswordHeader;
     viewModel.Labels.EmailLabel = entity.EmailLabel;
     viewModel.Labels.ForgottenPasswordLinkMessage = entity.ForgottenPasswordLinkMessage;
