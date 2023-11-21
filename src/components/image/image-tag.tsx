@@ -1,13 +1,6 @@
 import React from 'react';
-import { StyleGenerator } from '../styling/style-generator.service';
-import { OffsetStyle } from '../styling/offset-style';
-import { Alignment } from '../styling/alignment';
-import { ButtonType } from '../styling/button-types';
-import { generateAnchorAttrsFromLink, getCustomAttributes, htmlAttributes } from 'sitefinity-react-framework/widgets/attributes';
+import { getCustomAttributes } from 'sitefinity-react-framework/widgets/attributes';
 import { classNames } from 'sitefinity-react-framework/utils/classNames';
-import { WidgetContext } from 'sitefinity-react-framework/widgets/widget-context';
-import { LinkModel } from 'sitefinity-react-framework/interfaces/LinkModel';
-import { RestService, RestSdkTypes } from 'sitefinity-react-framework/sdk/rest-service';
 import { ImageDisplayMode } from './interfaces/ImageDisplayMode';
 import { ImageViewModel } from './interfaces/ImageViewModel';
 
