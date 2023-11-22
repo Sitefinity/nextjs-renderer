@@ -107,7 +107,11 @@ interface PageParams {
     searchParams: { [key:string]: string }
 }
 
-async function initLayout({ params, searchParams }: PageParams): Promise<PageLayoutServiceResponse> {
+export async function initLayout({ params, searchParams }: PageParams): Promise<PageLayoutServiceResponse> {
+    if (params && params.slug.some(x => x === '_next')) {
+        notFound();
+    }
+
     await initStaticParams();
 
     const actionParam = searchParams['sfaction'];
