@@ -107,7 +107,7 @@ interface PageParams {
     searchParams: { [key:string]: string }
 }
 
-export async function initLayout({ params, searchParams }: PageParams): Promise<PageLayoutServiceResponse> {
+async function initLayout({ params, searchParams }: PageParams): Promise<PageLayoutServiceResponse> {
     if (params && params.slug.some(x => x === '_next')) {
         notFound();
     }
