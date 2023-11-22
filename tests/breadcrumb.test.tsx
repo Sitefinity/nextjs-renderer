@@ -1,8 +1,13 @@
 import { Breadcrumb } from '@/components/breadcrumb/breadcrumb';
 import { render, waitFor } from '@testing-library/react';
+import { MockedBreadcrumbRestService } from './mocks/mock-breadcrumb.service';
 
-it.skip('should render breadcrumb', async () => {
-    const callToAction = await Breadcrumb({ model, requestContext, metadata });
+it('should render breadcrumb', async () => {
+    const callToAction = await Breadcrumb({
+        model,
+        requestContext,
+        metadata,
+        restService: MockedBreadcrumbRestService });
     const { container } = render(callToAction);
 
     await waitFor(() => {
