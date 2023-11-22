@@ -6,4 +6,5 @@ export interface WidgetContext<T> {
     readonly model: WidgetModel<T>;
     readonly requestContext: RequestContext;
     readonly metadata: WidgetMetadata;
+    readonly restService: any;
 }
