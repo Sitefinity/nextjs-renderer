@@ -11,7 +11,9 @@ import { LinkModel } from 'sitefinity-react-framework/interfaces/LinkModel';
 export type CTAPart = 'Wrapper' | 'Primary' | 'Secondary';
 
 export async function CallToAction(props: WidgetContext<CallToActionEntity>) {
-    const properties = props.model.Properties;
+    const properties = {
+        ...props.model.Properties
+    };
     const dataAttributes = htmlAttributes(props);
 
     const defaultClass =  `d-flex align-items-center ${properties.CssClass}`.trim();
@@ -22,8 +24,8 @@ export async function CallToAction(props: WidgetContext<CallToActionEntity>) {
     const wrapperCustomAttributes = getCustomAttributes(properties.Attributes, 'Wrapper');
     const primaryCustomAttributes = getCustomAttributes(properties.Attributes, 'Primary');
     const secondaryCustomAttributes = getCustomAttributes(properties.Attributes, 'Secondary');
-    const primaryClass = properties.Style ? properties.Style.Primary.DisplayStyle : 'Primary';
-    const secondaryClass = properties.Style ? properties.Style.Secondary.DisplayStyle : 'Secondary';
+    const primaryClass = properties.Style && properties.Style.Primary ? properties.Style.Primary.DisplayStyle : 'Primary';
+    const secondaryClass = properties.Style && properties.Style.Secondary ? properties.Style.Secondary.DisplayStyle : 'Secondary';
     const primaryButtonClass = StyleGenerator.getButtonClasses(primaryClass);
     const secondaryButtonClass = StyleGenerator.getButtonClasses(secondaryClass);
 

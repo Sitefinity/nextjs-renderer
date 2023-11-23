@@ -14,6 +14,7 @@ import { ExternalLoginBase } from 'sitefinity-react-framework/login/external-log
 import { ExternalProvider } from 'sitefinity-react-framework/sdk/dto/external-provider';
 import { RegistrationSettingsDto } from 'sitefinity-react-framework/sdk/dto/registration-settings';
 import { RegistrationForm } from './registration-form';
+import { RootUrlService } from 'sitefinity-react-framework/sdk/root-url.service';
 
 const defaultMixedContent = {
     ItemIdsOrdered:null,
@@ -68,7 +69,6 @@ export async function Registration(props: WidgetContext<RegistrationEntity>) {
     const dataAttributes = htmlAttributes(props);
     const defaultClass =  entity.CssClass;
     const marginClass = entity.MarginStyle && StyleGenerator.getMarginClasses(entity.MarginStyle);
-    const webServicePath =  process.env.SF_WEB_SERVICE_PATH;
 
     dataAttributes['className'] = classNames(
         defaultClass,
@@ -78,8 +78,8 @@ export async function Registration(props: WidgetContext<RegistrationEntity>) {
     dataAttributes['data-sfhasquickeditoperation'] = true;
 
     const viewModel: any = {
-        RegistrationHandlerPath: `/${webServicePath}/Registration`,
-        ResendConfirmationEmailHandlerPath: `/${webServicePath}/ResendConfirmationEmail`,
+        RegistrationHandlerPath: `${RootUrlService.getServiceUrl()}}/Registration`,
+        ResendConfirmationEmailHandlerPath: `${RootUrlService.getServiceUrl()}}/ResendConfirmationEmail`,
         ExternalLoginHandlerPath: '/sitefinity/external-login-handler',
         Attributes: entity.Attributes,
         Labels: {}
