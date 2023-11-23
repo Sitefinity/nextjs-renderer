@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.css';
 export const runtime = 'edge';
 export const dynamic = 'force-static';
+export const revalidate = 30;
 
 export default function RootLayout({
     children
