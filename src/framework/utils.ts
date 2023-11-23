@@ -1,4 +1,3 @@
-import { initStaticParams } from '@/app/init';
 import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 import { PageLayoutServiceResponse } from 'sitefinity-react-framework/sdk/services/layout-service.response';
@@ -8,6 +7,10 @@ import { Metadata } from 'next';
 import { GetAllArgs } from 'sitefinity-react-framework/sdk/services/get-all-args';
 import { ServiceMetadata } from 'sitefinity-react-framework/sdk/service-metadata';
 import { RestService } from 'sitefinity-react-framework/sdk/rest-service';
+import { RootUrlService } from 'sitefinity-react-framework/sdk/root-url.service';
+import { RenderWidgetService } from 'sitefinity-react-framework/services/render-widget-service';
+import { widgetRegistry } from '@/widget-registry';
+import { WidgetExecutionError } from '@/components/error/widget-execution-error-component';
 
 export async function pageLayout({ params, searchParams }: PageParams): Promise<PageLayoutServiceResponse> {
     if (params && params.slug.some(x => x === '_next')) {
@@ -90,4 +93,12 @@ export async function pageStaticParams() {
             slug: relativeUrl.split('/').splice(1)
         };
     });
+}
+
+export async function initStaticParams() {
+    RootUrlService.rootUrl = `${process.env['PROXY_URL'] || process.env['NEXT_CMS_URL']}`;
+    await ServiceMetadata.fetch();
+
+    RenderWidgetService.widgetRegistry = widgetRegistry;
+    RenderWidgetService.errorComponentType = WidgetExecutionError;
 }

@@ -1,4 +1,4 @@
-import { initStaticParams } from '@/app/init';
+import { initStaticParams } from '@/framework/utils';
 import { RenderWidgetService } from 'sitefinity-react-framework/services/render-widget-service';
 import { RequestContext } from 'sitefinity-react-framework/services/request-context';
 import { WidgetModel } from 'sitefinity-react-framework/widgets/widget-model';
