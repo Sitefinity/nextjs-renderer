@@ -245,7 +245,7 @@ export class RestService {
     }
 
     public static sendRequest<T>(request: RequestData) {
-        return fetch(request.url, { headers: this.buildHeaders(request.headers), method: request.method, body: request.data  }).then((x => x.json())).then((x) => {
+        return fetch(request.url, { headers: this.buildHeaders(request.headers), method: request.method, body: request.data }).then((x => x.json())).then((x) => {
             return <T>x;
         });
     }
