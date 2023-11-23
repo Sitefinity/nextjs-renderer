@@ -1,8 +1,9 @@
 import { SdkItem } from 'sitefinity-react-framework/sdk/dto/sdk-item';
 import { getExtension, getFileExtensionCssClass, getFileSize } from './common/utils';
 
-export function Grid(props: { items: any, viewModel: any }) {
-    const { items, viewModel } = props;
+export function Grid(props: { items: any, viewModel: any, url: string, queryString: string }) {
+    const { items, viewModel, url, queryString } = props;
+
     return (<table className="table">
       <thead>
         <tr className="row g-0">
@@ -23,8 +24,8 @@ export function Grid(props: { items: any, viewModel: any }) {
                 const title = item['Title'];
                 const fileSize = getFileSize(item);
                 const extension = getExtension(item);
-                const url = item['Url'];
-                const itemUrl = 'test'; // Model.GetItemUrl(context, item);
+                const downloadUrl = item['Url'];
+                const itemUrl = `${url}${item.ItemDefaultUrl}${queryString}`;
                 const extensionStyle = {
                     backgroundColor: `var(${getFileExtensionCssClass(extension)})`
                 };
@@ -64,7 +65,7 @@ export function Grid(props: { items: any, viewModel: any }) {
                         <span>{fileSize}</span>
                       </td>
                       <td className="col text-end">
-                        <a href={url} target="_blank">{viewModel.DownloadLinkLabel}</a>
+                        <a href={downloadUrl} target="_blank">{viewModel.DownloadLinkLabel}</a>
                       </td>
                     </tr>);
             })

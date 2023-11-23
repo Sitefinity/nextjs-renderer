@@ -1,3 +1,4 @@
+import { PageItem } from 'sitefinity-react-framework/sdk/dto/page-item';
 import { SdkItem } from 'sitefinity-react-framework/sdk/dto/sdk-item';
 
 export const getFileSize = (item: SdkItem) => {
@@ -49,4 +50,13 @@ export const getFileExtensionCssClass = (extension: string) => {
     }
 
     return color;
+};
+
+export const splitAt = (index: number, xs: string) => [xs.slice(0, index), xs.slice(index)];
+
+export const getPageQueryString = (page: PageItem) => {
+    const indexOf = page.ViewUrl.indexOf(page.RelativeUrlPath);
+    const dividedUrls = splitAt(indexOf + page.RelativeUrlPath.length, page.ViewUrl);
+
+    return dividedUrls[1];
 };

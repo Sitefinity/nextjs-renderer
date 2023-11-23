@@ -1,16 +1,16 @@
 import { SdkItem } from 'sitefinity-react-framework/sdk/dto/sdk-item';
 import { getExtension, getFileExtensionCssClass, getFileSize } from './common/utils';
 
-export function List(props: { items: any, viewModel: any }) {
-    const { items, viewModel } = props;
+export function List(props: { items: any, viewModel: any, url: string, queryString: string }) {
+    const { items, viewModel, url, queryString } = props;
     return (
       <>
         {items.map((item: SdkItem, idx: number) => {
             const title = item['Title'];
             const fileSize = getFileSize(item);
             const extension = getExtension(item);
-            const url = item['Url'];
-            const itemUrl = 'test'; // Model.GetItemUrl(context, item);
+            const downloadUrl = item['Url'];
+            const itemUrl = `${url}${item.ItemDefaultUrl}${queryString}`;
             const extensionStyle = {
                 backgroundColor: `var(${getFileExtensionCssClass(extension)})`
             };
@@ -40,7 +40,7 @@ export function List(props: { items: any, viewModel: any }) {
                   </>
                     }
                 <div>
-                  <a href={url} target="_blank" className="text-muted small">{viewModel.DownloadLinkLabel}</a>
+                  <a href={downloadUrl} target="_blank" className="text-muted small">{viewModel.DownloadLinkLabel}</a>
                   <span className="text-muted small">({fileSize})</span>
                 </div>
               </div>

@@ -16,12 +16,15 @@ import { ContentViewDisplayMode } from './interfaces/DisplayMode';
 import { DetailPageSelectionMode } from './interfaces/DetailPageSelectionMode';
 import { List } from './list';
 import { Grid } from './grid';
+import { PageItem } from 'sitefinity-react-framework/sdk/dto/page-item';
+import { getPageQueryString } from './common/utils';
 
 export async function DocumentList(props: WidgetContext<DocumentListEntity>) {
     const entity = {
         Attributes: {},
         CssClasses: [],
         SeoEnabled: true,
+        DetailPageMode: DetailPageSelectionMode.SamePage,
         DownloadLinkLabel: 'Download',
         TitleColumnLabel: 'Title',
         TypeColumnLabel: 'Type',
@@ -32,9 +35,11 @@ export async function DocumentList(props: WidgetContext<DocumentListEntity>) {
         ContentViewDisplayMode: ContentViewDisplayMode.Automatic,
         ...props.model.Properties
     };
-    console.log('props', props);
-    console.log('entity', entity);
+
+
     const context = props.requestContext;
+    // console.log('entity', JSON.stringify(entity, null, 4));
+    // console.log('context', JSON.stringify(context, null, 4));
     const dataAttributes = htmlAttributes(props);
    // const defaultClass =  entity.CssClass;
     const marginClass = entity.Margins && StyleGenerator.getMarginClasses(entity.Margins);
@@ -61,11 +66,7 @@ export async function DocumentList(props: WidgetContext<DocumentListEntity>) {
     viewModel.TitleColumnLabel = entity.TitleColumnLabel;
     viewModel.TypeColumnLabel = entity.TypeColumnLabel;
 
-    // properties.DetailPageMode = properties.DetailPageMode || 'SamePage';
-    // properties.ContentViewDisplayMode = properties.ContentViewDisplayMode || 'Automatic';
-    // properties.Attributes = properties.Attributes || {};
-    // properties.CssClasses = properties.CssClasses || [];
-    // properties.ListFieldMapping = properties.ListFieldMapping || [];
+
     // properties.OrderBy = properties.OrderBy || 'PublicationDate DESC';
     // properties.ListSettings = properties.ListSettings || {};
     // properties.ListSettings.DisplayMode = properties.ListSettings.DisplayMode || 'All';
@@ -96,6 +97,21 @@ export async function DocumentList(props: WidgetContext<DocumentListEntity>) {
     //     data.listModel = await handleListView(props);
     // }
    //  console.log('viewModel.listModel', viewModel.listModel)
+   let url: string = '';
+   const queryList = new URLSearchParams(context.searchParams);
+   let queryString = '?' + queryList.toString();
+
+   if (entity && entity.DetailPageMode === 'SamePage') {
+        url = context.pageNode.MetaInfo.CanonicalUrl;
+    } else if (entity && entity.DetailPage) {
+        const page = await RestService.getItem(
+                RestSdkTypes.Pages,
+                entity.DetailPage.ItemIdsOrdered![0],
+                entity.DetailPage.Content[0].Variations![0].Source
+            );
+
+        queryString = getPageQueryString(page as PageItem);
+    }
     return (
       <div
         {...dataAttributes}
@@ -103,8 +119,8 @@ export async function DocumentList(props: WidgetContext<DocumentListEntity>) {
         {/* {data.detailModel && <ContentListDetail entity={properties} detailModel={data.detailModel} />}
         {data.listModel && <DocumentListMaster  entity={properties} model={data.listModel} />} */}
         { viewModel.listModel && (isGrid
-            ?  <Grid items={viewModel.listModel.Items.Items} viewModel={viewModel} />
-            :  <List items={viewModel.listModel.Items.Items} viewModel={viewModel} />)
+            ?  <Grid items={viewModel.listModel.Items.Items} url={url} queryString={queryString}  viewModel={viewModel} />
+            :  <List items={viewModel.listModel.Items.Items} url={url} queryString={queryString} viewModel={viewModel} />)
         }
       </div>
     );

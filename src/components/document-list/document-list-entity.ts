@@ -13,7 +13,7 @@ export interface DocumentListEntity {
     Margins?: OffsetStyle;
     ListSettings: ContentListSettings;
     OrderBy: string;
-    DetailPageMode: 'SamePage' | 'ExistingPage',
+    DetailPageMode?: 'SamePage' | 'ExistingPage',
     DetailPage: MixedContentContext;
     SfDetailViewName: string;
     ContentViewDisplayMode?: ContentViewDisplayMode;
