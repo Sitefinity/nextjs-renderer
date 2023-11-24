@@ -13,7 +13,7 @@ module.exports = {
             headers: [
               {
                 key: 'Cache-Control',
-                value: 's-maxage=30'
+                value: 'public, s-maxage=30'
               }
             ]
           }
