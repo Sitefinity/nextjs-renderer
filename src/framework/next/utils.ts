@@ -9,8 +9,8 @@ import { ServiceMetadata } from '@/framework/rest-sdk/service-metadata';
 import { RestService } from '@/framework/rest-sdk/rest-service';
 import { RootUrlService } from '@/framework/rest-sdk/root-url.service';
 import { widgetRegistry } from '@/widget-registry';
-import { WidgetExecutionError } from '@/components/error/widget-execution-error-component';
 import { RenderWidgetService } from '../editor/services/render-widget-service';
+import { WidgetExecutionError } from '@/widgets/error/widget-execution-error-component';
 
 export async function pageLayout({ params, searchParams }: PageParams): Promise<PageLayoutServiceResponse> {
     if (params && params.slug.some(x => x === '_next')) {

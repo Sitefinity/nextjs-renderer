@@ -1,7 +1,7 @@
 import { CollectionResponse } from '@/framework/rest-sdk/dto/collection-response';
 import { SdkItem } from '@/framework/rest-sdk/dto/sdk-item';
-import { BreadcrumbEntity } from '@/components/breadcrumb/breadcrumb';
-import { BreadcrumbRestService } from '@/components/breadcrumb/breadcrumb.service';
+import { BreadcrumbEntity } from '@/widgets/breadcrumb/breadcrumb';
+import { BreadcrumbRestService } from '@/widgets/breadcrumb/breadcrumb.service';
 
 export class MockedBreadcrumbRestService extends BreadcrumbRestService {
 
