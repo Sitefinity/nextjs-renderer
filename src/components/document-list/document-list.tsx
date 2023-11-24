@@ -19,6 +19,7 @@ import { Grid } from './grid';
 import { PageItem } from 'sitefinity-react-framework/sdk/dto/page-item';
 import { getPageQueryString, getWhiteListQueryList } from './common/utils';
 import { DetailsItem } from './details-item';
+import { DocumentListViewModel } from './interfaces/DocumentListViewModel';
 
 export async function DocumentList(props: WidgetContext<DocumentListEntity>) {
     const entity = {
@@ -45,13 +46,10 @@ export async function DocumentList(props: WidgetContext<DocumentListEntity>) {
     dataAttributes['data-sfemptyiconaction'] = 'Edit';
     dataAttributes['data-sfhasquickeditoperation'] = true;
     const isGrid = entity.SfViewName === 'DocumentTable';
-    const viewModel: any = {
+    const viewModel: DocumentListViewModel = {
         detailModel: null,
-        listModel: null,
-        Attributes: entity.Attributes,
-        Labels: {}
+        listModel: null
     };
-    viewModel.CssClasses = entity.CssClasses;
     viewModel.RenderLinks = !(entity.ContentViewDisplayMode === ContentViewDisplayMode.Master &&
          entity.DetailPageMode === DetailPageSelectionMode.SamePage);
     viewModel.DownloadLinkLabel = entity.DownloadLinkLabel;

@@ -1,9 +1,10 @@
 import { SdkItem } from 'sitefinity-react-framework/sdk/dto/sdk-item';
 import { getExtension, getFileExtensionCssClass, getFileSize } from './common/utils';
+import { DocumentListViewModel } from './interfaces/DocumentListViewModel';
 
-export function List(props: { viewModel: any, url: string, queryString: string }) {
+export function List(props: { viewModel: DocumentListViewModel, url: string, queryString: string }) {
     const { viewModel, url, queryString } = props;
-    const items = viewModel.listModel.Items.Items;
+    const items = viewModel.listModel!.Items.Items;
     return (
       <>
         {items.map((item: SdkItem, idx: number) => {

@@ -10,11 +10,12 @@ import { RegistrationForm } from './registration-form';
 import { RestSdkTypes, RootUrlService, ExternalProvider, RestService, RegistrationSettingsDto } from '../../rest-sdk';
 import { RestExtensionsService } from '../rest-extensions';
 import { defaultMixedContent } from '../common/defaults';
+import { RequestContext } from 'sitefinity-react-framework/services/request-context';
 
 const EncryptedParam = 'qs';
 
-const isAccountActivationRequest = (context: any) => {
-    if (context && context.IsLive && context.searchParams[EncryptedParam]) {
+const isAccountActivationRequest = (context: RequestContext) => {
+    if (context && context.isLive && context.searchParams && context.searchParams[EncryptedParam]) {
         return true;
     }
 

@@ -1,9 +1,10 @@
 import { SdkItem } from 'sitefinity-react-framework/sdk/dto/sdk-item';
 import { getExtension, getFileExtensionCssClass, getFileSize } from './common/utils';
+import { DocumentListViewModel } from './interfaces/DocumentListViewModel';
 
-export function Grid(props: { viewModel: any, url: string, queryString: string }) {
+export function Grid(props: { viewModel: DocumentListViewModel, url: string, queryString: string }) {
     const { viewModel, url, queryString } = props;
-    const items = viewModel.listModel.Items.Items;
+    const items = viewModel.listModel!.Items.Items;
 
     return (<table className="table">
       <thead>

@@ -63,7 +63,7 @@ export const getPageQueryString = (page: PageItem) => {
 };
 
 export const getWhiteListQueryList = (context: RequestContext, whitelistedQueryParams: string[]) => {
-    const filteredQueryCollection: any = {};
+    const filteredQueryCollection: { [key: string]: string } = {};
     whitelistedQueryParams.forEach(param => {
         const searchParamValue = (context.searchParams || {})[param];
         if (searchParamValue) {
