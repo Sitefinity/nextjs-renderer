@@ -1,14 +1,11 @@
 import React from 'react';
-import { generateAnchorAttrsFromLink, getCustomAttributes, htmlAttributes } from 'sitefinity-react-framework/widgets/attributes';
-import { WidgetContext } from 'sitefinity-react-framework/widgets/widget-context';
-import { classNames } from 'sitefinity-react-framework/utils/classNames';
-import { LinkModel } from 'sitefinity-react-framework/interfaces/LinkModel';
 import { StyleGenerator } from '../styling/style-generator.service';
 import { OffsetStyle } from '../styling/offset-style';
-import { Alignment } from '../styling/alignment';
-import { ButtonType } from '../styling/button-types';
 import { ClassificationRestService } from './classification.service';
 import { PageViewModel } from '../navigation/interfaces/PageViewModel';
+import { classNames } from '@/framework/editor/utils/classNames';
+import { htmlAttributes, getCustomAttributes } from '@/framework/editor/widgets/attributes';
+import { WidgetContext } from '@/framework/editor/widgets/widget-context';
 
 const mapTaxonProperties = (taxon: any, taxonomyName: string, viewUrl?: string, searchParams?: any) =>{
     const children: any[] = [];

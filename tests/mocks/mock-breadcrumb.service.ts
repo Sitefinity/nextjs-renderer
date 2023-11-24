@@ -1,5 +1,5 @@
-import { CollectionResponse } from 'sitefinity-react-framework/sdk/dto/collection-response';
-import { SdkItem } from 'sitefinity-react-framework/sdk/dto/sdk-item';
+import { CollectionResponse } from '@/framework/rest-sdk/dto/collection-response';
+import { SdkItem } from '@/framework/rest-sdk/dto/sdk-item';
 import { BreadcrumbEntity } from '@/components/breadcrumb/breadcrumb';
 import { BreadcrumbRestService } from '@/components/breadcrumb/breadcrumb.service';
 

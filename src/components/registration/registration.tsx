@@ -1,26 +1,27 @@
 import React from 'react';
 import { StyleGenerator } from '../styling/style-generator.service';
 import { OffsetStyle } from '../styling/offset-style';
-import { htmlAttributes } from 'sitefinity-react-framework/widgets/attributes';
-import { classNames } from 'sitefinity-react-framework/utils/classNames';
-import { WidgetContext } from 'sitefinity-react-framework/widgets/widget-context';
-import { PostRegistrationAction } from './interfaces/PostRegistrationAction';
+import { classNames } from '@/framework/editor/utils/classNames';
+import { getUniqueId } from '@/framework/editor/utils/getUniqueId';
+import { RestExtensionsService } from '@/framework/editor/utils/rest-extensions';
+import { htmlAttributes } from '@/framework/editor/widgets/attributes';
+import { MixedContentContext } from '@/framework/editor/widgets/mixed-content-context';
+import { WidgetContext } from '@/framework/editor/widgets/widget-context';
+import { ExternalProvider } from '@/framework/rest-sdk/dto/external-provider';
+import { RegistrationSettingsDto } from '@/framework/rest-sdk/dto/registration-settings';
+import { RestSdkTypes, RestService } from '@/framework/rest-sdk/rest-service';
+import { RootUrlService } from '@/framework/rest-sdk/root-url.service';
+import { ExternalLoginBase } from '../external-login-base';
 import { StylingConfig } from '../styling/styling-config';
-import { getUniqueId } from 'sitefinity-react-framework/utils/getUniqueId';
-import { RestExtensionsService } from 'sitefinity-react-framework/sdk/rest-extensions';
-import { RestSdkTypes, RestService } from 'sitefinity-react-framework/sdk/rest-service';
-import { MixedContentContext } from 'sitefinity-react-framework/widgets/entities/mixed-content-context';
-import { ExternalLoginBase } from 'sitefinity-react-framework/login/external-login-base';
-import { ExternalProvider } from 'sitefinity-react-framework/sdk/dto/external-provider';
-import { RegistrationSettingsDto } from 'sitefinity-react-framework/sdk/dto/registration-settings';
+import { PostRegistrationAction } from './interfaces/PostRegistrationAction';
 import { RegistrationForm } from './registration-form';
-import { RootUrlService } from 'sitefinity-react-framework/sdk/root-url.service';
+
 
 const defaultMixedContent = {
     ItemIdsOrdered:null,
     Content:[ {
-        Type:RestSdkTypes.Pages,
-        Variations:null
+        Type: RestSdkTypes.Pages,
+        Variations: null
     }]
 };
 const EncryptedParam = 'qs';

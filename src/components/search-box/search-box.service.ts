@@ -1,7 +1,7 @@
-import { RestSdkTypes } from 'sitefinity-react-framework/sdk/rest-service';
-import { MixedContentContext } from 'sitefinity-react-framework/widgets/entities/mixed-content-context';
-import { FilterConverterService } from 'sitefinity-react-framework/sdk/filters/filter-converter';
-import { RestExtensionsService } from 'sitefinity-react-framework/sdk/rest-extensions';
+import { RestSdkTypes } from '@/framework/rest-sdk/rest-service';
+import { FilterConverterService } from '@/framework/rest-sdk/filters/filter-converter';
+import { RestExtensionsService } from '@/framework/editor/utils/rest-extensions';
+import { MixedContentContext } from '@/framework/editor/widgets/mixed-content-context';
 
 export class SearchBoxRestService {
 

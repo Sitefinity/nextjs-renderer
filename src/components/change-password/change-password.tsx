@@ -1,20 +1,20 @@
 import React from 'react';
 import { StyleGenerator } from '../styling/style-generator.service';
 import { OffsetStyle } from '../styling/offset-style';
-import { htmlAttributes } from 'sitefinity-react-framework/widgets/attributes';
-import { classNames } from 'sitefinity-react-framework/utils/classNames';
-import { WidgetContext } from 'sitefinity-react-framework/widgets/widget-context';
 import { PostPasswordChangeAction } from './interfaces/PostPasswordChangeAction';
 import { StylingConfig } from '../styling/styling-config';
-import { getUniqueId } from 'sitefinity-react-framework/utils/getUniqueId';
-import { RestExtensionsService } from 'sitefinity-react-framework/sdk/rest-extensions';
-import { RestSdkTypes, RestService } from 'sitefinity-react-framework/sdk/rest-service';
-import { MixedContentContext } from 'sitefinity-react-framework/widgets/entities/mixed-content-context';
 import { ChangeForm } from './change-form';
 import { VisibilityStyle } from '../styling/visibility-style';
 import { ChangePasswordViewModel } from './interfaces/ChangePasswordViewModel';
 import { User } from './interfaces/User';
-import { RootUrlService } from 'sitefinity-react-framework/sdk/root-url.service';
+import { classNames } from '@/framework/editor/utils/classNames';
+import { getUniqueId } from '@/framework/editor/utils/getUniqueId';
+import { RestExtensionsService } from '@/framework/editor/utils/rest-extensions';
+import { htmlAttributes } from '@/framework/editor/widgets/attributes';
+import { MixedContentContext } from '@/framework/editor/widgets/mixed-content-context';
+import { WidgetContext } from '@/framework/editor/widgets/widget-context';
+import { RestSdkTypes, RestService } from '@/framework/rest-sdk/rest-service';
+import { RootUrlService } from '@/framework/rest-sdk/root-url.service';
 
 const defaultMixedContent = {
     ItemIdsOrdered:null,

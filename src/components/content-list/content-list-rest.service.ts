@@ -1,16 +1,16 @@
-import { CollectionResponse } from 'sitefinity-react-framework/sdk/dto/collection-response';
-import { SdkItem } from 'sitefinity-react-framework/sdk/dto/sdk-item';
-import { CombinedFilter } from 'sitefinity-react-framework/sdk/filters/combined-filter';
-import { FilterClause, FilterOperators } from 'sitefinity-react-framework/sdk/filters/filter-clause';
-import { OrderBy } from 'sitefinity-react-framework/sdk/filters/orderby';
-import { RelationFilter } from 'sitefinity-react-framework/sdk/filters/relation-filter';
-import { RestService } from 'sitefinity-react-framework/sdk/rest-service';
-import { ServiceMetadata } from 'sitefinity-react-framework/sdk/service-metadata';
-import { DetailItem } from 'sitefinity-react-framework/sdk/services/detail-item';
-import { GetAllArgs } from 'sitefinity-react-framework/sdk/services/get-all-args';
-import { FilterConverterService } from 'sitefinity-react-framework/sdk/filters/filter-converter';
-import { ContentVariation, ContentContext } from 'sitefinity-react-framework/widgets/entities/mixed-content-context';
+import { CollectionResponse } from '@/framework/rest-sdk/dto/collection-response';
+import { SdkItem } from '@/framework/rest-sdk/dto/sdk-item';
+import { CombinedFilter } from '@/framework/rest-sdk/filters/combined-filter';
+import { FilterClause, FilterOperators } from '@/framework/rest-sdk/filters/filter-clause';
+import { OrderBy } from '@/framework/rest-sdk/filters/orderby';
+import { RelationFilter } from '@/framework/rest-sdk/filters/relation-filter';
+import { RestService } from '@/framework/rest-sdk/rest-service';
+import { ServiceMetadata } from '@/framework/rest-sdk/service-metadata';
+import { GetAllArgs } from '@/framework/rest-sdk/services/get-all-args';
+import { FilterConverterService } from '@/framework/rest-sdk/filters/filter-converter';
 import { ContentListEntity } from './content-list-entity';
+import { ContentContext, ContentVariation } from '@/framework/editor/widgets/mixed-content-context';
+import { DetailItem } from '@/framework/editor/services/detail-item';
 
 export class ContentListRestService {
 

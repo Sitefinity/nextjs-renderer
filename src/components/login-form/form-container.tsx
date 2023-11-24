@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import { ExternalLoginBase } from 'sitefinity-react-framework/login/external-login-base';
 import { VisibilityStyle } from '../styling/visibility-style';
-import { classNames } from 'sitefinity-react-framework/utils/classNames';
+import { ExternalLoginBase } from '../external-login-base';
+import { classNames } from '@/framework/editor/utils/classNames';
 
 const invalidDataAttr = 'data-sf-invalid';
 const isValidEmail = function (email: string) {

@@ -1,4 +1,4 @@
-import { WidgetRegistry } from 'sitefinity-react-framework/widgets/widget-registry';
+
 import { ContentBlock } from './components/content-block/content-block';
 import { ContentList } from './components/content-list/content-list';
 import { CallToAction } from './components/call-to-action/call-to-action';
@@ -13,6 +13,7 @@ import { ResetPassword } from './components/reset-password/reset-password';
 import { Registration } from './components/registration/registration';
 import { LanguageSelector } from './components/language-selector/language-selector';
 import { Section } from './components/section/section';
+import { WidgetRegistry } from './framework/editor/widgets/widget-registry';
 
 import sitefinityContentBlockJson from './components/content-block/designer-metadata.json';
 import sitefinitySectionJson from './components/section/designer-metadata.json';

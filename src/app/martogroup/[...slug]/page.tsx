@@ -1,6 +1,6 @@
 
-import RenderPage from '@/framework/components/render-page';
-import { PageParams } from '@/framework/page-params';
+import RenderPage from '@/framework/next/components/render-page';
+import { PageParams } from '@/framework/next/page-params';
 
 export const dynamic = 'force-static';
 export const revalidate = 30;

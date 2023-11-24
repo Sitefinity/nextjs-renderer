@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { VisibilityStyle } from '../styling/visibility-style';
-import { classNames } from 'sitefinity-react-framework/utils/classNames';
 import { invalidDataAttr, isValidEmail, redirect, serializeForm } from '../common/utils';
+import { classNames } from '@/framework/editor/utils/classNames';
 
 const RegistrationForm = (props: any) => {
     const { viewModel, context, firstNameInputId, lastNameInputId,

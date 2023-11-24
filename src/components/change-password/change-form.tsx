@@ -2,9 +2,9 @@
 
 import React from 'react';
 import { VisibilityStyle } from '../styling/visibility-style';
-import { classNames } from 'sitefinity-react-framework/utils/classNames';
 import { invalidDataAttr, invalidateElement, redirect, serializeForm } from '../common/utils';
 import { ChangePasswordViewModel } from './interfaces/ChangePasswordViewModel';
+import { classNames } from '@/framework/editor/utils/classNames';
 
 interface ChageFormProps {
     viewModel: ChangePasswordViewModel,

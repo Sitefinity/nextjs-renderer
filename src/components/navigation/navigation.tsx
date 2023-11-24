@@ -1,7 +1,5 @@
 import React from 'react';
-import { getCustomAttributes, htmlAttributes } from 'sitefinity-react-framework/widgets/attributes';
-import { WidgetContext } from 'sitefinity-react-framework/widgets/widget-context';
-import { classNames } from 'sitefinity-react-framework/utils/classNames';
+
 import { StyleGenerator } from '../styling/style-generator.service';
 import { OffsetStyle } from '../styling/offset-style';
 import { NavigationRestService } from './navigation.service';
@@ -10,6 +8,9 @@ import { Accordion } from './accordion';
 import { Vertical } from './vertical';
 import { VerticalSitemap } from './vertical-sitemap';
 import { Tabs } from './tabs';
+import { classNames } from '@/framework/editor/utils/classNames';
+import { htmlAttributes, getCustomAttributes } from '@/framework/editor/widgets/attributes';
+import { WidgetContext } from '@/framework/editor/widgets/widget-context';
 
 export type NavgationViewName = 'Horizontal' | 'Tabs' | 'Accordion' | 'Vertical' | 'VerticalSitemap';
 

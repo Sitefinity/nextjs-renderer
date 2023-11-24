@@ -1,8 +1,8 @@
-import { RendererContract, ComponentMetadata, GetWidgetMetadataArgs, RenderWidgetArgs, GetWidgetsArgs, TotalCountResult, WidgetSection, RenderResult, GetCategoriesArgs, WidgetItem } from 'sitefinity-react-framework/editor/renderer-contract-interfaces';
-import { RenderWidgetService } from 'sitefinity-react-framework/services/render-widget-service';
+import { RendererContract, ComponentMetadata, GetWidgetMetadataArgs, RenderWidgetArgs, GetWidgetsArgs, TotalCountResult, WidgetSection, RenderResult, GetCategoriesArgs, WidgetItem } from '@/framework/editor/renderer-contract-interfaces';
 import { createRoot } from 'react-dom/client';
-import { RequestContext } from 'sitefinity-react-framework/services/request-context';
 import { widgetRegistry } from './widget-registry';
+import { RenderWidgetService } from './framework/editor/services/render-widget-service';
+import { RequestContext } from './framework/editor/services/request-context';
 
 export class RendererContractImpl implements RendererContract {
 

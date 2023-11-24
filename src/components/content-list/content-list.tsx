@@ -5,11 +5,9 @@ import { ContentListDetail } from './detail/content-list-detail';
 import { ContentListModelDetail } from './detail/content-list-detail-model';
 import { ContentListMaster } from './master/content-list-master';
 import { ContentListModelMaster } from './master/content-list-master-model';
-import { WidgetContext } from 'sitefinity-react-framework/widgets/widget-context';
-import { htmlAttributes } from 'sitefinity-react-framework/widgets/attributes';
-import { DetailItem } from 'sitefinity-react-framework/sdk/services/detail-item';
-import { RestSdkTypes, RestService } from 'sitefinity-react-framework/sdk/rest-service';
-import { SdkItem } from 'sitefinity-react-framework/sdk/dto/sdk-item';
+import { DetailItem } from '@/framework/editor/services/detail-item';
+import { htmlAttributes } from '@/framework/editor/widgets/attributes';
+import { WidgetContext } from '@/framework/editor/widgets/widget-context';
 
 export async function ContentList(props: WidgetContext<ContentListEntity>) {
     const attributes = htmlAttributes(props);

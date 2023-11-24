@@ -1,6 +1,6 @@
+import { htmlAttributes } from '@/framework/editor/widgets/attributes';
+import { WidgetContext } from '@/framework/editor/widgets/widget-context';
 import React from 'react';
-import { WidgetContext } from 'sitefinity-react-framework/widgets/widget-context';
-import { htmlAttributes } from 'sitefinity-react-framework/widgets/attributes';
 
 
 export async function WidgetExecutionError(props: { error: string, context: WidgetContext<any>}) {

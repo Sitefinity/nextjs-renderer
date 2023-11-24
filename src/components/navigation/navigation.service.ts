@@ -1,5 +1,5 @@
-import { SdkItem } from 'sitefinity-react-framework/sdk/dto/sdk-item';
-import { RestService, RestSdkTypes } from 'sitefinity-react-framework/sdk/rest-service';
+import { SdkItem } from '@/framework/rest-sdk/dto/sdk-item';
+import { RestService, RestSdkTypes } from '@/framework/rest-sdk/rest-service';
 import { NavigationEntity } from './navigation';
 
 export class NavigationRestService {

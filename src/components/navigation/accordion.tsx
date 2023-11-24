@@ -1,8 +1,8 @@
 import React from 'react';
-import { classNames } from 'sitefinity-react-framework/utils/classNames';
-import { getUniqueId } from 'sitefinity-react-framework/utils/getUniqueId';
 import { PageViewModel } from './interfaces/PageViewModel';
 import { getClass } from './utils';
+import { classNames } from '@/framework/editor/utils/classNames';
+import { getUniqueId } from '@/framework/editor/utils/getUniqueId';
 
 const getAccordionButtonStateClass = (node: PageViewModel) =>{
     if (!node.IsCurrentlyOpened && !node.HasChildOpen) {

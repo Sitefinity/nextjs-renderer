@@ -1,8 +1,8 @@
 
 import { Metadata } from 'next';
-import RenderPage from '@/framework/components/render-page';
-import { pageMetadata, pageStaticParams } from '@/framework/utils';
-import { PageParams } from '@/framework/page-params';
+import RenderPage from '@/framework/next/components/render-page';
+import { pageMetadata, pageStaticParams } from '@/framework/next/utils';
+import { PageParams } from '@/framework/next/page-params';
 
 export const dynamic = 'force-dynamic';
 

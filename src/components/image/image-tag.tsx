@@ -1,8 +1,9 @@
 import React from 'react';
-import { getCustomAttributes } from 'sitefinity-react-framework/widgets/attributes';
-import { classNames } from 'sitefinity-react-framework/utils/classNames';
+
 import { ImageDisplayMode } from './interfaces/ImageDisplayMode';
 import { ImageViewModel } from './interfaces/ImageViewModel';
+import { classNames } from '@/framework/editor/utils/classNames';
+import { getCustomAttributes } from '@/framework/editor/widgets/attributes';
 
 const imageWrapperClass = 'd-inline-block';
 

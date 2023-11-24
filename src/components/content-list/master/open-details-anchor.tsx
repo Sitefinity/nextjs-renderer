@@ -1,12 +1,12 @@
 'use client';
 
 import React from 'react';
-import { RestSdkTypes, RestService } from 'sitefinity-react-framework/sdk/rest-service';
 import { ContentListEntity } from '../content-list-entity';
 import { ListWithSummaryModel } from './list-with-summary/list-with-summary-model';
-import { DetailItem } from 'sitefinity-react-framework/sdk/services/detail-item';
-import { SdkItem } from 'sitefinity-react-framework/sdk/dto/sdk-item';
-import { PageItem } from 'sitefinity-react-framework/sdk/dto/page-item';
+import { DetailItem } from '@/framework/editor/services/detail-item';
+import { PageItem } from '@/framework/rest-sdk/dto/page-item';
+import { SdkItem } from '@/framework/rest-sdk/dto/sdk-item';
+import { RestService, RestSdkTypes } from '@/framework/rest-sdk/rest-service';
 
 export function OpenDetailsAnchor(props: {
     item: any;

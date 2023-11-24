@@ -1,19 +1,20 @@
+import { classNames } from '@/framework/editor/utils/classNames';
+import { getUniqueId } from '@/framework/editor/utils/getUniqueId';
+import { RestExtensionsService } from '@/framework/editor/utils/rest-extensions';
+import { htmlAttributes } from '@/framework/editor/widgets/attributes';
+import { MixedContentContext } from '@/framework/editor/widgets/mixed-content-context';
+import { WidgetContext } from '@/framework/editor/widgets/widget-context';
+import { ExternalProvider } from '@/framework/rest-sdk/dto/external-provider';
+import { FilterConverterService } from '@/framework/rest-sdk/filters/filter-converter';
+import { RestSdkTypes, RestService } from '@/framework/rest-sdk/rest-service';
 import React from 'react';
-import { StyleGenerator } from '../styling/style-generator.service';
+import { ExternalLoginBase } from '../external-login-base';
 import { OffsetStyle } from '../styling/offset-style';
-import { htmlAttributes } from 'sitefinity-react-framework/widgets/attributes';
-import { classNames } from 'sitefinity-react-framework/utils/classNames';
-import { WidgetContext } from 'sitefinity-react-framework/widgets/widget-context';
-import { PostLoginAction } from './interfaces/PostLoginAction';
+import { StyleGenerator } from '../styling/style-generator.service';
 import { StylingConfig } from '../styling/styling-config';
-import { getUniqueId } from 'sitefinity-react-framework/utils/getUniqueId';
-import { RestExtensionsService } from 'sitefinity-react-framework/sdk/rest-extensions';
-import { RestSdkTypes, RestService } from 'sitefinity-react-framework/sdk/rest-service';
-import { FilterConverterService } from 'sitefinity-react-framework/sdk/filters/filter-converter';
-import { MixedContentContext } from 'sitefinity-react-framework/widgets/entities/mixed-content-context';
-import { ExternalLoginBase } from 'sitefinity-react-framework/login/external-login-base';
-import { ExternalProvider } from 'sitefinity-react-framework/sdk/dto/external-provider';
 import { FormContainer } from './form-container';
+import { PostLoginAction } from './interfaces/PostLoginAction';
+
 
 const defaultMixedContent = {
     ItemIdsOrdered:null,

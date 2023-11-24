@@ -1,14 +1,14 @@
 import React from 'react';
 import { StyleGenerator } from '../styling/style-generator.service';
 import { OffsetStyle } from '../styling/offset-style';
-import { generateAnchorAttrsFromLink, htmlAttributes } from 'sitefinity-react-framework/widgets/attributes';
-import { classNames } from 'sitefinity-react-framework/utils/classNames';
-import { WidgetContext } from 'sitefinity-react-framework/widgets/widget-context';
-import { LinkModel } from 'sitefinity-react-framework/interfaces/LinkModel';
-import { RestService, RestSdkTypes } from 'sitefinity-react-framework/sdk/rest-service';
 import { ImageTag } from './image-tag';
 import { ImageClickAction } from './interfaces/ImageClickAction';
 import { ImageDisplayMode } from './interfaces/ImageDisplayMode';
+import { classNames } from '@/framework/editor/utils/classNames';
+import { htmlAttributes, generateAnchorAttrsFromLink } from '@/framework/editor/widgets/attributes';
+import { LinkModel } from '@/framework/editor/widgets/link-model';
+import { WidgetContext } from '@/framework/editor/widgets/widget-context';
+import { RestService, RestSdkTypes } from '@/framework/rest-sdk/rest-service';
 
 const imageWrapperClass = 'd-inline-block';
 

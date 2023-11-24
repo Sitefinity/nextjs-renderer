@@ -1,7 +1,7 @@
+import { htmlAttributes } from '@/framework/editor/widgets/attributes';
+import { WidgetContext } from '@/framework/editor/widgets/widget-context';
+import { RestService } from '@/framework/rest-sdk/rest-service';
 import React from 'react';
-import { htmlAttributes } from 'sitefinity-react-framework/widgets/attributes';
-import { RestService } from 'sitefinity-react-framework/sdk/rest-service';
-import { WidgetContext } from 'sitefinity-react-framework/widgets/widget-context';
 
 export async function ContentBlock(props: WidgetContext<ContentBlockEntity>) {
     const dataAttributes = htmlAttributes(props);
