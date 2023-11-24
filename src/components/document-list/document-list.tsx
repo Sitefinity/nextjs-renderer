@@ -17,7 +17,8 @@ import { DetailPageSelectionMode } from './interfaces/DetailPageSelectionMode';
 import { List } from './list';
 import { Grid } from './grid';
 import { PageItem } from 'sitefinity-react-framework/sdk/dto/page-item';
-import { getPageQueryString } from './common/utils';
+import { getPageQueryString, getWhiteListQueryList } from './common/utils';
+import { DetailsItem } from './details-item';
 
 export async function DocumentList(props: WidgetContext<DocumentListEntity>) {
     const entity = {
@@ -36,18 +37,13 @@ export async function DocumentList(props: WidgetContext<DocumentListEntity>) {
         ...props.model.Properties
     };
 
-
     const context = props.requestContext;
-    // console.log('entity', JSON.stringify(entity, null, 4));
-    // console.log('context', JSON.stringify(context, null, 4));
     const dataAttributes = htmlAttributes(props);
-   // const defaultClass =  entity.CssClass;
     const marginClass = entity.Margins && StyleGenerator.getMarginClasses(entity.Margins);
 
     dataAttributes['className'] = classNames(
-      //  defaultClass,
         marginClass
-        );
+    );
     dataAttributes['data-sfemptyiconaction'] = 'Edit';
     dataAttributes['data-sfhasquickeditoperation'] = true;
     const isGrid = entity.SfViewName === 'DocumentTable';
@@ -58,7 +54,6 @@ export async function DocumentList(props: WidgetContext<DocumentListEntity>) {
         Labels: {}
     };
     viewModel.CssClasses = entity.CssClasses;
-   // viewModel.DetailItemUrl = new Uri(context.PageNode?.ViewUrl ?? string.Empty, UriKind.RelativeOrAbsolute);
     viewModel.RenderLinks = !(entity.ContentViewDisplayMode === ContentViewDisplayMode.Master &&
          entity.DetailPageMode === DetailPageSelectionMode.SamePage);
     viewModel.DownloadLinkLabel = entity.DownloadLinkLabel;
@@ -66,43 +61,34 @@ export async function DocumentList(props: WidgetContext<DocumentListEntity>) {
     viewModel.TitleColumnLabel = entity.TitleColumnLabel;
     viewModel.TypeColumnLabel = entity.TypeColumnLabel;
 
-
-    // properties.OrderBy = properties.OrderBy || 'PublicationDate DESC';
-    // properties.ListSettings = properties.ListSettings || {};
-    // properties.ListSettings.DisplayMode = properties.ListSettings.DisplayMode || 'All';
-    // properties.ListSettings.ItemsPerPage = properties.ListSettings.ItemsPerPage || 20;
-    // properties.ListSettings.LimitItemsCount = properties.ListSettings.LimitItemsCount || 20;
-    // properties.SelectExpression = properties.SelectExpression || '*';
-    // properties.SelectionGroupLogicalOperator = properties.SelectionGroupLogicalOperator || 'AND';
-    // properties.SfViewName = properties.SfViewName || 'CardsList';
-
-    // if (properties.ContentViewDisplayMode === 'Automatic') {
+     if (entity.ContentViewDisplayMode === 'Automatic') {
          if (context.detailItem) {
-             viewModel.detailModel = await handleDetailView(context.detailItem, entity);
+            viewModel.detailModel = await handleDetailView(context.detailItem, entity, context);
          } else {
              viewModel.listModel = await handleListView(entity, context);
          }
-    // } else if (properties.ContentViewDisplayMode === 'Detail') {
-    //     if (properties.SelectedItems && properties.SelectedItems.Content && properties.SelectedItems.Content.length > 0) {
-    //         const selectedContent = properties.SelectedItems.Content[0];
-    //         const itemIdsOrdered = properties.SelectedItems.ItemIdsOrdered;
-    //         const detailModel = await handleDetailView({
-    //             Id: itemIdsOrdered ? itemIdsOrdered![0]: '',
-    //             ItemType: selectedContent.Type,
-    //             ProviderName: selectedContent.Variations![0].Source
-    //         }, props);
-    //         data.detailModel = detailModel;
-    //     }
-    // } else if (properties.ContentViewDisplayMode === 'Master') {
-    //     data.listModel = await handleListView(props);
-    // }
-   //  console.log('viewModel.listModel', viewModel.listModel)
+     } else if (entity.ContentViewDisplayMode === 'Detail') {
+        if (entity.SelectedItems && entity.SelectedItems.Content && entity.SelectedItems.Content.length > 0) {
+            const selectedContent = entity.SelectedItems.Content[0];
+            const itemIdsOrdered = entity.SelectedItems.ItemIdsOrdered;
+            const detailModel = await handleDetailView({
+                Id: itemIdsOrdered ? itemIdsOrdered![0]: '',
+                ItemType: selectedContent.Type,
+                ProviderName: selectedContent.Variations![0].Source
+            }, entity, context);
+            viewModel.detailModel = detailModel;
+        }
+    } else if (entity.ContentViewDisplayMode === 'Master') {
+        viewModel.listModel = await handleListView(entity, context);
+    }
+
    let url: string = '';
-   const queryList = new URLSearchParams(context.searchParams);
+   const whitelistedQueryParams = ['sf_site','sfaction','sf_provider','sf_culture'];
+   const queryList = getWhiteListQueryList(context, whitelistedQueryParams);
    let queryString = '?' + queryList.toString();
 
    if (entity && entity.DetailPageMode === 'SamePage') {
-        url = context.pageNode.MetaInfo.CanonicalUrl;
+        url = context.pageNode.Fields ? context.pageNode.Fields.ViewUrl : context.pageNode.MetaInfo.CanonicalUrl;
     } else if (entity && entity.DetailPage) {
         const page = await RestService.getItem(
                 RestSdkTypes.Pages,
@@ -110,17 +96,17 @@ export async function DocumentList(props: WidgetContext<DocumentListEntity>) {
                 entity.DetailPage.Content[0].Variations![0].Source
             );
 
+        url = page.RelativeUrlPath;
         queryString = getPageQueryString(page as PageItem);
     }
     return (
       <div
         {...dataAttributes}
       >
-        {/* {data.detailModel && <ContentListDetail entity={properties} detailModel={data.detailModel} />}
-        {data.listModel && <DocumentListMaster  entity={properties} model={data.listModel} />} */}
+        {viewModel.detailModel && <DetailsItem entity={entity} viewModel={viewModel} />}
         { viewModel.listModel && (isGrid
-            ?  <Grid items={viewModel.listModel.Items.Items} url={url} queryString={queryString}  viewModel={viewModel} />
-            :  <List items={viewModel.listModel.Items.Items} url={url} queryString={queryString} viewModel={viewModel} />)
+            ?  <Grid url={url} queryString={queryString}  viewModel={viewModel} />
+            :  <List url={url} queryString={queryString} viewModel={viewModel} />)
         }
       </div>
     );
@@ -151,40 +137,52 @@ function getAttributesWithClasses(entity: DocumentListEntity, fieldName: string,
     return contentListAttributes;
 }
 
-function handleDetailView(detailItem: DetailItem, entity: DocumentListEntity) {
+ const handleDetailView = async (
+    detailItem: DetailItem,
+    entity: DocumentListEntity,
+    context: RequestContext
+ ) => {
     const contentListAttributes = getAttributesWithClasses(entity, 'Details view', null);
+
+    let item;
+    if (context.detailItem) {
+        item = await RestService.getItem(
+            detailItem.ItemType,
+            detailItem.Id,
+            detailItem.ProviderName
+        );
+    } else {
+        const items = await DocumentListRestService.getItems(entity, detailItem);
+        item = items.Items[0];
+    }
 
     const detailModel = {
         Attributes: contentListAttributes,
         DetailItem: detailItem,
+        item: item,
         ViewName: entity.SfDetailViewName
     } as DocumentListModelDetail;
 
     return detailModel;
-}
+};
 
- async function handleListView(entity: DocumentListEntity, context: RequestContext) {
+ const handleListView = async (entity: DocumentListEntity, context: RequestContext) => {
     const listFieldMapping: {[key: string]: string} = {};
-    // entity.ListFieldMapping.forEach((entry) => {
-    //     listFieldMapping[entry.FriendlyName] = entry.Name;
-    // });
-
     const fieldCssClassMap: {[key: string]: string} = {};
     entity.CssClasses!.forEach((entry) => {
         fieldCssClassMap[entry.FieldName] = entry.CssClass;
     });
 
-     const items = await DocumentListRestService.getItems(entity, context.detailItem);
-  //  console.log('items', items);
-    let DocumentListMasterModel: DocumentListModelMaster = {
+    const items = await DocumentListRestService.getItems(entity, context.detailItem);
+    const DocumentListMasterModel: DocumentListModelMaster = {
 
         OpenDetails: !(entity.ContentViewDisplayMode === 'Master' && entity.DetailPageMode === 'SamePage'),
         FieldCssClassMap: fieldCssClassMap,
         FieldMap: listFieldMapping,
         Items: items,
         ViewName: entity.SfViewName as any,
-        Attributes: getAttributesWithClasses(entity, 'Content list', 'row row-cols-1 row-cols-md-3')
+        Attributes: getAttributesWithClasses(entity, 'Document list', 'row row-cols-1 row-cols-md-3')
     };
 
      return DocumentListMasterModel;
- }
+ };

@@ -1,5 +1,6 @@
 import { PageItem } from 'sitefinity-react-framework/sdk/dto/page-item';
 import { SdkItem } from 'sitefinity-react-framework/sdk/dto/sdk-item';
+import { RequestContext } from 'sitefinity-react-framework/services/request-context';
 
 export const getFileSize = (item: SdkItem) => {
     const size = item['TotalSize'];
@@ -59,4 +60,15 @@ export const getPageQueryString = (page: PageItem) => {
     const dividedUrls = splitAt(indexOf + page.RelativeUrlPath.length, page.ViewUrl);
 
     return dividedUrls[1];
+};
+
+export const getWhiteListQueryList = (context: RequestContext, whitelistedQueryParams: string[]) => {
+    const filteredQueryCollection: any = {};
+    whitelistedQueryParams.forEach(param => {
+        const searchParamValue = (context.searchParams || {})[param];
+        if (searchParamValue) {
+            filteredQueryCollection[param] = searchParamValue;
+        }
+    });
+    return new URLSearchParams(filteredQueryCollection);
 };

@@ -1,8 +1,9 @@
 import { SdkItem } from 'sitefinity-react-framework/sdk/dto/sdk-item';
 import { getExtension, getFileExtensionCssClass, getFileSize } from './common/utils';
 
-export function Grid(props: { items: any, viewModel: any, url: string, queryString: string }) {
-    const { items, viewModel, url, queryString } = props;
+export function Grid(props: { viewModel: any, url: string, queryString: string }) {
+    const { viewModel, url, queryString } = props;
+    const items = viewModel.listModel.Items.Items;
 
     return (<table className="table">
       <thead>
