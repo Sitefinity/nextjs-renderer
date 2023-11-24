@@ -2,7 +2,7 @@ import React from 'react';
 import { DocumentListEntity } from './document-list-entity';
 import { DocumentListRestService } from './document-list-rest.service';
 import { WidgetContext } from 'sitefinity-react-framework/widgets/widget-context';
-import { htmlAttributes } from 'sitefinity-react-framework/widgets/attributes';
+import { getCustomAttributes, htmlAttributes } from 'sitefinity-react-framework/widgets/attributes';
 import { DetailItem } from 'sitefinity-react-framework/sdk/services/detail-item';
 import { RestSdkTypes, RestService } from 'sitefinity-react-framework/sdk/rest-service';
 import { SdkItem } from 'sitefinity-react-framework/sdk/dto/sdk-item';
@@ -36,14 +36,12 @@ export async function DocumentList(props: WidgetContext<DocumentListEntity>) {
         ContentViewDisplayMode: ContentViewDisplayMode.Automatic,
         ...props.model.Properties
     };
-
+    console.log('entity', entity);
     const context = props.requestContext;
     const dataAttributes = htmlAttributes(props);
+    const documentListCustomAttributes = getCustomAttributes(entity.Attributes, 'Document list');
     const marginClass = entity.Margins && StyleGenerator.getMarginClasses(entity.Margins);
-
-    dataAttributes['className'] = classNames(
-        marginClass
-    );
+    let defaultClass =  '';
     dataAttributes['data-sfemptyiconaction'] = 'Edit';
     dataAttributes['data-sfhasquickeditoperation'] = true;
     const isGrid = entity.SfViewName === 'DocumentTable';
@@ -63,8 +61,13 @@ export async function DocumentList(props: WidgetContext<DocumentListEntity>) {
 
      if (entity.ContentViewDisplayMode === 'Automatic') {
          if (context.detailItem) {
+            const viewCss = entity.CssClasses!.find(x => x.FieldName === 'Details view');
+            defaultClass = viewCss ? viewCss.CssClass : '';
             viewModel.detailModel = await handleDetailView(context.detailItem, entity, context);
          } else {
+            const fieldName = isGrid ? 'Document table' : 'Document list';
+            const viewCss = entity.CssClasses!.find(x => x.FieldName === fieldName);
+            defaultClass = viewCss ? viewCss.CssClass : '';
              viewModel.listModel = await handleListView(entity, context);
          }
      } else if (entity.ContentViewDisplayMode === 'Detail') {
@@ -77,6 +80,8 @@ export async function DocumentList(props: WidgetContext<DocumentListEntity>) {
                 ProviderName: selectedContent.Variations![0].Source
             }, entity, context);
             viewModel.detailModel = detailModel;
+            const viewCss = entity.CssClasses!.find(x => x.FieldName === 'Details view');
+            defaultClass = viewCss ? viewCss.CssClass : '';
         }
     } else if (entity.ContentViewDisplayMode === 'Master') {
         viewModel.listModel = await handleListView(entity, context);
@@ -99,8 +104,16 @@ export async function DocumentList(props: WidgetContext<DocumentListEntity>) {
         url = page.RelativeUrlPath;
         queryString = getPageQueryString(page as PageItem);
     }
+
+    dataAttributes['className'] = classNames(
+        defaultClass,
+        marginClass,
+        documentListCustomAttributes.class
+    );
+
     return (
       <div
+        {...documentListCustomAttributes}
         {...dataAttributes}
       >
         {viewModel.detailModel && <DetailsItem entity={entity} viewModel={viewModel} />}
@@ -112,38 +125,12 @@ export async function DocumentList(props: WidgetContext<DocumentListEntity>) {
     );
 }
 
-function getAttributesWithClasses(entity: DocumentListEntity, fieldName: string, additionalClasses: string | null): Array<{ Key: string, Value: string}> {
-    const viewCss = entity.CssClasses!.find(x => x.FieldName === fieldName);
-
-    const contentListAttributes = entity.Attributes!['ContentList'] || [];
-    let classAttribute = contentListAttributes.find(x => x.Key === 'class');
-    if (!classAttribute) {
-        classAttribute = {
-            Key: 'className',
-            Value: ''
-        };
-
-        contentListAttributes.push(classAttribute);
-    }
-
-    if (viewCss) {
-        classAttribute.Value += ` ${viewCss.CssClass}`;
-    }
-
-    if (additionalClasses) {
-        classAttribute.Value += ` ${additionalClasses}`;
-    }
-
-    return contentListAttributes;
-}
 
  const handleDetailView = async (
     detailItem: DetailItem,
     entity: DocumentListEntity,
     context: RequestContext
  ) => {
-    const contentListAttributes = getAttributesWithClasses(entity, 'Details view', null);
-
     let item;
     if (context.detailItem) {
         item = await RestService.getItem(
@@ -157,7 +144,6 @@ function getAttributesWithClasses(entity: DocumentListEntity, fieldName: string,
     }
 
     const detailModel = {
-        Attributes: contentListAttributes,
         DetailItem: detailItem,
         item: item,
         ViewName: entity.SfDetailViewName
@@ -167,21 +153,10 @@ function getAttributesWithClasses(entity: DocumentListEntity, fieldName: string,
 };
 
  const handleListView = async (entity: DocumentListEntity, context: RequestContext) => {
-    const listFieldMapping: {[key: string]: string} = {};
-    const fieldCssClassMap: {[key: string]: string} = {};
-    entity.CssClasses!.forEach((entry) => {
-        fieldCssClassMap[entry.FieldName] = entry.CssClass;
-    });
-
     const items = await DocumentListRestService.getItems(entity, context.detailItem);
     const DocumentListMasterModel: DocumentListModelMaster = {
-
         OpenDetails: !(entity.ContentViewDisplayMode === 'Master' && entity.DetailPageMode === 'SamePage'),
-        FieldCssClassMap: fieldCssClassMap,
-        FieldMap: listFieldMapping,
-        Items: items,
-        ViewName: entity.SfViewName as any,
-        Attributes: getAttributesWithClasses(entity, 'Document list', 'row row-cols-1 row-cols-md-3')
+        Items: items
     };
 
      return DocumentListMasterModel;

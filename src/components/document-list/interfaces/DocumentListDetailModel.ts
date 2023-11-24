@@ -4,6 +4,5 @@ export interface DocumentListModelDetail {
         Id: string;
         ProviderName: string;
         ItemType: string;
-    },
-    Attributes: Array<{ Key: string, Value: string}>;
+    };
 }

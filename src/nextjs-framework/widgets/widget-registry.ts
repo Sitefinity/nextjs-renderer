@@ -146,6 +146,16 @@ export const widgetRegistry: WidgetRegistry = {
                 EmptyIcon: 'plus-circle'
             },
             ssr: true
+        },
+        'SitefinityDocumentList':  <any>{
+            designerMetadata: sitefinityDocumentListJson,
+            componentType: DocumentList,
+            editorMetadata: {
+                Title: 'Document list',
+                EmptyIconText: 'Select document',
+                EmptyIcon: 'plus-circle'
+            },
+            ssr: true
         }
     }
 };
