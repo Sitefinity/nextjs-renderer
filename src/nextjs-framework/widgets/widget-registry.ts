@@ -1,9 +1,11 @@
-import { Breadcrumb } from './breadcrumb/breadcrumb';
+import { WidgetRegistry } from '../editor/widget-framework/widget-registry';
+
 import { ContentBlock } from './content-block/content-block';
 import { ContentList } from './content-list/content-list';
 import { CallToAction } from './call-to-action/call-to-action';
 import { Classification } from './classification/classification';
 import { Image } from './image/image';
+import { Breadcrumb } from './breadcrumb/breadcrumb';
 import { Navigation } from './navigation/navigation';
 import { SearchBox } from './search-box/search-box';
 import { LoginForm } from './login-form/login-form';
@@ -12,7 +14,8 @@ import { ResetPassword } from './reset-password/reset-password';
 import { Registration } from './registration/registration';
 import { LanguageSelector } from './language-selector/language-selector';
 import { Section } from './section/section';
-import { WidgetRegistry } from '../editor/widget-framework/widget-registry';
+import { DocumentList } from './document-list/document-list';
+import { SearchResults } from './search-results/search-results';
 
 import sitefinityContentBlockJson from './content-block/designer-metadata.json';
 import sitefinitySectionJson from './section/designer-metadata.json';
@@ -28,7 +31,8 @@ import sitefinityChangePasswordJson from './change-password/designer-metadata.js
 import sitefinityResetPasswordJson from './reset-password/designer-metadata.json';
 import sitefinityRegistrationJson from './registration/designer-metadata.json';
 import sitefinityLanguageSelectorJson from './language-selector/designer-metadata.json';
-
+import sitefinityDocumentListJson from './document-list/designer-metadata.json';
+import sitefinitySearchResultsListJson from './search-results/designer-metadata.json';
 
 export const widgetRegistry: WidgetRegistry = {
     widgets: {
@@ -154,6 +158,16 @@ export const widgetRegistry: WidgetRegistry = {
                 Title: 'Document list',
                 EmptyIconText: 'Select document',
                 EmptyIcon: 'plus-circle'
+            },
+            ssr: true
+        },
+        'SitefinitySearchResults':  <any>{
+            designerMetadata: sitefinitySearchResultsListJson,
+            componentType: SearchResults,
+            editorMetadata: {
+                Title: 'Search Results',
+                EmptyIconText: 'Search results',
+                EmptyIcon: 'search'
             },
             ssr: true
         }
