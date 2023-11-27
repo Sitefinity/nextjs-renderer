@@ -15,6 +15,7 @@ const sslOptions = {
 
 const handle = app.getRequestHandler();
 app.prepare().then(() => {
+    const originalHost = process.env.PROXY_ORIGINAL_HOST || 'localhost';
     const devProxy = {
         secure: false,
         target: process.env.PROXY_URL,
@@ -25,9 +26,9 @@ app.prepare().then(() => {
                 // for Sitefinity cloud
                 proxyReq.setHeader('X-SF-BYPASS-HOST', `localhost:${process.env.PORT}`);
                 proxyReq.setHeader('X-SF-BYPASS-HOST-VALIDATION-KEY', process.env.SF_CLOUD_KEY);
-            } else if (process.env.PORT && process.env.PROXY_ORIGINAL_HOST) {
+            } else if (process.env.PORT && originalHost) {
                 // when using a custom port
-                proxyReq.setHeader('X-ORIGINAL-HOST', `${process.env.PROXY_ORIGINAL_HOST}:${process.env.PORT}`);
+                proxyReq.setHeader('X-ORIGINAL-HOST', `${originalHost}:${process.env.PORT}`);
             }
         },
         onProxyRes: responseInterceptor(async (responseBuffer, proxyRes, req, res) => {
@@ -68,7 +69,9 @@ app.prepare().then(() => {
     });
 
     server.listen(process.env.PORT, (err) => {
-        if (err) {throw err;};
+        if (err) {
+            throw err;
+        };
         console.log('> Ready on https://localhost:' + process.env.PORT);
     });
 });

@@ -7,6 +7,11 @@ import { Image } from './components/image/image';
 import { Breadcrumb } from './components/breadcrumb/breadcrumb';
 import { Navigation } from './components/navigation/navigation';
 import { SearchBox } from './components/search-box/search-box';
+import { LoginForm } from './components/login-form/login-form';
+import { ChangePassword } from './components/change-password/change-password';
+import { ResetPassword } from './components/reset-password/reset-password';
+import { Registration } from './components/registration/registration';
+import { LanguageSelector } from './components/language-selector/language-selector';
 import { Section } from './components/section/section';
 import { AppBar } from './components/kendo/app-bar/app-bar';
 import { User } from './components/kendo/user/user';
@@ -21,9 +26,15 @@ import sitefinityImageJson from './components/image/designer-metadata.json';
 import sitefinityBreadcrumbJson from './components/breadcrumb/designer-metadata.json';
 import sitefinityNavigationJson from './components/navigation/designer-metadata.json';
 import sitefinitySearchBoxJson from './components/search-box/designer-metadata.json';
+import sitefinityLoginFormJson from './components/login-form/designer-metadata.json';
+import sitefinityChangePasswordJson from './components/change-password/designer-metadata.json';
+import sitefinityResetPasswordJson from './components/reset-password/designer-metadata.json';
+import sitefinityRegistrationJson from './components/registration/designer-metadata.json';
+import sitefinityLanguageSelectorJson from './components/language-selector/designer-metadata.json';
 import appBarJson from './components/kendo/app-bar/designer-metadata.json';
 import userJson from './components/kendo/user/designer-metadata.json';
 import themeButtonJson from './components/kendo/theme-button/designer-metadata.json';
+
 
 export const widgetRegistry: WidgetRegistry = {
     widgets: {
@@ -48,6 +59,46 @@ export const widgetRegistry: WidgetRegistry = {
             componentType: Image,
             editorMetadata: {
                 Title: 'Image'
+            },
+            ssr: true
+        },
+        'SitefinityLoginForm':  <any>{
+            designerMetadata: sitefinityLoginFormJson,
+            componentType: LoginForm,
+            editorMetadata: {
+                Title: 'LoginForm'
+            },
+            ssr: true
+        },
+        'SitefinityChangePassword':  <any>{
+            designerMetadata: sitefinityChangePasswordJson,
+            componentType: ChangePassword,
+            editorMetadata: {
+                Title: 'Change Password'
+            },
+            ssr: true
+        },
+        'SitefinityResetPassword':  <any>{
+            designerMetadata: sitefinityResetPasswordJson,
+            componentType: ResetPassword,
+            editorMetadata: {
+                Title: 'Reset Password'
+            },
+            ssr: true
+        },
+        'LanguageSelector':  <any>{
+            designerMetadata: sitefinityLanguageSelectorJson,
+            componentType: LanguageSelector,
+            editorMetadata: {
+                Title: 'Language Selector'
+            },
+            ssr: true
+        },
+        'SitefinityRegistration':  <any>{
+            designerMetadata: sitefinityRegistrationJson,
+            componentType: Registration,
+            editorMetadata: {
+                Title: 'Registration'
             },
             ssr: true
         },

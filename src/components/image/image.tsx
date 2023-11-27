@@ -34,7 +34,7 @@ export async function Image(props: WidgetContext<ImageEntity>) {
     dataAttributes['data-sfemptyicontext'] = 'Select image';
     dataAttributes['data-sfhasquickeditoperation'] = true;
     let imageItem = null;
-    if (entity.Item && entity.Item.Id){
+    if (entity.Item && entity.Item.Id) {
         imageItem =  await RestService.getItemWithFallback(RestSdkTypes.Image, entity.Item.Id.toString(), entity.Item.Provider);
     }
 

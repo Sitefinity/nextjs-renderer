@@ -1,0 +1,36 @@
+{
+    "Name": "LanguageSelector",
+    "Caption": "Language selector",
+    "PropertyMetadata": [
+        {
+            "Name": "Basic",
+            "Sections": []
+        },
+        {
+            "Name": "Advanced",
+            "Sections": [
+                {
+                    "Name": "AdvancedMain",
+                    "Title": null,
+                    "Properties": [
+                        {
+                            "Name": "SfWidgetLabel",
+                            "DefaultValue": "Language selector",
+                            "Title": "Label",
+                            "Type": null,
+                            "SectionName": null,
+                            "CategoryName": "Advanced",
+                            "Properties": {
+                                "Meta_Description_Description": "Custom labels are displayed in the page editor for your convenience. You can change the generic name with a specific one only for this widget.",
+                                "Meta_MaxLength_Length": "30"
+                            },
+                            "TypeChildProperties": [],
+                            "Position": 0
+                        }
+                    ],
+                    "CategoryName": null
+                }
+            ]
+        }
+    ]
+}
