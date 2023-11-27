@@ -1,0 +1,848 @@
+{
+    "Name": "SitefinityFacets",
+    "Caption": "Search facets",
+    "PropertyMetadata": [
+        {
+            "Name": "Basic",
+            "Sections": [
+                {
+                    "Name": "Search facets setup",
+                    "Title": "Search facets setup",
+                    "Properties": [
+                        {
+                            "Name": "IndexCatalogue",
+                            "DefaultValue": null,
+                            "Title": "Search index",
+                            "Type": "choices",
+                            "SectionName": "Search facets setup",
+                            "CategoryName": null,
+                            "Properties": {
+                                "Meta_Placeholder_Text": "Select search index",
+                                "Validations_Required": "True",
+                                "Validations_RequiredErrorMsg": "Select search index",
+                                "Meta_Choice_Choices": null,
+                                "Meta_Choice_ServiceUrl": "Default.GetFacetableIndexes",
+                                "Meta_Choice_ServiceCallParameters": null,
+                                "Meta_Choice_ServiceWarningMessage": "No search index with facetable fields has been created yet. To manage search indexes, go to Administration \u003E Search indexes, or contact your administrator for assistance.",
+                                "Meta_Choice_ShowFriendlyName": "False",
+                                "Meta_Choice_ActionTitle": null,
+                                "Meta_Choice_ButtonTitle": null,
+                                "Meta_Choice_NotResponsive": "False",
+                                "Meta_Choice_SideLabel": null,
+                                "Meta_Description_Description": "[{\u0022Type\u0022:1,\u0022Chunks\u0022:[{\u0022Value\u0022:\u0022To display facetable fields on your site,\u0022,\u0022Presentation\u0022:[]},{\u0022Value\u0022:\u0022select the same\u202Fsearch index as the one\u0022,\u0022Presentation\u0022:[]},{\u0022Value\u0022:\u0022selected in the Search box widget.\u0022,\u0022Presentation\u0022:[]}]}]"
+                            },
+                            "TypeChildProperties": [],
+                            "Position": 0
+                        },
+                        {
+                            "Name": "SelectedFacets",
+                            "DefaultValue": null,
+                            "Title": "Set facetable fields",
+                            "Type": "enumerable",
+                            "SectionName": "Search facets setup",
+                            "CategoryName": null,
+                            "Properties": {
+                                "Meta_TableView_ColumnTitle": null,
+                                "Meta_TableView_Enabled": "True",
+                                "Meta_TableView_Reorderable": "True",
+                                "Meta_TableView_Selectable": "False",
+                                "Meta_TableView_MultipleSelect": "False",
+                                "Meta_TableView_AllowEmptyState": "False",
+                                "Meta_ConditionalVisibility_Condition": "{\u0022conditions\u0022:[{\u0022fieldName\u0022:\u0022IndexCatalogue\u0022,\u0022operator\u0022:\u0022NotEquals\u0022,\u0022value\u0022:null }]}"
+                            },
+                            "TypeChildProperties": [
+                                {
+                                    "Name": "FacetableFieldNames",
+                                    "DefaultValue": "System.String[]",
+                                    "Title": "Field",
+                                    "Type": "facetTaxa",
+                                    "SectionName": null,
+                                    "CategoryName": null,
+                                    "Properties": {},
+                                    "TypeChildProperties": [
+                                        {
+                                            "Name": "Length",
+                                            "DefaultValue": "0",
+                                            "Title": "Length",
+                                            "Type": "number",
+                                            "SectionName": null,
+                                            "CategoryName": null,
+                                            "Properties": {
+                                                "Validations_Readonly": "True"
+                                            },
+                                            "TypeChildProperties": [],
+                                            "Position": 0
+                                        },
+                                        {
+                                            "Name": "LongLength",
+                                            "DefaultValue": "0",
+                                            "Title": "LongLength",
+                                            "Type": "number",
+                                            "SectionName": null,
+                                            "CategoryName": null,
+                                            "Properties": {
+                                                "Validations_DecimalPlaces": "10",
+                                                "Validations_Readonly": "True"
+                                            },
+                                            "TypeChildProperties": [],
+                                            "Position": 0
+                                        },
+                                        {
+                                            "Name": "Rank",
+                                            "DefaultValue": "0",
+                                            "Title": "Rank",
+                                            "Type": "number",
+                                            "SectionName": null,
+                                            "CategoryName": null,
+                                            "Properties": {
+                                                "Validations_Readonly": "True"
+                                            },
+                                            "TypeChildProperties": [],
+                                            "Position": 0
+                                        },
+                                        {
+                                            "Name": "SyncRoot",
+                                            "DefaultValue": null,
+                                            "Title": "SyncRoot",
+                                            "Type": "complex",
+                                            "SectionName": null,
+                                            "CategoryName": null,
+                                            "Properties": {
+                                                "Validations_Readonly": "True"
+                                            },
+                                            "TypeChildProperties": [],
+                                            "Position": 0
+                                        },
+                                        {
+                                            "Name": "IsReadOnly",
+                                            "DefaultValue": "False",
+                                            "Title": "IsReadOnly",
+                                            "Type": "bool",
+                                            "SectionName": null,
+                                            "CategoryName": null,
+                                            "Properties": {
+                                                "Validations_Readonly": "True"
+                                            },
+                                            "TypeChildProperties": [],
+                                            "Position": 0
+                                        },
+                                        {
+                                            "Name": "IsFixedSize",
+                                            "DefaultValue": "False",
+                                            "Title": "IsFixedSize",
+                                            "Type": "bool",
+                                            "SectionName": null,
+                                            "CategoryName": null,
+                                            "Properties": {
+                                                "Validations_Readonly": "True"
+                                            },
+                                            "TypeChildProperties": [],
+                                            "Position": 0
+                                        },
+                                        {
+                                            "Name": "IsSynchronized",
+                                            "DefaultValue": "False",
+                                            "Title": "IsSynchronized",
+                                            "Type": "bool",
+                                            "SectionName": null,
+                                            "CategoryName": null,
+                                            "Properties": {
+                                                "Validations_Readonly": "True"
+                                            },
+                                            "TypeChildProperties": [],
+                                            "Position": 0
+                                        }
+                                    ],
+                                    "Position": 0
+                                },
+                                {
+                                    "Name": "FacetableFieldLabels",
+                                    "DefaultValue": "",
+                                    "Title": "Label",
+                                    "Type": "string",
+                                    "SectionName": null,
+                                    "CategoryName": null,
+                                    "Properties": {
+                                        "Meta_Description_Description": "[{\u0022Type\u0022:1,\u0022Chunks\u0022:[{\u0022Value\u0022:\u0022Add a name of the facetable field that is\u0022,\u0022Presentation\u0022:[]},{\u0022Value\u0022:\u0022visible on your site.\u0022,\u0022Presentation\u0022:[]}]}]"
+                                    },
+                                    "TypeChildProperties": [],
+                                    "Position": 0
+                                },
+                                {
+                                    "Name": "FacetFieldSettings",
+                                    "DefaultValue": null,
+                                    "Title": "Configuration",
+                                    "Type": "pencilButton",
+                                    "SectionName": null,
+                                    "CategoryName": null,
+                                    "Properties": {
+                                        "Meta_Dialog_Data": "{\u0022buttons\u0022:[{\u0022type\u0022:\u0022confirm\u0022, \u0022title\u0022:\u0022Save\u0022}, {\u0022type\u0022:\u0022cancel\u0022, \u0022title\u0022:\u0022Cancel\u0022}], \u0022urlKey\u0022:\u0022settings\u0022}"
+                                    },
+                                    "TypeChildProperties": [
+                                        {
+                                            "Name": "RangeType",
+                                            "DefaultValue": "0",
+                                            "Title": "Range type",
+                                            "Type": "chipchoice",
+                                            "SectionName": null,
+                                            "CategoryName": null,
+                                            "Properties": {
+                                                "Meta_Choice_Choices": "[{\u0022Title\u0022:\u0022Auto\u0022,\u0022Name\u0022:\u0022Auto\u0022,\u0022Value\u0022:0,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Custom\u0022,\u0022Name\u0022:\u0022Custom\u0022,\u0022Value\u0022:1,\u0022Icon\u0022:null}]",
+                                                "Meta_Choice_ServiceUrl": null,
+                                                "Meta_Choice_ServiceCallParameters": null,
+                                                "Meta_Choice_ServiceWarningMessage": null,
+                                                "Meta_Choice_ShowFriendlyName": "False",
+                                                "Meta_Choice_ActionTitle": null,
+                                                "Meta_Choice_ButtonTitle": null,
+                                                "Meta_Choice_NotResponsive": "False",
+                                                "Meta_Choice_SideLabel": null
+                                            },
+                                            "TypeChildProperties": [],
+                                            "Position": 0
+                                        },
+                                        {
+                                            "Name": "DateRanges",
+                                            "DefaultValue": null,
+                                            "Title": "Set ranges",
+                                            "Type": "enumerable",
+                                            "SectionName": null,
+                                            "CategoryName": null,
+                                            "Properties": {
+                                                "Meta_TableView_ColumnTitle": null,
+                                                "Meta_TableView_Enabled": "True",
+                                                "Meta_TableView_Reorderable": "False",
+                                                "Meta_TableView_Selectable": "False",
+                                                "Meta_TableView_MultipleSelect": "False",
+                                                "Meta_TableView_AllowEmptyState": "False",
+                                                "Meta_Description_Description": "Specify the ranges for generating facets.",
+                                                "Meta_ConditionalVisibility_Condition": "{\u0022operator\u0022:\u0022And\u0022,\u0022conditions\u0022:[{\u0022fieldName\u0022:\u0022RangeType\u0022,\u0022operator\u0022:\u0022Equals\u0022,\u0022value\u0022:1 },{\u0022fieldName\u0022:\u0022FacetType\u0022,\u0022operator\u0022:\u0022Equals\u0022,\u0022value\u0022:\u0022DateAndTime\u0022 }]}"
+                                            },
+                                            "TypeChildProperties": [
+                                                {
+                                                    "Name": "From",
+                                                    "DefaultValue": null,
+                                                    "Title": "start date",
+                                                    "Type": "datetime",
+                                                    "SectionName": null,
+                                                    "CategoryName": null,
+                                                    "Properties": {
+                                                        "Meta_DateSettings_ShowTime": "False",
+                                                        "Meta_Placeholder_Text": "Start date",
+                                                        "Validations_Required": "True"
+                                                    },
+                                                    "TypeChildProperties": [],
+                                                    "Position": 0
+                                                },
+                                                {
+                                                    "Name": "To",
+                                                    "DefaultValue": null,
+                                                    "Title": "end date",
+                                                    "Type": "datetime",
+                                                    "SectionName": null,
+                                                    "CategoryName": null,
+                                                    "Properties": {
+                                                        "Meta_DateSettings_ShowTime": "False",
+                                                        "Meta_Placeholder_Text": "End date",
+                                                        "Validations_Required": "True"
+                                                    },
+                                                    "TypeChildProperties": [],
+                                                    "Position": 0
+                                                },
+                                                {
+                                                    "Name": "Label",
+                                                    "DefaultValue": "",
+                                                    "Title": "label",
+                                                    "Type": "string",
+                                                    "SectionName": null,
+                                                    "CategoryName": null,
+                                                    "Properties": {
+                                                        "Meta_Placeholder_Text": "type label...",
+                                                        "Meta_Description_Description": "Add a label for this range on your site. For example, 2021 - 2022 or May 2022.",
+                                                        "Validations_Required": "True"
+                                                    },
+                                                    "TypeChildProperties": [],
+                                                    "Position": 0
+                                                }
+                                            ],
+                                            "Position": 0
+                                        },
+                                        {
+                                            "Name": "DateStep",
+                                            "DefaultValue": null,
+                                            "Title": "Set a range step",
+                                            "Type": "choices",
+                                            "SectionName": null,
+                                            "CategoryName": null,
+                                            "Properties": {
+                                                "Meta_Description_Description": "Select a step to automatically group values by time period.",
+                                                "Meta_ConditionalVisibility_Condition": "{\u0022operator\u0022:\u0022And\u0022,\u0022conditions\u0022:[{\u0022fieldName\u0022:\u0022RangeType\u0022,\u0022operator\u0022:\u0022Equals\u0022,\u0022value\u0022:0 },{\u0022fieldName\u0022:\u0022FacetType\u0022,\u0022operator\u0022:\u0022Equals\u0022,\u0022value\u0022:\u0022DateAndTime\u0022 }]}",
+                                                "Meta_Choice_Choices": "[{\u0022Title\u0022:\u0022day\u0022,\u0022Name\u0022:\u00220\u0022,\u0022Value\u0022:0,\u0022Icon\u0022:\u0022ban\u0022},{\u0022Title\u0022:\u0022week\u0022,\u0022Name\u0022:\u00221\u0022,\u0022Value\u0022:1,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022month\u0022,\u0022Name\u0022:\u00222\u0022,\u0022Value\u0022:2,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022quarter\u0022,\u0022Name\u0022:\u00223\u0022,\u0022Value\u0022:3,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022year\u0022,\u0022Name\u0022:\u00224\u0022,\u0022Value\u0022:4,\u0022Icon\u0022:null}]",
+                                                "Meta_Choice_ServiceUrl": null,
+                                                "Meta_Choice_ServiceCallParameters": null,
+                                                "Meta_Choice_ServiceWarningMessage": null,
+                                                "Meta_Choice_ShowFriendlyName": "False",
+                                                "Meta_Choice_ActionTitle": null,
+                                                "Meta_Choice_ButtonTitle": null,
+                                                "Meta_Choice_NotResponsive": "False",
+                                                "Meta_Choice_SideLabel": null
+                                            },
+                                            "TypeChildProperties": [],
+                                            "Position": 0
+                                        },
+                                        {
+                                            "Name": "NumberStep",
+                                            "DefaultValue": null,
+                                            "Title": "Set a range step",
+                                            "Type": "number",
+                                            "SectionName": null,
+                                            "CategoryName": null,
+                                            "Properties": {
+                                                "Meta_Description_Description": "Specify a step to automatically generate ranges. For example, if the step is set to 10, generated ranges will be 0 - 10, 10 - 20, 20 - 30, etc. If a step is not set, all values are displayed.",
+                                                "Meta_Placeholder_Text": "type number...",
+                                                "Meta_ConditionalVisibility_Condition": "{\u0022operator\u0022:\u0022And\u0022,\u0022conditions\u0022:[{\u0022fieldName\u0022:\u0022RangeType\u0022,\u0022operator\u0022:\u0022Equals\u0022,\u0022value\u0022:0 }, {\u0022fieldName\u0022:\u0022FacetType\u0022,\u0022operator\u0022:\u0022Contains\u0022,\u0022value\u0022:\u0022Number\u0022 }]}",
+                                                "Validations_MaxValue": "2147483647",
+                                                "Validations_MinValue": "1",
+                                                "Validations_RangeErrorMsg": "Enter a positive number"
+                                            },
+                                            "TypeChildProperties": [],
+                                            "Position": 0
+                                        },
+                                        {
+                                            "Name": "NumberRanges",
+                                            "DefaultValue": null,
+                                            "Title": "Set ranges",
+                                            "Type": "enumerable",
+                                            "SectionName": null,
+                                            "CategoryName": null,
+                                            "Properties": {
+                                                "Meta_TableView_ColumnTitle": null,
+                                                "Meta_TableView_Enabled": "True",
+                                                "Meta_TableView_Reorderable": "False",
+                                                "Meta_TableView_Selectable": "False",
+                                                "Meta_TableView_MultipleSelect": "False",
+                                                "Meta_TableView_AllowEmptyState": "False",
+                                                "Meta_Description_Description": "Specify the ranges for generating facets.",
+                                                "Meta_ConditionalVisibility_Condition": "{\u0022operator\u0022:\u0022And\u0022,\u0022conditions\u0022:[{\u0022fieldName\u0022:\u0022RangeType\u0022,\u0022operator\u0022:\u0022Equals\u0022,\u0022value\u0022:1 },{\u0022fieldName\u0022:\u0022FacetType\u0022,\u0022operator\u0022:\u0022Equals\u0022,\u0022value\u0022:\u0022NumberWhole\u0022 }]}"
+                                            },
+                                            "TypeChildProperties": [
+                                                {
+                                                    "Name": "From",
+                                                    "DefaultValue": null,
+                                                    "Title": "min value",
+                                                    "Type": "number",
+                                                    "SectionName": null,
+                                                    "CategoryName": null,
+                                                    "Properties": {
+                                                        "Meta_Placeholder_Text": "type min value...",
+                                                        "Validations_Required": "True"
+                                                    },
+                                                    "TypeChildProperties": [],
+                                                    "Position": 0
+                                                },
+                                                {
+                                                    "Name": "To",
+                                                    "DefaultValue": null,
+                                                    "Title": "max value",
+                                                    "Type": "number",
+                                                    "SectionName": null,
+                                                    "CategoryName": null,
+                                                    "Properties": {
+                                                        "Meta_Placeholder_Text": "type max value...",
+                                                        "Validations_Required": "True"
+                                                    },
+                                                    "TypeChildProperties": [],
+                                                    "Position": 0
+                                                },
+                                                {
+                                                    "Name": "Label",
+                                                    "DefaultValue": null,
+                                                    "Title": "label",
+                                                    "Type": "string",
+                                                    "SectionName": null,
+                                                    "CategoryName": null,
+                                                    "Properties": {
+                                                        "Meta_Placeholder_Text": "type label...",
+                                                        "Meta_Description_Description": "Add a label for this range on your site. For example, 5kg - 10kg or above 10kg.",
+                                                        "Validations_Required": "True"
+                                                    },
+                                                    "TypeChildProperties": [],
+                                                    "Position": 0
+                                                }
+                                            ],
+                                            "Position": 0
+                                        },
+                                        {
+                                            "Name": "NumberRangesDecimal",
+                                            "DefaultValue": null,
+                                            "Title": "Set ranges",
+                                            "Type": "enumerable",
+                                            "SectionName": null,
+                                            "CategoryName": null,
+                                            "Properties": {
+                                                "Meta_TableView_ColumnTitle": null,
+                                                "Meta_TableView_Enabled": "True",
+                                                "Meta_TableView_Reorderable": "False",
+                                                "Meta_TableView_Selectable": "False",
+                                                "Meta_TableView_MultipleSelect": "False",
+                                                "Meta_TableView_AllowEmptyState": "False",
+                                                "Meta_Description_Description": "Specify the ranges for generating facets.",
+                                                "Meta_ConditionalVisibility_Condition": "{\u0022operator\u0022:\u0022And\u0022,\u0022conditions\u0022:[{\u0022fieldName\u0022:\u0022RangeType\u0022,\u0022operator\u0022:\u0022Equals\u0022,\u0022value\u0022:1 },{\u0022fieldName\u0022:\u0022FacetType\u0022,\u0022operator\u0022:\u0022Equals\u0022,\u0022value\u0022:\u0022NumberDecimal\u0022 }]}"
+                                            },
+                                            "TypeChildProperties": [
+                                                {
+                                                    "Name": "From",
+                                                    "DefaultValue": null,
+                                                    "Title": "min value",
+                                                    "Type": "number",
+                                                    "SectionName": null,
+                                                    "CategoryName": null,
+                                                    "Properties": {
+                                                        "Validations_DecimalPlaces": "10",
+                                                        "Meta_Placeholder_Text": "type min value...",
+                                                        "Validations_Required": "True"
+                                                    },
+                                                    "TypeChildProperties": [],
+                                                    "Position": 0
+                                                },
+                                                {
+                                                    "Name": "To",
+                                                    "DefaultValue": null,
+                                                    "Title": "max value",
+                                                    "Type": "number",
+                                                    "SectionName": null,
+                                                    "CategoryName": null,
+                                                    "Properties": {
+                                                        "Validations_DecimalPlaces": "10",
+                                                        "Meta_Placeholder_Text": "type max value...",
+                                                        "Validations_Required": "True"
+                                                    },
+                                                    "TypeChildProperties": [],
+                                                    "Position": 0
+                                                },
+                                                {
+                                                    "Name": "Label",
+                                                    "DefaultValue": null,
+                                                    "Title": "label",
+                                                    "Type": "string",
+                                                    "SectionName": null,
+                                                    "CategoryName": null,
+                                                    "Properties": {
+                                                        "Meta_Placeholder_Text": "type label...",
+                                                        "Meta_Description_Description": "Add a label for this range on your site. For example, 5kg - 10kg or above 10kg.",
+                                                        "Validations_Required": "True"
+                                                    },
+                                                    "TypeChildProperties": [],
+                                                    "Position": 0
+                                                }
+                                            ],
+                                            "Position": 0
+                                        },
+                                        {
+                                            "Name": "Prefix",
+                                            "DefaultValue": null,
+                                            "Title": "Prefix",
+                                            "Type": "string",
+                                            "SectionName": null,
+                                            "CategoryName": null,
+                                            "Properties": {
+                                                "Meta_Description_Description": "Add text before the values, such as units, currency, etc. For example, $0 - $10, $10 - $20, $20 - $30, etc.",
+                                                "Meta_ConditionalVisibility_Condition": "{\u0022operator\u0022:\u0022And\u0022,\u0022conditions\u0022:[{\u0022fieldName\u0022:\u0022RangeType\u0022,\u0022operator\u0022:\u0022Equals\u0022,\u0022value\u0022:0 }, {\u0022fieldName\u0022:\u0022FacetType\u0022,\u0022operator\u0022:\u0022Contains\u0022,\u0022value\u0022:\u0022Number\u0022 }]}",
+                                                "Validations_MaxValue": "20",
+                                                "Validations_MinValue": "0",
+                                                "Validations_StringLengthErrorMsg": "Your text must be less than 20 characters"
+                                            },
+                                            "TypeChildProperties": [],
+                                            "Position": 0
+                                        },
+                                        {
+                                            "Name": "Suffix",
+                                            "DefaultValue": null,
+                                            "Title": "Suffix",
+                                            "Type": "string",
+                                            "SectionName": null,
+                                            "CategoryName": null,
+                                            "Properties": {
+                                                "Meta_Description_Description": "Add text after the values, such as units, currency, etc. For example, 0 in - 10 in, 10 in - 20 in, 20 in - 30 in, etc.",
+                                                "Meta_ConditionalVisibility_Condition": "{\u0022operator\u0022:\u0022And\u0022,\u0022conditions\u0022:[{\u0022fieldName\u0022:\u0022RangeType\u0022,\u0022operator\u0022:\u0022Equals\u0022,\u0022value\u0022:0 }, {\u0022fieldName\u0022:\u0022FacetType\u0022,\u0022operator\u0022:\u0022Contains\u0022,\u0022value\u0022:\u0022Number\u0022 }]}",
+                                                "Validations_MaxValue": "20",
+                                                "Validations_MinValue": "0",
+                                                "Validations_StringLengthErrorMsg": "Your text must be less than 20 characters"
+                                            },
+                                            "TypeChildProperties": [],
+                                            "Position": 0
+                                        },
+                                        {
+                                            "Name": "DisplayCustomRange",
+                                            "DefaultValue": "False",
+                                            "Title": "Users can enter custom values",
+                                            "Type": "chipchoice",
+                                            "SectionName": null,
+                                            "CategoryName": null,
+                                            "Properties": {
+                                                "Meta_Description_Description": "If enabled, empty fields for entering custom values are displayed on your site.",
+                                                "Meta_ConditionalVisibility_Condition": "{\u0022operator\u0022:\u0022Or\u0022,\u0022conditions\u0022:[{\u0022fieldName\u0022:\u0022RangeType\u0022,\u0022operator\u0022:\u0022Equals\u0022,\u0022value\u0022:1 },{\u0022fieldName\u0022:\u0022FacetType\u0022,\u0022operator\u0022:\u0022Contains\u0022,\u0022value\u0022:\u0022Number\u0022 }]}",
+                                                "Meta_Choice_Choices": "[{\u0022Title\u0022:\u0022Yes\u0022,\u0022Name\u0022:\u0022Yes\u0022,\u0022Value\u0022:true,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022No\u0022,\u0022Name\u0022:\u0022No\u0022,\u0022Value\u0022:false,\u0022Icon\u0022:null}]",
+                                                "Meta_Choice_ServiceUrl": null,
+                                                "Meta_Choice_ServiceCallParameters": null,
+                                                "Meta_Choice_ServiceWarningMessage": null,
+                                                "Meta_Choice_ShowFriendlyName": "False",
+                                                "Meta_Choice_ActionTitle": null,
+                                                "Meta_Choice_ButtonTitle": null,
+                                                "Meta_Choice_NotResponsive": "False",
+                                                "Meta_Choice_SideLabel": null
+                                            },
+                                            "TypeChildProperties": [],
+                                            "Position": 0
+                                        },
+                                        {
+                                            "Name": "FacetType",
+                                            "DefaultValue": null,
+                                            "Title": "FacetType",
+                                            "Type": "string",
+                                            "SectionName": null,
+                                            "CategoryName": null,
+                                            "Properties": {
+                                                "Meta_DisplaySettings_Hide": "True",
+                                                "Meta_DisplaySettings_HideContent": "False"
+                                            },
+                                            "TypeChildProperties": [],
+                                            "Position": 0
+                                        }
+                                    ],
+                                    "Position": 0
+                                }
+                            ],
+                            "Position": 0
+                        },
+                        {
+                            "Name": "SortType",
+                            "DefaultValue": null,
+                            "Title": "Sort fields",
+                            "Type": "choices",
+                            "SectionName": "Search facets setup",
+                            "CategoryName": null,
+                            "Properties": {
+                                "Meta_ConditionalVisibility_Condition": "{\u0022conditions\u0022:[{\u0022fieldName\u0022:\u0022IndexCatalogue\u0022,\u0022operator\u0022:\u0022NotEquals\u0022,\u0022value\u0022:null }]}",
+                                "Meta_Choice_Choices": "[{\u0022Title\u0022:\u0022As set manually\u0022,\u0022Name\u0022:\u00220\u0022,\u0022Value\u0022:0,\u0022Icon\u0022:\u0022ban\u0022},{\u0022Title\u0022:\u0022Alphabetically\u0022,\u0022Name\u0022:\u00222\u0022,\u0022Value\u0022:2,\u0022Icon\u0022:null}]",
+                                "Meta_Choice_ServiceUrl": null,
+                                "Meta_Choice_ServiceCallParameters": null,
+                                "Meta_Choice_ServiceWarningMessage": null,
+                                "Meta_Choice_ShowFriendlyName": "False",
+                                "Meta_Choice_ActionTitle": null,
+                                "Meta_Choice_ButtonTitle": null,
+                                "Meta_Choice_NotResponsive": "False",
+                                "Meta_Choice_SideLabel": null
+                            },
+                            "TypeChildProperties": [],
+                            "Position": 0
+                        },
+                        {
+                            "Name": "DisplayItemCount",
+                            "DefaultValue": "True",
+                            "Title": "Display item count",
+                            "Type": "chipchoice",
+                            "SectionName": "Search facets setup",
+                            "CategoryName": null,
+                            "Properties": {
+                                "Meta_Choice_Choices": "[{\u0022Title\u0022:\u0022Yes\u0022,\u0022Name\u0022:\u0022Yes\u0022,\u0022Value\u0022:\u0022True\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022No\u0022,\u0022Name\u0022:\u0022No\u0022,\u0022Value\u0022:\u0022False\u0022,\u0022Icon\u0022:null}]",
+                                "Meta_Choice_ServiceUrl": null,
+                                "Meta_Choice_ServiceCallParameters": null,
+                                "Meta_Choice_ServiceWarningMessage": null,
+                                "Meta_Choice_ShowFriendlyName": "False",
+                                "Meta_Choice_ActionTitle": null,
+                                "Meta_Choice_ButtonTitle": null,
+                                "Meta_Choice_NotResponsive": "False",
+                                "Meta_Choice_SideLabel": null,
+                                "Meta_ConditionalVisibility_Condition": "{\u0022conditions\u0022:[{\u0022fieldName\u0022:\u0022IndexCatalogue\u0022,\u0022operator\u0022:\u0022NotEquals\u0022,\u0022value\u0022:null }]}"
+                            },
+                            "TypeChildProperties": [],
+                            "Position": 1
+                        },
+                        {
+                            "Name": "IsShowMoreLessButtonActive",
+                            "DefaultValue": "True",
+                            "Title": "Collapse large facet lists",
+                            "Type": "chipchoice",
+                            "SectionName": "Search facets setup",
+                            "CategoryName": null,
+                            "Properties": {
+                                "Meta_Choice_Choices": "[{\u0022Title\u0022:\u0022Yes\u0022,\u0022Name\u0022:\u0022Yes\u0022,\u0022Value\u0022:\u0022True\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022No\u0022,\u0022Name\u0022:\u0022No\u0022,\u0022Value\u0022:\u0022False\u0022,\u0022Icon\u0022:null}]",
+                                "Meta_Choice_ServiceUrl": null,
+                                "Meta_Choice_ServiceCallParameters": null,
+                                "Meta_Choice_ServiceWarningMessage": null,
+                                "Meta_Choice_ShowFriendlyName": "False",
+                                "Meta_Choice_ActionTitle": null,
+                                "Meta_Choice_ButtonTitle": null,
+                                "Meta_Choice_NotResponsive": "False",
+                                "Meta_Choice_SideLabel": null,
+                                "Meta_ConditionalVisibility_Condition": "{\u0022conditions\u0022:[{\u0022fieldName\u0022:\u0022IndexCatalogue\u0022,\u0022operator\u0022:\u0022NotEquals\u0022,\u0022value\u0022:null }]}",
+                                "Meta_Description_Description": "[{\u0022Type\u0022:1,\u0022Chunks\u0022:[{\u0022Value\u0022:\u0022Specifies whether to collapse facet lists on\u0022,\u0022Presentation\u0022:[]}, {\u0022Value\u0022:\u0022your site with more than 10 entries. If \u0027No\u0027\u0022,\u0022Presentation\u0022:[2]}, {\u0022Value\u0022:\u0022is selected, all facets are displayed.\u0022,\u0022Presentation\u0022:[2]}]}]"
+                            },
+                            "TypeChildProperties": [],
+                            "Position": 1
+                        }
+                    ],
+                    "CategoryName": "Basic"
+                },
+                {
+                    "Name": "Display settings",
+                    "Title": "Display settings",
+                    "Properties": [
+                        {
+                            "Name": "SfViewName",
+                            "DefaultValue": "Default",
+                            "Title": "Template",
+                            "Type": "viewSelector",
+                            "SectionName": "Display settings",
+                            "CategoryName": null,
+                            "Properties": {
+                                "Meta_Choices": "[{\u0022Title\u0022:\u0022Default\u0022,\u0022Name\u0022:\u0022Default\u0022,\u0022Value\u0022:\u0022Default\u0022,\u0022Icon\u0022:null}]",
+                                "Meta_Choices_AllowMultiple": "False"
+                            },
+                            "TypeChildProperties": [],
+                            "Position": 0
+                        },
+                        {
+                            "Name": "Margins",
+                            "DefaultValue": null,
+                            "Title": "Margins",
+                            "Type": "complex",
+                            "SectionName": "Display settings",
+                            "CategoryName": null,
+                            "Properties": {
+                                "Meta_TableView_ColumnTitle": "Search facets",
+                                "Meta_TableView_Enabled": "True",
+                                "Meta_TableView_Reorderable": "False",
+                                "Meta_TableView_Selectable": "False",
+                                "Meta_TableView_MultipleSelect": "False",
+                                "Meta_TableView_AllowEmptyState": "False"
+                            },
+                            "TypeChildProperties": [
+                                {
+                                    "Name": "Top",
+                                    "DefaultValue": "None",
+                                    "Title": "Top",
+                                    "Type": "chipchoice",
+                                    "SectionName": null,
+                                    "CategoryName": null,
+                                    "Properties": {
+                                        "Meta_Choices": "[{\u0022Title\u0022:\u0022None\u0022,\u0022Name\u0022:\u0022None\u0022,\u0022Value\u0022:\u0022None\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Small\u0022,\u0022Name\u0022:\u0022S\u0022,\u0022Value\u0022:\u0022S\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Medium\u0022,\u0022Name\u0022:\u0022M\u0022,\u0022Value\u0022:\u0022M\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Large\u0022,\u0022Name\u0022:\u0022L\u0022,\u0022Value\u0022:\u0022L\u0022,\u0022Icon\u0022:null}]",
+                                        "Meta_Choices_AllowMultiple": "False"
+                                    },
+                                    "TypeChildProperties": [],
+                                    "Position": 0
+                                },
+                                {
+                                    "Name": "Right",
+                                    "DefaultValue": "None",
+                                    "Title": "Right",
+                                    "Type": "chipchoice",
+                                    "SectionName": null,
+                                    "CategoryName": null,
+                                    "Properties": {
+                                        "Meta_Choices": "[{\u0022Title\u0022:\u0022None\u0022,\u0022Name\u0022:\u0022None\u0022,\u0022Value\u0022:\u0022None\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Small\u0022,\u0022Name\u0022:\u0022S\u0022,\u0022Value\u0022:\u0022S\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Medium\u0022,\u0022Name\u0022:\u0022M\u0022,\u0022Value\u0022:\u0022M\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Large\u0022,\u0022Name\u0022:\u0022L\u0022,\u0022Value\u0022:\u0022L\u0022,\u0022Icon\u0022:null}]",
+                                        "Meta_Choices_AllowMultiple": "False"
+                                    },
+                                    "TypeChildProperties": [],
+                                    "Position": 0
+                                },
+                                {
+                                    "Name": "Bottom",
+                                    "DefaultValue": "None",
+                                    "Title": "Bottom",
+                                    "Type": "chipchoice",
+                                    "SectionName": null,
+                                    "CategoryName": null,
+                                    "Properties": {
+                                        "Meta_Choices": "[{\u0022Title\u0022:\u0022None\u0022,\u0022Name\u0022:\u0022None\u0022,\u0022Value\u0022:\u0022None\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Small\u0022,\u0022Name\u0022:\u0022S\u0022,\u0022Value\u0022:\u0022S\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Medium\u0022,\u0022Name\u0022:\u0022M\u0022,\u0022Value\u0022:\u0022M\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Large\u0022,\u0022Name\u0022:\u0022L\u0022,\u0022Value\u0022:\u0022L\u0022,\u0022Icon\u0022:null}]",
+                                        "Meta_Choices_AllowMultiple": "False"
+                                    },
+                                    "TypeChildProperties": [],
+                                    "Position": 0
+                                },
+                                {
+                                    "Name": "Left",
+                                    "DefaultValue": "None",
+                                    "Title": "Left",
+                                    "Type": "chipchoice",
+                                    "SectionName": null,
+                                    "CategoryName": null,
+                                    "Properties": {
+                                        "Meta_Choices": "[{\u0022Title\u0022:\u0022None\u0022,\u0022Name\u0022:\u0022None\u0022,\u0022Value\u0022:\u0022None\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Small\u0022,\u0022Name\u0022:\u0022S\u0022,\u0022Value\u0022:\u0022S\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Medium\u0022,\u0022Name\u0022:\u0022M\u0022,\u0022Value\u0022:\u0022M\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Large\u0022,\u0022Name\u0022:\u0022L\u0022,\u0022Value\u0022:\u0022L\u0022,\u0022Icon\u0022:null}]",
+                                        "Meta_Choices_AllowMultiple": "False"
+                                    },
+                                    "TypeChildProperties": [],
+                                    "Position": 0
+                                }
+                            ],
+                            "Position": 1
+                        }
+                    ],
+                    "CategoryName": "Basic"
+                }
+            ]
+        },
+        {
+            "Name": "Advanced",
+            "Sections": [
+                {
+                    "Name": "AdvancedMain",
+                    "Title": null,
+                    "Properties": [
+                        {
+                            "Name": "SfWidgetLabel",
+                            "DefaultValue": "Search facets",
+                            "Title": "Label",
+                            "Type": null,
+                            "SectionName": null,
+                            "CategoryName": "Advanced",
+                            "Properties": {
+                                "Meta_Description_Description": "Custom labels are displayed in the page editor for your convenience. You can change the generic name with a specific one only for this widget.",
+                                "Meta_MaxLength_Length": "30"
+                            },
+                            "TypeChildProperties": [],
+                            "Position": 0
+                        },
+                        {
+                            "Name": "WidgetCssClass",
+                            "DefaultValue": null,
+                            "Title": "CSS class",
+                            "Type": "string",
+                            "SectionName": null,
+                            "CategoryName": "Advanced",
+                            "Properties": {},
+                            "TypeChildProperties": [],
+                            "Position": 0
+                        },
+                        {
+                            "Name": "SearchFields",
+                            "DefaultValue": null,
+                            "Title": "Search fields",
+                            "Type": "string",
+                            "SectionName": null,
+                            "CategoryName": "Advanced",
+                            "Properties": {
+                                "Meta_Description_Description": "[{\u0022Type\u0022:1,\u0022Chunks\u0022:[{\u0022Value\u0022:\u0022List of fields to be used in the search facets. These fields must be the same as those specified in the Search results widget.\u0022,\u0022Presentation\u0022:[]}]}]"
+                            },
+                            "TypeChildProperties": [],
+                            "Position": 0
+                        }
+                    ],
+                    "CategoryName": "Advanced"
+                },
+                {
+                    "Name": "Labels and messages",
+                    "Title": "Labels and messages",
+                    "Properties": [
+                        {
+                            "Name": "FilterResultsLabel",
+                            "DefaultValue": "Filter results",
+                            "Title": "Search facets header",
+                            "Type": "string",
+                            "SectionName": "Labels and messages",
+                            "CategoryName": "Advanced",
+                            "Properties": {},
+                            "TypeChildProperties": [],
+                            "Position": 0
+                        },
+                        {
+                            "Name": "AppliedFiltersLabel",
+                            "DefaultValue": "Applied filters",
+                            "Title": "Search facets label",
+                            "Type": "string",
+                            "SectionName": "Labels and messages",
+                            "CategoryName": "Advanced",
+                            "Properties": {},
+                            "TypeChildProperties": [],
+                            "Position": 1
+                        },
+                        {
+                            "Name": "ClearAllLabel",
+                            "DefaultValue": "Clear all",
+                            "Title": "Clear facets link",
+                            "Type": "string",
+                            "SectionName": "Labels and messages",
+                            "CategoryName": "Advanced",
+                            "Properties": {},
+                            "TypeChildProperties": [],
+                            "Position": 2
+                        },
+                        {
+                            "Name": "ShowMoreLabel",
+                            "DefaultValue": "Show more",
+                            "Title": "Show more link",
+                            "Type": "string",
+                            "SectionName": "Labels and messages",
+                            "CategoryName": "Advanced",
+                            "Properties": {},
+                            "TypeChildProperties": [],
+                            "Position": 3
+                        },
+                        {
+                            "Name": "ShowLessLabel",
+                            "DefaultValue": "Show less",
+                            "Title": "Show less link",
+                            "Type": "string",
+                            "SectionName": "Labels and messages",
+                            "CategoryName": "Advanced",
+                            "Properties": {},
+                            "TypeChildProperties": [],
+                            "Position": 4
+                        }
+                    ],
+                    "CategoryName": "Advanced"
+                },
+                {
+                    "Name": "Attributes",
+                    "Title": "Attributes",
+                    "Properties": [
+                        {
+                            "Name": "Attributes",
+                            "DefaultValue": null,
+                            "Title": "Data attributes for...",
+                            "Type": "attributes",
+                            "SectionName": "Attributes",
+                            "CategoryName": "Advanced",
+                            "Properties": {
+                                "Meta_LengthDependsOn_PropertyName": null,
+                                "Meta_LengthDependsOn_DisplayName": "",
+                                "Meta_LengthDependsOn_DisplayTitle": "",
+                                "Meta_LengthDependsOn_ExtraRecords": "[{\u0022Name\u0022: \u0022SearchFacets\u0022, \u0022Title\u0022: \u0022Search facets\u0022}]"
+                            },
+                            "TypeChildProperties": [
+                                {
+                                    "Name": "Keys",
+                                    "DefaultValue": null,
+                                    "Title": "Keys",
+                                    "Type": null,
+                                    "SectionName": null,
+                                    "CategoryName": null,
+                                    "Properties": {
+                                        "Validations_Readonly": "True"
+                                    },
+                                    "TypeChildProperties": [],
+                                    "Position": 0
+                                },
+                                {
+                                    "Name": "Values",
+                                    "DefaultValue": null,
+                                    "Title": "Values",
+                                    "Type": null,
+                                    "SectionName": null,
+                                    "CategoryName": null,
+                                    "Properties": {
+                                        "Validations_Readonly": "True"
+                                    },
+                                    "TypeChildProperties": [],
+                                    "Position": 0
+                                }
+                            ],
+                            "Position": 0
+                        }
+                    ],
+                    "CategoryName": "Advanced"
+                }
+            ]
+        }
+    ]
+}

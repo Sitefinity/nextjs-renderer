@@ -16,6 +16,7 @@ import { LanguageSelector } from './language-selector/language-selector';
 import { Section } from './section/section';
 import { DocumentList } from './document-list/document-list';
 import { SearchResults } from './search-results/search-results';
+import { SearchFacets } from './search-facets/search-facets';
 
 import sitefinityContentBlockJson from './content-block/designer-metadata.json';
 import sitefinitySectionJson from './section/designer-metadata.json';
@@ -33,6 +34,7 @@ import sitefinityRegistrationJson from './registration/designer-metadata.json';
 import sitefinityLanguageSelectorJson from './language-selector/designer-metadata.json';
 import sitefinityDocumentListJson from './document-list/designer-metadata.json';
 import sitefinitySearchResultsListJson from './search-results/designer-metadata.json';
+import sitefinitySearchFacetsListJson from './search-facets/designer-metadata.json';
 
 export const widgetRegistry: WidgetRegistry = {
     widgets: {
@@ -167,6 +169,16 @@ export const widgetRegistry: WidgetRegistry = {
             editorMetadata: {
                 Title: 'Search Results',
                 EmptyIconText: 'Search results',
+                EmptyIcon: 'search'
+            },
+            ssr: true
+        },
+        'SitefinityFacets':  <any>{
+            designerMetadata: sitefinitySearchFacetsListJson,
+            componentType: SearchFacets,
+            editorMetadata: {
+                Title: 'Search facets',
+                EmptyIconText: 'Select search facets',
                 EmptyIcon: 'search'
             },
             ssr: true
