@@ -1,4 +1,4 @@
-import { DetailItem } from '@/framework/editor/services/detail-item';
+import { DetailItem } from '@progress/sitefinity-react-framework';
 
 export interface RequestContext {
     pageNode?: any;

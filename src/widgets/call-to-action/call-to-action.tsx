@@ -3,10 +3,10 @@ import { StyleGenerator } from '../styling/style-generator.service';
 import { OffsetStyle } from '../styling/offset-style';
 import { Alignment } from '../styling/alignment';
 import { ButtonType } from '../styling/button-types';
-import { htmlAttributes, generateAnchorAttrsFromLink, getCustomAttributes } from '@/framework/editor/widgets/attributes';
-import { classNames } from '@/framework/editor/utils/classNames';
-import { LinkModel } from '@/framework/editor/widgets/link-model';
-import { WidgetContext } from '@/framework/editor/widgets/widget-context';
+import { htmlAttributes, generateAnchorAttrsFromLink, getCustomAttributes } from '@progress/sitefinity-react-framework';
+import { classNames } from '@progress/sitefinity-react-framework';
+import { LinkModel } from '@progress/sitefinity-react-framework';
+import { WidgetContext } from '@progress/sitefinity-react-framework';
 
 export type CTAPart = 'Wrapper' | 'Primary' | 'Secondary';
 

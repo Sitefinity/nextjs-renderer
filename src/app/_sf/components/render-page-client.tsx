@@ -1,15 +1,13 @@
 
 'use client';
 
-import { RenderWidgetService } from '@/framework/editor/services/render-widget-service';
-import { RequestContext } from '@/framework/editor/services/request-context';
-import { RootUrlService } from '@/framework/rest-sdk/root-url.service';
-import { ServiceMetadataDefinition, ServiceMetadata } from '@/framework/rest-sdk/service-metadata';
-import { PageLayoutServiceResponse } from '@/framework/rest-sdk/services/layout-service.response';
-import { RendererContractImpl } from '@/renderer-contract';
-import { widgetRegistry } from '@/widget-registry';
+import { RendererContractImpl } from '../renderer-contract';
+import { widgetRegistry } from '../../../widgets/widget-registry';
+import { RequestContext, RenderWidgetService } from '../../../framework/editor';
+import { ServiceMetadataDefinition, RootUrlService, ServiceMetadata } from '../../../framework/rest-sdk';
+import { PageLayoutServiceResponse } from '../../../framework/rest-sdk/services';
 
-export default function RenderPageClient({ layout, metadata, context }: { layout: PageLayoutServiceResponse, metadata: ServiceMetadataDefinition, context: RequestContext }) {
+export function RenderPageClient({ layout, metadata, context }: { layout: PageLayoutServiceResponse, metadata: ServiceMetadataDefinition, context: RequestContext }) {
     RootUrlService.rootUrl = `${process.env['NEXT_PUBLIC_CMS_URL'] || ''}`;
 
     RenderWidgetService.widgetRegistry = widgetRegistry;

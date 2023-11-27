@@ -1,4 +1,4 @@
-import { WidgetModel } from '@/framework/editor/widgets/widget-model';
+import { WidgetModel } from '@progress/sitefinity-react-framework';
 
 export interface ColumnHolder {
     Children: Array<ComponentContainer>

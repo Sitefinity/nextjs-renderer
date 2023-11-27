@@ -3,10 +3,10 @@
 import React from 'react';
 import { ContentListEntity } from '../content-list-entity';
 import { ListWithSummaryModel } from './list-with-summary/list-with-summary-model';
-import { DetailItem } from '@/framework/editor/services/detail-item';
-import { PageItem } from '@/framework/rest-sdk/dto/page-item';
-import { SdkItem } from '@/framework/rest-sdk/dto/sdk-item';
-import { RestService, RestSdkTypes } from '@/framework/rest-sdk/rest-service';
+import { DetailItem } from '@progress/sitefinity-react-framework';
+import { PageItem } from '@progress/sitefinity-react-framework';
+import { SdkItem } from '@progress/sitefinity-react-framework';
+import { RestService, RestSdkTypes } from '@progress/sitefinity-react-framework';
 
 export function OpenDetailsAnchor(props: {
     item: any;

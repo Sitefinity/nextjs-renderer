@@ -8,9 +8,9 @@ import { Accordion } from './accordion';
 import { Vertical } from './vertical';
 import { VerticalSitemap } from './vertical-sitemap';
 import { Tabs } from './tabs';
-import { classNames } from '@/framework/editor/utils/classNames';
-import { htmlAttributes, getCustomAttributes } from '@/framework/editor/widgets/attributes';
-import { WidgetContext } from '@/framework/editor/widgets/widget-context';
+import { classNames } from '@progress/sitefinity-react-framework';
+import { htmlAttributes, getCustomAttributes } from '@progress/sitefinity-react-framework';
+import { WidgetContext } from '@progress/sitefinity-react-framework';
 
 export type NavgationViewName = 'Horizontal' | 'Tabs' | 'Accordion' | 'Vertical' | 'VerticalSitemap';
 

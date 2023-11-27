@@ -1,4 +1,4 @@
-import { SdkItem } from '@/framework/rest-sdk/dto/sdk-item';
+import { SdkItem } from '@progress/sitefinity-react-framework';
 import { ContentListModelbase } from '../content-list-model-base';
 
 export interface ListWithSummaryModel extends ContentListModelbase {

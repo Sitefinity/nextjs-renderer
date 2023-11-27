@@ -3,7 +3,7 @@ import { FilterClause, FilterOperators } from './filter-clause';
 import { RelationFilter } from './relation-filter';
 import { DateOffsetPeriod } from './date-offset-period';
 import { FilterTypes } from './filter-types';
-import { ContentVariation } from '@/framework/editor/widgets/mixed-content-context';
+import { ContentVariation } from '@progress/sitefinity-react-framework';
 
 export class FilterConverterService {
     public static getMainFilter(variation: ContentVariation): CombinedFilter | FilterClause | RelationFilter | null {

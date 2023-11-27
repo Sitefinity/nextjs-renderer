@@ -1,4 +1,4 @@
-import { SdkItem } from '@/framework/rest-sdk/dto/sdk-item';
+import { SdkItem } from '@progress/sitefinity-react-framework';
 import { ImagePosition } from './image-position';
 
 export interface BackgroundStyle {

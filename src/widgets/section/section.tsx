@@ -1,17 +1,15 @@
-import { RenderWidgetService } from '@/framework/editor/services/render-widget-service';
-import { htmlAttributes } from '@/framework/editor/widgets/attributes';
-import { WidgetContext } from '@/framework/editor/widgets/widget-context';
-import { ImageItem } from '@/framework/rest-sdk/dto/image-item';
-import { VideoItem } from '@/framework/rest-sdk/dto/video-item';
-import { RestService, RestSdkTypes } from '@/framework/rest-sdk/rest-service';
-import { RootUrlService } from '@/framework/rest-sdk/root-url.service';
-import { widgetRegistry } from '@/widget-registry';
+import { RenderWidgetService } from '@progress/sitefinity-react-framework';
+import { htmlAttributes } from '@progress/sitefinity-react-framework';
+import { WidgetContext } from '@progress/sitefinity-react-framework';
+import { ImageItem } from '@progress/sitefinity-react-framework';
+import { VideoItem } from '@progress/sitefinity-react-framework';
+import { RestService, RestSdkTypes } from '@progress/sitefinity-react-framework';
+import { RootUrlService } from '@progress/sitefinity-react-framework';
 import { StyleGenerator } from '../styling/style-generator.service';
 import { StylingConfig } from '../styling/styling-config';
 import { ColumnHolder, ComponentContainer } from './column-holder';
 import { SectionHolder } from './section-holder';
 import { SectionEntity } from './section.entity';
-
 const ColumnNamePrefix = 'Column';
 const sectionKey = 'Section';
 
@@ -58,7 +56,7 @@ function populateColumns(context: WidgetContext<SectionEntity>): ColumnHolder[] 
             children = context.model.Children.filter(x => x.PlaceHolder === currentName).map((x => {
                 let ret: WidgetContext<any> = {
                     model: x,
-                    metadata: widgetRegistry.widgets[x.Name],
+                    metadata: RenderWidgetService.widgetRegistry.widgets[x.Name],
                     requestContext: context.requestContext
                 };
 

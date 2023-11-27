@@ -1,4 +1,4 @@
-import { LinkModel } from '@/framework/editor/widgets/link-model';
+import { LinkModel } from '@progress/sitefinity-react-framework';
 import { ImageClickAction } from './ImageClickAction';
 import { ImageDisplayMode } from './ImageDisplayMode';
 

@@ -1,6 +1,6 @@
-import { CollectionResponse } from '@/framework/rest-sdk/dto/collection-response';
-import { RestService } from '@/framework/rest-sdk/rest-service';
-import { SdkItem } from '@/framework/rest-sdk/dto/sdk-item';
+import { CollectionResponse } from '@progress/sitefinity-react-framework';
+import { RestService } from '@progress/sitefinity-react-framework';
+import { SdkItem } from '@progress/sitefinity-react-framework';
 import { ClassificationEntity } from './classification';
 
 export class ClassificationRestService {

@@ -3,7 +3,7 @@
 import React from 'react';
 import { VisibilityStyle } from '../styling/visibility-style';
 import { invalidDataAttr, invalidateElement, isValidEmail, serializeForm } from '../common/utils';
-import { classNames } from '@/framework/editor/utils/classNames';
+import { classNames } from '@progress/sitefinity-react-framework';
 
 const ForgottenForm = (props: any) => {
     const { viewModel, emailInputId } = props;

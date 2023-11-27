@@ -3,8 +3,8 @@
 import React, { FocusEvent, MouseEvent } from 'react';
 import { SearchInput } from './search-input';
 import { VisibilityStyle } from '../styling/visibility-style';
-import { classNames } from '@/framework/editor/utils/classNames';
-import { getCustomAttributes } from '@/framework/editor/widgets/attributes';
+import { classNames } from '@progress/sitefinity-react-framework';
+import { getCustomAttributes } from '@progress/sitefinity-react-framework';
 
 const dataSfItemAttribute = 'data-sfitem';
 const activeAttribute = 'data-sf-active';

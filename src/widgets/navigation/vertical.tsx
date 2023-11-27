@@ -1,7 +1,7 @@
 import React from 'react';
 import { PageViewModel } from './interfaces/PageViewModel';
 import { getClass } from './utils';
-import { classNames } from '@/framework/editor/utils/classNames';
+import { classNames } from '@progress/sitefinity-react-framework';
 
 export function Vertical(props: {
     items: any;

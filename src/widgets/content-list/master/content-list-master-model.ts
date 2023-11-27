@@ -1,5 +1,5 @@
-import { CollectionResponse } from '@/framework/rest-sdk/dto/collection-response';
-import { SdkItem } from '@/framework/rest-sdk/dto/sdk-item';
+import { CollectionResponse } from '@progress/sitefinity-react-framework';
+import { SdkItem } from '@progress/sitefinity-react-framework';
 
 export interface ContentListModelMaster {
     OpenDetails: boolean;

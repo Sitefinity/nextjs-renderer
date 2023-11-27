@@ -1,8 +1,8 @@
 import React from 'react';
 import { ContentListModelDetail } from './content-list-detail-model';
 import { ContentListEntity } from '../content-list-entity';
-import { SdkItem } from '@/framework/rest-sdk/dto/sdk-item';
-import { RestService } from '@/framework/rest-sdk/rest-service';
+import { SdkItem } from '@progress/sitefinity-react-framework';
+import { RestService } from '@progress/sitefinity-react-framework';
 
 export async function ContentListDetail(props: { detailModel: ContentListModelDetail, entity?: ContentListEntity }) {
     const model = props.detailModel;

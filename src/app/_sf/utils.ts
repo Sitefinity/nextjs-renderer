@@ -1,16 +1,14 @@
+import { Metadata } from 'next';
 import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
-import { PageLayoutServiceResponse } from '@/framework/rest-sdk/services/layout-service.response';
-import { LayoutService } from '@/framework/rest-sdk/services/layout.service';
 import { PageParams } from './page-params';
-import { Metadata } from 'next';
-import { GetAllArgs } from '@/framework/rest-sdk/services/get-all-args';
-import { ServiceMetadata } from '@/framework/rest-sdk/service-metadata';
-import { RestService } from '@/framework/rest-sdk/rest-service';
-import { RootUrlService } from '@/framework/rest-sdk/root-url.service';
-import { widgetRegistry } from '@/widget-registry';
-import { RenderWidgetService } from '../editor/services/render-widget-service';
-import { WidgetExecutionError } from '@/widgets/error/widget-execution-error-component';
+import { widgetRegistry } from '../../widgets/widget-registry';
+import { WidgetExecutionError } from '../../widgets/error/widget-execution-error-component';
+import { PageLayoutServiceResponse, LayoutService, GetAllArgs } from '../../framework/rest-sdk/services';
+import { ServiceMetadata } from '../../framework/rest-sdk/service-metadata';
+import { RootUrlService } from '../../framework/rest-sdk/root-url.service';
+import { RenderWidgetService } from '../../framework/editor/services/render-widget-service';
+import { RestService } from '../../framework/rest-sdk/rest-service';
 
 export async function pageLayout({ params, searchParams }: PageParams): Promise<PageLayoutServiceResponse> {
     if (params && params.slug.some(x => x === '_next')) {

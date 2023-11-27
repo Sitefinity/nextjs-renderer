@@ -1,8 +1,6 @@
-import { CollectionResponse } from '@/framework/rest-sdk/dto/collection-response';
-import { SdkItem } from '@/framework/rest-sdk/dto/sdk-item';
-import { BreadcrumbEntity } from '@/widgets/breadcrumb/breadcrumb';
-import { BreadcrumbRestService } from '@/widgets/breadcrumb/breadcrumb.service';
-
+import { CollectionResponse } from '@progress/sitefinity-react-framework';
+import { SdkItem } from '@progress/sitefinity-react-framework';
+import { BreadcrumbRestService } from '../../src/widgets/breadcrumb/breadcrumb.service';
 export class MockedBreadcrumbRestService extends BreadcrumbRestService {
 
     static override getItems(): {value: CollectionResponse<SdkItem>[]} {

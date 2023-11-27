@@ -1,8 +1,8 @@
-import { ContentListSettings } from '@/framework/editor/widgets/content-list-settings';
-import { MixedContentContext } from '@/framework/editor/widgets/mixed-content-context';
-import { CombinedFilter } from '@/framework/rest-sdk/filters/combined-filter';
-import { FilterClause } from '@/framework/rest-sdk/filters/filter-clause';
-import { RelationFilter } from '@/framework/rest-sdk/filters/relation-filter';
+import { ContentListSettings } from '@progress/sitefinity-react-framework';
+import { MixedContentContext } from '@progress/sitefinity-react-framework';
+import { CombinedFilter } from '@progress/sitefinity-react-framework';
+import { FilterClause } from '@progress/sitefinity-react-framework';
+import { RelationFilter } from '@progress/sitefinity-react-framework';
 
 export interface ContentListEntity {
     SelectedItems: MixedContentContext;

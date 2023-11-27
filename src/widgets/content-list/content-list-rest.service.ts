@@ -1,16 +1,16 @@
-import { CollectionResponse } from '@/framework/rest-sdk/dto/collection-response';
-import { SdkItem } from '@/framework/rest-sdk/dto/sdk-item';
-import { CombinedFilter } from '@/framework/rest-sdk/filters/combined-filter';
-import { FilterClause, FilterOperators } from '@/framework/rest-sdk/filters/filter-clause';
-import { OrderBy } from '@/framework/rest-sdk/filters/orderby';
-import { RelationFilter } from '@/framework/rest-sdk/filters/relation-filter';
-import { RestService } from '@/framework/rest-sdk/rest-service';
-import { ServiceMetadata } from '@/framework/rest-sdk/service-metadata';
-import { GetAllArgs } from '@/framework/rest-sdk/services/get-all-args';
-import { FilterConverterService } from '@/framework/rest-sdk/filters/filter-converter';
+import { CollectionResponse } from '@progress/sitefinity-react-framework';
+import { SdkItem } from '@progress/sitefinity-react-framework';
+import { CombinedFilter } from '@progress/sitefinity-react-framework';
+import { FilterClause, FilterOperators } from '@progress/sitefinity-react-framework';
+import { OrderBy } from '@progress/sitefinity-react-framework';
+import { RelationFilter } from '@progress/sitefinity-react-framework';
+import { RestService } from '@progress/sitefinity-react-framework';
+import { ServiceMetadata } from '@progress/sitefinity-react-framework';
+import { GetAllArgs } from '@progress/sitefinity-react-framework';
+import { FilterConverterService } from '@progress/sitefinity-react-framework';
 import { ContentListEntity } from './content-list-entity';
-import { ContentContext, ContentVariation } from '@/framework/editor/widgets/mixed-content-context';
-import { DetailItem } from '@/framework/editor/services/detail-item';
+import { ContentContext, ContentVariation } from '@progress/sitefinity-react-framework';
+import { DetailItem } from '@progress/sitefinity-react-framework';
 
 export class ContentListRestService {
 

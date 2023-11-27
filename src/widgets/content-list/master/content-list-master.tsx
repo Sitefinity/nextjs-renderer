@@ -8,7 +8,7 @@ import { ListWithSummary } from './list-with-summary/list-with-summary';
 import { ContentListEntity } from '../content-list-entity';
 import { CardsList } from './cards-list/cards-list';
 import { CardsListModel } from './cards-list/cards-list-model';
-import { ImageItem } from '@/framework/rest-sdk/dto/image-item';
+import { ImageItem } from '@progress/sitefinity-react-framework';
 
 export async function ContentListMaster(props: { model: ContentListModelMaster, entity?: ContentListEntity }) {
     let data: { viewName?: string, model?: ContentListModelbase} = {};

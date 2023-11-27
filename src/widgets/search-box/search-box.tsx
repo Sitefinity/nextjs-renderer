@@ -5,12 +5,12 @@ import { StylingConfig } from '../styling/styling-config';
 import { VisibilityStyle } from '../styling/visibility-style';
 import { SearchBoxRestService } from './search-box.service';
 import { SearchContent } from './search-content';
-import { classNames } from '@/framework/editor/utils/classNames';
-import { htmlAttributes } from '@/framework/editor/widgets/attributes';
-import { MixedContentContext } from '@/framework/editor/widgets/mixed-content-context';
-import { WidgetContext } from '@/framework/editor/widgets/widget-context';
-import { RestSdkTypes } from '@/framework/rest-sdk/rest-service';
-import { RootUrlService } from '@/framework/rest-sdk/root-url.service';
+import { classNames } from '@progress/sitefinity-react-framework';
+import { htmlAttributes } from '@progress/sitefinity-react-framework';
+import { MixedContentContext } from '@progress/sitefinity-react-framework';
+import { WidgetContext } from '@progress/sitefinity-react-framework';
+import { RestSdkTypes } from '@progress/sitefinity-react-framework';
+import { RootUrlService } from '@progress/sitefinity-react-framework';
 
 const defaultMixedContent = {
     ItemIdsOrdered:null,

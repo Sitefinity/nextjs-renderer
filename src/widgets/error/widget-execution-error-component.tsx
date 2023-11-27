@@ -1,5 +1,5 @@
-import { htmlAttributes } from '@/framework/editor/widgets/attributes';
-import { WidgetContext } from '@/framework/editor/widgets/widget-context';
+import { htmlAttributes } from '@progress/sitefinity-react-framework';
+import { WidgetContext } from '@progress/sitefinity-react-framework';
 import React from 'react';
 
 

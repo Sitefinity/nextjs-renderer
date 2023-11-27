@@ -4,11 +4,11 @@ import { OffsetStyle } from '../styling/offset-style';
 import { ImageTag } from './image-tag';
 import { ImageClickAction } from './interfaces/ImageClickAction';
 import { ImageDisplayMode } from './interfaces/ImageDisplayMode';
-import { classNames } from '@/framework/editor/utils/classNames';
-import { htmlAttributes, generateAnchorAttrsFromLink } from '@/framework/editor/widgets/attributes';
-import { LinkModel } from '@/framework/editor/widgets/link-model';
-import { WidgetContext } from '@/framework/editor/widgets/widget-context';
-import { RestService, RestSdkTypes } from '@/framework/rest-sdk/rest-service';
+import { classNames } from '@progress/sitefinity-react-framework';
+import { htmlAttributes, generateAnchorAttrsFromLink } from '@progress/sitefinity-react-framework';
+import { LinkModel } from '@progress/sitefinity-react-framework';
+import { WidgetContext } from '@progress/sitefinity-react-framework';
+import { RestService, RestSdkTypes } from '@progress/sitefinity-react-framework';
 
 const imageWrapperClass = 'd-inline-block';
 

@@ -5,9 +5,9 @@ import { ContentListDetail } from './detail/content-list-detail';
 import { ContentListModelDetail } from './detail/content-list-detail-model';
 import { ContentListMaster } from './master/content-list-master';
 import { ContentListModelMaster } from './master/content-list-master-model';
-import { DetailItem } from '@/framework/editor/services/detail-item';
-import { htmlAttributes } from '@/framework/editor/widgets/attributes';
-import { WidgetContext } from '@/framework/editor/widgets/widget-context';
+import { DetailItem } from '@progress/sitefinity-react-framework';
+import { htmlAttributes } from '@progress/sitefinity-react-framework';
+import { WidgetContext } from '@progress/sitefinity-react-framework';
 
 export async function ContentList(props: WidgetContext<ContentListEntity>) {
     const attributes = htmlAttributes(props);

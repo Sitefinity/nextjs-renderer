@@ -1,6 +1,6 @@
-import { htmlAttributes } from '@/framework/editor/widgets/attributes';
-import { WidgetContext } from '@/framework/editor/widgets/widget-context';
-import { RestService } from '@/framework/rest-sdk/rest-service';
+import { htmlAttributes } from '@progress/sitefinity-react-framework';
+import { WidgetContext } from '@progress/sitefinity-react-framework';
+import { RestService } from '@progress/sitefinity-react-framework';
 import React from 'react';
 
 export async function ContentBlock(props: WidgetContext<ContentBlockEntity>) {

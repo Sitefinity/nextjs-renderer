@@ -1,9 +1,9 @@
 import React from 'react';
 import { DropDownWrapper } from './dropdown';
-import { classNames } from '@/framework/editor/utils/classNames';
-import { WidgetContext } from '@/framework/editor/widgets/widget-context';
-import { PageItem } from '@/framework/rest-sdk/dto/page-item';
-import { RestService, RestSdkTypes } from '@/framework/rest-sdk/rest-service';
+import { classNames } from '@progress/sitefinity-react-framework';
+import { WidgetContext } from '@progress/sitefinity-react-framework';
+import { PageItem } from '@progress/sitefinity-react-framework';
+import { RestService, RestSdkTypes } from '@progress/sitefinity-react-framework';
 
 export async function LanguageSelector(props: WidgetContext<LanguageSelectorEntity>) {
     const context = props.requestContext;

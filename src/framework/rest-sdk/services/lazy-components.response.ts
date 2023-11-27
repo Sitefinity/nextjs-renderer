@@ -1,4 +1,4 @@
-import { WidgetModel } from '@/framework/editor/widgets/widget-model';
+import { WidgetModel } from '../../editor/widgets/widget-model';
 
 export interface LazyComponentsResponse {
     Components: WidgetModel<any>[]

@@ -2,9 +2,9 @@ import React from 'react';
 import { StyleGenerator } from '../styling/style-generator.service';
 import { OffsetStyle } from '../styling/offset-style';
 import { BreadcrumbRestService } from './breadcrumb.service';
-import { getCustomAttributes, htmlAttributes } from '@/framework/editor/widgets/attributes';
-import { WidgetContext } from '@/framework/editor/widgets/widget-context';
-import { classNames } from '@/framework/editor/utils/classNames';
+import { getCustomAttributes, htmlAttributes } from '@progress/sitefinity-react-framework';
+import { WidgetContext } from '@progress/sitefinity-react-framework';
+import { classNames } from '@progress/sitefinity-react-framework';
 
 const PAGE_MISSING_MESSAGE = 'Breadcrumb is visible when you are on a particular page.';
 

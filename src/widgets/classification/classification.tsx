@@ -3,9 +3,9 @@ import { StyleGenerator } from '../styling/style-generator.service';
 import { OffsetStyle } from '../styling/offset-style';
 import { ClassificationRestService } from './classification.service';
 import { PageViewModel } from '../navigation/interfaces/PageViewModel';
-import { classNames } from '@/framework/editor/utils/classNames';
-import { htmlAttributes, getCustomAttributes } from '@/framework/editor/widgets/attributes';
-import { WidgetContext } from '@/framework/editor/widgets/widget-context';
+import { classNames } from '@progress/sitefinity-react-framework';
+import { htmlAttributes, getCustomAttributes } from '@progress/sitefinity-react-framework';
+import { WidgetContext } from '@progress/sitefinity-react-framework';
 
 const mapTaxonProperties = (taxon: any, taxonomyName: string, viewUrl?: string, searchParams?: any) =>{
     const children: any[] = [];

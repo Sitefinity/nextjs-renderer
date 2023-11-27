@@ -7,14 +7,14 @@ import { ChangeForm } from './change-form';
 import { VisibilityStyle } from '../styling/visibility-style';
 import { ChangePasswordViewModel } from './interfaces/ChangePasswordViewModel';
 import { User } from './interfaces/User';
-import { classNames } from '@/framework/editor/utils/classNames';
-import { getUniqueId } from '@/framework/editor/utils/getUniqueId';
-import { RestExtensionsService } from '@/framework/editor/utils/rest-extensions';
-import { htmlAttributes } from '@/framework/editor/widgets/attributes';
-import { MixedContentContext } from '@/framework/editor/widgets/mixed-content-context';
-import { WidgetContext } from '@/framework/editor/widgets/widget-context';
-import { RestSdkTypes, RestService } from '@/framework/rest-sdk/rest-service';
-import { RootUrlService } from '@/framework/rest-sdk/root-url.service';
+import { classNames } from '@progress/sitefinity-react-framework';
+import { getUniqueId } from '@progress/sitefinity-react-framework';
+import { RestExtensionsService } from '@progress/sitefinity-react-framework';
+import { htmlAttributes } from '@progress/sitefinity-react-framework';
+import { MixedContentContext } from '@progress/sitefinity-react-framework';
+import { WidgetContext } from '@progress/sitefinity-react-framework';
+import { RestSdkTypes, RestService } from '@progress/sitefinity-react-framework';
+import { RootUrlService } from '@progress/sitefinity-react-framework';
 
 const defaultMixedContent = {
     ItemIdsOrdered:null,

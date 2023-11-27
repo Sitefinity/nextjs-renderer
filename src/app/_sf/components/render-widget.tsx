@@ -1,9 +1,9 @@
-import { initStaticParams } from '@/framework/next/utils';
-import { RenderWidgetService } from '@/framework/editor/services/render-widget-service';
-import { RequestContext } from '@/framework/editor/services/request-context';
-import { WidgetModel } from '@/framework/editor/widgets/widget-model';
 
-export default async function RenderWidget({ searchParams }: { searchParams: { [key: string]: string } }) {
+
+import { RenderWidgetService, RequestContext, WidgetModel } from '@progress/sitefinity-react-framework';
+import { initStaticParams } from '../utils';
+
+export async function RenderWidget({ searchParams }: { searchParams: { [key: string]: string } }) {
     await initStaticParams();
     try {
         const urlDecoded = decodeURIComponent(searchParams.model);

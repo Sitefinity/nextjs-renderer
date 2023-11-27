@@ -1,6 +1,5 @@
-
-import { WidgetModel } from '@/framework/editor/widgets/widget-model';
 import { DetailItem } from '../../editor/services/detail-item';
+import { WidgetModel } from '../../editor/widgets/widget-model';
 
 export interface PageLayoutServiceResponse {
     Culture: string;

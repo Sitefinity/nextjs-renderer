@@ -1,14 +1,14 @@
 
 import React from 'react';
-import RenderPageClient from './render-page-client';
+import { RenderPageClient } from './render-page-client';
 import { cookies } from 'next/headers';
 import { pageLayout } from '../utils';
 import { AppState } from '../app-state';
 import { PageParams } from '../page-params';
-import { RenderWidgetService } from '@/framework/editor/services/render-widget-service';
-import { ServiceMetadata } from '@/framework/rest-sdk/service-metadata';
+import { RenderWidgetService } from '../../../framework/editor';
+import { ServiceMetadata } from '../../../framework/rest-sdk';
 
-export default async function RenderPage({ params, searchParams }: PageParams) {
+export async function RenderPage({ params, searchParams }: PageParams) {
     const layout = await pageLayout({ params, searchParams });
     const isEdit = searchParams['sfaction'] === 'edit';
     const isPreview = searchParams['sfaction'] === 'preview';
