@@ -18,10 +18,12 @@ export class SearchResultsService {
 
             let skip = 0;
             let take = 20;
-
             if (entity.ListSettings!.DisplayMode === ListDisplayMode.Paging) {
                 take = entity.ListSettings!.ItemsPerPage;
-                skip = (searchParamsModel.Page - 1) * take;
+                if (searchParamsModel.page) {
+                    skip = (parseInt(searchParamsModel.page, 10) - 1) * take;
+                }
+
             } else if (entity.ListSettings!.DisplayMode === ListDisplayMode.Limit) {
                 take = entity.ListSettings!.LimitItemsCount;
             } else if (entity.ListSettings!.DisplayMode === ListDisplayMode.All) {
@@ -30,7 +32,8 @@ export class SearchResultsService {
 
             const argsLocal = {
                 Name: 'Default.PerformSearch',
-                AdditionalQueryParams: {
+                AdditionalQueryParams:
+                 {
                      ['indexCatalogue']: searchParamsModel.indexCatalogue,
                      ['searchQuery']: encodeURIComponent(searchParamsModel.searchQuery).toLowerCase(),
                      ['wordsMode']: searchParamsModel.wordsMode,

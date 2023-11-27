@@ -22,7 +22,7 @@ export class RestService {
         const queryParams = args.AdditionalQueryParams || {};
         const baseURL = args.BaseURL || RestService.buildItemBaseUrl(args.Name);
         const wholeUrl = `${baseURL}${RestService.buildQueryParams(queryParams)}`;
-        console.log('whole', wholeUrl);
+
         return this.sendRequest({ url: wholeUrl, headers });
     }
 

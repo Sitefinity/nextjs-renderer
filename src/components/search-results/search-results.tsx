@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { getCustomAttributes, htmlAttributes } from 'sitefinity-react-framework/widgets/attributes';
 import { WidgetContext } from 'sitefinity-react-framework/widgets/widget-context';
 import { classNames } from 'sitefinity-react-framework/utils/classNames';
@@ -12,7 +13,7 @@ import { SearchResultsSorting } from './interfaces/SearchResultsSorting';
 import { ExtendedContentListSettings } from 'sitefinity-react-framework/widgets/entities/extended-content-list-settings';
 import { ListDisplayMode } from 'sitefinity-react-framework/widgets/entities/list-display-mode';
 import { SearchResultsViewModel } from './interfaces/SearchResultsViewModel';
-import Image from 'next/image';
+import { OrderByDropDown } from './orderby-dropdown';
 
 export async function SearchResults(props: WidgetContext<SearchResultsEntity>) {
     const model = props.model;
@@ -64,7 +65,7 @@ export async function SearchResults(props: WidgetContext<SearchResultsEntity>) {
     };
     const languagesCount = viewModel.Languages.length;
     const response: {TotalCount:number, SearchResults: SearchResultDocumentDto[]} = await restService.performSearch(entity, searchParams);
-    viewModel.TotalCount = response.TotalCount;
+    viewModel.TotalCount = response.TotalCount || 0;
     viewModel.SearchResults = response.SearchResults || [];
 
     if (viewModel.SearchResults && viewModel.SearchResults.length > 0) {
@@ -84,7 +85,6 @@ export async function SearchResults(props: WidgetContext<SearchResultsEntity>) {
     let orderByQuery = queryCollection['orderBy'];
     let sorting = orderByQuery ? orderByQuery : viewModel.Sorting;
     let sortingSelectId = getUniqueId('sf-sort-');
-    let searchTerm = queryCollection['searchQuery'];
     return (
       <>
         {
@@ -93,7 +93,7 @@ export async function SearchResults(props: WidgetContext<SearchResultsEntity>) {
             {...searchResultsCustomAttributes}
             id="sf-search-result-container"
             data-sf-role="search-results"
-            data-sf-search-query={searchTerm}
+            data-sf-search-query={queryCollection['searchQuery']}
             data-sf-search-catalogue={queryCollection['indexCatalogue']}
             data-sf-words-mode={queryCollection['wordsMode']}
             data-sf-language={queryCollection['sf_culture']}
@@ -109,11 +109,8 @@ export async function SearchResults(props: WidgetContext<SearchResultsEntity>) {
                   <label htmlFor={sortingSelectId} className="form-label text-nowrap mb-0">
                     {viewModel.SortByLabel}
                   </label>
-                  <select className="userSortDropdown form-select" title="SortDropdown" id={sortingSelectId}>
-                    <option value={SearchResultsSorting.MostRelevantOnTop}>Relevance</option>
-                    <option value={SearchResultsSorting.NewestFirst}>Newest first</option>
-                    <option value={SearchResultsSorting.OldestFirst}>Oldest first</option>
-                  </select>
+                  <OrderByDropDown context={context} sortingSelectId={sortingSelectId}
+                    queryCollection={queryCollection} sorting={sorting} />
                 </>
                     }
               </div>
