@@ -1,8 +1,8 @@
 
 import { Metadata } from 'next';
-import { RenderPage } from '../_sf/components/render-page';
-import { PageParams } from '../_sf/page-params';
-import { pageMetadata } from '../_sf/utils';
+import { RenderPage } from '../../nextjs-framework/pages/render-page';
+import { PageParams } from '../../nextjs-framework/pages/page-params';
+import { pageMetadata } from '../../nextjs-framework/pages/utils';
 
 export async function generateMetadata({ params, searchParams }: PageParams): Promise<Metadata> {
     return await pageMetadata({ params, searchParams });
