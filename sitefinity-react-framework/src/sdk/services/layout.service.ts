@@ -9,7 +9,7 @@ export class LayoutService {
         let url = null;
 
         let indexOfSitefinityTemplate = pagePath.indexOf('Sitefinity/Template/');
-        if (indexOfSitefinityTemplate > 0) {
+        if (indexOfSitefinityTemplate > -1) {
             let id = null;
             let indexOfGuid = indexOfSitefinityTemplate + 'Sitefinity/Template/'.length;
             let nextIndexOfSlash = pagePath.indexOf('/', indexOfGuid);

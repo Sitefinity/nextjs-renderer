@@ -45,20 +45,23 @@ export async function pageLayout({ params, searchParams }: PageParams): Promise<
 }
 
 export async function pageMetadata({ params, searchParams }: PageParams): Promise<Metadata> {
-    const layout = await pageLayout( { params, searchParams });
+    const layout = await pageLayout({ params, searchParams });
+    if (layout.MetaInfo) {
+        return {
+            title: layout.MetaInfo.Title,
+            description: layout.MetaInfo.Description,
 
-    return {
-        title: layout.MetaInfo.Title,
-        description: layout.MetaInfo.Description,
+            other: {
+                'og-title': layout.MetaInfo.OpenGraphTitle,
+                'og-image': layout.MetaInfo.OpenGraphImage,
+                'og-video': layout.MetaInfo.OpenGraphVideo,
+                'og-type': layout.MetaInfo.OpenGraphType,
+                'og-site': layout.MetaInfo.OpenGraphSite
+            }
+        };
+    }
 
-        other: {
-            'og-title': layout.MetaInfo.OpenGraphTitle,
-            'og-image': layout.MetaInfo.OpenGraphImage,
-            'og-video': layout.MetaInfo.OpenGraphVideo,
-            'og-type': layout.MetaInfo.OpenGraphType,
-            'og-site': layout.MetaInfo.OpenGraphSite
-        }
-    };
+    return {};
 }
 
 export async function pageStaticParams() {
