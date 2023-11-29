@@ -30,9 +30,6 @@ jobs:
           cd sitefinity-react-framework
           npm ci
           npm run build
-          cp package.json dist/package.json
-          cd ./dist
-          npm pack --pack-destination ../build
 
       - name: Install
         run: npm ci
