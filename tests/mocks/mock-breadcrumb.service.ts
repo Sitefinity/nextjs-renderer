@@ -1,5 +1,5 @@
-import { CollectionResponse } from '../../src/nextjs-framework';
-import { SdkItem } from '../../src/nextjs-framework';
+
+import { CollectionResponse, SdkItem } from '../../src/nextjs-framework/rest-sdk';
 import { BreadcrumbRestService } from '../../src/nextjs-framework/widgets/breadcrumb/breadcrumb.service';
 export class MockedBreadcrumbRestService extends BreadcrumbRestService {
 
