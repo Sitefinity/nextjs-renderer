@@ -27,7 +27,6 @@ jobs:
 
       - name: Build Sitefinity React Framework
         run: |
-          cd sitefinity-react-framework
           npm ci
           npm run build
 
