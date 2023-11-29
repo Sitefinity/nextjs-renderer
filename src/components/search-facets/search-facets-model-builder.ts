@@ -56,7 +56,7 @@ export  class SearchFacetsModelBuilder {
         facetableFieldsFromIndex: {[key: string]:FacetField},
         searchFacets: SearchFacets[],
         sortType: string): SearchFacets[] {
-        if (sortType === this.AlphabeticallySort) {
+        if (sortType.toString() === this.AlphabeticallySort) {
             searchFacets = searchFacets
                 .sort((a: SearchFacets, b: SearchFacets) => {
                     const nameA = a.FacetFieldName!.toUpperCase();
