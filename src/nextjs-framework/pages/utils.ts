@@ -100,7 +100,7 @@ export async function initRestSdk() {
     await ServiceMetadata.fetch();
 }
 
-export async function initRendering(widgetRegistry: WidgetRegistry, errorComponentType: any) {
+export function initRendering(widgetRegistry: WidgetRegistry, errorComponentType: any) {
     RenderWidgetService.widgetRegistry = widgetRegistry;
     RenderWidgetService.errorComponentType = errorComponentType;
 }
