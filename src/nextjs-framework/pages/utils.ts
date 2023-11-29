@@ -8,13 +8,14 @@ import { ServiceMetadata } from '../rest-sdk/service-metadata';
 import { RootUrlService } from '../rest-sdk/root-url.service';
 import { RenderWidgetService } from '../services/render-widget-service';
 import { RestService } from '../rest-sdk/rest-service';
+import { WidgetRegistry } from '../editor';
 
 export async function pageLayout({ params, searchParams, cookie }: PageParams): Promise<PageLayoutServiceResponse> {
     if (params && params.slug.some(x => x === '_next')) {
         notFound();
     }
 
-    await initStaticParams();
+    await initRestSdk();
 
     const actionParam = searchParams['sfaction'];
 
@@ -94,10 +95,12 @@ export async function pageStaticParams() {
     });
 }
 
-export async function initStaticParams() {
+export async function initRestSdk() {
     RootUrlService.rootUrl = `${process.env['PROXY_URL'] || process.env['NEXT_CMS_URL']}`;
     await ServiceMetadata.fetch();
+}
 
+export async function initRendering(widgetRegistry: WidgetRegistry, errorComponentType: any) {
     RenderWidgetService.widgetRegistry = widgetRegistry;
-    RenderWidgetService.errorComponentType = WidgetExecutionError;
+    RenderWidgetService.errorComponentType = errorComponentType;
 }
