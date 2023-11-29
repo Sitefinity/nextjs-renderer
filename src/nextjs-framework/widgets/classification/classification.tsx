@@ -3,9 +3,7 @@ import { StyleGenerator } from '../styling/style-generator.service';
 import { OffsetStyle } from '../styling/offset-style';
 import { ClassificationRestService } from './classification.service';
 import { PageViewModel } from '../navigation/interfaces/PageViewModel';
-import { classNames } from '../..';
-import { htmlAttributes, getCustomAttributes } from '../..';
-import { WidgetContext } from '../..';
+import { WidgetContext, classNames, getCustomAttributes, htmlAttributes } from '../../editor';
 
 const mapTaxonProperties = (taxon: any, taxonomyName: string, viewUrl?: string, searchParams?: any) =>{
     const children: any[] = [];

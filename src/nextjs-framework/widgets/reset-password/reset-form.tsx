@@ -3,7 +3,7 @@
 import React from 'react';
 import { VisibilityStyle } from '../styling/visibility-style';
 import { invalidDataAttr, invalidateElement, serializeForm } from '../common/utils';
-import { classNames } from '../..';
+import { classNames } from '../../editor';
 
 const ResetForm = (props: any) => {
     const { viewModel, context, securityQuestionInputId,

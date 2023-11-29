@@ -4,11 +4,8 @@ import { OffsetStyle } from '../styling/offset-style';
 import { ImageTag } from './image-tag';
 import { ImageClickAction } from './interfaces/ImageClickAction';
 import { ImageDisplayMode } from './interfaces/ImageDisplayMode';
-import { classNames } from '../..';
-import { htmlAttributes, generateAnchorAttrsFromLink } from '../..';
-import { LinkModel } from '../..';
-import { WidgetContext } from '../..';
-import { RestService, RestSdkTypes } from '../..';
+import { WidgetContext, htmlAttributes, classNames, generateAnchorAttrsFromLink, LinkModel } from '../../editor';
+import { RestService, RestSdkTypes } from '../../rest-sdk';
 
 const imageWrapperClass = 'd-inline-block';
 

@@ -3,10 +3,7 @@ import { StyleGenerator } from '../styling/style-generator.service';
 import { OffsetStyle } from '../styling/offset-style';
 import { Alignment } from '../styling/alignment';
 import { ButtonType } from '../styling/button-types';
-import { htmlAttributes, generateAnchorAttrsFromLink, getCustomAttributes } from '../..';
-import { classNames } from '../..';
-import { LinkModel } from '../..';
-import { WidgetContext } from '../..';
+import { WidgetContext, htmlAttributes, generateAnchorAttrsFromLink, getCustomAttributes, classNames, LinkModel } from '../../editor';
 
 export type CTAPart = 'Wrapper' | 'Primary' | 'Secondary';
 

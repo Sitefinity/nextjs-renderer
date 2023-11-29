@@ -2,8 +2,7 @@ import React from 'react';
 
 import { ImageDisplayMode } from './interfaces/ImageDisplayMode';
 import { ImageViewModel } from './interfaces/ImageViewModel';
-import { classNames } from '../..';
-import { getCustomAttributes } from '../..';
+import { getCustomAttributes, classNames } from '../../editor';
 
 const imageWrapperClass = 'd-inline-block';
 

@@ -1,9 +1,6 @@
-import { htmlAttributes } from '../..';
-import { WidgetContext } from '../..';
-import { ImageItem } from '../..';
-import { VideoItem } from '../..';
-import { RestService, RestSdkTypes } from '../..';
-import { RootUrlService } from '../..';
+
+import { WidgetContext, htmlAttributes } from '../../editor';
+import { ImageItem, RestSdkTypes, RestService, RootUrlService, VideoItem } from '../../rest-sdk';
 import { RenderWidgetService } from '../../services/render-widget-service';
 import { StyleGenerator } from '../styling/style-generator.service';
 import { StylingConfig } from '../styling/styling-config';

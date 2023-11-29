@@ -1,15 +1,14 @@
 
 import React from 'react';
 import { RenderPageClient } from './render-page-client';
-import { cookies } from 'next/headers';
 import { pageLayout } from './utils';
 import { AppState } from './app-state';
 import { PageParams } from './page-params';
 import { ServiceMetadata } from '../rest-sdk';
 import { RenderWidgetService } from '../services/render-widget-service';
 
-export async function RenderPage({ params, searchParams }: PageParams) {
-    const layout = await pageLayout({ params, searchParams });
+export async function RenderPage({ params, searchParams, cookie }: PageParams) {
+    const layout = await pageLayout({ params, searchParams, cookie });
     const isEdit = searchParams['sfaction'] === 'edit';
     const isPreview = searchParams['sfaction'] === 'preview';
     const isLive = !(isEdit || isPreview);
@@ -23,7 +22,7 @@ export async function RenderPage({ params, searchParams }: PageParams) {
             isEdit,
             isPreview,
             isLive,
-            cookie: cookies().toString()
+            cookie: cookie
         },
         widgets: layout.ComponentContext.Components
     };

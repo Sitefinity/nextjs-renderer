@@ -23,6 +23,6 @@
             "@progress/sitefinity-react-framework": ["./src/nextjs-framework"]
         }
     },
-    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+    "include": ["next-env.d.ts", "./src/app/*.ts", "./src/app/*.tsx", ".next/types/**/*.ts", "./src/nextjs-framework"],
     "exclude": ["node_modules"]
 }

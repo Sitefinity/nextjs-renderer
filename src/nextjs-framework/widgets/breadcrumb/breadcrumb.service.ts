@@ -1,6 +1,5 @@
-import { CollectionResponse } from '../..';
-import { RestService, RestSdkTypes } from '../..';
-import { SdkItem } from '../..';
+
+import { CollectionResponse, RestSdkTypes, RestService, SdkItem } from '../../rest-sdk';
 import { BreadcrumbEntity, BreadcrumbIncludeOption } from './breadcrumb';
 
 export class BreadcrumbRestService {

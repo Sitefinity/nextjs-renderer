@@ -3,7 +3,7 @@ import { FilterClause, FilterOperators } from './filter-clause';
 import { RelationFilter } from './relation-filter';
 import { DateOffsetPeriod } from './date-offset-period';
 import { FilterTypes } from './filter-types';
-import { ContentVariation } from '../..';
+import { ContentVariation } from '../../editor';
 
 export class FilterConverterService {
     public static getMainFilter(variation: ContentVariation): CombinedFilter | FilterClause | RelationFilter | null {

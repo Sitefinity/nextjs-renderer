@@ -1,4 +1,5 @@
-import { LinkModel } from '../../..';
+
+import { LinkModel } from '../../../editor';
 import { ImageClickAction } from './ImageClickAction';
 import { ImageDisplayMode } from './ImageDisplayMode';
 

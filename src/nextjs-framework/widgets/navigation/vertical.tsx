@@ -1,7 +1,7 @@
 import React from 'react';
 import { PageViewModel } from './interfaces/PageViewModel';
 import { getClass } from './utils';
-import { classNames } from '../..';
+import { classNames } from '../../editor';
 
 export function Vertical(props: {
     items: any;

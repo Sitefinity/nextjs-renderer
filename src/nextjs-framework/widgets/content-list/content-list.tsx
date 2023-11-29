@@ -5,9 +5,7 @@ import { ContentListDetail } from './detail/content-list-detail';
 import { ContentListModelDetail } from './detail/content-list-detail-model';
 import { ContentListMaster } from './master/content-list-master';
 import { ContentListModelMaster } from './master/content-list-master-model';
-import { DetailItem } from '../..';
-import { htmlAttributes } from '../..';
-import { WidgetContext } from '../..';
+import { DetailItem, WidgetContext, htmlAttributes } from '../../editor';
 
 export async function ContentList(props: WidgetContext<ContentListEntity>) {
     const attributes = htmlAttributes(props);

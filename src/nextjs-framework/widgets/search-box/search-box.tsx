@@ -5,12 +5,8 @@ import { StylingConfig } from '../styling/styling-config';
 import { VisibilityStyle } from '../styling/visibility-style';
 import { SearchBoxRestService } from './search-box.service';
 import { SearchContent } from './search-content';
-import { classNames } from '../..';
-import { htmlAttributes } from '../..';
-import { MixedContentContext } from '../..';
-import { WidgetContext } from '../..';
-import { RestSdkTypes } from '../..';
-import { RootUrlService } from '../..';
+import { MixedContentContext, WidgetContext, classNames, htmlAttributes } from '../../editor';
+import { RestSdkTypes, RootUrlService } from '../../rest-sdk';
 
 const defaultMixedContent = {
     ItemIdsOrdered:null,

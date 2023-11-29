@@ -1,6 +1,7 @@
 import { createRoot } from 'react-dom/client';
-import { RendererContract, GetWidgetMetadataArgs, ComponentMetadata, RenderWidgetArgs, RenderResult, RequestContext, GetWidgetsArgs, TotalCountResult, WidgetSection, WidgetItem, GetCategoriesArgs } from '..';
 import { RenderWidgetService } from './render-widget-service';
+import { ComponentMetadata, GetCategoriesArgs, GetWidgetMetadataArgs, GetWidgetsArgs, RenderResult, RenderWidgetArgs, RendererContract, TotalCountResult, WidgetItem, WidgetSection } from '../editor/renderer-contract-interfaces';
+import { RequestContext } from '../editor/request-context';
 
 export class RendererContractImpl implements RendererContract {
 

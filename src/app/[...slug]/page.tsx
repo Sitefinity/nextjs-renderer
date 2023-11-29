@@ -1,13 +1,14 @@
 
 import { Metadata } from 'next';
-import { RenderPage } from '../../nextjs-framework/pages/render-page';
-import { PageParams } from '../../nextjs-framework/pages/page-params';
-import { pageMetadata } from '../../nextjs-framework/pages/utils';
+import { cookies } from 'next/headers';
 
-export async function generateMetadata({ params, searchParams }: PageParams): Promise<Metadata> {
-    return await pageMetadata({ params, searchParams });
+import { RenderPage } from '@progress/sitefinity-react-framework';
+import { pageMetadata } from '@progress/sitefinity-react-framework';
+
+export async function generateMetadata({ params, searchParams }: any): Promise<Metadata> {
+    return await pageMetadata({ params, searchParams, cookie: cookies().toString() });
 }
 
-export default async function Page({ params, searchParams }: PageParams) {
-    return RenderPage({ params, searchParams });
+export default async function Page({ params, searchParams }: any) {
+    return RenderPage({ params, searchParams, cookie: cookies().toString() });
 }

@@ -2,9 +2,7 @@ import React from 'react';
 import { StyleGenerator } from '../styling/style-generator.service';
 import { OffsetStyle } from '../styling/offset-style';
 import { BreadcrumbRestService } from './breadcrumb.service';
-import { getCustomAttributes, htmlAttributes } from '../..';
-import { WidgetContext } from '../..';
-import { classNames } from '../..';
+import { WidgetContext, classNames, getCustomAttributes, htmlAttributes } from '../../editor';
 
 const PAGE_MISSING_MESSAGE = 'Breadcrumb is visible when you are on a particular page.';
 

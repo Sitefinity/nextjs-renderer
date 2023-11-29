@@ -1,8 +1,7 @@
-
-
-import { RequestContext, WidgetModel } from '..';
 import { initStaticParams } from './utils';
 import { RenderWidgetService } from '../services/render-widget-service';
+import { WidgetModel } from '../editor/widget-framework/widget-model';
+import { RequestContext } from '../editor/request-context';
 
 export async function RenderWidget({ searchParams }: { searchParams: { [key: string]: string } }) {
     await initStaticParams();

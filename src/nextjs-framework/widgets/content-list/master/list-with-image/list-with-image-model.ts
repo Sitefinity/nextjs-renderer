@@ -1,4 +1,4 @@
-import { SdkItem } from '../../../..';
+import { SdkItem } from '../../../../rest-sdk';
 import { ContentListModelbase } from '../content-list-model-base';
 
 export interface ListWithImageModel extends ContentListModelbase {

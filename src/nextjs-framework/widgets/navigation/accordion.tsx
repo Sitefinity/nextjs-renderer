@@ -1,8 +1,7 @@
 import React from 'react';
 import { PageViewModel } from './interfaces/PageViewModel';
 import { getClass } from './utils';
-import { classNames } from '../..';
-import { getUniqueId } from '../..';
+import { getUniqueId, classNames } from '../../editor';
 
 const getAccordionButtonStateClass = (node: PageViewModel) =>{
     if (!node.IsCurrentlyOpened && !node.HasChildOpen) {

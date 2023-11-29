@@ -1,7 +1,7 @@
-import { RestSdkTypes } from '../..';
-import { FilterConverterService } from '../..';
-import { RestExtensionsService } from '../..';
-import { MixedContentContext } from '../..';
+import { MixedContentContext } from '../../editor';
+import { FilterConverterService, RestSdkTypes } from '../../rest-sdk';
+import { RestExtensionsService } from '../rest-extensions';
+
 
 export class SearchBoxRestService {
 

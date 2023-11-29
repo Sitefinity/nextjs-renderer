@@ -1,20 +1,14 @@
 import React from 'react';
 import { StyleGenerator } from '../styling/style-generator.service';
 import { OffsetStyle } from '../styling/offset-style';
-import { classNames } from '../..';
-import { getUniqueId } from '../..';
-import { RestExtensionsService } from '../..';
-import { htmlAttributes } from '../..';
-import { MixedContentContext } from '../..';
-import { WidgetContext } from '../..';
-import { ExternalProvider } from '../..';
-import { RegistrationSettingsDto } from '../..';
-import { RestSdkTypes, RestService } from '../..';
-import { RootUrlService } from '../..';
+import { MixedContentContext, WidgetContext, classNames, getUniqueId, htmlAttributes } from '../../editor';
+
 import { ExternalLoginBase } from '../external-login-base';
 import { StylingConfig } from '../styling/styling-config';
 import { PostRegistrationAction } from './interfaces/PostRegistrationAction';
 import { RegistrationForm } from './registration-form';
+import { RestSdkTypes, RootUrlService, ExternalProvider, RestService, RegistrationSettingsDto } from '../../rest-sdk';
+import { RestExtensionsService } from '../rest-extensions';
 
 
 const defaultMixedContent = {

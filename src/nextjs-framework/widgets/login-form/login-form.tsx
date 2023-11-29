@@ -1,12 +1,4 @@
-import { classNames } from '../..';
-import { getUniqueId } from '../..';
-import { RestExtensionsService } from '../..';
-import { htmlAttributes } from '../..';
-import { MixedContentContext } from '../..';
-import { WidgetContext } from '../..';
-import { ExternalProvider } from '../..';
-import { FilterConverterService } from '../..';
-import { RestSdkTypes, RestService } from '../..';
+
 import React from 'react';
 import { ExternalLoginBase } from '../external-login-base';
 import { OffsetStyle } from '../styling/offset-style';
@@ -14,6 +6,9 @@ import { StyleGenerator } from '../styling/style-generator.service';
 import { StylingConfig } from '../styling/styling-config';
 import { FormContainer } from './form-container';
 import { PostLoginAction } from './interfaces/PostLoginAction';
+import { WidgetContext, htmlAttributes, classNames, getUniqueId, MixedContentContext } from '../../editor';
+import { RestSdkTypes, ExternalProvider, RestService, FilterConverterService } from '../../rest-sdk';
+import { RestExtensionsService } from '../rest-extensions';
 
 
 const defaultMixedContent = {

@@ -1,4 +1,4 @@
-import { DetailItem } from '..';
+import { DetailItem } from './detail-item';
 
 export interface RequestContext {
     pageNode?: any;

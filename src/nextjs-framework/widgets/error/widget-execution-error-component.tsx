@@ -1,6 +1,6 @@
-import { htmlAttributes } from '../..';
-import { WidgetContext } from '../..';
+
 import React from 'react';
+import { WidgetContext, htmlAttributes } from '../../editor';
 
 
 export async function WidgetExecutionError(props: { error: string, context: WidgetContext<any>}) {

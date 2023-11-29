@@ -3,9 +3,7 @@
 import React, { FocusEvent, MouseEvent } from 'react';
 import { SearchInput } from './search-input';
 import { VisibilityStyle } from '../styling/visibility-style';
-import { classNames } from '../..';
-import { getCustomAttributes } from '../..';
-
+import { classNames, getCustomAttributes } from '../../editor';
 const dataSfItemAttribute = 'data-sfitem';
 const activeAttribute = 'data-sf-active';
 

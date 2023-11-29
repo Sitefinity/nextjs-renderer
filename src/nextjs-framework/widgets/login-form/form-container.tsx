@@ -3,7 +3,7 @@
 import React from 'react';
 import { VisibilityStyle } from '../styling/visibility-style';
 import { ExternalLoginBase } from '../external-login-base';
-import { classNames } from '../..';
+import { classNames } from '../../editor';
 
 const invalidDataAttr = 'data-sf-invalid';
 const isValidEmail = function (email: string) {

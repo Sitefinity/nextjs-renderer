@@ -1,5 +1,5 @@
-import { SdkItem } from '../..';
-import { RestService, RestSdkTypes } from '../..';
+
+import { SdkItem, RestService, RestSdkTypes } from '../../rest-sdk';
 import { NavigationEntity } from './navigation';
 
 export class NavigationRestService {

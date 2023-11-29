@@ -8,9 +8,7 @@ import { Accordion } from './accordion';
 import { Vertical } from './vertical';
 import { VerticalSitemap } from './vertical-sitemap';
 import { Tabs } from './tabs';
-import { classNames } from '../..';
-import { htmlAttributes, getCustomAttributes } from '../..';
-import { WidgetContext } from '../..';
+import { WidgetContext, classNames, getCustomAttributes, htmlAttributes } from '../../editor';
 
 export type NavgationViewName = 'Horizontal' | 'Tabs' | 'Accordion' | 'Vertical' | 'VerticalSitemap';
 

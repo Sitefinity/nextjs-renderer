@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 import { PageParams } from './page-params';
 import { widgetRegistry } from '../widgets/widget-registry';
@@ -10,7 +9,7 @@ import { RootUrlService } from '../rest-sdk/root-url.service';
 import { RenderWidgetService } from '../services/render-widget-service';
 import { RestService } from '../rest-sdk/rest-service';
 
-export async function pageLayout({ params, searchParams }: PageParams): Promise<PageLayoutServiceResponse> {
+export async function pageLayout({ params, searchParams, cookie }: PageParams): Promise<PageLayoutServiceResponse> {
     if (params && params.slug.some(x => x === '_next')) {
         notFound();
     }
@@ -21,7 +20,6 @@ export async function pageLayout({ params, searchParams }: PageParams): Promise<
 
     let headers: { [key: string]: string } = {};
     if (process.env.NODE_ENV === 'development' && actionParam) {
-        const cookie = cookies().toString();
         headers = { 'Cookie': cookie };
         if (process.env.SF_CLOUD_KEY) {
             headers['X-SF-BYPASS-HOST'] = `${process.env.PROXY_ORIGINAL_HOST}:${process.env.PORT}`;
@@ -42,8 +40,8 @@ export async function pageLayout({ params, searchParams }: PageParams): Promise<
     return layoutOrError as PageLayoutServiceResponse;
 }
 
-export async function pageMetadata({ params, searchParams }: PageParams): Promise<Metadata> {
-    const layout = await pageLayout({ params, searchParams });
+export async function pageMetadata({ params, searchParams, cookie }: PageParams): Promise<Metadata> {
+    const layout = await pageLayout({ params, searchParams, cookie });
     if (layout.MetaInfo) {
         return {
             title: layout.MetaInfo.Title,

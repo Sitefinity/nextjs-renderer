@@ -1,4 +1,5 @@
-import { SdkItem } from '../..';
+
+import { SdkItem } from '../../rest-sdk';
 import { ImagePosition } from './image-position';
 
 export interface BackgroundStyle {

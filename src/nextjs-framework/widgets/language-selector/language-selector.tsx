@@ -1,9 +1,7 @@
 import React from 'react';
 import { DropDownWrapper } from './dropdown';
-import { classNames } from '../..';
-import { WidgetContext } from '../..';
-import { PageItem } from '../..';
-import { RestService, RestSdkTypes } from '../..';
+import { WidgetContext, classNames } from '../../editor';
+import { PageItem, RestService, RestSdkTypes } from '../../rest-sdk';
 
 export async function LanguageSelector(props: WidgetContext<LanguageSelectorEntity>) {
     const context = props.requestContext;

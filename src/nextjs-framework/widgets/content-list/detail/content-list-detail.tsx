@@ -1,8 +1,7 @@
 import React from 'react';
 import { ContentListModelDetail } from './content-list-detail-model';
 import { ContentListEntity } from '../content-list-entity';
-import { SdkItem } from '../../..';
-import { RestService } from '../../..';
+import { RestService, SdkItem } from '../../../rest-sdk';
 
 export async function ContentListDetail(props: { detailModel: ContentListModelDetail, entity?: ContentListEntity }) {
     const model = props.detailModel;

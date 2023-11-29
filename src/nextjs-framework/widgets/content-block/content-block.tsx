@@ -1,7 +1,7 @@
-import { htmlAttributes } from '../..';
-import { WidgetContext } from '../..';
-import { RestService } from '../..';
+
 import React from 'react';
+import { WidgetContext, htmlAttributes } from '../../editor';
+import { RestService } from '../../rest-sdk';
 
 export async function ContentBlock(props: WidgetContext<ContentBlockEntity>) {
     const dataAttributes = htmlAttributes(props);

@@ -7,14 +7,9 @@ import { ChangeForm } from './change-form';
 import { VisibilityStyle } from '../styling/visibility-style';
 import { ChangePasswordViewModel } from './interfaces/ChangePasswordViewModel';
 import { User } from './interfaces/User';
-import { classNames } from '../..';
-import { getUniqueId } from '../..';
-import { RestExtensionsService } from '../..';
-import { htmlAttributes } from '../..';
-import { MixedContentContext } from '../..';
-import { WidgetContext } from '../..';
-import { RestSdkTypes, RestService } from '../..';
-import { RootUrlService } from '../..';
+import { RestSdkTypes, RestService, RootUrlService } from '../../rest-sdk';
+import { WidgetContext, htmlAttributes, classNames, getUniqueId, MixedContentContext } from '../../editor';
+import { RestExtensionsService } from '../rest-extensions';
 
 const defaultMixedContent = {
     ItemIdsOrdered:null,

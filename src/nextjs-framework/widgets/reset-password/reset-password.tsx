@@ -1,17 +1,13 @@
 import React from 'react';
 import { StyleGenerator } from '../styling/style-generator.service';
 import { OffsetStyle } from '../styling/offset-style';
-import { classNames } from '../..';
-import { getUniqueId } from '../..';
-import { RestExtensionsService } from '../..';
-import { htmlAttributes } from '../..';
-import { MixedContentContext } from '../..';
-import { WidgetContext } from '../..';
-import { RestSdkTypes, RestService } from '../..';
-import { RootUrlService } from '../..';
+import { MixedContentContext, WidgetContext, classNames, getUniqueId, htmlAttributes } from '../../editor';
+
 import { StylingConfig } from '../styling/styling-config';
 import { ForgottenForm } from './forgotten-form';
 import { ResetForm } from './reset-form';
+import { RestSdkTypes, RootUrlService, RestService } from '../../rest-sdk';
+import { RestExtensionsService } from '../rest-extensions';
 
 const defaultMixedContent = {
     ItemIdsOrdered:null,

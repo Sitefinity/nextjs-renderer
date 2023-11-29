@@ -1,6 +1,5 @@
-import { CollectionResponse } from '../..';
-import { RestService } from '../..';
-import { SdkItem } from '../..';
+
+import { SdkItem, RestService } from '../../rest-sdk';
 import { ClassificationEntity } from './classification';
 
 export class ClassificationRestService {

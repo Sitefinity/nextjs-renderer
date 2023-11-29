@@ -3,10 +3,8 @@
 import React from 'react';
 import { ContentListEntity } from '../content-list-entity';
 import { ListWithSummaryModel } from './list-with-summary/list-with-summary-model';
-import { DetailItem } from '../../..';
-import { PageItem } from '../../..';
-import { SdkItem } from '../../..';
-import { RestService, RestSdkTypes } from '../../..';
+import { PageItem, RestSdkTypes, RestService, SdkItem } from '../../../rest-sdk';
+import { DetailItem } from '../../../editor';
 
 export function OpenDetailsAnchor(props: {
     item: any;

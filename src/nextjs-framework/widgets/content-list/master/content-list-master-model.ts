@@ -1,5 +1,4 @@
-import { CollectionResponse } from '../../..';
-import { SdkItem } from '../../..';
+import { CollectionResponse, SdkItem } from '../../../rest-sdk';
 
 export interface ContentListModelMaster {
     OpenDetails: boolean;

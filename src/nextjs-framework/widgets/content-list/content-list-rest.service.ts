@@ -1,16 +1,6 @@
-import { CollectionResponse } from '../..';
-import { SdkItem } from '../..';
-import { CombinedFilter } from '../..';
-import { FilterClause, FilterOperators } from '../..';
-import { OrderBy } from '../..';
-import { RelationFilter } from '../..';
-import { RestService } from '../..';
-import { ServiceMetadata } from '../..';
-import { GetAllArgs } from '../..';
-import { FilterConverterService } from '../..';
+import { DetailItem, ContentContext, ContentVariation } from '../../editor';
+import { CollectionResponse, SdkItem, FilterConverterService, CombinedFilter, FilterClause, RelationFilter, GetAllArgs, OrderBy, RestService, ServiceMetadata, FilterOperators } from '../../rest-sdk';
 import { ContentListEntity } from './content-list-entity';
-import { ContentContext, ContentVariation } from '../..';
-import { DetailItem } from '../..';
 
 export class ContentListRestService {
 

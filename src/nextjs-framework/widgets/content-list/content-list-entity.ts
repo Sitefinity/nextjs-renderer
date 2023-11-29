@@ -1,8 +1,6 @@
-import { ContentListSettings } from '../..';
-import { MixedContentContext } from '../..';
-import { CombinedFilter } from '../..';
-import { FilterClause } from '../..';
-import { RelationFilter } from '../..';
+import { ContentListSettings, MixedContentContext } from '../../editor';
+import { CombinedFilter, FilterClause, RelationFilter } from '../../rest-sdk';
+
 
 export interface ContentListEntity {
     SelectedItems: MixedContentContext;

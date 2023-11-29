@@ -1,4 +1,5 @@
-import { WidgetModel } from '../..';
+import { WidgetModel } from '../../editor';
+
 
 export interface ColumnHolder {
     Children: Array<ComponentContainer>
