@@ -26,13 +26,11 @@ export  class SearchFacetsModelBuilder {
                 return group;
             }, {});
 
-
             const widgetFacetableFields = Object.fromEntries(
                 Object.values(sourceGroups)
                     .map((e: unknown) => (e as any[])[(e as any[]).length - 1])
                     .map((p: FacetField) => [p.FacetableFieldNames[0], p])
                 );
-
 
             for (let [facetKey, facet] of Object.entries(facets)) {
                 let facetResponses: FacetResponseDto[] | null;
@@ -61,8 +59,8 @@ export  class SearchFacetsModelBuilder {
         if (sortType === this.AlphabeticallySort) {
             searchFacets = searchFacets
                 .sort((a: SearchFacets, b: SearchFacets) => {
-                    const nameA = a.FacetTitle!.toUpperCase();
-                    const nameB = b.FacetTitle!.toUpperCase();
+                    const nameA = a.FacetFieldName!.toUpperCase();
+                    const nameB = b.FacetFieldName!.toUpperCase();
                     if (nameA < nameB) {
                       return -1;
                     }
@@ -73,11 +71,12 @@ export  class SearchFacetsModelBuilder {
                     return 0;
                   });
         } else {
-            let facetsOrder = Object.values(facetableFieldsFromIndex)
+            const facetsOrder = Object.values(facetableFieldsFromIndex)
                     .map(x => x.FacetableFieldNames[0]);
-
-            searchFacets = searchFacets
-                    .sort(f => facetsOrder.indexOf(f.FacetFieldName));
+           searchFacets = searchFacets
+                .sort((a, b) => {
+                    return facetsOrder.indexOf(a.FacetFieldName) - facetsOrder.indexOf(b.FacetFieldName);
+                });
         }
 
         return searchFacets;

@@ -30,7 +30,7 @@ export async function SearchFacets(props: WidgetContext<SearchFacetsEntity>) {
         ShowLessLabel:'Show less',
         ...model.Properties
     };
-
+    console.log('model.Properties', model)
     const context = props.requestContext;
     const searchParams = context.searchParams || {};
     const restService = props.restService || SearchFacetsService;
@@ -108,7 +108,7 @@ export async function SearchFacets(props: WidgetContext<SearchFacetsEntity>) {
           </>
     }
 
-          <div id="facetContent" className="mb-3">
+          { viewModel.SearchFacets && <div id="facetContent" className="mb-3">
             { viewModel.SearchFacets.map((facet: SearchFacetsClass) => {
             let value = 0;
 
@@ -225,8 +225,9 @@ export async function SearchFacets(props: WidgetContext<SearchFacetsEntity>) {
                 }
             </>);
             })
-        }
+            }
           </div>
+            }
         </div>
         <input type="hidden" id="sf-currentPageUrl" value="@(this.Context?.Request.Path ?? string.Empty)" />
       </>
