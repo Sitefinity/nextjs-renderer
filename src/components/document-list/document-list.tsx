@@ -37,7 +37,7 @@ export async function DocumentList(props: WidgetContext<DocumentListEntity>) {
         ContentViewDisplayMode: ContentViewDisplayMode.Automatic,
         ...props.model.Properties
     };
-    console.log('entity', entity);
+
     const context = props.requestContext;
     const dataAttributes = htmlAttributes(props);
     const documentListCustomAttributes = getCustomAttributes(entity.Attributes, 'Document list');
