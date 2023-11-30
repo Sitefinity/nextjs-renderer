@@ -1,5 +1,6 @@
 import { keys } from '../../symbols/known-keys';
 import { WidgetMetadata } from '../../metadata/widget-metadata';
+import { PropertyDecoratorBase } from './common/property-decorator-wrapper';
 
 export function DisplaySettings(hide?: boolean, hideContent?: boolean) {
     const data: { [key: string]: boolean } = {};
@@ -12,8 +13,8 @@ export function DisplaySettings(hide?: boolean, hideContent?: boolean) {
         data['HideContent'] = hideContent;
     }
 
-    return function (target: any, propName: string) {
+    return PropertyDecoratorBase((target: any, propName: string) => {
         WidgetMetadata.register(target);
         WidgetMetadata.registerPropertyMetadata(target, propName, keys.displaySettings, data);
-    };
+    });
 }

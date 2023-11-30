@@ -1,5 +1,6 @@
 import { keys } from '../../symbols/known-keys';
 import { WidgetMetadata } from '../../metadata/widget-metadata';
+import { PropertyDecoratorBase } from './common/property-decorator-wrapper';
 
 export enum KnownFieldTypes {
     Html = 'html',
@@ -21,18 +22,18 @@ export enum KnownFieldTypes {
 }
 
 export function DataType(customDataType: KnownFieldTypes | string) {
-    return function (target: any, propName: string) {
+    return PropertyDecoratorBase((target: any, propName: string) => {
         WidgetMetadata.register(target);
         WidgetMetadata.registerPropertyMetadata(target, propName, keys.type, customDataType);
 
         if (customDataType ===  KnownFieldTypes.Html) {
             WidgetMetadata.registerPropertyMetadata(target, propName, 'DynamicLinksContainer', {HasLinks : true});
         }
-    };
+    });
 }
 
 export function DataModel(model: any) {
-    return function (target: any, propName: string) {
+    return PropertyDecoratorBase((target: any, propName: string) => {
         const descriptors = Object.getOwnPropertyDescriptors(model.prototype);
         const metadata = descriptors[keys.metadata];
 
@@ -45,5 +46,5 @@ export function DataModel(model: any) {
 
         WidgetMetadata.register(target);
         WidgetMetadata.registerPropertyMetadata(target, propName, keys.dataModel, metadata);
-    };
+    });
 }

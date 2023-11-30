@@ -2,7 +2,7 @@ import { WidgetMetadata } from '../metadata/widget-metadata';
 import { keys } from '../symbols/known-keys';
 
 export function WidgetEntity(name: string, caption: string) {
-    return function(target: any) {
+    return function(target: any, context?: any) {
         WidgetMetadata.registerPrototype(target);
         WidgetMetadata.registerPrototypeProperty(target, keys.name, name);
         WidgetMetadata.registerPrototypeProperty(target, keys.caption, caption);
@@ -12,7 +12,7 @@ export function WidgetEntity(name: string, caption: string) {
 }
 
 export function Model() {
-    return function(target: any) {
+    return function(target: any, context?: any) {
         WidgetMetadata.registerPrototype(target);
 
         const descriptors = Object.getOwnPropertyDescriptors(target.prototype);

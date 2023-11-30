@@ -1,6 +1,7 @@
 import { keys } from '../../symbols/known-keys';
 import { WidgetMetadata } from '../../metadata/widget-metadata';
 import { DataType, KnownFieldTypes } from '..';
+import { PropertyDecoratorBase } from './common/property-decorator-wrapper';
 
 export class TableViewSettings {
     ColumnTitle: string | null = null;
@@ -25,9 +26,9 @@ export function TableView(args: unknown, addManyFileName?: string) {
             config['AddManyFileName'] = addManyFileName;
         }
     }
-    return function (target: any, propName: string) {
+    return PropertyDecoratorBase((target: any, propName: string) => {
         WidgetMetadata.register(target);
         WidgetMetadata.registerPropertyMetadata(target, propName, keys.tableView, config);
         DataType(KnownFieldTypes.Complex)(target, propName);
-    };
+    });
 }

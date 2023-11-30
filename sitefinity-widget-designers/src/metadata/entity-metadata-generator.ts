@@ -1,3 +1,4 @@
+import { ChoiceSettings, KnownFieldTypes } from '../decorators';
 import { keys } from '../symbols/known-keys';
 
 export class EntityMetadataGenerator {
@@ -10,8 +11,6 @@ export class EntityMetadataGenerator {
         const metadata = descriptors[keys.metadata].value;
 
         const meta = this.buildMetadata(metadata);
-
-        console.log(metadata);
 
         return meta;
     }
@@ -98,6 +97,8 @@ export class EntityMetadataGenerator {
             [keys.position] : 0
         };
 
+        this.modifyPropertyMeta(propertyMeta);
+
         const metaKeys = Object.keys(propertyMeta);
         metaKeys.forEach(key => {
             const value = propertyMeta[key];
@@ -106,7 +107,7 @@ export class EntityMetadataGenerator {
             if (value != null && typeof(value) === 'object' && key !== keys.dataModel) {
                 propertyObject[keys.properties] = Object.assign(propertyObject[keys.properties], this.compileSpecialProperties(key, value));
             } else if (value != null && typeof(value) === 'object' && key === keys.dataModel) {
-                propertyObject.TypeChildProperties = propertyObject.TypeChildProperties.concat(this.unpackDataModel(value?.value || value));
+                propertyObject[keys.typeChildProperties] = propertyObject.TypeChildProperties.concat(this.unpackDataModel(value?.value || value));
             } else {
                 propertyObject[key] = value;
             }
@@ -122,10 +123,16 @@ export class EntityMetadataGenerator {
 
     private static unpackDataModel(dataModelProps: {[key: string]: any}) {
         const models: {[key: string]: any}[] = [];
-        const propertyObject: {[key: string]: any} = {
+
+        let propertyObject: {[key: string]: any} = {
             [keys.properties]: [],
             [keys.typeChildProperties]: [],
-            [keys.position] : 0
+            [keys.position]: 0,
+            [keys.defaultValue]: null,
+            [keys.categoryName]: null,
+            [keys.sectionName]: null,
+            [keys.name]: null,
+            [keys.title]: null
         };
 
         const dataModelKeys = Object.keys(dataModelProps);
@@ -135,16 +142,10 @@ export class EntityMetadataGenerator {
                 return;
             }
 
-            if (value[keys.dataModel] != null) {
-                propertyObject[keys.typeChildProperties] = this.unpackDataModel(value[keys.dataModel]);
-            } //else if (typeof(value) === 'object') {
-            //     // TODO: sus
-            //     propertyObject[keys.properties] = Object.assign(propertyObject[keys.properties], this.compileSpecialProperties(key, value));
-            // }
+            // unpack nested object properties
+            propertyObject = Object.assign(propertyObject, this.compileProperty(value, false));
 
-            const model = Object.assign({}, propertyObject, value);
-            delete model[keys.dataModel];
-            models.push(model);
+            models.push(propertyObject);
         });
 
         return models;
@@ -162,17 +163,34 @@ export class EntityMetadataGenerator {
         return value;
     }
 
+    private static modifyPropertyMeta(fullPropertyMeta: {[key: string]: any}) {
+        const choiceMeta = fullPropertyMeta[keys.choices];
+
+        if (choiceMeta) {
+            const type = fullPropertyMeta[keys.type];
+            if (type !== KnownFieldTypes.ChipChoice && type !== KnownFieldTypes.RadioChoice) {
+                fullPropertyMeta[keys.type] = KnownFieldTypes.Choices;
+            }
+
+            if ((choiceMeta as ChoiceSettings)?.AllowMultiple) {
+                fullPropertyMeta[keys.type] = 'multipleChoices';
+            }
+        }
+    }
+
+
     private static compileSpecialProperties(propName: string, propMeta: {[key: string]: any}) {
         const properties: {[key: string]: any} = {};
-        const keys = Object.keys(propMeta);
-        keys.forEach(key => {
+
+        const propKeys = Object.keys(propMeta);
+        propKeys.forEach(key => {
             let newKey;
             if (this.skipMetaKeyword.includes(propName)) {
                 newKey = `${propName}_${key}`;
-            } else if (propName !== 'Choices' && key !== 'Choices') {
-                newKey =  `Meta_${propName}_${key}`;
-            } else {
+            } else if (propName === 'Choices' && key === 'Choices') {
                 newKey = `Meta_${propName}`;
+            } else {
+                newKey =  `Meta_${propName}_${key}`;
             }
 
             properties[newKey] = this.modifyValue(propMeta[key]);
@@ -198,18 +216,6 @@ export class EntityMetadataGenerator {
     }
 
     private static skipMetaKeyword = [
-        keys.validations
-    ];
-
-    private static specialFields = [
-        keys.choices,
-        keys.content,
-        keys.description,
-        keys.maxLength,
-        keys.cssClasses,
-        keys.lengthDependsOn,
-        keys.conditionalVisibility,
-        keys.emptyValues,
         keys.validations
     ];
 }
@@ -239,7 +245,7 @@ export interface PropertyModel {
     SectionName: string,
     CategoryName: string,
     Properties: { [key: string]: any },
-    TypeChildProperties: { [key: string]: any }[],
+    TypeChildProperties: PropertyModel[],
     Position: number,
     [key: string]: any
 }

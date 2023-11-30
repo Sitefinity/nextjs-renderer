@@ -1,5 +1,6 @@
 import { keys } from '../../symbols/known-keys';
 import { WidgetMetadata } from '../../metadata/widget-metadata';
+import { PropertyDecoratorBase } from './common/property-decorator-wrapper';
 
 export function Description(description: string): any;
 export function Description(description: RichDescription[]): any;
@@ -16,14 +17,14 @@ export function Description(description: string | RichDescription[], inlineDescr
         data['InstructionalNotes'] = instructionalNotes;
     }
 
-    return function (target: any, propName: string) {
+    return PropertyDecoratorBase((target: any, propName: string) => {
         if (Array.isArray(description)) {
             description = JSON.stringify(description);
         }
 
         WidgetMetadata.register(target);
         WidgetMetadata.registerPropertyMetadata(target, propName, keys.description, data);
-    };
+    });
 }
 
 export interface RichDescription {

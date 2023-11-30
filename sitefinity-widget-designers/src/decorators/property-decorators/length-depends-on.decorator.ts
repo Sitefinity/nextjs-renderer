@@ -1,8 +1,9 @@
 import { keys } from '../../symbols/known-keys';
 import { WidgetMetadata } from '../../metadata/widget-metadata';
+import { PropertyDecoratorBase } from './common/property-decorator-wrapper';
 
 export function LengthDependsOn(propertyName: string, displayName: string, displayTitle: string, extraRecords?: string) {
-    return function (target: any, propName: string) {
+    return PropertyDecoratorBase((target: any, propName: string) => {
         const lengthDependsOn = {
             'ExtraRecords': extraRecords,
             'PropertyName': propertyName,
@@ -12,5 +13,5 @@ export function LengthDependsOn(propertyName: string, displayName: string, displ
 
         WidgetMetadata.register(target);
         WidgetMetadata.registerPropertyMetadata(target, propName, keys.lengthDependsOn, lengthDependsOn);
-    };
+    });
 }

@@ -2,9 +2,10 @@ import { keys } from '../../symbols/known-keys';
 import { WidgetMetadata } from '../../metadata/widget-metadata';
 import { Model } from '../widget-entity.decorator';
 import { DataType } from './data-type.decorator';
+import { PropertyDecoratorBase } from './common/property-decorator-wrapper';
 
 export function MediaItem(itemType: string, allowMultipleSelection: boolean, standalone: boolean = false) {
-    return function (target: any, propName: string) {
+    return PropertyDecoratorBase((target: any, propName: string) => {
         const data = {
             'ItemType': itemType,
             'AllowMultipleSelection': allowMultipleSelection,
@@ -13,7 +14,7 @@ export function MediaItem(itemType: string, allowMultipleSelection: boolean, sta
 
         WidgetMetadata.register(target);
         WidgetMetadata.registerPropertyMetadata(target, propName, keys.mediaItem, data);
-    };
+    });
 }
 
 @Model()

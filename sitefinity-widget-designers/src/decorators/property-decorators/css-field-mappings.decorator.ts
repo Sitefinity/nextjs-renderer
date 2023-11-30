@@ -3,6 +3,7 @@ import { keys } from '../../symbols/known-keys';
 import { WidgetMetadata } from '../../metadata/widget-metadata';
 import { Model } from '../widget-entity.decorator';
 import { DataModel, DataType } from './data-type.decorator';
+import { PropertyDecoratorBase } from './common/property-decorator-wrapper';
 
 export interface ViewMetaModel {
     [key: string]: { fieldTitle: string, fieldType: string }[]
@@ -26,9 +27,9 @@ export function CssFieldMappings(viewMeta: ViewMetaModel | null = null, showWrap
         classes['ViewMetaData'] = JSON.stringify(viewMeta);
     }
 
-    return function (target: any, propName: string) {
+    return PropertyDecoratorBase((target: any, propName: string) => {
         WidgetMetadata.register(target);
         WidgetMetadata.registerPropertyMetadata(target, propName, keys.cssClasses, classes);
         DataModel(CssClassMapping)(target, propName);
-    };
+    });
 }

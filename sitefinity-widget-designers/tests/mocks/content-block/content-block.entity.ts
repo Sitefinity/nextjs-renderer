@@ -5,27 +5,19 @@ export type OffsetSize = 'None' | 'M' | 'L' | 'S';
 @Model()
 export class OffsetStyle {
     @DataType(KnownFieldTypes.ChipChoice)
-    @Choices({
-        Choices: Offset_Choices
-    })
+    @Choices(Offset_Choices)
     Top: OffsetSize = 'None';
 
     @DataType(KnownFieldTypes.ChipChoice)
-    @Choices({
-        Choices: Offset_Choices
-    })
+    @Choices(Offset_Choices)
     Bottom: OffsetSize = 'None';
 
     @DataType(KnownFieldTypes.ChipChoice)
-    @Choices({
-        Choices: Offset_Choices
-    })
+    @Choices(Offset_Choices)
     Left: OffsetSize = 'None';
 
     @DataType(KnownFieldTypes.ChipChoice)
-    @Choices({
-        Choices: Offset_Choices
-    })
+    @Choices(Offset_Choices)
     Right: OffsetSize = 'None';
 }
 

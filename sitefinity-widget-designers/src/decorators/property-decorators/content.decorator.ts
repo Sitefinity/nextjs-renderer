@@ -1,5 +1,6 @@
 import { keys } from '../../symbols/known-keys';
 import { WidgetMetadata } from '../../metadata/widget-metadata';
+import { PropertyDecoratorBase } from './common/property-decorator-wrapper';
 
 export class ContentSettings {
     Type?: string | null = null;
@@ -15,9 +16,9 @@ export class ContentSettings {
 }
 
 export function Content(settings: ContentSettings = new ContentSettings()) {
-    return function (target: any, propName: string) {
+    return PropertyDecoratorBase((target: any, propName: string) => {
         WidgetMetadata.register(target);
         WidgetMetadata.registerPropertyMetadata(target, propName, keys.content, settings);
         WidgetMetadata.registerPropertyMetadata(target, propName, keys.type, 'content');
-    };
+    });
 }

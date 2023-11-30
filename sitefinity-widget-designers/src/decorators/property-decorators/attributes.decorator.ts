@@ -2,6 +2,7 @@
 import { WidgetMetadata } from '../../metadata/widget-metadata';
 import { Model } from '../widget-entity.decorator';
 import { Category } from './category.decorator';
+import { PropertyDecoratorBase } from './common/property-decorator-wrapper';
 import { ContentSection } from './content-section.decorator';
 import { DataModel, DataType, KnownFieldTypes } from './data-type.decorator';
 import { DefaultValue } from './default-value.decorator';
@@ -28,7 +29,7 @@ export function Attributes(widgetName: string, witgetTitle?: string, position? :
         'ExtraRecords': JSON.stringify([{Name: widgetName, Title: witgetTitle || widgetName}])
     };
 
-    return function (target: any, propName: string) {
+    return PropertyDecoratorBase((target: any, propName: string) => {
         WidgetMetadata.register(target);
         Category('Advanced')(target, propName);
         DefaultValue(null)(target, propName);
@@ -38,5 +39,5 @@ export function Attributes(widgetName: string, witgetTitle?: string, position? :
 
         WidgetMetadata.registerPropertyMetadata(target, propName, 'LengthDependsOn', LengthDependsOn);
         DataModel(KeysValues)(target, propName);
-    };
+    });
 }

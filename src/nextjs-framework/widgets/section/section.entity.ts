@@ -1,5 +1,5 @@
 
-import { WidgetEntity, Range, Category, LengthDependsOn, DisplayName, DataType, ContentSection, DataModel, TableView } from 'sitefinity-widget-designers/decorators';
+import { WidgetEntity, Range, Category, LengthDependsOn, DisplayName, DataType, ContentSection, DataModel, TableView } from '@progress/sitefinity-widget-designers';
 import { BackgroundStyle } from '../styling/background-style';
 import { CustomCssModel } from '../styling/custom-css-model';
 import { OffsetStyle } from '../styling/offset-style';

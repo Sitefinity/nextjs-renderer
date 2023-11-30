@@ -72,5 +72,11 @@ function verifyProperty(actual: PropertyModel, expected: PropertyModel) {
     }
 
     // verify typechildproperties
-    expect(actual.TypeChildProperties.length).toBe(expected.TypeChildProperties.length);
+    expect(`${actual.Name} TypeChildProperties count: ${actual.TypeChildProperties.length}`)
+        .toBe(`${expected.Name} TypeChildProperties count: ${expected.TypeChildProperties.length}`);
+
+    actual.TypeChildProperties.forEach(typeChildProp => {
+        const expectedProperty = expected.TypeChildProperties.find(x => x.Name === typeChildProp.Name);
+        verifyProperty(typeChildProp, expectedProperty!);
+    });
 }
