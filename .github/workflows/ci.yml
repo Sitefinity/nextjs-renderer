@@ -47,3 +47,11 @@ jobs:
           cp ./package.json ./dist/package.json
           cd ./dist
           npm pack
+
+      - name: Update template repository
+        run: |
+          cd ../../../
+
+          rm -rf starter
+          git clone https://github.com/Gebov/nextjs-renderer-starter.git starter
+          cp -R -v ./src/app/* ./starter/src/app/*
