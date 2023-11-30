@@ -28,16 +28,16 @@ jobs:
       - name: Install
         run: npm ci
 
-      # - name: Lint
-      #   run: npm run lint
+      - name: Lint
+        run: npm run lint
 
-      # - name: Test
-      #   run: npm run test
+      - name: Test
+        run: npm run test
 
-      # - name: Build
-      #   run: npm run build
-      #   env:
-      #     ENVIRONMENT: production
+      - name: Build
+        run: npm run build
+        env:
+          ENVIRONMENT: production
 
       - name: Build package
         run: |
@@ -69,8 +69,11 @@ jobs:
           npm install ../dist
           npm run build
 
+      - name: Copy package
+        run: cp ../dist/progress-sitefinity-react-framework* ./
+
       - name: Archive package
         uses: actions/upload-artifact@v3
         with:
           name: sitefinity-react-framework
-          path: ../dist/progress-sitefinity-react-framework*
+          path: ./progress-sitefinity-react-framework*
