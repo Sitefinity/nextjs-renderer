@@ -66,12 +66,8 @@ jobs:
             cp -v ./$i ../starter/$i
           done
 
-          echo "in repo"
-          ls
-
           cd ../starter
-          echo "in starter"
-          ls
 
           npm install ../dist
+          cat package.json
           npm run build
