@@ -62,3 +62,7 @@ jobs:
           do
             cp -v ./$i ./starter/$i
           done
+
+          cd ./starter
+          npm install ../src/nextjs-framework/dist
+          npm run build
