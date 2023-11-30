@@ -47,7 +47,7 @@ jobs:
 
           cd ../../../
 
-          cp ./nextjs-renderer/package.json ./dist/package.json
+          cp ./nextjs-renderer/src/app/nextjs-framework/package.json ./dist/package.json
           cd ./dist
           npm pack
 
@@ -69,5 +69,4 @@ jobs:
           cd ../starter
 
           npm install ../dist
-          cat package.json
           npm run build
