@@ -44,7 +44,10 @@ jobs:
           rm -rf ../dist
           tsc
           cd ./src/nextjs-framework
-          cp ./package.json ../../../dist/package.json
+          cd ../../../
+          ls
+
+          cp ./nextjs-renderer/package.json ./dist/package.json
           cd ../../../dist
           npm pack
 
