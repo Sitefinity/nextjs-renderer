@@ -1,6 +1,6 @@
 import { ContentListSettings, MixedContentContext } from '../../editor';
 import { CombinedFilter, FilterClause, RelationFilter } from '../../rest-sdk';
-import { Attributes, Category, Choices, ConditionalVisibility, Content, ContentSection, CssFieldMappings, DataModel, DataType, DefaultValue, Description, DisplayName, FallbackToDefaultValueWhenEmpty, KnownFieldTypes, MaxLength, Model, WidgetEntity } from '@progress/sitefinity-widget-designers/decorators';
+import { Attributes, Category, Choices, ConditionalVisibility, Content, ContentSection, CssFieldMappings, DataModel, DataType, DefaultValue, Description, DisplayName, FallbackToDefaultValueWhenEmpty, KnownFieldTypes, MaxLength, Model, WidgetEntity } from '@progress/sitefinity-widget-designers';
 
 @Model()
 export class ListFieldMapping {

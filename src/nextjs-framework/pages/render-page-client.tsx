@@ -11,6 +11,7 @@ export function RenderPageClient({ layout, metadata, context }: { layout: PageLa
     RootUrlService.rootUrl = `${process.env['NEXT_PUBLIC_CMS_URL'] || ''}`;
 
     RenderWidgetService.widgetRegistry = ReactWidgetRegistry;
+    ServiceMetadata.serviceMetadataCache = metadata;
 
     if (context.isEdit && typeof window !== 'undefined') {
         const timeout = 2000;
