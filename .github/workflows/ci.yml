@@ -51,6 +51,7 @@ jobs:
       - name: Update template repository
         run: |
           cd ../../
+          ls
 
           rm -rf starter
           git clone https://github.com/Gebov/nextjs-renderer-starter.git starter
