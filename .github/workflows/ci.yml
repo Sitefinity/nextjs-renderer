@@ -46,12 +46,9 @@ jobs:
           tsc
 
           cd ../../../
-          ls
-          cd ./nextjs-renderer
-          ls
 
           cp ./nextjs-renderer/package.json ./dist/package.json
-          cd ../../../dist
+          cd ./dist
           npm pack
 
       - name: Update template repository
