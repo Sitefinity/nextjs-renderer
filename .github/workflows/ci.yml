@@ -50,7 +50,6 @@ jobs:
 
       - name: Update template repository
         run: |
-          cd ../
           ls
 
           rm -rf starter
