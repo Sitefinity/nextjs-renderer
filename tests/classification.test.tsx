@@ -1,5 +1,6 @@
-import { Classification } from '@/components/classification/classification';
+import { Classification, ClassificationEntity } from '@progress/sitefinity-react-framework';
 import { render, waitFor } from '@testing-library/react';
+import { RequestContext, WidgetModel } from '../src/nextjs-framework/editor';
 
 it.skip('should render classification', async () => {
     const callToAction = await Classification({ model, requestContext, metadata });
@@ -21,22 +22,13 @@ const metadata = {
     ssr: true
 };
 
-const model = {
+const model: WidgetModel<ClassificationEntity> = {
     Id: '41ffac2c-113c-426d-a997-14fd7e0338cf',
-    SiblingId: '00000000-0000-0000-0000-000000000000',
     Name: 'SitefinityClassification',
     PlaceHolder: 'Column1',
-    Caption: null,
-    ViewName: null,
+    Caption: 'Classification',
+    ViewName: '',
     Lazy: false,
-    Key: null,
-    AddAllowed: false,
-    DeleteAllowed: false,
-    EditAllowed: false,
-    MoveAllowed: false,
-    LabelTooltip: null,
-    IsPersonalized: false,
-    WidgetSegmentId: null,
     Properties: {
         ClassificationSettings: {
             selectedTaxonomyId: 'e5cd6d69-1543-427b-ad62-688a99f5e7d4',
@@ -47,13 +39,13 @@ const model = {
             byContentType: '',
             selectedTaxaIds: []
         },
-        Margins: {},
-        OrderBy: null
+        Margins: { Bottom:'L', Left: 'L', Right: 'L', Top: 'L' },
+        OrderBy: undefined
     },
     Children: []
 };
 
-const requestContext = {
+const requestContext: RequestContext = {
     pageNode: {
         '@odata.context': 'https://localhost:5001/api/default/$metadata#Telerik.Sitefinity.Renderer.Web.Services.Dto.PageDtoWithContext',
         Culture: 'en',
@@ -117,5 +109,6 @@ const requestContext = {
     detailItem: null,
     culture: 'en',
     isEdit: true,
-    isPreview: false
+    isPreview: false,
+    isLive: false
 };

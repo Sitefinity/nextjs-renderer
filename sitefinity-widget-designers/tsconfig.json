@@ -13,10 +13,7 @@
       "isolatedModules": true,
       "incremental": true,
       "declaration": true,
-      "experimentalDecorators": true,
-      "paths": {
-        "sitefinity-widget-designers/*": [ "./src/*" ],
-      }
+      "experimentalDecorators": true
     },
     "include": ["./src/**/*.ts", "./src/public-api.ts"],
     "exclude": ["node_modules"]

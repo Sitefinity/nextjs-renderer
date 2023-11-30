@@ -1,0 +1,10 @@
+{
+    "name": "@progress/sitefinity-react-framework",
+    "version": "0.1.0",
+    "private": true,
+    "peerDependencies": {
+        "next": "14.0.3",
+        "react": "18.2.0",
+        "react-dom": "18.2.0"
+    }
+}

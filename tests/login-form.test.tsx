@@ -1,5 +1,6 @@
-import { LoginForm } from '@/components/login-form/login-form';
+import { LoginForm, LoginFormEntity } from '@progress/sitefinity-react-framework';
 import { render, waitFor } from '@testing-library/react';
+import { RequestContext, WidgetModel } from '../src/nextjs-framework/editor';
 
 it('should render login form', async () => {
     const contentList = await LoginForm({ model, requestContext, metadata });
@@ -37,27 +38,18 @@ const metadata = {
     ssr: true
 };
 
-const model = {
+const model: WidgetModel<LoginFormEntity> = {
     Id: 'b116390e-23ae-410a-b323-6354a04aaddc',
-    SiblingId: '75c6e799-1e66-4269-bb54-0868cbb062f9',
     Name: 'SitefinityLoginForm',
     PlaceHolder: 'Column1',
-    Caption: null,
-    ViewName: null,
+    Caption: '',
+    ViewName: '',
     Lazy: false,
-    Key: null,
-    AddAllowed: false,
-    DeleteAllowed: false,
-    EditAllowed: false,
-    MoveAllowed: false,
-    LabelTooltip: null,
-    IsPersonalized: false,
-    WidgetSegmentId: null,
-    Properties: { Margins: {}, RememberMe: true },
+    Properties: { Margins: undefined, RememberMe: true },
     Children: []
 };
 
-const requestContext = {
+const requestContext: RequestContext = {
     pageNode: {
         '@odata.context': 'https://localhost:5001/api/default/$metadata#Telerik.Sitefinity.Renderer.Web.Services.Dto.PageDtoWithContext',
         Culture: 'en',
@@ -68,13 +60,50 @@ const requestContext = {
         Renderer: 'React',
         UrlParameters: [],
         HasVariations: false,
-        Site: [Object],
+        Site: {
+            Id: '4c922118-f076-4e24-9193-93e004f50107',
+            Name: 'Quantum International',
+            DefaultCulture: 'en',
+            Cultures: [Array],
+            TimeZone: 'UTC;0;UTC;UTC;UTC;;',
+            IsSubFolder: false
+        },
         User: null,
-        ComponentContext: [Object],
+        ComponentContext: {
+            HasLazyComponents: false,
+            OrphanedControls: [],
+            Components: [Array],
+            Fields: null,
+            Site: null,
+            User: null
+        },
         Scripts: [],
         DetailItem: null,
-        MetaInfo: [Object],
-        Fields: [Object]
+        MetaInfo: {
+            Title: 'integration-test',
+            Description: '',
+            HtmlInHeadTag: null,
+            OpenGraphTitle: 'integration-test',
+            OpenGraphDescription: '',
+            OpenGraphImage: null,
+            OpenGraphVideo: null,
+            OpenGraphType: null,
+            OpenGraphSite: null,
+            CanonicalUrl: 'https://localhost:5001/integration-test'
+        },
+        Fields: {
+            Title: 'integration-test',
+            UrlName: 'integration-test',
+            LastModified: '2023-11-13T13:13:09.183Z',
+            DateCreated: '2023-11-13T13:13:09.183Z',
+            Crawlable: true,
+            ParentId: 'f669d9a7-009d-4d83-ddaa-000000000002',
+            RootId: 'f669d9a7-009d-4d83-ddaa-000000000002',
+            IsHomePage: false,
+            'AvailableLanguages@odata.type': '#Collection(String)',
+            AvailableLanguages: [Array],
+            ViewUrl: '/integration-test'
+        }
     },
     searchParams: {
         sf_site: '4c922118-f076-4e24-9193-93e004f50107',
@@ -84,5 +113,7 @@ const requestContext = {
     detailItem: null,
     culture: 'en',
     isEdit: true,
-    isPreview: false
+    isPreview: false,
+    isLive: false,
+    cookie: undefined
 };

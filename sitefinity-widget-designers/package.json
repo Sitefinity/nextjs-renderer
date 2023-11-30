@@ -1,5 +1,5 @@
 {
-  "name": "sitefinity-widget-designers",
+  "name": "@progress/sitefinity-widget-designers",
   "version": "0.1.0",
   "private": true,
   "publishConfig": {

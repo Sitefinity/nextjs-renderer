@@ -48,3 +48,5 @@ next-env.d.ts
 /sitefinity-widget-designers/dist
 /sitefinity-widget-designers/node_modules
 /sitefinity-widget-designers/coverage
+
+dist-framework

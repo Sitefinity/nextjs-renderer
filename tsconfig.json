@@ -1,31 +1,29 @@
 {
     "compilerOptions": {
-      "target": "es6",
-      "lib": ["dom", "dom.iterable", "esnext"],
-      "allowJs": true,
-      "skipLibCheck": true,
-      "strict": true,
-      "noEmit": false,
-      "sourceMap": true,
-      "esModuleInterop": true,
-      "module": "esnext",
-      "moduleResolution": "bundler",
-      "resolveJsonModule": true,
-      "isolatedModules": true,
-      "jsx": "preserve",
-      "incremental": true,
-      "experimentalDecorators": true,
-      "plugins": [
-        {
-          "name": "next"
+        "target": "es6",
+        "lib": ["dom", "dom.iterable", "esnext"],
+        "allowJs": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "noEmit": false,
+        "sourceMap": true,
+        "esModuleInterop": true,
+        "module": "esnext",
+        "moduleResolution": "bundler",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "jsx": "preserve",
+        "incremental": true,
+        "plugins": [
+            {
+                "name": "next"
+            }
+        ],
+        "paths": {
+            "@progress/sitefinity-react-framework": ["./src/nextjs-framework"],
+            "@progress/sitefinity-widget-designers": [ "../sitefinity-widget-designers" ]
         }
-      ],
-      "paths": {
-        "sitefinity-react-framework/*": [ "./sitefinity-react-framework/src/*" ],
-        "sitefinity-widget-designers/*": [ "./sitefinity-widget-designers/src/*" ],
-        "@/*": ["./src/*"],
-      }
     },
-    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+    "include": ["next-env.d.ts", "./src/app/*.ts", "./src/app/*.tsx", ".next/types/**/*.ts", "./src/nextjs-framework"],
     "exclude": ["node_modules"]
-  }
+}
