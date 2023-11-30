@@ -41,9 +41,9 @@ jobs:
 
       - name: Build package
         run: |
-        cd ./src/nextjs-framework
-        rm -rf ./dist
-        tsc
-        cp ./package.json ./dist/package.json
-        cd ./dist
-        npm pack
+          cd ./src/nextjs-framework
+          rm -rf ./dist
+          tsc
+          cp ./package.json ./dist/package.json
+          cd ./dist
+          npm pack
