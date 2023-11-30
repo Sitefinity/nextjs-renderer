@@ -2,10 +2,7 @@
 import { Metadata } from 'next';
 import { cookies } from 'next/headers';
 
-import { RenderPage, initRendering } from '@progress/sitefinity-react-framework';
-import { pageMetadata } from '@progress/sitefinity-react-framework';
-import { ReactWidgetRegistry } from '../../nextjs-framework/widgets';
-import { WidgetExecutionError } from '../../nextjs-framework/widgets/error/widget-execution-error-component';
+import { ReactWidgetRegistry, RenderPage, WidgetExecutionError, initRendering, pageMetadata } from '@progress/sitefinity-react-framework';
 
 export async function generateMetadata({ params, searchParams }: any): Promise<Metadata> {
     initRendering(ReactWidgetRegistry, WidgetExecutionError);
