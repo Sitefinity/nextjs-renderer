@@ -43,7 +43,3 @@ jobs:
         run: |
           cd ./src/nextjs-framework
           rm -rf ./dist
-          tsc
-          cp ./package.json ./dist/package.json
-          cd ./dist
-          npm pack
