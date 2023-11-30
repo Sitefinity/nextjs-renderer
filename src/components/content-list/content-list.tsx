@@ -65,9 +65,9 @@ export async function ContentList(props: WidgetContext<ContentListEntity>) {
 }
 
 function getAttributesWithClasses(props: WidgetContext<ContentListEntity>, fieldName: string, additionalClasses: string | null): Array<{ Key: string, Value: string}> {
-    const viewCss = props.model.Properties.CssClasses.find(x => x.FieldName === fieldName);
+    const viewCss = props.model.Properties.CssClasses!.find(x => x.FieldName === fieldName);
 
-    const contentListAttributes = props.model.Properties.Attributes['ContentList'] || [];
+    const contentListAttributes = props.model.Properties.Attributes!['ContentList'] || [];
     let classAttribute = contentListAttributes.find(x => x.Key === 'class');
     if (!classAttribute) {
         classAttribute = {
@@ -104,11 +104,11 @@ function handleDetailView(detailItem: DetailItem, props: WidgetContext<ContentLi
 function handleListView(props: WidgetContext<ContentListEntity>) {
     const listFieldMapping: {[key: string]: string} = {};
     props.model.Properties.ListFieldMapping.forEach((entry) => {
-        listFieldMapping[entry.FriendlyName] = entry.Name;
+        listFieldMapping[entry.FriendlyName!] = entry.Name!;
     });
 
     const fieldCssClassMap: {[key: string]: string} = {};
-    props.model.Properties.CssClasses.forEach((entry) => {
+    props.model.Properties.CssClasses!.forEach((entry) => {
         fieldCssClassMap[entry.FieldName] = entry.CssClass;
     });
 

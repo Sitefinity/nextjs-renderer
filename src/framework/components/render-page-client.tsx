@@ -7,12 +7,11 @@ import { PageLayoutServiceResponse } from 'sitefinity-react-framework/sdk/servic
 import { RenderWidgetService } from 'sitefinity-react-framework/services/render-widget-service';
 import { RequestContext } from 'sitefinity-react-framework/services/request-context';
 import { RendererContractImpl } from '@/renderer-contract';
-import { widgetRegistry } from '@/widget-registry';
+import { ReactWidgetRegistry } from '@/widget-registry';
 
-export default function RenderPageClient({ layout, metadata, context }: { layout: PageLayoutServiceResponse, metadata: ServiceMetadataDefinition, context: RequestContext }) {
-    RootUrlService.rootUrl = `${process.env['NEXT_PUBLIC_CMS_URL'] || ''}`;
-
-    RenderWidgetService.widgetRegistry = widgetRegistry;
+export default function PageClient({ layout, metadata, context }: { layout: PageLayoutServiceResponse, metadata: ServiceMetadataDefinition, context: RequestContext }) {
+    RootUrlService.rootUrl = `${process.env['NEXT_PUBLIC_CMS_URL']}`;
+    RenderWidgetService.widgetRegistry = ReactWidgetRegistry;
     ServiceMetadata.serviceMetadataCache = metadata;
 
     if (context.isEdit && typeof window !== 'undefined') {

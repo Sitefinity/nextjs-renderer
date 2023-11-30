@@ -1,14 +1,11 @@
 import React from 'react';
-import { generateAnchorAttrsFromLink, getCustomAttributes, htmlAttributes } from 'sitefinity-react-framework/widgets/attributes';
+import { getCustomAttributes, htmlAttributes } from 'sitefinity-react-framework/widgets/attributes';
 import { WidgetContext } from 'sitefinity-react-framework/widgets/widget-context';
 import { classNames } from 'sitefinity-react-framework/utils/classNames';
-import { LinkModel } from 'sitefinity-react-framework/interfaces/LinkModel';
 import { StyleGenerator } from '../styling/style-generator.service';
-import { OffsetStyle } from '../styling/offset-style';
-import { Alignment } from '../styling/alignment';
-import { ButtonType } from '../styling/button-types';
 import { ClassificationRestService } from './classification.service';
 import { PageViewModel } from '../navigation/interfaces/PageViewModel';
+import { ClassificationEntity } from './classification-entity';
 
 const mapTaxonProperties = (taxon: any, taxonomyName: string, viewUrl?: string, searchParams?: any) =>{
     const children: any[] = [];
@@ -62,8 +59,8 @@ export async function Classification(props: WidgetContext<ClassificationEntity>)
     const updatedTokens = tokens.value.map (taxon => {
         return {
             ...taxon,
-            SubTaxa: mapTaxonProperties(taxon, settings!.selectedTaxonomyName, viewUrl, searchParams),
-            UrlName: getTaxaUrl(settings!.selectedTaxonomyName, taxon.UrlName, viewUrl, searchParams)
+            SubTaxa: mapTaxonProperties(taxon, settings!.selectedTaxonomyName!, viewUrl, searchParams),
+            UrlName: getTaxaUrl(settings!.selectedTaxonomyName!, taxon.UrlName, viewUrl, searchParams)
         };
     });
 
@@ -117,26 +114,4 @@ export async function Classification(props: WidgetContext<ClassificationEntity>)
             }
       </ul>
     );
-}
-
-export interface ClassificationSettingsInterface {
-    selectedTaxonomyId: string;
-    selectedTaxonomyUrl: string;
-    selectedTaxonomyName: string;
-    selectedTaxonomyTitle: string;
-    selectionMode: string;
-    byContentType: string;
-    selectedTaxaIds: string [];
-  }
-
-export class ClassificationEntity {
-    ClassificationSettings?: ClassificationSettingsInterface;
-    CssClass?: string;
-    Margins?: OffsetStyle;
-    OrderBy?: string;
-    ShowItemCount?: boolean;
-    ShowEmpty?: boolean;
-    SfViewName?: string;
-    SortExpression?: string;
-    Attributes?: any[];
 }

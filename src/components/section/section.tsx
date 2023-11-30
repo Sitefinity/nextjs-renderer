@@ -10,14 +10,14 @@ import { ColumnHolder, ComponentContainer } from './column-holder';
 import { SectionHolder } from './section-holder';
 import { SectionEntity } from './section.entity';
 import { RenderWidgetService } from 'sitefinity-react-framework/services/render-widget-service';
-import { widgetRegistry } from '@/widget-registry';
+import { ReactWidgetRegistry } from '@/widget-registry';
 
 const ColumnNamePrefix = 'Column';
 const sectionKey = 'Section';
 
 export async function Section(props: WidgetContext<SectionEntity>) {
     props.model.Properties.ColumnsCount = props.model.Properties.ColumnsCount || 1;
-    props.model.Properties.ColumnProportionsInfo = props.model.Properties.ColumnProportionsInfo || '[12]';
+    props.model.Properties.ColumnProportionsInfo = props.model.Properties.ColumnProportionsInfo || ['12'];
     const columns = populateColumns(props);
     const section = await populateSection(props.model.Properties);
 
@@ -51,14 +51,14 @@ function populateColumns(context: WidgetContext<SectionEntity>): ColumnHolder[] 
     for (let i = 0; i < properties.ColumnsCount; i++) {
         let currentName = `${ColumnNamePrefix}${i + 1}`;
 
-        const classAttribute = `col-md-${properties.ColumnProportionsInfo[i]}`;
+        const classAttribute = `col-md-${properties.ColumnProportionsInfo![i]}`;
         const classAttributes = [classAttribute];
         let children: Array<ComponentContainer> = [];
         if (context.model.Children) {
             children = context.model.Children.filter(x => x.PlaceHolder === currentName).map((x => {
                 let ret: WidgetContext<any> = {
                     model: x,
-                    metadata: widgetRegistry.widgets[x.Name],
+                    metadata: ReactWidgetRegistry.widgets[x.Name],
                     requestContext: context.requestContext
                 };
 
@@ -175,7 +175,7 @@ function populateSection(properties: SectionEntity): Promise<SectionHolder> {
             });
         }
     } else if (properties.SectionBackground.BackgroundType === 'Image' && properties.SectionBackground.ImageItem && properties.SectionBackground.ImageItem.Id) {
-        const imagePosition = properties.SectionBackground.Position || 'Fill';
+        const imagePosition = properties.SectionBackground.ImagePosition || 'Fill';
         sectionClasses.push(StylingConfig.ImageBackgroundClass);
         return RestService.getItemWithFallback<ImageItem>(RestSdkTypes.Image, properties.SectionBackground.ImageItem.Id, properties.SectionBackground.ImageItem.Provider).then((image) => {
             let style: { [key: string]: string } = {};

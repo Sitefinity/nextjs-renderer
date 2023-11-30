@@ -9,7 +9,7 @@ import { ServiceMetadata } from 'sitefinity-react-framework/sdk/service-metadata
 import { RestService } from 'sitefinity-react-framework/sdk/rest-service';
 import { RootUrlService } from 'sitefinity-react-framework/sdk/root-url.service';
 import { RenderWidgetService } from 'sitefinity-react-framework/services/render-widget-service';
-import { widgetRegistry } from '@/widget-registry';
+import { ReactWidgetRegistry } from '@/widget-registry';
 import { WidgetExecutionError } from '@/components/error/widget-execution-error-component';
 
 export async function pageLayout({ params, searchParams }: PageParams): Promise<PageLayoutServiceResponse> {
@@ -99,6 +99,6 @@ export async function initStaticParams() {
     RootUrlService.rootUrl = `${process.env['PROXY_URL'] || process.env['NEXT_CMS_URL']}`;
     await ServiceMetadata.fetch();
 
-    RenderWidgetService.widgetRegistry = widgetRegistry;
+    RenderWidgetService.widgetRegistry = ReactWidgetRegistry;
     RenderWidgetService.errorComponentType = WidgetExecutionError;
 }

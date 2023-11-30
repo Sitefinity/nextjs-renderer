@@ -1,7 +1,7 @@
 import { WidgetMetadata } from './widget-metadata';
 
-export interface WidgetRegistry {
-    widgets: {
-        [key: string]: WidgetMetadata
+export class WidgetRegistry {
+    static get widgets(): { [key: string]: WidgetMetadata } | null {
+        return null;
     }
 }

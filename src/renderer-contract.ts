@@ -2,18 +2,18 @@ import { RendererContract, ComponentMetadata, GetWidgetMetadataArgs, RenderWidge
 import { RenderWidgetService } from 'sitefinity-react-framework/services/render-widget-service';
 import { createRoot } from 'react-dom/client';
 import { RequestContext } from 'sitefinity-react-framework/services/request-context';
-import { widgetRegistry } from './widget-registry';
+import { ReactWidgetRegistry } from './widget-registry';
 
 export class RendererContractImpl implements RendererContract {
 
     getWidgetMetadata(args: GetWidgetMetadataArgs): Promise<ComponentMetadata> {
-        const designerMetadata = widgetRegistry.widgets[args.widgetName].designerMetadata;
+        const designerMetadata = ReactWidgetRegistry.widgets[args.widgetName].designerMetadata;
         return Promise.resolve(designerMetadata);
     }
 
     // html string to change the widget and rerender it
     renderWidget(args: RenderWidgetArgs): Promise<RenderResult> {
-        const widgetMetadata = widgetRegistry.widgets[args.model.Name];
+        const widgetMetadata = ReactWidgetRegistry.widgets[args.model.Name];
 
         if ((widgetMetadata as any).ssr) {
             return new Promise((resolve) => {
@@ -62,8 +62,8 @@ export class RendererContractImpl implements RendererContract {
     getWidgets(args: GetWidgetsArgs): Promise<TotalCountResult<WidgetSection[]>> {
         const filteredWidgets: WidgetItem[] = [];
 
-        Object.keys(widgetRegistry.widgets).forEach((key) => {
-            const widgetEntry = widgetRegistry.widgets[key];
+        Object.keys(ReactWidgetRegistry.widgets).forEach((key) => {
+            const widgetEntry = ReactWidgetRegistry.widgets[key];
             if ((widgetEntry.selectorCategory === args.category) || (!widgetEntry.selectorCategory && args.category === 'Content')) {
                 filteredWidgets.push({
                     name: key,

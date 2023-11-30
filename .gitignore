@@ -34,9 +34,17 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+.vs/
+
 /cert
 
 /sitefinity-react-framework/**/*.js
 /sitefinity-react-framework/**/*.d.ts
 /sitefinity-react-framework/dist
 /sitefinity-react-framework/node_modules
+
+/sitefinity-widget-designers/**/*.js
+/sitefinity-widget-designers/**/*.d.ts
+/sitefinity-widget-designers/dist
+/sitefinity-widget-designers/node_modules
+/sitefinity-widget-designers/coverage

@@ -29,10 +29,16 @@ import sitefinityResetPasswordJson from './components/reset-password/designer-me
 import sitefinityRegistrationJson from './components/registration/designer-metadata.json';
 import sitefinityLanguageSelectorJson from './components/language-selector/designer-metadata.json';
 
+import { ContentListEntity } from './components/content-list/content-list-entity';
+import { WidgetMetadata } from 'sitefinity-react-framework/widgets/widget-metadata';
+import { ClassificationEntity } from './components/classification/classification-entity';
+import { EntityMetadataGenerator } from 'sitefinity-widget-designers/metadata/entity-metadata-generator';
 
-export const widgetRegistry: WidgetRegistry = {
-    widgets: {
-        'SitefinityBreadcrumb':  <any>{
+export class ReactWidgetRegistry implements WidgetRegistry {
+    private static _processed: any = null;
+
+    private static _widgets: { [key: string]: WidgetMetadata; } = {
+        'SitefinityBreadcrumb': {
             designerMetadata: sitefinityBreadcrumbJson,
             componentType: Breadcrumb,
             editorMetadata: {
@@ -41,6 +47,7 @@ export const widgetRegistry: WidgetRegistry = {
             ssr: true
         },
         'SitefinityClassification':  <any>{
+            entity: ClassificationEntity,
             designerMetadata: sitefinityClassificationJson,
             componentType: Classification,
             editorMetadata: {
@@ -138,6 +145,7 @@ export const widgetRegistry: WidgetRegistry = {
             ssr: true
         },
         'SitefinityContentList':  <any>{
+            entity: ContentListEntity,
             designerMetadata: sitefinityContentListJson,
             componentType: ContentList,
             editorMetadata: {
@@ -147,5 +155,20 @@ export const widgetRegistry: WidgetRegistry = {
             },
             ssr: true
         }
+    };
+
+    static get widgets(): { [key: string]: WidgetMetadata; } {
+        if (!this._processed) {
+            this._processed = {};
+
+            for (const key in this._widgets) {
+                if (Object.prototype.hasOwnProperty.call(this._widgets, key)) {
+                    const element = this._widgets[key];
+                    EntityMetadataGenerator.extractMetadata(element.entity);
+                }
+            }
+        }
+
+        return this._widgets;
     }
-};
+}

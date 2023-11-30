@@ -15,7 +15,7 @@
       "declaration": true,
       "experimentalDecorators": true,
       "paths": {
-        "sitefinity-widget-designers/*": [ "../sitefinity-widget-designers/src/*" ],
+        "sitefinity-widget-designers/*": [ "./src/*" ],
       }
     },
     "include": ["./src/**/*.ts", "./src/public-api.ts"],

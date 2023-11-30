@@ -8,10 +8,17 @@
         "command": "node server.js"
       },
       {
+        "name": "Designers tests: debug",
+        "type": "node-terminal",
+        "cwd": "${workspaceFolder}\\sitefinity-widget-designers",
+        "request": "launch",
+        "command": "npm run test:watch"
+      },
+      {
         "name": "Next.js: debug client-side",
         "type": "chrome",
         "request": "launch",
-        "url": "http://localhost:3000"
+        "url": "http://localhost:5001"
       },
       {
         "name": "Next.js: debug full stack",
