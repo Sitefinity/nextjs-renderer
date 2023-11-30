@@ -25,8 +25,8 @@ jobs:
       # - name: Generate Certificates
       #   run: dotnet dev-certs https --export-path ./cert/cert.crt --no-password --format PEM
 
-      # - name: Install
-      #   run: npm ci
+      - name: Install
+        run: npm ci
 
       # - name: Lint
       #   run: npm run lint
