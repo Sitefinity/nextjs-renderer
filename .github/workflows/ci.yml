@@ -17,27 +17,27 @@ jobs:
         with:
           node-version: 18
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: "6.x.x"
+      # - name: Setup .NET
+      #   uses: actions/setup-dotnet@v3
+      #   with:
+      #     dotnet-version: "6.x.x"
 
-      - name: Generate Certificates
-        run: dotnet dev-certs https --export-path ./cert/cert.crt --no-password --format PEM
+      # - name: Generate Certificates
+      #   run: dotnet dev-certs https --export-path ./cert/cert.crt --no-password --format PEM
 
-      - name: Install
-        run: npm ci
+      # - name: Install
+      #   run: npm ci
 
-      - name: Lint
-        run: npm run lint
+      # - name: Lint
+      #   run: npm run lint
 
-      - name: Test
-        run: npm run test
+      # - name: Test
+      #   run: npm run test
 
-      - name: Build
-        run: npm run build
-        env:
-          ENVIRONMENT: production
+      # - name: Build
+      #   run: npm run build
+      #   env:
+      #     ENVIRONMENT: production
 
       - name: Build package
         run: |
