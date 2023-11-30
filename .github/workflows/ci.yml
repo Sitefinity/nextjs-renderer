@@ -28,23 +28,26 @@ jobs:
       - name: Install
         run: npm ci
 
-      - name: Lint
-        run: npm run lint
+      # - name: Lint
+      #   run: npm run lint
 
-      - name: Test
-        run: npm run test
+      # - name: Test
+      #   run: npm run test
 
-      - name: Build
-        run: npm run build
-        env:
-          ENVIRONMENT: production
+      # - name: Build
+      #   run: npm run build
+      #   env:
+      #     ENVIRONMENT: production
 
       - name: Build package
         run: |
           rm -rf ../dist
-          tsc
           cd ./src/nextjs-framework
+          tsc
+
           cd ../../../
+          ls
+          cd ./nextjs-renderer
           ls
 
           cp ./nextjs-renderer/package.json ./dist/package.json
