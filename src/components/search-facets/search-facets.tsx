@@ -91,7 +91,7 @@ export async function SearchFacets(props: WidgetContext<SearchFacetsEntity>) {
           {...dataAttributes}
           {...searchFacetsCustomAttributes}
         >
-          <SearchFacetsClient viewModel={viewModel} />
+          <SearchFacetsClient viewModel={viewModel} searchParams={searchParams} />
         </div>
         <input type="hidden" id="sf-currentPageUrl" value="@(this.Context?.Request.Path ?? string.Empty)" />
       </>
