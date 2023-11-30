@@ -47,7 +47,7 @@ jobs:
 
           cd ../../../
 
-          cp ./nextjs-renderer/src/app/nextjs-framework/package.json ./dist/package.json
+          cp ./nextjs-renderer/src/nextjs-framework/package.json ./dist/package.json
           cd ./dist
           npm pack
 
