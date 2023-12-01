@@ -170,7 +170,7 @@ function populateSection(properties: SectionEntity): Promise<SectionHolder> {
             });
         }
     } else if (properties.SectionBackground.BackgroundType === 'Image' && properties.SectionBackground.ImageItem && properties.SectionBackground.ImageItem.Id) {
-        const imagePosition = properties.SectionBackground.Position || 'Fill';
+        const imagePosition = properties.SectionBackground.ImagePosition || 'Fill';
         sectionClasses.push(StylingConfig.ImageBackgroundClass);
         return RestService.getItemWithFallback<ImageItem>(RestSdkTypes.Image, properties.SectionBackground.ImageItem.Id, properties.SectionBackground.ImageItem.Provider).then((image) => {
             let style: { [key: string]: string } = {};

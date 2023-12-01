@@ -6,7 +6,8 @@ import { RequestContext } from '../editor/request-context';
 export class RendererContractImpl implements RendererContract {
 
     getWidgetMetadata(args: GetWidgetMetadataArgs): Promise<ComponentMetadata> {
-        const designerMetadata = RenderWidgetService.widgetRegistry.widgets[args.widgetName].designerMetadata;
+        const widgetRegister = RenderWidgetService.widgetRegistry.widgets[args.widgetName];
+        const designerMetadata = widgetRegister.entity || widgetRegister.designerMetadata;
         return Promise.resolve(designerMetadata);
     }
 

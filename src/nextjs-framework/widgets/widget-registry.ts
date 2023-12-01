@@ -34,10 +34,8 @@ import { WidgetMetadata } from '../editor';
 import { ClassificationEntity } from './classification/classification-entity';
 import { ContentListEntity } from './content-list/content-list-entity';
 
-export class ReactWidgetRegistry implements WidgetRegistry {
-    private static _processed: any = null;
-
-    private static _widgets: { [key: string]: WidgetMetadata; } = {
+export const ReactWidgetRegistry: WidgetRegistry = {
+    widgets: {
         'SitefinityBreadcrumb': {
             designerMetadata: sitefinityBreadcrumbJson,
             componentType: Breadcrumb,
@@ -47,7 +45,7 @@ export class ReactWidgetRegistry implements WidgetRegistry {
             ssr: true
         },
         'SitefinityClassification':  <any>{
-            entity: ClassificationEntity,
+            entity: EntityMetadataGenerator.extractMetadata(ClassificationEntity),
             designerMetadata: sitefinityClassificationJson,
             componentType: Classification,
             editorMetadata: {
@@ -145,7 +143,7 @@ export class ReactWidgetRegistry implements WidgetRegistry {
             ssr: true
         },
         'SitefinityContentList':  <any>{
-            entity: ContentListEntity,
+            entity: EntityMetadataGenerator.extractMetadata(ContentListEntity),
             designerMetadata: sitefinityContentListJson,
             componentType: ContentList,
             editorMetadata: {
@@ -155,20 +153,5 @@ export class ReactWidgetRegistry implements WidgetRegistry {
             },
             ssr: true
         }
-    };
-
-    static get widgets(): { [key: string]: WidgetMetadata; } {
-        if (!this._processed) {
-            this._processed = {};
-
-            for (const key in this._widgets) {
-                if (Object.prototype.hasOwnProperty.call(this._widgets, key)) {
-                    const element = this._widgets[key];
-                    EntityMetadataGenerator.extractMetadata(element.entity);
-                }
-            }
-        }
-
-        return this._widgets;
     }
-}
+};
