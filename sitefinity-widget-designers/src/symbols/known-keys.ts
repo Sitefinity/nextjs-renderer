@@ -14,7 +14,8 @@ export const keys = {
     content: 'Content',
     conditionalVisibility: 'ConditionalVisibility',
     choices: 'Choices',
-    cssClasses: 'CssClasses',
+    choice: 'Choice',
+    cssClasses: 'CssFieldMappings',
     lengthDependsOn: 'LengthDependsOn',
     emptyValues: 'EmptyValues',
     name: 'Name',
@@ -27,5 +28,7 @@ export const keys = {
     displaySettings: 'DisplaySettings',
     dialog: 'Dialog',
     group: 'Group',
-    contentContainer: 'ContentContainer'
+    contentContainer: 'ContentContainer',
+    fieldMappings: 'FieldMappings',
+    sectionsOrder: '__SectionsOrder'
 };

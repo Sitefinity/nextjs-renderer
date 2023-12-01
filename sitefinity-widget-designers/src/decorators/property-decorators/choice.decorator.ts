@@ -32,19 +32,23 @@ export function Choices(args: unknown, allowMultiple: boolean = false) {
             AllowMultiple: allowMultiple
         };
 
-        if ((args as ChoiceSettings)?.Choices) {
+        if (!Array.isArray(args)) {
             const baseChoices = new ChoiceSettings();
             (args as ChoiceSettings).Choices?.forEach(c => {
                 const choice = new ChoiceItem();
+                choice.Name = c.Name || c.Value;
                 baseChoices.Choices?.push(Object.assign(choice, c));
             });
 
             config = Object.assign(baseChoices, args as ChoiceSettings);
+
+            delete(config['AllowMultiple']);
         } else if (Array.isArray(args)) {
             config.Choices = [];
 
             args.forEach(c => {
                 const choice = new ChoiceItem();
+                choice.Name = c.Name || c.Value;
                 config.Choices.push(Object.assign(choice, c));
             });
         }
@@ -54,7 +58,9 @@ export function Choices(args: unknown, allowMultiple: boolean = false) {
             (config.Choices as any) = JSON.stringify(config.Choices);
         }
 
+        const assignableKey = Array.isArray(args) ? keys.choices : keys.choice;
+
         WidgetMetadata.register(target);
-        WidgetMetadata.registerPropertyMetadata(target, propName, keys.choices, config);
+        WidgetMetadata.registerPropertyMetadata(target, propName, assignableKey, config);
     });
 }

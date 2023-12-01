@@ -11,6 +11,13 @@ export function WidgetEntity(name: string, caption: string) {
     };
 }
 
+export function SectionsOrder(sections: string[]) {
+    return function(target: any, context?: any) {
+        WidgetMetadata.registerPrototype(target);
+        WidgetMetadata.registerPrototypeProperty(target, keys.sectionsOrder, sections);
+    };
+}
+
 export function Model() {
     return function(target: any, context?: any) {
         WidgetMetadata.registerPrototype(target);
@@ -37,9 +44,14 @@ export function Model() {
                 WidgetMetadata.registerPrototypePropertyMetadata(target, p, keys.type, type, false);
             }
 
+            let defaultValue = value;
+            if (typeof(value) === 'boolean') {
+                defaultValue = defaultValue ? 'True' : 'False';
+            }
+
             WidgetMetadata.registerPrototypePropertyMetadata(target, p, keys.name, p, false);
             WidgetMetadata.registerPrototypePropertyMetadata(target, p, keys.title, p, false);
-            WidgetMetadata.registerPrototypePropertyMetadata(target, p, keys.defaultValue, value, false);
+            WidgetMetadata.registerPrototypePropertyMetadata(target, p, keys.defaultValue, defaultValue, false);
         });
     };
 }

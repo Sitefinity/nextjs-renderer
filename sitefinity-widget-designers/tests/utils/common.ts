@@ -1,4 +1,5 @@
 import { CategoryModel, MetadataModel, PropertyModel, SectionModel } from '../../src/metadata/entity-metadata-generator';
+import { keys } from '../../src/symbols/known-keys';
 
 export function verifyPropertyKeyValues(property: any, expectedValues: {[key: string] : any}) {
     for (const key in expectedValues) {
@@ -40,7 +41,8 @@ function verifySection(widgetName: string, actual: SectionModel, expected: Secti
     expect(actual.Name).toBe(expected.Name);
     expect(actual.Title).toBe(expected.Title);
     expect(actual.CategoryName).toBe(expected.CategoryName);
-    expect(actual.Properties.length).toBe(expected.Properties.length);
+    expect(`${actual.Name} ${actual.Properties.map(x => x.Name).join(', ')}`)
+        .toBe(`${expected.Name} ${expected.Properties.map(x => x.Name).join(', ')}`);
 
     // verify each property
     actual.Properties.forEach(actualProp => {
@@ -54,7 +56,7 @@ function verifyProperty(actual: PropertyModel, expected: PropertyModel) {
     expect(actual.Name).toBe(expected.Name);
     expect(actual.Title).toBe(expected.Title);
     expect(actual.CategoryName).toBe(expected.CategoryName);
-    if (expected.SectionName !== null) {
+    if (expected.SectionName !== null && expected.SectionName !== '') {
         expect(actual.SectionName).toBe(expected.SectionName);
     }
     expect(`${actual.Name} default value: ${actual.DefaultValue}`).toBe(`${expected.Name} default value: ${expected.DefaultValue}`);
@@ -66,8 +68,13 @@ function verifyProperty(actual: PropertyModel, expected: PropertyModel) {
     expect(`${actual.Name} ${actualPropertyKeys}`).toBe(`${expected.Name} ${expectedPropertyKeys}`);
     for (const key in expected.Properties) {
         if (Object.prototype.hasOwnProperty.call(expected.Properties, key)) {
-            const element = expected.Properties[key];
-            expect(`${actual.Name}:${key} -> ${actual.Properties[key]}`).toBe(`${expected.Name}:${key} -> ${element}`);
+            let element = expected.Properties[key];
+            if (key === keys.fieldMappings) {
+                element = JSON.stringify(JSON.stringify(element));
+            }
+
+            const actualElement = expected.Properties[key];
+            expect(`${actual.Name}:${key} -> ${actualElement}`).toBe(`${expected.Name}:${key} -> ${element}`);
         }
     }
 

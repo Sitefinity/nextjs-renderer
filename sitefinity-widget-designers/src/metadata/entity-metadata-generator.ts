@@ -17,10 +17,21 @@ export class EntityMetadataGenerator {
 
     private static buildMetadata(metadata: {[key: string]: any}): MetadataModel {
         const meta: MetadataModel = {
-            Name: metadata.Name,
-            Caption: metadata.Caption,
+            Name: metadata[keys.name],
+            Caption: metadata[keys.caption],
             PropertyMetadata: []
         };
+
+        // remove Name and Caption
+        delete(metadata[keys.name]);
+        delete(metadata[keys.caption]);
+
+        // order properties by sections
+        let sectionsOrder = metadata[keys.sectionsOrder];
+        if (sectionsOrder) {
+            sectionsOrder = JSON.parse(JSON.stringify(sectionsOrder));
+            delete(metadata[keys.sectionsOrder]);
+        }
 
         const propertyKeys = Object.keys(metadata);
         const properties: {[key: string]: any}[] = [];
@@ -37,19 +48,28 @@ export class EntityMetadataGenerator {
         const quickEditCategory = this.generateCategory('QuickEdit');
 
         const uniqueSections: string[] = [];
+        let generatedSections: SectionModel[] = [];
         properties.forEach(p => {
             const sectionName = p[keys.sectionName];
             const categoryName = p[keys.categoryName];
             if (!uniqueSections.includes(sectionName)) {
                 uniqueSections.push(sectionName);
                 const section = this.generateSection(sectionName, categoryName);
-                if (categoryName === 'Advanced') {
-                    advancedCategory.Sections.push(section);
-                } else if (categoryName === 'QuickEdit') {
-                    quickEditCategory.Sections.push(section);
-                } else {
-                    basicCategory.Sections.push(section);
-                }
+                generatedSections.push(section);
+            }
+        });
+
+        if (sectionsOrder) {
+            generatedSections = generatedSections.sort((a, b) => sectionsOrder.indexOf(a.Name) - sectionsOrder.indexOf(b.Name));
+        }
+
+        generatedSections.forEach(section => {
+            if (section.CategoryName === 'Advanced') {
+                advancedCategory.Sections.push(section);
+            } else if (section.CategoryName === 'QuickEdit') {
+                quickEditCategory.Sections.push(section);
+            } else {
+                basicCategory.Sections.push(section);
             }
         });
 
@@ -84,6 +104,10 @@ export class EntityMetadataGenerator {
 
     private static pushIfHasSections(category: CategoryModel, propertyMeta: any[]) {
         if (category.Sections.length > 0) {
+            category.Sections = category.Sections.map(s => {
+                s.Properties = s.Properties.sort((a, b) => a.Position - b.Position);
+                return s;
+            });
             propertyMeta.push(category);
         }
     }
@@ -176,6 +200,11 @@ export class EntityMetadataGenerator {
                 fullPropertyMeta[keys.type] = 'multipleChoices';
             }
         }
+
+        const titleMeta = fullPropertyMeta[keys.title];
+        if (titleMeta === undefined) {
+            fullPropertyMeta[keys.title] = fullPropertyMeta[keys.name];
+        }
     }
 
 
@@ -187,8 +216,10 @@ export class EntityMetadataGenerator {
             let newKey;
             if (this.skipMetaKeyword.includes(propName)) {
                 newKey = `${propName}_${key}`;
-            } else if (propName === 'Choices' && key === 'Choices') {
+            } else if (propName === keys.choices && key === 'Choices') {
                 newKey = `Meta_${propName}`;
+            } else if ((propName === keys.fieldMappings || propName === keys.cssClasses)&& key === 'ViewMetaData') {
+                newKey = `Meta_${key}`;
             } else {
                 newKey =  `Meta_${propName}_${key}`;
             }

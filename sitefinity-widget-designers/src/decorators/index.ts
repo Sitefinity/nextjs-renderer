@@ -14,6 +14,7 @@ export * from './property-decorators/dialog.decorator';
 export * from './property-decorators/display-name.decorator';
 export * from './property-decorators/display-settings.decorator';
 export * from './property-decorators/fallback-to-default-when-empty.decorator';
+export * from './property-decorators/field-mappings.decorator';
 export * from './property-decorators/group.decorator';
 export * from './property-decorators/length-depends-on.decorator';
 export * from './property-decorators/max-length.decorator';
