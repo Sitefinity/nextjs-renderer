@@ -11,7 +11,6 @@ export interface Rule {
         hideContent?: boolean
     }[],
     inline?: boolean,
-
 }
 
 export function ConditionalVisibility(condition: Rule | string) {
