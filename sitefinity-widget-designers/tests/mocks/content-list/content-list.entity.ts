@@ -299,7 +299,6 @@ export class ContentListEntity {
     @Category('Advanced')
     @ContentSection('Custom CSS classes', 0)
     @DisplayName('')
-    @DataType('listFieldMappingCss')
     @CssFieldMappings(viewMeta, true)
     CssClasses: Array<{ FieldName: string; CssClass: string; }> | null = null;
 

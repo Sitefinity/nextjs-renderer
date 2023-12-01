@@ -1,5 +1,4 @@
 import { CategoryModel, MetadataModel, PropertyModel, SectionModel } from '../../src/metadata/entity-metadata-generator';
-import { keys } from '../../src/symbols/known-keys';
 
 export function verifyPropertyKeyValues(property: any, expectedValues: {[key: string] : any}) {
     for (const key in expectedValues) {

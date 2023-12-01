@@ -30,6 +30,7 @@ export function CssFieldMappings(viewMeta: ViewMetaModel | null = null, showWrap
     return PropertyDecoratorBase((target: any, propName: string) => {
         WidgetMetadata.register(target);
         WidgetMetadata.registerPropertyMetadata(target, propName, keys.cssClasses, classes);
+        WidgetMetadata.registerPropertyMetadata(target, propName, keys.type, 'listFieldMappingCss');
         DataModel(CssClassMapping)(target, propName);
     });
 }
