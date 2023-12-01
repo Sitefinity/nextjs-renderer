@@ -22,6 +22,7 @@ export function FieldMappings(viewMeta: ViewMetaModel) {
     return PropertyDecoratorBase((target: any, propName: string) => {
         WidgetMetadata.register(target);
         WidgetMetadata.registerPropertyMetadata(target, propName, keys.fieldMappings, mappings);
+        WidgetMetadata.registerPropertyMetadata(target, propName, keys.type, 'listFieldMapping');
         DataModel(FieldMapping)(target, propName);
     });
 }

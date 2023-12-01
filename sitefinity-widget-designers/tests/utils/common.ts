@@ -55,6 +55,11 @@ function verifySection(widgetName: string, actual: SectionModel, expected: Secti
 function verifyProperty(actual: PropertyModel, expected: PropertyModel) {
     expect(actual.Name).toBe(expected.Name);
     expect(actual.Title).toBe(expected.Title);
+    // null fallbacks to string in iris
+    if (!(actual.Type === 'string' && expected.Type === null)) {
+        expect(`${actual.Name} type: ${actual.Type}`)
+           .toBe(`${expected.Name} type: ${expected.Type}`);
+    }
     expect(actual.CategoryName).toBe(expected.CategoryName);
     if (expected.SectionName !== null && expected.SectionName !== '') {
         expect(actual.SectionName).toBe(expected.SectionName);
@@ -66,16 +71,20 @@ function verifyProperty(actual: PropertyModel, expected: PropertyModel) {
     const actualPropertyKeys = Object.keys(actual.Properties).sort().join(', ');
     const expectedPropertyKeys = Object.keys(expected.Properties).sort().join(', ');
     expect(`${actual.Name} ${actualPropertyKeys}`).toBe(`${expected.Name} ${expectedPropertyKeys}`);
+    // eslint-disable-next-line guard-for-in
     for (const key in expected.Properties) {
-        if (Object.prototype.hasOwnProperty.call(expected.Properties, key)) {
             let element = expected.Properties[key];
-            if (key === keys.fieldMappings) {
-                element = JSON.stringify(JSON.stringify(element));
+            switch (key) {
+                case 'Meta_LengthDependsOn_ExtraRecords':
+                case 'Meta_ViewMetaData':
+                    element = JSON.stringify(JSON.parse(element));
+                break;
+                default: break;
             }
 
-            const actualElement = expected.Properties[key];
+
+            const actualElement = actual.Properties[key];
             expect(`${actual.Name}:${key} -> ${actualElement}`).toBe(`${expected.Name}:${key} -> ${element}`);
-        }
     }
 
     // verify typechildproperties

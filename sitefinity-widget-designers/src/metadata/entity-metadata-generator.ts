@@ -116,9 +116,10 @@ export class EntityMetadataGenerator {
         const propertyObject: {[key: string]: any} = {
             [keys.sectionName]: null,
             [keys.categoryName]: null,
-            [keys.properties]: [],
+            [keys.properties]: {},
             [keys.typeChildProperties]: [],
-            [keys.position] : 0
+            [keys.position] : 0,
+            [keys.type]: null
         };
 
         this.modifyPropertyMeta(propertyMeta);
@@ -149,7 +150,7 @@ export class EntityMetadataGenerator {
         const models: {[key: string]: any}[] = [];
 
         let propertyObject: {[key: string]: any} = {
-            [keys.properties]: [],
+            [keys.properties]: {},
             [keys.typeChildProperties]: [],
             [keys.position]: 0,
             [keys.defaultValue]: null,
@@ -192,7 +193,7 @@ export class EntityMetadataGenerator {
 
         if (choiceMeta) {
             const type = fullPropertyMeta[keys.type];
-            if (type !== KnownFieldTypes.ChipChoice && type !== KnownFieldTypes.RadioChoice) {
+            if (type == null && (type !== KnownFieldTypes.ChipChoice && type !== KnownFieldTypes.RadioChoice)) {
                 fullPropertyMeta[keys.type] = KnownFieldTypes.Choices;
             }
 
@@ -275,6 +276,7 @@ export interface PropertyModel {
     Title: string,
     SectionName: string,
     CategoryName: string,
+    Type: string;
     Properties: { [key: string]: any },
     TypeChildProperties: PropertyModel[],
     Position: number,

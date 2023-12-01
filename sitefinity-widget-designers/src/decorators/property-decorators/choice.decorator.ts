@@ -34,11 +34,13 @@ export function Choices(args: unknown, allowMultiple: boolean = false) {
 
         if (!Array.isArray(args)) {
             const baseChoices = new ChoiceSettings();
-            (args as ChoiceSettings).Choices?.forEach(c => {
+
+            (args as ChoiceSettings).Choices = (args as ChoiceSettings).Choices?.map(c => {
                 const choice = new ChoiceItem();
                 choice.Name = c.Name || c.Value;
-                baseChoices.Choices?.push(Object.assign(choice, c));
-            });
+                choice.Title = c.Title || c.Name || c.Value;
+                return Object.assign(choice, c);
+            }) || null;
 
             config = Object.assign(baseChoices, args as ChoiceSettings);
 
@@ -49,6 +51,7 @@ export function Choices(args: unknown, allowMultiple: boolean = false) {
             args.forEach(c => {
                 const choice = new ChoiceItem();
                 choice.Name = c.Name || c.Value;
+                choice.Title = c.Title || c.Name || c.Value;
                 config.Choices.push(Object.assign(choice, c));
             });
         }

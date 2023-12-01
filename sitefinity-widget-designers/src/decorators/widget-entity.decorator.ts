@@ -41,6 +41,10 @@ export function Model() {
             }
 
             if (type === 'string' || type === 'number' || type === 'boolean') {
+                if (type === 'boolean') {
+                    type = 'bool';
+                }
+
                 WidgetMetadata.registerPrototypePropertyMetadata(target, p, keys.type, type, false);
             }
 

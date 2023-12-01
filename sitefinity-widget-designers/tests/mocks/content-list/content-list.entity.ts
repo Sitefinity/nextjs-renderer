@@ -109,11 +109,11 @@ export class ContentListEntity {
     @ContentSection('Single item settings', 1)
     @DataType('viewSelector')
     @Choices([
-            {Title: 'Blog posts', Value: 'BlogPosts'},
-            {Title: 'Dynamic', Value: 'Dynamic'},
-            {Title: 'Events', Value: 'Events'},
-            {Title: 'List items', Value: 'ListItems'},
-            {Title: 'News', Value: 'News'}
+            {Title: 'Details.Blog posts.Default', Value: 'Details.BlogPosts.Default'},
+            {Title: 'Details.Dynamic.Default', Value: 'Details.Dynamic.Default'},
+            {Title: 'Details.Events.Default', Value: 'Details.Events.Default'},
+            {Title: 'Details.List items.Default', Value: 'Details.ListItems.Default'},
+            {Title: 'Details.News.Default', Value: 'Details.News.Default'}
         ])
     SfDetailViewName: string = 'Details.BlogPosts.Default';
 
@@ -194,7 +194,7 @@ export class ContentListEntity {
     @DataType(KnownFieldTypes.RadioChoice)
     @Description('Controls whether the paging works with URL segments or a query parameter.')
     @Choices([
-        { Value: 'URLSegments', Title: 'URL Segments'},
+        { Value: 'URLSegments', Title: 'URL segments'},
         { Value: 'QueryParameter', Title: 'Query parameter'}
     ])
     PagerMode: 'URLSegments' | 'QueryParameter' = 'URLSegments';
@@ -219,6 +219,7 @@ export class ContentListEntity {
     @Category('Advanced')
     @ContentSection('Metadata fields', 0)
     @DisplayName('SEO enabled')
+    @DataType(KnownFieldTypes.ChipChoice)
     @Choices({
         Choices: [
             { Name: 'Yes', Value: 'True' },
@@ -255,6 +256,7 @@ export class ContentListEntity {
     @Category('Advanced')
     @ContentSection('Metadata fields', 4)
     @DisplayName('OpenGraph enabled')
+    @DataType(KnownFieldTypes.ChipChoice)
     @Choices({
         Choices: [
             { Name: 'Yes', Value: 'True' },
@@ -320,6 +322,6 @@ export class ContentListEntity {
     @Description('Show or hide the child list view of this widget when on the same page there is another widget displaying parent items and no parent item is selected to filter the child\u0027s list.')
     ShowListViewOnEmptyParentFilter: boolean = false;
 
-    @Attributes('ContentList')
+    @Attributes('ContentList', 'Content list')
     Attributes: { [key: string]: Array<{ Key: string; Value: string; }>; } | null = null;
 }

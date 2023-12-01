@@ -144,7 +144,6 @@ export const ReactWidgetRegistry: WidgetRegistry = {
         },
         'SitefinityContentList':  <any>{
             entity: EntityMetadataGenerator.extractMetadata(ContentListEntity),
-            designerMetadata: sitefinityContentListJson,
             componentType: ContentList,
             editorMetadata: {
                 Title: 'Content list',
