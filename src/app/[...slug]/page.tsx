@@ -1,7 +1,6 @@
 
 import { Metadata } from 'next';
 import { cookies } from 'next/headers';
-
 import { ReactWidgetRegistry, RenderPage, WidgetExecutionError, initRendering, pageMetadata } from '@progress/sitefinity-react-framework';
 
 export async function generateMetadata({ params, searchParams }: any): Promise<Metadata> {
