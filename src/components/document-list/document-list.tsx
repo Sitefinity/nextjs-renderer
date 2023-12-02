@@ -17,7 +17,7 @@ import { DetailPageSelectionMode } from './interfaces/DetailPageSelectionMode';
 import { List } from './list';
 import { Grid } from './grid';
 import { PageItem } from 'sitefinity-react-framework/sdk/dto/page-item';
-import { getPageQueryString, getWhiteListQueryList } from './common/utils';
+import { getPageQueryString, getWhiteListSearchParams } from './common/utils';
 import { DetailsItem } from './details-item';
 import { DocumentListViewModel } from './interfaces/DocumentListViewModel';
 
@@ -87,7 +87,7 @@ export async function DocumentList(props: WidgetContext<DocumentListEntity>) {
 
    let url: string = '';
    const whitelistedQueryParams = ['sf_site','sfaction','sf_provider','sf_culture'];
-   const queryList = getWhiteListQueryList(context, whitelistedQueryParams);
+   const queryList = new URLSearchParams(getWhiteListSearchParams(context.searchParams || {}, whitelistedQueryParams));
    let queryString = '?' + queryList.toString();
 
    if (entity && entity.DetailPageMode === 'SamePage') {

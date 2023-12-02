@@ -3,7 +3,7 @@
 import React from 'react';
 import { SearchResultsSorting } from './interfaces/SearchResultsSorting';
 import { RequestContext } from 'sitefinity-react-framework/services/request-context';
-import { getWhiteListQueryList } from '../document-list/common/utils';
+import { getWhiteListSearchParams } from '../document-list/common/utils';
 
 export async function OrderByDropDown(props: {
     sortingSelectId: string;
@@ -15,7 +15,7 @@ export async function OrderByDropDown(props: {
 }) {
     const { sortingSelectId, queryCollection, sorting, context} = props;
     const whitelistedQueryParams = ['sf_site','sfaction','sf_provider'];
-    const queryList = getWhiteListQueryList(context, whitelistedQueryParams);
+    const queryList = new URLSearchParams(getWhiteListSearchParams(context.searchParams || {}, whitelistedQueryParams));
     const query = queryCollection['searchQuery'];
     const index = queryCollection['indexCatalogue'];
     const wordsMode = queryCollection['wordsMode'];
