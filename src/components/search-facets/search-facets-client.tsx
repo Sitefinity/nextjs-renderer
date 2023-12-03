@@ -80,19 +80,7 @@ export function SearchFacetsClient(props: any) {
         setMoreLessLabel(newMoreLessLabel);
     };
 
-
-    React.useEffect(()=>{
-        markSelectedInputs();
-    },[]);
-
-    React.useEffect(()=>{
-        const filterObject = buildFilterObjectBasedOnPopulatedInputs(lastUpdatedKey);
-
-        searchWithFilter(filterObject);
-
-    },[lastUpdatedKey]);
-    console.log('lastUpdatedKey', lastUpdatedKey)
-    function searchWithFilter(currentFilterObject: AppliedFilterObject) {
+    const searchWithFilter = React.useCallback((currentFilterObject: AppliedFilterObject) => {
         let filterString = JSON.stringify(currentFilterObject);
         const newSearchParam = {...searchParams};
         delete newSearchParam['slug'];
@@ -109,8 +97,37 @@ export function SearchFacetsClient(props: any) {
         let url = buildUrl(newSearchParam);
 
         window.history.pushState({ path: url }, '', url);
-    }
+    },[searchParams]);
 
+
+    const buildFilterObjectBasedOnPopulatedInputs = React.useCallback((id: string | null) => {
+        let groupedFilters = groupAllCheckedFacetInputs();
+
+        let lastSelectedElementKey;
+
+        let isDeselected = false;
+        if (id) {
+            const eventTargetElement = document.getElementById(id) as HTMLInputElement;
+            lastSelectedElementKey = (eventTargetElement.attributes as any)['data-facet-key'].value;
+            isDeselected = !eventTargetElement.checked;
+        }
+
+        let filterObject = constructFilterObject(groupedFilters, lastSelectedElementKey, isDeselected);
+
+        return filterObject;
+    }, [groupAllCheckedFacetInputs]);
+
+    React.useEffect(()=>{
+        markSelectedInputs();
+    },[markSelectedInputs]);
+
+    React.useEffect(()=>{
+        const filterObject = buildFilterObjectBasedOnPopulatedInputs(lastUpdatedKey);
+
+        searchWithFilter(filterObject);
+
+    },[lastUpdatedKey, buildFilterObjectBasedOnPopulatedInputs, searchWithFilter]);
+    console.log('lastUpdatedKey', lastUpdatedKey);
 
     function handleChipDeleteClick(ev: React.MouseEvent<HTMLSpanElement>) {
         const facetKey = (ev.target as HTMLSpanElement).getAttribute('data-facet-key');
@@ -163,24 +180,6 @@ export function SearchFacetsClient(props: any) {
             });
             setCheckedInputs(newCheckedInputs);
         }
-    }
-
-    function buildFilterObjectBasedOnPopulatedInputs(id: string | null) {
-
-        let groupedFilters = groupAllCheckedFacetInputs();
-
-        let lastSelectedElementKey;
-
-        let isDeselected = false;
-        if (id) {
-            const eventTargetElement = document.getElementById(id) as HTMLInputElement;
-            lastSelectedElementKey = (eventTargetElement.attributes as any)['data-facet-key'].value;
-            isDeselected = !eventTargetElement.checked;
-        }
-
-        let filterObject = constructFilterObject(groupedFilters, lastSelectedElementKey, isDeselected);
-
-        return filterObject;
     }
 
     function constructFilterObject(
