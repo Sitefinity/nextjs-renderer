@@ -1,19 +1,17 @@
 import React from 'react';
 import Image from 'next/image';
-import { getCustomAttributes, htmlAttributes } from 'sitefinity-react-framework/widgets/attributes';
-import { WidgetContext } from 'sitefinity-react-framework/widgets/widget-context';
-import { classNames } from 'sitefinity-react-framework/utils/classNames';
+
 import { StyleGenerator } from '../styling/style-generator.service';
 import { OffsetStyle } from '../styling/offset-style';
 import { SearchResultsService } from './search-results.service';
-import { getUniqueId } from 'sitefinity-react-framework/utils/getUniqueId';
 import { SearchResultDocumentDto } from './interfaces/SearchResultDocumentDto';
 import { LanguageEntry } from '../language-selector/language-selector';
 import { SearchResultsSorting } from './interfaces/SearchResultsSorting';
-import { ExtendedContentListSettings } from 'sitefinity-react-framework/widgets/entities/extended-content-list-settings';
-import { ListDisplayMode } from 'sitefinity-react-framework/widgets/entities/list-display-mode';
 import { SearchResultsViewModel } from './interfaces/SearchResultsViewModel';
 import { OrderByDropDown } from './orderby-dropdown';
+import { WidgetContext, classNames, getCustomAttributes, getUniqueId, htmlAttributes } from '../../editor';
+import { ListDisplayMode } from '../../editor/widget-framework/list-display-mode';
+import { ExtendedContentListSettings } from '../../editor/widget-framework/extended-content-list-settings';
 
 export async function SearchResults(props: WidgetContext<SearchResultsEntity>) {
     const model = props.model;

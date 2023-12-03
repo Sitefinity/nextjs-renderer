@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleGenerator } from '../styling/style-generator.service';
 import { OffsetStyle } from '../styling/offset-style';
-import { MixedContentContext, WidgetContext, classNames, getUniqueId, htmlAttributes } from '../../editor';
+import { MixedContentContext, RequestContext, WidgetContext, classNames, getUniqueId, htmlAttributes } from '../../editor';
 
 import { ExternalLoginBase } from '../external-login-base';
 import { StylingConfig } from '../styling/styling-config';
@@ -10,7 +10,6 @@ import { RegistrationForm } from './registration-form';
 import { RestSdkTypes, RootUrlService, ExternalProvider, RestService, RegistrationSettingsDto } from '../../rest-sdk';
 import { RestExtensionsService } from '../rest-extensions';
 import { defaultMixedContent } from '../common/defaults';
-import { RequestContext } from 'sitefinity-react-framework/services/request-context';
 
 const EncryptedParam = 'qs';
 

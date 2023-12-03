@@ -1,11 +1,9 @@
-import { CombinedFilter } from 'sitefinity-react-framework/sdk/filters/combined-filter';
-import { FilterClause } from 'sitefinity-react-framework/sdk/filters/filter-clause';
-import { RelationFilter } from 'sitefinity-react-framework/sdk/filters/relation-filter';
-import { ContentListSettings } from 'sitefinity-react-framework/widgets/entities/content-list-settings';
-import { MixedContentContext } from 'sitefinity-react-framework/widgets/entities/mixed-content-context';
+
 import { OffsetStyle } from '../styling/offset-style';
 import { PageTitleMode } from './interfaces/PageTitleMode';
 import { ContentViewDisplayMode } from './interfaces/DisplayMode';
+import { ContentListSettings, MixedContentContext } from '../../editor';
+import { CombinedFilter, FilterClause, RelationFilter } from '../../rest-sdk';
 
 export interface DocumentListEntity {
     SelectedItems: MixedContentContext;

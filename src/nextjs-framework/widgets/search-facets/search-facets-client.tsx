@@ -99,6 +99,32 @@ export function SearchFacetsClient(props: any) {
         window.history.pushState({ path: url }, '', url);
     },[searchParams]);
 
+    const groupAllCheckedFacetInputs = React.useCallback((): GroupedCheckedFacets => {
+        let groupedFilters: GroupedCheckedFacets = {};
+
+        const checkedFilters = Object.entries(inputRefs)
+            .filter(([key, val])=>key.includes('facet-checkbox') && val && val.checked)
+            .map(([_key, val]) => val);
+        if (checkedFilters) {
+            checkedFilters.forEach(function (checkedFilter) {
+                let filterKey = (checkedFilter.attributes as any)['data-facet-key'].value;
+                let filterValue = (checkedFilter.attributes as any)['data-facet-value'].value;
+
+                let filterValueObj = {
+                    filterValue: filterValue,
+                    isCustom: false
+                };
+
+                if (groupedFilters.hasOwnProperty(filterKey)) {
+                    groupedFilters[filterKey].push(filterValueObj);
+                } else {
+                    groupedFilters[filterKey] = [filterValueObj];
+                }
+            });
+        }
+
+        return groupedFilters;
+    },[inputRefs]);
 
     const buildFilterObjectBasedOnPopulatedInputs = React.useCallback((id: string | null) => {
         let groupedFilters = groupAllCheckedFacetInputs();
@@ -116,6 +142,34 @@ export function SearchFacetsClient(props: any) {
 
         return filterObject;
     }, [groupAllCheckedFacetInputs]);
+
+    const markSelectedInputs = React.useCallback(() => {
+        if (filterQuery) {
+            let decodedFilterParam = atob(filterQuery);
+            let jsonFilters: AppliedFilterObject = JSON.parse(decodedFilterParam);
+            const newCheckedInputs: {[key:string]: string} = {};
+            jsonFilters.appliedFilters.forEach(function (filter: { filterValues: any[], fieldName: string}) {
+                filter.filterValues.forEach(function (fvObj) {
+                    let fieldName = decodeURIComponent(filter.fieldName);
+                    let filterValue = fvObj.filterValue;
+
+                    let inputId = 'facet-checkbox-' + fieldName + '-' + filterValue;
+                    let currentInputElement = inputRefs[inputId];
+
+                    if (!currentInputElement) {
+                        // try to find with different decimal point separator
+                        inputId = inputId.replace(/\./g, ',');
+                        currentInputElement = inputRefs[inputId];
+                    }
+
+                    if (currentInputElement) {
+                        newCheckedInputs[inputId] = currentInputElement.getAttribute('data-facet-label') || '';
+                    }
+                });
+            });
+            setCheckedInputs(newCheckedInputs);
+        }
+    },[filterQuery, inputRefs]);
 
     React.useEffect(()=>{
         markSelectedInputs();
@@ -154,34 +208,6 @@ export function SearchFacetsClient(props: any) {
         return url;
     }
 
-    function markSelectedInputs() {
-        if (filterQuery) {
-            let decodedFilterParam = atob(filterQuery);
-            let jsonFilters: AppliedFilterObject = JSON.parse(decodedFilterParam);
-            const newCheckedInputs: {[key:string]: string} = {};
-            jsonFilters.appliedFilters.forEach(function (filter: { filterValues: any[], fieldName: string}) {
-                filter.filterValues.forEach(function (fvObj) {
-                    let fieldName = decodeURIComponent(filter.fieldName);
-                    let filterValue = fvObj.filterValue;
-
-                    let inputId = 'facet-checkbox-' + fieldName + '-' + filterValue;
-                    let currentInputElement = inputRefs[inputId];
-
-                    if (!currentInputElement) {
-                        // try to find with different decimal point separator
-                        inputId = inputId.replace(/\./g, ',');
-                        currentInputElement = inputRefs[inputId];
-                    }
-
-                    if (currentInputElement) {
-                        newCheckedInputs[inputId] = currentInputElement.getAttribute('data-facet-label') || '';
-                    }
-                });
-            });
-            setCheckedInputs(newCheckedInputs);
-        }
-    }
-
     function constructFilterObject(
         groupedFilters: GroupedCheckedFacets,
         lastSelectedElementKey: string,
@@ -199,34 +225,6 @@ export function SearchFacetsClient(props: any) {
         };
 
         return currentFilterObject;
-    }
-
-
-    function groupAllCheckedFacetInputs(): GroupedCheckedFacets {
-        let groupedFilters: GroupedCheckedFacets = {};
-
-        const checkedFilters = Object.entries(inputRefs)
-            .filter(([key, val])=>key.includes('facet-checkbox') && val && val.checked)
-            .map(([_key, val]) => val);
-        if (checkedFilters) {
-            checkedFilters.forEach(function (checkedFilter) {
-                let filterKey = (checkedFilter.attributes as any)['data-facet-key'].value;
-                let filterValue = (checkedFilter.attributes as any)['data-facet-value'].value;
-
-                let filterValueObj = {
-                    filterValue: filterValue,
-                    isCustom: false
-                };
-
-                if (groupedFilters.hasOwnProperty(filterKey)) {
-                    groupedFilters[filterKey].push(filterValueObj);
-                } else {
-                    groupedFilters[filterKey] = [filterValueObj];
-                }
-            });
-        }
-
-        return groupedFilters;
     }
 
     function parseGroupedFiltersToJson(groupedFilters: any) {

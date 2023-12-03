@@ -1,6 +1,5 @@
-import { PageItem } from 'sitefinity-react-framework/sdk/dto/page-item';
-import { SdkItem } from 'sitefinity-react-framework/sdk/dto/sdk-item';
-import { RequestContext } from 'sitefinity-react-framework/services/request-context';
+import { PageItem, SdkItem } from '../../../rest-sdk';
+
 
 export const getFileSize = (item: SdkItem) => {
     const size = item['TotalSize'];

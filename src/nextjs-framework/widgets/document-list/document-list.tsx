@@ -1,25 +1,19 @@
 import React from 'react';
 import { DocumentListEntity } from './document-list-entity';
 import { DocumentListRestService } from './document-list-rest.service';
-import { WidgetContext } from 'sitefinity-react-framework/widgets/widget-context';
-import { getCustomAttributes, htmlAttributes } from 'sitefinity-react-framework/widgets/attributes';
-import { DetailItem } from 'sitefinity-react-framework/sdk/services/detail-item';
-import { RestSdkTypes, RestService } from 'sitefinity-react-framework/sdk/rest-service';
-import { SdkItem } from 'sitefinity-react-framework/sdk/dto/sdk-item';
 import { StyleGenerator } from '../styling/style-generator.service';
-import { classNames } from 'sitefinity-react-framework/utils/classNames';
 import { DocumentListModelMaster } from './interfaces/DocumentListModelMaster';
-import { RequestContext } from 'sitefinity-react-framework/services/request-context';
 import { DocumentListModelDetail } from './interfaces/DocumentListDetailModel';
 import { PageTitleMode } from './interfaces/PageTitleMode';
 import { ContentViewDisplayMode } from './interfaces/DisplayMode';
 import { DetailPageSelectionMode } from './interfaces/DetailPageSelectionMode';
 import { List } from './list';
 import { Grid } from './grid';
-import { PageItem } from 'sitefinity-react-framework/sdk/dto/page-item';
 import { getPageQueryString, getWhiteListSearchParams } from './common/utils';
 import { DetailsItem } from './details-item';
 import { DocumentListViewModel } from './interfaces/DocumentListViewModel';
+import { DetailItem, RequestContext, WidgetContext, classNames, getCustomAttributes, htmlAttributes } from '../../editor';
+import { PageItem, RestSdkTypes, RestService } from '../../rest-sdk';
 
 export async function DocumentList(props: WidgetContext<DocumentListEntity>) {
     const entity = {

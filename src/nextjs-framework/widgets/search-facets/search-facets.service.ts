@@ -1,7 +1,6 @@
-import { RestService } from 'sitefinity-react-framework/sdk/rest-service';
-import { SearchFacetsEntity } from './search-facets';
 import { FacetsViewModelDto } from './interfaces/FacetsViewModelDto';
 import { FacetFlatResponseDto } from './interfaces/FacetFlatResponseDto';
+import { RestService } from '../../rest-sdk';
 
 export class SearchFacetsService {
 

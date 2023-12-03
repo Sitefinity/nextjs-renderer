@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { SearchResultsSorting } from './interfaces/SearchResultsSorting';
-import { RequestContext } from 'sitefinity-react-framework/services/request-context';
 import { getWhiteListSearchParams } from '../document-list/common/utils';
+import { RequestContext } from '../../editor';
 
 export async function OrderByDropDown(props: {
     sortingSelectId: string;

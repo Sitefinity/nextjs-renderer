@@ -1,4 +1,4 @@
-import { SdkItem } from 'sitefinity-react-framework/sdk/dto/sdk-item';
+import { SdkItem } from '../../rest-sdk';
 import { getExtension, getFileExtensionCssClass, getFileSize } from './common/utils';
 import { DocumentListViewModel } from './interfaces/DocumentListViewModel';
 

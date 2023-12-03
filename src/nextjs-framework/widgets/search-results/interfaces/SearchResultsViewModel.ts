@@ -1,4 +1,5 @@
-import { LanguageEntry } from '@/components/language-selector/language-selector';
+
+import { LanguageEntry } from '../../language-selector/language-selector';
 import { SearchResultDocumentDto } from './SearchResultDocumentDto';
 
 export interface SearchResultsViewModel {

@@ -1,7 +1,7 @@
-import { RestService } from 'sitefinity-react-framework/sdk/rest-service';
 import { SearchResultsEntity } from './search-results';
 import { SearchResultsSorting } from './interfaces/SearchResultsSorting';
-import { ListDisplayMode } from 'sitefinity-react-framework/widgets/entities/list-display-mode';
+import { ListDisplayMode } from '../../editor/widget-framework/list-display-mode';
+import { RestService } from '../../rest-sdk';
 
 export class SearchResultsService {
 

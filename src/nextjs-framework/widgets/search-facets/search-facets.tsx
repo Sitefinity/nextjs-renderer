@@ -1,7 +1,5 @@
 import React from 'react';
-import { getCustomAttributes, htmlAttributes } from 'sitefinity-react-framework/widgets/attributes';
-import { WidgetContext } from 'sitefinity-react-framework/widgets/widget-context';
-import { classNames } from 'sitefinity-react-framework/utils/classNames';
+
 import { StyleGenerator } from '../styling/style-generator.service';
 import { OffsetStyle } from '../styling/offset-style';
 import { SearchFacetsService } from './search-facets.service';
@@ -12,6 +10,7 @@ import { WidgetSettingsFacetFieldMapper } from './facet-field-mapper';
 import { FacetFlatResponseDto } from './interfaces/FacetFlatResponseDto';
 import { SearchFacetsModelBuilder } from './search-facets-model-builder';
 import { SearchFacetsClient } from './search-facets-client';
+import { WidgetContext, classNames, getCustomAttributes, htmlAttributes } from '../../editor';
 
 export async function SearchFacets(props: WidgetContext<SearchFacetsEntity>) {
     const model = props.model;
