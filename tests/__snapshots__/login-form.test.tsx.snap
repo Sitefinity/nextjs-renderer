@@ -101,12 +101,12 @@ exports[`should render login form 1`] = `
         <input
           name="RedirectUrl"
           type="hidden"
-          value="undefined?sf_site=4c922118-f076-4e24-9193-93e004f50107&sfaction=edit&sf_version=80"
+          value="https://localhost:5001/integration-test?sf_site=4c922118-f076-4e24-9193-93e004f50107&sfaction=edit&sf_version=80"
         />
         <input
           name="ErrorRedirectUrl"
           type="hidden"
-          value="undefined?sf_site=4c922118-f076-4e24-9193-93e004f50107&sfaction=edit&sf_version=80&loginerror=True"
+          value="https://localhost:5001/integration-test?sf_site=4c922118-f076-4e24-9193-93e004f50107&sfaction=edit&sf_version=80&loginerror=True"
         />
         <input
           name="MembershipProviderName"

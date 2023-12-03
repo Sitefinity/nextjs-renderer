@@ -1,6 +1,8 @@
-import { Breadcrumb } from '@/components/breadcrumb/breadcrumb';
+
 import { render, waitFor } from '@testing-library/react';
 import { MockedBreadcrumbRestService } from './mocks/mock-breadcrumb.service';
+import { Breadcrumb, BreadcrumbEntity } from '@progress/sitefinity-react-framework';
+import { RequestContext, WidgetModel } from '../src/nextjs-framework/editor';
 
 it('should render breadcrumb', async () => {
     const callToAction = await Breadcrumb({
@@ -26,44 +28,71 @@ const metadata = {
     ssr: true
 };
 
-const model = {
+const model: WidgetModel<BreadcrumbEntity> = {
     Id: 'c53ba795-8c6c-4b4e-a5f3-531e8f8e8122',
-    SiblingId: '00000000-0000-0000-0000-000000000000',
     Name: 'SitefinityBreadcrumb',
     PlaceHolder: 'Body',
-    Caption: null,
-    ViewName: null,
+    Caption: 'Breadcrumb',
+    ViewName: '',
     Lazy: false,
-    Key: null,
-    AddAllowed: false,
-    DeleteAllowed: false,
-    EditAllowed: false,
-    MoveAllowed: false,
-    LabelTooltip: null,
-    IsPersonalized: false,
-    WidgetSegmentId: null,
     Properties: {},
     Children: []
 };
 
-const requestContext = {
+const requestContext: RequestContext = {
     pageNode: {
-        '@odata.context': 'https://localhost:5001/api/default/$metadata#Telerik.Sitefinity.Renderer.Web.Services.Dto.PageDtoWithContext',
         Culture: 'en',
         SiteId: '4c922118-f076-4e24-9193-93e004f50107',
         MetadataHash: '-1129976431',
-        Id: '3b13e28b-21ee-44f4-8cd8-22eed0e84b00',
+        Id: '831706cd-10e1-4184-b2e5-ef9f9ad0fdb5',
         TemplateName: 'Default',
         Renderer: 'React',
         UrlParameters: [],
         HasVariations: false,
-        Site: [Object],
+        Site: {
+            Id: '4c922118-f076-4e24-9193-93e004f50107',
+            Name: 'Quantum International',
+            DefaultCulture: 'en',
+            Cultures: [Array],
+            TimeZone: 'UTC;0;UTC;UTC;UTC;;',
+            IsSubFolder: false
+        },
         User: null,
-        ComponentContext: [Object],
+        ComponentContext: {
+            HasLazyComponents: false,
+            OrphanedControls: [],
+            Components: [Array],
+            Fields: null,
+            Site: null,
+            User: null
+        },
         Scripts: [],
         DetailItem: null,
-        MetaInfo: [Object],
-        Fields: [Object]
+        MetaInfo: {
+            Title: 'integration-test',
+            Description: '',
+            HtmlInHeadTag: null,
+            OpenGraphTitle: 'integration-test',
+            OpenGraphDescription: '',
+            OpenGraphImage: null,
+            OpenGraphVideo: null,
+            OpenGraphType: null,
+            OpenGraphSite: null,
+            CanonicalUrl: 'https://localhost:5001/integration-test'
+        },
+        Fields: {
+            Title: 'integration-test',
+            UrlName: 'integration-test',
+            LastModified: '2023-11-13T13:13:09.183Z',
+            DateCreated: '2023-11-13T13:13:09.183Z',
+            Crawlable: true,
+            ParentId: 'f669d9a7-009d-4d83-ddaa-000000000002',
+            RootId: 'f669d9a7-009d-4d83-ddaa-000000000002',
+            IsHomePage: false,
+            'AvailableLanguages@odata.type': '#Collection(String)',
+            AvailableLanguages: [Array],
+            ViewUrl: '/integration-test'
+        }
     },
     searchParams: {
         sf_site: '4c922118-f076-4e24-9193-93e004f50107',
@@ -73,5 +102,6 @@ const requestContext = {
     detailItem: null,
     culture: 'en',
     isEdit: true,
-    isPreview: false
+    isPreview: false,
+    isLive: false
 };
