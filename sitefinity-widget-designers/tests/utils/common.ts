@@ -99,6 +99,11 @@ function verifyProperty(actual: PropertyModel, expected: PropertyModel) {
 }
 
 function verifyJsonProperty(propName: string, actual: string | object, expected: string | object) {
+    if (expected == null || actual == null) {
+        expect(`${propName} -> ${actual}`).toBe(`${propName} -> ${expected}`);
+        return;
+    }
+
     const expectedParsed = typeof(expected) === 'string' ? JSON.parse(expected) : expected;
     const actualParsed = typeof(actual) === 'string' ? JSON.parse(actual) : actual;
 
