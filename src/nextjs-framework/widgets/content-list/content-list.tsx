@@ -17,20 +17,6 @@ export async function ContentList(props: WidgetContext<ContentListEntity>) {
         attributes
     };
 
-    properties.DetailPageMode = properties.DetailPageMode || 'SamePage';
-    properties.ContentViewDisplayMode = properties.ContentViewDisplayMode || 'Automatic';
-    properties.Attributes = properties.Attributes || {};
-    properties.CssClasses = properties.CssClasses || [];
-    properties.ListFieldMapping = properties.ListFieldMapping || [];
-    properties.OrderBy = properties.OrderBy || 'PublicationDate DESC';
-    properties.ListSettings = properties.ListSettings || {};
-    properties.ListSettings.DisplayMode = properties.ListSettings.DisplayMode || 'All';
-    properties.ListSettings.ItemsPerPage = properties.ListSettings.ItemsPerPage || 20;
-    properties.ListSettings.LimitItemsCount = properties.ListSettings.LimitItemsCount || 20;
-    properties.SelectExpression = properties.SelectExpression || '*';
-    properties.SelectionGroupLogicalOperator = properties.SelectionGroupLogicalOperator || 'AND';
-    properties.SfViewName = properties.SfViewName || 'CardsList';
-
     if (properties.ContentViewDisplayMode === 'Automatic') {
         if (props.requestContext.detailItem) {
             data.detailModel = await handleDetailView(props.requestContext.detailItem, props);
@@ -99,7 +85,7 @@ function handleDetailView(detailItem: DetailItem, props: WidgetContext<ContentLi
 
 function handleListView(props: WidgetContext<ContentListEntity>) {
     const listFieldMapping: {[key: string]: string} = {};
-    props.model.Properties.ListFieldMapping.forEach((entry) => {
+    props.model.Properties.ListFieldMapping?.forEach((entry) => {
         listFieldMapping[entry.FriendlyName!] = entry.Name!;
     });
 
