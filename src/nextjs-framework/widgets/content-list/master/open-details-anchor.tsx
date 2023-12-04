@@ -18,7 +18,7 @@ export function OpenDetailsAnchor(props: {
     const entity = props.entity;
 
     const onDetailsOpen = ((sdkItem: any) => {
-        const selectedContent = entity!.SelectedItems.Content[0];
+        const selectedContent = entity!.SelectedItems!.Content[0];
         const detailItem: DetailItem = {
             Id: sdkItem.Id,
             ProviderName: sdkItem.Provider,
