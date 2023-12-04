@@ -1,6 +1,6 @@
 
 import { SdkItem, RestService } from '../../rest-sdk';
-import { ClassificationEntity } from './classification';
+import { ClassificationEntity } from './classification-entity';
 
 export class ClassificationRestService {
 
@@ -22,7 +22,7 @@ export class ClassificationRestService {
                 '$orderby': orderBy,
                 '@param': `[${(settings.selectedTaxaIds || []).map(x => `'${x}'`).toString()}]`
             };
-            const taxonomyUrl = settings.selectedTaxonomyUrl;
+            const taxonomyUrl = settings.selectedTaxonomyUrl!;
             const contentText = `taxonomyId=${settings.selectedTaxonomyId},selectedTaxaIds=@param,selectionMode='${settings.selectionMode}',contentType='${settings.byContentType}'`;
             const action = 'Default.GetTaxons';
             return RestService.getCustomItems(taxonomyUrl, action, additionalParams, contentText);
