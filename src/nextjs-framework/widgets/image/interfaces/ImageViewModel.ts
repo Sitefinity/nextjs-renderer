@@ -1,5 +1,6 @@
 
 import { LinkModel } from '../../../editor';
+import { ThumbnailItem } from '../../../rest-sdk';
 import { ImageClickAction } from './ImageClickAction';
 import { ImageDisplayMode } from './ImageDisplayMode';
 
@@ -12,7 +13,7 @@ export interface ImageViewModel
         ActionLink?: LinkModel;
         ImageSize?: ImageDisplayMode;
         FitToContainer: boolean;
-        Thumbnails: any[];
+        Thumbnails: ThumbnailItem[];
         ViewName?: string;
         Width: number;
         Height: number;

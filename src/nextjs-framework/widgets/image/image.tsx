@@ -5,7 +5,7 @@ import { ImageTag } from './image-tag';
 import { ImageClickAction } from './interfaces/ImageClickAction';
 import { ImageDisplayMode } from './interfaces/ImageDisplayMode';
 import { WidgetContext, htmlAttributes, classNames, generateAnchorAttrsFromLink, LinkModel } from '../../editor';
-import { RestService, RestSdkTypes } from '../../rest-sdk';
+import { RestService, RestSdkTypes, ThumbnailItem, SdkItem, ImageItem } from '../../rest-sdk';
 
 const imageWrapperClass = 'd-inline-block';
 
@@ -47,9 +47,9 @@ export async function Image(props: WidgetContext<ImageEntity>) {
     let selectedImageUrl =  imageItem.Url;
 
     if (imageItem.Thumbnails) {
-        thumbnails = imageItem.Thumbnails.sort((a: any,b: any) => a.Width - b.Width);
+        thumbnails = imageItem.Thumbnails.sort((a: ThumbnailItem,b: ThumbnailItem) => a.Width - b.Width);
         if (entity.ImageSize === ImageDisplayMode.Thumbnail && imageItem.Thumnail) {
-            let selectedThumbnail = thumbnails.find((t: any) => t.Title === entity.Thumnail.Name);
+            let selectedThumbnail = thumbnails.find((t: ThumbnailItem) => t.Title === entity.Thumnail!.Name);
             selectedImageUrl = imageItem.Thumnail.Url;
 
             if (selectedThumbnail) {
@@ -83,7 +83,7 @@ export async function Image(props: WidgetContext<ImageEntity>) {
     };
 
     return  entity.ClickAction === ImageClickAction.OpenOriginalSize
-                ? <a href={entity.Item.Url}
+                ? <a href={entity.Item!.Url}
                     {...dataAttributes}>
                   {<ImageTag imageModel={imageModel} />}
                 </a>
@@ -97,7 +97,7 @@ export async function Image(props: WidgetContext<ImageEntity>) {
 }
 
 export interface ImageEntity {
-    Item?: any;
+    Item?: ImageItem;
     Attributes?: { [key: string]: Array<{ Key: string, Value: string}> };
     Margins?: OffsetStyle;
     Title?: string;
@@ -107,7 +107,7 @@ export interface ImageEntity {
     ActionLink?: LinkModel;
     ImageSize?: ImageDisplayMode;
     FitToContainer: boolean;
-    CustomSize?: any;
-    Thumnail?: any;
+    CustomSize?: { Width: number, Height: number};
+    Thumnail?: ThumbnailItem;
     ViewName?: string;
 }

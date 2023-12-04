@@ -2,7 +2,7 @@ export interface ThumbnailItem {
     Name: string;
     Title: string;
     Url: string;
-    Widgth: number;
+    Width: number;
     Height: number;
     MimeType: string;
 }

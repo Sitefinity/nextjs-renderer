@@ -1,10 +1,11 @@
 import { getExtension, getFileExtensionCssClass, getFileSize } from './common/utils';
 import { DocumentListEntity } from './document-list-entity';
+import { DocumentListViewModel } from './interfaces/DocumentListViewModel';
 
-export function DetailsItem(props: { entity: DocumentListEntity, viewModel: any}) {
+export function DetailsItem(props: { entity: DocumentListEntity, viewModel: DocumentListViewModel }) {
     const { viewModel } = props;
     const detailModel = viewModel.detailModel;
-    const entity = detailModel.item;
+    const entity = detailModel!.item;
     const title = entity['Title'];
     const author = entity['Author'];
     const publicationDate = entity['PublicationDate'] ? new Date(entity['PublicationDate']) : '';
