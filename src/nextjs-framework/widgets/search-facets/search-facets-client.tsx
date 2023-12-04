@@ -26,7 +26,9 @@ interface AppliedFilterObject {
 export function SearchFacetsClient(props: any) {
     const { viewModel, searchParams } = props;
     const filterQuery = searchParams[FILTER_QUERY_PARAM];
-    const inputRefs: {[key: string]: HTMLInputElement} = {};
+    const inputRefs = React.useMemo((): {[key: string]: HTMLInputElement} =>{
+        return {};
+    },[]);
     const [checkedInputs, setCheckedInputs] =  React.useState< {[key: string]:  string} >({});
     const groupUlRefs: {[key: string]: HTMLUListElement} = {};
     const appliedFiltersRef = React.useRef<HTMLUListElement>(null);

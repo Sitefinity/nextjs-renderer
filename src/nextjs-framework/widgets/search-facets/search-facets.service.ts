@@ -1,6 +1,7 @@
 import { FacetsViewModelDto } from './interfaces/FacetsViewModelDto';
 import { FacetFlatResponseDto } from './interfaces/FacetFlatResponseDto';
 import { RestService } from '../../rest-sdk';
+import { Facet } from './interfaces/Facet';
 
 export class SearchFacetsService {
 
@@ -9,7 +10,7 @@ export class SearchFacetsService {
             Name: `Default.GetFacetableFields(indexCatalogName='${indexCatalogue}')`
         };
 
-        const response: {value: any} = await RestService.getUnboundType(argsLocal);
+        const response: {value: Promise<FacetsViewModelDto[]> } = await RestService.getUnboundType(argsLocal);
         return response.value;
     }
 
@@ -20,7 +21,7 @@ export class SearchFacetsService {
         filter: string,
         resultsForAllSites: string,
         searchFields: string,
-        facets: any): Promise<FacetFlatResponseDto> {
+        facets: Facet[]): Promise<FacetFlatResponseDto> {
 
         const facetsStr = JSON.stringify(facets);
         const argsLocal = {
@@ -36,7 +37,7 @@ export class SearchFacetsService {
             }
         };
 
-        const response: {value: any} = await RestService.getUnboundType(argsLocal);
+        const response: {value: Promise<FacetFlatResponseDto>} = await RestService.getUnboundType(argsLocal);
 
         return response.value;
     }

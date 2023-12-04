@@ -2,11 +2,14 @@ import { SearchResultsEntity } from './search-results';
 import { SearchResultsSorting } from './interfaces/SearchResultsSorting';
 import { ListDisplayMode } from '../../editor/widget-framework/list-display-mode';
 import { RestService } from '../../rest-sdk';
+import { SearchResultDocumentDto } from './interfaces/SearchResultDocumentDto';
 
 export class SearchResultsService {
 
-    static async performSearch(entity: SearchResultsEntity, searchParamsModel: any): Promise<{TotalCount:number, SearchResults: any[]}> {
-            let orderByClause: string = searchParamsModel.orderBy ? searchParamsModel.orderBy : entity.Sorting;
+    static async performSearch(entity: SearchResultsEntity, searchParamsModel: {
+        [key: string]: string;
+    }): Promise<{TotalCount:number, SearchResults: SearchResultDocumentDto[]}> {
+            let orderByClause = searchParamsModel.orderBy ? searchParamsModel.orderBy : entity.Sorting;
 
             if (orderByClause === SearchResultsSorting.NewestFirst) {
                 orderByClause = 'PublicationDate desc';

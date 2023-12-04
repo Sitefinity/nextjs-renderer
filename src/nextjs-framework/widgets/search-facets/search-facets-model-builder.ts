@@ -13,13 +13,13 @@ export  class SearchFacetsModelBuilder {
        facets: {[key: string]: FacetResponseDto[]},
        facetableFieldsKeysFromIndex: string[],
        sortType: string
-    ): any[]{
-        let searchFacets: any[] = [];
+    ): SearchFacets[]{
+        let searchFacets: SearchFacets[] = [];
         if (facetableFieldsKeysFromIndex.length) {
             const filteredFacetsWidgetDEfinition = facetsWidgetDefinition
             .filter(f => facetableFieldsKeysFromIndex.includes(f.FacetableFieldNames[0]));
 
-            const sourceGroups: any= filteredFacetsWidgetDEfinition.reduce((group: any, contentVariation: FacetField) => {
+            const sourceGroups: {[key: string]: FacetField [] }= filteredFacetsWidgetDEfinition.reduce((group: {[key: string]: FacetField [] }, contentVariation: FacetField) => {
                 const { FacetableFieldNames } = contentVariation;
                     group[FacetableFieldNames[0]] = group[FacetableFieldNames[0]] ?? [];
                     group[FacetableFieldNames[0]].push(contentVariation);
@@ -28,7 +28,7 @@ export  class SearchFacetsModelBuilder {
 
             const widgetFacetableFields = Object.fromEntries(
                 Object.values(sourceGroups)
-                    .map((e: unknown) => (e as any[])[(e as any[]).length - 1])
+                    .map((e: FacetField [] ) => (e )[e.length - 1])
                     .map((p: FacetField) => [p.FacetableFieldNames[0], p])
                 );
 
