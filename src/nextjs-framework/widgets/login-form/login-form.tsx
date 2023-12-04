@@ -161,7 +161,7 @@ export async function LoginForm(props: WidgetContext<LoginFormEntity>) {
 }
 
 export class LoginFormEntity {
-    Attributes?: any[];
+    Attributes?: { [key: string]: Array<{ Key: string, Value: string}> };
     CssClass?: string;
     Margins?: OffsetStyle;
     PostLoginAction?: PostLoginAction;

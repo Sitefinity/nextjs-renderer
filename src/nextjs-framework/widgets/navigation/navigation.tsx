@@ -48,7 +48,7 @@ export class NavigationEntity {
     SfViewName?: string;
     LevelsToInclude?: number;
     ShowParentPage?: boolean;
-    Attributes?: any[];
+    Attributes?: { [key: string]: Array<{ Key: string, Value: string}> };
     WrapperCssClass?: string;
     Margins?: OffsetStyle;
 }

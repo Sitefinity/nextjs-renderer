@@ -218,7 +218,7 @@ export async function Registration(props: WidgetContext<RegistrationEntity>) {
 }
 
 export class RegistrationEntity {
-    Attributes?: any[];
+    Attributes?: { [key: string]: Array<{ Key: string, Value: string}> };
     CssClass?: string;
     MarginStyle?: OffsetStyle;
     PostRegistrationAction?: PostRegistrationAction;

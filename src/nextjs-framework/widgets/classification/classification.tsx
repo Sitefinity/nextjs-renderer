@@ -133,5 +133,5 @@ export class ClassificationEntity {
     ShowEmpty?: boolean;
     SfViewName?: string;
     SortExpression?: string;
-    Attributes?: any[];
+    Attributes?: { [key: string]: Array<{ Key: string, Value: string}> };
 }

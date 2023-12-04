@@ -98,7 +98,7 @@ export async function Image(props: WidgetContext<ImageEntity>) {
 
 export interface ImageEntity {
     Item?: any;
-    Attributes?: any[];
+    Attributes?: { [key: string]: Array<{ Key: string, Value: string}> };
     Margins?: OffsetStyle;
     Title?: string;
     AlternativeText?: string;

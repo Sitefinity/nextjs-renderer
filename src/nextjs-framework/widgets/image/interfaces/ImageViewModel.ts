@@ -16,5 +16,5 @@ export interface ImageViewModel
         ViewName?: string;
         Width: number;
         Height: number;
-        Attributes?: any[];
+        Attributes?: { [key: string]: Array<{ Key: string, Value: string}> };
     }

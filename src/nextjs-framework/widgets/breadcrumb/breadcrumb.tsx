@@ -43,7 +43,7 @@ export async function Breadcrumb(props: WidgetContext<BreadcrumbEntity>) {
         <nav aria-label="Full path to the current page">
           <ol className="breadcrumb">
             {
-                        items.value.map((node: any, idx: number) => {
+                        items.value.map((node: { Title: string, ViewUrl: string }, idx: number) => {
                             if (idx === items.value.length - 1) {
                                 return  <li key={idx} className="breadcrumb-item active" aria-current="page">{node.Title}</li>;
                             }
@@ -71,5 +71,5 @@ export class BreadcrumbEntity {
     IncludeGroupPages?: boolean;
     AllowVirtualNodes?: boolean;
     SfViewName?: string;
-    Attributes?: any[];
+    Attributes?: { [key: string]: Array<{ Key: string, Value: string}> };
 }

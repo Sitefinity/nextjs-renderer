@@ -117,7 +117,7 @@ export async function ChangePassword(props: WidgetContext<ChangePasswordEntity>)
 }
 
 export class ChangePasswordEntity {
-    Attributes?: any[];
+    Attributes?: { [key: string]: Array<{ Key: string, Value: string}> };
     CssClass?: string;
     Margins?: OffsetStyle;
     PostPasswordChangeAction?: PostPasswordChangeAction;
