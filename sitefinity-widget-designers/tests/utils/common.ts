@@ -73,16 +73,20 @@ function verifyProperty(actual: PropertyModel, expected: PropertyModel) {
     // eslint-disable-next-line guard-for-in
     for (const key in expected.Properties) {
             let element = expected.Properties[key];
+            let actualElement = actual.Properties[key];
+
             switch (key) {
                 case 'Meta_LengthDependsOn_ExtraRecords':
                 case 'Meta_ViewMetaData':
                     element = JSON.stringify(JSON.parse(element));
                 break;
+                case 'Meta_Choices':
+                    element = JSON.stringify(JSON.parse(element));
+                    actualElement = JSON.stringify(JSON.parse(actualElement));
+                break;
                 default: break;
             }
 
-
-            const actualElement = actual.Properties[key];
             expect(`${actual.Name}:${key} -> ${actualElement}`).toBe(`${expected.Name}:${key} -> ${element}`);
     }
 
