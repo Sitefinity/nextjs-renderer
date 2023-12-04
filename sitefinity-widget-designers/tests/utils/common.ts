@@ -104,7 +104,7 @@ function verifyJsonProperty(propName: string, actual: string | object, expected:
     const expectedKeys = Object.keys(expectedParsed);
     const actualKeys = Object.keys(actualParsed);
 
-    expect(`${propName} keys: ${actualKeys.join(', ')}`).toBe(`${propName} keys: ${expectedKeys.join(', ')}`);
+    expect(`${propName} keys: ${actualKeys.sort().join(', ')}`).toBe(`${propName} keys: ${expectedKeys.sort().join(', ')}`);
 
     expectedKeys.forEach(key => {
         const actualValue = actualParsed[key];
