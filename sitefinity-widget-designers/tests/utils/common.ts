@@ -72,22 +72,19 @@ function verifyProperty(actual: PropertyModel, expected: PropertyModel) {
     expect(`${actual.Name} ${actualPropertyKeys}`).toBe(`${expected.Name} ${expectedPropertyKeys}`);
     // eslint-disable-next-line guard-for-in
     for (const key in expected.Properties) {
-            let element = expected.Properties[key];
+            let expectedElement = expected.Properties[key];
             let actualElement = actual.Properties[key];
 
             switch (key) {
                 case 'Meta_LengthDependsOn_ExtraRecords':
                 case 'Meta_ViewMetaData':
-                    element = JSON.stringify(JSON.parse(element));
-                break;
                 case 'Meta_Choices':
-                    element = JSON.stringify(JSON.parse(element));
-                    actualElement = JSON.stringify(JSON.parse(actualElement));
+                    verifyJsonProperty(actual.Name, actualElement, expectedElement);
                 break;
-                default: break;
+                default:
+                    expect(`${actual.Name}:${key} -> ${actualElement}`).toBe(`${expected.Name}:${key} -> ${expectedElement}`);
+                break;
             }
-
-            expect(`${actual.Name}:${key} -> ${actualElement}`).toBe(`${expected.Name}:${key} -> ${element}`);
     }
 
     // verify typechildproperties
@@ -97,5 +94,25 @@ function verifyProperty(actual: PropertyModel, expected: PropertyModel) {
     actual.TypeChildProperties.forEach(typeChildProp => {
         const expectedProperty = expected.TypeChildProperties.find(x => x.Name === typeChildProp.Name);
         verifyProperty(typeChildProp, expectedProperty!);
+    });
+}
+
+function verifyJsonProperty(propName: string, expected: string, actual: string) {
+    const expectedParsed = JSON.parse(expected);
+    const actualParsed = JSON.parse(actual);
+
+    const expectedKeys = Object.keys(expectedParsed);
+    const actualKeys = Object.keys(actualParsed);
+
+    expect(`${propName} keys: ${actualKeys.join(', ')}`).toBe(`${propName} keys: ${expectedKeys.join(', ')}`);
+
+    expectedKeys.forEach(key => {
+        let actualValue = actualParsed[key];
+        let expectedValue = expectedParsed[key];
+        if (typeof(expectedValue) === 'object') {
+            actualValue = JSON.stringify(actualValue);
+            expectedValue = JSON.stringify(expectedValue);
+        }
+        expect(`${propName}.${key} -> ${actualValue}`).toBe(`${propName}.${key} -> ${expectedValue}`);
     });
 }
