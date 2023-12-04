@@ -59,7 +59,7 @@ export class ContentListRestService {
     private static getSkipAndTake(entity: ContentListEntity, pageNumber: number): { Skip?: number, Take?: number, Count?: boolean, ShowPager?: boolean } {
         let retVal: { Skip?: number, Take?: number, ShowPager?: boolean, Count?: boolean } | null = {};
         let currentPage = 1;
-        switch (entity.ListSettings.DisplayMode) {
+        switch (entity.ListSettings?.DisplayMode) {
             case 'Paging':
                 retVal.ShowPager = true;
                 retVal.Take = entity.ListSettings.ItemsPerPage;
