@@ -97,9 +97,9 @@ function verifyProperty(actual: PropertyModel, expected: PropertyModel) {
     });
 }
 
-function verifyJsonProperty(propName: string, expected: string, actual: string) {
-    const expectedParsed = JSON.parse(expected);
-    const actualParsed = JSON.parse(actual);
+function verifyJsonProperty(propName: string, actual: string | object, expected: string | object) {
+    const expectedParsed = typeof(expected) === 'string' ? JSON.parse(expected) : expected;
+    const actualParsed = typeof(actual) === 'string' ? JSON.parse(actual) : actual;
 
     const expectedKeys = Object.keys(expectedParsed);
     const actualKeys = Object.keys(actualParsed);
@@ -107,12 +107,12 @@ function verifyJsonProperty(propName: string, expected: string, actual: string) 
     expect(`${propName} keys: ${actualKeys.join(', ')}`).toBe(`${propName} keys: ${expectedKeys.join(', ')}`);
 
     expectedKeys.forEach(key => {
-        let actualValue = actualParsed[key];
-        let expectedValue = expectedParsed[key];
-        if (typeof(expectedValue) === 'object') {
-            actualValue = JSON.stringify(actualValue);
-            expectedValue = JSON.stringify(expectedValue);
+        const actualValue = actualParsed[key];
+        const expectedValue = expectedParsed[key];
+        if (expectedValue != null && typeof(expectedValue) === 'object') {
+            verifyJsonProperty(`${propName}.${key}`, actualValue, expectedValue);
+        } else {
+            expect(`${propName}.${key} -> ${actualValue}`).toBe(`${propName}.${key} -> ${expectedValue}`);
         }
-        expect(`${propName}.${key} -> ${actualValue}`).toBe(`${propName}.${key} -> ${expectedValue}`);
     });
 }
