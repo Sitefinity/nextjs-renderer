@@ -79,6 +79,7 @@ function verifyProperty(actual: PropertyModel, expected: PropertyModel) {
                 case 'Meta_LengthDependsOn_ExtraRecords':
                 case 'Meta_ViewMetaData':
                 case 'Meta_Choices':
+                case 'Meta_Choice_Choices':
                     verifyJsonProperty(actual.Name, actualElement, expectedElement);
                 break;
                 default:
