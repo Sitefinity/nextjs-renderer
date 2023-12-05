@@ -26,6 +26,32 @@ export class RestService {
         return this.sendRequest({ url: wholeUrl, headers });
     }
 
+    public static getBoundType<T>(args: {
+        Name: string,
+        Type: string,
+        BaseURL?: string,
+        Id?: string,
+        Data?: object,
+        AdditionalQueryParams?: {
+            [key: string]: string | undefined;
+        },
+        AdditionalHeaders?: {
+            [key: string]: string;
+        }
+    }): Promise<T> {
+        const headers = args.AdditionalHeaders || {};
+        const queryParams = args.AdditionalQueryParams || {};
+        let path = `${args.Type}/${args.Name}`;
+
+        if (args.Id) {
+            path = `${args.Type}(${args.Id})/${args.Name}`;
+        }
+        const baseURL = args.BaseURL || RestService.buildItemBaseUrl(path);
+        const wholeUrl = `${baseURL}${RestService.buildQueryParams(queryParams)}`;
+
+        return this.sendRequest({ url: wholeUrl, headers });
+    }
+
     public static getItemWithFallback<T extends SdkItem>(itemType: string, id: string, provider: string): Promise<T> {
         const wholeUrl = `${RestService.buildItemBaseUrl(itemType)}(${id})/Default.GetItemWithFallback()${RestService.buildQueryParams({
             sf_provider: provider,
@@ -264,6 +290,7 @@ export class RestSdkTypes {
     public static readonly News: string = 'Telerik.Sitefinity.News.Model.NewsItem';
     public static readonly GenericContent: string = 'Telerik.Sitefinity.GenericContent.Model.ContentItem';
     public static readonly Pages: string = 'Telerik.Sitefinity.Pages.Model.PageNode';
+    public static readonly Form: string = 'Telerik.Sitefinity.Forms.Model.FormDescription';
 }
 
 interface RequestData {
