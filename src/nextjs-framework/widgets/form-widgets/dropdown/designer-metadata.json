@@ -1,0 +1,202 @@
+{
+    "Name": "SitefinityDropdown",
+    "Caption": "Dropdown",
+    "PropertyMetadata": [
+        {
+            "Name": "Basic",
+            "Sections": [
+                {
+                    "Name": "Labels and content",
+                    "Title": "Labels and content",
+                    "Properties": [
+                        {
+                            "Name": "Label",
+                            "DefaultValue": "Untitled",
+                            "Title": "Label",
+                            "Type": "string",
+                            "SectionName": "Labels and content",
+                            "CategoryName": null,
+                            "Properties": {},
+                            "TypeChildProperties": [],
+                            "Position": 1
+                        },
+                        {
+                            "Name": "InstructionalText",
+                            "DefaultValue": null,
+                            "Title": "Instructional text",
+                            "Type": "string",
+                            "SectionName": "Labels and content",
+                            "CategoryName": null,
+                            "Properties": {
+                                "Meta_Description_Description": "Suitable for giving examples how the entered value will be used."
+                            },
+                            "TypeChildProperties": [],
+                            "Position": 2
+                        },
+                        {
+                            "Name": "Choices",
+                            "DefaultValue": null,
+                            "Title": "Choices",
+                            "Type": "enumerable",
+                            "SectionName": "Labels and content",
+                            "CategoryName": null,
+                            "Properties": {
+                                "Meta_TableView_ColumnTitle": null,
+                                "Meta_TableView_Enabled": "True",
+                                "Meta_TableView_Reorderable": "True",
+                                "Meta_TableView_Selectable": "True",
+                                "Meta_TableView_MultipleSelect": "False",
+                                "Meta_TableView_AllowEmptyState": "False",
+                                "Meta_TableView_PredefinedLists": "{\n    \u0022Week days\u0022: [\n        \u0022Monday\u0022,\n        \u0022Tuesday\u0022,\n        \u0022Wednesday\u0022,\n        \u0022Thursday\u0022,\n        \u0022Friday\u0022,\n        \u0022Saturday\u0022,\n        \u0022Sunday\u0022\n    ],\n    \u0022Months\u0022: [\n        \u0022January\u0022,\n        \u0022February\u0022,\n        \u0022March\u0022,\n        \u0022April\u0022,\n        \u0022May\u0022,\n        \u0022June\u0022,\n        \u0022July\u0022,\n        \u0022August\u0022,\n        \u0022September\u0022,\n        \u0022October\u0022,\n        \u0022November\u0022,\n        \u0022December\u0022\n    ],\n    \u0022Timezones\u0022: [\n        \u0022(-12:00) International Date Line\u0022,\n        \u0022(-11:00) Midway Island, Samoa\u0022,\n        \u0022(-10:00) Hawaii\u0022,\n        \u0022(-9:00) Alaska\u0022,\n        \u0022(-8:00) Pacific\u0022,\n        \u0022(-7:00) Mountain\u0022,\n        \u0022(-6:00) Central\u0022,\n        \u0022(-5:00) Eastern\u0022,\n        \u0022(-4:30) Venezuela\u0022,\n        \u0022(-4:00) Atlantic\u0022,\n        \u0022(-3:30) Newfoundland\u0022,\n        \u0022(-3:00) Brasilia, Buenos Aires, Georgetown\u0022,\n        \u0022(-2:00) Mid-Atlantic\u0022,\n        \u0022(-1:00) Azores, Cape Verde Isles\u0022,\n        \u0022(0:00) Dublin, London, Monrovia, Casablanca\u0022,\n        \u0022(\u002B1:00) Paris, Madrid, Athens, Berlin, Rome\u0022,\n        \u0022(\u002B2:00) Eastern Europe, Harare, Pretoria, Israel\u0022,\n        \u0022(\u002B3:00) Moscow, Baghdad, Kuwait, Nairobi\u0022,\n        \u0022(\u002B3:30) Tehran\u0022,\n        \u0022(\u002B4:00) Abu Dhabi, Muscat, Tbilisi, Kazan\u0022,\n        \u0022(\u002B4:30) Kabul\u0022,\n        \u0022(\u002B5:00) Islamabad, Karachi, Ekaterinburg\u0022,\n        \u0022(\u002B5:30) Bombay, Calcutta, Madras, New Delhi\u0022,\n        \u0022(\u002B6:00) Almaty, Dhaka\u0022,\n        \u0022(\u002B7:00) Bangkok, Jakarta, Hanoi\u0022,\n        \u0022(\u002B8:00) Beijing, Hong Kong, Perth, Singapore\u0022,\n        \u0022(\u002B9:00) Tokyo, Osaka, Sapporo, Seoul, Yakutsk\u0022,\n        \u0022(\u002B9:30) Adelaide, Darwin\u0022,\n        \u0022(\u002B10:00) Sydney, Guam, Port Moresby, Vladivostok\u0022,\n        \u0022(\u002B11:00) Magadan, Solomon Isles, New Caledonia\u0022,\n        \u0022(\u002B12:00) Fiji, Marshall Isles, Wellington, Auckland\u0022\n    ],\n    \u0022Continets\u0022: [\n        \u0022Africa\u0022,\n        \u0022Antarctica\u0022,\n        \u0022Asia\u0022,\n        \u0022Australia\u0022,\n        \u0022Europe\u0022,\n        \u0022North America\u0022,\n        \u0022South America\u0022\n    ],\n    \u0022Countries\u0022: [\n        \u0022Afghanistan\u0022,\n        \u0022Albania\u0022,\n        \u0022Algeria\u0022,\n        \u0022Andorra\u0022,\n        \u0022Angola\u0022,\n        \u0022Antigua and Barbuda\u0022,\n        \u0022Argentina\u0022,\n        \u0022Armenia\u0022,\n        \u0022Australia\u0022,\n        \u0022Austria\u0022,\n        \u0022Azerbaijan\u0022,\n        \u0022Bahamas\u0022,\n        \u0022Bahrain\u0022,\n        \u0022Bangladesh\u0022,\n        \u0022Barbados\u0022,\n        \u0022Belarus\u0022,\n        \u0022Belgium\u0022,\n        \u0022Belize\u0022,\n        \u0022Benin\u0022,\n        \u0022Bhutan\u0022,\n        \u0022Bolivia\u0022,\n        \u0022Bosnia and Herzegovina\u0022,\n        \u0022Botswana\u0022,\n        \u0022Brazil\u0022,\n        \u0022Brunei\u0022,\n        \u0022Bulgaria\u0022,\n        \u0022Burkina Faso\u0022,\n        \u0022Burma\u0022,\n        \u0022Burundi\u0022,\n        \u0022Cambodia\u0022,\n        \u0022Cameroon\u0022,\n        \u0022Canada\u0022,\n        \u0022Cape Verde\u0022,\n        \u0022Central African Republic\u0022,\n        \u0022Chad\u0022,\n        \u0022Chile\u0022,\n        \u0022China\u0022,\n        \u0022Colombia\u0022,\n        \u0022Comoros\u0022,\n        \u0022Congo\u0022,\n        \u0022Costa Rica\u0022,\n        \u0022C\u00F4te d\u0027Ivoire\u0022,\n        \u0022Croatia\u0022,\n        \u0022Cuba\u0022,\n        \u0022Cyprus\u0022,\n        \u0022Czech Republic\u0022,\n        \u0022Denmark\u0022,\n        \u0022Djibouti\u0022,\n        \u0022Dominica\u0022,\n        \u0022Dominican Republic\u0022,\n        \u0022East Timor\u0022,\n        \u0022Ecuador\u0022,\n        \u0022Egypt\u0022,\n        \u0022El Salvador\u0022,\n        \u0022Equatorial Guinea\u0022,\n        \u0022Eritrea\u0022,\n        \u0022Estonia\u0022,\n        \u0022Ethiopia\u0022,\n        \u0022Fiji\u0022,\n        \u0022Finland\u0022,\n        \u0022France\u0022,\n        \u0022Gabon\u0022,\n        \u0022Gambia\u0022,\n        \u0022Georgia\u0022,\n        \u0022Germany\u0022,\n        \u0022Ghana\u0022,\n        \u0022Greece\u0022,\n        \u0022Grenada\u0022,\n        \u0022Guatemala\u0022,\n        \u0022Guinea\u0022,\n        \u0022Guinea-Bissau\u0022,\n        \u0022Guyana\u0022,\n        \u0022Haiti\u0022,\n        \u0022Honduras\u0022,\n        \u0022Hungary\u0022,\n        \u0022Iceland\u0022,\n        \u0022India\u0022,\n        \u0022Indonesia\u0022,\n        \u0022Iran\u0022,\n        \u0022Iraq\u0022,\n        \u0022Ireland\u0022,\n        \u0022Israel\u0022,\n        \u0022Italy\u0022,\n        \u0022Jamaica\u0022,\n        \u0022Japan\u0022,\n        \u0022Jordan\u0022,\n        \u0022Kazakhstan\u0022,\n        \u0022Kenya\u0022,\n        \u0022Kiribati\u0022,\n        \u0022Korea, North\u0022,\n        \u0022Korea, South\u0022,\n        \u0022Kuwait\u0022,\n        \u0022Kyrgyzstan\u0022,\n        \u0022Laos\u0022,\n        \u0022Latvia\u0022,\n        \u0022Lebanon\u0022,\n        \u0022Lesotho\u0022,\n        \u0022Liberia\u0022,\n        \u0022Libya\u0022,\n        \u0022Liechtenstein\u0022,\n        \u0022Lithuania\u0022,\n        \u0022Luxembourg\u0022,\n        \u0022Macedonia\u0022,\n        \u0022Madagascar\u0022,\n        \u0022Malawi\u0022,\n        \u0022Malaysia\u0022,\n        \u0022Maldives\u0022,\n        \u0022Mali\u0022,\n        \u0022Malta\u0022,\n        \u0022Marshall Islands\u0022,\n        \u0022Mauritania\u0022,\n        \u0022Mauritius\u0022,\n        \u0022Mexico\u0022,\n        \u0022Micronesia\u0022,\n        \u0022Moldova\u0022,\n        \u0022Monaco\u0022,\n        \u0022Mongolia\u0022,\n        \u0022Montenegro\u0022,\n        \u0022Morocco\u0022,\n        \u0022Mozambique\u0022,\n        \u0022Myanmar\u0022,\n        \u0022Namibia\u0022,\n        \u0022Nauru\u0022,\n        \u0022Nepal\u0022,\n        \u0022Netherlands\u0022,\n        \u0022New Zealand\u0022,\n        \u0022Nicaragua\u0022,\n        \u0022Nigeria\u0022,\n        \u0022Northern Ireland\u0022,\n        \u0022Norway\u0022,\n        \u0022Oman\u0022,\n        \u0022Pakistan\u0022,\n        \u0022Palau\u0022,\n        \u0022Panama\u0022,\n        \u0022Papua New Guinea\u0022,\n        \u0022Paraguay\u0022,\n        \u0022Peru\u0022,\n        \u0022Philippines\u0022,\n        \u0022Poland\u0022,\n        \u0022Portugal\u0022,\n        \u0022Qatar\u0022,\n        \u0022Romania\u0022,\n        \u0022Russia\u0022,\n        \u0022Rwanda\u0022,\n        \u0022Samoa\u0022,\n        \u0022San Marino\u0022,\n        \u0022S\u00E3o Tom\u00E9 and Pr\u00EDncipe\u0022,\n        \u0022Saudi Arabia\u0022,\n        \u0022Senegal\u0022,\n        \u0022Serbia\u0022,\n        \u0022Seychelles\u0022,\n        \u0022Sierra Leone\u0022,\n        \u0022Singapore\u0022,\n        \u0022Slovakia\u0022,\n        \u0022Slovenia\u0022,\n        \u0022Solomon Islands\u0022,\n        \u0022Somalia\u0022,\n        \u0022South Africa\u0022,\n        \u0022Spain\u0022,\n        \u0022Sri Lanka\u0022,\n        \u0022St. Kitts and Nevis\u0022,\n        \u0022St. Lucia\u0022,\n        \u0022St. Vincent and the Grenadines\u0022,\n        \u0022Sudan\u0022,\n        \u0022Suriname\u0022,\n        \u0022Swaziland\u0022,\n        \u0022Sweden\u0022,\n        \u0022Switzerland\u0022,\n        \u0022Syria\u0022,\n        \u0022Taiwan\u0022,\n        \u0022Tajikistan\u0022,\n        \u0022Tanzania\u0022,\n        \u0022Thailand\u0022,\n        \u0022Togo\u0022,\n        \u0022Tonga\u0022,\n        \u0022Trinidad and Tobago\u0022,\n        \u0022Tunisia\u0022,\n        \u0022Turkey\u0022,\n        \u0022Turkmenistan\u0022,\n        \u0022Tuvalu\u0022,\n        \u0022Uganda\u0022,\n        \u0022Ukraine\u0022,\n        \u0022United Arab Emirates\u0022,\n        \u0022United Kingdom\u0022,\n        \u0022United States\u0022,\n        \u0022Uruguay\u0022,\n        \u0022Uzbekistan\u0022,\n        \u0022Vanuatu\u0022,\n        \u0022Vatican City\u0022,\n        \u0022Venezuela\u0022,\n        \u0022Vietnam\u0022,\n        \u0022Yemen\u0022,\n        \u0022Zaire\u0022,\n        \u0022Zambia\u0022,\n        \u0022Zimbabwe\u0022\n    ],\n    \u0022US states\u0022: [\n        \u0022Alabama\u0022,\n        \u0022Alaska\u0022,\n        \u0022Arizona\u0022,\n        \u0022Arkansas\u0022,\n        \u0022California\u0022,\n        \u0022Colorado\u0022,\n        \u0022Connecticut\u0022,\n        \u0022Delaware\u0022,\n        \u0022Florida\u0022,\n        \u0022Georgia\u0022,\n        \u0022Hawaii\u0022,\n        \u0022Idaho\u0022,\n        \u0022Illinois\u0022,\n        \u0022Indiana\u0022,\n        \u0022Iowa\u0022,\n        \u0022Kansas\u0022,\n        \u0022Kentucky\u0022,\n        \u0022Louisiana\u0022,\n        \u0022Maine\u0022,\n        \u0022Maryland\u0022,\n        \u0022Massachusetts\u0022,\n        \u0022Michigan\u0022,\n        \u0022Minnesota\u0022,\n        \u0022Mississippi\u0022,\n        \u0022Missouri\u0022,\n        \u0022Montana\u0022,\n        \u0022Nebraska\u0022,\n        \u0022Nevada\u0022,\n        \u0022New Hampshire\u0022,\n        \u0022New Jersey\u0022,\n        \u0022New Mexico\u0022,\n        \u0022New York\u0022,\n        \u0022North Carolina\u0022,\n        \u0022North Dakota\u0022,\n        \u0022Ohio\u0022,\n        \u0022Oklahoma\u0022,\n        \u0022Oregon\u0022,\n        \u0022Pennsylvania\u0022,\n        \u0022Rhode Island\u0022,\n        \u0022South Carolina\u0022,\n        \u0022South Dakota\u0022,\n        \u0022Tennessee\u0022,\n        \u0022Texas\u0022,\n        \u0022Utah\u0022,\n        \u0022Vermont\u0022,\n        \u0022Virginia\u0022,\n        \u0022Washington\u0022,\n        \u0022West Virginia\u0022,\n        \u0022Wisconsin\u0022,\n        \u0022Wyoming\u0022\n    ],\n    \u0022Canada provinces and territories\u0022: [\n        \u0022Alberta\u0022,\n        \u0022British Columbia\u0022,\n        \u0022Manitoba\u0022,\n        \u0022New Brunswick\u0022,\n        \u0022Newfoundland and Labrador\u0022,\n        \u0022Northwest Territories\u0022,\n        \u0022Nova Scotia\u0022,\n        \u0022Nunavut\u0022,\n        \u0022Ontario\u0022,\n        \u0022Prince Edward Island\u0022,\n        \u0022Quebec\u0022,\n        \u0022Saskatchewan\u0022,\n        \u0022Yukon\u0022\n    ]\n}\n"
+                            },
+                            "TypeChildProperties": [
+                                {
+                                    "Name": "Name",
+                                    "DefaultValue": null,
+                                    "Title": "Label",
+                                    "Type": "string",
+                                    "SectionName": null,
+                                    "CategoryName": null,
+                                    "Properties": {
+                                        "Meta_Placeholder_Text": "add label",
+                                        "Validations_Required": "True"
+                                    },
+                                    "TypeChildProperties": [],
+                                    "Position": 0
+                                },
+                                {
+                                    "Name": "Value",
+                                    "DefaultValue": null,
+                                    "Title": "Value",
+                                    "Type": "string",
+                                    "SectionName": null,
+                                    "CategoryName": null,
+                                    "Properties": {
+                                        "Meta_Placeholder_Text": "add value",
+                                        "Validations_Regex": "^[^,]\u002B$",
+                                        "Validations_RegexErrorMsg": "Commas are not allowed."
+                                    },
+                                    "TypeChildProperties": [],
+                                    "Position": 0
+                                }
+                            ],
+                            "Position": 3
+                        },
+                        {
+                            "Name": "Sorting",
+                            "DefaultValue": "Manual",
+                            "Title": "Sort choices",
+                            "Type": "choices",
+                            "SectionName": "Labels and content",
+                            "CategoryName": null,
+                            "Properties": {
+                                "Meta_Choices": "[{\u0022Title\u0022:\u0022As set manually\u0022,\u0022Name\u0022:\u0022Manual\u0022,\u0022Value\u0022:\u0022Manual\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Alphabetically\u0022,\u0022Name\u0022:\u0022Alphabetical\u0022,\u0022Value\u0022:\u0022Alphabetical\u0022,\u0022Icon\u0022:null}]",
+                                "Meta_Choices_AllowMultiple": "False"
+                            },
+                            "TypeChildProperties": [],
+                            "Position": 4
+                        },
+                        {
+                            "Name": "Required",
+                            "DefaultValue": "False",
+                            "Title": "Required field",
+                            "Type": "choiceYesNo",
+                            "SectionName": "Labels and content",
+                            "CategoryName": null,
+                            "Properties": {
+                                "Meta_Group_Name": "Options"
+                            },
+                            "TypeChildProperties": [],
+                            "Position": 5
+                        },
+                        {
+                            "Name": "Hidden",
+                            "DefaultValue": "False",
+                            "Title": "Hide field initially (use form rules to display it)",
+                            "Type": "choiceYesNo",
+                            "SectionName": "Labels and content",
+                            "CategoryName": null,
+                            "Properties": {
+                                "Meta_Group_Name": "Options"
+                            },
+                            "TypeChildProperties": [],
+                            "Position": 6
+                        },
+                        {
+                            "Name": "RequiredErrorMessage",
+                            "DefaultValue": "{0} field is required",
+                            "Title": "Error message if choice is not selected",
+                            "Type": "string",
+                            "SectionName": "Labels and content",
+                            "CategoryName": null,
+                            "Properties": {
+                                "Meta_ConditionalVisibility_Condition": "{\u0022conditions\u0022:[{\u0022fieldName\u0022:\u0022Required\u0022,\u0022operator\u0022:\u0022Equals\u0022,\u0022value\u0022:true}]}"
+                            },
+                            "TypeChildProperties": [],
+                            "Position": 7
+                        }
+                    ],
+                    "CategoryName": "Basic"
+                },
+                {
+                    "Name": "Display settings",
+                    "Title": "Display settings",
+                    "Properties": [
+                        {
+                            "Name": "SfViewName",
+                            "DefaultValue": "Default",
+                            "Title": "Template",
+                            "Type": "viewSelector",
+                            "SectionName": "Display settings",
+                            "CategoryName": null,
+                            "Properties": {
+                                "Meta_Choices": "[{\u0022Title\u0022:\u0022Default\u0022,\u0022Name\u0022:\u0022Default\u0022,\u0022Value\u0022:\u0022Default\u0022,\u0022Icon\u0022:null}]",
+                                "Meta_Choices_AllowMultiple": "False"
+                            },
+                            "TypeChildProperties": [],
+                            "Position": 1
+                        },
+                        {
+                            "Name": "FieldSize",
+                            "DefaultValue": "None",
+                            "Title": "Field size",
+                            "Type": "chipchoice",
+                            "SectionName": "Display settings",
+                            "CategoryName": null,
+                            "Properties": {
+                                "Meta_Choices": "[{\u0022Title\u0022:\u0022None\u0022,\u0022Name\u0022:\u0022None\u0022,\u0022Value\u0022:\u0022None\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Small\u0022,\u0022Name\u0022:\u0022S\u0022,\u0022Value\u0022:\u0022S\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Medium\u0022,\u0022Name\u0022:\u0022M\u0022,\u0022Value\u0022:\u0022M\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022Large\u0022,\u0022Name\u0022:\u0022L\u0022,\u0022Value\u0022:\u0022L\u0022,\u0022Icon\u0022:null}]",
+                                "Meta_Choices_AllowMultiple": "False"
+                            },
+                            "TypeChildProperties": [],
+                            "Position": 2
+                        }
+                    ],
+                    "CategoryName": "Basic"
+                }
+            ]
+        },
+        {
+            "Name": "Advanced",
+            "Sections": [
+                {
+                    "Name": "AdvancedMain",
+                    "Title": null,
+                    "Properties": [
+                        {
+                            "Name": "CssClass",
+                            "DefaultValue": null,
+                            "Title": "CSS class",
+                            "Type": "string",
+                            "SectionName": "AdvancedMain",
+                            "CategoryName": "Advanced",
+                            "Properties": {},
+                            "TypeChildProperties": [],
+                            "Position": 0
+                        }
+                    ],
+                    "CategoryName": "Advanced"
+                }
+            ]
+        }
+    ]
+}
