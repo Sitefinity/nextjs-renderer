@@ -19,7 +19,6 @@ export function ConditionalVisibility(condition: Rule | string) {
             condition = JSON.stringify(condition);
         }
 
-        WidgetMetadata.register(target);
         WidgetMetadata.registerPropertyMetadata(target, propName, keys.conditionalVisibility, { Condition: condition });
     });
 }

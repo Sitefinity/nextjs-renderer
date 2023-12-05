@@ -1,12 +1,6 @@
 import { keys } from '../symbols/known-keys';
 
 export class WidgetMetadata {
-    public static register (target: any) {
-        if (!Object.hasOwn(target, keys.metadata)) {
-            Object.defineProperty(target, keys.metadata, {enumerable: true, writable: true, value: {}});
-        }
-    }
-
     public static registerPrototype (target: any) {
         this.register(target.prototype);
     }
@@ -20,6 +14,7 @@ export class WidgetMetadata {
     }
 
     public static registerPropertyMetadata (target: any, propName: string, key: string, value: any, override = true) {
+        this.register(target);
         this.registerPropertyObject(target, propName);
 
         if (target[keys.metadata][propName][key] === undefined || override) {
@@ -29,6 +24,12 @@ export class WidgetMetadata {
 
     public static registerPrototypePropertyMetadata (target: any, propName: string, key: string, value: any, override = true) {
         this.registerPropertyMetadata(target.prototype, propName, key, value, override);
+    }
+
+    private static register (target: any) {
+        if (!Object.hasOwn(target, keys.metadata)) {
+            Object.defineProperty(target, keys.metadata, {enumerable: true, writable: true, value: {}});
+        }
     }
 
     private static registerPropertyObject (target: any, key: string) {

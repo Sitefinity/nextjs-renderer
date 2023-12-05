@@ -12,7 +12,6 @@ export function MediaItem(itemType: string, allowMultipleSelection: boolean, sta
             'Standalone': standalone
         };
 
-        WidgetMetadata.register(target);
         WidgetMetadata.registerPropertyMetadata(target, propName, keys.mediaItem, data);
     });
 }

@@ -4,7 +4,6 @@ import { PropertyDecoratorBase } from './common/property-decorator-wrapper';
 
 export function Placeholder(text: string) {
     return PropertyDecoratorBase((target: any, propName: string) => {
-        WidgetMetadata.register(target);
         WidgetMetadata.registerPropertyMetadata(target, propName, keys.placeholder, { Text: text });
     });
 }

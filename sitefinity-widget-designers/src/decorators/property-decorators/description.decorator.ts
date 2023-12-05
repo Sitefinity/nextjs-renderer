@@ -22,7 +22,6 @@ export function Description(description: string | RichDescription[], inlineDescr
             description = JSON.stringify(description);
         }
 
-        WidgetMetadata.register(target);
         WidgetMetadata.registerPropertyMetadata(target, propName, keys.description, data);
     });
 }

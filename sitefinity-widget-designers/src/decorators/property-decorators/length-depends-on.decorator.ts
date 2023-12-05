@@ -11,7 +11,6 @@ export function LengthDependsOn(propertyName: string, displayName: string, displ
             'DisplayTitle': displayTitle
         };
 
-        WidgetMetadata.register(target);
         WidgetMetadata.registerPropertyMetadata(target, propName, keys.lengthDependsOn, lengthDependsOn);
     });
 }

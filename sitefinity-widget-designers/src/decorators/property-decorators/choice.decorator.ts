@@ -63,7 +63,6 @@ export function Choices(args: unknown, allowMultiple: boolean = false) {
 
         const assignableKey = Array.isArray(args) ? keys.choices : keys.choice;
 
-        WidgetMetadata.register(target);
         WidgetMetadata.registerPropertyMetadata(target, propName, assignableKey, config);
     });
 }

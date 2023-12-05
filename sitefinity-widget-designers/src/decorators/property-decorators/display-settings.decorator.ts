@@ -14,7 +14,6 @@ export function DisplaySettings(hide?: boolean, hideContent?: boolean) {
     }
 
     return PropertyDecoratorBase((target: any, propName: string) => {
-        WidgetMetadata.register(target);
         WidgetMetadata.registerPropertyMetadata(target, propName, keys.displaySettings, data);
     });
 }

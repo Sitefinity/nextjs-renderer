@@ -19,7 +19,6 @@ export function Content(settings: ContentSettings = new ContentSettings()) {
     const contetSecttings = new ContentSettings();
 
     return PropertyDecoratorBase((target: any, propName: string) => {
-        WidgetMetadata.register(target);
         WidgetMetadata.registerPropertyMetadata(target, propName, keys.content, Object.assign(contetSecttings, settings));
         WidgetMetadata.registerPropertyMetadata(target, propName, keys.type, 'content');
     });

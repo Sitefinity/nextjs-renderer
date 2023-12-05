@@ -27,7 +27,6 @@ export function TableView(args: unknown, addManyFileName?: string) {
         }
     }
     return PropertyDecoratorBase((target: any, propName: string) => {
-        WidgetMetadata.register(target);
         WidgetMetadata.registerPropertyMetadata(target, propName, keys.tableView, config);
         DataType(KnownFieldTypes.Complex)(target, propName);
     });

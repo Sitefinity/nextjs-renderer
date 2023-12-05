@@ -33,7 +33,7 @@ export function Model() {
             let type: string = typeof(instance[p]);
             const value = instance[p];
             if (Array.isArray(value)) {
-                type = 'array';
+                type = 'enumerable';
             }
 
             if (metaDescriptor[p]?.value?.type === 'object') {

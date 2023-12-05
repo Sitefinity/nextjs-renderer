@@ -16,7 +16,6 @@ export function Margins() {
             'AllowEmptyState': false
         };
 
-        WidgetMetadata.register(target);
         WidgetMetadata.registerPropertyMetadata(target, propName, 'TableView', tableView);
 
         DataModel(MarginsProperties)(target, propName);

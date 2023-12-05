@@ -30,7 +30,6 @@ export function Attributes(widgetName: string, witgetTitle?: string, position? :
     };
 
     return PropertyDecoratorBase((target: any, propName: string) => {
-        WidgetMetadata.register(target);
         Category('Advanced')(target, propName);
         DefaultValue(null)(target, propName);
         DisplayName('Attributes for...')(target, propName);

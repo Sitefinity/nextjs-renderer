@@ -12,7 +12,6 @@ export function Required(errorMessage?: string) {
             required['RequiredErrorMsg'] = errorMessage;
         }
 
-        WidgetMetadata.register(target);
         WidgetMetadata.registerPropertyMetadata(target, propName, keys.validations, required);
     });
 }
@@ -23,7 +22,6 @@ export function Readonly() {
             'Readonly': true
         };
 
-        WidgetMetadata.register(target);
         WidgetMetadata.registerPropertyMetadata(target, propName, keys.validations, readonly);
     });
 }
@@ -39,7 +37,6 @@ export function Range(min: number, max: number, errorMessage?: string) {
             range['RangeErrorMsg'] = errorMessage;
         }
 
-        WidgetMetadata.register(target);
         WidgetMetadata.registerPropertyMetadata(target, propName, keys.validations, range);
     });
 }
@@ -54,7 +51,6 @@ export function RegularExpression(regExp: string, errorMessage?: string) {
             regex['RegexErrorMsg'] = errorMessage;
         }
 
-        WidgetMetadata.register(target);
         WidgetMetadata.registerPropertyMetadata(target, propName, keys.validations, regex);
     });
 }

@@ -132,7 +132,9 @@ export class EntityMetadataGenerator {
             if (value != null && typeof(value) === 'object' && key !== keys.dataModel) {
                 propertyObject[keys.properties] = Object.assign(propertyObject[keys.properties], this.compileSpecialProperties(key, value));
             } else if (value != null && typeof(value) === 'object' && key === keys.dataModel) {
-                propertyObject[keys.typeChildProperties] = propertyObject.TypeChildProperties.concat(this.unpackDataModel(value?.value || value));
+                const dataModelValue = value?.value || value;
+                propertyObject[keys.typeChildProperties] = propertyObject.TypeChildProperties.concat(this.unpackDataModel(dataModelValue));
+                propertyObject[keys.type] ||= dataModelValue['type'];
             } else {
                 propertyObject[key] = value;
             }
