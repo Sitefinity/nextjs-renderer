@@ -1,5 +1,7 @@
 import React from 'react';
 import { WidgetContext, classNames, getUniqueId } from '../../../editor';
+import { FileTypes } from './interface/FileTypes';
+import { NumericRange } from './interface/NumericRange';
 
 export async function FileUpload(props: WidgetContext<FileUploadEntity>) {
     const entity = {
@@ -85,9 +87,9 @@ export interface FileUploadEntity {
     Required: boolean;
     Hidden: boolean;
     RequiredErrorMessage?: string;
-    Range: any; // NumericRange;
+    Range: NumericRange;
     FileSizeViolationMessage?: string;
-    FileTypes: any; // FileTypes
+    FileTypes: FileTypes;
     FileTypeViolationMessage?: string;
     SfViewName?: string;
     CssClass?: string;

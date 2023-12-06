@@ -44,12 +44,12 @@ export async function MultipleChoice(props: WidgetContext<MultipleChoiceEntity>)
                 }
 
         <div className={layoutClass}>
-          { viewModel.Choices.map((choiceOption: any, idx: number)=>{
+          { viewModel.Choices.map((choiceOption: {Name: string, Value: string}, idx: number)=>{
                 let choiceOptionId = getUniqueId(`choiceOption-${idx}-${viewModel.FieldName}`);
 
                 return (<div className={`form-check ${innerColumnClass}`} key={idx}>
                   <input className="form-check-input" type="radio" name={viewModel.FieldName} id={choiceOptionId}
-                    value={choiceOption.Value} data-sf-role="multiple-choice-field-input" checked={choiceOption.Selected} required={viewModel.Required} />
+                    value={choiceOption.Value} data-sf-role="multiple-choice-field-input" required={viewModel.Required} />
                   <label className="form-check-label" htmlFor={choiceOptionId}>
                     {choiceOption.Name}
                   </label>

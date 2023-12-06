@@ -17,7 +17,7 @@ export async function Breadcrumb(props: WidgetContext<BreadcrumbEntity>) {
         ...model.Properties
     };
     const restService = props.restService || BreadcrumbRestService;
-    const items = await restService.getItems(entities, model, props.requestContext);
+    const items = await restService.getItems(entities, props.requestContext);
     const defaultClass =  entities.WrapperCssClass;
     const marginClass = entities.Margins && StyleGenerator.getMarginClasses(entities.Margins);
     const breadcrumbCustomAttributes = getCustomAttributes(entities.Attributes, 'Breadcrumb');

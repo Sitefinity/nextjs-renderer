@@ -19,10 +19,10 @@ export async function Form(props: WidgetContext<FormEntity>) {
     const context = props.requestContext;
     const searchParams = context.searchParams;
 
-    const viewModel: any = {
+    const viewModel: FormViewModel = {
         VisibilityClasses: StylingConfig.VisibilityClasses,
         InvalidClass: StylingConfig.InvalidClass
-    }; //FormViewModel
+    };
     const restService = props.restService || FormRestService;
     let formDto;
     let formModel;
@@ -126,6 +126,22 @@ export async function Form(props: WidgetContext<FormEntity>) {
         </div>
       </div>
     </form>);
+}
+
+export interface FormViewModel {
+    CssClass?: string;
+    FormModel?: any;
+    SubmitUrl?: string;
+    CustomSubmitAction?: boolean;
+    RedirectUrl?: string;
+    SuccessMessage?: string;
+    Warning?: string;
+    SkipDataSubmission?: boolean;
+    Rules?: string;
+    InvalidClass?: string;
+    HiddenFields?: string;
+    Attributes?:{ [key: string]: Array<{ Key: string, Value: string}> };
+    VisibilityClasses: {[key: number]: string};
 }
 
 export interface FormEntity {

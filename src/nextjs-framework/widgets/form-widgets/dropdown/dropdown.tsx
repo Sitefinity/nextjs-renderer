@@ -17,7 +17,7 @@ export async function Dropdown(props: WidgetContext<DropdownEntity>) {
 
         <select className="form-select" data-sf-role="dropdown-list-field-select" name={viewModel.FieldName} required={viewModel.Required}>
 
-          { viewModel.Choices.map((choiceOption: any, idx: number) =>{
+          { viewModel.Choices.map((choiceOption: {Name: string, Value: string}, idx: number) =>{
             return <option key={idx} value={choiceOption.Value}>{choiceOption.Name}</option>;
             })
         }

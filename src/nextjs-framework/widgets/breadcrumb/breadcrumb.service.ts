@@ -1,11 +1,12 @@
+import { RequestContext } from '../../editor';
 import { CollectionResponse, RestSdkTypes, RestService, SdkItem } from '../../rest-sdk';
 import { BreadcrumbEntity, BreadcrumbIncludeOption } from './breadcrumb';
 
 export class BreadcrumbRestService {
 
-    static getItems(entity: BreadcrumbEntity, model?: any, requestContext?: any): {value: CollectionResponse<SdkItem>[]} {
+    static getItems(entity: BreadcrumbEntity, requestContext: RequestContext): {value: CollectionResponse<SdkItem>[]} {
         if (entity && requestContext.pageNode) {
-            const getAllArgs: any = {
+            const getAllArgs: {[key: string]: boolean | string} = {
                 addStartingPageAtEnd: entity.AddCurrentPageLinkAtTheEnd || true,
                 addHomePageAtBeginning: entity.AddHomePageLinkAtBeginning || true,
                 includeGroupPages: entity.IncludeGroupPages || false,
