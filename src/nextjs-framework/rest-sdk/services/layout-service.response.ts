@@ -18,6 +18,7 @@ export interface PageLayoutServiceResponse {
         OpenGraphSite: string,
         CanonicalUrl: string,
     },
+    TemplateName?: string,
     DetailItem: DetailItem,
     UrlParameters: string[],
     Scripts: PageScript[]

@@ -1,0 +1,69 @@
+{
+    "Name": "SitefinityFormContentBlock",
+    "Caption": "Content block",
+    "PropertyMetadata": [
+        {
+            "Name": "Basic",
+            "Sections": [
+                {
+                    "Name": "Main",
+                    "Title": null,
+                    "Properties": [
+                        {
+                            "Name": "Content",
+                            "DefaultValue": null,
+                            "Title": "Content",
+                            "Type": "html",
+                            "SectionName": null,
+                            "CategoryName": null,
+                            "Properties": {
+                                "Meta_DynamicLinksContainer_HasLinks": "True"
+                            },
+                            "TypeChildProperties": [],
+                            "Position": 0
+                        }
+                    ],
+                    "CategoryName": "Basic"
+                }
+            ]
+        },
+        {
+            "Name": "Advanced",
+            "Sections": [
+                {
+                    "Name": "AdvancedMain",
+                    "Title": null,
+                    "Properties": [
+                        {
+                            "Name": "WrapperCssClass",
+                            "DefaultValue": null,
+                            "Title": "CSS class",
+                            "Type": "string",
+                            "SectionName": null,
+                            "CategoryName": "Advanced",
+                            "Properties": {},
+                            "TypeChildProperties": [],
+                            "Position": 0
+                        },
+                        {
+                            "Name": "TagName",
+                            "DefaultValue": "div",
+                            "Title": "Tag name",
+                            "Type": "string",
+                            "SectionName": null,
+                            "CategoryName": "Advanced",
+                            "Properties": {
+                                "Meta_Description_Description": "Up to twenty characters in the range a-z are allowed",
+                                "Validations_Regex": "^[a-z]{1,20}$",
+                                "Validations_RegexErrorMsg": "Up to twenty characters in the range a-z are allowed."
+                            },
+                            "TypeChildProperties": [],
+                            "Position": 0
+                        }
+                    ],
+                    "CategoryName": "Advanced"
+                }
+            ]
+        }
+    ]
+}

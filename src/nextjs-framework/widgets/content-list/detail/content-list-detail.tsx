@@ -2,15 +2,12 @@ import React from 'react';
 import { ContentListModelDetail } from './content-list-detail-model';
 import { ContentListEntity } from '../content-list-entity';
 import { RestService, SdkItem } from '../../../rest-sdk';
+import { RequestContext } from '../../../editor';
 
-export async function ContentListDetail(props: { detailModel: ContentListModelDetail, entity?: ContentListEntity }) {
+export async function ContentListDetail(props: { detailModel: ContentListModelDetail, entity?: ContentListEntity, context: RequestContext }) {
     const model = props.detailModel;
 
-    let queryParams: { [key: string]: string } = {};
-    new URLSearchParams(window.location.search).forEach((val, key) => {
-        queryParams[key] = val;
-    });
-
+    let queryParams: { [key: string]: string } = props.context.searchParams || {};
     let dataItem: SdkItem;
     if (queryParams.hasOwnProperty('sf-content-action')) {
         dataItem = await RestService.getItemWithStatus(

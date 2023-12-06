@@ -9,15 +9,7 @@ import { PostLoginAction } from './interfaces/PostLoginAction';
 import { WidgetContext, htmlAttributes, classNames, getUniqueId, MixedContentContext } from '../../editor';
 import { RestSdkTypes, ExternalProvider, RestService, FilterConverterService } from '../../rest-sdk';
 import { RestExtensionsService } from '../rest-extensions';
-
-
-const defaultMixedContent = {
-    ItemIdsOrdered:null,
-    Content:[ {
-        Type:RestSdkTypes.Pages,
-        Variations:null
-    }]
-};
+import { defaultMixedContent } from '../common/defaults';
 
 export async function LoginForm(props: WidgetContext<LoginFormEntity>) {
     const entity = {
@@ -169,7 +161,7 @@ export async function LoginForm(props: WidgetContext<LoginFormEntity>) {
 }
 
 export class LoginFormEntity {
-    Attributes?: any[];
+    Attributes?: { [key: string]: Array<{ Key: string, Value: string}> };
     CssClass?: string;
     Margins?: OffsetStyle;
     PostLoginAction?: PostLoginAction;

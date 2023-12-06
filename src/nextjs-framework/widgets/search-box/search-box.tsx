@@ -72,7 +72,7 @@ export async function SearchBox(props: WidgetContext<SearchBoxEntity>) {
 }
 
 export class SearchBoxEntity {
-    Attributes?: any[];
+    Attributes?: { [key: string]: Array<{ Key: string, Value: string}> };
     CssClass?: string;
     Margins?: OffsetStyle;
     SearchIndex?: string;

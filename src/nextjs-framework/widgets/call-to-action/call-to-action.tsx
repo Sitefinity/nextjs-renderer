@@ -71,7 +71,7 @@ export class CallToActionEntity {
             DisplayStyle: ButtonType
         }
     };
-    Attributes?: any[];
+    Attributes?: { [key: string]: Array<{ Key: string, Value: string}> };
     Position?: {
         CTA: {
             Alignment: Alignment

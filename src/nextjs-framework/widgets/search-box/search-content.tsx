@@ -4,6 +4,7 @@ import React, { FocusEvent, MouseEvent } from 'react';
 import { SearchInput } from './search-input';
 import { VisibilityStyle } from '../styling/visibility-style';
 import { classNames, getCustomAttributes } from '../../editor';
+
 const dataSfItemAttribute = 'data-sfitem';
 const activeAttribute = 'data-sf-active';
 
@@ -178,7 +179,7 @@ export function SearchContent(props: any) {
                 onNavigate={navigateToResults}
                 onBlur={handleDropDownBlur}
                 onFocus={firstItemfocus}
-                value={queryCollection['searchQuery']}
+                defaultValue={queryCollection['searchQuery']}
                 className="form-control" data-sf-role="search-box"
                 data-sf-results-url={searchModel.SearchResultsPageUrl}
                 data-sf-search-catalogue={searchModel.SearchIndex}
