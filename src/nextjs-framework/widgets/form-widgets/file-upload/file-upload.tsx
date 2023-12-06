@@ -3,6 +3,10 @@ import { WidgetContext, classNames, getUniqueId } from '../../../editor';
 
 export async function FileUpload(props: WidgetContext<FileUploadEntity>) {
     const entity = {
+        Label: 'Upload file',
+        RequiredErrorMessage: '{0} field is required',
+        FileSizeViolationMessage: 'The size of the selected file is too large',
+        FileTypeViolationMessage: 'File type is not allowed to upload',
         ...props.model.Properties
     };
     const context = props.requestContext;
@@ -75,4 +79,18 @@ export async function FileUpload(props: WidgetContext<FileUploadEntity>) {
 }
 
 export interface FileUploadEntity {
+    Label?: string;
+    InstructionalText?: string;
+    AllowMultipleFiles: boolean;
+    Required: boolean;
+    Hidden: boolean;
+    RequiredErrorMessage?: string;
+    Range: any; // NumericRange;
+    FileSizeViolationMessage?: string;
+    FileTypes: any; // FileTypes
+    FileTypeViolationMessage?: string;
+    SfViewName?: string;
+    CssClass?: string;
+    SfFieldType?: string;
+    SfFieldName?: string;
 }

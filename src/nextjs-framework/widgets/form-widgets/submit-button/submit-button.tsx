@@ -15,4 +15,7 @@ export async function SubmitButton(props: WidgetContext<SubmitButtonEntity>) {
 }
 
 export interface SubmitButtonEntity {
+    Label?: string;
+    SfViewName?: string;
+    CssClass?: string;
 }

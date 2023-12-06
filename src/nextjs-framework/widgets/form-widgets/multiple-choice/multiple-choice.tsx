@@ -1,8 +1,12 @@
 import React from 'react';
 import { WidgetContext, classNames, getUniqueId } from '../../../editor';
+import { ChoiceEntityBase } from '../interfaces/ChoiceEntityBase';
 
 export async function MultipleChoice(props: WidgetContext<MultipleChoiceEntity>) {
     const entity = {
+        Label: 'Select a choice',
+        RequiredErrorMessage: '{0} field is required',
+        ColumnsNumber: 1,
         ...props.model.Properties
     };
     const viewModel: any = {...entity};
@@ -68,5 +72,7 @@ export async function MultipleChoice(props: WidgetContext<MultipleChoiceEntity>)
     </>);
 }
 
-export interface MultipleChoiceEntity {
+export interface MultipleChoiceEntity extends ChoiceEntityBase {
+     HasAdditionalChoice: boolean,
+     ColumnsNumber?: number
 }

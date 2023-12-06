@@ -1,8 +1,12 @@
 import React from 'react';
 import { WidgetContext, classNames, getUniqueId } from '../../../editor';
+import { ChoiceEntityBase } from '../interfaces/ChoiceEntityBase';
 
 export async function Checkboxes(props: WidgetContext<CheckboxesEntity>) {
     const entity = {
+        Label: 'Select a choice',
+        RequiredErrorMessage: '{0} field is required',
+        ColumnsNumber: 1,
         ...props.model.Properties
     };
     const viewModel: any = {...entity};
@@ -69,5 +73,7 @@ export async function Checkboxes(props: WidgetContext<CheckboxesEntity>) {
     );
 }
 
-export interface CheckboxesEntity {
+export interface CheckboxesEntity extends ChoiceEntityBase {
+    HasAdditionalChoice: boolean,
+    ColumnsNumber?: number
 }

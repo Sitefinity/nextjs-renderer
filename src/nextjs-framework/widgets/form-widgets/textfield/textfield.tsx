@@ -1,5 +1,6 @@
 import React from 'react';
 import { WidgetContext, classNames, getUniqueId } from '../../../editor';
+import { TextType } from './interfaces/TextType';
 
 export async function TextField(props: WidgetContext<TextFieldEntity>) {
     const entity = {
@@ -37,4 +38,7 @@ export async function TextField(props: WidgetContext<TextFieldEntity>) {
 }
 
 export interface TextFieldEntity {
+    InputType: TextType;
+    RegularExpression: string;
+    RegularExpressionViolationMessage: string;
 }

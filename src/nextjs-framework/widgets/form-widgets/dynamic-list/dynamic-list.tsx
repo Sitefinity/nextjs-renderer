@@ -11,7 +11,7 @@ export async function DynamicList(props: WidgetContext<DynamicListEntity>) {
 
     return (viewModel.SfViewName === 'dropdown'
         ? <Dropdown {...props} />
-        : <Checkboxes {...props} />);
+        : <Checkboxes {...props as any} />);
 }
 
 export interface DynamicListEntity {
