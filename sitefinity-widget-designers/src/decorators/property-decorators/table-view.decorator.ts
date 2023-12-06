@@ -4,12 +4,12 @@ import { DataType, KnownFieldTypes } from '..';
 import { PropertyDecoratorBase } from './common/property-decorator-wrapper';
 
 export class TableViewSettings {
-    ColumnTitle: string | null = null;
-    Enabled: boolean = true;
-    Reorderable: boolean = false;
-    Selectable: boolean = false;
-    MultipleSelect: boolean = false;
-    AllowEmptyState: boolean = false;
+    ColumnTitle?: string | null = null;
+    Enabled?: boolean = true;
+    Reorderable?: boolean = false;
+    Selectable?: boolean = false;
+    MultipleSelect?: boolean = false;
+    AllowEmptyState?: boolean = false;
 }
 
 export function TableView(config: TableViewSettings): any;

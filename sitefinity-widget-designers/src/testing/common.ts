@@ -1,4 +1,4 @@
-import { CategoryModel, MetadataModel, PropertyModel, SectionModel } from '../../src/metadata/entity-metadata-generator';
+import { CategoryModel, MetadataModel, PropertyModel, SectionModel } from '../metadata/entity-metadata-generator';
 
 export function verifyPropertyKeyValues(property: any, expectedValues: {[key: string] : any}) {
     for (const key in expectedValues) {
@@ -21,27 +21,29 @@ export function verifyFullDesigner(actual: MetadataModel, expected: MetadataMode
     });
 }
 
-function verifyCategory(widgetName: string, actual: CategoryModel, expected: CategoryModel) {
-    expect(actual.Name).toBe(expected.Name);
+export function verifyCategory(widgetName: string, actual: CategoryModel, expected: CategoryModel) {
+    expect(`${widgetName}'s category => ${actual.Name}`).toBe(`${widgetName}'s category => ${expected.Name}`);
     const actualSections = actual.Sections.map(x => x.Name).join(', ');
     const expectedSections = expected.Sections.map(x => x.Name).join(', ');
-    expect(`${actual.Name} sections: ${actualSections}`).toBe(`${expected.Name} sections: ${expectedSections}`);
+    expect(`${widgetName}'s ${actual.Name} sections: ${actualSections}`)
+        .toBe(`${widgetName}'s ${expected.Name} sections: ${expectedSections}`);
 
     // verify each section
     actual.Sections.forEach((actualSection, i) => {
         const expectedSection = expected.Sections[i];
         expect(expectedSection).not.toBeNull();
-        expect(actualSection.Name).toBe(expectedSection.Name);
+        expect(`${widgetName}'s section => ${actualSection.Name}`).toBe(`${widgetName}'s section => ${expectedSection.Name}`);
         verifySection(widgetName, actualSection, expectedSection);
     });
 }
 
-function verifySection(widgetName: string, actual: SectionModel, expected: SectionModel) {
-    expect(actual.Name).toBe(expected.Name);
-    expect(actual.Title).toBe(expected.Title);
-    expect(actual.CategoryName).toBe(expected.CategoryName);
-    expect(`${actual.Name} ${actual.Properties.map(x => x.Name).join(', ')}`)
-        .toBe(`${expected.Name} ${expected.Properties.map(x => x.Name).join(', ')}`);
+export function verifySection(widgetName: string, actual: SectionModel, expected: SectionModel) {
+    expect(`${widgetName}'s section => ${actual.Name}`).toBe(`${widgetName}'s section => ${expected.Name}`);
+    expect(`${widgetName}'s section => ${actual.Title}`).toBe(`${widgetName}'s section => ${expected.Title}`);
+    expect(`${widgetName}'s ${actual.Name} section => ${actual.CategoryName}`)
+        .toBe(`${widgetName}'s ${expected.Name} section => ${expected.CategoryName}`);
+    expect(`${widgetName}'s ${actual.Name} ${actual.Properties.map(x => x.Name).join(', ')}`)
+        .toBe(`${widgetName}'s ${expected.Name} ${expected.Properties.map(x => x.Name).join(', ')}`);
 
     // verify each property
     actual.Properties.forEach(actualProp => {
@@ -51,7 +53,7 @@ function verifySection(widgetName: string, actual: SectionModel, expected: Secti
     });
 }
 
-function verifyProperty(actual: PropertyModel, expected: PropertyModel) {
+export function verifyProperty(actual: PropertyModel, expected: PropertyModel) {
     expect(actual.Name).toBe(expected.Name);
     expect(actual.Title).toBe(expected.Title);
     // null fallbacks to string in iris
@@ -98,7 +100,7 @@ function verifyProperty(actual: PropertyModel, expected: PropertyModel) {
     });
 }
 
-function verifyJsonProperty(propName: string, actual: string | object, expected: string | object) {
+export function verifyJsonProperty(propName: string, actual: string | object, expected: string | object) {
     if (expected == null || actual == null) {
         expect(`${propName} -> ${actual}`).toBe(`${propName} -> ${expected}`);
         return;

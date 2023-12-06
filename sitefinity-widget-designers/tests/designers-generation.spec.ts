@@ -1,7 +1,9 @@
 
 import { EntityMetadataGenerator } from '../src/metadata/entity-metadata-generator';
+import { ComplexFieldsEntitiy } from './mocks/complex-designer/complex-designer.entity';
 import { SimpleWidgetCaption, SimpleWidgetEntity, SimpleWidgetName } from './mocks/simple-designer';
-import { verifyPropertyKeyValues } from './utils/common';
+import { verifyFullDesigner, verifyPropertyKeyValues } from '../src/testing/common';
+import { COMLPEX_DESIGNER_DESIGNER } from './mocks/complex-designer/complex-designer.designer';
 
 describe('Designers autogeneration', () => {
     test('Generate simple designer', () => {
@@ -37,5 +39,10 @@ describe('Designers autogeneration', () => {
             SectionName: 'Main',
             CategoryName: null
         });
+    });
+
+    test('Generate complex fields designer', () => {
+        const designer = EntityMetadataGenerator.extractMetadata(ComplexFieldsEntitiy);
+        verifyFullDesigner(designer!, COMLPEX_DESIGNER_DESIGNER as any);
     });
 });

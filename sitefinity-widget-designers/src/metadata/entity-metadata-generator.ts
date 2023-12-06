@@ -1,3 +1,4 @@
+import { getBasicType } from '../decorators/property-decorators/common/utls';
 import { ChoiceSettings, KnownFieldTypes } from '../decorators';
 import { keys } from '../symbols/known-keys';
 
@@ -136,6 +137,13 @@ export class EntityMetadataGenerator {
                 propertyObject[keys.typeChildProperties] = propertyObject.TypeChildProperties.concat(this.unpackDataModel(dataModelValue));
                 propertyObject[keys.type] ||= dataModelValue['type'];
             } else {
+                if (key === keys.defaultValue && propertyMeta[keys.type] === undefined) {
+                    const typeName = getBasicType(typeof(value));
+                    if (typeName) {
+                        propertyObject[keys.type] ||= typeName;
+                    }
+                }
+
                 propertyObject[key] = value;
             }
         });
@@ -150,24 +158,23 @@ export class EntityMetadataGenerator {
 
     private static unpackDataModel(dataModelProps: {[key: string]: any}) {
         const models: {[key: string]: any}[] = [];
-
-        let propertyObject: {[key: string]: any} = {
-            [keys.properties]: {},
-            [keys.typeChildProperties]: [],
-            [keys.position]: 0,
-            [keys.defaultValue]: null,
-            [keys.categoryName]: null,
-            [keys.sectionName]: null,
-            [keys.name]: null,
-            [keys.title]: null
-        };
-
         const dataModelKeys = Object.keys(dataModelProps);
         dataModelKeys.forEach(key => {
             const value = dataModelProps[key];
             if (key === 'type') {
                 return;
             }
+
+            let propertyObject: {[key: string]: any} = {
+                [keys.properties]: {},
+                [keys.typeChildProperties]: [],
+                [keys.position]: 0,
+                [keys.defaultValue]: null,
+                [keys.categoryName]: null,
+                [keys.sectionName]: null,
+                [keys.name]: null,
+                [keys.title]: null
+            };
 
             // unpack nested object properties
             propertyObject = Object.assign(propertyObject, this.compileProperty(value, false));

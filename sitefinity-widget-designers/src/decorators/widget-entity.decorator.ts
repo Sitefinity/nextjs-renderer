@@ -1,5 +1,6 @@
 import { WidgetMetadata } from '../metadata/widget-metadata';
 import { keys } from '../symbols/known-keys';
+import { getBasicType } from './property-decorators/common/utls';
 
 export function WidgetEntity(name: string, caption: string) {
     return function(target: any, context?: any) {
@@ -40,12 +41,10 @@ export function Model() {
                 WidgetMetadata.registerPrototypePropertyMetadata(target, p, 'type', type, true);
             }
 
-            if (type === 'string' || type === 'number' || type === 'boolean') {
-                if (type === 'boolean') {
-                    type = 'bool';
-                }
+            const typeName = getBasicType(type);
 
-                WidgetMetadata.registerPrototypePropertyMetadata(target, p, keys.type, type, false);
+            if (typeName) {
+                WidgetMetadata.registerPrototypePropertyMetadata(target, p, keys.type, typeName, false);
             }
 
             let defaultValue = value;

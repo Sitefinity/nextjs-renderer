@@ -21,7 +21,13 @@ export enum KnownFieldTypes {
     Complex = 'complex'
 }
 
-export function DataType(customDataType: KnownFieldTypes | string) {
+export enum ComlexType {
+    Complex = 'complex',
+    Enumerable = 'enumerable',
+    Dictionary = 'dictionary'
+}
+
+export function DataType(customDataType: KnownFieldTypes | ComlexType | string) {
     return PropertyDecoratorBase((target: any, propName: string) => {
         WidgetMetadata.registerPropertyMetadata(target, propName, keys.type, customDataType);
 
@@ -31,11 +37,9 @@ export function DataType(customDataType: KnownFieldTypes | string) {
     });
 }
 
-export type CollectionType = 'enumerable' | 'dictionary';
-
-export function DataModel(model: any): any;
-export function DataModel(model: any, collectionType: CollectionType): any;
-export function DataModel(model: any, collectionType?: CollectionType) {
+// TODO: refactor this to assign type not to the original class but to the widget entity's current property
+// provide overloads
+export function DataModel(model: any) {
     return PropertyDecoratorBase((target: any, propName: string) => {
         const descriptors = Object.getOwnPropertyDescriptors(model.prototype);
         const metadata = descriptors[keys.metadata];
@@ -44,14 +48,10 @@ export function DataModel(model: any, collectionType?: CollectionType) {
         const objectInstance = new (target.constructor)();
         const value = objectInstance[propName];
         if (metadata) {
-            if (!collectionType) {
-                if (Array.isArray(value)) {
-                    metadata.value['type'] = 'enumerable';
-                } else if (typeof(value) === 'object') {
-                    metadata.value['type'] = KnownFieldTypes.Complex;
-                }
-            } else if (collectionType) {
-                metadata.value['type'] = collectionType;
+            if (Array.isArray(value)) {
+                metadata.value['type'] = ComlexType.Enumerable;
+            } else if (typeof(value) === 'object') {
+                metadata.value['type'] = ComlexType.Complex;
             }
         }
 
