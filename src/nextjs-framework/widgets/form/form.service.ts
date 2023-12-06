@@ -1,7 +1,9 @@
 
-import { RestSdkTypes, RestService, SdkItem } from '../../rest-sdk';
+import { WidgetModel } from '../../editor';
+import { PageLayoutServiceResponse, RestSdkTypes, RestService, SdkItem } from '../../rest-sdk';
 import { FormEntity } from './form';
 import { FormDto } from './interfaces/FormDto';
+import { FormModel } from './interfaces/FormModel';
 import { FormRuleAction } from './interfaces/FormRuleAction';
 
 export class FormRestService {
@@ -27,8 +29,7 @@ export class FormRestService {
             }
         };
 
-        const response: { value: any } = await RestService.getBoundType(argsLocal);
-        return response;
+        return await RestService.getBoundType(argsLocal);
     }
 
     static async getPage(entity: FormEntity)  {
@@ -58,15 +59,15 @@ export class FormRestService {
         return rules;
     }
 
-    static getHiddenFields(formModel: any){ // PageModel
+    static getHiddenFields(formModel: FormModel){
         const hiddenFields = formModel.AllViewComponentsFlat
-            .filter((x :any) => x.Properties.Hidden)
-            .map((x :any) => x.Properties.SfFieldName);
+            .filter((x: WidgetModel<any>) => x.Properties.Hidden)
+            .map((x: WidgetModel<any>) => x.Properties.SfFieldName);
 
         return hiddenFields;
     }
 
-    static buildFormComponents(formModel: any) {
+    static buildFormComponents(formModel: PageLayoutServiceResponse) {
         return {
             HasLazyComponents: formModel.ComponentContext.HasLazyComponents,
             ViewComponentsFlat:formModel.ComponentContext.Components,

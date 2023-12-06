@@ -68,10 +68,10 @@ export async function FileUpload(props: WidgetContext<FileUploadEntity>) {
                 }
             </div>
             { (viewModel.MinFileSizeInMb > 0 || viewModel.MaxFileSizeInMb > 0) &&
-            <div data-sf-role="filesize-violation-message" className="invalid-feedback my-2" role="alert" aria-live="assertive">@Model.FileSizeViolationMessage</div>
+            <div data-sf-role="filesize-violation-message" className="invalid-feedback my-2" role="alert" aria-live="assertive">{viewModel.FileSizeViolationMessage}</div>
             }
             { (viewModel.AllowedFileTypes != null) &&
-            <div data-sf-role="filetype-violation-message" className="invalid-feedback my-2" role="alert" aria-live="assertive">@Model.FileTypeViolationMessage</div>
+            <div data-sf-role="filetype-violation-message" className="invalid-feedback my-2" role="alert" aria-live="assertive">{viewModel.FileTypeViolationMessage}</div>
             }
           </div>
     }

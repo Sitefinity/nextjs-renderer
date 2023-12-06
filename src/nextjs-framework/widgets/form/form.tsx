@@ -9,6 +9,7 @@ import { StylingConfig } from '../styling/styling-config';
 import { RestExtensionsService } from '../rest-extensions';
 import { RenderWidgetService } from '../../services/render-widget-service';
 import { QueryParamNames } from '../../rest-sdk/query-params-names';
+import { FormModel } from './interfaces/FormModel';
 
 
 export async function Form(props: WidgetContext<FormEntity>) {
@@ -20,6 +21,7 @@ export async function Form(props: WidgetContext<FormEntity>) {
     const searchParams = context.searchParams;
 
     const viewModel: FormViewModel = {
+        CustomSubmitAction: false,
         VisibilityClasses: StylingConfig.VisibilityClasses,
         InvalidClass: StylingConfig.InvalidClass
     };
@@ -40,11 +42,11 @@ export async function Form(props: WidgetContext<FormEntity>) {
         }
 
         try {
-            formModel = await restService.getModel(formDto as any, {});
+            formModel = await restService.getModel(formDto as FormDto, {});
         } catch (err) {
             if (context.isEdit) {
                 queryParams[QueryParamNames.Action] = 'edit';
-                formModel = await restService.getModel(formDto as any, {});
+                formModel = await restService.getModel(formDto as FormDto, {});
                 viewModel.Warning = 'This form is a Draft and will not be displayed on the site until you publish the form.';
             } else {
                 throw err;
@@ -104,7 +106,7 @@ export async function Form(props: WidgetContext<FormEntity>) {
                 }
 
         <input type="hidden" data-sf-role="redirect-url" value={viewModel.RedirectUrl} />
-        <input type="hidden" data-sf-role="custom-submit-action" value={viewModel.CustomSubmitAction} />
+        <input type="hidden" data-sf-role="custom-submit-action" value={viewModel.CustomSubmitAction!.toString()} />
         <div data-sf-role="success-message" className="valid-feedback" role="alert" aria-live="assertive">{viewModel.SuccessMessage}</div>
         <div data-sf-role="error-message" className="invalid-feedback" role="alert" aria-live="assertive" />
         <div data-sf-role="loading" style={{display: 'none'}}>
@@ -120,7 +122,7 @@ export async function Form(props: WidgetContext<FormEntity>) {
         <div data-sf-role="fields-container" data-sfcontainer={true} not-editable="true"
                 // container-context={viewModel.FormModel.ContainerContext("Body", null)}
                 >
-          {viewModel.FormModel.ViewComponentsFlat.map((widgetModel: WidgetModel<any>, idx: number)=>{
+          { viewModel.FormModel && viewModel.FormModel.ViewComponentsFlat.map((widgetModel: WidgetModel<any>, idx: number)=>{
                         return RenderWidgetService.createComponent(widgetModel, context);
                     })}
         </div>
@@ -130,9 +132,9 @@ export async function Form(props: WidgetContext<FormEntity>) {
 
 export interface FormViewModel {
     CssClass?: string;
-    FormModel?: any;
+    FormModel?: FormModel;
     SubmitUrl?: string;
-    CustomSubmitAction?: boolean;
+    CustomSubmitAction: boolean;
     RedirectUrl?: string;
     SuccessMessage?: string;
     Warning?: string;
