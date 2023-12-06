@@ -183,7 +183,6 @@ export function SearchFacetsClient(props: any) {
         searchWithFilter(filterObject);
 
     },[lastUpdatedKey, buildFilterObjectBasedOnPopulatedInputs, searchWithFilter]);
-    console.log('lastUpdatedKey', lastUpdatedKey);
 
     function handleChipDeleteClick(ev: React.MouseEvent<HTMLSpanElement>) {
         const facetKey = (ev.target as HTMLSpanElement).getAttribute('data-facet-key');
