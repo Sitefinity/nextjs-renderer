@@ -8,5 +8,4 @@ export interface RequestContext {
     isEdit: boolean;
     isPreview: boolean;
     isLive: boolean;
-    cookie?: string;
 }

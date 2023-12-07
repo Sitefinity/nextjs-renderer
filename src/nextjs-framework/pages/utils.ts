@@ -10,7 +10,7 @@ import { RenderWidgetService } from '../services/render-widget-service';
 import { RestService } from '../rest-sdk/rest-service';
 import { WidgetRegistry } from '../editor';
 
-export async function pageLayout({ params, searchParams, cookie }: PageParams): Promise<PageLayoutServiceResponse> {
+export async function pageLayout({ params, searchParams }: PageParams): Promise<PageLayoutServiceResponse> {
     if (params && params.slug.some(x => x === '_next')) {
         notFound();
     }
@@ -21,7 +21,6 @@ export async function pageLayout({ params, searchParams, cookie }: PageParams): 
 
     let headers: { [key: string]: string } = {};
     if (process.env.NODE_ENV === 'development' && actionParam) {
-        headers = { 'Cookie': cookie };
         if (process.env.SF_CLOUD_KEY) {
             headers['X-SF-BYPASS-HOST'] = `${process.env.PROXY_ORIGINAL_HOST}:${process.env.PORT}`;
             headers['X-SF-BYPASS-HOST-VALIDATION-KEY'] = process.env.SF_CLOUD_KEY;
@@ -41,8 +40,8 @@ export async function pageLayout({ params, searchParams, cookie }: PageParams): 
     return layoutOrError as PageLayoutServiceResponse;
 }
 
-export async function pageMetadata({ params, searchParams, cookie }: PageParams): Promise<Metadata> {
-    const layout = await pageLayout({ params, searchParams, cookie });
+export async function pageMetadata({ params, searchParams }: PageParams): Promise<Metadata> {
+    const layout = await pageLayout({ params, searchParams });
     if (layout.MetaInfo) {
         return {
             title: layout.MetaInfo.Title,
@@ -96,7 +95,7 @@ export async function pageStaticParams() {
 }
 
 export async function initRestSdk() {
-    RootUrlService.rootUrl = `${process.env['PROXY_URL'] || process.env['NEXT_CMS_URL']}`;
+    RootUrlService.rootUrl = `${process.env['PROXY_URL'] || process.env['SF_CMS_URL']}`;
     await ServiceMetadata.fetch();
 }
 

@@ -5,12 +5,12 @@ const { createProxyMiddleware, responseInterceptor } = require('http-proxy-middl
 const https = require('https');
 const fs = require('fs');
 
-process.env.NODE_ENV = 'development';
-const app = next({ dev: true });
+const dev = process.env.NODE_ENV !== 'production';
+const app = next({ dev: dev });
 
 const sslOptions = {
-    key: fs.readFileSync('./cert/cert.key'),
-    cert: fs.readFileSync('./cert/cert.crt')
+    key: fs.readFileSync(process.env['SSL_CRT_FILE']),
+    cert: fs.readFileSync(process.env['SSL_KEY_FILE'])
 };
 
 const handle = app.getRequestHandler();
@@ -60,7 +60,7 @@ app.prepare().then(() => {
     const proxy = createProxyMiddleware(devProxy);
 
     const paths = ['/adminapp', '/sf/system', '/api/default', '/ws', '/restapi', '/contextual-help', '/res', '/admin-bridge', '/sfres', '/images', '/documents', '/videos'];
-    const server = https.createServer(sslOptions, (req, res) => {
+    const server = https.createServer(sslOptions, async (req, res) => {
         if (req.url.indexOf('.axd?') !== -1 || paths.some(path => req.url.toUpperCase().startsWith(path.toUpperCase())) || /\/sitefinity(?!\/template)/i.test(req.url)) {
             return proxy(req, res);
         }

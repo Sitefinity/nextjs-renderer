@@ -65,11 +65,9 @@ export async function ChangePassword(props: WidgetContext<ChangePasswordEntity>)
     }
     const argsLocal = {
         BaseURL: baseURL,
-        Name: 'users/current',
-        AdditionalHeaders: {
-            cookie : context.cookie || ''
-        }
+        Name: 'users/current'
     };
+
     const response: { value: User } = await RestService.getUnboundType(argsLocal);
     const user: User = response.value;
 
