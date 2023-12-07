@@ -262,7 +262,11 @@ export class RestService {
     }
 
     private static buildHeaders(additionalHeaders: { [key: string]: string } | undefined) {
-        let headers = { 'X-Requested-With': 'react' };
+        let headers: { [key:string]: string } = { 'X-Requested-With': 'react' };
+        if (process.env.NODE_ENV === 'development' && process.env['SF_ACCESS_KEY']) {
+            headers['X-SF-Access-Key'] = process.env['SF_ACCESS_KEY'];
+        }
+
         if (!additionalHeaders) {
             return headers;
         }
@@ -271,7 +275,12 @@ export class RestService {
     }
 
     public static sendRequest<T>(request: RequestData) {
-        return fetch(request.url, { headers: this.buildHeaders(request.headers), method: request.method, body: request.data, cache: 'no-store' }).then((x => x.json())).then((x) => {
+        const args: RequestInit = { headers: this.buildHeaders(request.headers), method: request.method, body: request.data };
+        if (process.env.NODE_ENV === 'development') {
+            args.cache = 'no-cache';
+        }
+
+        return fetch(request.url, args).then((x => x.json())).then((x) => {
             return <T>x;
         });
     }

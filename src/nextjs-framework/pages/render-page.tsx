@@ -7,8 +7,8 @@ import { PageParams } from './page-params';
 import { ServiceMetadata } from '../rest-sdk';
 import { RenderWidgetService } from '../services/render-widget-service';
 
-export async function RenderPage({ params, searchParams, cookie }: PageParams) {
-    const layout = await pageLayout({ params, searchParams, cookie });
+export async function RenderPage({ params, searchParams }: PageParams) {
+    const layout = await pageLayout({ params, searchParams });
     const isEdit = searchParams['sfaction'] === 'edit';
     const isPreview = searchParams['sfaction'] === 'preview';
     const isLive = !(isEdit || isPreview);
@@ -21,8 +21,7 @@ export async function RenderPage({ params, searchParams, cookie }: PageParams) {
             culture: layout.Culture,
             isEdit,
             isPreview,
-            isLive,
-            cookie: cookie
+            isLive
         },
         widgets: layout.ComponentContext.Components
     };
