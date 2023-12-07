@@ -1,17 +1,19 @@
 import React from 'react';
-import { WidgetContext, classNames, getUniqueId } from '../../../editor';
+import { WidgetContext, classNames, getUniqueId, htmlAttributes } from '../../../editor';
 import { TextType } from './interfaces/TextType';
 
 export async function TextField(props: WidgetContext<TextFieldEntity>) {
+
     const entity = {
         ...props.model.Properties
     };
     const viewModel: any = {...entity};
-    const textBoxUniqueId = viewModel.FieldName;
+    const textBoxUniqueId = viewModel.SfFieldName;
     const textBoxErrorMessageId = getUniqueId('TextboxErrorMessage');
     const ariaDescribedByAttribute = viewModel.HasDescription ? `${textBoxUniqueId} ${textBoxErrorMessageId}` : textBoxErrorMessageId;
-    return (<>
-      <script data-sf-role={'start_field_$(textBoxUniqueId)'} data-sf-role-field-name={textBoxUniqueId} />
+    const dataAttributes = htmlAttributes(props);
+    const defaultRendering = (<>
+      <script data-sf-role={`start_field_${textBoxUniqueId}`} data-sf-role-field-name={textBoxUniqueId} />
       <div className={classNames('mb-3', viewModel.CssClass)} data-sf-role="text-field-container">
         <input data-sf-role="violation-restrictions" type="hidden" value={viewModel.ViolationRestrictionsJson} />
         <input data-sf-role="violation-messages" type="hidden" value={viewModel.ViolationRestrictionsMessages} />
@@ -35,10 +37,15 @@ export async function TextField(props: WidgetContext<TextFieldEntity>) {
       </div>
       <script data-sf-role={`end_field_${textBoxUniqueId}`} />
     </>);
+     return (props.requestContext.isEdit
+        ? <div {...dataAttributes}> {defaultRendering} </div>
+        :defaultRendering);
 }
 
 export interface TextFieldEntity {
     InputType: TextType;
     RegularExpression: string;
     RegularExpressionViolationMessage: string;
+    SfFieldType?: string;
+    SfFieldName?: string;
 }

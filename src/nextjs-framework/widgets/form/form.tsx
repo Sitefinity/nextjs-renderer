@@ -10,6 +10,7 @@ import { RestExtensionsService } from '../rest-extensions';
 import { RenderWidgetService } from '../../services/render-widget-service';
 import { QueryParamNames } from '../../rest-sdk/query-params-names';
 import { FormModel } from './interfaces/FormModel';
+import { VisibilityStyle } from '../styling/visibility-style';
 
 
 export async function Form(props: WidgetContext<FormEntity>) {
@@ -55,7 +56,7 @@ export async function Form(props: WidgetContext<FormEntity>) {
 
         viewModel.FormModel = restService.buildFormComponents(formModel);
         viewModel.Rules = restService.getFormRulesViewModel(formDto);
-        viewModel.SubmitUrl = `/forms/submit/${formDto.Name}/${context.culture}?${searchParams![QueryParamNames.Site]}=${context.layout.SiteId}&${searchParams![QueryParamNames.SiteTempFlag]}=true`;
+        viewModel.SubmitUrl = `/forms/submit/${formDto.Name}/${context.culture}?${QueryParamNames.Site}=${context.layout.SiteId}&${QueryParamNames.SiteTempFlag}=true`;
 
         if (entity.FormSubmitAction === FormSubmitAction.Redirect) {
             viewModel.CustomSubmitAction = true;
@@ -71,30 +72,32 @@ export async function Form(props: WidgetContext<FormEntity>) {
         viewModel.Attributes = entity.Attributes;
     }
 
-    const dataAttributes = htmlAttributes(props);
+    const formDataAttributes = htmlAttributes(props);
+
     const defaultClass = entity.CssClass;
     const marginClass = entity.Margins && StyleGenerator.getMarginClasses(entity.Margins);
-    dataAttributes['className'] = classNames(
+    const containerClass = classNames(
         defaultClass,
         marginClass
     );
 
     if (props.requestContext && props.requestContext.isEdit) {
-        dataAttributes['data-sfemptyicon'] = 'plus-circle';
-        dataAttributes['data-sfemptyiconaction'] = 'Edit';
+        formDataAttributes['data-sfemptyicon'] = 'plus-circle';
+        formDataAttributes['data-sfemptyiconaction'] = 'Edit';
     }
 
-    dataAttributes['data-sfemptyicontext'] = 'Select a form';
-    dataAttributes['data-sfhasquickeditoperation'] = true;
+    formDataAttributes['data-sfemptyicontext'] = 'Select a form';
+    formDataAttributes['data-sfiscontentwidget'] = true;
+    formDataAttributes['data-sfhasquickeditoperation'] = true;
 
-    return (<form action={viewModel.SubmitUrl} method="post" {...dataAttributes} noValidate={true}>
-      <div className={viewModel.CssClass}
+    return (<form action={viewModel.SubmitUrl} method="post" {...formDataAttributes}  noValidate={true}>
+      <div
+        className={containerClass}
         data-sf-role="form-container"
         data-sf-invalid={viewModel.InvalidClass}
-            // data-sf-visibility-inline-visible="@Model.VisibilityClasses[Progress.Sitefinity.AspNetCore.Configuration.VisibilityStyle.InlineVisible]"
-            // data-sf-visibility-hidden="@Model.VisibilityClasses[Progress.Sitefinity.AspNetCore.Configuration.VisibilityStyle.Hidden]"
-            // data-sf-visibility-visible="@Model.VisibilityClasses[Progress.Sitefinity.AspNetCore.Configuration.VisibilityStyle.Visible]">
-            >
+        data-sf-visibility-inline-visible={viewModel.VisibilityClasses[VisibilityStyle.InlineVisible]}
+        data-sf-visibility-hidden={viewModel.VisibilityClasses[VisibilityStyle.Hidden]}
+        data-sf-visibility-visible={viewModel.VisibilityClasses[VisibilityStyle.Visible]}>
         { (viewModel.Rules) && <>
           <input type="hidden" data-sf-role="form-rules" value={viewModel.Rules} />
           <input type="hidden" data-sf-role="form-rules-hidden-fields" name="sf_FormHiddenFields" value={viewModel.HiddenFields} autoComplete="off"/>
@@ -118,13 +121,12 @@ export async function Form(props: WidgetContext<FormEntity>) {
         </div>
         { viewModel.SkipDataSubmission &&
         <span data-sf-role="skip-data-submission" />
-                }
-        <div data-sf-role="fields-container" data-sfcontainer={true} not-editable="true"
-                // container-context={viewModel.FormModel.ContainerContext("Body", null)}
-                >
+        }
+        <div data-sf-role="fields-container" >
           { viewModel.FormModel && viewModel.FormModel.ViewComponentsFlat.map((widgetModel: WidgetModel<any>, idx: number)=>{
-                        return RenderWidgetService.createComponent(widgetModel, context);
-                    })}
+               return RenderWidgetService.createComponent(widgetModel, context);
+            })
+          }
         </div>
       </div>
     </form>);

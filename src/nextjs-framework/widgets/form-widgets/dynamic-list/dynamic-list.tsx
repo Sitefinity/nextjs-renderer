@@ -1,5 +1,5 @@
 import React from 'react';
-import { WidgetContext } from '../../../editor';
+import { WidgetContext, htmlAttributes } from '../../../editor';
 import { Dropdown } from '../dropdown/dropdown';
 import { Checkboxes } from '../checkboxes/checkboxes';
 
@@ -8,10 +8,13 @@ export async function DynamicList(props: WidgetContext<DynamicListEntity>) {
         ...props.model.Properties
     };
     const viewModel: any = {...entity};
-
-    return (viewModel.SfViewName === 'dropdown'
+    const dataAttributes = htmlAttributes(props);
+    const defaultRendering = (viewModel.SfViewName === 'dropdown'
         ? <Dropdown {...props} />
         : <Checkboxes {...props as any} />);
+    return (props.requestContext.isEdit
+        ? <div {...dataAttributes}> {defaultRendering} </div>
+        :defaultRendering);
 }
 
 export interface DynamicListEntity {

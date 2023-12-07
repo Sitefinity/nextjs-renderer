@@ -1,5 +1,5 @@
 import React from 'react';
-import { WidgetContext, classNames, getUniqueId } from '../../../editor';
+import { WidgetContext, classNames, getUniqueId, htmlAttributes } from '../../../editor';
 import { ChoiceEntityBase } from '../interfaces/ChoiceEntityBase';
 
 export async function MultipleChoice(props: WidgetContext<MultipleChoiceEntity>) {
@@ -10,6 +10,7 @@ export async function MultipleChoice(props: WidgetContext<MultipleChoiceEntity>)
         ...props.model.Properties
     };
     const viewModel: any = {...entity};
+
 
     let layoutClass = '';
     let innerColumnClass = '';
@@ -29,26 +30,29 @@ export async function MultipleChoice(props: WidgetContext<MultipleChoiceEntity>)
         default:
             break;
     }
-    const otherChoiceOptionId = getUniqueId(`choiceOption-other-${viewModel.FieldName}`);
-    return (<>
-      <script data-sf-role={`start_field_${viewModel.FieldName}`} data-sf-role-field-name={`${viewModel.FieldName}`} />
-      <fieldset data-sf-role="multiple-choice-field-container" className={classNames('mb-3', viewModel.CssClass)}
-        aria-labelledby={`choice-field-label-${viewModel.FieldName} choice-field-description-${viewModel.FieldName}`}>
-        <input data-sf-role="violation-messages" type="hidden" value={viewModel.ViolationRestrictionsMessages} />
-        <input type="hidden" data-sf-role="required-validator" value={viewModel.Required} />
+    const multipleChoiceUniqueId = viewModel.SfFieldName;
+    const otherChoiceOptionId = getUniqueId(`choiceOption-other-${multipleChoiceUniqueId}`);
+    const dataAttributes = htmlAttributes(props);
+    const defaultRendering = (
+      <>
+        <script data-sf-role={`start_field_${multipleChoiceUniqueId}`} data-sf-role-field-name={`${multipleChoiceUniqueId}`} />
+        <fieldset data-sf-role="multiple-choice-field-container" className={classNames('mb-3', viewModel.CssClass)}
+          aria-labelledby={`choice-field-label-${multipleChoiceUniqueId} choice-field-description-${multipleChoiceUniqueId}`}>
+          <input data-sf-role="violation-messages" type="hidden" value={viewModel.ViolationRestrictionsMessages} />
+          <input type="hidden" data-sf-role="required-validator" value={viewModel.Required} />
 
-        <legend className="h6" id={`choice-field-label-${viewModel.FieldName}`}>{viewModel.Label}</legend>
+          <legend className="h6" id={`choice-field-label-${multipleChoiceUniqueId}`}>{viewModel.Label}</legend>
 
-        { viewModel.InstructionalText &&
-        <p className="text-muted small" id={`choice-field-description-${viewModel.FieldName}`}>{viewModel.InstructionalText}</p>
+          { viewModel.InstructionalText &&
+            <p className="text-muted small" id={`choice-field-description-${multipleChoiceUniqueId}`}>{viewModel.InstructionalText}</p>
                 }
 
-        <div className={layoutClass}>
-          { viewModel.Choices.map((choiceOption: {Name: string, Value: string}, idx: number)=>{
-                let choiceOptionId = getUniqueId(`choiceOption-${idx}-${viewModel.FieldName}`);
+          <div className={layoutClass}>
+            { viewModel.Choices.map((choiceOption: {Name: string, Value: string}, idx: number)=>{
+                let choiceOptionId = getUniqueId(`choiceOption-${idx}-${multipleChoiceUniqueId}`);
 
                 return (<div className={`form-check ${innerColumnClass}`} key={idx}>
-                  <input className="form-check-input" type="radio" name={viewModel.FieldName} id={choiceOptionId}
+                  <input className="form-check-input" type="radio" name={multipleChoiceUniqueId} id={choiceOptionId}
                     value={choiceOption.Value} data-sf-role="multiple-choice-field-input" required={viewModel.Required} />
                   <label className="form-check-label" htmlFor={choiceOptionId}>
                     {choiceOption.Name}
@@ -56,20 +60,24 @@ export async function MultipleChoice(props: WidgetContext<MultipleChoiceEntity>)
                 </div>);
             })
         }
-          { viewModel.HasAdditionalChoice &&
+            { viewModel.HasAdditionalChoice &&
 
-          <div className={`form-check ${innerColumnClass}`}>
-            <input className="form-check-input mt-1" type="radio" name={viewModel.FieldName} id={otherChoiceOptionId}
-              data-sf-role="multiple-choice-field-input" required={viewModel.Required} />
-            <label className="form-check-label" htmlFor={otherChoiceOptionId}>Other</label>
-            <input type="text" style={{display: 'none'}} className="form-control" data-sf-role="choice-other-input" />
-          </div>
+              <div className={`form-check ${innerColumnClass}`}>
+                <input className="form-check-input mt-1" type="radio" name={multipleChoiceUniqueId} id={otherChoiceOptionId}
+                  data-sf-role="multiple-choice-field-input" required={viewModel.Required} />
+                <label className="form-check-label" htmlFor={otherChoiceOptionId}>Other</label>
+                <input type="text" style={{display: 'none'}} className="form-control" data-sf-role="choice-other-input" />
+              </div>
                     }
-        </div>
-        <div data-sf-role="error-message" role="alert" aria-live="assertive" className="invalid-feedback" />
-      </fieldset>
-      <script data-sf-role={`end_field_${viewModel.FieldName}`} />
-    </>);
+          </div>
+          <div data-sf-role="error-message" role="alert" aria-live="assertive" className="invalid-feedback" />
+        </fieldset>
+        <script data-sf-role={`end_field_${multipleChoiceUniqueId}`} />
+      </>
+    );
+    return (props.requestContext.isEdit
+        ? <div {...dataAttributes}> {defaultRendering} </div>
+        :defaultRendering);
 }
 
 export interface MultipleChoiceEntity extends ChoiceEntityBase {

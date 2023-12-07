@@ -1,5 +1,5 @@
 import React from 'react';
-import { WidgetContext, classNames, getUniqueId } from '../../../editor';
+import { WidgetContext, classNames, getUniqueId, htmlAttributes } from '../../../editor';
 import { FileTypes } from './interface/FileTypes';
 import { NumericRange } from './interface/NumericRange';
 
@@ -13,12 +13,12 @@ export async function FileUpload(props: WidgetContext<FileUploadEntity>) {
     };
     const context = props.requestContext;
     const viewModel: any = {...entity};
-    const fileFieldUniqueId = viewModel.FieldName;
+    const fileFieldUniqueId = viewModel.SfFieldName;
     const fileFieldErrorMessageId = getUniqueId('FileFieldErrorMessage');
     const labelAdditionalClassList = viewModel.HasDescription ? 'mb-1' : null;
     const ariaDescribedByAttribute = viewModel.HasDescription ? `${fileFieldUniqueId} ${fileFieldErrorMessageId}` : fileFieldErrorMessageId;
-
-    return (<>
+    const dataAttributes = htmlAttributes(props);
+    const defaultRendering = (<>
       <script data-sf-role={`start_field_${fileFieldUniqueId}`} data-sf-role-field-name={fileFieldUniqueId} />
       <div className={classNames('mb-3', viewModel.CssClass)} data-sf-role="file-field-container">
         <label className={classNames('h6', 'd-block', labelAdditionalClassList)} htmlFor={fileFieldUniqueId}>{viewModel.Label}</label>
@@ -34,7 +34,7 @@ export async function FileUpload(props: WidgetContext<FileUploadEntity>) {
               className="form-control"
               id={fileFieldUniqueId}
               title={viewModel.Label}
-              name={viewModel.FieldName}
+              name={fileFieldUniqueId}
               type="file"
               aria-describedby={ariaDescribedByAttribute}
               {...viewModel.ValidationAttributes} />
@@ -78,6 +78,9 @@ export async function FileUpload(props: WidgetContext<FileUploadEntity>) {
       </div>
       <script data-sf-role={`end_field_${fileFieldUniqueId}`} />
     </>);
+     return (props.requestContext.isEdit
+        ? <div {...dataAttributes}> {defaultRendering} </div>
+        :defaultRendering);
 }
 
 export interface FileUploadEntity {
