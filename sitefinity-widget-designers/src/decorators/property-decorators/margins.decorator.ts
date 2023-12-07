@@ -5,12 +5,12 @@ import { Choices } from './choice.decorator';
 import { Model } from '../widget-entity.decorator';
 import { PropertyDecoratorBase } from './common/property-decorator-wrapper';
 
-export function Margins() {
+export function Margins(widgetName: string) {
     return PropertyDecoratorBase((target: any, propName: string) => {
         const tableView = {
-            'ColumnTitle': 'Classification',
+            'ColumnTitle': widgetName,
             'Enabled': true,
-            'Reordarable': false,
+            'Reorderable': false,
             'Selectable': false,
             'MultipleSelect': false,
             'AllowEmptyState': false
@@ -18,6 +18,7 @@ export function Margins() {
 
         WidgetMetadata.registerPropertyMetadata(target, propName, 'TableView', tableView);
 
+        DataType('complex')(target, propName);
         DataModel(MarginsProperties)(target, propName);
     });
 }

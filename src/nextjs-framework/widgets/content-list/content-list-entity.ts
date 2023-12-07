@@ -1,6 +1,6 @@
 import { ContentListSettings, MixedContentContext } from '../../editor';
 import { CombinedFilter, FilterClause, RelationFilter } from '../../rest-sdk';
-import { Attributes, Category, Choices, ConditionalVisibility, Content, ContentSection, CssFieldMappings, DataModel, DataType, DefaultValue, Description, DisplayName, FallbackToDefaultValueWhenEmpty, FieldMapping, FieldMappings, KnownFieldTypes, MaxLength, Model, SectionsOrder, WidgetEntity, WidgetLabel } from '@progress/sitefinity-widget-designers';
+import { Attributes, Category, Choices, ConditionalVisibility, Content, ContentSection, ContentSectionTitles, CssFieldMappings, DataModel, DataType, DefaultValue, Description, DisplayName, FallbackToDefaultValueWhenEmpty, FieldMapping, FieldMappings, KnownFieldTypes, MaxLength, Model, SectionsOrder, WidgetEntity, WidgetLabel } from '@progress/sitefinity-widget-designers';
 
 @Model()
 export class ListFieldMapping {
@@ -27,22 +27,6 @@ const viewMeta = {
         { fieldTitle: 'Image', fieldType: 'RelatedImage' },
         { fieldTitle: 'Text', fieldType: 'Text' }
     ]
-};
-
-const ContentSectionTitles =
-{   LabelsAndContent: 'Labels and content',
-    LabelsAndMessages: 'Labels and messages',
-    Limitations: 'Limitations',
-    DisplaySettings: 'Display settings',
-    Attributes: 'Attributes',
-    ResultsListSettings: 'Results list settings',
-    SelectContentToDisplay: 'Select content to display',
-    SelectDocumentsToDisplay: 'Select documents to display',
-    SingleItemSettings: 'Single item settings',
-    ListSettings: 'List settings',
-    CustomCssClasses: 'Custom CSS classes',
-    MetadataFields: 'Metadata fields',
-    DisplayingHierarchicalContent: 'Displaying hierarchical content'
 };
 
 @WidgetEntity('SitefinityContentList', 'Content list')

@@ -23,6 +23,7 @@ export * from './property-decorators/media-item.decorator';
 export * from './property-decorators/placeholder.decorator';
 export * from './property-decorators/table-view.decorator';
 export * from './property-decorators/validations.decorator';
+export * from './property-decorators/view-selector.decorator';
 export * from './property-decorators/widget-label.decorator';
 
 export * from './widget-entity.decorator';

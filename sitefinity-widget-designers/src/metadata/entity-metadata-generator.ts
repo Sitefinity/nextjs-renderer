@@ -144,7 +144,7 @@ export class EntityMetadataGenerator {
                     }
                 }
 
-                propertyObject[key] = value;
+                propertyObject[key] = this.modifyValue(value);
             }
         });
 
@@ -202,7 +202,7 @@ export class EntityMetadataGenerator {
 
         if (choiceMeta) {
             const type = fullPropertyMeta[keys.type];
-            if (type == null && (type !== KnownFieldTypes.ChipChoice && type !== KnownFieldTypes.RadioChoice)) {
+            if ((type == null || type === 'string') && (type !== KnownFieldTypes.ChipChoice && type !== KnownFieldTypes.RadioChoice)) {
                 fullPropertyMeta[keys.type] = KnownFieldTypes.Choices;
             }
 

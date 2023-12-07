@@ -54,7 +54,7 @@ export function verifySection(widgetName: string, actual: SectionModel, expected
 }
 
 export function verifyProperty(actual: PropertyModel, expected: PropertyModel) {
-    expect(actual.Name).toBe(expected.Name);
+    expect(actual.Name).toBe(expected?.Name);
     expect(`${actual.Name} => ${actual.Title}`).toBe(`${expected.Name} => ${expected.Title}`);
     // null fallbacks to string in iris
     if (!(actual.Type === 'string' && expected.Type === null)) {

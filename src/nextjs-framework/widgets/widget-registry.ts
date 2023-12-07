@@ -14,12 +14,8 @@ import { LanguageSelector } from './language-selector/language-selector';
 import { Section } from './section/section';
 import { WidgetRegistry } from '../editor/widget-framework/widget-registry';
 
-import sitefinityContentBlockJson from './content-block/designer-metadata.json';
-import sitefinitySectionJson from './section/designer-metadata.json';
-import sitefinityContentListJson from './content-list/designer-metadata.json';
 import sitefinityCallToActionJson from './call-to-action/designer-metadata.json';
 import sitefinityClassificationJson from './classification/designer-metadata.json';
-import sitefinityImageJson from './image/designer-metadata.json';
 import sitefinityBreadcrumbJson from './breadcrumb/designer-metadata.json';
 import sitefinityNavigationJson from './navigation/designer-metadata.json';
 import sitefinitySearchBoxJson from './search-box/designer-metadata.json';
@@ -30,9 +26,10 @@ import sitefinityRegistrationJson from './registration/designer-metadata.json';
 import sitefinityLanguageSelectorJson from './language-selector/designer-metadata.json';
 
 import { EntityMetadataGenerator } from '@progress/sitefinity-widget-designers';
-import { WidgetMetadata } from '../editor';
 import { ClassificationEntity } from './classification/classification-entity';
 import { ContentListEntity } from './content-list/content-list-entity';
+import { SectionEntity } from './section/section.entity';
+import { ImageEntity } from './image/image.entity';
 
 export const ReactWidgetRegistry: WidgetRegistry = {
     widgets: {
@@ -54,7 +51,7 @@ export const ReactWidgetRegistry: WidgetRegistry = {
             ssr: true
         },
         'SitefinityImage':  <any>{
-            designerMetadata: sitefinityImageJson,
+            entity: EntityMetadataGenerator.extractMetadata(ImageEntity),
             componentType: Image,
             editorMetadata: {
                 Title: 'Image'
@@ -126,7 +123,7 @@ export const ReactWidgetRegistry: WidgetRegistry = {
             ssr: true
         },
         'SitefinityContentBlock':  <any>{
-            designerMetadata: sitefinityContentBlockJson,
+            entity: EntityMetadataGenerator.extractMetadata(ContentBlock),
             componentType: ContentBlock,
             editorMetadata: {
                 Title: 'Content block'
@@ -134,7 +131,7 @@ export const ReactWidgetRegistry: WidgetRegistry = {
             ssr: true
         },
         'SitefinitySection': <any>{
-            designerMetadata: sitefinitySectionJson,
+            entity: EntityMetadataGenerator.extractMetadata(SectionEntity),
             componentType: Section,
             selectorCategory: 'Layout',
             editorMetadata: {

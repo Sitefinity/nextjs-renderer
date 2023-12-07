@@ -86,7 +86,7 @@ export class ClassificationEntity {
     SfViewName: string = 'Default';
 
     @ContentSection('Display settings', 1)
-    @Margins()
+    @Margins('Classification')
     Margins?: OffsetStyle;
 
     // Advanced
