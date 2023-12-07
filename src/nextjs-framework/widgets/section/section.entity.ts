@@ -1,5 +1,5 @@
 
-import { WidgetEntity, Range, Category, LengthDependsOn, DisplayName, DataType, ContentSection, DataModel, TableView } from '@progress/sitefinity-widget-designers';
+import { WidgetEntity, Range, Category, LengthDependsOn, DisplayName, DataType, ContentSection, DataModel, TableView, Attributes, DefaultValue, Description, RegularExpression, ComlexType } from '@progress/sitefinity-widget-designers';
 import { BackgroundStyle } from '../styling/background-style';
 import { CustomCssModel } from '../styling/custom-css-model';
 import { OffsetStyle } from '../styling/offset-style';
@@ -56,7 +56,29 @@ export class SectionEntity {
     @DataType('dictionary')
     ColumnsBackground: { [key: string]: SimpleBackgroundStyle } | null = null;
 
-    CustomCssClass?: { [key: string]: CustomCssModel };
-    Labels?: { [key: string]: LabelModel };
+    @Category('Advanced')
+    @DisplayName('Tag name')
+    @Description('Up to twenty characters in the range a-z are allowed')
+    @RegularExpression('^[a-zA-Z]{1,20}$', 'Up to twenty characters in the range a-z and A-Z are allowed.')
+    TagName: string = 'section';
+
+    @Category('Advanced')
+    @ContentSection('Custom CSS classes')
+    @DisplayName('Custom CSS class for...')
+    @LengthDependsOn('ColumnsCount', 'Column', 'Column ', '[{"Name": "Section", "Title": "Section"}]')
+    @DataModel(CustomCssModel)
+    @DataType(ComlexType.Dictionary)
+    CustomCssClass: { [key: string]: CustomCssModel } | null = null;
+
+    @Category('Advanced')
+    @ContentSection('Labels')
+    @DisplayName('Section and column labels')
+    @Description('Custom labels are displayed in the page editor for your convenience. They do not appear on the public site. You can change the generic name for this section and add column labels in the section widget.')
+    @LengthDependsOn('ColumnsCount', 'Column', 'Column ', '[{"Name": "Section", "Title": "Section"}]')
+    @DataModel(LabelModel)
+    @DataType(ComlexType.Dictionary)
+    Labels: { [key: string]: LabelModel } | null = null;
+
+    @Attributes({DisplayName: 'Column', DisplayTitle: 'Column ', PropertyName: 'ColumnsCount', ExtraRecords: '[{\"Name\": \"Section\", \"Title\": \"Section\"}]'})
     Attributes?: { [key: string]: Array<{ Key: string, Value: string }> };
 }

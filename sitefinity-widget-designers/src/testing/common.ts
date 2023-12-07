@@ -55,7 +55,7 @@ export function verifySection(widgetName: string, actual: SectionModel, expected
 
 export function verifyProperty(actual: PropertyModel, expected: PropertyModel) {
     expect(actual.Name).toBe(expected.Name);
-    expect(actual.Title).toBe(expected.Title);
+    expect(`${actual.Name} => ${actual.Title}`).toBe(`${expected.Name} => ${expected.Title}`);
     // null fallbacks to string in iris
     if (!(actual.Type === 'string' && expected.Type === null)) {
         expect(`${actual.Name} type: ${actual.Type}`)
@@ -82,7 +82,7 @@ export function verifyProperty(actual: PropertyModel, expected: PropertyModel) {
                 case 'Meta_ViewMetaData':
                 case 'Meta_Choices':
                 case 'Meta_Choice_Choices':
-                    verifyJsonProperty(actual.Name, actualElement, expectedElement);
+                    verifyJsonProperty(`${actual.Name}.${key}`, actualElement, expectedElement);
                 break;
                 default:
                     expect(`${actual.Name}:${key} -> ${actualElement}`).toBe(`${expected.Name}:${key} -> ${expectedElement}`);

@@ -13,6 +13,7 @@ export const keys = {
     dataModel: 'DataModel',
     content: 'Content',
     conditionalVisibility: 'ConditionalVisibility',
+    colorPaletteColors: 'ColorPaletteColors',
     choices: 'Choices',
     choice: 'Choice',
     cssClasses: 'CssFieldMappings',

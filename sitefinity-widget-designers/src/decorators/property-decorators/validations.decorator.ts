@@ -41,6 +41,20 @@ export function Range(min: number, max: number, errorMessage?: string) {
     });
 }
 
+export function MaxLength(length: number, errorMessage?: string) {
+    return PropertyDecoratorBase((target: any, propName: string) => {
+        const range: {[key: string]: any} = {
+            'MaxValue': length
+        };
+
+        if (errorMessage) {
+            range['RangeErrorMsg'] = errorMessage;
+        }
+
+        WidgetMetadata.registerPropertyMetadata(target, propName, keys.validations, range);
+    });
+}
+
 export function RegularExpression(regExp: string, errorMessage?: string) {
     return PropertyDecoratorBase((target: any, propName: string) => {
         const regex: {[key: string]: any} = {

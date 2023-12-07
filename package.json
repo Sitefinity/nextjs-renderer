@@ -35,6 +35,7 @@
         "build": "next build",
         "lint": "eslint . --quiet",
         "lint:fix": "eslint . --fix",
-        "test": "jest"
+        "test": "jest",
+        "test:watch": "jest --watch"
     }
 }

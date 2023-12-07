@@ -15,6 +15,12 @@
         "command": "npm run test:watch"
       },
       {
+        "name": "Full tests: debug",
+        "type": "node-terminal",
+        "request": "launch",
+        "command": "npm run test:watch"
+      },
+      {
         "name": "Next.js: debug client-side",
         "type": "chrome",
         "request": "launch",

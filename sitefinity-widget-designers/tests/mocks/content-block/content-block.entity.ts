@@ -1,4 +1,4 @@
-import { Attributes, Category, Choices, ContentContainer, ContentSection, DataModel, DataType, Description, DisplayName, KnownFieldTypes, MaxLength, Model, Offset_Choices, RegularExpression, TableView, WidgetEntity } from '../../../src/decorators/';
+import { Attributes, Category, Choices, ContentContainer, ContentSection, DataModel, DataType, Description, DisplayName, KnownFieldTypes, MaxLength, Model, Offset_Choices, RegularExpression, TableView, WidgetEntity, WidgetLabel } from '../../../src/decorators/';
 
 export type OffsetSize = 'None' | 'M' | 'L' | 'S';
 
@@ -34,10 +34,7 @@ export class ContentBlockEntity {
     SharedContentID: string | null = null;
 
     //Advanced
-    @Category('Advanced')
-    @DisplayName('Label')
-    @Description('Custom labels are displayed in the page editor for your convenience. You can change the generic name with a specific one only for this widget.')
-    @MaxLength(30)
+    @WidgetLabel()
     SfWidgetLabel: string = 'Content block';
 
     @Category('Advanced')

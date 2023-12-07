@@ -228,7 +228,7 @@ export class EntityMetadataGenerator {
                 newKey = `${propName}_${key}`;
             } else if (propName === keys.choices && key === 'Choices') {
                 newKey = `Meta_${propName}`;
-            } else if ((propName === keys.fieldMappings || propName === keys.cssClasses)&& key === 'ViewMetaData') {
+            } else if ((propName === keys.fieldMappings || propName === keys.cssClasses)&& key === 'ViewMetaData' || key === 'ColorPaletteColors') {
                 newKey = `Meta_${key}`;
             } else {
                 newKey =  `Meta_${propName}_${key}`;
@@ -283,9 +283,9 @@ export interface PropertyModel {
     Name: string,
     DefaultValue: any,
     Title: string,
-    SectionName: string,
-    CategoryName: string,
-    Type: string;
+    SectionName: string | null,
+    CategoryName: string | null,
+    Type: string | null;
     Properties: { [key: string]: any },
     TypeChildProperties: PropertyModel[],
     Position: number,

@@ -1,6 +1,6 @@
 import { ContentListSettings, MixedContentContext } from '../../editor';
 import { CombinedFilter, FilterClause, RelationFilter } from '../../rest-sdk';
-import { Attributes, Category, Choices, ConditionalVisibility, Content, ContentSection, CssFieldMappings, DataModel, DataType, DefaultValue, Description, DisplayName, FallbackToDefaultValueWhenEmpty, FieldMapping, FieldMappings, KnownFieldTypes, MaxLength, Model, SectionsOrder, WidgetEntity } from '@progress/sitefinity-widget-designers';
+import { Attributes, Category, Choices, ConditionalVisibility, Content, ContentSection, CssFieldMappings, DataModel, DataType, DefaultValue, Description, DisplayName, FallbackToDefaultValueWhenEmpty, FieldMapping, FieldMappings, KnownFieldTypes, MaxLength, Model, SectionsOrder, WidgetEntity, WidgetLabel } from '@progress/sitefinity-widget-designers';
 
 @Model()
 export class ListFieldMapping {
@@ -116,10 +116,7 @@ export class ContentListEntity {
     DetailPage: MixedContentContext | null = null;
 
     // Advanced
-    @Category('Advanced')
-    @DisplayName('Label')
-    @Description('Custom labels are displayed in the page editor for your convenience. You can change the generic name with a specific one only for this widget.')
-    @MaxLength(30)
+    @WidgetLabel()
     SfWidgetLabel: string = 'Content list';
 
     @Category('Advanced')

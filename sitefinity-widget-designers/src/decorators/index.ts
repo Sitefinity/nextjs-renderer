@@ -1,6 +1,7 @@
 export * from './property-decorators/attributes.decorator';
 export * from './property-decorators/category.decorator';
 export * from './property-decorators/choice.decorator';
+export * from './property-decorators/color-palette.decorator';
 export * from './property-decorators/conditional-visibility.decorator';
 export * from './property-decorators/content-section.decorator';
 export * from './property-decorators/content.decorator';
@@ -17,11 +18,11 @@ export * from './property-decorators/fallback-to-default-when-empty.decorator';
 export * from './property-decorators/field-mappings.decorator';
 export * from './property-decorators/group.decorator';
 export * from './property-decorators/length-depends-on.decorator';
-export * from './property-decorators/max-length.decorator';
 export * from './property-decorators/margins.decorator';
 export * from './property-decorators/media-item.decorator';
 export * from './property-decorators/placeholder.decorator';
 export * from './property-decorators/table-view.decorator';
 export * from './property-decorators/validations.decorator';
+export * from './property-decorators/widget-label.decorator';
 
 export * from './widget-entity.decorator';

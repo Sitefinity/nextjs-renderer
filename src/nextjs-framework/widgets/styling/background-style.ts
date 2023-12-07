@@ -1,23 +1,23 @@
 import { SdkItem } from '../../rest-sdk';
 import { ImagePosition } from './image-position';
-import { Choices, ConditionalVisibility, DataModel, DataType, DisplayName, KnownFieldTypes, MediaItem, Model, SdkItemModel } from '@progress/sitefinity-widget-designers';
+import { Choices, ColorPalette, ConditionalVisibility, DataModel, DataType, DisplayName, KnownFieldTypes, MediaItem, Model, SdkItemModel } from '@progress/sitefinity-widget-designers';
+import { StylingConfig } from './styling-config';
 
 @Model()
 export class BackgroundStyle {
     @DisplayName('Type')
     @DataType(KnownFieldTypes.ChipChoice)
-    @Choices({
-        Choices: [
+    @Choices([
             { Value: 'None' },
             { Value: 'Color' },
             { Value: 'Image' },
             { Value: 'Video' }
-        ]
-    })
+        ])
     BackgroundType: 'None' | 'Color' | 'Image' | 'Video' = 'None';
 
     @DisplayName('Value')
     @DataType(KnownFieldTypes.Color)
+    @ColorPalette('Default', StylingConfig)
     @ConditionalVisibility({
         conditions: [ { fieldName: 'BackgroundType', operator: 'Equals', value: 'Color' } ]
     })
@@ -43,13 +43,11 @@ export class BackgroundStyle {
 
     @DisplayName(' ')
     @DataType(KnownFieldTypes.Choices)
-    @Choices({
-        Choices: [
+    @Choices([
             { Value: 'Fill'},
             { Value: 'Center'},
             { Value: 'Cover'}
-        ]
-    })
+        ])
     @ConditionalVisibility({
         conditions: [ { fieldName: 'BackgroundType', operator: 'Equals', value: 'Image' } ]
     })

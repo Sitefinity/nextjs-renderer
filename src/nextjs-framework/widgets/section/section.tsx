@@ -76,7 +76,7 @@ function populateColumns(context: WidgetContext<SectionEntity>): ColumnHolder[] 
                 currentTitle = currentName;
             }
 
-            column.Attributes['data-sfplaceholderlabel'] = currentTitle;
+            column.Attributes['data-sfplaceholderlabel'] = currentTitle!;
         }
 
         if (properties.Attributes && properties.Attributes.hasOwnProperty(currentName)) {
@@ -144,7 +144,7 @@ function populateSection(properties: SectionEntity): Promise<SectionHolder> {
     }
 
     if (properties.CustomCssClass && properties.CustomCssClass.hasOwnProperty(sectionKey)) {
-        sectionClasses.push(properties.CustomCssClass[sectionKey].Class);
+        sectionClasses.push(properties.CustomCssClass[sectionKey].Class!);
     }
 
     if (!properties.SectionBackground) {
