@@ -5,21 +5,26 @@ import { PageItem, RestService, RestSdkTypes } from '../../rest-sdk';
 
 export async function LanguageSelector(props: WidgetContext<LanguageSelectorEntity>) {
     const context = props.requestContext;
-    const cultures = context.pageNode.Site.Cultures;
+    if (!context.layout) {
+        throw 'Layout is undefined';
+    }
+
+    const cultures = context.layout.Site.Cultures;
+    const layoutId = context.layout.Id;
+    const culture = context.culture;
     let values: PageItem[] = [];
 
-    if (context.pageNode != null) {
-        const allBatches = cultures.map((culture: string)=>{
-            return RestService.getItem(
-                RestSdkTypes.Pages,
-                context.pageNode.Id,
-                context.pageNode.Provider,
-                culture
-            );
-        });
+    const allBatches = cultures.map((culture: string)=>{
+        return RestService.getItem(
+            RestSdkTypes.Pages,
+            layoutId,
+            '',
+            culture
+        );
+    });
 
-        values = await Promise.all(allBatches);
-    }
+    values = await Promise.all(allBatches);
+
     const languageNames = new Intl.DisplayNames(['en'], {
         type: 'language'
       });
@@ -28,7 +33,7 @@ export async function LanguageSelector(props: WidgetContext<LanguageSelectorEnti
         const entry: LanguageEntry = {
             Name: languageNames.of(culture) || culture,
             Value: culture,
-            Selected: culture === context.pageNode.Culture,
+            Selected: culture === culture,
             PageUrl: values[index] ? values[index].ViewUrl : ''
         };
 

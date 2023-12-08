@@ -21,7 +21,9 @@ export interface PageLayoutServiceResponse {
     TemplateName?: string,
     DetailItem: DetailItem,
     UrlParameters: string[],
-    Scripts: PageScript[]
+    Scripts: PageScript[],
+    Fields: { [key: string]: any },
+    Site: any
 }
 
 export interface PageScript {

@@ -3,6 +3,7 @@ import { RequestContext } from '../editor/request-context';
 import { WidgetContext } from '../editor/widget-framework/widget-context';
 import { WidgetModel } from '../editor/widget-framework/widget-model';
 import { WidgetRegistry } from '../editor/widget-framework/widget-registry';
+import { LazyComponent } from '../widgets/lazy/lazy-component';
 
 export class RenderWidgetService {
     public static widgetRegistry: WidgetRegistry;
@@ -20,7 +21,12 @@ export class RenderWidgetService {
         };
 
         try {
-            const element = React.createElement(registeredType.componentType, { key: widgetModel.Id, ...propsForWidget });
+            let componentType = registeredType.componentType;
+            if (!requestContext.isEdit && widgetModel.Lazy) {
+                componentType = LazyComponent;
+            }
+
+            const element = React.createElement(componentType, { key: widgetModel.Id, ...propsForWidget });
             return element;
         } catch (err) {
             if (requestContext.isEdit) {

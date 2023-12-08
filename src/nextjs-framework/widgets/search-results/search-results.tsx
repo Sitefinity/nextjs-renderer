@@ -33,7 +33,13 @@ export async function SearchResults(props: WidgetContext<SearchResultsEntity>) {
     const context = props.requestContext;
     const searchParams = context.searchParams || {};
     const restService = props.restService || SearchResultsService;
-    const cultures = context.pageNode.Site.Cultures;
+
+    if (!context.layout) {
+        throw 'Layout is undefined';
+    }
+
+    const cultures = context.layout.Site.Cultures;
+    const culture = context.layout.Culture;
     const languageNames = new Intl.DisplayNames(['en'], {
         type: 'language'
       });
@@ -42,7 +48,7 @@ export async function SearchResults(props: WidgetContext<SearchResultsEntity>) {
         const entry: LanguageEntry = {
             Name: languageNames.of(culture) || culture,
             Value: culture,
-            Selected: culture === context.pageNode.Culture,
+            Selected: culture === culture,
             PageUrl: ''
         };
 

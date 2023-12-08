@@ -5,18 +5,18 @@ import { BreadcrumbEntity, BreadcrumbIncludeOption } from './breadcrumb';
 export class BreadcrumbRestService {
 
     static getItems(entity: BreadcrumbEntity, requestContext: RequestContext): {value: CollectionResponse<SdkItem>[]} {
-        if (entity && requestContext.pageNode) {
+        if (entity && requestContext.layout) {
             const getAllArgs: {[key: string]: boolean | string} = {
                 addStartingPageAtEnd: entity.AddCurrentPageLinkAtTheEnd || true,
                 addHomePageAtBeginning: entity.AddHomePageLinkAtBeginning || true,
                 includeGroupPages: entity.IncludeGroupPages || false,
-                currentPageId: requestContext.pageNode.Id
+                currentPageId: requestContext.layout.Id
             };
 
 
-            if (requestContext.pageNode.DetailItem !== null && entity.AllowVirtualNodes) {
-                    let stringifiedItem = requestContext.pageNode.DetailItem;
-                    getAllArgs['detailItemInfo'] = stringifiedItem;
+            if (requestContext.layout.DetailItem !== null && entity.AllowVirtualNodes) {
+                    let stringifiedItem = requestContext.layout.DetailItem;
+                    getAllArgs['detailItemInfo'] = JSON.stringify(stringifiedItem);
                 }
 
             if (entity.BreadcrumbIncludeOption === BreadcrumbIncludeOption.SpecificPagePath
@@ -26,7 +26,7 @@ export class BreadcrumbRestService {
 
             if (requestContext) {
                 const queryString =  new URLSearchParams(requestContext.searchParams);
-                const url = `${requestContext.pageNode.MetaInfo.CanonicalUrl}?${queryString}`;
+                const url = `${requestContext.layout.MetaInfo.CanonicalUrl}?${queryString}`;
 
                 getAllArgs['currentPageUrl'] = encodeURIComponent(url).toLowerCase();
             }
