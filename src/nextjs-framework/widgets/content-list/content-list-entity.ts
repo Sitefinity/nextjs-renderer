@@ -48,7 +48,7 @@ export class ContentListEntity {
             { Title: 'List with image', Value: 'ListWithImage'},
             { Title: 'List with summary', Value: 'ListWithSummary'}
         ])
-    SfViewName: string = 'List template';
+    SfViewName: string = 'CardsList';
 
     @DisplayName('Field mapping')
     @ContentSection('Select content to display', 2)

@@ -14,9 +14,9 @@ export class ThumbnailItem {
     @DataType('string')
     OriginalUrl?: string;
 
-    Width?: number = 0;
+    Width: number = 0;
 
-    Height?: number = 0;
+    Height: number = 0;
 
     @DataType('string')
     MimeType?: string;

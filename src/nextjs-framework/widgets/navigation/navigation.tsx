@@ -8,7 +8,7 @@ import { Accordion } from './accordion';
 import { Vertical } from './vertical';
 import { VerticalSitemap } from './vertical-sitemap';
 import { Tabs } from './tabs';
-import { WidgetContext, classNames, getCustomAttributes, htmlAttributes } from '../../editor';
+import { MixedContentContext, WidgetContext, classNames, getCustomAttributes, htmlAttributes } from '../../editor';
 
 export type NavgationViewName = 'Horizontal' | 'Tabs' | 'Accordion' | 'Vertical' | 'VerticalSitemap';
 
@@ -42,13 +42,13 @@ export async function Navigation(props: WidgetContext<NavigationEntity>) {
 }
 
 export class NavigationEntity {
-    SelectionMode?: any;
-    SelectedPage?: any;
-    CustomSelectedPages?: any;
+    SelectionMode?: string;
+    SelectedPage?: MixedContentContext;
+    CustomSelectedPages?: MixedContentContext;
     SfViewName?: string;
     LevelsToInclude?: number;
     ShowParentPage?: boolean;
-    Attributes?: any[];
+    Attributes?: { [key: string]: Array<{ Key: string, Value: string}> };
     WrapperCssClass?: string;
     Margins?: OffsetStyle;
 }

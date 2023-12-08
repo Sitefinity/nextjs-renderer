@@ -25,21 +25,16 @@ jobs:
       - name: Generate Certificates
         run: dotnet dev-certs https --export-path ./cert/cert.crt --no-password --format PEM
 
-      - name: Build Sitefinity React Framework
-        run: |
-          npm ci
-          npm run build
-
       - name: Install
         run: npm ci
+
+      - name: Build Sitefinity React Framework
+        run: npm run build
+        env:
+          ENVIRONMENT: production
 
       - name: Lint
         run: npm run lint
 
       - name: Test
         run: npm run test
-
-      - name: Build
-        run: npm run build
-        env:
-          ENVIRONMENT: production

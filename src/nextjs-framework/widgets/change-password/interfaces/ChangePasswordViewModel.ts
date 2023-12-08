@@ -2,7 +2,7 @@ import { ChangePasswordLabels } from './ChangePasswordLabels';
 
 export interface ChangePasswordViewModel {
     ChangePasswordHandlerPath: string;
-    Attributes: any[] | undefined;
+    Attributes?: { [key: string]: Array<{ Key: string, Value: string}> };
     Labels: ChangePasswordLabels;
     VisibilityClasses: {[key: number]: string;};
     InvalidClass: string;

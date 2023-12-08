@@ -164,7 +164,7 @@ export async function ResetPassword(props: WidgetContext<ResetPasswordEntity>) {
 }
 
 export class ResetPasswordEntity {
-    Attributes?: any[];
+    Attributes?: { [key: string]: Array<{ Key: string, Value: string}> };
     CssClass?: string;
     Margins?: OffsetStyle;
     LoginPage?: MixedContentContext;

@@ -82,5 +82,5 @@ export class ImageEntity {
     CssClass?: string;
 
     @Attributes('Image')
-    Attributes?: any[];
+    Attributes?: { [key: string]: Array<{ Key: string, Value: string}> };
 }

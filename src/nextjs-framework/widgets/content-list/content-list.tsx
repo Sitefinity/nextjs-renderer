@@ -10,7 +10,7 @@ import { DetailItem, WidgetContext, htmlAttributes } from '../../editor';
 export async function ContentList(props: WidgetContext<ContentListEntity>) {
     const attributes = htmlAttributes(props);
     const properties = props.model.Properties;
-
+    const context = props.requestContext;
     let data: any = {
         detailModel: null,
         listModel: null,
@@ -18,8 +18,8 @@ export async function ContentList(props: WidgetContext<ContentListEntity>) {
     };
 
     if (properties.ContentViewDisplayMode === 'Automatic') {
-        if (props.requestContext.detailItem) {
-            data.detailModel = await handleDetailView(props.requestContext.detailItem, props);
+        if (context.detailItem) {
+            data.detailModel = await handleDetailView(context.detailItem, props);
         } else {
             data.listModel = await handleListView(props);
         }
@@ -40,7 +40,7 @@ export async function ContentList(props: WidgetContext<ContentListEntity>) {
 
     return (
       <div {...data.attributes as any}>
-        {data.detailModel && <ContentListDetail entity={properties} detailModel={data.detailModel} />}
+        {data.detailModel && <ContentListDetail entity={properties} detailModel={data.detailModel} context={context} />}
         {data.listModel && <ContentListMaster  entity={properties} model={data.listModel} />}
       </div>
     );
@@ -85,7 +85,7 @@ function handleDetailView(detailItem: DetailItem, props: WidgetContext<ContentLi
 
 function handleListView(props: WidgetContext<ContentListEntity>) {
     const listFieldMapping: {[key: string]: string} = {};
-    props.model.Properties.ListFieldMapping?.forEach((entry) => {
+    props.model.Properties.ListFieldMapping!.forEach((entry) => {
         listFieldMapping[entry.FriendlyName!] = entry.Name!;
     });
 

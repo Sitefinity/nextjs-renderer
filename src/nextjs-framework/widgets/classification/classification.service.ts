@@ -1,10 +1,10 @@
 
-import { SdkItem, RestService } from '../../rest-sdk';
-import { ClassificationEntity } from './classification-entity';
+import { RestService } from '../../rest-sdk';
+import { ClassificationEntity, TaxaPageViewModel } from './classification';
 
 export class ClassificationRestService {
 
-    static getTaxons(entity: ClassificationEntity, model?: any): {value: SdkItem[]} {
+    static getTaxons(entity: ClassificationEntity): {value: TaxaPageViewModel[]} {
         const settings = entity.ClassificationSettings;
         if (settings &&  settings.selectedTaxonomyId) {
             const showEmpty = entity.ShowEmpty || false;
@@ -22,12 +22,12 @@ export class ClassificationRestService {
                 '$orderby': orderBy,
                 '@param': `[${(settings.selectedTaxaIds || []).map(x => `'${x}'`).toString()}]`
             };
-            const taxonomyUrl = settings.selectedTaxonomyUrl!;
+            const taxonomyUrl = settings.selectedTaxonomyUrl;
             const contentText = `taxonomyId=${settings.selectedTaxonomyId},selectedTaxaIds=@param,selectionMode='${settings.selectionMode}',contentType='${settings.byContentType}'`;
             const action = 'Default.GetTaxons';
             return RestService.getCustomItems(taxonomyUrl, action, additionalParams, contentText);
 
         }
-        return { value: [] as any };
+        return { value: [] };
     }
 }

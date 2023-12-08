@@ -2,19 +2,25 @@ import React from 'react';
 import { StyleGenerator } from '../styling/style-generator.service';
 import { OffsetStyle } from '../styling/offset-style';
 import { BreadcrumbRestService } from './breadcrumb.service';
-import { WidgetContext, classNames, getCustomAttributes, htmlAttributes } from '../../editor';
+import { MixedContentContext, WidgetContext, classNames, getCustomAttributes, htmlAttributes } from '../../editor';
+import { defaultMixedContent } from '../common/defaults';
 
 const PAGE_MISSING_MESSAGE = 'Breadcrumb is visible when you are on a particular page.';
 
 export async function Breadcrumb(props: WidgetContext<BreadcrumbEntity>) {
     const model = props.model;
-    const properties = model.Properties;
     const dataAttributes = htmlAttributes(props);
+    const entities = {
+        AddHomePageLinkAtBeginning: true,
+        AddCurrentPageLinkAtTheEnd: true,
+        SelectedPage: defaultMixedContent,
+        ...model.Properties
+    };
     const restService = props.restService || BreadcrumbRestService;
-    const items = await restService.getItems(model.Properties, model, props.requestContext);
-    const defaultClass =  properties.WrapperCssClass;
-    const marginClass = properties.Margins && StyleGenerator.getMarginClasses(properties.Margins);
-    const breadcrumbCustomAttributes = getCustomAttributes(properties.Attributes, 'Breadcrumb');
+    const items = await restService.getItems(entities, props.requestContext);
+    const defaultClass =  entities.WrapperCssClass;
+    const marginClass = entities.Margins && StyleGenerator.getMarginClasses(entities.Margins);
+    const breadcrumbCustomAttributes = getCustomAttributes(entities.Attributes, 'Breadcrumb');
 
     dataAttributes['className'] = classNames(
         defaultClass,
@@ -37,7 +43,7 @@ export async function Breadcrumb(props: WidgetContext<BreadcrumbEntity>) {
         <nav aria-label="Full path to the current page">
           <ol className="breadcrumb">
             {
-                        items.value.map((node: any, idx: number) => {
+                        items.value.map((node: { Title: string, ViewUrl: string }, idx: number) => {
                             if (idx === items.value.length - 1) {
                                 return  <li key={idx} className="breadcrumb-item active" aria-current="page">{node.Title}</li>;
                             }
@@ -59,11 +65,11 @@ export class BreadcrumbEntity {
     WrapperCssClass?: string;
     Margins?: OffsetStyle;
     BreadcrumbIncludeOption?: BreadcrumbIncludeOption;
-    SelectedPage?: any; // MixedContentContext
+    SelectedPage?: MixedContentContext;
     AddHomePageLinkAtBeginning?: boolean;
     AddCurrentPageLinkAtTheEnd?: boolean;
     IncludeGroupPages?: boolean;
     AllowVirtualNodes?: boolean;
     SfViewName?: string;
-    Attributes?: any[];
+    Attributes?: { [key: string]: Array<{ Key: string, Value: string}> };
 }
