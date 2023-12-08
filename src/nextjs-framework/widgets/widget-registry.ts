@@ -30,6 +30,7 @@ import { ClassificationEntity } from './classification/classification-entity';
 import { ContentListEntity } from './content-list/content-list-entity';
 import { SectionEntity } from './section/section.entity';
 import { ImageEntity } from './image/image.entity';
+import { ContentBlockEntity } from './content-block/content-block.entity';
 
 export const ReactWidgetRegistry: WidgetRegistry = {
     widgets: {
@@ -123,7 +124,7 @@ export const ReactWidgetRegistry: WidgetRegistry = {
             ssr: true
         },
         'SitefinityContentBlock':  <any>{
-            entity: EntityMetadataGenerator.extractMetadata(ContentBlock),
+            entity: EntityMetadataGenerator.extractMetadata(ContentBlockEntity),
             componentType: ContentBlock,
             editorMetadata: {
                 Title: 'Content block'
