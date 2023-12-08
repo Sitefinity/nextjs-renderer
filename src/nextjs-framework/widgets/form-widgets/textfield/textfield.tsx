@@ -6,6 +6,7 @@ import { FieldSize } from '../../styling/field-size';
 import { TextFieldService } from './textfield.service';
 import { TextEntityBase } from './interfaces/TextEntityBase';
 import { TextFieldContainer } from './textfield-client';
+import { VisibilityStyle } from '../../styling/visibility-style';
 
 const TextLengthDefaultValidationMessage = '{0} field input is too long';
 const RequiredDefaultValidationMessage = '{0} field is required';
@@ -16,6 +17,7 @@ export async function TextField(props: WidgetContext<TextFieldEntity>) {
 
     const entity = {
         Label: 'Untitled',
+        InputType: TextType.Text,
         TextLengthViolationMessage: TextLengthDefaultValidationMessage,
         RequiredErrorMessage: RequiredDefaultValidationMessage,
         RegularExpressionViolationMessage: RegularExpressionDefaultValidationMessage,
@@ -23,6 +25,7 @@ export async function TextField(props: WidgetContext<TextFieldEntity>) {
         ...props.model.Properties
     };
     const viewModel: any = {...entity};
+    viewModel.InputType = entity.InputType === TextType.Phone ? 'tel' : entity.InputType.toLowerCase();
     viewModel.CssClass = classNames(entity.CssClass, StylingConfig.FieldSizeClasses[entity.FieldSize]);
     viewModel.Label = entity.Label;
     viewModel.PlaceholderText = entity.PlaceholderText;
@@ -42,15 +45,19 @@ export async function TextField(props: WidgetContext<TextFieldEntity>) {
     };
     const textBoxUniqueId = viewModel.SfFieldName;
     const textBoxErrorMessageId = getUniqueId('TextboxErrorMessage');
+    const textBoxInfoMessageId = getUniqueId('TextboxInfo');
     const ariaDescribedByAttribute = viewModel.HasDescription ? `${textBoxUniqueId} ${textBoxErrorMessageId}` : textBoxErrorMessageId;
     const dataAttributes = htmlAttributes(props);
     const defaultRendering = (<>
       <script data-sf-role={`start_field_${textBoxUniqueId}`} data-sf-role-field-name={textBoxUniqueId} />
-      <div className={classNames('mb-3', viewModel.CssClass)} data-sf-role="text-field-container">
+      <div className={classNames('mb-3', viewModel.CssClass,{
+            [StylingConfig.VisibilityClasses[VisibilityStyle.Hidden]]: entity.Hidden
+        })} data-sf-role="text-field-container">
         <label className="h6" htmlFor={textBoxUniqueId}>{viewModel.Label}</label>
         <TextFieldContainer viewModel={viewModel}
           textBoxUniqueId={textBoxUniqueId}
           textBoxErrorMessageId={textBoxErrorMessageId}
+          textBoxInfoMessageId={textBoxInfoMessageId}
           ariaDescribedByAttribute={ariaDescribedByAttribute}
             />
       </div>
@@ -62,7 +69,7 @@ export async function TextField(props: WidgetContext<TextFieldEntity>) {
 }
 
 export interface TextFieldEntity extends TextEntityBase {
-    InputType: TextType;
+    InputType?: TextType;
     RegularExpression: string;
     RegularExpressionViolationMessage?: string;
 }

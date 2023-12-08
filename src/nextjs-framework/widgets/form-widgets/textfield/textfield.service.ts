@@ -10,7 +10,7 @@ export class TextFieldService {
        }
 
        if (entity.RegularExpression) {
-        validationAttributes['pattern']= entity.RegularExpression;
+          validationAttributes['pattern']= entity.RegularExpression;
        }
 
        return validationAttributes;

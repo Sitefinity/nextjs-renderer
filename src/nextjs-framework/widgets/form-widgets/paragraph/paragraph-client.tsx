@@ -4,9 +4,9 @@ import React, { useContext, useState } from 'react';
 import { classNames } from '../../../editor';
 import { FormContext } from '../../form/form-container';
 
-export function TextFieldContainer(props: any) {
-    const {viewModel, textBoxUniqueId, textBoxErrorMessageId,
-        textBoxInfoMessageId, ariaDescribedByAttribute} = props;
+export function ParagraphClient(props: any) {
+    const {viewModel, paragraphUniqueId, paragraphInfoMessageId,
+        paragraphErrorMessageId, ariaDescribedByAttribute} = props;
     const [inputValue, setInputValue] = React.useState(viewModel.PredefinedValue);
     const { formViewModel, sfFormValueChanged } = useContext(FormContext);
     const [errorMessageText, setErrorMessageText] = useState('');
@@ -63,28 +63,27 @@ export function TextFieldContainer(props: any) {
     };
 
     return (<>
-      <input id={textBoxUniqueId}
-        type={viewModel.InputType}
+      <textarea id={paragraphUniqueId}
         className={classNames('form-control',{
-            [formViewModel.InvalidClass!]: formViewModel.InvalidClass && errorMessageText
-        })}
+                [formViewModel.InvalidClass!]: formViewModel.InvalidClass && errorMessageText
+            })}
         name={viewModel.FieldName}
         placeholder={viewModel.PlaceholderText}
         value={inputValue}
-        data-sf-role="text-field-input"
+        data-sf-role="paragraph-text-field-textarea"
         readOnly={viewModel.Readonly}
         aria-describedby={ariaDescribedByAttribute}
         onChange={handleTextValidation}
         onInput={handleInputEvent}
         onInvalid={handleTextValidation}
-        {...viewModel.ValidationAttributes}
-        />
+        {...viewModel.ValidationAttributes}>{viewModel.PredefinedValue}</textarea>
       { viewModel.HasDescription &&
-        <div id={textBoxInfoMessageId} className="form-text">{viewModel.InstructionalText}</div>
-    }
+        <div id={paragraphInfoMessageId} className="form-text">{viewModel.InstructionalText}</div>
+            }
+      {errorMessageText && <div id={paragraphErrorMessageId} data-sf-role="error-message" role="alert" aria-live="assertive" className="invalid-feedback" >
 
-      {errorMessageText && <div id={textBoxErrorMessageId} data-sf-role="error-message" role="alert" aria-live="assertive" className="invalid-feedback" >
         {errorMessageText}
       </div>}
+
     </>);
 }
