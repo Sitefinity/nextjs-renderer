@@ -1,8 +1,6 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { PageParams } from './page-params';
-import { ReactWidgetRegistry } from '../widgets/widget-registry';
-import { WidgetExecutionError } from '../widgets/error/widget-execution-error-component';
 import { PageLayoutServiceResponse, LayoutService, GetAllArgs } from '../rest-sdk/services';
 import { ServiceMetadata } from '../rest-sdk/service-metadata';
 import { RootUrlService } from '../rest-sdk/root-url.service';
@@ -100,6 +98,6 @@ export async function initRestSdk() {
 }
 
 export function initRendering(widgetRegistry: WidgetRegistry, errorComponentType: any) {
-    RenderWidgetService.widgetRegistry = ReactWidgetRegistry;
+    RenderWidgetService.widgetRegistry = widgetRegistry;
     RenderWidgetService.errorComponentType = errorComponentType;
 }

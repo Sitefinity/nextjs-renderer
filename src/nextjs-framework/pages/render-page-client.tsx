@@ -1,7 +1,7 @@
 'use client';
 
 import { RendererContractImpl } from '../services/renderer-contract';
-import { ReactWidgetRegistry } from '../widgets/widget-registry';
+import { widgetRegistry } from '../widgets/widget-registry';
 import { RequestContext } from '../editor';
 import { ServiceMetadataDefinition, RootUrlService, ServiceMetadata } from '../rest-sdk';
 import { PageLayoutServiceResponse } from '../rest-sdk/services';
@@ -10,7 +10,7 @@ import { RenderWidgetService } from '../services/render-widget-service';
 export function RenderPageClient({ layout, metadata, context }: { layout: PageLayoutServiceResponse, metadata: ServiceMetadataDefinition, context: RequestContext }) {
     RootUrlService.rootUrl = `${process.env['NEXT_PUBLIC_CMS_URL'] || ''}`;
 
-    RenderWidgetService.widgetRegistry = ReactWidgetRegistry;
+    RenderWidgetService.widgetRegistry = widgetRegistry;
     ServiceMetadata.serviceMetadataCache = metadata;
 
     if (context.isEdit && typeof window !== 'undefined') {

@@ -26,6 +26,12 @@ import { MultipleChoice } from './form-widgets/multiple-choice/multiple-choice';
 import { Paragraph } from './form-widgets/paragraph/paragraph';
 import { SubmitButton } from './form-widgets/submit-button/submit-button';
 import { TextField } from './form-widgets/textfield/textfield';
+import { EntityMetadataGenerator } from '@progress/sitefinity-widget-designers';
+import { ClassificationEntity } from './classification/classification-entity';
+import { ContentListEntity } from './content-list/content-list-entity';
+import { SectionEntity } from './section/section.entity';
+import { ImageEntity } from './image/image.entity';
+import { ContentBlockEntity } from './content-block/content-block.entity';
 
 import sitefinityCallToActionJson from './call-to-action/designer-metadata.json';
 import sitefinityClassificationJson from './classification/designer-metadata.json';
@@ -37,13 +43,6 @@ import sitefinityChangePasswordJson from './change-password/designer-metadata.js
 import sitefinityResetPasswordJson from './reset-password/designer-metadata.json';
 import sitefinityRegistrationJson from './registration/designer-metadata.json';
 import sitefinityLanguageSelectorJson from './language-selector/designer-metadata.json';
-
-import { EntityMetadataGenerator } from '@progress/sitefinity-widget-designers';
-import { ClassificationEntity } from './classification/classification-entity';
-import { ContentListEntity } from './content-list/content-list-entity';
-import { SectionEntity } from './section/section.entity';
-import { ImageEntity } from './image/image.entity';
-import { ContentBlockEntity } from './content-block/content-block.entity';
 import sitefinityDocumentListJson from './document-list/designer-metadata.json';
 import sitefinitySearchResultsListJson from './search-results/designer-metadata.json';
 import sitefinitySearchFacetsListJson from './search-facets/designer-metadata.json';
@@ -58,7 +57,7 @@ import sitefinityParagraphJson from './form-widgets/paragraph/designer-metadata.
 import sitefinitySubmitButtonJson from './form-widgets/submit-button/designer-metadata.json';
 import sitefinityTextFieldJson from './form-widgets/textfield/designer-metadata.json';
 
-export const ReactWidgetRegistry: WidgetRegistry = {
+export const widgetRegistry: WidgetRegistry = {
     widgets: {
         'SitefinityBreadcrumb':  <any>{
             designerMetadata: sitefinityBreadcrumbJson,
