@@ -240,9 +240,9 @@ export class RestService {
         return allFields;
     }
 
-    private static buildQueryParams(queryParams: { [key: string]: string | undefined }) {
+    public static buildQueryParams(queryParams: { [key: string]: string | undefined }) {
         if (!queryParams) {
-            return null;
+            return '';
         }
 
         let result = '';

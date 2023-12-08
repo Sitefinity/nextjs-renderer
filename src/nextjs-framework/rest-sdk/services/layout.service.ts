@@ -5,7 +5,7 @@ import { LazyComponentsResponse } from './lazy-components.response';
 
 export class LayoutService {
 
-    public static get(pagePath: string, action: string | null, headers: { [key: string]: string } = {}): Promise<PageLayoutServiceResponse> {
+    public static get(pagePath: string, queryParams: { [key: string]: string } = {}): Promise<PageLayoutServiceResponse> {
         let url = null;
 
         let indexOfSitefinityTemplate = pagePath.indexOf('Sitefinity/Template/');
@@ -21,19 +21,19 @@ export class LayoutService {
 
             url = `/api/default/templates/${id}/Default.Model()`;
         } else {
-            url = `/api/default/pages/Default.Model(url=@param)?@param='${encodeURIComponent(pagePath)}'`;
+            const whiteListedParams = ['segment', 'sfversion', 'abTestVariationKey', 'sfaction'];
+            let whitelistedParamDic: { [key:string]: string | undefined } = {};
+            whiteListedParams.forEach(x => {
+                whitelistedParamDic[x] = queryParams[x];
+            });
+
+            let queryParamString = RestService.buildQueryParams(whitelistedParamDic);
+            queryParamString = queryParamString.replace('?', '&');
+
+            url = `/api/default/pages/Default.Model(url=@param)?@param='${encodeURIComponent(pagePath)}'${queryParamString}`;
         }
 
-        if (action) {
-            let concatChar = '?';
-            if (url.indexOf(concatChar) !== -1) {
-                concatChar = '&';
-            }
-
-            url += `${concatChar}sfaction=${action}`;
-        }
-
-        return RestService.sendRequest({ url: RootUrlService.rootUrl + url, headers });
+        return RestService.sendRequest({ url: RootUrlService.rootUrl + url });
     }
 
     public static getLazyComponents(pagePathAndQuery: string): Promise<LazyComponentsResponse> {
