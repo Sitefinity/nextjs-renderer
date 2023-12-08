@@ -1,7 +1,7 @@
 import React from 'react';
 import { WidgetContext, classNames, getUniqueId, htmlAttributes } from '../../../editor';
 import { FileTypes } from './interface/FileTypes';
-import { NumericRange } from './interface/NumericRange';
+import { NumericRange } from '../common/NumericRange';
 
 export async function FileUpload(props: WidgetContext<FileUploadEntity>) {
     const entity = {

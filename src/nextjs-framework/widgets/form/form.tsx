@@ -11,6 +11,7 @@ import { RenderWidgetService } from '../../services/render-widget-service';
 import { QueryParamNames } from '../../rest-sdk/query-params-names';
 import { FormModel } from './interfaces/FormModel';
 import { VisibilityStyle } from '../styling/visibility-style';
+import { FromContainer } from './form-container';
 
 
 export async function Form(props: WidgetContext<FormEntity>) {
@@ -18,6 +19,7 @@ export async function Form(props: WidgetContext<FormEntity>) {
         SuccessMessage: 'Thank you for filling out our form.',
         ...props.model.Properties
     };
+
     const context = props.requestContext;
     const searchParams = context.searchParams;
 
@@ -91,6 +93,7 @@ export async function Form(props: WidgetContext<FormEntity>) {
     formDataAttributes['data-sfhasquickeditoperation'] = true;
 
     return (<form action={viewModel.SubmitUrl} method="post" {...formDataAttributes}  noValidate={true}>
+      { entity.Heading && <h3 className="qu-heading-medium">{entity.Heading}</h3>}
       <div
         className={containerClass}
         data-sf-role="form-container"
@@ -122,12 +125,12 @@ export async function Form(props: WidgetContext<FormEntity>) {
         { viewModel.SkipDataSubmission &&
         <span data-sf-role="skip-data-submission" />
         }
-        <div data-sf-role="fields-container" >
+        <FromContainer viewModel={viewModel}>
           { viewModel.FormModel && viewModel.FormModel.ViewComponentsFlat.map((widgetModel: WidgetModel<any>, idx: number)=>{
                return RenderWidgetService.createComponent(widgetModel, context);
             })
           }
-        </div>
+        </FromContainer>
       </div>
     </form>);
 }
@@ -149,6 +152,7 @@ export interface FormViewModel {
 }
 
 export interface FormEntity {
+    Heading?: string;
     SelectedItems: MixedContentContext;
     FormSubmitAction: FormSubmitAction;
     SuccessMessage?: string;
