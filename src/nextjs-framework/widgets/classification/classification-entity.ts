@@ -15,15 +15,13 @@ export class ClassificationSettingsInterface {
     @DataType('string')
     selectedTaxonomyTitle: string | null = null;
 
-    @Choices({
-        Choices: [
-            { Value: 'All' },
-            { Value: 'TopLevel' },
-            { Value: 'UnderParent' },
-            { Value: 'Selected' },
-            { Value: 'ByContentType' }
-        ]
-    })
+    @Choices([
+        { Value: 'All' },
+        { Value: 'TopLevel' },
+        { Value: 'UnderParent' },
+        { Value: 'Selected' },
+        { Value: 'ByContentType' }
+    ])
     selectionMode: string = 'All';
 
     @DataType('enumerable')
@@ -55,34 +53,28 @@ export class ClassificationEntity {
     @ContentSection('List settings', 1)
     @DisplayName('Display item count')
     @DataType(KnownFieldTypes.ChipChoice)
-    @Choices({
-        Choices: [
-            { Title: 'Yes', Value: true},
-            { Title: 'No', Value: false}
-        ]
-    })
+    @Choices([
+        { Title: 'Yes', Value: true},
+        { Title: 'No', Value: false}
+    ])
     ShowItemCount: boolean = true;
 
     @ContentSection('List settings', 2)
     @DisplayName('Display empty tags or categories')
     @DataType(KnownFieldTypes.ChipChoice)
-    @Choices({
-        Choices: [
-            { Title: 'Yes', Value: true},
-            { Title: 'No', Value: false}
-        ]
-    })
+    @Choices([
+        { Title: 'Yes', Value: true},
+        { Title: 'No', Value: false}
+    ])
     ShowEmpty: boolean = false;
 
     // Display settings
     @ContentSection('Display settings')
     @DisplayName('Classification template')
     @DataType('viewSelector')
-    @Choices({
-        Choices: [
-            { Value: 'Default'}
-        ]
-    })
+    @Choices([
+        { Value: 'Default'}
+    ])
     SfViewName: string = 'Default';
 
     @ContentSection('Display settings', 1)
