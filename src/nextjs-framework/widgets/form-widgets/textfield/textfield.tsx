@@ -5,7 +5,7 @@ import { StylingConfig } from '../../styling/styling-config';
 import { FieldSize } from '../../styling/field-size';
 import { TextFieldService } from './textfield.service';
 import { TextEntityBase } from './interfaces/TextEntityBase';
-import { TextFieldContainer } from './textfield-client';
+import { TextFieldClient } from './textfield-client';
 import { VisibilityStyle } from '../../styling/visibility-style';
 
 const TextLengthDefaultValidationMessage = '{0} field input is too long';
@@ -54,7 +54,7 @@ export async function TextField(props: WidgetContext<TextFieldEntity>) {
             [StylingConfig.VisibilityClasses[VisibilityStyle.Hidden]]: entity.Hidden
         })} data-sf-role="text-field-container">
         <label className="h6" htmlFor={textBoxUniqueId}>{viewModel.Label}</label>
-        <TextFieldContainer viewModel={viewModel}
+        <TextFieldClient viewModel={viewModel}
           textBoxUniqueId={textBoxUniqueId}
           textBoxErrorMessageId={textBoxErrorMessageId}
           textBoxInfoMessageId={textBoxInfoMessageId}

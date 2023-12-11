@@ -1,6 +1,7 @@
 import React from 'react';
 import { WidgetContext, classNames, getUniqueId, htmlAttributes } from '../../../editor';
 import { ChoiceEntityBase } from '../interfaces/ChoiceEntityBase';
+import { CheckboxesClient } from './checkboxes-client';
 
 export async function Checkboxes(props: WidgetContext<CheckboxesEntity>) {
     const entity = {
@@ -30,6 +31,7 @@ export async function Checkboxes(props: WidgetContext<CheckboxesEntity>) {
             break;
     }
     const checkboxUniqueId = viewModel.SfFieldName;
+    const inputCheckboxUniqueId = getUniqueId(checkboxUniqueId);
     const otherChoiceOptionId = getUniqueId(`choiceOption-other-${checkboxUniqueId}`);
     const dataAttributes = htmlAttributes(props);
     const defaultRendering = (<>
@@ -45,30 +47,13 @@ export async function Checkboxes(props: WidgetContext<CheckboxesEntity>) {
         <p className="text-muted small" id={`choice-field-description-${checkboxUniqueId}`}>{viewModel.InstructionalText}</p>
                 }
 
-        <div className={layoutClass}>
-          { viewModel.Choices.map((choiceOption: {Name: string, Value: string}, idx: number)=>{
-                let choiceOptionId = getUniqueId(`choiceOption-${idx}-${checkboxUniqueId}`);
-
-                return (<div className={`form-check ${innerColumnClass}`} key={idx}>
-                  <input className="form-check-input" type="checkbox" name={checkboxUniqueId} id={choiceOptionId}
-                    value={choiceOption.Value} data-sf-role="checkboxes-field-input"  required={viewModel.Required} />
-                  <label className="form-check-label" htmlFor={choiceOptionId}>
-                    {choiceOption.Name}
-                  </label>
-                </div>);
-            })
-        }
-          { viewModel.HasAdditionalChoice &&
-
-          <div className={`form-check ${innerColumnClass}`}>
-            <input className="form-check-input mt-1" type="checkbox" name={checkboxUniqueId} id={otherChoiceOptionId}
-              data-sf-role="checkboxes-field-input" required={viewModel.Required} />
-            <label className="form-check-label" htmlFor={otherChoiceOptionId}>Other</label>
-            <input type="text" style={{display: 'none'}} className="form-control" data-sf-role="choice-other-input" />
-          </div>
-                    }
-        </div>
-        <div data-sf-role="error-message" role="alert" aria-live="assertive" className="invalid-feedback" />
+        <CheckboxesClient viewModel={viewModel}
+          checkboxUniqueId={checkboxUniqueId}
+          inputCheckboxUniqueId={inputCheckboxUniqueId}
+          otherChoiceOptionId={otherChoiceOptionId}
+          innerColumnClass={innerColumnClass}
+          layoutClass={layoutClass}
+           />
       </fieldset>
       <script data-sf-role={`end_field_${checkboxUniqueId}`} />
     </>

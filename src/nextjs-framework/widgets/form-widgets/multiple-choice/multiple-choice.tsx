@@ -1,6 +1,7 @@
 import React from 'react';
 import { WidgetContext, classNames, getUniqueId, htmlAttributes } from '../../../editor';
 import { ChoiceEntityBase } from '../interfaces/ChoiceEntityBase';
+import { MultipleChoiceClient } from './multiple-choice-client';
 
 export async function MultipleChoice(props: WidgetContext<MultipleChoiceEntity>) {
     const entity = {
@@ -10,7 +11,6 @@ export async function MultipleChoice(props: WidgetContext<MultipleChoiceEntity>)
         ...props.model.Properties
     };
     const viewModel: any = {...entity};
-
 
     let layoutClass = '';
     let innerColumnClass = '';
@@ -31,6 +31,7 @@ export async function MultipleChoice(props: WidgetContext<MultipleChoiceEntity>)
             break;
     }
     const multipleChoiceUniqueId = viewModel.SfFieldName;
+    const inputMultipleChoiceUniqueId = getUniqueId(multipleChoiceUniqueId);
     const otherChoiceOptionId = getUniqueId(`choiceOption-other-${multipleChoiceUniqueId}`);
     const dataAttributes = htmlAttributes(props);
     const defaultRendering = (
@@ -45,32 +46,14 @@ export async function MultipleChoice(props: WidgetContext<MultipleChoiceEntity>)
 
           { viewModel.InstructionalText &&
             <p className="text-muted small" id={`choice-field-description-${multipleChoiceUniqueId}`}>{viewModel.InstructionalText}</p>
-                }
-
-          <div className={layoutClass}>
-            { viewModel.Choices.map((choiceOption: {Name: string, Value: string}, idx: number)=>{
-                let choiceOptionId = getUniqueId(`choiceOption-${idx}-${multipleChoiceUniqueId}`);
-
-                return (<div className={`form-check ${innerColumnClass}`} key={idx}>
-                  <input className="form-check-input" type="radio" name={multipleChoiceUniqueId} id={choiceOptionId}
-                    value={choiceOption.Value} data-sf-role="multiple-choice-field-input" required={viewModel.Required} />
-                  <label className="form-check-label" htmlFor={choiceOptionId}>
-                    {choiceOption.Name}
-                  </label>
-                </div>);
-            })
-        }
-            { viewModel.HasAdditionalChoice &&
-
-              <div className={`form-check ${innerColumnClass}`}>
-                <input className="form-check-input mt-1" type="radio" name={multipleChoiceUniqueId} id={otherChoiceOptionId}
-                  data-sf-role="multiple-choice-field-input" required={viewModel.Required} />
-                <label className="form-check-label" htmlFor={otherChoiceOptionId}>Other</label>
-                <input type="text" style={{display: 'none'}} className="form-control" data-sf-role="choice-other-input" />
-              </div>
-                    }
-          </div>
-          <div data-sf-role="error-message" role="alert" aria-live="assertive" className="invalid-feedback" />
+          }
+          <MultipleChoiceClient viewModel={viewModel}
+            multipleChoiceUniqueId={multipleChoiceUniqueId}
+            inputMultipleChoiceUniqueId={inputMultipleChoiceUniqueId}
+            otherChoiceOptionId={otherChoiceOptionId}
+            innerColumnClass={innerColumnClass}
+            layoutClass={layoutClass}
+           />
         </fieldset>
         <script data-sf-role={`end_field_${multipleChoiceUniqueId}`} />
       </>

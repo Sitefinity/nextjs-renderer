@@ -4,7 +4,7 @@ import React, { useContext, useState } from 'react';
 import { classNames } from '../../../editor';
 import { FormContext } from '../../form/form-container';
 
-export function TextFieldContainer(props: any) {
+export function TextFieldClient(props: any) {
     const {viewModel, textBoxUniqueId, textBoxErrorMessageId,
         textBoxInfoMessageId, ariaDescribedByAttribute} = props;
     const [inputValue, setInputValue] = React.useState(viewModel.PredefinedValue);

@@ -76,7 +76,7 @@ export function ParagraphClient(props: any) {
         onChange={handleTextValidation}
         onInput={handleInputEvent}
         onInvalid={handleTextValidation}
-        {...viewModel.ValidationAttributes}>{viewModel.PredefinedValue}</textarea>
+        {...viewModel.ValidationAttributes} />
       { viewModel.HasDescription &&
         <div id={paragraphInfoMessageId} className="form-text">{viewModel.InstructionalText}</div>
             }

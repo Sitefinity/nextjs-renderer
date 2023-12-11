@@ -6,6 +6,8 @@ import { StylingConfig } from '../styling/styling-config';
 
 export const FormContext = createContext<{
     formViewModel: FormViewModel,
+    validationMessages?: {[key:string]: boolean},
+    hiddenInputs?: {[key:string]: boolean},
     sfFormValueChanged: ()=>void
 }>({
     formViewModel: {
