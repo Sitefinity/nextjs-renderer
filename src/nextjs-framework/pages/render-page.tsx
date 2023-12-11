@@ -7,6 +7,7 @@ import { PageParams } from './page-params';
 import { ServiceMetadata } from '../rest-sdk';
 import { RenderWidgetService } from '../services/render-widget-service';
 import { RenderLazyWidgets as RenderLazyWidgets } from './render-lazy-widgets';
+import { RenderPageScripts } from './render-page-scripts';
 
 export async function RenderPage({ params, searchParams }: PageParams) {
     const layout = await pageLayout({ params, searchParams });
@@ -29,6 +30,7 @@ export async function RenderPage({ params, searchParams }: PageParams) {
 
     return (
       <>
+        <RenderPageScripts layout={layout} />
         {isEdit && <RenderPageClient metadata={ServiceMetadata.serviceMetadataCache} layout={layout} context={appState.requestContext} />}
         {!isEdit && appState.requestContext.layout?.ComponentContext.HasLazyComponents && <RenderLazyWidgets metadata={ServiceMetadata.serviceMetadataCache} layout={layout} context={appState.requestContext} />}
         {appState.widgets.map((child) => {
