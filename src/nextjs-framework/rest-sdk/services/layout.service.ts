@@ -5,7 +5,7 @@ import { LazyComponentsResponse } from './lazy-components.response';
 
 export class LayoutService {
 
-    public static get(pagePath: string, action: string | null, headers: { [key: string]: string } = {}): Promise<PageLayoutServiceResponse> {
+    public static get(pagePath: string, queryParams: { [key: string]: string } = {}): Promise<PageLayoutServiceResponse> {
         let url = null;
 
         let indexOfSitefinityTemplate = pagePath.indexOf('Sitefinity/Template/');
@@ -21,19 +21,26 @@ export class LayoutService {
 
             url = `/api/default/templates/${id}/Default.Model()`;
         } else {
-            url = `/api/default/pages/Default.Model(url=@param)?@param='${encodeURIComponent(pagePath)}'`;
+            const whiteListedParams = ['sfaction', 'sfversion', 'segment', 'isBackend', 'sf_site', 'sf_site_temp', 'sf-auth', 'abTestVariationKey', 'sf-content-action', 'sf-lc-status'];
+            let whitelistedParamDic: { [key:string]: string | undefined } = {};
+            whiteListedParams.forEach(x => {
+                whitelistedParamDic[x] = queryParams[x];
+            });
+
+            let pageParamsDic: { [key:string]: string | undefined } = {};
+            Object.keys(queryParams).filter(x => !whiteListedParams.some(y => y === x)).forEach(x => {
+                pageParamsDic[x] = queryParams[x];
+            });
+
+            let sysParamsQueryString = RestService.buildQueryParams(whitelistedParamDic);
+            sysParamsQueryString = sysParamsQueryString.replace('?', '&');
+
+            let pagePramsQueryString = RestService.buildQueryParams(pageParamsDic);
+
+            url = `/api/default/pages/Default.Model(url=@param)?@param='${encodeURIComponent(pagePath + pagePramsQueryString)}'${sysParamsQueryString}`;
         }
 
-        if (action) {
-            let concatChar = '?';
-            if (url.indexOf(concatChar) !== -1) {
-                concatChar = '&';
-            }
-
-            url += `${concatChar}sfaction=${action}`;
-        }
-
-        return RestService.sendRequest({ url: RootUrlService.rootUrl + url, headers });
+        return RestService.sendRequest({ url: RootUrlService.rootUrl + url });
     }
 
     public static getLazyComponents(pagePathAndQuery: string): Promise<LazyComponentsResponse> {

@@ -90,7 +90,7 @@ describe('should render breadcrumb', () => {
         };
 
         const requestContext = {
-            pageNode: {
+            layout: {
                 '@odata.context': 'https://localhost:5001/api/default/$metadata#Telerik.Sitefinity.Renderer.Web.Services.Dto.PageDtoWithContext',
                 Culture: 'en',
                 SiteId: '4c922118-f076-4e24-9193-93e004f50107',
@@ -366,7 +366,7 @@ const model: WidgetModel<BreadcrumbEntity> = {
 };
 
 const requestContext: RequestContext = {
-    pageNode: {
+    layout: {
         Culture: 'en',
         SiteId: '4c922118-f076-4e24-9193-93e004f50107',
         MetadataHash: '-1129976431',

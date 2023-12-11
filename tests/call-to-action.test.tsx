@@ -51,7 +51,7 @@ const requestContext: RequestContext = {
     isPreview: false,
     isLive: false,
     culture: 'en',
-    pageNode: {
+    layout: {
         Culture: 'en',
         SiteId: '4c922118-f076-4e24-9193-93e004f50107',
         MetadataHash: '-1129976431',

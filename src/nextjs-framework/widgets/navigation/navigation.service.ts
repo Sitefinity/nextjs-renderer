@@ -18,7 +18,7 @@ export class NavigationRestService {
                 levelsToInclude: entity.LevelsToInclude || 1,
                 showParentPage: entity.ShowParentPage || false,
                 selectedPageId: selectedPageId,
-                'sf_page_node':requestContext.pageNode.Id,
+                'sf_page_node':requestContext.layout.Id,
                 selectedPages: entity.CustomSelectedPages ? JSON.stringify(entity.CustomSelectedPages.ItemIdsOrdered): undefined
             };
             const action = 'Default.HierarhicalByLevelsResponse';

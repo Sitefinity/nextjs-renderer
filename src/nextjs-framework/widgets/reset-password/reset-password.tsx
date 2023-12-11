@@ -118,8 +118,8 @@ export async function ResetPassword(props: WidgetContext<ResetPasswordEntity>) {
             viewModel.Error = true;
         }
     } else {
-        if (context.isLive) {
-            viewModel.ResetPasswordUrl = context.pageNode.MetaInfo.CanonicalUrl;
+        if (context.isLive && context.layout) {
+            viewModel.ResetPasswordUrl = context.layout.MetaInfo.CanonicalUrl;
         }
     }
 

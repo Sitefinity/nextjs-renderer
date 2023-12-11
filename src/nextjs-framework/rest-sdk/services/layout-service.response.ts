@@ -1,5 +1,6 @@
 import { DetailItem } from '../../editor/detail-item';
 import { WidgetModel } from '../../editor/widget-framework/widget-model';
+import { PageScript } from './scripts';
 
 export interface PageLayoutServiceResponse {
     Culture: string;
@@ -21,13 +22,9 @@ export interface PageLayoutServiceResponse {
     TemplateName?: string,
     DetailItem: DetailItem,
     UrlParameters: string[],
-    Scripts: PageScript[]
-}
-
-export interface PageScript {
-    Source: string,
-    Attributes: [{ Key: string, Value: string }]
-    Value: string
+    Scripts: PageScript[],
+    Fields: { [key: string]: any },
+    Site: any
 }
 
 export interface ComponentContext {

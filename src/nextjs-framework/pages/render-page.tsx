@@ -6,6 +6,8 @@ import { AppState } from './app-state';
 import { PageParams } from './page-params';
 import { ServiceMetadata } from '../rest-sdk';
 import { RenderWidgetService } from '../services/render-widget-service';
+import { RenderLazyWidgets as RenderLazyWidgets } from './render-lazy-widgets';
+import { RenderPageScripts } from './render-page-scripts';
 
 export async function RenderPage({ params, searchParams }: PageParams) {
     const layout = await pageLayout({ params, searchParams });
@@ -15,7 +17,7 @@ export async function RenderPage({ params, searchParams }: PageParams) {
 
     let appState : AppState = {
         requestContext: {
-            pageNode: layout,
+            layout: layout,
             searchParams: searchParams,
             detailItem: layout.DetailItem,
             culture: layout.Culture,
@@ -28,7 +30,9 @@ export async function RenderPage({ params, searchParams }: PageParams) {
 
     return (
       <>
-        <RenderPageClient metadata={ServiceMetadata.serviceMetadataCache} layout={layout} context={appState.requestContext} />
+        <RenderPageScripts layout={layout} />
+        {isEdit && <RenderPageClient metadata={ServiceMetadata.serviceMetadataCache} layout={layout} context={appState.requestContext} />}
+        {!isEdit && appState.requestContext.layout?.ComponentContext.HasLazyComponents && <RenderLazyWidgets metadata={ServiceMetadata.serviceMetadataCache} layout={layout} context={appState.requestContext} />}
         {appState.widgets.map((child) => {
                 return RenderWidgetService.createComponent(child, appState.requestContext);
             })}

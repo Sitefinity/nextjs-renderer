@@ -137,7 +137,11 @@ export async function Registration(props: WidgetContext<RegistrationEntity>) {
         viewModel.RequiresQuestionAndAnswer = result.RequiresQuestionAndAnswer;
         viewModel.ActivationMethod = result.ActivationMethod;
         if (context.isLive) {
-            viewModel.ActivationPageUrl = context.pageNode.MetaInfo.CanonicalUrl;
+            if (!context.layout) {
+                throw 'Layout is undefined';
+            }
+
+            viewModel.ActivationPageUrl = context.layout.MetaInfo.CanonicalUrl;
         }
     }
 

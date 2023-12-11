@@ -1,7 +1,8 @@
+import { PageLayoutServiceResponse, SdkItem } from '../rest-sdk';
 import { DetailItem } from './detail-item';
 
 export interface RequestContext {
-    pageNode?: any;
+    layout?: PageLayoutServiceResponse;
     searchParams?: { [key: string]: string; };
     detailItem: DetailItem | null;
     culture: string;
