@@ -50,7 +50,7 @@ const model: WidgetModel<LoginFormEntity> = {
 };
 
 const requestContext: RequestContext = {
-    pageNode: {
+    layout: {
         '@odata.context': 'https://localhost:5001/api/default/$metadata#Telerik.Sitefinity.Renderer.Web.Services.Dto.PageDtoWithContext',
         Culture: 'en',
         SiteId: '4c922118-f076-4e24-9193-93e004f50107',

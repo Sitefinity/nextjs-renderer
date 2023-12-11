@@ -53,9 +53,13 @@ export async function Form(props: WidgetContext<FormEntity>) {
             }
         }
 
+        if (!context.layout) {
+            throw 'Layout is undefined';
+        }
+
         viewModel.FormModel = restService.buildFormComponents(formModel);
         viewModel.Rules = restService.getFormRulesViewModel(formDto);
-        viewModel.SubmitUrl = `/forms/submit/${formDto.Name}/${context.culture}?${searchParams![QueryParamNames.Site]}=${context.pageNode.SiteId}&${searchParams![QueryParamNames.SiteTempFlag]}=true`;
+        viewModel.SubmitUrl = `/forms/submit/${formDto.Name}/${context.culture}?${searchParams![QueryParamNames.Site]}=${context.layout.SiteId}&${searchParams![QueryParamNames.SiteTempFlag]}=true`;
 
         if (entity.FormSubmitAction === FormSubmitAction.Redirect) {
             viewModel.CustomSubmitAction = true;
