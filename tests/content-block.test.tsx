@@ -158,7 +158,7 @@ const requestContext: RequestContext = {
         sf_site: '4c922118-f076-4e24-9193-93e004f50107',
         sf_page_node: '831706cd-10e1-4184-b2e5-ef9f9ad0fdb5'
     },
-    pageNode: {
+    layout: {
         '@odata.context': 'https://localhost:5001/api/default/$metadata#Telerik.Sitefinity.Renderer.Web.Services.Dto.PageDtoWithContext',
         Culture: 'en',
         SiteId: '4c922118-f076-4e24-9193-93e004f50107',
