@@ -16,7 +16,7 @@ export class BreadcrumbRestService {
 
             if (requestContext.layout.DetailItem !== null && entity.AllowVirtualNodes) {
                     let stringifiedItem = requestContext.layout.DetailItem;
-                    getAllArgs['detailItemInfo'] = stringifiedItem;
+                    getAllArgs['detailItemInfo'] = JSON.stringify(stringifiedItem);
                 }
 
             if (entity.BreadcrumbIncludeOption === BreadcrumbIncludeOption.SpecificPagePath
