@@ -1,5 +1,5 @@
 import { keys } from '../../symbols/known-keys';
-import { WidgetMetadata } from '../../metadata/widget-metadata';
+import { PropertyMergeStrategy, WidgetMetadata } from '../../metadata/widget-metadata';
 import { PropertyDecoratorBase } from './common/property-decorator-wrapper';
 
 export enum KnownFieldTypes {
@@ -33,7 +33,7 @@ export enum BasicValueTypes {
 
 export function DataType(customDataType: KnownFieldTypes | ComlexType | string) {
     return PropertyDecoratorBase((target: any, propName: string) => {
-        WidgetMetadata.registerPropertyMetadata(target, propName, keys.type, customDataType, true);
+        WidgetMetadata.registerPropertyMetadata(target, propName, keys.type, customDataType, PropertyMergeStrategy.Override);
 
         if (customDataType ===  KnownFieldTypes.Html) {
             WidgetMetadata.registerPropertyMetadata(target, propName, 'DynamicLinksContainer', {HasLinks : true});
