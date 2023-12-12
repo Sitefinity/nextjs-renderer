@@ -45,7 +45,6 @@ import sitefinityRegistrationJson from './registration/designer-metadata.json';
 import sitefinityLanguageSelectorJson from './language-selector/designer-metadata.json';
 import sitefinityDocumentListJson from './document-list/designer-metadata.json';
 import sitefinitySearchResultsListJson from './search-results/designer-metadata.json';
-import sitefinitySearchFacetsListJson from './search-facets/designer-metadata.json';
 import sitefinityFormListJson from './form/designer-metadata.json';
 import sitefinityCheckboxesJson from './form-widgets/checkboxes/designer-metadata.json';
 import sitefinityFormContentBlockJson from './form-widgets/content-block/designer-metadata.json';
@@ -56,6 +55,7 @@ import sitefinityMultipleChoiceJson from './form-widgets/multiple-choice/designe
 import sitefinityParagraphJson from './form-widgets/paragraph/designer-metadata.json';
 import sitefinitySubmitButtonJson from './form-widgets/submit-button/designer-metadata.json';
 import sitefinityTextFieldJson from './form-widgets/textfield/designer-metadata.json';
+import { SearchFacetsEntity } from './search-facets/search-facets.entity';
 
 export const widgetRegistry: WidgetRegistry = {
     widgets: {
@@ -196,7 +196,7 @@ export const widgetRegistry: WidgetRegistry = {
             ssr: true
         },
         'SitefinityFacets':  <any>{
-            designerMetadata: sitefinitySearchFacetsListJson,
+            designerMetadata: EntityMetadataGenerator.extractMetadata(SearchFacetsEntity),
             componentType: SearchFacets,
             editorMetadata: {
                 Title: 'Search facets',
