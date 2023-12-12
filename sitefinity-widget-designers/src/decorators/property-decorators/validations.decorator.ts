@@ -1,5 +1,5 @@
 import { keys } from '../../symbols/known-keys';
-import { WidgetMetadata } from '../../metadata/widget-metadata';
+import { PropertyMergeStrategy, WidgetMetadata } from '../../metadata/widget-metadata';
 import { PropertyDecoratorBase } from './common/property-decorator-wrapper';
 
 export function Required(errorMessage?: string) {
@@ -12,7 +12,7 @@ export function Required(errorMessage?: string) {
             required['RequiredErrorMsg'] = errorMessage;
         }
 
-        WidgetMetadata.registerPropertyMetadata(target, propName, keys.validations, required);
+        WidgetMetadata.registerPropertyMetadata(target, propName, keys.validations, required, PropertyMergeStrategy.Merge);
     });
 }
 
@@ -22,7 +22,7 @@ export function Readonly() {
             'Readonly': true
         };
 
-        WidgetMetadata.registerPropertyMetadata(target, propName, keys.validations, readonly);
+        WidgetMetadata.registerPropertyMetadata(target, propName, keys.validations, readonly, PropertyMergeStrategy.Merge);
     });
 }
 
@@ -37,7 +37,7 @@ export function Range(min: number, max: number, errorMessage?: string) {
             range['RangeErrorMsg'] = errorMessage;
         }
 
-        WidgetMetadata.registerPropertyMetadata(target, propName, keys.validations, range);
+        WidgetMetadata.registerPropertyMetadata(target, propName, keys.validations, range, PropertyMergeStrategy.Merge);
     });
 }
 
@@ -51,7 +51,7 @@ export function MaxLength(length: number, errorMessage?: string) {
             range['RangeErrorMsg'] = errorMessage;
         }
 
-        WidgetMetadata.registerPropertyMetadata(target, propName, keys.validations, range);
+        WidgetMetadata.registerPropertyMetadata(target, propName, keys.validations, range, PropertyMergeStrategy.Merge);
     });
 }
 
@@ -65,6 +65,30 @@ export function RegularExpression(regExp: string, errorMessage?: string) {
             regex['RegexErrorMsg'] = errorMessage;
         }
 
-        WidgetMetadata.registerPropertyMetadata(target, propName, keys.validations, regex);
+        WidgetMetadata.registerPropertyMetadata(target, propName, keys.validations, regex, PropertyMergeStrategy.Merge);
+    });
+}
+
+export function StringLength(max: number, errorMessage?: string) {
+    return PropertyDecoratorBase((target: any, propName: string) => {
+        const range: {[key: string]: any} = {
+            'MinValue': 0,
+            'MaxValue': max
+        };
+        if (errorMessage) {
+            range['StringLengthErrorMsg'] = errorMessage;
+        }
+
+        WidgetMetadata.registerPropertyMetadata(target, propName, keys.validations, range, PropertyMergeStrategy.Merge);
+    });
+}
+
+export function DecimalPlaces(decimalPlaces: number) {
+    return PropertyDecoratorBase((target: any, propName: string) => {
+        const data: {[key: string]: any} = {
+            'DecimalPlaces': decimalPlaces
+        };
+
+        WidgetMetadata.registerPropertyMetadata(target, propName, keys.validations, data, PropertyMergeStrategy.Merge);
     });
 }

@@ -10,12 +10,12 @@ export class LengthDependsOnSettings {
 }
 
 export function LengthDependsOn(settings: LengthDependsOnSettings): any;
-export function LengthDependsOn(propertyName: string, displayName: string, displayTitle: string, extraRecords?: string | null): any;
+export function LengthDependsOn(propertyName: string | null, displayName: string, displayTitle: string, extraRecords?: string | null): any;
 export function LengthDependsOn(config: unknown, displayName?: string, displayTitle?: string, extraRecords: string | null = null) {
     return PropertyDecoratorBase((target: any, propName: string) => {
         let lengthDependsOn: LengthDependsOnSettings | null = null;
 
-        if (typeof(config) === 'object') {
+        if (typeof(config) === 'object' && config !== null) {
             lengthDependsOn = config as LengthDependsOnSettings;
         } else {
             const propertyName = config as string;

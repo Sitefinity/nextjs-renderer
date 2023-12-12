@@ -1,4 +1,4 @@
-import { WidgetMetadata } from '../metadata/widget-metadata';
+import { PropertyMergeStrategy, WidgetMetadata } from '../metadata/widget-metadata';
 import { keys } from '../symbols/known-keys';
 import { getBasicType } from './property-decorators/common/utls';
 
@@ -38,13 +38,13 @@ export function Model() {
             }
 
             if (metaDescriptor[p]?.value?.type === 'object') {
-                WidgetMetadata.registerPrototypePropertyMetadata(target, p, 'type', type, true);
+                WidgetMetadata.registerPrototypePropertyMetadata(target, p, 'type', type, PropertyMergeStrategy.Override);
             }
 
             const typeName = getBasicType(type);
 
             if (typeName) {
-                WidgetMetadata.registerPrototypePropertyMetadata(target, p, keys.type, typeName, false);
+                WidgetMetadata.registerPrototypePropertyMetadata(target, p, keys.type, typeName, PropertyMergeStrategy.Skip);
             }
 
             let defaultValue = value;
@@ -52,9 +52,9 @@ export function Model() {
                 defaultValue = defaultValue ? 'True' : 'False';
             }
 
-            WidgetMetadata.registerPrototypePropertyMetadata(target, p, keys.name, p, false);
-            WidgetMetadata.registerPrototypePropertyMetadata(target, p, keys.title, p, false);
-            WidgetMetadata.registerPrototypePropertyMetadata(target, p, keys.defaultValue, defaultValue, false);
+            WidgetMetadata.registerPrototypePropertyMetadata(target, p, keys.name, p, PropertyMergeStrategy.Skip);
+            WidgetMetadata.registerPrototypePropertyMetadata(target, p, keys.title, p, PropertyMergeStrategy.Skip);
+            WidgetMetadata.registerPrototypePropertyMetadata(target, p, keys.defaultValue, defaultValue, PropertyMergeStrategy.Skip);
         });
     };
 }

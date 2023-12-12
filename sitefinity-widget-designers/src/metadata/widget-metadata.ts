@@ -1,5 +1,11 @@
 import { keys } from '../symbols/known-keys';
 
+export enum PropertyMergeStrategy {
+    Skip,
+    Override,
+    Merge,
+}
+
 export class WidgetMetadata {
     public static registerPrototype (target: any) {
         this.register(target.prototype);
@@ -13,16 +19,21 @@ export class WidgetMetadata {
         this.registerProperty(target.prototype, key, value);
     }
 
-    public static registerPropertyMetadata (target: any, propName: string, key: string, value: any, override = true) {
+    public static registerPropertyMetadata (target: any, propName: string, key: string, value: any, override: PropertyMergeStrategy = PropertyMergeStrategy.Override) {
         this.register(target);
         this.registerPropertyObject(target, propName);
 
-        if (target[keys.metadata][propName][key] === undefined || override) {
+        if (target[keys.metadata][propName][key] === undefined || override === PropertyMergeStrategy.Override) {
             target[keys.metadata][propName][key] = value;
+        }
+
+        if (override === PropertyMergeStrategy.Merge) {
+            const currentValue = target[keys.metadata][propName][key];
+            target[keys.metadata][propName][key] = Object.assign({}, currentValue, value);
         }
     }
 
-    public static registerPrototypePropertyMetadata (target: any, propName: string, key: string, value: any, override = true) {
+    public static registerPrototypePropertyMetadata (target: any, propName: string, key: string, value: any, override: PropertyMergeStrategy = PropertyMergeStrategy.Override) {
         this.registerPropertyMetadata(target.prototype, propName, key, value, override);
     }
 

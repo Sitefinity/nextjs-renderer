@@ -27,9 +27,13 @@ export enum ComlexType {
     Dictionary = 'dictionary'
 }
 
+export enum BasicValueTypes {
+    StringArray = 'System.String[]'
+}
+
 export function DataType(customDataType: KnownFieldTypes | ComlexType | string) {
     return PropertyDecoratorBase((target: any, propName: string) => {
-        WidgetMetadata.registerPropertyMetadata(target, propName, keys.type, customDataType);
+        WidgetMetadata.registerPropertyMetadata(target, propName, keys.type, customDataType, true);
 
         if (customDataType ===  KnownFieldTypes.Html) {
             WidgetMetadata.registerPropertyMetadata(target, propName, 'DynamicLinksContainer', {HasLinks : true});
@@ -50,7 +54,7 @@ export function DataModel(model: any) {
         if (metadata) {
             if (Array.isArray(value)) {
                 metadata.value['type'] = ComlexType.Enumerable;
-            } else if (typeof(value) === 'object') {
+            } else if (typeof(value) === 'object' && value !== null) {
                 metadata.value['type'] = ComlexType.Complex;
             }
         }

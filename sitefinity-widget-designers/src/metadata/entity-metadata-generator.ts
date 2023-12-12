@@ -1,5 +1,5 @@
 import { getBasicType } from '../decorators/property-decorators/common/utls';
-import { ChoiceSettings, KnownFieldTypes } from '../decorators';
+import { ChoiceSettings, ComlexType as ComplexType, KnownFieldTypes } from '../decorators';
 import { keys } from '../symbols/known-keys';
 
 export class EntityMetadataGenerator {
@@ -135,7 +135,7 @@ export class EntityMetadataGenerator {
             } else if (value != null && typeof(value) === 'object' && key === keys.dataModel) {
                 const dataModelValue = value?.value || value;
                 propertyObject[keys.typeChildProperties] = propertyObject.TypeChildProperties.concat(this.unpackDataModel(dataModelValue));
-                propertyObject[keys.type] ||= dataModelValue['type'];
+                propertyObject[keys.type] ||= dataModelValue['type'] || ComplexType.Complex;
             } else {
                 if (key === keys.defaultValue && propertyMeta[keys.type] === undefined) {
                     const typeName = getBasicType(typeof(value));
