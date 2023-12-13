@@ -41,6 +41,8 @@ export class LayoutService {
             url = '/api/default/pages/Default.Model(url=@param)';
         }
 
+        url += `?@param='${encodeURIComponent(pagePath + pagePramsQueryString)}'${sysParamsQueryString}`;
+
         return RestService.sendRequest({ url: RootUrlService.rootUrl + url });
     }
 
