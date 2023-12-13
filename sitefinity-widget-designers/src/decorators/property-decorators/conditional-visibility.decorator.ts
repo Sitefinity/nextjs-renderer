@@ -13,6 +13,10 @@ export interface Rule {
     inline?: boolean,
 }
 
+/**
+ * Defines the condition for showing/hiding the field
+ * @param {string | Rule} condition The condition for the field's visibility
+ */
 export function ConditionalVisibility(condition: Rule | string) {
     return PropertyDecoratorBase((target: any, propName: string) => {
         if (typeof(condition) === 'object') {

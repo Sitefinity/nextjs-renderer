@@ -15,6 +15,6 @@
       "declaration": true,
       "experimentalDecorators": true
     },
-    "include": ["./src/**/*.ts", "./src/public-api.ts"],
+    "include": ["./src/**/*.ts", "./index.ts"],
     "exclude": ["node_modules"]
   }

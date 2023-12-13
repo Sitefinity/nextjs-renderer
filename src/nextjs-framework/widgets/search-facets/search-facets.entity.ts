@@ -1,4 +1,4 @@
-import { Attributes, Category, Choices, ComlexType, ConditionalVisibility, ContentSection, ContentSectionTitles, DataModel, DataType, DefaultValue, Description, DisplayName, KeysValues, KnownFieldTypes, LengthDependsOn, Margins, Placeholder, PropertyCategory, Required, TableView, ViewSelector, WidgetEntity, WidgetLabel } from '@progress/sitefinity-widget-designers';
+import { Category, Choices, ComlexType, ConditionalVisibility, ContentSection, ContentSectionTitles, DataModel, DataType, DefaultValue, Description, DisplayName, KeysValues, KnownFieldTypes, LengthDependsOn, Margins, Placeholder, PropertyCategory, Required, TableView, ViewSelector, WidgetEntity, WidgetLabel } from '@progress/sitefinity-widget-designers';
 import { OffsetStyle } from '../styling/offset-style';
 import { FacetField } from './interfaces/FacetField';
 

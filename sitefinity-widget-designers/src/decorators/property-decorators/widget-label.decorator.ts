@@ -5,6 +5,13 @@ import { PropertyDecoratorBase } from './common/property-decorator-wrapper';
 import { Description } from './description.decorator';
 import { DisplayName } from './display-name.decorator';
 
+/**
+ * Defines the property as the predefined SfWidgetLabel and adds the appropriate metadata:
+ *  - Category: Advanced
+ *  - Display name: Label
+ *  - Max length: 30
+ *  - Predefined description
+ */
 export function WidgetLabel() {
     return PropertyDecoratorBase((target: any, propName: string) => {
         WidgetMetadata.registerPropertyMetadata(target, propName, keys.maxLength, { Length: 30 });

@@ -2,6 +2,9 @@ import { keys } from '../../symbols/known-keys';
 import { PropertyMergeStrategy, WidgetMetadata } from '../../metadata/widget-metadata';
 import { PropertyDecoratorBase } from './common/property-decorator-wrapper';
 
+/**
+ * Predefined known field types.
+ */
 export enum KnownFieldTypes {
     Html = 'html',
     TextArea = 'textArea',
@@ -21,16 +24,19 @@ export enum KnownFieldTypes {
     Complex = 'complex'
 }
 
+/**
+ * Predefined types of complex fields.
+ */
 export enum ComlexType {
     Complex = 'complex',
     Enumerable = 'enumerable',
     Dictionary = 'dictionary'
 }
 
-export enum BasicValueTypes {
-    StringArray = 'System.String[]'
-}
-
+/**
+ * Defines the property's data type.
+ * @param {(KnownFieldTypes|ComlexType|string)} customDataType The property data type - e.g. 'string', 'boolean', complex type, custom type or anything specific.
+ */
 export function DataType(customDataType: KnownFieldTypes | ComlexType | string) {
     return PropertyDecoratorBase((target: any, propName: string) => {
         WidgetMetadata.registerPropertyMetadata(target, propName, keys.type, customDataType, PropertyMergeStrategy.Override);
@@ -43,6 +49,12 @@ export function DataType(customDataType: KnownFieldTypes | ComlexType | string) 
 
 // TODO: refactor this to assign type not to the original class but to the widget entity's current property
 // provide overloads
+
+/**
+ * Defines the property's data model when the property is not a basic type.
+ * If the property's type is a class or object, it should be referenced here, so its metadata could be populated in the decorated property's metadata.
+ * @param model The class that is used as a model for the properties. It should be decorated with {@link Model} decorator.
+ */
 export function DataModel(model: any) {
     return PropertyDecoratorBase((target: any, propName: string) => {
         const descriptors = Object.getOwnPropertyDescriptors(model.prototype);

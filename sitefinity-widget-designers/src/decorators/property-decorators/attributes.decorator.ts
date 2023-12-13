@@ -19,6 +19,16 @@ export class KeysValues {
     Values: any = null;
 }
 
+/**
+ * Defines that the property represents attributes configuration.
+ * Calls internally {@link Category}, {@link DefaultValue}, {@link DisplayName}, {@link ContentSection}, {@link DataType}, {@link LengthDependsOn}, and {@link DataModel} decorators.
+ * The metadata default tos:
+ *  - Category - 'Advanced'
+ *  - Default value - null
+ *  - Display name - 'Attributes for...'
+ *  - Data type - 'attributes'
+ *  - Data model - {@link KeysValues}
+ */
 export function Attributes(widgetName: string): any;
 export function Attributes(lengthDependsOn: LengthDependsOnSettings): any;
 export function Attributes(widgetName: string, witgetTitle: string): any;

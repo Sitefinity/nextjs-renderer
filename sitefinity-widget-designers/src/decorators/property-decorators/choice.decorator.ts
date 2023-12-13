@@ -2,6 +2,9 @@ import { keys } from '../../symbols/known-keys';
 import { WidgetMetadata } from '../../metadata/widget-metadata';
 import { PropertyDecoratorBase } from './common/property-decorator-wrapper';
 
+/**
+ * Represents a choice item model.
+ */
 export class ChoiceItem {
     Title?: string;
     Name?: string;
@@ -9,6 +12,9 @@ export class ChoiceItem {
     Icon?: string | null = null;
 }
 
+/**
+ * Configuration for a properties' choices metadata.
+ */
 export class ChoiceSettings {
     Choices?: ChoiceItem[] | null = null;
     ServiceUrl?: string | null = null;
@@ -22,6 +28,11 @@ export class ChoiceSettings {
     AllowMultiple?: boolean = false;
 }
 
+/**
+ * Defines the property's choices metadata.
+ * @param {(ChoiceItem[]|ChoiceSettings)} choices Choice items or choice config.
+ * @param {?boolean} allowMultiple Allow multiple choices.
+ */
 export function Choices(choices: ChoiceItem[]): any
 export function Choices(choices: ChoiceItem[], allowMultiple: boolean): any
 export function Choices(settings: ChoiceSettings): any;

@@ -18,6 +18,12 @@ export class CssClassMapping {
     CssClass: string | null = null;
 }
 
+/**
+ * Defines the property as a predefined css field mappings property.
+ * Internally calls {@link DataModel} with {@link CssClassMapping}.
+ * @param {ViewMetaModel} viewMeta View metadata field name to css class mapping.
+ * @param {boolean} showWrapperClasses Should show an option of the wrapper classes.
+ */
 export function CssFieldMappings(viewMeta: ViewMetaModel | null = null, showWrapperClasses: boolean = false) {
     const classes: {[key: string]: any} = {
         'ShowWrapperClasses': showWrapperClasses

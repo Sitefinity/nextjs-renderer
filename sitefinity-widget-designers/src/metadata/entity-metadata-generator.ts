@@ -2,14 +2,27 @@ import { getBasicType } from '../decorators/property-decorators/common/utls';
 import { ChoiceSettings, ComlexType as ComplexType, KnownFieldTypes } from '../decorators';
 import { keys } from '../symbols/known-keys';
 
+/**
+ * Generates the metadata for the widget designer based on a decorated widget entity.
+ */
 export class EntityMetadataGenerator {
-    public static extractMetadata(target: any) {
-        if (target == null) {
+    /**
+     * Compiles the designer metadata from the widget entity.
+     * The passed class should be decorated with {@link WidgetEntity}.
+     * @param widgetEntityClass The widget enitity class.
+     * @returns The generated designer metadata.
+     */
+    public static extractMetadata(widgetEntityClass: any) {
+        if (widgetEntityClass == null) {
             return;
         }
 
-        const descriptors = Object.getOwnPropertyDescriptors(target.prototype);
+        const descriptors = Object.getOwnPropertyDescriptors(widgetEntityClass.prototype);
         const metadata = descriptors[keys.metadata].value;
+
+        if (!metadata) {
+            throw new Error(`The provided entity class does not have registered ${keys.metadata}`);
+        }
 
         const meta = this.buildMetadata(metadata);
 
