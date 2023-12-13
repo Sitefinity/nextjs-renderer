@@ -1,19 +1,38 @@
 {
   "name": "@progress/sitefinity-widget-designers",
-  "version": "0.1.0",
+  "version": "0.0.0-development",
   "private": true,
   "publishConfig": {
     "access": "public"
   },
-  "license": "See license in EULA.md",
-  "dependencies": {
-    "tslib": "2.3.1",
-    "typescript": "5.2.2"
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./lib/esm/types/index.d.ts",
+        "default": "./lib/esm/index.mjs"
+      },
+      "require": {
+        "types": "./lib/cjs/types/index.d.ts",
+        "default": "./lib/cjs/index.js"
+      }
+    }
   },
+  "license": "See license in EULA.md",
   "scripts": {
-    "build": "tsc",
+    "prepack": "npm run build",
+    "build": "npm run build:esm && npm run build:cjs",
+    "build:esm": "tsc -p ./tsconfig.esm.json",
+    "build:cjs": "tsc -p ./tsconfig.cjs.json",
     "test": "jest",
     "test:watch": "jest --watch"
+  },
+  "types": "./lib/cjs/types/index.d.ts",
+  "main": "./lib/cjs/index.js",
+  "files": [
+    "lib/**/*"
+  ],
+  "dependencies": {
+    "typescript": "5.2.2"
   },
   "devDependencies": {
     "@types/jest": "^29.5.10",
