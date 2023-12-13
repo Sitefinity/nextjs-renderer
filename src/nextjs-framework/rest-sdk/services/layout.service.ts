@@ -35,10 +35,10 @@ export class LayoutService {
                 id = pagePath.substring(indexOfGuid, nextIndexOfSlash);
             }
 
-            url = `/api/default/templates/${id}/Default.Model()?@param='${encodeURIComponent(pagePath + pagePramsQueryString)}'${sysParamsQueryString}`;
+            url = `/api/default/templates/${id}/Default.Model()`;
         } else {
 
-            url = `/api/default/pages/Default.Model(url=@param)?@param='${encodeURIComponent(pagePath + pagePramsQueryString)}'${sysParamsQueryString}`;
+            url = '/api/default/pages/Default.Model(url=@param)';
         }
 
         return RestService.sendRequest({ url: RootUrlService.rootUrl + url });
