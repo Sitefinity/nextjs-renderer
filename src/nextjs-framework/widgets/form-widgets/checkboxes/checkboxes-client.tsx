@@ -2,7 +2,7 @@
 
 import React, { useContext, useState } from 'react';
 import { FormContext } from '../../form/form-container';
-import { ChoiceInput } from '../common/ChoiceInput';
+import { ChoiceOption } from '../common/ChoiceOption';
 import { classNames } from '../../../editor';
 
 export function CheckboxesClient(props: any) {
@@ -30,7 +30,7 @@ export function CheckboxesClient(props: any) {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         clearErrorMessage();
 
-        const newInputValues = [...inputValues].map((input:ChoiceInput)=>{
+        const newInputValues = [...inputValues].map((input:ChoiceOption)=>{
             return {
                 ...input,
                 Selected: event.target.value.toString() === input.Value.toString() ? event.target.checked : input.Selected
@@ -61,12 +61,12 @@ export function CheckboxesClient(props: any) {
     }
 
     const hasValueSelected = React.useMemo(()=>{
-        return inputValues.some((i: ChoiceInput)=>i.Selected);
+        return inputValues.some((i: ChoiceOption)=>i.Selected);
     },[inputValues]);
 
     return (<>
       <div className={layoutClass}>
-        { inputValues.map((choiceOption: ChoiceInput, idx: number)=>{
+        { inputValues.map((choiceOption: ChoiceOption, idx: number)=>{
                 let choiceOptionId = `choiceOption-${idx}-${inputCheckboxUniqueId}`;
 
                 return (<div className={`form-check ${innerColumnClass}`} key={idx}>
