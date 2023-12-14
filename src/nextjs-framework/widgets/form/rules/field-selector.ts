@@ -3,7 +3,7 @@ export class FieldSelector {
     public elementSelector;
     public additionalFilter;
 
-    constructor(fieldContainerDataSfRole: string, elementSelector :string, additionalFilter: string) {
+    constructor(fieldContainerDataSfRole: string, elementSelector :string, additionalFilter?: string) {
         this.fieldContainerDataSfRole = fieldContainerDataSfRole;
         this.elementSelector = elementSelector;
         this.additionalFilter = additionalFilter;

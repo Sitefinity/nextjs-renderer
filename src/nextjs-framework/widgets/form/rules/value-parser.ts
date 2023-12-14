@@ -4,10 +4,10 @@ export class ValueParser{
     public escape: boolean;
     public escapeRegEx: RegExp;
 
-    constructor(inputType :string, parser: (value: string)=>string, escape: boolean, escapeRegEx: RegExp) {
+    constructor(inputType :string, parser: (value: string)=>string, escape?: boolean, escapeRegEx?: RegExp) {
         this.inputType = inputType;
         this.parser = parser;
-        this.escape = escape;
+        this.escape = escape || false;
         this.escapeRegEx = escapeRegEx ? escapeRegEx : /[\-\[\]{}()*+?.,\\\^$|#\s]/g;
     }
 
@@ -15,7 +15,7 @@ export class ValueParser{
         return this.inputType === inputType;
     };
 
-    public parse(value: string) {
+    public parse(value: string): string {
         let parsedValue = this.parser(value);
         if (this.escape === true && typeof parsedValue === 'string') {
             return parsedValue.replace(this.escapeRegEx, '\\$&');

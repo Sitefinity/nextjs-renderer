@@ -1,4 +1,5 @@
 import { ConditionEvaluator } from './condition-evaluator';
+import { FormRuleActionExecutorBase } from './extractors/form-rule-action-extractor-base';
 import { FieldSelector } from './field-selector';
 import { ValueParser } from './value-parser';
 
@@ -7,7 +8,7 @@ export class FormRulesSettings {
     public InputTypeParsers: ValueParser[] = [];
     public RuleValueParsers: ValueParser[] = [];
     public FieldSelectors: FieldSelector[] = [];
-    public ActionExecutors: { actionName: string, actionExecutor: string }[] = [];
+    public ActionExecutors: { actionName: string, actionExecutor: FormRuleActionExecutorBase }[] = [];
 
     public addConditionEvaluator (name: string, conditionEvaluator: (a: string, b: string) => {}) {
         this.ConditionEvaluators.push(new ConditionEvaluator(name, conditionEvaluator, this));
@@ -39,7 +40,7 @@ export class FormRulesSettings {
         return null;
     }
 
-    public addActionExecutor (actionName: string, actionExecutor: string) {
+    public addActionExecutor (actionName: string, actionExecutor: FormRuleActionExecutorBase) {
             this.ActionExecutors.push({ actionName: actionName, actionExecutor: actionExecutor });
         }
     public removeActionExecutor (actionName: string) {
@@ -58,7 +59,7 @@ export class FormRulesSettings {
         return null;
     }
 
-    public addInputTypeParser (inputType: string, parser: (value: string) => string, escape: boolean, escapeRegEx: RegExp) {
+    public addInputTypeParser (inputType: string, parser: (value: string) => any, escape?: boolean, escapeRegEx?: RegExp) {
         this.InputTypeParsers.push(new ValueParser(inputType, parser, escape, escapeRegEx));
     }
     public removeInputTypeParser (inputType :string) {
@@ -69,7 +70,7 @@ export class FormRulesSettings {
             }
         }
     }
-    public addRuleValueParser (inputType: string, parser: (value: string) => string, escape: boolean, escapeRegEx: RegExp) {
+    public addRuleValueParser (inputType: string, parser: (value: string) => any, escape?: boolean, escapeRegEx?: RegExp) {
         this.RuleValueParsers.push(new ValueParser(inputType, parser, escape, escapeRegEx));
     }
     public removeRuleValueParser (inputType: string) {
@@ -80,7 +81,7 @@ export class FormRulesSettings {
             }
         }
     }
-    public addFieldSelector (fieldContainerDataSfRole: string, elementSelector: string, additionalFilter: string) {
+    public addFieldSelector (fieldContainerDataSfRole: string, elementSelector: string, additionalFilter?: string) {
         let element = this.FieldSelectors.map(function (e) {
             return e.fieldContainerDataSfRole;
         }).indexOf(fieldContainerDataSfRole);
