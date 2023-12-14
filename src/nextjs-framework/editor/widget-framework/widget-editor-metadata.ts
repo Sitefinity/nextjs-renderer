@@ -4,4 +4,5 @@ export interface EditorMetadata {
     EmptyIconText?: string;
     EmptyIconAction?: 'Edit' | 'None';
     EmptyIcon?: string;
+    ThumbnailUrl?: string;
 }
