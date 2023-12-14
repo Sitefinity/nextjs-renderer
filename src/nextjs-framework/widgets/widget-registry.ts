@@ -68,8 +68,7 @@ export const widgetRegistry: WidgetRegistry = {
             ssr: true
         },
         'SitefinityClassification':  <any>{
-            entity: EntityMetadataGenerator.extractMetadata(ClassificationEntity),
-            designerMetadata: sitefinityClassificationJson,
+            designerMetadata: EntityMetadataGenerator.extractMetadata(ClassificationEntity),
             componentType: Classification,
             editorMetadata: {
                 Title: 'Classification'
@@ -77,7 +76,7 @@ export const widgetRegistry: WidgetRegistry = {
             ssr: true
         },
         'SitefinityImage':  <any>{
-            entity: EntityMetadataGenerator.extractMetadata(ImageEntity),
+            designerMetadata: EntityMetadataGenerator.extractMetadata(ImageEntity),
             componentType: Image,
             editorMetadata: {
                 Title: 'Image'
@@ -149,7 +148,7 @@ export const widgetRegistry: WidgetRegistry = {
             ssr: true
         },
         'SitefinityContentBlock':  <any>{
-            entity: EntityMetadataGenerator.extractMetadata(ContentBlockEntity),
+            designerMetadata: EntityMetadataGenerator.extractMetadata(ContentBlockEntity),
             componentType: ContentBlock,
             editorMetadata: {
                 Title: 'Content block'
@@ -157,7 +156,7 @@ export const widgetRegistry: WidgetRegistry = {
             ssr: true
         },
         'SitefinitySection': <any>{
-            entity: EntityMetadataGenerator.extractMetadata(SectionEntity),
+            designerMetadata: EntityMetadataGenerator.extractMetadata(SectionEntity),
             componentType: Section,
             selectorCategory: 'Layout',
             editorMetadata: {
@@ -166,7 +165,7 @@ export const widgetRegistry: WidgetRegistry = {
             ssr: true
         },
         'SitefinityContentList':  <any>{
-            entity: EntityMetadataGenerator.extractMetadata(ContentListEntity),
+            designerMetadata: EntityMetadataGenerator.extractMetadata(ContentListEntity),
             componentType: ContentList,
             editorMetadata: {
                 Title: 'Content list',

@@ -21,8 +21,7 @@
             }
         ],
         "paths": {
-            "@progress/sitefinity-react-framework": ["./src/nextjs-framework"],
-            "@progress/sitefinity-widget-designers": [ "./sitefinity-widget-designers" ]
+            "@progress/sitefinity-react-framework": ["./src/nextjs-framework"]
         }
     },
     "include": ["next-env.d.ts", "./src/app/*.ts", "./src/app/*.tsx", ".next/types/**/*.ts", "./src/nextjs-framework"],

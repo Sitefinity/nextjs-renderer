@@ -7,7 +7,7 @@ export class RendererContractImpl implements RendererContract {
 
     getWidgetMetadata(args: GetWidgetMetadataArgs): Promise<ComponentMetadata> {
         const widgetRegister = RenderWidgetService.widgetRegistry.widgets[args.widgetName];
-        const designerMetadata = widgetRegister.entity || widgetRegister.designerMetadata;
+        const designerMetadata = widgetRegister.designerMetadata;
         return Promise.resolve(designerMetadata);
     }
 

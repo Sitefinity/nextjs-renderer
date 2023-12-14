@@ -14,9 +14,6 @@
         "declaration": true,
         "incremental": true,
         "experimentalDecorators": true,
-        "paths": {
-          "@progress/sitefinity-widget-designers": [ "../../sitefinity-widget-designers" ],
-        },
         "plugins": [
             {
                 "name": "next"

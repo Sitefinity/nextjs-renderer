@@ -4,6 +4,7 @@ import { WidgetContext } from '../editor/widget-framework/widget-context';
 import { WidgetModel } from '../editor/widget-framework/widget-model';
 import { WidgetRegistry } from '../editor/widget-framework/widget-registry';
 import { LazyComponent } from '../widgets/lazy/lazy-component';
+import { PropertyModel } from '@progress/sitefinity-widget-designers';
 
 export class RenderWidgetService {
     public static widgetRegistry: WidgetRegistry;
@@ -12,7 +13,7 @@ export class RenderWidgetService {
     public static createComponent(widgetModel: WidgetModel<any>, requestContext: RequestContext) {
         const registeredType = RenderWidgetService.widgetRegistry.widgets[widgetModel.Name];
 
-        parseProperties(widgetModel, requestContext, this);
+        parseProperties(widgetModel, registeredType.designerMetadata.PropertyMetadataFlat || []);
 
         const propsForWidget: WidgetContext<any> = {
             metadata: registeredType,
@@ -45,7 +46,15 @@ export class RenderWidgetService {
     }
 }
 
-function parseProperties(widgetModel: WidgetModel<any>, requestContext: RequestContext, renderWidgetService: RenderWidgetService) {
+function parseProperties(widgetModel: WidgetModel<any>, propertiesMetadata: PropertyModel[]) {
+    const defaultValues: {[key: string]: any} = {};
+    propertiesMetadata.forEach(property => {
+        const value = property.DefaultValue;
+        if (value !== undefined) {
+            defaultValues[property.Name] = value;
+        }
+    });
+
     Object.keys(widgetModel.Properties).forEach((key) => {
         try {
             (widgetModel.Properties as any)[key] = JSON.parse((widgetModel.Properties as any)[key]);
@@ -53,5 +62,7 @@ function parseProperties(widgetModel: WidgetModel<any>, requestContext: RequestC
             // console.log('error')
         }
     });
+
+    widgetModel.Properties = Object.assign(defaultValues, widgetModel.Properties);
 }
 

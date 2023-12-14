@@ -38,10 +38,5 @@ next-env.d.ts
 
 /cert
 
-/sitefinity-widget-designers/**/*.js
-/sitefinity-widget-designers/**/*.d.ts
-/sitefinity-widget-designers/dist
-/sitefinity-widget-designers/node_modules
-/sitefinity-widget-designers/coverage
-
 dist-framework
+src/nextjs-framework/node_modules

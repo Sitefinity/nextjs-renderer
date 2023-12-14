@@ -6,5 +6,4 @@ export interface WidgetMetadata {
     selectorCategory?: string;
     editorMetadata?: EditorMetadata;
     ssr?: boolean;
-    entity?: any;
 }
