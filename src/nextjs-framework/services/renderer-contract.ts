@@ -66,7 +66,8 @@ export class RendererContractImpl implements RendererContract {
             if ((widgetEntry.selectorCategory === args.category) || (!widgetEntry.selectorCategory && args.category === 'Content')) {
                 filteredWidgets.push({
                     name: key,
-                    title: widgetEntry.editorMetadata?.Title || key
+                    title: widgetEntry.editorMetadata?.Title || key,
+                    thumbnailUrl: widgetEntry.editorMetadata?.ThumbnailUrl
                 });
             }
         });
