@@ -1,19 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should render content block with empty model 1`] = `
+exports[`Content block render Content property 1`] = `
 <div>
-  <div
-    data-sfhasquickeditoperation="true"
-    data-sfid="731d793d-4fe1-4bf6-878d-7cc973c2be3f"
-    data-sfiscontentwidget="true"
-    data-sfisempty="false"
-    data-sfisemptyvisualhidden="false"
-    data-sfisorphaned="false"
-    data-sfname="SitefinityContentBlock"
-    data-sftitle="Content block"
-    draggable="true"
-  >
+  <div>
     c11
+  </div>
+</div>
+`;
+
+exports[`Content block render with Content item 1`] = `
+<div>
+  <div>
+    Test content block content
   </div>
 </div>
 `;

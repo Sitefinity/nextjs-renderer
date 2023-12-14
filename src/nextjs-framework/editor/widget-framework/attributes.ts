@@ -8,6 +8,10 @@ export type CustomAttribute = {
 };
 
 export function htmlAttributes(widgetContext: WidgetContext<any>, error: string | undefined = undefined) {
+    if (!widgetContext.requestContext.isEdit) {
+        return {};
+    }
+
     const model = widgetContext.model;
     const metadata = widgetContext.metadata;
     const editorMetadata = metadata?.editorMetadata;

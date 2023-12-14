@@ -6,6 +6,7 @@ import { RootUrlService } from './root-url.service';
 import { ServiceMetadata } from './service-metadata';
 import { CreateArgs } from './services/args/create-args';
 import { CreateWidgetArgs } from './services/args/create-widget-args';
+import { DeleteArgs } from './services/args/delete-args';
 import { GetAllArgs } from './services/args/get-all-args';
 import { GetLayoutArgs } from './services/args/get-layout-args';
 import { LockArgs } from './services/args/lock-page-args';
@@ -145,6 +146,18 @@ export class RestService {
             url: wholeUrl,
             data: args.Data,
             method: 'POST',
+            headers: args.AdditionalHeaders
+        }).then((x) => {
+            return x as T;
+        });
+    }
+
+    public static deleteItem<T extends SdkItem>(args: DeleteArgs): Promise<T> {
+        const wholeUrl = `${RestService.buildItemBaseUrl(args.Type)}(${args.Id})${RestService.buildQueryParams(args.AdditionalQueryParams)}`;
+
+        return RestService.sendRequest({
+            url: wholeUrl,
+            method: 'DELETE',
             headers: args.AdditionalHeaders
         }).then((x) => {
             return x as T;
@@ -401,7 +414,7 @@ export class RestService {
         return Object.assign(headers, requestData.headers);
     }
 
-    public static sendRequest<T>(request: RequestData) {
+    public static sendRequest<T>(request: RequestData) : Promise<T> {
         const args: RequestInit = { headers: this.buildHeaders(request), method: request.method };
         if (request.data) {
             args.body = JSON.stringify(request.data);
@@ -414,26 +427,28 @@ export class RestService {
         return fetch(request.url, args)
             .then((x => {
                 const contentTypeHeader = x.headers.get('content-type');
-                if (x.status > 399 && contentTypeHeader) {
-                    if (contentTypeHeader.indexOf('application/json') !== -1) {
-                        return x.json().then((y) => {
-                            const message = `${request.method} ${request.url} failed. Response -> ${y.error.code}: ${y.error.message}`;
+                if (contentTypeHeader) {
+                    if (x.status > 399) {
+                        if (contentTypeHeader.indexOf('application/json') !== -1) {
+                            return x.json().then((y) => {
+                                const message = `${request.method} ${request.url} failed. Response -> ${y.error.code}: ${y.error.message}`;
+                                console.error(message);
+                                throw message;
+                            });
+                        }
+
+                        return x.text().then((html) => {
+                            const message = `${request.method} ${request.url} failed. Response -> ${x.status}: ${x.statusText} ${html}`;
                             console.error(message);
                             throw message;
                         });
                     }
 
-                    return x.text().then((html) => {
-                        const message = `${request.method} ${request.url} failed. Response -> ${x.status}: ${x.statusText} ${html}`;
-                        console.error(message);
-                        throw message;
-                    });
+                    return x.json().then(x => <T>x);
                 }
 
-                return x.json();
-            })).then((x) => {
-                return <T>x;
-            });
+                return Promise.resolve<any>(undefined);
+            }));
     }
 
     public static buildItemBaseUrl(itemType: string): string {
