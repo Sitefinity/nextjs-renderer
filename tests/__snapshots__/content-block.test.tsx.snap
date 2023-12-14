@@ -1,94 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should render content block with content 1`] = `
-<div>
-  <div
-    data-sfhasquickeditoperation="true"
-    data-sfid="731d793d-4fe1-4bf6-878d-7cc973c2be3f"
-    data-sfiscontentwidget="true"
-    data-sfisempty="false"
-    data-sfisemptyvisualhidden="false"
-    data-sfisorphaned="false"
-    data-sfname="SitefinityContentBlock"
-    data-sftitle="Content block"
-    draggable="true"
-  >
-    <p>
-      Title
-    </p>
-    <h1>
-      Heading 1
-    </h1>
-    <p>
-      Paragraph 1
-    </p>
-    <p>
-      <img
-        alt=""
-        sf-size="2191"
-        sfref="[images%7COpenAccessDataProvider]671a7697-6e9e-4e22-bd45-b73fcc1dd941"
-        src="/images/default-source/backend-images/standard-collection-1.png?sfvrsn=be8438f4_1"
-      />
-    </p>
-    <p>
-      List
-    </p>
-    <ul>
-      <li>
-        List Item 1
-      </li>
-      <li>
-        List Item 2
-      </li>
-    </ul>
-    <p>
-      <a
-        data-sf-ec-immutable=""
-        href="https://github.com/"
-        title="GitHub"
-      >
-        github.com
-      </a>
-    </p>
-    <table>
-      <tbody>
-        <tr
-          style="height:50%;"
-        >
-          <td
-            style="width:50%;"
-          >
-            cell1
-          </td>
-          <td
-            style="width:50%;"
-          >
-            cell2
-          </td>
-        </tr>
-        <tr
-          style="height:50%;"
-        >
-          <td
-            style="width:50%;"
-          >
-            cell3
-          </td>
-          <td
-            style="width:50%;"
-          >
-             
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <p>
-       
-    </p>
-  </div>
-</div>
-`;
-
 exports[`should render content block with empty model 1`] = `
 <div>
   <div
@@ -101,6 +12,8 @@ exports[`should render content block with empty model 1`] = `
     data-sfname="SitefinityContentBlock"
     data-sftitle="Content block"
     draggable="true"
-  />
+  >
+    c11
+  </div>
 </div>
 `;

@@ -15,7 +15,10 @@ export async function pageLayout({ params, searchParams }: PageParams): Promise<
 
     await initRestSdk();
 
-    const layoutOrError = await LayoutService.get(params.slug.join('/'), searchParams);
+    const layoutOrError = await RestService.getLayout({
+        pagePath: params.slug.join('/'),
+        queryParams: searchParams
+    });
     const errorResponse = layoutOrError as any;
     if (errorResponse.error && errorResponse.error.code) {
         if (errorResponse.error.code === 'NotFound') {

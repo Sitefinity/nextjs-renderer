@@ -1,9 +1,16 @@
 import { CollectionResponse } from './dto/collection-response';
 import { GenericContentItem } from './dto/generic-content-item';
 import { SdkItem } from './dto/sdk-item';
+import { Widget } from './dto/widget';
 import { RootUrlService } from './root-url.service';
 import { ServiceMetadata } from './service-metadata';
-import { GetAllArgs } from './services/get-all-args';
+import { CreateArgs } from './services/args/create-args';
+import { CreateWidgetArgs } from './services/args/create-widget-args';
+import { GetAllArgs } from './services/args/get-all-args';
+import { GetLayoutArgs } from './services/args/get-layout-args';
+import { LockArgs } from './services/args/lock-page-args';
+import { PublishArgs } from './services/args/publish-args';
+import { PageLayoutServiceResponse } from './services/layout-service.response';
 import { ODataFilterSerializer } from './services/odata-filter-serializer';
 
 export class RestService {
@@ -131,6 +138,122 @@ export class RestService {
         });
     }
 
+    public static createItem<T extends SdkItem>(args: CreateArgs): Promise<T> {
+        const wholeUrl = `${RestService.buildItemBaseUrl(args.Type)}${RestService.buildQueryParams(args.AdditionalQueryParams)}`;
+
+        return RestService.sendRequest({
+            url: wholeUrl,
+            data: args.Data,
+            method: 'POST',
+            headers: args.AdditionalHeaders
+        }).then((x) => {
+            return x as T;
+        });
+    }
+
+    public static publishItem(args: PublishArgs): Promise<void> {
+        const wholeUrl = `${RestService.buildItemBaseUrl(args.Type)}(${args.Id})/Default.Operation()${RestService.buildQueryParams(args.AdditionalQueryParams)}`;
+        return RestService.sendRequest({
+            url: wholeUrl,
+            data: {
+                action: 'Publish',
+                actionParameters: {}
+            },
+            method: 'POST',
+            headers: args.AdditionalHeaders
+        });
+    }
+
+    public static lockPage(args: LockArgs): Promise<void> {
+        const wholeUrl = `${RestService.buildItemBaseUrl(args.Type)}(${args.Id})/Default.Lock()${RestService.buildQueryParams(args.AdditionalQueryParams)}`;
+        return RestService.sendRequest({
+            url: wholeUrl,
+            data: {
+                state: {
+                    Version: args.Version
+                }
+            },
+            method: 'POST',
+            headers: args.AdditionalHeaders
+        });
+    }
+
+    public static createWidget(args: CreateWidgetArgs): Promise<Widget> {
+        const wholeUrl = `${RestService.buildItemBaseUrl(args.Type)}(${args.Id})/Default.AddWidget()${RestService.buildQueryParams(args.AdditionalQueryParams)}`;
+
+        const properties: Array<{ Name: string, Value: string }> = [];
+
+        if (args.Properties) {
+            Object.keys(args.Properties).forEach((x) => {
+                properties.push({
+                    Name: x,
+                    Value: (args.Properties as any)[x]
+                });
+            });
+        }
+
+        const dto = {
+            widget: {
+                Id: null,
+                Name: args.Name,
+                SiblingKey: args.SiblingKey,
+                ParentPlaceholderKey: args.ParentPlaceholderKey,
+                PlaceholderName: args.PlaceholderName,
+                Properties: properties
+            }
+        };
+
+        return RestService.sendRequest({
+            url: wholeUrl,
+            data: dto,
+            method: 'POST',
+            headers: args.AdditionalHeaders
+        });
+    }
+
+    public static getLayout(args: GetLayoutArgs): Promise<PageLayoutServiceResponse> {
+        const pagePath = args.pagePath;
+        const queryParams = args.queryParams || {};
+        let url = null;
+
+        const whiteListedParams = ['sfaction', 'sfversion', 'segment', 'isBackend', 'sf_site', 'sf_site_temp', 'sf-auth', 'abTestVariationKey', 'sf-content-action', 'sf-lc-status'];
+        let whitelistedParamDic: { [key:string]: string | undefined } = {};
+        whiteListedParams.forEach(x => {
+            whitelistedParamDic[x] = queryParams[x];
+        });
+
+        let pageParamsDic: { [key:string]: string | undefined } = {};
+        Object.keys(queryParams).filter(x => !whiteListedParams.some(y => y === x)).forEach(x => {
+            pageParamsDic[x] = queryParams[x];
+        });
+
+        let sysParamsQueryString = RestService.buildQueryParams(whitelistedParamDic);
+        sysParamsQueryString = sysParamsQueryString.replace('?', '&');
+
+        let pagePramsQueryString = RestService.buildQueryParams(pageParamsDic);
+
+        let indexOfSitefinityTemplate = pagePath.indexOf('Sitefinity/Template/');
+        if (indexOfSitefinityTemplate > -1) {
+            let id = null;
+            let indexOfGuid = indexOfSitefinityTemplate + 'Sitefinity/Template/'.length;
+            let nextIndexOfSlash = pagePath.indexOf('/', indexOfGuid);
+            if (nextIndexOfSlash === -1) {
+                id = pagePath.substring(indexOfGuid);
+            } else {
+                id = pagePath.substring(indexOfGuid, nextIndexOfSlash);
+            }
+
+            url = `/api/default/templates/${id}/Default.Model()`;
+        } else {
+
+            url = '/api/default/pages/Default.Model(url=@param)';
+        }
+
+        url += `?@param='${encodeURIComponent(pagePath + pagePramsQueryString)}'${sysParamsQueryString}`;
+
+        return RestService.sendRequest({ url: RootUrlService.rootUrl + url });
+    }
+
     private static getSimpleFields(type: string, fields: string[]): string[] {
         let star = '*';
         if (fields != null && fields.length === 1 && fields[0] === star) {
@@ -240,7 +363,7 @@ export class RestService {
         return allFields;
     }
 
-    public static buildQueryParams(queryParams: { [key: string]: string | undefined }) {
+    public static buildQueryParams(queryParams: { [key: string]: string | undefined } | undefined) {
         if (!queryParams) {
             return '';
         }
@@ -261,28 +384,56 @@ export class RestService {
         return result;
     }
 
-    private static buildHeaders(additionalHeaders: { [key: string]: string } | undefined) {
+    private static buildHeaders(requestData: RequestData) {
         let headers: { [key:string]: string } = { 'X-Requested-With': 'react' };
-        if (process.env.NODE_ENV === 'development' && process.env['SF_ACCESS_KEY']) {
+        if (process.env['SF_ACCESS_KEY']) {
             headers['X-SF-Access-Key'] = process.env['SF_ACCESS_KEY'];
         }
 
-        if (!additionalHeaders) {
+        if (requestData.method === 'POST') {
+            headers['Content-Type'] = 'application/json';
+        }
+
+        if (!requestData.headers) {
             return headers;
         }
 
-        return Object.assign(headers, additionalHeaders);
+        return Object.assign(headers, requestData.headers);
     }
 
     public static sendRequest<T>(request: RequestData) {
-        const args: RequestInit = { headers: this.buildHeaders(request.headers), method: request.method, body: request.data };
+        const args: RequestInit = { headers: this.buildHeaders(request), method: request.method };
+        if (request.data) {
+            args.body = JSON.stringify(request.data);
+        }
+
         if (process.env.NODE_ENV === 'development') {
             args.cache = 'no-cache';
         }
 
-        return fetch(request.url, args).then((x => x.json())).then((x) => {
-            return <T>x;
-        });
+        return fetch(request.url, args)
+            .then((x => {
+                const contentTypeHeader = x.headers.get('content-type');
+                if (x.status > 399 && contentTypeHeader) {
+                    if (contentTypeHeader.indexOf('application/json') !== -1) {
+                        return x.json().then((y) => {
+                            const message = `${request.method} ${request.url} failed. Response -> ${y.error.code}: ${y.error.message}`;
+                            console.error(message);
+                            throw message;
+                        });
+                    }
+
+                    return x.text().then((html) => {
+                        const message = `${request.method} ${request.url} failed. Response -> ${x.status}: ${x.statusText} ${html}`;
+                        console.error(message);
+                        throw message;
+                    });
+                }
+
+                return x.json();
+            })).then((x) => {
+                return <T>x;
+            });
     }
 
     public static buildItemBaseUrl(itemType: string): string {

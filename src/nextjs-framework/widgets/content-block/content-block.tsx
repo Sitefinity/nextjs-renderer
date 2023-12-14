@@ -4,6 +4,7 @@ import { WidgetContext, htmlAttributes } from '../../editor';
 import { RestService } from '../../rest-sdk';
 
 export async function ContentBlock(props: WidgetContext<ContentBlockEntity>) {
+
     const dataAttributes = htmlAttributes(props);
     if (props.model.Properties.WrapperCssClass) {
         dataAttributes['className'] = props.model.Properties.WrapperCssClass;
