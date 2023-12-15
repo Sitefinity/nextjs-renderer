@@ -19,7 +19,7 @@ export class SendNotificationRuleActionExecutor extends FormRuleActionExecutorBa
         }
     };
 
-    public updateState(context: any, actionData: any) {
+    public updateState(context: any, actionData: any): boolean {
         if (!context.notificationEmails) {
             context.notificationEmails = [];
         }
@@ -40,7 +40,7 @@ export class SendNotificationRuleActionExecutor extends FormRuleActionExecutorBa
         }
     };
 
-    public isConflict(actionData: any, otherActionData: any) {
+    public isConflict(actionData: any, otherActionData: any): boolean {
         return actionData.name === otherActionData.name && actionData.target === otherActionData.target;
     }
 }

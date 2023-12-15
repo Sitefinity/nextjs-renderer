@@ -10,7 +10,7 @@ export class FormRulesSettings {
     public FieldSelectors: FieldSelector[] = [];
     public ActionExecutors: { actionName: string, actionExecutor: FormRuleActionExecutorBase }[] = [];
 
-    public addConditionEvaluator (name: string, conditionEvaluator: (a: string, b: string) => {}) {
+    public addConditionEvaluator (name: string, conditionEvaluator: (a: string, b: string) => boolean) {
         this.ConditionEvaluators.push(new ConditionEvaluator(name, conditionEvaluator, this));
     }
     public removeConditionEvaluator (name: string) {

@@ -2,10 +2,10 @@ import { FormRulesSettings } from './form-rules-settings';
 
 export class ConditionEvaluator {
     public name: string;
-    public conditionEvaluator;
+    public  conditionEvaluator;
     public settings: FormRulesSettings;
 
-    constructor(name :string, conditionEvaluator: (a:string, b:string)=>{}, settings: FormRulesSettings){
+    constructor(name :string, conditionEvaluator: (a:string, b:string)=>boolean, settings: FormRulesSettings){
         this.name = name;
         this.conditionEvaluator = conditionEvaluator;
         this.settings = settings;

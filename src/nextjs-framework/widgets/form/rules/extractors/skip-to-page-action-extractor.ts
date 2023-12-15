@@ -11,7 +11,7 @@ export class SkipToPageFormRuleActionExecutor extends FormRuleActionExecutorBase
         }
     };
 
-    public updateState(context: any, actionData: any) {
+    public updateState(context: any, actionData: any): boolean {
         if (!context.skipToPageCollection) {
             context.skipToPageCollection = [];
         }
@@ -32,7 +32,7 @@ export class SkipToPageFormRuleActionExecutor extends FormRuleActionExecutorBase
         }
     };
 
-    public isConflict(actionData: any, otherActionData: any) {
+    public isConflict(actionData: any, otherActionData: any): boolean {
         return actionData.name === otherActionData.name && actionData.pageIndex === otherActionData.pageIndex; // same action, same current page
     }
 }

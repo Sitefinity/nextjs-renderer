@@ -23,7 +23,7 @@ export class GoToPageRuleActionExecutor extends FormRuleActionExecutorBase {
         }
     };
 
-    public updateState(context: any, actionData: any) {
+    public updateState(context: any, actionData: any): boolean {
         this.execute = true;
         return true;
     };
@@ -32,7 +32,7 @@ export class GoToPageRuleActionExecutor extends FormRuleActionExecutorBase {
         this.execute = false;
     };
 
-    public isConflict(actionData: any, otherActionData: any) {
+    public isConflict(actionData: any, otherActionData: any): boolean {
         return otherActionData.name === FormRuleConstants.Actions.ShowMessage || otherActionData.name === FormRuleConstants.Actions.GoTo;
     }
 }

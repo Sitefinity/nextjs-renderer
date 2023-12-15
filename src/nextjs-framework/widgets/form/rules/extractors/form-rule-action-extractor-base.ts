@@ -4,7 +4,7 @@ export class FormRuleActionExecutorBase {
         throw new Error('applyState() function not implemented');
     };
 
-    public updateState (context: any, actionData: any) {
+    public updateState (context: any, actionData: any): boolean {
         throw new Error('updateState() function not implemented');
     };
 
@@ -12,7 +12,7 @@ export class FormRuleActionExecutorBase {
         throw new Error('undoUpdateState() function not implemented');
     };
 
-    isConflict (actionData: any, otherActionData: any) {
+    isConflict (actionData: any, otherActionData: any): boolean {
         return false;
     };
 

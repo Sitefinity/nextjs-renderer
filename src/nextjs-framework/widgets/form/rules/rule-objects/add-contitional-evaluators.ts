@@ -22,13 +22,13 @@ export const addConditionEvaluators = (ruleSettings: FormRulesSettings) => {
         return currentValue.search(new RegExp(ruleValue, 'i')) === -1;
     });
 
-    let isFilledFunction = function (currentValue: number | string) {
+    let isFilledFunction = function (currentValue: number | string): boolean {
         // Check if currentValue is NaN
         if (typeof currentValue === 'number' && currentValue !== currentValue) {
             return false;
         }
 
-        return currentValue && currentValue.toString().length > 0;
+        return !!(currentValue && currentValue.toString().length > 0);
     };
 
     ruleSettings.addConditionEvaluator('IsFilled', isFilledFunction);
@@ -36,7 +36,7 @@ export const addConditionEvaluators = (ruleSettings: FormRulesSettings) => {
         return !isFilledFunction(currentValue);
     });
     ruleSettings.addConditionEvaluator('FileSelected', function (currentValue) {
-        return currentValue && currentValue.length > 0;
+        return !!(currentValue && currentValue.length > 0);
     });
     ruleSettings.addConditionEvaluator('FileNotSelected', function (currentValue) {
         return !currentValue || currentValue.length === 0;

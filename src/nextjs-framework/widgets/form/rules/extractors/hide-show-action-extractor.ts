@@ -24,7 +24,7 @@ export class HideShowFieldFormRuleActionExecutor extends FormRuleActionExecutorB
         }
     };
 
-    public updateState(context: any, actionData: any) {
+    public updateState(context: any, actionData: any) : boolean {
         let updated = false;
         let fieldIndex = context.helper.fieldIndexOf(context.fields, actionData.target);
         if (this.actionName === FormRuleConstants.Actions.Show && !context.fields[fieldIndex].Visible) {
@@ -47,7 +47,7 @@ export class HideShowFieldFormRuleActionExecutor extends FormRuleActionExecutorB
         }
     };
 
-    public isConflict(actionData: any, otherActionData: any) {
+    public isConflict(actionData: any, otherActionData: any): boolean {
         return (otherActionData.name === FormRuleConstants.Actions.Show || otherActionData.name === FormRuleConstants.Actions.Hide) && actionData.target === otherActionData.target;
     };
 
