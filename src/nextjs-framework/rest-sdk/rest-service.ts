@@ -11,6 +11,7 @@ import { GetAllArgs } from './services/args/get-all-args';
 import { GetLayoutArgs } from './services/args/get-layout-args';
 import { LockArgs } from './services/args/lock-page-args';
 import { PublishArgs } from './services/args/publish-args';
+import { UploadMediaArgs } from './services/args/upload-args';
 import { PageLayoutServiceResponse } from './services/layout-service.response';
 import { ODataFilterSerializer } from './services/odata-filter-serializer';
 
@@ -267,6 +268,28 @@ export class RestService {
         return RestService.sendRequest({ url: RootUrlService.rootUrl + url });
     }
 
+    public static uploadItem(args: UploadMediaArgs): Promise<SdkItem> {
+        const wholeUrl = `${RestService.buildItemBaseUrl(args.Type)}${RestService.buildQueryParams(args.AdditionalQueryParams)}`;
+        const headers = args.AdditionalHeaders || {};
+        const data = Object.assign({}, args.Fields, { Title: args.Title, ParentId: args.ParentId });
+
+        headers['X-Sf-Properties'] = JSON.stringify(data);
+        headers['X-File-Name'] = args.FileName;
+        headers['Content-Type'] = args.ContentType;
+        headers['Content-Length'] = args.BinaryData.length.toString();
+        headers['Content-Encoding'] = 'base64';
+        headers['DirectUpload'] = true.toString();
+
+        return RestService.sendRequest({
+            url: wholeUrl,
+            data: args.BinaryData,
+            method: 'POST',
+            headers
+        }).then((x) => {
+            return x as SdkItem;
+        });;
+    }
+
     private static getSimpleFields(type: string, fields: string[]): string[] {
         let star = '*';
         if (fields != null && fields.length === 1 && fields[0] === star) {
@@ -403,7 +426,7 @@ export class RestService {
             headers['X-SF-Access-Key'] = process.env['SF_ACCESS_KEY'];
         }
 
-        if (requestData.method === 'POST') {
+        if (requestData.method === 'POST' && !headers['Content-Type']) {
             headers['Content-Type'] = 'application/json';
         }
 
@@ -414,10 +437,16 @@ export class RestService {
         return Object.assign(headers, requestData.headers);
     }
 
-    public static sendRequest<T>(request: RequestData) : Promise<T> {
-        const args: RequestInit = { headers: this.buildHeaders(request), method: request.method };
-        if (request.data) {
+    public static sendRequest<T>(request: RequestData): Promise<T> {
+        const headers = this.buildHeaders(request);
+
+        const args: RequestInit = { headers, method: request.method };
+        if (request.data && headers['Content-Type'] === 'application/json') {
             args.body = JSON.stringify(request.data);
+        }
+
+        if (headers['Content-Encoding'] === 'base64') {
+            args.body = request.data;
         }
 
         if (process.env.NODE_ENV === 'development') {

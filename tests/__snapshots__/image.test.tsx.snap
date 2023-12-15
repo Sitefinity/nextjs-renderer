@@ -1,3 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should render image default state 1`] = `<div />`;
+exports[`Image with selected image item 1`] = `
+<div>
+  <picture
+    class="d-inline-block"
+  >
+    <source
+      height="160"
+      media="(max-width: 160px)"
+      type="image/jpeg"
+      width="160"
+    />
+    <img
+      alt=""
+      class="d-inline-block img-fluid"
+      loading="lazy"
+      title="Image"
+    />
+  </picture>
+</div>
+`;

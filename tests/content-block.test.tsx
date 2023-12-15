@@ -2,10 +2,10 @@
 import { waitFor } from '@testing-library/react';
 import { RenderType, WidgetTester } from './framework/widget-tester';
 import { RestSdkTypes, RestService } from '../src/nextjs-framework/rest-sdk';
-
+import { ContentBlockEntity } from '../src/nextjs-framework/widgets';
 
 test('Content block render Content property', async () => {
-    await WidgetTester.testWidgetRender({
+    await WidgetTester.testWidgetRender<ContentBlockEntity>({
         name: 'SitefinityContentBlock',
         properties: {
             Content: 'Test content'
@@ -27,7 +27,7 @@ test('Content block render with Content item', async () => {
         }
     });
 
-    await WidgetTester.testWidgetRender({
+    await WidgetTester.testWidgetRender<ContentBlockEntity>({
         name: 'SitefinityContentBlock',
         properties: {
             SharedContentID: contentItem.Id
@@ -41,7 +41,7 @@ test('Content block render with Content item', async () => {
 });
 
 test('Content block html metadata assert during edit', async () => {
-    await WidgetTester.testWidgetRender({
+    await WidgetTester.testWidgetRender<ContentBlockEntity>({
         name: 'SitefinityContentBlock',
         properties: {
             Content: 'Test content'

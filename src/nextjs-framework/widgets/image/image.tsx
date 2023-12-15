@@ -26,10 +26,10 @@ export async function Image(props: WidgetContext<ImageEntity>) {
     if (props.requestContext && props.requestContext.isEdit) {
         dataAttributes['data-sfemptyicon'] = 'picture-o';
         dataAttributes['data-sfemptyiconaction'] = 'Edit';
+        dataAttributes['data-sfemptyicontext'] = 'Select image';
+        dataAttributes['data-sfhasquickeditoperation'] = true;
     }
 
-    dataAttributes['data-sfemptyicontext'] = 'Select image';
-    dataAttributes['data-sfhasquickeditoperation'] = true;
     let imageItem = null;
     if (entity.Item && entity.Item.Id) {
         imageItem =  await RestService.getItemWithFallback(RestSdkTypes.Image, entity.Item.Id.toString(), entity.Item.Provider);

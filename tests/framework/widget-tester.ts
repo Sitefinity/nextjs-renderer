@@ -1,9 +1,9 @@
 import { initRestSdk, RequestContext, RestSdkTypes, RestService, RenderWidgetService, initRendering, widgetRegistry, WidgetExecutionError } from '@progress/sitefinity-react-framework';
 import { render } from '@testing-library/react';
+import { Dictionary } from '../../src/nextjs-framework/typings/dictionary';
 
 export class WidgetTester {
-    public static async testWidgetRender(args: TestWidgetArgs) {
-        await initRestSdk();
+    public static async testWidgetRender<TEntity>(args: TestWidgetArgs<TEntity>) {
         initRendering(widgetRegistry, WidgetExecutionError);
 
         const page = await RestService.createItem({
@@ -21,13 +21,25 @@ export class WidgetTester {
             Version: 0
         });
 
+        let properties: Dictionary = {};
+        if (args.properties) {
+            Object.keys(args.properties).forEach((key) => {
+                let value: any = (args.properties as any)[key];
+                if (value && !(typeof value === 'undefined')) {
+                    value = JSON.stringify(value);
+                }
+
+                properties[key] = value;
+            });
+        }
+
         await RestService.createWidget({
             Id: page.Id,
             Provider: page.Provider,
             Type: RestSdkTypes.Pages,
             Name: args.name,
             PlaceholderName: 'Body',
-            Properties: args.properties
+            Properties: properties
         });
 
         await RestService.publishItem({
@@ -61,6 +73,7 @@ export class WidgetTester {
 
         const widgetModel = layout.ComponentContext.Components[0];
         const metadata = RenderWidgetService.widgetRegistry.widgets[args.name];
+        RenderWidgetService.parseProperties(widgetModel);
 
         const component = await metadata.componentType({ model: widgetModel, requestContext, metadata });
 
@@ -69,9 +82,9 @@ export class WidgetTester {
     }
 }
 
-export interface TestWidgetArgs {
+export interface TestWidgetArgs<TEntity> {
     name: string;
-    properties?: { [key: string]: string };
+    properties?: TEntity;
     render?: RenderType;
     assert: AssertWidgetArgs;
 }

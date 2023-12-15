@@ -22,15 +22,26 @@ process.env['SF_ACCESS_KEY'] = 'OTQ4M2QyMzItYTlkNi00ZGI2LTlkMmYtOTNhNmExYTMyMjQ2
 
 
 const restServiceModule = require('./src/nextjs-framework/rest-sdk/rest-service');
+const utilsModule = require('./src/nextjs-framework/pages/utils');
 let createdItems = [];
 global.beforeAll(async () => {
-    const originalFunc = restServiceModule.RestService.createItem;
+    const originalFuncCreate = restServiceModule.RestService.createItem;
     restServiceModule.RestService.createItem = async (args) => {
-        const actualResult = await originalFunc(args);
+        const actualResult = await originalFuncCreate(args);
         createdItems.push({ type: args.Type, id: actualResult.Id });
 
         return actualResult;
     };
+
+    const originalFuncUpload = restServiceModule.RestService.uploadItem;
+    restServiceModule.RestService.uploadItem = async (args) => {
+        const actualResult = await originalFuncUpload(args);
+        createdItems.push({ type: args.Type, id: actualResult.Id });
+
+        return actualResult;
+    };
+
+    await utilsModule.initRestSdk();
 });
 
 global.afterEach(async () => {

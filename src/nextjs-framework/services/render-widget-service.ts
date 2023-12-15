@@ -12,7 +12,7 @@ export class RenderWidgetService {
     public static createComponent(widgetModel: WidgetModel<any>, requestContext: RequestContext) {
         const registeredType = RenderWidgetService.widgetRegistry.widgets[widgetModel.Name];
 
-        parseProperties(widgetModel, requestContext, this);
+        RenderWidgetService.parseProperties(widgetModel);
 
         const propsForWidget: WidgetContext<any> = {
             metadata: registeredType,
@@ -43,15 +43,16 @@ export class RenderWidgetService {
             return null;
         }
     }
+
+    public static parseProperties(widgetModel: WidgetModel<any>) {
+        Object.keys(widgetModel.Properties).forEach((key) => {
+            try {
+                (widgetModel.Properties as any)[key] = JSON.parse((widgetModel.Properties as any)[key]);
+            } catch {
+                // console.log('error')
+            }
+        });
+    }
 }
 
-function parseProperties(widgetModel: WidgetModel<any>, requestContext: RequestContext, renderWidgetService: RenderWidgetService) {
-    Object.keys(widgetModel.Properties).forEach((key) => {
-        try {
-            (widgetModel.Properties as any)[key] = JSON.parse((widgetModel.Properties as any)[key]);
-        } catch {
-            // console.log('error')
-        }
-    });
-}
 
