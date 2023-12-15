@@ -1,15 +1,14 @@
 
 import { waitFor } from '@testing-library/react';
-import { WidgetTester } from './framework/widget-tester';
-import { RestSdkTypes, RestService, SdkItem } from '../src/nextjs-framework/rest-sdk';
-import { CreateArgs } from '../src/nextjs-framework/rest-sdk/services/args/create-args';
+import { RenderType, WidgetTester } from './framework/widget-tester';
+import { RestSdkTypes, RestService } from '../src/nextjs-framework/rest-sdk';
 
 
 test('Content block render Content property', async () => {
     await WidgetTester.testWidgetRender({
         name: 'SitefinityContentBlock',
         properties: {
-            Content: 'c11'
+            Content: 'Test content'
         },
         assert: async (element) => {
             await waitFor(() => {
@@ -41,23 +40,17 @@ test('Content block render with Content item', async () => {
     });
 });
 
-// beforeAll(async () => {
-//     const originalFunc = RestService.createItem;
-//     RestService.createItem = async (args: CreateArgs) => {
-//         const actualResult = await originalFunc(args);
-//         createdItems.push({ type: args.Type, id: actualResult.Id });
-
-//         return actualResult as any;
-//     };
-// });
-
-// afterEach(async () => {
-//     for (let i = 0; i < createdItems.length; i++) {
-//         const createdItem = createdItems[i];
-//         await RestService.deleteItem({
-//             Id: createdItem.id,
-//             Type: createdItem.type
-//         });
-
-//     }
-// });
+test('Content block html metadata assert during edit', async () => {
+    await WidgetTester.testWidgetRender({
+        name: 'SitefinityContentBlock',
+        properties: {
+            Content: 'Test content'
+        },
+        assert: (element) => {
+            const actualElement = element.querySelector('[data-sfid]');
+            actualElement?.setAttribute('data-sfid', 'static');
+            expect(element).toMatchSnapshot();
+        },
+        render: RenderType.Edit
+    });
+});

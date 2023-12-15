@@ -2,7 +2,6 @@ import { initRestSdk, RequestContext, RestSdkTypes, RestService, RenderWidgetSer
 import { render } from '@testing-library/react';
 
 export class WidgetTester {
-
     public static async testWidgetRender(args: TestWidgetArgs) {
         await initRestSdk();
         initRendering(widgetRegistry, WidgetExecutionError);
@@ -41,6 +40,11 @@ export class WidgetTester {
             pagePath: page['UrlName']
         });
 
+        let renderType = args.render;
+        if (typeof renderType === 'undefined') {
+            renderType = RenderType.Live;
+        }
+
         const requestContext: RequestContext = {
             'detailItem': layout.DetailItem,
             'layout': layout,
@@ -49,9 +53,9 @@ export class WidgetTester {
                 'sf_site': layout.SiteId,
                 'sf_page_node': layout.Id
             },
-            'isEdit': false,
-            'isPreview': false,
-            'isLive': true,
+            'isEdit': renderType === RenderType.Edit,
+            'isPreview': renderType === RenderType.Preview,
+            'isLive': renderType === RenderType.Live,
             'culture': layout.Culture
         };
 
@@ -68,8 +72,54 @@ export class WidgetTester {
 export interface TestWidgetArgs {
     name: string;
     properties?: { [key: string]: string };
-    assert: AssertWidgetArgs
+    render?: RenderType;
+    assert: AssertWidgetArgs;
 }
 
-type AssertWidgetArgs = (element: HTMLElement) => void | Promise<void>
 
+type AssertWidgetArgs = (element: HTMLElement) => void | Promise<void>
+export enum RenderType {
+    Edit,
+    Live,
+    Preview
+}
+
+// // export interface TestWidgetArgsEdit {
+// //     name: string;
+// //     properties?: { [key: string]: string };
+// //     metadata: TestMetadata
+// // }
+// // interface TestMetadata {
+// //     hasQuickEditOperation?: boolean;
+// //     isContentWidget?: boolean;
+// //     isEmpty?: boolean;
+// //     isEmptyVisualHidden?: boolean;
+// //     isOrphaned?: boolean;
+// //     name?: string;
+// //     title?: string;
+// //     draggable?: boolean
+// // }
+
+
+// // public static async testWidgetMetadataRenderInEdit(args: TestWidgetArgsEdit) {
+// //     return this.testWidgetRender({
+// //         assert: (element) => {
+// //             const actualElement = element.querySelector('[data-sfid]');
+// //             if (!actualElement) {
+// //                 throw 'Cannot find element to test by attribute data-sfid';
+// //             }
+
+// //             Object.keys(args.metadata).forEach((key) => {
+// //                 if (key === 'draggable') {
+// //                     expect(actualElement.getAttribute('draggable')).toEqual(args.metadata.draggable?.toString());
+// //                 } else {
+// //                     const attributeName = `data-sf${key.toLowerCase()}`;
+// //                     expect(actualElement.getAttribute(attributeName)).toEqual((args.metadata as any)[key].toString());
+// //                 }
+// //             });
+// //         },
+// //         name: args.name,
+// //         properties: args.properties,
+// //         render: RenderType.Edit
+// //     });
+// // }

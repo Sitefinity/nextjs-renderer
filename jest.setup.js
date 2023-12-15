@@ -24,7 +24,6 @@ process.env['SF_ACCESS_KEY'] = 'OTQ4M2QyMzItYTlkNi00ZGI2LTlkMmYtOTNhNmExYTMyMjQ2
 const restServiceModule = require('./src/nextjs-framework/rest-sdk/rest-service');
 let createdItems = [];
 global.beforeAll(async () => {
-
     const originalFunc = restServiceModule.RestService.createItem;
     restServiceModule.RestService.createItem = async (args) => {
         const actualResult = await originalFunc(args);

@@ -1,9 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Content block html metadata assert during edit 1`] = `
+<div>
+  <div
+    data-sfhasquickeditoperation="true"
+    data-sfid="static"
+    data-sfiscontentwidget="true"
+    data-sfisempty="false"
+    data-sfisemptyvisualhidden="false"
+    data-sfisorphaned="false"
+    data-sfname="SitefinityContentBlock"
+    data-sftitle="Content block"
+    draggable="true"
+  >
+    Test content
+  </div>
+</div>
+`;
+
 exports[`Content block render Content property 1`] = `
 <div>
   <div>
-    c11
+    Test content
   </div>
 </div>
 `;
