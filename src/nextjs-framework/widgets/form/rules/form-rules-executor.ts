@@ -55,7 +55,7 @@ export class FormRulesExecutor {
     private skipFieldsSelector = 'input[type="hidden"][data-sf-role="form-rules-skip-fields"]';
     private hiddenFieldsSelector = 'input[type="hidden"][data-sf-role="form-rules-hidden-fields"]';
 
-    constructor(container: HTMLDivElement, ruleSettings: FormRulesSettings) {
+    constructor(container: HTMLDivElement) {
         this.formContainerSelector = this.getFormContainerSelector();
         this.ruleSettings = new FormRulesSettings();
         this.formContainerMap = new Map();
