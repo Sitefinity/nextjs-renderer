@@ -10,6 +10,7 @@ test('Content block render Content property', async () => {
         properties: {
             Content: 'Test content'
         },
+        pageTitle: 'Content block render Content property',
         assert: async (element) => {
             await waitFor(() => {
                 expect(element).toMatchSnapshot();
@@ -32,6 +33,7 @@ test('Content block render with Content item', async () => {
         properties: {
             SharedContentID: contentItem.Id
         },
+        pageTitle: 'Content block render with Content item',
         assert: async (element) => {
             await waitFor(() => {
                 expect(element).toMatchSnapshot();
@@ -46,6 +48,7 @@ test('Content block html metadata assert during edit', async () => {
         properties: {
             Content: 'Test content'
         },
+        pageTitle: 'Content block html metadata assert during edit',
         assert: (element) => {
             const actualElement = element.querySelector('[data-sfid]');
             actualElement?.setAttribute('data-sfid', 'static');

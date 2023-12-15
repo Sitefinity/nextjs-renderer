@@ -1,4 +1,4 @@
-import { initRestSdk, RequestContext, RestSdkTypes, RestService, RenderWidgetService, initRendering, widgetRegistry, WidgetExecutionError } from '@progress/sitefinity-react-framework';
+import { RequestContext, RestSdkTypes, RestService, RenderWidgetService, initRendering, widgetRegistry, WidgetExecutionError } from '@progress/sitefinity-react-framework';
 import { render } from '@testing-library/react';
 import { Dictionary } from '../../src/nextjs-framework/typings/dictionary';
 
@@ -9,8 +9,8 @@ export class WidgetTester {
         const page = await RestService.createItem({
             Type: RestSdkTypes.Pages,
             Data: {
-                Title: 'should render content block with empty model',
-                UrlName: 'content-block-with-content' + new Date().getTime(),
+                Title: args.pageTitle ?? new Date().getTime().toString(),
+                UrlName: args.pageUrlName ?? new Date().getTime().toString(),
                 TemplateName: 'Next.Default'
             }
         });
@@ -84,6 +84,8 @@ export class WidgetTester {
 
 export interface TestWidgetArgs<TEntity> {
     name: string;
+    pageTitle?: string;
+    pageUrlName?: string;
     properties?: TEntity;
     render?: RenderType;
     assert: AssertWidgetArgs;
