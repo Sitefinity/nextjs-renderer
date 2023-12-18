@@ -69,6 +69,12 @@ const metadata = {
         PropertyMetadata: [Array]
     },
     componentType: [Image],
-    editorMetadata: { Title: 'Image' },
+    editorMetadata: {
+        Title: 'Image',
+        Section: 'Basic',
+        EmptyIcon: 'picture-o',
+        EmptyIconAction: 'Edit',
+        EmptyIconText: 'Select image'
+    },
     ssr: true
 };
