@@ -37,18 +37,13 @@ export async function MultipleChoice(props: WidgetContext<MultipleChoiceEntity>)
     const defaultRendering = (
       <>
         <script data-sf-role={`start_field_${multipleChoiceUniqueId}`} data-sf-role-field-name={`${multipleChoiceUniqueId}`} />
-        <fieldset data-sf-role="multiple-choice-field-container" className={classNames('mb-3', viewModel.CssClass)}
-          aria-labelledby={`choice-field-label-${multipleChoiceUniqueId} choice-field-description-${multipleChoiceUniqueId}`}>
-          <input data-sf-role="violation-messages" type="hidden" value={viewModel.ViolationRestrictionsMessages} />
-          <input type="hidden" data-sf-role="required-validator" value={viewModel.Required} />
-          <MultipleChoiceClient viewModel={viewModel}
-            multipleChoiceUniqueId={multipleChoiceUniqueId}
-            inputMultipleChoiceUniqueId={inputMultipleChoiceUniqueId}
-            otherChoiceOptionId={otherChoiceOptionId}
-            innerColumnClass={innerColumnClass}
-            layoutClass={layoutClass}
+        <MultipleChoiceClient viewModel={viewModel}
+          multipleChoiceUniqueId={multipleChoiceUniqueId}
+          inputMultipleChoiceUniqueId={inputMultipleChoiceUniqueId}
+          otherChoiceOptionId={otherChoiceOptionId}
+          innerColumnClass={innerColumnClass}
+          layoutClass={layoutClass}
            />
-        </fieldset>
         <script data-sf-role={`end_field_${multipleChoiceUniqueId}`} />
       </>
     );

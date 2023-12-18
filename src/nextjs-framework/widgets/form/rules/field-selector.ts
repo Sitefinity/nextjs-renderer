@@ -29,7 +29,11 @@ export class FieldSelector {
         return fieldValues;
     };
 
-    public getFieldValueElements(fieldContainer: HTMLDivElement): Element | null {
+    public getFieldValueElements(fieldContainer: HTMLDivElement): NodeListOf<Element> {
+        return fieldContainer.querySelectorAll(this.elementSelector);
+    };
+
+    public getFieldValueElement(fieldContainer: HTMLDivElement): Element | null {
         return fieldContainer.querySelector(this.elementSelector);
     };
 

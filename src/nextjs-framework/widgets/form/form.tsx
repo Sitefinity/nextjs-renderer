@@ -10,8 +10,7 @@ import { RestExtensionsService } from '../rest-extensions';
 import { RenderWidgetService } from '../../services/render-widget-service';
 import { QueryParamNames } from '../../rest-sdk/query-params-names';
 import { FormModel } from './interfaces/FormModel';
-import { VisibilityStyle } from '../styling/visibility-style';
-import { FromContainer } from './form-container';
+import { FormContainer } from './form-container';
 
 
 export async function Form(props: WidgetContext<FormEntity>) {
@@ -94,13 +93,9 @@ export async function Form(props: WidgetContext<FormEntity>) {
 
     return (<form action={viewModel.SubmitUrl} method="post" {...formDataAttributes}  noValidate={true}>
       { entity.Heading && <h3 className="qu-heading-medium">{entity.Heading}</h3>}
-      <div
-        className={containerClass}
-        data-sf-role="form-container"
-        data-sf-invalid={viewModel.InvalidClass}
-        data-sf-visibility-inline-visible={viewModel.VisibilityClasses[VisibilityStyle.InlineVisible]}
-        data-sf-visibility-hidden={viewModel.VisibilityClasses[VisibilityStyle.Hidden]}
-        data-sf-visibility-visible={viewModel.VisibilityClasses[VisibilityStyle.Visible]}>
+      <FormContainer
+        viewModel={viewModel}
+        className={containerClass}>
         { (viewModel.Rules) && <>
           <input type="hidden" data-sf-role="form-rules" value={viewModel.Rules} />
           <input type="hidden" data-sf-role="form-rules-hidden-fields" name="sf_FormHiddenFields" value={viewModel.HiddenFields} autoComplete="off"/>
@@ -125,13 +120,13 @@ export async function Form(props: WidgetContext<FormEntity>) {
         { viewModel.SkipDataSubmission &&
         <span data-sf-role="skip-data-submission" />
         }
-        <FromContainer viewModel={viewModel}>
+        <div data-sf-role="fields-container" >
           { viewModel.FormModel && viewModel.FormModel.ViewComponentsFlat.map((widgetModel: WidgetModel<any>, idx: number)=>{
                return RenderWidgetService.createComponent(widgetModel, context);
             })
           }
-        </FromContainer>
-      </div>
+        </div>
+      </FormContainer>
     </form>);
 }
 

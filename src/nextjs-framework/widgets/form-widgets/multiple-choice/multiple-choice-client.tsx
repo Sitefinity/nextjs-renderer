@@ -4,6 +4,8 @@ import React, { useContext, useState } from 'react';
 import { FormContext } from '../../form/form-container';
 import { ChoiceOption } from '../common/ChoiceOption';
 import { classNames } from '../../../editor';
+import { VisibilityStyle } from '../../styling/visibility-style';
+import { StylingConfig } from '../../styling/styling-config';
 
 export function MultipleChoiceClient(props: any) {
     const {viewModel, multipleChoiceUniqueId,
@@ -11,8 +13,9 @@ export function MultipleChoiceClient(props: any) {
         otherChoiceOptionId, innerColumnClass, layoutClass} = props;
 
     const [inputValues, setInputValues] = React.useState(viewModel.Choices);
-    const { formViewModel, sfFormValueChanged, hiddenInputs } = useContext(FormContext);
-    const isVisible = (hiddenInputs ? !hiddenInputs[multipleChoiceUniqueId] : true);
+    const { formViewModel, sfFormValueChanged, hiddenInputs, skippedInputs } = useContext(FormContext);
+    const isHidden = hiddenInputs[multipleChoiceUniqueId];
+    const isSkipped = skippedInputs[multipleChoiceUniqueId];
     const [errorMessageText, setErrorMessageText] = useState('');
     const [otherInputText, setOtherInputText] = useState('');
     const [showOtherInput, setShowOtherInput] = useState(false);
@@ -71,19 +74,30 @@ export function MultipleChoiceClient(props: any) {
         return inputValues.some((i: ChoiceOption)=>i.Selected);
     },[inputValues]);
 
-    return (isVisible && <>
-      <legend className="h6" id={`choice-field-label-${multipleChoiceUniqueId}`}>{viewModel.Label}</legend>
+    return (
+      <fieldset data-sf-role="multiple-choice-field-container"
+        className={classNames(
+            'mb-3',
+            viewModel.CssClass,
+            isHidden
+                ? StylingConfig.VisibilityClasses[VisibilityStyle.Hidden]
+                : StylingConfig.VisibilityClasses[VisibilityStyle.Visible])}
+        aria-labelledby={`choice-field-label-${multipleChoiceUniqueId} choice-field-description-${multipleChoiceUniqueId}`}>
+        <input data-sf-role="violation-messages" type="hidden" value={viewModel.ViolationRestrictionsMessages} />
+        <input type="hidden" data-sf-role="required-validator" value={viewModel.Required} />
+        <legend className="h6" id={`choice-field-label-${multipleChoiceUniqueId}`}>{viewModel.Label}</legend>
         { viewModel.InstructionalText &&
-        <p className="text-muted small" id={`choice-field-description-${multipleChoiceUniqueId}`}>{viewModel.InstructionalText}</p>
+          <p className="text-muted small" id={`choice-field-description-${multipleChoiceUniqueId}`}>{viewModel.InstructionalText}</p>
         }
-      <div className={layoutClass}>
-        { inputValues.map((choiceOption: ChoiceOption, idx: number)=>{
+        <div className={layoutClass}>
+          { inputValues.map((choiceOption: ChoiceOption, idx: number)=>{
                 let choiceOptionId = `choiceOption-${idx}-${inputMultipleChoiceUniqueId}`;
 
                 return (<div className={`form-check ${innerColumnClass}`} key={idx}>
                   <input className="form-check-input" type="radio" name={multipleChoiceUniqueId} id={choiceOptionId}
                     value={choiceOption.Value} data-sf-role="multiple-choice-field-input" required={viewModel.Required && !hasValueSelected}
                     checked={choiceOption.Selected}
+                    disabled={isHidden || isSkipped}
                     onChange={handleChange}
                     />
                   <label className="form-check-label" htmlFor={choiceOptionId}>
@@ -92,29 +106,30 @@ export function MultipleChoiceClient(props: any) {
                 </div>);
             })
         }
-        { viewModel.HasAdditionalChoice &&
-        <div className={`form-check ${innerColumnClass}`}>
-          <input className="form-check-input mt-1" type="radio" name={multipleChoiceUniqueId} id={otherChoiceOptionId}
-            data-sf-role="multiple-choice-field-input" required={viewModel.Required && !hasValueSelected}
-            checked={showOtherInput}
-            onChange={handleOtherChange}/>
-          <label className="form-check-label" htmlFor={otherChoiceOptionId}>Other</label>
-          {showOtherInput && <input type="text"
-            className={classNames('form-control',{
+          { viewModel.HasAdditionalChoice &&
+            <div className={`form-check ${innerColumnClass}`}>
+              <input className="form-check-input mt-1" type="radio" name={multipleChoiceUniqueId} id={otherChoiceOptionId}
+                data-sf-role="multiple-choice-field-input" required={viewModel.Required && !hasValueSelected}
+                checked={showOtherInput}
+                onChange={handleOtherChange}/>
+              <label className="form-check-label" htmlFor={otherChoiceOptionId}>Other</label>
+              {showOtherInput && <input type="text"
+                className={classNames('form-control',{
                 [formViewModel.InvalidClass!]: formViewModel.InvalidClass && viewModel.Required && !otherInputText
             })}
-            data-sf-role="choice-other-input"
-            value={otherInputText}
-            required={viewModel.Required}
-            onChange={handleOtherInputChange}
-            onInput={handleOtherInputInput}
+                data-sf-role="choice-other-input"
+                value={otherInputText}
+                required={viewModel.Required}
+                onChange={handleOtherInputChange}
+                onInput={handleOtherInputInput}
           />}
-        </div>
+            </div>
         }
-      </div>
+        </div>
 
-      {errorMessageText && <div data-sf-role="error-message" role="alert" aria-live="assertive" className="invalid-feedback" >
-        {errorMessageText}
-      </div>}
-    </>);
+        {errorMessageText && <div data-sf-role="error-message" role="alert" aria-live="assertive" className="invalid-feedback" >
+            {errorMessageText}
+          </div>}
+      </fieldset>
+    );
 }

@@ -4,6 +4,8 @@ import React, { useContext, useState } from 'react';
 import { FormContext } from '../../form/form-container';
 import { ChoiceOption } from '../common/ChoiceOption';
 import { classNames } from '../../../editor';
+import { StylingConfig } from '../../styling/styling-config';
+import { VisibilityStyle } from '../../styling/visibility-style';
 
 export function CheckboxesClient(props: any) {
     const {viewModel, checkboxUniqueId,
@@ -11,8 +13,9 @@ export function CheckboxesClient(props: any) {
         otherChoiceOptionId, innerColumnClass, layoutClass} = props;
 
     const [inputValues, setInputValues] = React.useState(viewModel.Choices);
-    const { formViewModel, sfFormValueChanged, hiddenInputs } = useContext(FormContext);
-    const isVisible = (hiddenInputs ? !hiddenInputs[checkboxUniqueId] : true);
+    const { formViewModel, sfFormValueChanged, hiddenInputs, skippedInputs } = useContext(FormContext);
+    const isHidden = hiddenInputs[checkboxUniqueId];
+    const isSkipped = skippedInputs[checkboxUniqueId];
     const [errorMessageText, setErrorMessageText] = useState('');
     const [otherInputText, setOtherInputText] = useState('');
     const [showOtherInput, setShowOtherInput] = useState(false);
@@ -65,7 +68,16 @@ export function CheckboxesClient(props: any) {
         return inputValues.some((i: ChoiceOption)=>i.Selected);
     },[inputValues]);
 
-    return (isVisible && <>
+    return (<fieldset data-sf-role="checkboxes-field-container"
+      className={classNames(
+        'mb-3',
+        viewModel.CssClass,
+        isHidden
+        ? StylingConfig.VisibilityClasses[VisibilityStyle.Hidden]
+        : StylingConfig.VisibilityClasses[VisibilityStyle.Visible])}
+      aria-labelledby={`choice-field-label-${checkboxUniqueId} choice-field-description-${checkboxUniqueId}`}>
+      <input data-sf-role="violation-messages" type="hidden" value={viewModel.ViolationRestrictionsMessages} />
+      <input type="hidden" data-sf-role="required-validator" value={viewModel.Required} />
       <legend className="h6" id={`choice-field-label-${checkboxUniqueId}`}>{viewModel.Label}</legend>
       { viewModel.InstructionalText &&
         <p className="text-muted small" id={`choice-field-description-${checkboxUniqueId}`}>{viewModel.InstructionalText}</p>
@@ -78,6 +90,7 @@ export function CheckboxesClient(props: any) {
                   <input className="form-check-input" type="checkbox" name={checkboxUniqueId} id={choiceOptionId}
                     value={choiceOption.Value} data-sf-role="multiple-choice-field-input" required={viewModel.Required && !hasValueSelected}
                     checked={!!choiceOption.Selected}
+                    disabled={isHidden || isSkipped}
                     onChange={handleChange}
                     />
                   <label className="form-check-label" htmlFor={choiceOptionId}>
@@ -111,5 +124,5 @@ export function CheckboxesClient(props: any) {
         {errorMessageText}
         </div>
         }
-    </>);
+    </fieldset>);
 }

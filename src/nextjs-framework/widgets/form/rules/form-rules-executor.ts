@@ -50,16 +50,28 @@ export class FormRulesExecutor {
     public fieldsContainer: HTMLElement | Element | null = null;
     public formContainerMap;
     private iterationsMaxCount = 50;
+    private updateFields: (args: {
+        show?: string;
+        hide?: string;
+        skip?: string;
+        unSkip?: string;
+    })=>void;
     private fieldContainerSelector = '[data-sf-role$="field-container"]';
     private separatorSelector = '[data-sf-role="separator"]';
     private skipFieldsSelector = 'input[type="hidden"][data-sf-role="form-rules-skip-fields"]';
     private hiddenFieldsSelector = 'input[type="hidden"][data-sf-role="form-rules-hidden-fields"]';
 
-    constructor(container: HTMLDivElement) {
+    constructor(container: HTMLDivElement, updateFields: (args: {
+        show?: string;
+        hide?: string;
+        skip?: string;
+        unSkip?: string;
+    })=>void) {
         this.formContainerSelector = this.getFormContainerSelector();
         this.ruleSettings = new FormRulesSettings();
         this.formContainerMap = new Map();
         this.formContainer = this.formContainerSelector ? container.closest(this.formContainerSelector) : null;
+        this.updateFields = updateFields.bind(this),
         this._init(container);
     };
 
@@ -93,7 +105,6 @@ export class FormRulesExecutor {
     }
 
     private _init(target: HTMLElement) {
-
         let separator = target.closest(this.separatorSelector);
         this.fieldsContainer = separator || this.formContainer;
         this.pages = Array.from(this.formContainer!.querySelectorAll(this.separatorSelector));
@@ -101,9 +112,9 @@ export class FormRulesExecutor {
         this._initializeFormRules();
 
         let that = this;
-        // this.formContainer!.addEventListener('form-page-changed', function (e, nextIndex, previousIndex) {
-        //     that._updateSkipPages(previousIndex, nextIndex);
-        // });
+        this.formContainer!.addEventListener('form-page-changed', function (e: any, nextIndex: number, previousIndex: number) {
+            that._updateSkipPages(previousIndex, nextIndex);
+        } as any);
     }
 
 
@@ -373,60 +384,52 @@ export class FormRulesExecutor {
         return fields;
     }
 
-    // private _updateSkipPages (previousIndex :number, nextIndex: number) {
-    //     if (previousIndex < nextIndex) {
-    //         // next page - disable fields in skipped pages
-    //         let fieldContainerNames = this.ruleSettings.getFieldsContainerNames();
-    //         for (let skipPage = previousIndex + 1; skipPage < nextIndex; skipPage++) {
-    //             for (let k = 0; k < fieldContainerNames.length; k++) {
-    //                 let fieldsContainers = this.pages.find(skipPage).find('[data-sf-role="' + fieldContainerNames[k] + '"]');
-    //                 for (let j = 0; j < fieldsContainers.length; j++) {
-    //                     let skippedField = this.ruleSettings.getFieldValueElements(fieldsContainers[j])!;
-    //                     if (skippedField.length) {
-    //                         let fieldName = skippedField.first().setAttribute('name');
-    //                         let fieldStartWrapper = this.formContainer!.querySelectorAll('script[data-sf-role-field-name=\'' + fieldName + '\']')[0];
-    //                         if (fieldStartWrapper) {
-    //                             let dataSfRole = fieldStartWrapper.getAttribute('data-sf-role');
-    //                             if (dataSfRole) {
-    //                                 let fieldControlId = dataSfRole.replace('start_field_', '');
-    //                                 this._skipField(fieldControlId);
-    //                             }
-    //                         }
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     } else {
-    //         // previous page - iterate through skipped fields and enable them again
-    //         for (let fieldIndex = this.skipFields.length - 1; fieldIndex >= 0; fieldIndex--) {
-    //             let fieldPageIndex = this._getFieldPageContainerIndex(this.skipFields[fieldIndex]);
-    //             if (nextIndex < fieldPageIndex && fieldPageIndex < previousIndex) {
-    //                 this._unskipField(this.skipFields[fieldIndex]);
-    //             }
-    //         }
-    //     }
+    private _updateSkipPages (previousIndex :number, nextIndex: number) {
+        if (previousIndex < nextIndex) {
+            // next page - disable fields in skipped pages
+            let fieldContainerNames = this.ruleSettings.getFieldsContainerNames();
+            for (let skipPage = previousIndex + 1; skipPage < nextIndex; skipPage++) {
+                for (let k = 0; k < fieldContainerNames.length; k++) {
+                    let fieldsContainers = this.pages[skipPage].find('[data-sf-role="' + fieldContainerNames[k] + '"]');
+                    for (let j = 0; j < fieldsContainers.length; j++) {
+                        let skippedField = this.ruleSettings.getFieldValueElements(fieldsContainers[j])!;
+                        if (skippedField.length) {
+                            let fieldName = skippedField[0].getAttribute('name');
+                            let fieldStartWrapper = this.formContainer!.querySelectorAll('script[data-sf-role-field-name=\'' + fieldName + '\']')[0];
+                            if (fieldStartWrapper) {
+                                let dataSfRole = fieldStartWrapper.getAttribute('data-sf-role');
+                                if (dataSfRole) {
+                                    let fieldControlId = dataSfRole.replace('start_field_', '');
+                                    this._skipField(fieldControlId);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            // previous page - iterate through skipped fields and enable them again
+            for (let fieldIndex = this.skipFields.length - 1; fieldIndex >= 0; fieldIndex--) {
+                let fieldPageIndex = this._getFieldPageContainerIndex(this.skipFields[fieldIndex]);
+                if (nextIndex < fieldPageIndex && fieldPageIndex < previousIndex) {
+                    this._unskipField(this.skipFields[fieldIndex]);
+                }
+            }
+        }
 
-    //     this._setSkipFields(this.skipFields);
-    // }
+        this._setSkipFields(this.skipFields);
+    }
 
     private _skipField (fieldControlId: string) {
-        let index = this._arrayIndexOf(this.skipFields, fieldControlId);
-        if (index === -1) {
-            this.skipFields.push(fieldControlId);
-
-            let fieldElement = this._getFieldElement(fieldControlId);
-            fieldElement!.setAttribute('disabled', 'disabled');
-        }
+        this.updateFields({
+            skip: fieldControlId
+        });
     }
 
     private _unskipField(fieldControlId: string) {
-        let index = this._arrayIndexOf(this.skipFields, fieldControlId);
-        if (index > -1) {
-            this.skipFields.splice(index, 1);
-
-            let fieldElement = this._getFieldElement(fieldControlId);
-            fieldElement!.removeAttribute('disabled');
-        }
+        this.updateFields({
+            unSkip: fieldControlId
+        });
     }
 
     private _actionItemIndexOf(actions: Action[], actionData: ActionData): number {
@@ -484,7 +487,7 @@ export class FormRulesExecutor {
                     }
 
                     if (fieldContainer) {
-                        return this.ruleSettings.getFieldValueElements(fieldContainer as HTMLDivElement);
+                        return this.ruleSettings.getFieldValueElement(fieldContainer as HTMLDivElement);
                     }
                 }
             }
@@ -493,49 +496,16 @@ export class FormRulesExecutor {
         return null;
     }
 
-    private _showField (context: ContextInterface, fieldControlId :string) {
-        let index = this._arrayIndexOf(context.hiddenFields, fieldControlId);
-        if (index > -1) {
-            context.hiddenFields.splice(index, 1);
-
-            let scriptWrapper = context.formContainer.querySelector(this._getFieldStartSelector(fieldControlId));
-            if (scriptWrapper) {
-                let fieldElement = this._getFieldElement(fieldControlId);
-                if (fieldElement) {
-                    fieldElement.removeAttribute('disabled');
-                }
-
-                let sibling = scriptWrapper.nextElementSibling!;
-                while (!sibling.matches(this._getFieldEndSelector(fieldControlId))) {
-                    // toggleHideStyles(sibling, false);
-
-                    // toggleShowStyles(sibling);
-                    sibling = sibling.nextElementSibling!;
-                }
-            }
-        }
+    private _showField (_context: ContextInterface, fieldControlId :string) {
+       this.updateFields({
+            show: fieldControlId
+        });
     }
 
-    private _hideField(context: ContextInterface, fieldControlId :string) {
-        let index = this._arrayIndexOf(context.hiddenFields, fieldControlId);
-        if (index === -1) {
-            context.hiddenFields.push(fieldControlId);
-
-            let scriptWrapper = context.formContainer.querySelector(this._getFieldStartSelector(fieldControlId));
-            if (scriptWrapper) {
-                let fieldElement = this._getFieldElement(fieldControlId);
-                if (fieldElement) {
-                    fieldElement.setAttribute('disabled', 'disabled');
-                }
-
-                let sibling = scriptWrapper.nextElementSibling!;
-                while (!sibling.matches(this._getFieldEndSelector(fieldControlId))) {
-                    // toggleShowStyles(sibling, false);
-                    // toggleHideStyles(sibling);
-                    sibling = sibling.nextElementSibling!;
-                }
-            }
-        }
+    private _hideField(_context: ContextInterface, fieldControlId :string) {
+        this.updateFields({
+            hide: fieldControlId
+        });
     }
 
     private _getFieldType(fieldControlId: string) {

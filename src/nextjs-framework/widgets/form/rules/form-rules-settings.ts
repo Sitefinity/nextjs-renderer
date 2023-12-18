@@ -1,6 +1,10 @@
 import { ConditionEvaluator } from './condition-evaluator';
 import { FormRuleActionExecutorBase } from './extractors/form-rule-action-extractor-base';
 import { FieldSelector } from './field-selector';
+import { addActionExecutors } from './rule-objects/add-action-executors';
+import { addConditionEvaluators } from './rule-objects/add-contitional-evaluators';
+import { addFieldSelectors } from './rule-objects/add-field-selectors';
+import { addValueParsers } from './rule-objects/add-value-parsers';
 import { ValueParser } from './value-parser';
 
 export class FormRulesSettings {
@@ -9,6 +13,13 @@ export class FormRulesSettings {
     public RuleValueParsers: ValueParser[] = [];
     public FieldSelectors: FieldSelector[] = [];
     public ActionExecutors: { actionName: string, actionExecutor: FormRuleActionExecutorBase }[] = [];
+
+    constructor(){
+        addActionExecutors(this);
+        addConditionEvaluators(this);
+        addFieldSelectors(this);
+        addValueParsers(this);
+    }
 
     public addConditionEvaluator (name: string, conditionEvaluator: (a: string, b: string) => boolean) {
         this.ConditionEvaluators.push(new ConditionEvaluator(name, conditionEvaluator, this));
@@ -117,6 +128,17 @@ export class FormRulesSettings {
 
         return null;
     }
+
+    public getFieldValueElement (fieldContainer: HTMLDivElement) {
+        for (let i = 0; i < this.FieldSelectors.length; i++) {
+            if (this.FieldSelectors[i].canGetValues(fieldContainer)) {
+                return this.FieldSelectors[i].getFieldValueElement(fieldContainer);
+            }
+        }
+
+        return null;
+    }
+
     public getFieldsContainerNames () {
         let containers = [];
         for (let i = 0; i < this.FieldSelectors.length; i++) {

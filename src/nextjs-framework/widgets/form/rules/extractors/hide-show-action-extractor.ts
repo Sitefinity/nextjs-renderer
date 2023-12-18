@@ -6,7 +6,6 @@ export class HideShowFieldFormRuleActionExecutor extends FormRuleActionExecutorB
 
     constructor(actionName: string) {
         super();
-      //  FormRuleActionExecutorBase.call(this);
         if (actionName === FormRuleConstants.Actions.Show || actionName === FormRuleConstants.Actions.Hide) {
             this.actionName = actionName;
         } else {
