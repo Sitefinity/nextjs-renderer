@@ -8,6 +8,22 @@ export class LayoutService {
     public static get(pagePath: string, queryParams: { [key: string]: string } = {}): Promise<PageLayoutServiceResponse> {
         let url = null;
 
+        const whiteListedParams = ['sfaction', 'sfversion', 'segment', 'isBackend', 'sf_site', 'sf_site_temp', 'sf-auth', 'abTestVariationKey', 'sf-content-action', 'sf-lc-status'];
+        let whitelistedParamDic: { [key:string]: string | undefined } = {};
+        whiteListedParams.forEach(x => {
+            whitelistedParamDic[x] = queryParams[x];
+        });
+
+        let pageParamsDic: { [key:string]: string | undefined } = {};
+        Object.keys(queryParams).filter(x => !whiteListedParams.some(y => y === x)).forEach(x => {
+            pageParamsDic[x] = queryParams[x];
+        });
+
+        let sysParamsQueryString = RestService.buildQueryParams(whitelistedParamDic);
+        sysParamsQueryString = sysParamsQueryString.replace('?', '&');
+
+        let pagePramsQueryString = RestService.buildQueryParams(pageParamsDic);
+
         let indexOfSitefinityTemplate = pagePath.indexOf('Sitefinity/Template/');
         if (indexOfSitefinityTemplate > -1) {
             let id = null;
@@ -21,24 +37,11 @@ export class LayoutService {
 
             url = `/api/default/templates/${id}/Default.Model()`;
         } else {
-            const whiteListedParams = ['sfaction', 'sfversion', 'segment', 'isBackend', 'sf_site', 'sf_site_temp', 'sf-auth', 'abTestVariationKey', 'sf-content-action', 'sf-lc-status'];
-            let whitelistedParamDic: { [key:string]: string | undefined } = {};
-            whiteListedParams.forEach(x => {
-                whitelistedParamDic[x] = queryParams[x];
-            });
 
-            let pageParamsDic: { [key:string]: string | undefined } = {};
-            Object.keys(queryParams).filter(x => !whiteListedParams.some(y => y === x)).forEach(x => {
-                pageParamsDic[x] = queryParams[x];
-            });
-
-            let sysParamsQueryString = RestService.buildQueryParams(whitelistedParamDic);
-            sysParamsQueryString = sysParamsQueryString.replace('?', '&');
-
-            let pagePramsQueryString = RestService.buildQueryParams(pageParamsDic);
-
-            url = `/api/default/pages/Default.Model(url=@param)?@param='${encodeURIComponent(pagePath + pagePramsQueryString)}'${sysParamsQueryString}`;
+            url = '/api/default/pages/Default.Model(url=@param)';
         }
+
+        url += `?@param='${encodeURIComponent(pagePath + pagePramsQueryString)}'${sysParamsQueryString}`;
 
         return RestService.sendRequest({ url: RootUrlService.rootUrl + url });
     }

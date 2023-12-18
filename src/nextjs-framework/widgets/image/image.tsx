@@ -6,12 +6,14 @@ import { ImageClickAction } from './interfaces/ImageClickAction';
 import { ImageDisplayMode } from './interfaces/ImageDisplayMode';
 import { WidgetContext, htmlAttributes, classNames, generateAnchorAttrsFromLink, LinkModel } from '../../editor';
 import { RestService, RestSdkTypes, ThumbnailItem, SdkItem, ImageItem } from '../../rest-sdk';
-import { ImageEntity } from './image.entity';
 
 const imageWrapperClass = 'd-inline-block';
 
 export async function Image(props: WidgetContext<ImageEntity>) {
-    const entity = props.model.Properties;
+    const entity = {
+        ImageSize: ImageDisplayMode.Responsive,
+        ...props.model.Properties
+    };
     const dataAttributes = htmlAttributes(props);
     const defaultClass = classNames(imageWrapperClass, entity.CssClass);
     const marginClass = entity.Margins && StyleGenerator.getMarginClasses(entity.Margins);
@@ -34,7 +36,7 @@ export async function Image(props: WidgetContext<ImageEntity>) {
     }
 
     if (!imageItem) {
-        return null;
+        return (<div {...dataAttributes} />);
     }
 
     const isSvg = imageItem.MimeType === 'image/svg+xml';
@@ -92,4 +94,20 @@ export async function Image(props: WidgetContext<ImageEntity>) {
                     :  <ImageTag imageModel={imageModel} className={entity.CssClass}
                         {...dataAttributes} />
              ;
+}
+
+export interface ImageEntity {
+    Item?: ImageItem;
+    Attributes?: { [key: string]: Array<{ Key: string, Value: string}> };
+    Margins?: OffsetStyle;
+    Title?: string;
+    AlternativeText?: string;
+    CssClass?: string;
+    ClickAction?: ImageClickAction;
+    ActionLink?: LinkModel;
+    ImageSize?: ImageDisplayMode;
+    FitToContainer: boolean;
+    CustomSize?: { Width: number, Height: number};
+    Thumnail?: ThumbnailItem;
+    ViewName?: string;
 }

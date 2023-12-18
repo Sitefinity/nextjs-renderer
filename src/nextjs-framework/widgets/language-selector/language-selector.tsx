@@ -9,8 +9,8 @@ export async function LanguageSelector(props: WidgetContext<LanguageSelectorEnti
         throw 'Layout is undefined';
     }
 
-    const cultures = context.layout.Site.Cultures;
-    const layoutId = context.layout.Id;
+    const cultures = context.layout?.Site.Cultures;
+    const layoutId = context.layout?.Id;
     const culture = context.culture;
     let values: PageItem[] = [];
 
