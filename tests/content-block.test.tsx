@@ -10,7 +10,6 @@ test('Content block render Content property', async () => {
         properties: {
             Content: 'Test content'
         },
-        pageTitle: 'Content block render Content property',
         assert: async (element) => {
             await waitFor(() => {
                 expect(element).toMatchSnapshot();
@@ -33,7 +32,6 @@ test('Content block render with Content item', async () => {
         properties: {
             SharedContentID: contentItem.Id
         },
-        pageTitle: 'Content block render with Content item',
         assert: async (element) => {
             await waitFor(() => {
                 expect(element).toMatchSnapshot();
@@ -48,7 +46,6 @@ test('Content block html metadata assert during edit', async () => {
         properties: {
             Content: 'Test content'
         },
-        pageTitle: 'Content block html metadata assert during edit',
         assert: (element) => {
             const actualElement = element.querySelector('[data-sfid]');
             actualElement?.setAttribute('data-sfid', 'static');
@@ -57,3 +54,37 @@ test('Content block html metadata assert during edit', async () => {
         render: RenderType.Edit
     });
 });
+
+test('Content block with custom tag name(CB_TagName_Rendered)', async () => {
+    await WidgetTester.testWidgetRender<ContentBlockEntity>({
+        name: 'SitefinityContentBlock',
+        properties: {
+            Content: 'Test content',
+            TagName: 'h1'
+        },
+        assert: (element) => {
+            expect(element).toMatchSnapshot();
+        }
+    });
+});
+
+test('Content block with custom attributes', async () => {
+    await WidgetTester.testWidgetRender<ContentBlockEntity>({
+        name: 'SitefinityContentBlock',
+        properties: {
+            Content: 'Test content',
+            Attributes: {
+                'SitefinityContentBlock': [
+                    {
+                        Key: 'test-attribute-key',
+                        Value: 'test-attribute-value'
+                    }
+                ]
+            }
+        },
+        assert: (element) => {
+            expect(element).toMatchSnapshot();
+        }
+    });
+});
+

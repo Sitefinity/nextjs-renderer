@@ -9,7 +9,7 @@ export class WidgetTester {
         const page = await RestService.createItem({
             Type: RestSdkTypes.Pages,
             Data: {
-                Title: args.pageTitle ?? new Date().getTime().toString(),
+                Title: args.pageTitle ?? expect.getState().currentTestName,
                 UrlName: args.pageUrlName ?? new Date().getTime().toString(),
                 TemplateName: 'Next.Default'
             }
