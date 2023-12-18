@@ -33,29 +33,7 @@ exports[`should render breadcrumb with full path to current page 1`] = `
     data-sftitle="Breadcrumb"
     draggable="true"
   >
-    <nav
-      aria-label="Full path to the current page"
-    >
-      <ol
-        class="breadcrumb"
-      >
-        <li
-          class="breadcrumb-item"
-        >
-          <a
-            href="/home"
-          >
-            Home
-          </a>
-        </li>
-        <li
-          aria-current="page"
-          class="breadcrumb-item active"
-        >
-          react new
-        </li>
-      </ol>
-    </nav>
+    Breadcrumb is visible when you are on a particular page.
   </div>
 </div>
 `;

@@ -8,7 +8,7 @@ import { ServiceMetadataDefinition, RootUrlService, ServiceMetadata } from '../r
 import { PageLayoutServiceResponse } from '../rest-sdk/services';
 import { RenderWidgetService } from '../services/render-widget-service';
 
-export function RenderLazyWidgets({ layout, metadata, context }: { layout: PageLayoutServiceResponse, metadata: ServiceMetadataDefinition, context: RequestContext }) {
+export function RenderLazyWidgets({ layout, metadata, context }: { layout: PageLayoutServiceResponse, metadata: ServiceMetadataDefinition, context: RequestContext, url :string }) {
     RootUrlService.rootUrl = `${process.env['NEXT_PUBLIC_CMS_URL'] || ''}`;
 
     RenderWidgetService.widgetRegistry = widgetRegistry;
@@ -41,11 +41,14 @@ export function RenderLazyWidgets({ layout, metadata, context }: { layout: PageL
                     result.Components.forEach((component) => {
                         contract.renderWidget({
                             model: component,
-                            siteId: context.layout?.SiteId as string,
+                            siteId: context.layout.SiteId as string,
                             dataItem: {
-                                key: context.layout?.Id as string,
+                                key: context.layout.Id as string,
                                 culture: context.culture,
-                                provider: ''
+                                provider: '',
+                                data: {
+                                    EditUrl: url
+                                }
                             }
                         }).then((renderResult) => {
                             let element = document.getElementById(component.Id);
