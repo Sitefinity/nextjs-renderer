@@ -1,4 +1,4 @@
-import { Attributes, Category, Choices, ConditionalVisibility, ContentSection, ContentSectionTitles, DataModel, DataType, DefaultValue, Description, DescriptionExtened, DisplayName, KnownFieldTypes, Margins, MediaItem, Required, SdkItemModel, ViewSelector, WidgetEntity, WidgetLabel } from '@progress/sitefinity-widget-designers';
+import { Attributes, Category, Choice,ConditionalVisibility, ContentSection, ContentSectionTitles, DataModel, DataType, DefaultValue, Description, DescriptionExtened, DisplayName, KnownFieldTypes, Margins, MediaItem, Required, SdkItemModel, ViewSelector, WidgetEntity, WidgetLabel } from '@progress/sitefinity-widget-designers';
 import { LinkModel } from '../../editor';
 import { OffsetStyle } from '../styling/offset-style';
 import { ImageClickAction, ImageClickActionChoices } from './interfaces/ImageClickAction';
@@ -27,7 +27,7 @@ export class ImageEntity {
     AlternativeText?: string;
 
     @DisplayName('When image is clicked...')
-    @Choices(ImageClickActionChoices)
+    @Choice(ImageClickActionChoices)
     ClickAction: ImageClickAction = ImageClickAction.DoNothing;
 
     @DisplayName('Link to...')
@@ -39,7 +39,7 @@ export class ImageEntity {
 
     @ContentSection(ContentSectionTitles.DisplaySettings, 1)
     @DisplayName('Image size')
-    @Choices(ImageDisplayChoices)
+    @Choice(ImageDisplayChoices)
     ImageSize: ImageDisplayMode = ImageDisplayMode.Responsive;
 
     @DisplayName('Fit to container')

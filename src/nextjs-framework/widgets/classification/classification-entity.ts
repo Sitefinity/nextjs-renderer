@@ -1,7 +1,7 @@
-import { Attributes, Category, Choices, ContentSection, CssFieldMappings, DataModel, DataType, Description, DisplayName, KnownFieldTypes, Margins, MaxLength, Model, Placeholder, Required, WidgetEntity } from '@progress/sitefinity-widget-designers';
+import { Attributes, Category, Choice,ContentSection, CssFieldMappings, DataModel, DataType, Description, DisplayName, KnownFieldTypes, Margins, MaxLength, Model, Placeholder, Required, WidgetEntity, WidgetLabel } from '@progress/sitefinity-widget-designers';
 import { OffsetStyle } from '../styling/offset-style';
 
-@Model()
+@Model(true)
 export class ClassificationSettingsInterface {
     @DataType('string')
     selectedTaxonomyId: string | null = null;
@@ -15,7 +15,7 @@ export class ClassificationSettingsInterface {
     @DataType('string')
     selectedTaxonomyTitle: string | null = null;
 
-    @Choices([
+    @Choice([
         { Value: 'All' },
         { Value: 'TopLevel' },
         { Value: 'UnderParent' },
@@ -39,59 +39,59 @@ export class ClassificationEntity {
     @DataModel(ClassificationSettingsInterface)
     @Required('Please select a classification')
     @Placeholder('Select classification')
-    ClassificationSettings?: ClassificationSettingsInterface;
+    ClassificationSettings: ClassificationSettingsInterface | null = null;
 
     // List settings
     @ContentSection('List settings', 0)
-    @Choices({
+    @Choice({
         ServiceUrl: '{0}/Default.Sorters()?frontend=True',
         ServiceCallParameters: '[{ \u0022taxaUrl\u0022 : \u0022{0}\u0022}]'
     })
     @DisplayName('Sort items')
+    @DataType(KnownFieldTypes.Choices)
     OrderBy: string = 'Title ASC';
 
     @ContentSection('List settings', 1)
     @DisplayName('Display item count')
     @DataType(KnownFieldTypes.ChipChoice)
-    @Choices([
-        { Title: 'Yes', Value: true},
-        { Title: 'No', Value: false}
-    ])
+    @Choice({Choices: [
+            { Name: 'Yes', Value: 'True'},
+            { Name: 'No', Value: 'False'}
+        ]
+    })
     ShowItemCount: boolean = true;
 
     @ContentSection('List settings', 2)
     @DisplayName('Display empty tags or categories')
     @DataType(KnownFieldTypes.ChipChoice)
-    @Choices([
-        { Title: 'Yes', Value: true},
-        { Title: 'No', Value: false}
-    ])
+    @Choice({Choices: [
+            { Name: 'Yes', Value: 'True'},
+            { Name: 'No', Value: 'False'}
+        ]
+    })
     ShowEmpty: boolean = false;
 
     // Display settings
     @ContentSection('Display settings')
     @DisplayName('Classification template')
     @DataType('viewSelector')
-    @Choices([
+    @Choice([
         { Value: 'Default'}
     ])
     SfViewName: string = 'Default';
 
     @ContentSection('Display settings', 1)
     @Margins('Classification')
-    Margins?: OffsetStyle;
+    Margins: OffsetStyle | null = null;
 
     // Advanced
-    @Category('Advanced')
-    @DataType('string')
-    @DisplayName('Label')
-    @Description('Custom labels are displayed in the page editor for your convenience. You can change the generic name with a specific one only for this widget.')
-    @MaxLength(30)
-    SfWidgetLabel: string | null = null;
+    @WidgetLabel()
+    SfWidgetLabel: string = 'Classification';
 
     @Category('Advanced')
-    @CssFieldMappings()
-    CssClass?: string;
+    @DataType('string')
+    @DisplayName('CSS class')
+    CssClass: string | null = null;
 
     @Category('Advanced')
     @DisplayName('Sort expression')

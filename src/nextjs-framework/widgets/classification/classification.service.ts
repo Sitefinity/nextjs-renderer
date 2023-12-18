@@ -8,8 +8,6 @@ export class ClassificationRestService {
     static getTaxons(entity: ClassificationEntity): {value: TaxaPageViewModel[]} {
         const settings = entity.ClassificationSettings;
         if (settings && settings.selectedTaxonomyId) {
-            const showEmpty = entity.ShowEmpty || false;
-            const showCount = entity.ShowItemCount || true;
             let orderBy = entity.OrderBy || 'Title ASC';
 
             if (orderBy === 'Custom') {
@@ -19,7 +17,7 @@ export class ClassificationRestService {
             }
 
             const additionalParams = {
-                'showEmpty': showEmpty,
+                'showEmpty': entity.ShowEmpty,
                 '$orderby': orderBy,
                 '@param': `[${(settings.selectedTaxaIds || []).map(x => `'${x}'`).toString()}]`
             };

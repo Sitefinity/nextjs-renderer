@@ -1,13 +1,13 @@
 import { DecimalNumberRange, NumberRange } from './NumberRange';
 import { DateRange } from './DateRange';
-import { Choices, ComlexType, ConditionalVisibility, DataModel, DataType, DefaultValue, Description, DisplayName, DisplaySettings, KnownFieldTypes, Model, Placeholder, Range, StringLength, TableView } from '@progress/sitefinity-widget-designers';
+import { Choice,ComlexType, ConditionalVisibility, DataModel, DataType, DefaultValue, Description, DisplayName, DisplaySettings, KnownFieldTypes, Model, Placeholder, Range, StringLength, TableView } from '@progress/sitefinity-widget-designers';
 
 @Model()
 export class Settings {
     @DisplayName('Range type')
     @DefaultValue(0)
     @DataType(KnownFieldTypes.ChipChoice)
-    @Choices({ Choices: [{'Title':'Auto','Name':'Auto','Value':0,'Icon':null},{'Title':'Custom','Name':'Custom','Value':1,'Icon':null}] })
+    @Choice({ Choices: [{'Title':'Auto','Name':'Auto','Value':0,'Icon':null},{'Title':'Custom','Name':'Custom','Value':1,'Icon':null}] })
     RangeType?: number;
 
     @TableView({ Reorderable: false, Selectable: false, MultipleSelect: false })
@@ -26,7 +26,7 @@ export class Settings {
     @ConditionalVisibility('{"operator":"And","conditions":[' +
         '{"fieldName":"RangeType","operator":"Equals","value":0 },' +
         '{"fieldName":"FacetType","operator":"Equals","value":"DateAndTime" }]}')
-    @Choices({ Choices: [{'Title':'day','Name':'0','Value':0,'Icon':'ban'},{'Title':'week','Name':'1','Value':1,'Icon':null},{'Title':'month','Name':'2','Value':2,'Icon':null},{'Title':'quarter','Name':'3','Value':3,'Icon':null},{'Title':'year','Name':'4','Value':4,'Icon':null}] })
+    @Choice({ Choices: [{'Title':'day','Name':'0','Value':0,'Icon':'ban'},{'Title':'week','Name':'1','Value':1,'Icon':null},{'Title':'month','Name':'2','Value':2,'Icon':null},{'Title':'quarter','Name':'3','Value':3,'Icon':null},{'Title':'year','Name':'4','Value':4,'Icon':null}] })
     DateStep: string | null = null;
 
     @DisplayName('Set a range step')
@@ -84,7 +84,7 @@ export class Settings {
     @DefaultValue(false)
     @DataType(KnownFieldTypes.ChipChoice)
     @ConditionalVisibility('{"operator":"Or","conditions":[{"fieldName":"RangeType","operator":"Equals","value":1 },{"fieldName":"FacetType","operator":"Contains","value":"Number" }]}')
-    @Choices({ Choices: [{'Title':'Yes','Name':'Yes','Value':true,'Icon':null},{'Title':'No','Name':'No','Value':false,'Icon':null}] })
+    @Choice({ Choices: [{'Title':'Yes','Name':'Yes','Value':true,'Icon':null},{'Title':'No','Name':'No','Value':false,'Icon':null}] })
     DisplayCustomRange?: boolean;
 
     @DisplaySettings(true)

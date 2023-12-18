@@ -1,6 +1,6 @@
 import { ContentListSettings, MixedContentContext } from '../../editor';
 import { CombinedFilter, FilterClause, RelationFilter } from '../../rest-sdk';
-import { Attributes, Category, Choices, ConditionalVisibility, Content, ContentSection, ContentSectionTitles, CssFieldMappings, DataModel, DataType, DefaultValue, Description, DisplayName, FallbackToDefaultValueWhenEmpty, FieldMapping, FieldMappings, KnownFieldTypes, MaxLength, Model, SectionsOrder, WidgetEntity, WidgetLabel } from '@progress/sitefinity-widget-designers';
+import { Attributes, Category, Choice,ConditionalVisibility, Content, ContentSection, ContentSectionTitles, CssFieldMappings, DataModel, DataType, DefaultValue, Description, DisplayName, FallbackToDefaultValueWhenEmpty, FieldMapping, FieldMappings, KnownFieldTypes, MaxLength, Model, SectionsOrder, WidgetEntity, WidgetLabel } from '@progress/sitefinity-widget-designers';
 
 @Model()
 export class ListFieldMapping {
@@ -42,7 +42,7 @@ export class ContentListEntity {
     @DisplayName('List template')
     @DataType('viewSelector')
     @ContentSection('Select content to display', 1)
-    @Choices([
+    @Choice([
             { Title: 'Cards list', Value: 'CardsList'},
             { Title: 'External list', Value: 'ExternalList'},
             { Title: 'List with image', Value: 'ListWithImage'},
@@ -65,14 +65,14 @@ export class ContentListEntity {
     @DisplayName('Sort items')
     @ContentSection('List settings', 1)
     @DataType('dynamicChoicePerItemType')
-    @Choices({ ServiceUrl: '/Default.Sorters()?frontend=True' })
+    @Choice({ ServiceUrl: '/Default.Sorters()?frontend=True' })
     OrderBy: string = 'PublicationDate DESC';
 
     // Single item settings
     @DisplayName('Open single item in...')
     @ContentSection('Single item settings', 0)
     @DataType(KnownFieldTypes.RadioChoice)
-    @Choices([
+    @Choice([
         { Title: 'Auto-generated page - same layout as the list page',  Value: 'SamePage'},
         { Title: 'Select existing page', Value: 'ExistingPage'}
     ])
@@ -81,7 +81,7 @@ export class ContentListEntity {
     @DisplayName('Single item template')
     @ContentSection('Single item settings', 1)
     @DataType('viewSelector')
-    @Choices([
+    @Choice([
             {Title: 'Details.Blog posts.Default', Value: 'Details.BlogPosts.Default'},
             {Title: 'Details.Dynamic.Default', Value: 'Details.Dynamic.Default'},
             {Title: 'Details.Events.Default', Value: 'Details.Events.Default'},
@@ -107,7 +107,7 @@ export class ContentListEntity {
     @ContentSection('', 1)
     @DisplayName('Content view display mode')
     @DataType(KnownFieldTypes.Choices)
-    @Choices([
+    @Choice([
         { Value: 'Automatic'},
         { Value: 'Master'},
         { Value: 'Detail'}
@@ -121,7 +121,7 @@ export class ContentListEntity {
     @DisplayName('Selection group logical operator')
     @DataType(KnownFieldTypes.RadioChoice)
     @Description('Controls the logic of the filters - whether all conditions should be true (AND) or whether one of the conditions should be true (OR).')
-    @Choices([
+    @Choice([
         { Value: 'AND'},
         { Value: 'OR'}
     ])
@@ -163,7 +163,7 @@ export class ContentListEntity {
     @DisplayName('Paging mode')
     @DataType(KnownFieldTypes.RadioChoice)
     @Description('Controls whether the paging works with URL segments or a query parameter.')
-    @Choices([
+    @Choice([
         { Value: 'URLSegments', Title: 'URL segments'},
         { Value: 'QueryParameter', Title: 'Query parameter'}
     ])
@@ -190,7 +190,7 @@ export class ContentListEntity {
     @ContentSection('Metadata fields', 0)
     @DisplayName('SEO enabled')
     @DataType(KnownFieldTypes.ChipChoice)
-    @Choices({
+    @Choice({
         Choices: [
             { Name: 'Yes', Value: 'True' },
             { Name: 'No', Value: 'False' }
@@ -215,7 +215,7 @@ export class ContentListEntity {
     @DisplayName('Page title mode')
     @Description('[{\u0022Type\u0022: 1,\u0022Chunks\u0022: [{\u0022Value\u0022: \u0022Setting Page title mode\u0022,\u0022Presentation\u0022: [0]},{\u0022Value\u0022: \u0022Replace \u2013 page title is replaced by the\u0022,\u0022Presentation\u0022: [2]},{\u0022Value\u0022: \u0022item\u0027s title.\u0022,\u0022Presentation\u0022: [2]},{\u0022Value\u0022: \u0022Append \u2013 item title is appended to the\u0022,\u0022Presentation\u0022: [2]},{\u0022Value\u0022: \u0022page title.\u0022,\u0022Presentation\u0022: [2]},{\u0022Value\u0022: \u0022Hierarchy \u2013 page title will be built by the\u0022,\u0022Presentation\u0022: [2]},{\u0022Value\u0022: \u0022item\u0027s title and its parent\u0027s title. Value is\u0022,\u0022Presentation\u0022: [2]},{\u0022Value\u0022: \u0022relevant for the Forums widget only.\u0022,\u0022Presentation\u0022: [2]},{\u0022Value\u0022: \u0022Do not set \u2013 page title will not be altered.\u0022,\u0022Presentation\u0022: []}]}]')
     @DataType(KnownFieldTypes.Choices)
-    @Choices([
+    @Choice([
         { Value: 'Replace' },
         { Value: 'Append' },
         { Value: 'Hierarchy' },
@@ -227,7 +227,7 @@ export class ContentListEntity {
     @ContentSection('Metadata fields', 4)
     @DisplayName('OpenGraph enabled')
     @DataType(KnownFieldTypes.ChipChoice)
-    @Choices({
+    @Choice({
         Choices: [
             { Name: 'Yes', Value: 'True' },
             { Name: 'No', Value: 'False' }

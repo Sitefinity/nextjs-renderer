@@ -1,4 +1,4 @@
-import { Choices, ColorPalette, ConditionalVisibility, DataType, DisplayName, KnownFieldTypes, Model } from '@progress/sitefinity-widget-designers';
+import { Choice,ColorPalette, ConditionalVisibility, DataType, DisplayName, KnownFieldTypes, Model } from '@progress/sitefinity-widget-designers';
 import { BackgroundBase } from './background-base';
 import { StylingConfig } from './styling-config';
 
@@ -6,7 +6,7 @@ import { StylingConfig } from './styling-config';
 export class SimpleBackgroundStyle {
     @DisplayName('Type')
     @DataType(KnownFieldTypes.ChipChoice)
-    @Choices([
+    @Choice([
             { Value: 'None' },
             { Value: 'Color' }
         ])

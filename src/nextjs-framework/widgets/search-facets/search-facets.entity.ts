@@ -1,4 +1,4 @@
-import { Category, Choices, ComlexType, ConditionalVisibility, ContentSection, ContentSectionTitles, DataModel, DataType, DefaultValue, Description, DisplayName, KeysValues, KnownFieldTypes, LengthDependsOn, Margins, Placeholder, PropertyCategory, Required, TableView, ViewSelector, WidgetEntity, WidgetLabel } from '@progress/sitefinity-widget-designers';
+import { Category, Choice,ComlexType, ConditionalVisibility, ContentSection, ContentSectionTitles, DataModel, DataType, DefaultValue, Description, DisplayName, KeysValues, KnownFieldTypes, LengthDependsOn, Margins, Placeholder, PropertyCategory, Required, TableView, ViewSelector, WidgetEntity, WidgetLabel } from '@progress/sitefinity-widget-designers';
 import { OffsetStyle } from '../styling/offset-style';
 import { FacetField } from './interfaces/FacetField';
 
@@ -9,7 +9,7 @@ export class SearchFacetsEntity {
     @Placeholder('Select search index')
     @Required('Select search index')
     @DataType(KnownFieldTypes.Choices)
-    @Choices({
+    @Choice({
         ServiceUrl: 'Default.GetFacetableIndexes',
         ServiceWarningMessage: 'No search index with facetable fields has been created yet. To manage search indexes, go to Administration > Search indexes, or contact your administrator for assistance.'
     })
@@ -29,21 +29,21 @@ export class SearchFacetsEntity {
     @DisplayName('Sort fields')
     @DataType(KnownFieldTypes.Choices)
     @ConditionalVisibility('{"conditions":[{"fieldName":"IndexCatalogue","operator":"NotEquals","value":null }]}')
-    @Choices({Choices:[{'Title':'As set manually','Name':'0','Value':0,'Icon':'ban'},{'Title':'Alphabetically','Name':'2','Value':2,'Icon':null}]})
+    @Choice({Choices:[{'Title':'As set manually','Name':'0','Value':0,'Icon':'ban'},{'Title':'Alphabetically','Name':'2','Value':2,'Icon':null}]})
     @DefaultValue(null)
     SortType?: string;
 
     @ContentSection('Search facets setup', 1)
     @DisplayName('Display item count')
     @DataType(KnownFieldTypes.ChipChoice)
-    @Choices({Choices: [{'Title':'Yes','Name':'Yes','Value':'True','Icon':null},{'Title':'No','Name':'No','Value':'False','Icon':null}]})
+    @Choice({Choices: [{'Title':'Yes','Name':'Yes','Value':'True','Icon':null},{'Title':'No','Name':'No','Value':'False','Icon':null}]})
     @ConditionalVisibility('{"conditions":[{"fieldName":"IndexCatalogue","operator":"NotEquals","value":null }]}')
     DisplayItemCount: boolean = true;
 
     @ContentSection('Search facets setup', 1)
     @DisplayName('Collapse large facet lists')
     @DataType( KnownFieldTypes.ChipChoice)
-    @Choices({Choices: [{'Title':'Yes','Name':'Yes','Value':'True','Icon':null},{'Title':'No','Name':'No','Value':'False','Icon':null}]})
+    @Choice({Choices: [{'Title':'Yes','Name':'Yes','Value':'True','Icon':null},{'Title':'No','Name':'No','Value':'False','Icon':null}]})
     @ConditionalVisibility('{"conditions":[{"fieldName":"IndexCatalogue","operator":"NotEquals","value":null }]}')
     @Description('[{"Type":1,"Chunks":[{"Value":"Specifies whether to collapse facet lists on","Presentation":[]}, {"Value":"your site with more than 10 entries. If \'No\'","Presentation":[2]}, {"Value":"is selected, all facets are displayed.","Presentation":[2]}]}]')
     IsShowMoreLessButtonActive: boolean = true;

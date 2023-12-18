@@ -1,13 +1,13 @@
 import { SdkItem } from '../../rest-sdk';
 import { ImagePosition } from './image-position';
-import { Choices, ColorPalette, ConditionalVisibility, DataModel, DataType, DisplayName, KnownFieldTypes, MediaItem, Model, SdkItemModel } from '@progress/sitefinity-widget-designers';
+import { Choice,ColorPalette, ConditionalVisibility, DataModel, DataType, DisplayName, KnownFieldTypes, MediaItem, Model, SdkItemModel } from '@progress/sitefinity-widget-designers';
 import { StylingConfig } from './styling-config';
 
 @Model()
 export class BackgroundStyle {
     @DisplayName('Type')
     @DataType(KnownFieldTypes.ChipChoice)
-    @Choices([
+    @Choice([
             { Value: 'None' },
             { Value: 'Color' },
             { Value: 'Image' },
@@ -43,7 +43,7 @@ export class BackgroundStyle {
 
     @DisplayName(' ')
     @DataType(KnownFieldTypes.Choices)
-    @Choices([
+    @Choice([
             { Value: 'Fill'},
             { Value: 'Center'},
             { Value: 'Cover'}
