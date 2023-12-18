@@ -28,11 +28,12 @@ export async function RenderPage({ params, searchParams }: PageParams) {
         widgets: layout.ComponentContext.Components
     };
 
+    const liveUrl = params.slug.join('/') + '?' + new URLSearchParams(searchParams).toString();
     return (
       <>
         <RenderPageScripts layout={layout} />
         {isEdit && <RenderPageClient metadata={ServiceMetadata.serviceMetadataCache} layout={layout} context={appState.requestContext} />}
-        {!isEdit && appState.requestContext.layout?.ComponentContext.HasLazyComponents && <RenderLazyWidgets metadata={ServiceMetadata.serviceMetadataCache} layout={layout} context={appState.requestContext} />}
+        {!isEdit && appState.requestContext.layout?.ComponentContext.HasLazyComponents && <RenderLazyWidgets metadata={ServiceMetadata.serviceMetadataCache} layout={layout} context={appState.requestContext} url={liveUrl} />}
         {appState.widgets.map((child) => {
                 return RenderWidgetService.createComponent(child, appState.requestContext);
             })}

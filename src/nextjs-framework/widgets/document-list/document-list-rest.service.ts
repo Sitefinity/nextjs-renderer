@@ -5,7 +5,7 @@ import { DocumentListEntity } from './document-list-entity';
 
 export class DocumentListRestService {
 
-    static getItems(entity: DocumentListEntity, detailItem: DetailItem | null): Promise<CollectionResponse<SdkItem>> {
+    static getItems(entity: DocumentListEntity, detailItem: DetailItem | undefined): Promise<CollectionResponse<SdkItem>> {
         if (entity.SelectedItems && entity.SelectedItems.Content && entity.SelectedItems.Content.length > 0
                 && entity.SelectedItems.Content[0].Variations) {
             const selectedContent = entity.SelectedItems.Content[0];
@@ -40,12 +40,12 @@ export class DocumentListRestService {
     }
 
 
-    private static getParentFilterExpression(selectedContent: ContentContext, variation: ContentVariation, detailItem: DetailItem | null): FilterClause | null {
+    private static getParentFilterExpression(selectedContent: ContentContext, variation: ContentVariation, detailItem: DetailItem | undefined): FilterClause | null {
         let filterByParentExpressionSerialized = null;
         if (variation.DynamicFilterByParent) {
             let parentType = ServiceMetadata.getParentType(selectedContent.Type);
 
-            if (parentType != null && detailItem != null && detailItem.ItemType === parentType) {
+            if (parentType != null && detailItem && detailItem.ItemType === parentType) {
                 return <FilterClause>{
                     FieldName: 'ParentId',
                     FieldValue: detailItem.Id,

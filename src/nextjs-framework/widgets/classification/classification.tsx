@@ -55,10 +55,9 @@ export async function Classification(props: WidgetContext<ClassificationEntity>)
     const model = props.model;
     const properties = model.Properties;
     const settings = properties.ClassificationSettings;
-    const pageNode = props.requestContext.layout;
     const dataAttributes = htmlAttributes(props);
     const tokens = await ClassificationRestService.getTaxons(model.Properties);
-    const viewUrl = pageNode ? pageNode.Fields.ViewUrl : '';
+    const viewUrl = props.requestContext.layout.Fields['ViewUrl'] || '';
     const searchParams = props.requestContext.searchParams;
 
     const updatedTokens = tokens.value.map (taxon => {
