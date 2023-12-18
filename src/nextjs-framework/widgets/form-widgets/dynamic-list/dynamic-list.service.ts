@@ -16,8 +16,8 @@ export class DynamicListService {
             defaultFieldName = 'Title';
         } else if (entity.ListType === Selection.Content) {
             let result = await this.getContent(entity);
-            // items = result.Item1;
-            // defaultFieldName = result.Item2;
+            items = result.value;
+            defaultFieldName = 'Title';
         }
 
         return this.getChoices(items, defaultFieldName, entity);
@@ -29,7 +29,6 @@ export class DynamicListService {
             entity.SelectedContent.Content.length > 0 &&
             entity.SelectedContent.Content[0].Type != null) {
             let itemType = entity.SelectedContent.Content[0].Type;
-       //     var defaultFieldName = (this.restClient as RestClient).ServiceMetadata.GetDefaultFieldName(itemType);
             const getAllArgs: GetAllArgs = {
                 OrderBy: [],
                 Type: itemType
@@ -38,17 +37,17 @@ export class DynamicListService {
 
             const orderBy = this.getOrderByExpressionForContent(entity);
             if (orderBy !== null) {
-                getAllArgs.OrderBy!.push(orderBy.Type as any);
+                getAllArgs.OrderBy!.push(orderBy);
             }
 
             let items = await RestService.getItems(getAllArgs);
+            return {value: items.Items};
         }
 
         return { value: []};
     }
      static getOrderByExpressionForContent(entity: DynamicListEntity) {
         if (entity.OrderByContent === 'Manually') {
-            console.log(1);
             return null;
         }
 
@@ -63,7 +62,7 @@ export class DynamicListService {
 
             return null;
         }
-        console.log(3, sortExpressionParts);
+
         let sortOrder = sortExpressionParts[1].toLowerCase() === 'ASC' ? 'asc' : 'desc';
         let orderBy = { Name: sortExpressionParts[0], Type: sortOrder };
 

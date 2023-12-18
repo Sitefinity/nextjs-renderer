@@ -41,12 +41,6 @@ export async function MultipleChoice(props: WidgetContext<MultipleChoiceEntity>)
           aria-labelledby={`choice-field-label-${multipleChoiceUniqueId} choice-field-description-${multipleChoiceUniqueId}`}>
           <input data-sf-role="violation-messages" type="hidden" value={viewModel.ViolationRestrictionsMessages} />
           <input type="hidden" data-sf-role="required-validator" value={viewModel.Required} />
-
-          <legend className="h6" id={`choice-field-label-${multipleChoiceUniqueId}`}>{viewModel.Label}</legend>
-
-          { viewModel.InstructionalText &&
-            <p className="text-muted small" id={`choice-field-description-${multipleChoiceUniqueId}`}>{viewModel.InstructionalText}</p>
-          }
           <MultipleChoiceClient viewModel={viewModel}
             multipleChoiceUniqueId={multipleChoiceUniqueId}
             inputMultipleChoiceUniqueId={inputMultipleChoiceUniqueId}

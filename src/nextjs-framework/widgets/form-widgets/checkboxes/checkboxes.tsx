@@ -34,19 +34,13 @@ export async function Checkboxes(props: WidgetContext<CheckboxesEntity>) {
     const inputCheckboxUniqueId = getUniqueId(checkboxUniqueId);
     const otherChoiceOptionId = getUniqueId(`choiceOption-other-${checkboxUniqueId}`);
     const dataAttributes = htmlAttributes(props);
+
     const defaultRendering = (<>
       <script data-sf-role={`start_field_${checkboxUniqueId}`} data-sf-role-field-name={`${checkboxUniqueId}`} />
       <fieldset data-sf-role="checkboxes-field-container" className={classNames('mb-3', viewModel.CssClass)}
         aria-labelledby={`choice-field-label-${checkboxUniqueId} choice-field-description-${checkboxUniqueId}`}>
         <input data-sf-role="violation-messages" type="hidden" value={viewModel.ViolationRestrictionsMessages} />
         <input type="hidden" data-sf-role="required-validator" value={viewModel.Required} />
-
-        <legend className="h6" id={`choice-field-label-${checkboxUniqueId}`}>{viewModel.Label}</legend>
-
-        { viewModel.InstructionalText &&
-        <p className="text-muted small" id={`choice-field-description-${checkboxUniqueId}`}>{viewModel.InstructionalText}</p>
-                }
-
         <CheckboxesClient viewModel={viewModel}
           checkboxUniqueId={checkboxUniqueId}
           inputCheckboxUniqueId={inputCheckboxUniqueId}
@@ -58,7 +52,7 @@ export async function Checkboxes(props: WidgetContext<CheckboxesEntity>) {
       <script data-sf-role={`end_field_${checkboxUniqueId}`} />
     </>
     );
-    return (props.requestContext.isEdit
+    return  (props.requestContext.isEdit
         ? <div {...dataAttributes}> {defaultRendering} </div>
         :defaultRendering);
 }

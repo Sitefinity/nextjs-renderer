@@ -46,14 +46,13 @@ export async function TextField(props: WidgetContext<TextFieldEntity>) {
     const textBoxUniqueId = viewModel.SfFieldName;
     const textBoxErrorMessageId = getUniqueId('TextboxErrorMessage');
     const textBoxInfoMessageId = getUniqueId('TextboxInfo');
-    const ariaDescribedByAttribute = viewModel.HasDescription ? `${textBoxUniqueId} ${textBoxErrorMessageId}` : textBoxErrorMessageId;
+    const ariaDescribedByAttribute = viewModel.InstructionalText ? `${textBoxUniqueId} ${textBoxErrorMessageId}` : textBoxErrorMessageId;
     const dataAttributes = htmlAttributes(props);
     const defaultRendering = (<>
       <script data-sf-role={`start_field_${textBoxUniqueId}`} data-sf-role-field-name={textBoxUniqueId} />
       <div className={classNames('mb-3', viewModel.CssClass,{
             [StylingConfig.VisibilityClasses[VisibilityStyle.Hidden]]: entity.Hidden
         })} data-sf-role="text-field-container">
-        <label className="h6" htmlFor={textBoxUniqueId}>{viewModel.Label}</label>
         <TextFieldClient viewModel={viewModel}
           textBoxUniqueId={textBoxUniqueId}
           textBoxErrorMessageId={textBoxErrorMessageId}

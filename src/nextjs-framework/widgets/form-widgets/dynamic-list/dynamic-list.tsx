@@ -24,6 +24,7 @@ export async function DynamicList(props: WidgetContext<DynamicListEntity>) {
         Label: entity.Label,
         InstructionalText: entity.InstructionalText,
         Required: entity.Required,
+        ViewName: entity.SfViewName,
         FieldName: entity.SfFieldName,
         ViolationRestrictionsMessages: {
             required:  entity.RequiredErrorMessage.replace('{0}', entity.Label)
@@ -36,7 +37,7 @@ export async function DynamicList(props: WidgetContext<DynamicListEntity>) {
     const newProps = {...props};
     newProps.model.Properties  = {...newProps.model.Properties, Choices: viewModel.Choices } as any;
 
-    return (viewModel.SfViewName === 'Dropdown'
+    return (viewModel.ViewName === 'Dropdown'
         ? <Dropdown {...newProps}  />
         : <Checkboxes {...newProps as any} />);
 

@@ -63,6 +63,7 @@ export function TextFieldClient(props: any) {
     };
 
     return (<>
+      <label className="h6" htmlFor={textBoxUniqueId}>{viewModel.Label}</label>
       <input id={textBoxUniqueId}
         type={viewModel.InputType}
         className={classNames('form-control',{
@@ -79,7 +80,7 @@ export function TextFieldClient(props: any) {
         onInvalid={handleTextValidation}
         {...viewModel.ValidationAttributes}
         />
-      { viewModel.HasDescription &&
+      { viewModel.InstructionalText &&
         <div id={textBoxInfoMessageId} className="form-text">{viewModel.InstructionalText}</div>
     }
 

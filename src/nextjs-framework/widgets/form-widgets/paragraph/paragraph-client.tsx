@@ -63,6 +63,7 @@ export function ParagraphClient(props: any) {
     };
 
     return (<>
+      <label className="h6" htmlFor={paragraphUniqueId}>{viewModel.Label}</label>
       <textarea id={paragraphUniqueId}
         className={classNames('form-control',{
                 [formViewModel.InvalidClass!]: formViewModel.InvalidClass && errorMessageText
@@ -77,7 +78,7 @@ export function ParagraphClient(props: any) {
         onInput={handleInputEvent}
         onInvalid={handleTextValidation}
         {...viewModel.ValidationAttributes} />
-      { viewModel.HasDescription &&
+      { viewModel.InstructionalText &&
         <div id={paragraphInfoMessageId} className="form-text">{viewModel.InstructionalText}</div>
             }
       {errorMessageText && <div id={paragraphErrorMessageId} data-sf-role="error-message" role="alert" aria-live="assertive" className="invalid-feedback" >

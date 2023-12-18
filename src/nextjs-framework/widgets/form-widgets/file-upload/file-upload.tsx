@@ -15,14 +15,14 @@ export async function FileUpload(props: WidgetContext<FileUploadEntity>) {
     const viewModel: any = {...entity};
     const fileFieldUniqueId = viewModel.SfFieldName;
     const fileFieldErrorMessageId = getUniqueId('FileFieldErrorMessage');
-    const labelAdditionalClassList = viewModel.HasDescription ? 'mb-1' : null;
-    const ariaDescribedByAttribute = viewModel.HasDescription ? `${fileFieldUniqueId} ${fileFieldErrorMessageId}` : fileFieldErrorMessageId;
+    const labelAdditionalClassList = viewModel.InstructionalText ? 'mb-1' : null;
+    const ariaDescribedByAttribute = viewModel.InstructionalText ? `${fileFieldUniqueId} ${fileFieldErrorMessageId}` : fileFieldErrorMessageId;
     const dataAttributes = htmlAttributes(props);
     const defaultRendering = (<>
       <script data-sf-role={`start_field_${fileFieldUniqueId}`} data-sf-role-field-name={fileFieldUniqueId} />
       <div className={classNames('mb-3', viewModel.CssClass)} data-sf-role="file-field-container">
         <label className={classNames('h6', 'd-block', labelAdditionalClassList)} htmlFor={fileFieldUniqueId}>{viewModel.Label}</label>
-        { viewModel.HasDescription &&
+        { viewModel.InstructionalText &&
         <div id={getUniqueId('FileFieldInfo')} className="form-text mt-1 mb-2">{viewModel.InstructionalText}</div>
     }
         <input data-sf-role="violation-restrictions" type="hidden" value={viewModel.ViolationRestrictionsJson} />

@@ -41,7 +41,7 @@ export async function Paragraph(props: WidgetContext<ParagraphEntity>) {
     const paragraphErrorMessageId = getUniqueId('ParagraphErrorMessage');
     const paragraphInfoMessageId = getUniqueId('ParagraphInfo');
     let ariaDescribedByAttribute = '';
-    if (viewModel.HasDescription) {
+    if (viewModel.InstructionalText) {
 
         if (viewModel.InstructionalText) {
             ariaDescribedByAttribute = `${paragraphUniqueId} ${paragraphErrorMessageId}`;
@@ -55,7 +55,7 @@ export async function Paragraph(props: WidgetContext<ParagraphEntity>) {
      <div className={classNames('mb-3', viewModel.CssClass,{
         [StylingConfig.VisibilityClasses[VisibilityStyle.Hidden]]: entity.Hidden
      })} data-sf-role="paragraph-text-field-container">
-       <label className="h6" htmlFor={paragraphUniqueId}>{viewModel.Label}</label>
+       
        <ParagraphClient viewModel={viewModel}
          paragraphUniqueId={paragraphUniqueId}
          paragraphErrorMessageId={paragraphErrorMessageId}

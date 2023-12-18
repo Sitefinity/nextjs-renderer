@@ -7,7 +7,7 @@ import { StylingConfig } from '../styling/styling-config';
 export const FormContext = createContext<{
     formViewModel: FormViewModel,
     validationMessages?: {[key:string]: boolean},
-    hiddenInputs?: {[key:string]: boolean},
+    hiddenInputs: {[key:string]: boolean},
     sfFormValueChanged: ()=>void
 }>({
     formViewModel: {
@@ -15,17 +15,24 @@ export const FormContext = createContext<{
         VisibilityClasses: StylingConfig.VisibilityClasses,
         InvalidClass: StylingConfig.InvalidClass
     },
-    sfFormValueChanged: ()=>{}
+    sfFormValueChanged: ()=>{},
+    hiddenInputs: {}
 });
+
+const generateHiddenFields = (hiddenFields: string) =>{
+    return (hiddenFields?.split(',') || []).reduce((obj: object, item: string) =>
+    Object.assign(obj, { [item]: true })
+    , {});
+};
 
 export function FromContainer(props: FromContainerProps) {
     const {children, viewModel } = props;
-
+    const [hiddenInputs, setHiddenInputs] = React.useState(generateHiddenFields(viewModel.HiddenFields || ''));
     const sfFormValueChanged = () => {
         console.log('sfFormValueChanged');
     };
     return (
-      <FormContext.Provider value={{ formViewModel: viewModel, sfFormValueChanged }}>
+      <FormContext.Provider value={{ formViewModel: viewModel, sfFormValueChanged, hiddenInputs }}>
         <div data-sf-role="fields-container" >
           {children}
         </div>
