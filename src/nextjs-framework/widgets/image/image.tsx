@@ -23,12 +23,6 @@ export async function Image(props: WidgetContext<ImageEntity>) {
         marginClass
     );
 
-    if (props.requestContext && props.requestContext.isEdit) {
-        dataAttributes['data-sfemptyicon'] = 'picture-o';
-        dataAttributes['data-sfemptyiconaction'] = 'Edit';
-    }
-
-    dataAttributes['data-sfemptyicontext'] = 'Select image';
     dataAttributes['data-sfhasquickeditoperation'] = true;
     let imageItem = null;
     if (entity.Item && entity.Item.Id) {

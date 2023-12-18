@@ -58,230 +58,276 @@ import sitefinityTextFieldJson from './form-widgets/textfield/designer-metadata.
 
 export const widgetRegistry: WidgetRegistry = {
     widgets: {
-        'SitefinityBreadcrumb':  <any>{
+        'SitefinityBreadcrumb':  {
             designerMetadata: sitefinityBreadcrumbJson,
             componentType: Breadcrumb,
             editorMetadata: {
-                Title: 'Breadcrumb'
+                Title: 'Breadcrumb',
+                Category: 'Navigation & Search',
+                Section: 'Main navigation'
             },
             ssr: true
         },
-        'SitefinityClassification':  <any>{
+        'SitefinityClassification': {
             designerMetadata: sitefinityClassificationJson,
             componentType: Classification,
             editorMetadata: {
-                Title: 'Classification'
+                Title: 'Classification',
+                Category: 'Navigation & Search',
+                Section: 'Search and classification'
             },
             ssr: true
         },
-        'SitefinityImage':  <any>{
+        'SitefinityImage': {
             designerMetadata: sitefinityImageJson,
             componentType: Image,
             editorMetadata: {
-                Title: 'Image'
+                Title: 'Image',
+                Section: 'Basic',
+                EmptyIcon: 'picture-o',
+                EmptyIconAction: 'Edit',
+                EmptyIconText: 'Select image'
             },
             ssr: true
         },
-        'SitefinityLoginForm':  <any>{
+        'SitefinityLoginForm': {
             designerMetadata: sitefinityLoginFormJson,
             componentType: LoginForm,
             editorMetadata: {
-                Title: 'LoginForm'
+                Title: 'Login form',
+                Section: 'Login',
+                Category: 'Login & Users'
             },
             ssr: true
         },
-        'SitefinityChangePassword':  <any>{
+        'SitefinityChangePassword': {
             designerMetadata: sitefinityChangePasswordJson,
             componentType: ChangePassword,
             editorMetadata: {
-                Title: 'Change Password'
+                Title: 'Change password',
+                Section: 'Login',
+                Category: 'Login & Users'
             },
             ssr: true
         },
-        'SitefinityResetPassword':  <any>{
+        'SitefinityResetPassword': {
             designerMetadata: sitefinityResetPasswordJson,
             componentType: ResetPassword,
             editorMetadata: {
-                Title: 'Reset Password'
+                Title: 'Reset password',
+                Section: 'Login',
+                Category: 'Login & Users'
             },
             ssr: true
         },
-        'LanguageSelector':  <any>{
-            designerMetadata: sitefinityLanguageSelectorJson,
-            componentType: LanguageSelector,
-            editorMetadata: {
-                Title: 'Language Selector'
-            },
-            ssr: true
-        },
-        'SitefinityRegistration':  <any>{
+        'SitefinityRegistration': {
             designerMetadata: sitefinityRegistrationJson,
             componentType: Registration,
             editorMetadata: {
-                Title: 'Registration'
+                Title: 'Registration',
+                Section: 'Login',
+                Category: 'Login & Users'
             },
             ssr: true
         },
-        'SitefinityNavigation':  <any>{
+        'SitefinityNavigation': {
             designerMetadata: sitefinityNavigationJson,
             componentType: Navigation,
             editorMetadata: {
-                Title: 'Navigation'
+                Title: 'Navigation',
+                Category: 'Navigation & Search',
+                Section: 'Main navigation'
             },
             ssr: true
         },
-        'SitefinitySearchBox':  <any>{
+        'SitefinitySearchBox': {
             designerMetadata: sitefinitySearchBoxJson,
             componentType: SearchBox,
             editorMetadata: {
-                Title: 'SearchBox'
+                Title: 'SearchBox',
+                Category: 'Navigation & Search',
+                Section: 'Search and classification'
             },
             ssr: true
         },
-        'SitefinityButton':  <any>{
+        'SitefinityButton': {
             designerMetadata: sitefinityCallToActionJson,
             componentType: CallToAction,
             editorMetadata: {
-                Title: 'Call to action'
+                Title: 'Call to action',
+                Section: 'Basic'
             },
             ssr: true
         },
-        'SitefinityContentBlock':  <any>{
+        'SitefinityContentBlock': {
             designerMetadata: sitefinityContentBlockJson,
             componentType: ContentBlock,
             editorMetadata: {
-                Title: 'Content block'
+                Title: 'Content block',
+                Section: 'Basic'
             },
             ssr: true
         },
-        'SitefinitySection': <any>{
+        'SitefinitySection': {
             designerMetadata: sitefinitySectionJson,
             componentType: Section,
             selectorCategory: 'Layout',
             editorMetadata: {
-                Title: 'Section'
+                Title: 'Section',
+                Category: 'Layout & Presets'
             },
             ssr: true
         },
-        'SitefinityContentList':  <any>{
+        'SitefinityContentList': {
             designerMetadata: sitefinityContentListJson,
             componentType: ContentList,
             editorMetadata: {
                 Title: 'Content list',
+                Section: 'Basic',
                 EmptyIconText: 'Select content',
                 EmptyIcon: 'plus-circle'
             },
             ssr: true
         },
-        'SitefinityDocumentList':  <any>{
+        'SitefinityDocumentList': {
             designerMetadata: sitefinityDynamicListJson,
             componentType: DocumentList,
             editorMetadata: {
                 Title: 'Document list',
                 EmptyIconText: 'Select document',
-                EmptyIcon: 'plus-circle'
+                EmptyIcon: 'plus-circle',
+                Section: 'Basic'
             },
             ssr: true
         },
-        'SitefinitySearchResults':  <any>{
+        'SitefinitySearchResults': {
             designerMetadata: sitefinitySearchResultsListJson,
             componentType: SearchResults,
             editorMetadata: {
                 Title: 'Search Results',
                 EmptyIconText: 'Search results',
-                EmptyIcon: 'search'
+                EmptyIcon: 'search',
+                Category: 'Navigation & Search',
+                Section: 'Search and classification'
             },
             ssr: true
         },
-        'SitefinityFacets':  <any>{
+        'SitefinityFacets': {
             designerMetadata: sitefinitySearchFacetsListJson,
             componentType: SearchFacets,
             editorMetadata: {
                 Title: 'Search facets',
                 EmptyIconText: 'Select search facets',
-                EmptyIcon: 'search'
+                EmptyIcon: 'search',
+                Category: 'Navigation & Search',
+                Section: 'Search and classification'
             },
             ssr: true
         },
-        'SitefinityForm':  <any>{
+        'SitefinityForm': {
             designerMetadata: sitefinityFormListJson,
             componentType: Form,
             editorMetadata: {
-                Title: 'Search facets',
-                EmptyIconText: 'Select search facets',
-                EmptyIcon: 'search'
+                Title: 'Form',
+                Section: 'Basic'
             },
             ssr: true
         },
-        'SitefinityCheckboxes':  <any>{
+        'SitefinityCheckboxes': {
             designerMetadata: sitefinityCheckboxesJson,
             componentType: Checkboxes,
             editorMetadata: {
-                Title: 'Checkboxes'
+                Title: 'Checkboxes',
+                Toolbox: 'Forms',
+                Section: 'Choices'
             },
             ssr: true
         },
-        'SitefinityFormContentBlock':  <any>{
+        'SitefinityFormContentBlock': {
             designerMetadata: sitefinityFormContentBlockJson,
             componentType: FormContentBlock,
             editorMetadata: {
-                Title: 'Content Block'
+                Title: 'Content Block',
+                Toolbox: 'Forms',
+                Section: 'Other'
             },
             ssr: true
         },
-        'SitefinityDropdown':  <any>{
+        'SitefinityDropdown': {
             designerMetadata: sitefinityDropdownJson,
             componentType: Dropdown,
             editorMetadata: {
-                Title: 'Dropdown'
+                Title: 'Dropdown',
+                Toolbox: 'Forms',
+                Section: 'Choices'
             },
             ssr: true
         },
-        'SitefinityDynamicList':  <any>{
+        'SitefinityDynamicList': {
             designerMetadata: sitefinityDocumentListJson,
             componentType: DynamicList,
             editorMetadata: {
-                Title: 'Dynamic List'
+                Title: 'Dynamic List',
+                Toolbox: 'Forms',
+                Section: 'Choices'
             },
             ssr: true
         },
-        'SitefinityFileField':  <any>{
+        'SitefinityFileField': {
             designerMetadata: sitefinityFileUploadJson,
             componentType: FileUpload,
             editorMetadata: {
-                Title: 'File Upload'
+                Title: 'File Upload',
+                Toolbox: 'Forms',
+                Section: 'Other'
             },
             ssr: true
         },
-        'SitefinityMultipleChoice':  <any>{
+        'SitefinityMultipleChoice': {
             designerMetadata: sitefinityMultipleChoiceJson,
             componentType: MultipleChoice,
             editorMetadata: {
-                Title: 'Multiple Choice'
+                Title: 'Multiple Choice',
+                Toolbox: 'Forms',
+                Section: 'Choices'
             },
             ssr: true
         },
-        'SitefinityParagraph':  <any>{
+        'SitefinityParagraph': {
             designerMetadata: sitefinityParagraphJson,
             componentType: Paragraph,
             editorMetadata: {
-                Title: 'Paragraph'
+                Title: 'Paragraph',
+                Toolbox: 'Forms',
+                Section: 'Basic'
             },
             ssr: true
         },
-        'SitefinitySubmitButton':  <any>{
+        'SitefinitySubmitButton': {
             designerMetadata: sitefinitySubmitButtonJson,
             componentType: SubmitButton,
             editorMetadata: {
-                Title: 'Submit Button'
+                Title: 'Submit Button',
+                Toolbox: 'Forms',
+                Section: 'Basic'
             },
             ssr: true
         },
-        'SitefinityTextField':  <any>{
+        'SitefinityTextField': {
             designerMetadata: sitefinityTextFieldJson,
             componentType: TextField,
             editorMetadata: {
-                Title: 'TextField'
+                Title: 'TextField',
+                Toolbox: 'Forms',
+                Section: 'Basic'
+            },
+            ssr: true
+        },
+        'LanguageSelector': {
+            designerMetadata: sitefinityLanguageSelectorJson,
+            componentType: LanguageSelector,
+            editorMetadata: {
+                Title: 'Language Selector'
             },
             ssr: true
         }

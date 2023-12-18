@@ -30,6 +30,7 @@ app.prepare().then(() => {
                 // when using a custom port
                 proxyReq.setHeader('X-ORIGINAL-HOST', `${originalHost}:${process.env.PORT}`);
             }
+            proxyReq.setHeader('X-SFRENDERER-PROXY', 'true');
         },
         onProxyRes: responseInterceptor(async (responseBuffer, proxyRes, req, res) => {
             if ((req.url.indexOf('pages/Default.GetPageTemplates') !== -1 || req.url.indexOf('templates/Default.GetPageTemplates') !== -1) && res.statusCode === 200) {
@@ -61,6 +62,10 @@ app.prepare().then(() => {
 
     const paths = ['/adminapp', '/sf/system', '/api/default', '/ws', '/restapi', '/contextual-help', '/res', '/admin-bridge', '/sfres', '/images', '/documents', '/videos'];
     const server = https.createServer(sslOptions, (req, res) => {
+        if (/\/sitefinity\/forms/i.test(req.url) && req.url.indexOf('render=true') !== -1) {
+            return handle(req, res);
+        }
+
         if (req.url.indexOf('.axd?') !== -1 || paths.some(path => req.url.toUpperCase().startsWith(path.toUpperCase())) || /\/sitefinity(?!\/template)/i.test(req.url)) {
             return proxy(req, res);
         }

@@ -4,5 +4,6 @@ export interface WidgetMetadata {
     componentType: any;
     designerMetadata: any;
     selectorCategory?: string;
-    editorMetadata?: EditorMetadata
+    editorMetadata?: EditorMetadata;
+    ssr?: boolean;
 }
