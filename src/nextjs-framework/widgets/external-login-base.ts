@@ -49,7 +49,7 @@ export class ExternalLoginBase {
 
         const queryString =  new URLSearchParams(searchParams);
 
-        let result = `${context.layout.MetaInfo.CanonicalUrl}?${queryString}`;
+        let result = `${context.layout?.MetaInfo.CanonicalUrl}?${queryString}`;
         if (args.shouldEncode) {
             result = encodeURIComponent(result).toLowerCase();
         }
