@@ -5,6 +5,7 @@ import { WidgetModel } from '../editor/widget-framework/widget-model';
 import { WidgetRegistry } from '../editor/widget-framework/widget-registry';
 import { LazyComponent } from '../widgets/lazy/lazy-component';
 import { PropertyModel } from '@progress/sitefinity-widget-designers';
+import { WidgetMetadata } from '../editor';
 
 export class RenderWidgetService {
     public static widgetRegistry: WidgetRegistry;
@@ -13,7 +14,7 @@ export class RenderWidgetService {
     public static createComponent(widgetModel: WidgetModel<any>, requestContext: RequestContext) {
         const registeredType = RenderWidgetService.widgetRegistry.widgets[widgetModel.Name];
 
-        parseProperties(widgetModel, registeredType.designerMetadata.PropertyMetadataFlat || []);
+        parseProperties(widgetModel, registeredType);
 
         const propsForWidget: WidgetContext<any> = {
             metadata: registeredType,
@@ -46,11 +47,25 @@ export class RenderWidgetService {
     }
 }
 
-function parseProperties(widgetModel: WidgetModel<any>, propertiesMetadata: PropertyModel[]) {
-    const defaultValues: {[key: string]: any} = {};
-    propertiesMetadata.forEach(property => {
+function parseProperties(widgetModel: WidgetModel<any>, widgetMetadata: WidgetMetadata) {
+    let defaultValues: {[key: string]: any} = {};
+
+    let instance: any = null;
+    if (widgetMetadata.entity) {
+        try {
+            instance = new widgetMetadata.entity;
+        } catch {/*noop*/ }
+
+        if (instance) {
+            defaultValues = Object.assign({}, defaultValues, instance);
+        }
+    }
+
+    const propertiesMetadata: PropertyModel[] = widgetMetadata.designerMetadata?.PropertyMetadataFlat || [];
+
+    propertiesMetadata?.forEach(property => {
         const value = property.DefaultValue;
-        if (value !== undefined) {
+        if (value !== undefined && defaultValues[property.Name] === undefined) {
             defaultValues[property.Name] = value;
         }
     });
@@ -65,4 +80,3 @@ function parseProperties(widgetModel: WidgetModel<any>, propertiesMetadata: Prop
 
     widgetModel.Properties = Object.assign(defaultValues, widgetModel.Properties);
 }
-

@@ -12,7 +12,7 @@ import { ResetPassword } from './reset-password/reset-password';
 import { Registration } from './registration/registration';
 import { LanguageSelector } from './language-selector/language-selector';
 import { Section } from './section/section';
-import { WidgetRegistry } from '../editor/widget-framework/widget-registry';
+import { WidgetRegistry, initRegistry } from '../editor/widget-framework/widget-registry';
 import { DocumentList } from './document-list/document-list';
 import { SearchResults } from './search-results/search-results';
 import { SearchFacets } from './search-facets/search-facets';
@@ -26,7 +26,6 @@ import { MultipleChoice } from './form-widgets/multiple-choice/multiple-choice';
 import { Paragraph } from './form-widgets/paragraph/paragraph';
 import { SubmitButton } from './form-widgets/submit-button/submit-button';
 import { TextField } from './form-widgets/textfield/textfield';
-import { EntityMetadataGenerator } from '@progress/sitefinity-widget-designers';
 import { ClassificationEntity } from './classification/classification-entity';
 import { ContentListEntity } from './content-list/content-list-entity';
 import { SectionEntity } from './section/section.entity';
@@ -34,7 +33,6 @@ import { ImageEntity } from './image/image.entity';
 import { ContentBlockEntity } from './content-block/content-block.entity';
 
 import sitefinityCallToActionJson from './call-to-action/designer-metadata.json';
-import sitefinityClassificationJson from './classification/designer-metadata.json';
 import sitefinityBreadcrumbJson from './breadcrumb/designer-metadata.json';
 import sitefinityNavigationJson from './navigation/designer-metadata.json';
 import sitefinitySearchBoxJson from './search-box/designer-metadata.json';
@@ -57,9 +55,9 @@ import sitefinitySubmitButtonJson from './form-widgets/submit-button/designer-me
 import sitefinityTextFieldJson from './form-widgets/textfield/designer-metadata.json';
 import { SearchFacetsEntity } from './search-facets/search-facets.entity';
 
-export const widgetRegistry: WidgetRegistry = {
+export const widgetRegistry: WidgetRegistry = initRegistry({
     widgets: {
-        'SitefinityBreadcrumb':  <any>{
+        'SitefinityBreadcrumb': {
             designerMetadata: sitefinityBreadcrumbJson,
             componentType: Breadcrumb,
             editorMetadata: {
@@ -67,23 +65,23 @@ export const widgetRegistry: WidgetRegistry = {
             },
             ssr: true
         },
-        'SitefinityClassification':  <any>{
-            designerMetadata: EntityMetadataGenerator.extractMetadata(ClassificationEntity),
+        'SitefinityClassification': {
+            entity: ClassificationEntity,
             componentType: Classification,
             editorMetadata: {
                 Title: 'Classification'
             },
             ssr: true
         },
-        'SitefinityImage':  <any>{
-            designerMetadata: EntityMetadataGenerator.extractMetadata(ImageEntity),
+        'SitefinityImage': {
+            entity: ImageEntity,
             componentType: Image,
             editorMetadata: {
                 Title: 'Image'
             },
             ssr: true
         },
-        'SitefinityLoginForm':  <any>{
+        'SitefinityLoginForm': {
             designerMetadata: sitefinityLoginFormJson,
             componentType: LoginForm,
             editorMetadata: {
@@ -91,7 +89,7 @@ export const widgetRegistry: WidgetRegistry = {
             },
             ssr: true
         },
-        'SitefinityChangePassword':  <any>{
+        'SitefinityChangePassword': {
             designerMetadata: sitefinityChangePasswordJson,
             componentType: ChangePassword,
             editorMetadata: {
@@ -99,7 +97,7 @@ export const widgetRegistry: WidgetRegistry = {
             },
             ssr: true
         },
-        'SitefinityResetPassword':  <any>{
+        'SitefinityResetPassword': {
             designerMetadata: sitefinityResetPasswordJson,
             componentType: ResetPassword,
             editorMetadata: {
@@ -107,7 +105,7 @@ export const widgetRegistry: WidgetRegistry = {
             },
             ssr: true
         },
-        'LanguageSelector':  <any>{
+        'LanguageSelector': {
             designerMetadata: sitefinityLanguageSelectorJson,
             componentType: LanguageSelector,
             editorMetadata: {
@@ -115,7 +113,7 @@ export const widgetRegistry: WidgetRegistry = {
             },
             ssr: true
         },
-        'SitefinityRegistration':  <any>{
+        'SitefinityRegistration': {
             designerMetadata: sitefinityRegistrationJson,
             componentType: Registration,
             editorMetadata: {
@@ -123,7 +121,7 @@ export const widgetRegistry: WidgetRegistry = {
             },
             ssr: true
         },
-        'SitefinityNavigation':  <any>{
+        'SitefinityNavigation': {
             designerMetadata: sitefinityNavigationJson,
             componentType: Navigation,
             editorMetadata: {
@@ -131,7 +129,7 @@ export const widgetRegistry: WidgetRegistry = {
             },
             ssr: true
         },
-        'SitefinitySearchBox':  <any>{
+        'SitefinitySearchBox': {
             designerMetadata: sitefinitySearchBoxJson,
             componentType: SearchBox,
             editorMetadata: {
@@ -139,7 +137,7 @@ export const widgetRegistry: WidgetRegistry = {
             },
             ssr: true
         },
-        'SitefinityButton':  <any>{
+        'SitefinityButton': {
             designerMetadata: sitefinityCallToActionJson,
             componentType: CallToAction,
             editorMetadata: {
@@ -147,16 +145,16 @@ export const widgetRegistry: WidgetRegistry = {
             },
             ssr: true
         },
-        'SitefinityContentBlock':  <any>{
-            designerMetadata: EntityMetadataGenerator.extractMetadata(ContentBlockEntity),
+        'SitefinityContentBlock': {
+            entity: ContentBlockEntity,
             componentType: ContentBlock,
             editorMetadata: {
                 Title: 'Content block'
             },
             ssr: true
         },
-        'SitefinitySection': <any>{
-            designerMetadata: EntityMetadataGenerator.extractMetadata(SectionEntity),
+        'SitefinitySection':{
+            entity: SectionEntity,
             componentType: Section,
             selectorCategory: 'Layout',
             editorMetadata: {
@@ -164,8 +162,8 @@ export const widgetRegistry: WidgetRegistry = {
             },
             ssr: true
         },
-        'SitefinityContentList':  <any>{
-            designerMetadata: EntityMetadataGenerator.extractMetadata(ContentListEntity),
+        'SitefinityContentList': {
+            entity: ContentListEntity,
             componentType: ContentList,
             editorMetadata: {
                 Title: 'Content list',
@@ -174,7 +172,7 @@ export const widgetRegistry: WidgetRegistry = {
             },
             ssr: true
         },
-        'SitefinityDocumentList':  <any>{
+        'SitefinityDocumentList': {
             designerMetadata: sitefinityDynamicListJson,
             componentType: DocumentList,
             editorMetadata: {
@@ -184,7 +182,7 @@ export const widgetRegistry: WidgetRegistry = {
             },
             ssr: true
         },
-        'SitefinitySearchResults':  <any>{
+        'SitefinitySearchResults': {
             designerMetadata: sitefinitySearchResultsListJson,
             componentType: SearchResults,
             editorMetadata: {
@@ -194,8 +192,8 @@ export const widgetRegistry: WidgetRegistry = {
             },
             ssr: true
         },
-        'SitefinityFacets':  <any>{
-            designerMetadata: EntityMetadataGenerator.extractMetadata(SearchFacetsEntity),
+        'SitefinityFacets': {
+            entity: SearchFacetsEntity,
             componentType: SearchFacets,
             editorMetadata: {
                 Title: 'Search facets',
@@ -204,7 +202,7 @@ export const widgetRegistry: WidgetRegistry = {
             },
             ssr: true
         },
-        'SitefinityForm':  <any>{
+        'SitefinityForm': {
             designerMetadata: sitefinityFormListJson,
             componentType: Form,
             editorMetadata: {
@@ -214,7 +212,7 @@ export const widgetRegistry: WidgetRegistry = {
             },
             ssr: true
         },
-        'SitefinityCheckboxes':  <any>{
+        'SitefinityCheckboxes': {
             designerMetadata: sitefinityCheckboxesJson,
             componentType: Checkboxes,
             editorMetadata: {
@@ -222,7 +220,7 @@ export const widgetRegistry: WidgetRegistry = {
             },
             ssr: true
         },
-        'SitefinityFormContentBlock':  <any>{
+        'SitefinityFormContentBlock': {
             designerMetadata: sitefinityFormContentBlockJson,
             componentType: FormContentBlock,
             editorMetadata: {
@@ -230,7 +228,7 @@ export const widgetRegistry: WidgetRegistry = {
             },
             ssr: true
         },
-        'SitefinityDropdown':  <any>{
+        'SitefinityDropdown': {
             designerMetadata: sitefinityDropdownJson,
             componentType: Dropdown,
             editorMetadata: {
@@ -238,7 +236,7 @@ export const widgetRegistry: WidgetRegistry = {
             },
             ssr: true
         },
-        'SitefinityDynamicList':  <any>{
+        'SitefinityDynamicList': {
             designerMetadata: sitefinityDocumentListJson,
             componentType: DynamicList,
             editorMetadata: {
@@ -246,7 +244,7 @@ export const widgetRegistry: WidgetRegistry = {
             },
             ssr: true
         },
-        'SitefinityFileField':  <any>{
+        'SitefinityFileField': {
             designerMetadata: sitefinityFileUploadJson,
             componentType: FileUpload,
             editorMetadata: {
@@ -254,7 +252,7 @@ export const widgetRegistry: WidgetRegistry = {
             },
             ssr: true
         },
-        'SitefinityMultipleChoice':  <any>{
+        'SitefinityMultipleChoice': {
             designerMetadata: sitefinityMultipleChoiceJson,
             componentType: MultipleChoice,
             editorMetadata: {
@@ -262,7 +260,7 @@ export const widgetRegistry: WidgetRegistry = {
             },
             ssr: true
         },
-        'SitefinityParagraph':  <any>{
+        'SitefinityParagraph': {
             designerMetadata: sitefinityParagraphJson,
             componentType: Paragraph,
             editorMetadata: {
@@ -270,7 +268,7 @@ export const widgetRegistry: WidgetRegistry = {
             },
             ssr: true
         },
-        'SitefinitySubmitButton':  <any>{
+        'SitefinitySubmitButton': {
             designerMetadata: sitefinitySubmitButtonJson,
             componentType: SubmitButton,
             editorMetadata: {
@@ -278,7 +276,7 @@ export const widgetRegistry: WidgetRegistry = {
             },
             ssr: true
         },
-        'SitefinityTextField':  <any>{
+        'SitefinityTextField': {
             designerMetadata: sitefinityTextFieldJson,
             componentType: TextField,
             editorMetadata: {
@@ -287,4 +285,4 @@ export const widgetRegistry: WidgetRegistry = {
             ssr: true
         }
     }
-};
+});
