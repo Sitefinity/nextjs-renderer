@@ -15,13 +15,8 @@ export async function Image(props: WidgetContext<ImageEntity>) {
         ...props.model.Properties
     };
     const dataAttributes = htmlAttributes(props);
-    const defaultClass = classNames(imageWrapperClass, entity.CssClass);
     const marginClass = entity.Margins && StyleGenerator.getMarginClasses(entity.Margins);
     const anchorAttributes = generateAnchorAttrsFromLink(entity.ActionLink);
-    dataAttributes['className'] = classNames(
-        defaultClass,
-        marginClass
-    );
 
     if (props.requestContext && props.requestContext.isEdit) {
         dataAttributes['data-sfemptyicon'] = 'picture-o';
@@ -36,8 +31,14 @@ export async function Image(props: WidgetContext<ImageEntity>) {
     }
 
     if (!imageItem) {
-        return (<div {...dataAttributes} />);
+        return <div {...dataAttributes}/>;
     }
+
+    const defaultClass = classNames(imageWrapperClass, entity.CssClass);
+    dataAttributes['className'] = classNames(
+        defaultClass,
+        marginClass
+    );
 
     const isSvg = imageItem.MimeType === 'image/svg+xml';
     const hasZeroDimensions = imageItem.Width === 0 && imageItem.Height === 0;
@@ -82,18 +83,18 @@ export async function Image(props: WidgetContext<ImageEntity>) {
         SelectedImageUrl: selectedImageUrl
     };
 
-    return  entity.ClickAction === ImageClickAction.OpenOriginalSize
-                ? <a href={entity.Item!.Url}
-                    {...dataAttributes}>
-                  {<ImageTag imageModel={imageModel} />}
-                </a>
-                : entity.ClickAction === ImageClickAction.OpenLink && entity.ActionLink!.href
-                    ?  <a {...anchorAttributes} {...dataAttributes}>
-                      {<ImageTag imageModel={imageModel}  />}
+    return entity.ClickAction === ImageClickAction.OpenOriginalSize
+                    ? <a href={entity.Item!.Url}
+                        {...dataAttributes}>
+                      {<ImageTag imageModel={imageModel} />}
                     </a>
-                    :  <ImageTag imageModel={imageModel} className={entity.CssClass}
-                        {...dataAttributes} />
-             ;
+                    : entity.ClickAction === ImageClickAction.OpenLink && entity.ActionLink!.href
+                        ?  <a {...anchorAttributes} {...dataAttributes}>
+                          {<ImageTag imageModel={imageModel}  />}
+                        </a>
+                        :  <ImageTag imageModel={imageModel} className={entity.CssClass}
+                            {...dataAttributes} />
+                ;
 }
 
 export interface ImageEntity {
