@@ -5,7 +5,7 @@ import { BreadcrumbEntity, BreadcrumbIncludeOption } from './breadcrumb';
 export class BreadcrumbRestService {
 
     static getItems(entity: BreadcrumbEntity, requestContext: RequestContext): {value: CollectionResponse<SdkItem>[]} {
-        if (entity && requestContext.layout) {
+        if (entity) {
             const getAllArgs: {[key: string]: boolean | string} = {
                 addStartingPageAtEnd: entity.AddCurrentPageLinkAtTheEnd || true,
                 addHomePageAtBeginning: entity.AddHomePageLinkAtBeginning || true,
@@ -14,7 +14,7 @@ export class BreadcrumbRestService {
             };
 
 
-            if (requestContext.layout.DetailItem !== null && entity.AllowVirtualNodes) {
+            if (requestContext.layout.DetailItem && entity.AllowVirtualNodes) {
                     let stringifiedItem = requestContext.layout.DetailItem;
                     getAllArgs['detailItemInfo'] = JSON.stringify(stringifiedItem);
                 }
@@ -24,12 +24,10 @@ export class BreadcrumbRestService {
                  getAllArgs['startingPageId'] = entity.SelectedPage!.ItemIdsOrdered[0];
             }
 
-            if (requestContext) {
-                const queryString =  new URLSearchParams(requestContext.searchParams);
-                const url = `${requestContext.layout.MetaInfo.CanonicalUrl}?${queryString}`;
+            const queryString =  new URLSearchParams(requestContext.searchParams);
+            const url = `${requestContext.layout.MetaInfo.CanonicalUrl}?${queryString}`;
 
-                getAllArgs['currentPageUrl'] = encodeURIComponent(url).toLowerCase();
-            }
+            getAllArgs['currentPageUrl'] = encodeURIComponent(url).toLowerCase();
 
             const action = 'Default.GetBreadcrumb';
 

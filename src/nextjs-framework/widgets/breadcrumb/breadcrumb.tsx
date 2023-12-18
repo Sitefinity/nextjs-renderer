@@ -28,7 +28,7 @@ export async function Breadcrumb(props: WidgetContext<BreadcrumbEntity>) {
     );
     dataAttributes['data-sfhasquickeditoperation'] = true;
 
-    if (!props.requestContext.layout && props.requestContext.isEdit) {
+    if (props.requestContext.isEdit) {
         return  (<div {...dataAttributes}>
           {PAGE_MISSING_MESSAGE}
         </div>);

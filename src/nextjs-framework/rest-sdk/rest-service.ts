@@ -495,6 +495,7 @@ export class RestSdkTypes {
     public static readonly GenericContent: string = 'Telerik.Sitefinity.GenericContent.Model.ContentItem';
     public static readonly Pages: string = 'Telerik.Sitefinity.Pages.Model.PageNode';
     public static readonly Form: string = 'Telerik.Sitefinity.Forms.Model.FormDescription';
+    public static readonly Site: string = 'Telerik.Sitefinity.Multisite.Model.Site';
 }
 
 interface RequestData {

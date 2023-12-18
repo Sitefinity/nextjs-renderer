@@ -34,12 +34,7 @@ export async function SearchResults(props: WidgetContext<SearchResultsEntity>) {
     const searchParams = context.searchParams || {};
     const restService = props.restService || SearchResultsService;
 
-    if (!context.layout) {
-        throw 'Layout is undefined';
-    }
-
     const cultures = context.layout.Site.Cultures;
-    const culture = context.layout.Culture;
     const languageNames = new Intl.DisplayNames(['en'], {
         type: 'language'
       });

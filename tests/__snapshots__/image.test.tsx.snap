@@ -1,22 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Image with selected image item 1`] = `
+exports[`should render image default state 1`] = `
 <div>
-  <picture
+  <div
     class="d-inline-block"
-  >
-    <source
-      height="160"
-      media="(max-width: 160px)"
-      type="image/jpeg"
-      width="160"
-    />
-    <img
-      alt=""
-      class="d-inline-block img-fluid"
-      loading="lazy"
-      title="Image"
-    />
-  </picture>
+    data-sfemptyicon="picture-o"
+    data-sfemptyiconaction="Edit"
+    data-sfemptyicontext="Select image"
+    data-sfhasquickeditoperation="true"
+    data-sfid="568481ca-45db-4f02-a62e-f76122532902"
+    data-sfiscontentwidget="true"
+    data-sfisempty="false"
+    data-sfisemptyvisualhidden="false"
+    data-sfisorphaned="false"
+    data-sfname="SitefinityImage"
+    data-sftitle="Image"
+    draggable="true"
+  />
 </div>
 `;

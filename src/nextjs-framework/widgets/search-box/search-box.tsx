@@ -35,10 +35,6 @@ export async function SearchBox(props: WidgetContext<SearchBoxEntity>) {
     dataAttributes['data-sfemptyicontext'] = 'Set where to search';
     dataAttributes['data-sfhasquickeditoperation'] = true;
 
-    if (!requestContext.layout) {
-        throw 'Layout is undefined';
-    }
-
     const currentSite = requestContext.layout.Site;
     const searchModel: any = {};
 

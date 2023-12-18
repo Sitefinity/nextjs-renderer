@@ -84,7 +84,7 @@ export async function DocumentList(props: WidgetContext<DocumentListEntity>) {
    const queryList = new URLSearchParams(getWhiteListSearchParams(context.searchParams || {}, whitelistedQueryParams));
    let queryString = '?' + queryList.toString();
 
-   if (entity && entity.DetailPageMode === 'SamePage' && context.layout) {
+   if (entity && entity.DetailPageMode === 'SamePage') {
         url = context.layout.Fields ? context.layout.Fields.ViewUrl : context.layout.MetaInfo.CanonicalUrl;
     } else if (entity && entity.DetailPage) {
         const page = await RestService.getItem(
