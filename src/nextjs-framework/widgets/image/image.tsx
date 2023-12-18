@@ -36,7 +36,7 @@ export async function Image(props: WidgetContext<ImageEntity>) {
     }
 
     if (!imageItem) {
-        return null;
+        return (<div {...dataAttributes} />);
     }
 
     const isSvg = imageItem.MimeType === 'image/svg+xml';

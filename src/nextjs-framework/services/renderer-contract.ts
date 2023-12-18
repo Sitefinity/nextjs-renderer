@@ -15,7 +15,7 @@ export class RendererContractImpl implements RendererContract {
         const widgetMetadata = RenderWidgetService.widgetRegistry.widgets[args.model.Name];
 
         if ((widgetMetadata as any).ssr) {
-            return new Promise((resolve) => {
+            return new Promise((resolve, reject) => {
                 const serializedModel = JSON.stringify(args.model);
                 const modelAsBase64String = btoa(serializedModel);
                 const modedelAsUrlEncodedString = encodeURIComponent(modelAsBase64String);
@@ -23,13 +23,17 @@ export class RendererContractImpl implements RendererContract {
                     response.text().then((html) => {
                         let rootDoc = document.createElement('html');
                         rootDoc.innerHTML = html;
-                        const renderedElement = rootDoc.lastElementChild?.firstChild?.firstChild as HTMLElement;
+                        const wrapper = rootDoc.querySelector('div[id=\'widgetPlaceholder\']');
+                        if (wrapper) {
+                            resolve(<RenderResult>{
+                                element: wrapper.firstElementChild as HTMLElement,
+                                content: '',
+                                scripts: []
+                            });
+                        } else {
+                            reject('Wrapping widgetplaceholder not found');
+                        }
 
-                        resolve(<RenderResult>{
-                            element: renderedElement,
-                            content: '',
-                            scripts: []
-                        });
                     });
                 });
             });
