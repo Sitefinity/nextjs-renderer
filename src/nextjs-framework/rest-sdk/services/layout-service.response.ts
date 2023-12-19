@@ -20,7 +20,7 @@ export interface PageLayoutServiceResponse {
         CanonicalUrl: string,
     },
     TemplateName?: string,
-    DetailItem: DetailItem,
+    DetailItem?: DetailItem,
     UrlParameters: string[],
     Scripts: PageScript[],
     Fields: { [key: string]: any },

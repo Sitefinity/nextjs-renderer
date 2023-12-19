@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleGenerator } from '../styling/style-generator.service';
-import { OffsetStyle } from '../styling/offset-style';
 import { ClassificationRestService } from './classification.service';
 import { PageViewModel } from '../navigation/interfaces/PageViewModel';
 import { WidgetContext, classNames, getCustomAttributes, htmlAttributes } from '../../editor';
@@ -56,10 +55,9 @@ export async function Classification(props: WidgetContext<ClassificationEntity>)
     const model = props.model;
     const properties = model.Properties;
     const settings = properties.ClassificationSettings;
-    const pageNode = props.requestContext.layout;
     const dataAttributes = htmlAttributes(props);
     const tokens = await ClassificationRestService.getTaxons(model.Properties);
-    const viewUrl = pageNode ? pageNode.Fields.ViewUrl : '';
+    const viewUrl = props.requestContext.layout.Fields['ViewUrl'] || '';
     const searchParams = props.requestContext.searchParams;
 
     const updatedTokens = tokens.value.map (taxon => {

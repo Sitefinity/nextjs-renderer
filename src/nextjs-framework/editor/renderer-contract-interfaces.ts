@@ -101,4 +101,5 @@ export interface DataItem {
     readonly provider: string;
     readonly culture: string;
     readonly key: string;
+    readonly data: { [key: string]: any }
 }

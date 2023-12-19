@@ -5,7 +5,7 @@ import { ContentListEntity } from './content-list-entity';
 
 export class ContentListRestService {
 
-    static getItems(entity: ContentListEntity, detailItem: DetailItem | null): Promise<CollectionResponse<SdkItem>> {
+    static getItems(entity: ContentListEntity, detailItem: DetailItem | undefined): Promise<CollectionResponse<SdkItem>> {
         if (entity.SelectedItems && entity.SelectedItems.Content && entity.SelectedItems.Content.length > 0
                 && entity.SelectedItems.Content[0].Variations) {
             const selectedContent = entity.SelectedItems.Content[0];
@@ -40,12 +40,12 @@ export class ContentListRestService {
     }
 
 
-    private static getParentFilterExpression(selectedContent: ContentContext, variation: ContentVariation, detailItem: DetailItem | null): FilterClause | null {
+    private static getParentFilterExpression(selectedContent: ContentContext, variation: ContentVariation, detailItem: DetailItem | undefined): FilterClause | null {
         let filterByParentExpressionSerialized = null;
         if (variation.DynamicFilterByParent) {
             let parentType = ServiceMetadata.getParentType(selectedContent.Type);
 
-            if (parentType != null && detailItem != null && detailItem.ItemType === parentType) {
+            if (parentType != null && detailItem && detailItem.ItemType === parentType) {
                 return <FilterClause>{
                     FieldName: 'ParentId',
                     FieldValue: detailItem.Id,
