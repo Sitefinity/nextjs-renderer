@@ -225,45 +225,62 @@ export class RestService {
         });
     }
 
-    public static getLayout(args: GetLayoutArgs): Promise<PageLayoutServiceResponse> {
+    public static async getLayout(args: GetLayoutArgs): Promise<PageLayoutServiceResponse> {
         const pagePath = args.pagePath;
         const queryParams = args.queryParams || {};
         let url = null;
 
-        const whiteListedParams = ['sfaction', 'sfversion', 'segment', 'isBackend', 'sf_site', 'sf_site_temp', 'sf-auth', 'abTestVariationKey', 'sf-content-action', 'sf-lc-status'];
+        const whiteListedParams = ['sfaction', 'sf_version', 'segment', 'isBackend', 'sf_site', 'sf_site_temp', 'sf-auth', 'abTestVariationKey', 'sf-content-action', 'sf-lc-status'];
         let whitelistedParamDic: { [key:string]: string | undefined } = {};
         whiteListedParams.forEach(x => {
             whitelistedParamDic[x] = queryParams[x];
         });
 
-        let pageParamsDic: { [key:string]: string | undefined } = {};
-        Object.keys(queryParams).filter(x => !whiteListedParams.some(y => y === x)).forEach(x => {
-            pageParamsDic[x] = queryParams[x];
-        });
-
-        let sysParamsQueryString = RestService.buildQueryParams(whitelistedParamDic);
-        sysParamsQueryString = sysParamsQueryString.replace('?', '&');
-
-        let pagePramsQueryString = RestService.buildQueryParams(pageParamsDic);
-
-        let indexOfSitefinityTemplate = pagePath.indexOf('Sitefinity/Template/');
-        if (indexOfSitefinityTemplate > -1) {
-            let id = null;
-            let indexOfGuid = indexOfSitefinityTemplate + 'Sitefinity/Template/'.length;
-            let nextIndexOfSlash = pagePath.indexOf('/', indexOfGuid);
+        let indexOfSitefinityForms = pagePath.indexOf('Sitefinity/Forms/');
+        if (indexOfSitefinityForms !== -1) {
+            let name = null;
+            let indexOfFormName = indexOfSitefinityForms + 'Sitefinity/Forms/'.length;
+            let nextIndexOfSlash = pagePath.indexOf('/', indexOfFormName);
             if (nextIndexOfSlash === -1) {
-                id = pagePath.substring(indexOfGuid);
+                name = pagePath.substring(indexOfFormName);
             } else {
-                id = pagePath.substring(indexOfGuid, nextIndexOfSlash);
+                name = pagePath.substring(indexOfFormName, nextIndexOfSlash);
             }
 
-            url = `/api/default/templates/${id}/Default.Model()`;
-        } else {
+            const formResponse = await RestService.sendRequest<{ value: SdkItem[] }>({
+                url: RootUrlService.rootUrl + `/sf/system/forms?$filter=Name eq \'${name}\'`
+            });
 
-            url = '/api/default/pages/Default.Model(url=@param)';
+            url = `/api/default/forms(${formResponse.value[0].Id})/Default.Model()`;
+        } else {
+            let indexOfSitefinityTemplate = pagePath.indexOf('Sitefinity/Template/');
+            if (indexOfSitefinityTemplate > -1) {
+                let id = null;
+                let indexOfGuid = indexOfSitefinityTemplate + 'Sitefinity/Template/'.length;
+                let nextIndexOfSlash = pagePath.indexOf('/', indexOfGuid);
+                if (nextIndexOfSlash === -1) {
+                    id = pagePath.substring(indexOfGuid);
+                } else {
+                    id = pagePath.substring(indexOfGuid, nextIndexOfSlash);
+                }
+
+                url = `/api/default/templates/${id}/Default.Model()`;
+            } else {
+                url = '/api/default/pages/Default.Model(url=@param)';
+
+                let pageParamsDic: { [key:string]: string | undefined } = {};
+                Object.keys(queryParams).filter(x => !whiteListedParams.some(y => y === x)).forEach(x => {
+                    pageParamsDic[x] = queryParams[x];
+                });
+
+                let pagePramsQueryString = RestService.buildQueryParams(pageParamsDic);
+
+                whitelistedParamDic['@param'] = `'${encodeURIComponent(pagePath + pagePramsQueryString)}'`;
+            }
         }
 
-        url += `?@param='${encodeURIComponent(pagePath + pagePramsQueryString)}'${sysParamsQueryString}`;
+        let sysParamsQueryString = RestService.buildQueryParams(whitelistedParamDic);
+        url += `${sysParamsQueryString}`;
 
         return RestService.sendRequest({ url: RootUrlService.rootUrl + url });
     }
