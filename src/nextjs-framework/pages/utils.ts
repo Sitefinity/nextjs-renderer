@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { PageParams } from './page-params';
-import { PageLayoutServiceResponse, LayoutService, GetAllArgs } from '../rest-sdk/services';
+import { PageLayoutServiceResponse, GetAllArgs } from '../rest-sdk/services';
 import { ServiceMetadata } from '../rest-sdk/service-metadata';
 import { RootUrlService } from '../rest-sdk/root-url.service';
 import { RenderWidgetService } from '../services/render-widget-service';
