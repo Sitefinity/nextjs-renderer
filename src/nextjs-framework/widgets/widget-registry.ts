@@ -168,10 +168,9 @@ export const widgetRegistry: WidgetRegistry = {
             },
             ssr: true
         },
-        'SitefinitySection': {
+        'SitefinitySectionCustom': {
             designerMetadata: sitefinitySectionJson,
             componentType: Section,
-            selectorCategory: 'Layout',
             editorMetadata: {
                 Title: 'Section',
                 Category: 'Layout & Presets'

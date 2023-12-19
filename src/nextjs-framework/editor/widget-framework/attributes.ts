@@ -37,7 +37,7 @@ export function htmlAttributes(widgetContext: WidgetContext<any>, error: string 
         }
     }
 
-    attributes['data-sfiscontentwidget'] = widgetContext.metadata?.selectorCategory !== 'Layout';
+    attributes['data-sfiscontentwidget'] = widgetContext.metadata?.editorMetadata?.Category !== 'Layout & Presets';
     attributes['data-sfisemptyvisualhidden'] = false;
     attributes['data-sfisempty'] = false;
     attributes['draggable'] = true;
