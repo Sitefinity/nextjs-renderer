@@ -28,7 +28,7 @@ export function OpenDetailsAnchor(props: {
         if (entity && entity.DetailPageMode === 'SamePage') {
 
             const newUrl = window.location.origin + window.location.pathname + sdkItem.ItemDefaultUrl + window.location.search;
-            window.history.pushState(detailItem, '', newUrl);
+            window.location.href = newUrl;
         } else if (entity && entity.DetailPage) {
             RestService.getItem(
                 RestSdkTypes.Pages,
@@ -48,10 +48,11 @@ export function OpenDetailsAnchor(props: {
         onDetailsOpen(item);
     }
 
-    return (
-      <a href="#"
-        className={props.className}
-        onClick={(e) => onDetailItemOpenHandler(e, item.Original)}
-        >{props.text || item.Title.Value}</a>
-    );
+    return item.Original?.ItemDefaultUrl ?
+            (<a href="#"
+              className={props.className}
+              onClick={(e) => onDetailItemOpenHandler(e, item.Original)}
+              >{props.text || item.Title.Value}</a>)
+            :
+            (<>{props.text || item.Title.Value}</>);
 }
