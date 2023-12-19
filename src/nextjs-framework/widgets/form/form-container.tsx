@@ -7,7 +7,6 @@ import { VisibilityStyle } from '../styling/visibility-style';
 import { FormRulesExecutor } from './rules/form-rules-executor';
 export const FormContext = createContext<{
     formViewModel: FormViewModel,
-    validationMessages?: {[key:string]: boolean},
     hiddenInputs: {[key:string]: boolean},
     skippedInputs: {[key:string]: boolean},
     sfFormValueChanged: ()=>void
@@ -46,27 +45,35 @@ export function FormContainer(props: FromContainerProps) {
         unSkip?: string;
     }) => {
         if (args.show) {
-            const newHiddenFields = {...hiddenInputs};
-            delete newHiddenFields[args.show];
-            setHiddenInputs(newHiddenFields);
+            setHiddenInputs(hI => {
+                const newHiddenFields = {...hI};
+                delete newHiddenFields[args.show!];
+                return newHiddenFields;
+            });
         }
 
         if (args.hide) {
-            const newHiddenFields = {...hiddenInputs};
-            newHiddenFields[args.hide] = true;
-            setHiddenInputs(newHiddenFields);
+            setHiddenInputs(hI => {
+                const newHiddenFields = {...hI};
+                newHiddenFields[args.hide!] = true;
+                return newHiddenFields;
+            });
         }
 
         if (args.skip) {
-            const newSkippedFields = {...skippedInputs};
-            delete newSkippedFields[args.skip];
-            setSkippedInputs(newSkippedFields);
+            setSkippedInputs(sI => {
+                const newSkippedFields = {...sI};
+                delete newSkippedFields[args.skip!];
+                return newSkippedFields;
+            });
         }
 
         if (args.unSkip) {
-            const newSkippedFields = {...skippedInputs};
-            newSkippedFields[args.unSkip] = true;
-            setSkippedInputs(newSkippedFields);
+            setSkippedInputs(sI => {
+                const newSkippedFields = {...sI};
+                newSkippedFields[args.unSkip!] = true;
+                return newSkippedFields;
+            });
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);

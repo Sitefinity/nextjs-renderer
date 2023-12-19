@@ -518,7 +518,6 @@ export class FormRulesExecutor {
             }
         }
 
-
         return fieldType;
     }
 

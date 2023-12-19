@@ -50,16 +50,12 @@ export async function TextField(props: WidgetContext<TextFieldEntity>) {
     const dataAttributes = htmlAttributes(props);
     const defaultRendering = (<>
       <script data-sf-role={`start_field_${textBoxUniqueId}`} data-sf-role-field-name={textBoxUniqueId} />
-      <div className={classNames('mb-3', viewModel.CssClass,{
-            [StylingConfig.VisibilityClasses[VisibilityStyle.Hidden]]: entity.Hidden
-        })} data-sf-role="text-field-container">
-        <TextFieldClient viewModel={viewModel}
-          textBoxUniqueId={textBoxUniqueId}
-          textBoxErrorMessageId={textBoxErrorMessageId}
-          textBoxInfoMessageId={textBoxInfoMessageId}
-          ariaDescribedByAttribute={ariaDescribedByAttribute}
+      <TextFieldClient viewModel={viewModel}
+        textBoxUniqueId={textBoxUniqueId}
+        textBoxErrorMessageId={textBoxErrorMessageId}
+        textBoxInfoMessageId={textBoxInfoMessageId}
+        ariaDescribedByAttribute={ariaDescribedByAttribute}
             />
-      </div>
       <script data-sf-role={`end_field_${textBoxUniqueId}`} />
     </>);
      return (props.requestContext.isEdit

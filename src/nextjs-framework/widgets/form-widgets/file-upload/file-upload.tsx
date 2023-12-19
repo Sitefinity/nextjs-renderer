@@ -1,7 +1,8 @@
 import React from 'react';
-import { WidgetContext, classNames, getUniqueId, htmlAttributes } from '../../../editor';
+import { WidgetContext, getUniqueId, htmlAttributes } from '../../../editor';
 import { FileTypes } from './interface/FileTypes';
 import { NumericRange } from '../common/NumericRange';
+import { FileUploadClient } from './file-upload-client';
 
 export async function FileUpload(props: WidgetContext<FileUploadEntity>) {
     const entity = {
@@ -15,67 +16,14 @@ export async function FileUpload(props: WidgetContext<FileUploadEntity>) {
     const viewModel: any = {...entity};
     const fileFieldUniqueId = viewModel.SfFieldName;
     const fileFieldErrorMessageId = getUniqueId('FileFieldErrorMessage');
-    const labelAdditionalClassList = viewModel.InstructionalText ? 'mb-1' : null;
-    const ariaDescribedByAttribute = viewModel.InstructionalText ? `${fileFieldUniqueId} ${fileFieldErrorMessageId}` : fileFieldErrorMessageId;
     const dataAttributes = htmlAttributes(props);
     const defaultRendering = (<>
       <script data-sf-role={`start_field_${fileFieldUniqueId}`} data-sf-role-field-name={fileFieldUniqueId} />
-      <div className={classNames('mb-3', viewModel.CssClass)} data-sf-role="file-field-container">
-        <label className={classNames('h6', 'd-block', labelAdditionalClassList)} htmlFor={fileFieldUniqueId}>{viewModel.Label}</label>
-        { viewModel.InstructionalText &&
-        <div id={getUniqueId('FileFieldInfo')} className="form-text mt-1 mb-2">{viewModel.InstructionalText}</div>
-    }
-        <input data-sf-role="violation-restrictions" type="hidden" value={viewModel.ViolationRestrictionsJson} />
-        <div data-sf-role="file-field-inputs">
-
-          { context.isEdit &&
-          <div data-sf-role="single-file-input">
-            <input
-              className="form-control"
-              id={fileFieldUniqueId}
-              title={viewModel.Label}
-              name={fileFieldUniqueId}
-              type="file"
-              aria-describedby={ariaDescribedByAttribute}
-              {...viewModel.ValidationAttributes} />
-          </div>
-        }
-
-        </div>
-        { viewModel.AllowMultipleFiles &&
-        <button data-sf-role="add-input" className="btn btn-secondary my-2">+</button>
-    }
-
-        { viewModel.Required &&
-        <div data-sf-role="required-violation-message" className="invalid-feedback" role="alert" aria-live="assertive">{viewModel.RequiredViolationMessage}</div>
-    }
-
-        { (!context.isEdit) &&
-
-          <div data-sf-role="single-file-input-wrapper">
-            <div className="d-flex mb-2" data-sf-role="single-file-input">
-              <input
-                className="form-control"
-                id={fileFieldUniqueId}
-                title={viewModel.Label}
-                name={viewModel.FieldName}
-                type="file"
-                aria-describedby={ariaDescribedByAttribute}
-                {...viewModel.ValidationAttributes} />
-
-              { viewModel.AllowMultipleFiles &&
-              <button title="Remove" data-sf-role="remove-input" className="btn btn-light ms-1">X</button>
-                }
-            </div>
-            { (viewModel.MinFileSizeInMb > 0 || viewModel.MaxFileSizeInMb > 0) &&
-            <div data-sf-role="filesize-violation-message" className="invalid-feedback my-2" role="alert" aria-live="assertive">{viewModel.FileSizeViolationMessage}</div>
-            }
-            { (viewModel.AllowedFileTypes != null) &&
-            <div data-sf-role="filetype-violation-message" className="invalid-feedback my-2" role="alert" aria-live="assertive">{viewModel.FileTypeViolationMessage}</div>
-            }
-          </div>
-    }
-      </div>
+      <FileUploadClient viewModel={viewModel}
+        fileFieldUniqueId={fileFieldUniqueId}
+        fileFieldErrorMessageId={fileFieldErrorMessageId}
+        context={context}
+        />
       <script data-sf-role={`end_field_${fileFieldUniqueId}`} />
     </>);
      return (props.requestContext.isEdit

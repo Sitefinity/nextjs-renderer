@@ -52,17 +52,12 @@ export async function Paragraph(props: WidgetContext<ParagraphEntity>) {
     const dataAttributes = htmlAttributes(props);
    const defaultRendering = (<>
      <script data-sf-role={`start_field_${paragraphUniqueId}`} data-sf-role-field-name={paragraphUniqueId} />
-     <div className={classNames('mb-3', viewModel.CssClass,{
-        [StylingConfig.VisibilityClasses[VisibilityStyle.Hidden]]: entity.Hidden
-     })} data-sf-role="paragraph-text-field-container">
-       
-       <ParagraphClient viewModel={viewModel}
-         paragraphUniqueId={paragraphUniqueId}
-         paragraphErrorMessageId={paragraphErrorMessageId}
-         paragraphInfoMessageId={paragraphInfoMessageId}
-         ariaDescribedByAttribute={ariaDescribedByAttribute}
-            />
-     </div>
+     <ParagraphClient viewModel={viewModel}
+       paragraphUniqueId={paragraphUniqueId}
+       paragraphErrorMessageId={paragraphErrorMessageId}
+       paragraphInfoMessageId={paragraphInfoMessageId}
+       ariaDescribedByAttribute={ariaDescribedByAttribute}
+        />
      <script data-sf-role={`end_field_${paragraphUniqueId}`} />
    </>);
      return (props.requestContext.isEdit

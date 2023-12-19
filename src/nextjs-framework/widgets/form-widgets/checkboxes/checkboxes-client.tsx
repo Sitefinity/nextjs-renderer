@@ -73,8 +73,8 @@ export function CheckboxesClient(props: any) {
         'mb-3',
         viewModel.CssClass,
         isHidden
-        ? StylingConfig.VisibilityClasses[VisibilityStyle.Hidden]
-        : StylingConfig.VisibilityClasses[VisibilityStyle.Visible])}
+            ? StylingConfig.VisibilityClasses[VisibilityStyle.Hidden]
+            : StylingConfig.VisibilityClasses[VisibilityStyle.Visible])}
       aria-labelledby={`choice-field-label-${checkboxUniqueId} choice-field-description-${checkboxUniqueId}`}>
       <input data-sf-role="violation-messages" type="hidden" value={viewModel.ViolationRestrictionsMessages} />
       <input type="hidden" data-sf-role="required-validator" value={viewModel.Required} />
@@ -88,7 +88,7 @@ export function CheckboxesClient(props: any) {
 
                 return (<div className={`form-check ${innerColumnClass}`} key={idx}>
                   <input className="form-check-input" type="checkbox" name={checkboxUniqueId} id={choiceOptionId}
-                    value={choiceOption.Value} data-sf-role="multiple-choice-field-input" required={viewModel.Required && !hasValueSelected}
+                    value={choiceOption.Value} data-sf-role="checkboxes-field-input" required={viewModel.Required && !hasValueSelected}
                     checked={!!choiceOption.Selected}
                     disabled={isHidden || isSkipped}
                     onChange={handleChange}
@@ -102,7 +102,7 @@ export function CheckboxesClient(props: any) {
         { viewModel.HasAdditionalChoice &&
         <div className={`form-check ${innerColumnClass}`}>
           <input className="form-check-input mt-1" type="checkbox" name={checkboxUniqueId} id={otherChoiceOptionId}
-            data-sf-role="multiple-choice-field-input" required={viewModel.Required && !hasValueSelected}
+            data-sf-role="checkboxes-field-input" required={viewModel.Required && !hasValueSelected}
             checked={showOtherInput}
             onChange={handleOtherChange}/>
           <label className="form-check-label" htmlFor={otherChoiceOptionId}>Other</label>
@@ -113,6 +113,7 @@ export function CheckboxesClient(props: any) {
             data-sf-role="choice-other-input"
             value={otherInputText}
             required={viewModel.Required}
+            disabled={isHidden || isSkipped}
             onChange={handleOtherInputChange}
             onInput={handleOtherInputInput}
           />}

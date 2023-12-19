@@ -3,12 +3,16 @@
 import React, { useContext, useState } from 'react';
 import { classNames } from '../../../editor';
 import { FormContext } from '../../form/form-container';
+import { VisibilityStyle } from '../../styling/visibility-style';
+import { StylingConfig } from '../../styling/styling-config';
 
 export function TextFieldClient(props: any) {
     const {viewModel, textBoxUniqueId, textBoxErrorMessageId,
         textBoxInfoMessageId, ariaDescribedByAttribute} = props;
     const [inputValue, setInputValue] = React.useState(viewModel.PredefinedValue);
-    const { formViewModel, sfFormValueChanged } = useContext(FormContext);
+    const { formViewModel, sfFormValueChanged, hiddenInputs, skippedInputs } = useContext(FormContext);
+    const isHidden = hiddenInputs[textBoxUniqueId];
+    const isSkipped = skippedInputs[textBoxUniqueId];
     const [errorMessageText, setErrorMessageText] = useState('');
     let delayTimer: ReturnType<typeof setTimeout>;
     function dispatchValueChanged() {
@@ -62,7 +66,13 @@ export function TextFieldClient(props: any) {
         dispatchValueChanged();
     };
 
-    return (<>
+    return (<div className={classNames(
+        'mb-3',
+        viewModel.CssClass,
+        isHidden
+            ? StylingConfig.VisibilityClasses[VisibilityStyle.Hidden]
+            : StylingConfig.VisibilityClasses[VisibilityStyle.Visible]
+        )} data-sf-role="text-field-container">
       <label className="h6" htmlFor={textBoxUniqueId}>{viewModel.Label}</label>
       <input id={textBoxUniqueId}
         type={viewModel.InputType}
@@ -74,6 +84,7 @@ export function TextFieldClient(props: any) {
         value={inputValue}
         data-sf-role="text-field-input"
         readOnly={viewModel.Readonly}
+        disabled={isHidden || isSkipped}
         aria-describedby={ariaDescribedByAttribute}
         onChange={handleTextValidation}
         onInput={handleInputEvent}
@@ -87,5 +98,6 @@ export function TextFieldClient(props: any) {
       {errorMessageText && <div id={textBoxErrorMessageId} data-sf-role="error-message" role="alert" aria-live="assertive" className="invalid-feedback" >
         {errorMessageText}
       </div>}
-    </>);
+    </div>
+    );
 }
