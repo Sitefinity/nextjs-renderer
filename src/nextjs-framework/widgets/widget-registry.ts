@@ -173,7 +173,7 @@ export const widgetRegistry: WidgetRegistry = initRegistry({
             ssr: true
         },
         'SitefinityDocumentList': {
-            designerMetadata: sitefinityDynamicListJson,
+            designerMetadata: sitefinityDocumentListJson,
             componentType: DocumentList,
             editorMetadata: {
                 Title: 'Document list',
@@ -237,7 +237,7 @@ export const widgetRegistry: WidgetRegistry = initRegistry({
             ssr: true
         },
         'SitefinityDynamicList': {
-            designerMetadata: sitefinityDocumentListJson,
+            designerMetadata: sitefinityDynamicListJson,
             componentType: DynamicList,
             editorMetadata: {
                 Title: 'Dynamic List'

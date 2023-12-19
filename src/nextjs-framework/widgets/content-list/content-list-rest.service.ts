@@ -1,4 +1,5 @@
-import { DetailItem, ContentContext, ContentVariation } from '../../editor';
+import { DetailItem, ContentContext, ContentVariation, ContentListSettings } from '../../editor';
+import { ListDisplayMode } from '../../editor/widget-framework/list-display-mode';
 import { CollectionResponse, SdkItem, FilterConverterService, CombinedFilter, FilterClause, RelationFilter, GetAllArgs, OrderBy, RestService, ServiceMetadata, FilterOperators } from '../../rest-sdk';
 import { ContentListEntity } from './content-list-entity';
 
@@ -59,21 +60,22 @@ export class ContentListRestService {
     private static getSkipAndTake(entity: ContentListEntity, pageNumber: number): { Skip?: number, Take?: number, Count?: boolean, ShowPager?: boolean } {
         let retVal: { Skip?: number, Take?: number, ShowPager?: boolean, Count?: boolean } | null = {};
         let currentPage = 1;
-        switch (entity.ListSettings?.DisplayMode) {
-            case 'Paging':
+        const settings = entity.ListSettings || new ContentListSettings();
+        switch (settings.DisplayMode ) {
+            case ListDisplayMode.Paging:
                 retVal.ShowPager = true;
-                retVal.Take = entity.ListSettings.ItemsPerPage;
+                retVal.Take = settings.ItemsPerPage;
 
                 currentPage = pageNumber;
 
                 if (currentPage > 1) {
-                    retVal.Skip = entity.ListSettings.ItemsPerPage * (currentPage - 1);
+                    retVal.Skip = settings.ItemsPerPage * (currentPage - 1);
                 }
 
                 retVal.Count = true;
                 break;
-            case 'Limit':
-                retVal.Take = entity.ListSettings.LimitItemsCount;
+            case ListDisplayMode.Limit:
+                retVal.Take = settings.LimitItemsCount;
                 break;
             default:
                 break;
