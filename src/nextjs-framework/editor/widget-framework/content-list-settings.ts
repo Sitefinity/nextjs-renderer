@@ -1,7 +1,7 @@
 import { ListDisplayMode } from './list-display-mode';
 
-export interface ContentListSettings {
-    ItemsPerPage: number;
-    LimitItemsCount: number;
-    DisplayMode: ListDisplayMode;
+export class ContentListSettings {
+    ItemsPerPage: number = 20;
+    LimitItemsCount: number = 20;
+    DisplayMode: ListDisplayMode = ListDisplayMode.All;
 }

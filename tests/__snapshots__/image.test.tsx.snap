@@ -3,7 +3,6 @@
 exports[`should render image default state 1`] = `
 <div>
   <div
-    class="d-inline-block"
     data-sfemptyicon="picture-o"
     data-sfemptyiconaction="Edit"
     data-sfemptyicontext="Select image"

@@ -33,7 +33,7 @@ export async function ContentListMaster(props: { model: ContentListModelMaster, 
                 if (imageProp && imageProp.length > 0) {
                     image = imageProp[0];
                     if (image.Thumbnails && image.Thumbnails.length > 0) {
-                        url = image.Thumbnails[0].Url;
+                        url = image.Thumbnails[0].Url!;
                     } else {
                         url = image.Url;
                     }

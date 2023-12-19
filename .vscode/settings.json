@@ -1,8 +1,8 @@
 {
-    "files.eol": "\n",
+    "files.eol": "\r\n",
     "files.insertFinalNewline": true,
     "editor.codeActionsOnSave": {
-        "source.fixAll": true
+        "source.fixAll": "explicit"
     },
     "eslint.format.enable": true,
     "[json]": {

@@ -49,6 +49,7 @@ describe('should render image', () => {
             'isEdit': true,
             'isPreview': false,
             'isLive': false,
+            layout: null,
             'culture': 'en'
 
         };

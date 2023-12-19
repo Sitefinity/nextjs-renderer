@@ -11,21 +11,12 @@ import { FacetFlatResponseDto } from './interfaces/FacetFlatResponseDto';
 import { SearchFacetsModelBuilder } from './search-facets-model-builder';
 import { SearchFacetsClient } from './search-facets-client';
 import { WidgetContext, classNames, getCustomAttributes, htmlAttributes } from '../../editor';
+import { SearchFacetsEntity } from './search-facets.entity';
 
 export async function SearchFacets(props: WidgetContext<SearchFacetsEntity>) {
     const model = props.model;
     const dataAttributes = htmlAttributes(props);
-    const entity = {
-        DisplayItemCount:true,
-        IsShowMoreLessButtonActive: true,
-        SelectedFacets: [],
-        FilterResultsLabel: 'Filter results',
-        AppliedFiltersLabel: 'Applied filters',
-        ClearAllLabel:'Clear all',
-        ShowMoreLabel: 'Show more',
-        ShowLessLabel:'Show less',
-        ...model.Properties
-    };
+    const entity = model.Properties;
 
     const context = props.requestContext;
     const searchParams = context.searchParams || {};
@@ -66,7 +57,7 @@ export async function SearchFacets(props: WidgetContext<SearchFacetsEntity>) {
         const facetsDict = Object.fromEntries(
             searchServiceFacetResponse.map((p: FacetFlatResponseDto) => [p.FacetKey, p.FacetResponses])
           );
-        viewModel.SearchFacets = SearchFacetsModelBuilder.buildFacetsViewModel(entity.SelectedFacets, facetsDict, facetableFieldsKeys, entity.SortType || '')
+        viewModel.SearchFacets = SearchFacetsModelBuilder.buildFacetsViewModel(entity.SelectedFacets!, facetsDict, facetableFieldsKeys, entity.SortType || '')
             .map(e=> {
                 return {...e};
             });
@@ -75,7 +66,7 @@ export async function SearchFacets(props: WidgetContext<SearchFacetsEntity>) {
     viewModel.HasAnyFacetElements = SearchFacetsModelBuilder.hasAnyFacetElements(viewModel.SearchFacets);
 
     const defaultClass =  entity.WidgetCssClass;
-    const marginClass = entity.MarginStyle && StyleGenerator.getMarginClasses(entity.MarginStyle);
+    const marginClass = entity.Margins! && StyleGenerator.getMarginClasses(entity.Margins!);
     const searchFacetsCustomAttributes = getCustomAttributes(entity.Attributes, 'SearchFacets');
 
     dataAttributes['className'] = classNames(
@@ -95,24 +86,4 @@ export async function SearchFacets(props: WidgetContext<SearchFacetsEntity>) {
         <input type="hidden" id="sf-currentPageUrl" value="@(this.Context?.Request.Path ?? string.Empty)" />
       </>
     );
-}
-
-
-export class SearchFacetsEntity {
-    MarginStyle?: OffsetStyle;
-    Attributes?: { [key: string]: Array<{ Key: string, Value: string}> };
-    IndexCatalogue?: string;
-    SelectedFacets?: FacetField[];
-    SortType?: string;
-    DisplayItemCount?: boolean;
-    IsShowMoreLessButtonActive?: boolean;
-    SfViewName?: string;
-    WidgetCssClass?: string;
-    SearchFields?: string;
-    FilterResultsLabel?: string;
-    AppliedFiltersLabel?: string;
-    ClearAllLabel?: string;
-    ShowMoreLabel?: string;
-    ShowLessLabel?: string;
-
 }

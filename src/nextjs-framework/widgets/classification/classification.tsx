@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleGenerator } from '../styling/style-generator.service';
-import { OffsetStyle } from '../styling/offset-style';
 import { ClassificationRestService } from './classification.service';
 import { PageViewModel } from '../navigation/interfaces/PageViewModel';
 import { WidgetContext, classNames, getCustomAttributes, htmlAttributes } from '../../editor';
+import { ClassificationEntity } from './classification-entity';
 
 export interface TaxaPageViewModel extends PageViewModel {
     AppliedTo: string;
@@ -63,8 +63,8 @@ export async function Classification(props: WidgetContext<ClassificationEntity>)
     const updatedTokens = tokens.value.map (taxon => {
         return {
             ...taxon,
-            SubTaxa: mapTaxonProperties(taxon as TaxaPageViewModel, settings!.selectedTaxonomyName, viewUrl, searchParams),
-            UrlName: getTaxaUrl(settings!.selectedTaxonomyName, taxon.UrlName, viewUrl, searchParams)
+            SubTaxa: mapTaxonProperties(taxon as TaxaPageViewModel, settings!.selectedTaxonomyName!, viewUrl, searchParams),
+            UrlName: getTaxaUrl(settings!.selectedTaxonomyName!, taxon.UrlName, viewUrl, searchParams)
         };
     });
 
@@ -118,26 +118,4 @@ export async function Classification(props: WidgetContext<ClassificationEntity>)
             }
       </ul>
     );
-}
-
-export interface ClassificationSettingsInterface {
-    selectedTaxonomyId: string;
-    selectedTaxonomyUrl: string;
-    selectedTaxonomyName: string;
-    selectedTaxonomyTitle: string;
-    selectionMode: string;
-    byContentType: string;
-    selectedTaxaIds: string [];
-  }
-
-export class ClassificationEntity {
-    ClassificationSettings?: ClassificationSettingsInterface;
-    CssClass?: string;
-    Margins?: OffsetStyle;
-    OrderBy?: string;
-    ShowItemCount?: boolean;
-    ShowEmpty?: boolean;
-    SfViewName?: string;
-    SortExpression?: string;
-    Attributes?: { [key: string]: Array<{ Key: string, Value: string}> };
 }

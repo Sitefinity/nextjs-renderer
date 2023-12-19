@@ -59,100 +59,7 @@
                                     "SectionName": null,
                                     "CategoryName": null,
                                     "Properties": {},
-                                    "TypeChildProperties": [
-                                        {
-                                            "Name": "Length",
-                                            "DefaultValue": "0",
-                                            "Title": "Length",
-                                            "Type": "number",
-                                            "SectionName": null,
-                                            "CategoryName": null,
-                                            "Properties": {
-                                                "Validations_Readonly": "True"
-                                            },
-                                            "TypeChildProperties": [],
-                                            "Position": 0
-                                        },
-                                        {
-                                            "Name": "LongLength",
-                                            "DefaultValue": "0",
-                                            "Title": "LongLength",
-                                            "Type": "number",
-                                            "SectionName": null,
-                                            "CategoryName": null,
-                                            "Properties": {
-                                                "Validations_DecimalPlaces": "10",
-                                                "Validations_Readonly": "True"
-                                            },
-                                            "TypeChildProperties": [],
-                                            "Position": 0
-                                        },
-                                        {
-                                            "Name": "Rank",
-                                            "DefaultValue": "0",
-                                            "Title": "Rank",
-                                            "Type": "number",
-                                            "SectionName": null,
-                                            "CategoryName": null,
-                                            "Properties": {
-                                                "Validations_Readonly": "True"
-                                            },
-                                            "TypeChildProperties": [],
-                                            "Position": 0
-                                        },
-                                        {
-                                            "Name": "SyncRoot",
-                                            "DefaultValue": null,
-                                            "Title": "SyncRoot",
-                                            "Type": "complex",
-                                            "SectionName": null,
-                                            "CategoryName": null,
-                                            "Properties": {
-                                                "Validations_Readonly": "True"
-                                            },
-                                            "TypeChildProperties": [],
-                                            "Position": 0
-                                        },
-                                        {
-                                            "Name": "IsReadOnly",
-                                            "DefaultValue": "False",
-                                            "Title": "IsReadOnly",
-                                            "Type": "bool",
-                                            "SectionName": null,
-                                            "CategoryName": null,
-                                            "Properties": {
-                                                "Validations_Readonly": "True"
-                                            },
-                                            "TypeChildProperties": [],
-                                            "Position": 0
-                                        },
-                                        {
-                                            "Name": "IsFixedSize",
-                                            "DefaultValue": "False",
-                                            "Title": "IsFixedSize",
-                                            "Type": "bool",
-                                            "SectionName": null,
-                                            "CategoryName": null,
-                                            "Properties": {
-                                                "Validations_Readonly": "True"
-                                            },
-                                            "TypeChildProperties": [],
-                                            "Position": 0
-                                        },
-                                        {
-                                            "Name": "IsSynchronized",
-                                            "DefaultValue": "False",
-                                            "Title": "IsSynchronized",
-                                            "Type": "bool",
-                                            "SectionName": null,
-                                            "CategoryName": null,
-                                            "Properties": {
-                                                "Validations_Readonly": "True"
-                                            },
-                                            "TypeChildProperties": [],
-                                            "Position": 0
-                                        }
-                                    ],
+                                    "TypeChildProperties": [],
                                     "Position": 0
                                 },
                                 {
@@ -481,7 +388,7 @@
                                             "Properties": {
                                                 "Meta_Description_Description": "If enabled, empty fields for entering custom values are displayed on your site.",
                                                 "Meta_ConditionalVisibility_Condition": "{\u0022operator\u0022:\u0022Or\u0022,\u0022conditions\u0022:[{\u0022fieldName\u0022:\u0022RangeType\u0022,\u0022operator\u0022:\u0022Equals\u0022,\u0022value\u0022:1 },{\u0022fieldName\u0022:\u0022FacetType\u0022,\u0022operator\u0022:\u0022Contains\u0022,\u0022value\u0022:\u0022Number\u0022 }]}",
-                                                "Meta_Choice_Choices": "[{\u0022Title\u0022:\u0022Yes\u0022,\u0022Name\u0022:\u0022Yes\u0022,\u0022Value\u0022:true,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022No\u0022,\u0022Name\u0022:\u0022No\u0022,\u0022Value\u0022:false,\u0022Icon\u0022:null}]",
+                                                "Meta_Choice_Choices": "[{\u0022Title\u0022:\u0022Yes\u0022,\u0022Name\u0022:\u0022Yes\u0022,\u0022Value\u0022:\u0022True\u0022,\u0022Icon\u0022:null},{\u0022Title\u0022:\u0022No\u0022,\u0022Name\u0022:\u0022No\u0022,\u0022Value\u0022:\u0022False\u0022,\u0022Icon\u0022:null}]",
                                                 "Meta_Choice_ServiceUrl": null,
                                                 "Meta_Choice_ServiceCallParameters": null,
                                                 "Meta_Choice_ServiceWarningMessage": null,

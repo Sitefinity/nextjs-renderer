@@ -1,4 +1,3 @@
-
 'use client';
 
 import { RendererContractImpl } from '../services/renderer-contract';

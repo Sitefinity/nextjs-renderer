@@ -15,18 +15,18 @@ export class SearchFacets {
 
         this.FacetTitle = facetField.FacetableFieldLabels;
         this.FacetFieldName = facetField.FacetableFieldNames[0];
-        this.FacetFieldType = facetField.FacetFieldSettings.FacetType;
+        this.FacetFieldType = facetField.FacetFieldSettings!.FacetType!;
     }
 
   get ShowNumberCustomRange(): boolean | undefined {
-    return this.facetField!.FacetFieldSettings.DisplayCustomRange &&
+    return this.facetField!.FacetFieldSettings!.DisplayCustomRange &&
         (this.FacetFieldType === SearchIndexAdditonalFieldType.NumberWhole ||
         this.FacetFieldType === SearchIndexAdditonalFieldType.NumberDecimal);
   }
 
   get ShowDateCustomRanges(): boolean | undefined {
-    return this.facetField!.FacetFieldSettings.RangeType === 1 &&
-        this.facetField!.FacetFieldSettings.DisplayCustomRange &&
+    return this.facetField!.FacetFieldSettings!.RangeType === 1 &&
+        this.facetField!.FacetFieldSettings!.DisplayCustomRange &&
         this.FacetFieldType === SearchIndexAdditonalFieldType.DateAndTime;
   }
 }
