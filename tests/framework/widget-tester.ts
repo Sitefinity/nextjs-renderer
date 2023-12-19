@@ -25,8 +25,12 @@ export class WidgetTester {
         if (args.properties) {
             Object.keys(args.properties).forEach((key) => {
                 let value: any = (args.properties as any)[key];
-                if (value && !(typeof value === 'undefined')) {
+                if (typeof value === 'object') {
                     value = JSON.stringify(value);
+                } else if (typeof value !== 'undefined') {
+                    value = value.toString();
+                } else {
+                    return;
                 }
 
                 properties[key] = value;

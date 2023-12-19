@@ -1,4 +1,5 @@
 
+import { Dictionary } from '../../typings/dictionary';
 import { LinkModel } from './link-model';
 import { WidgetContext } from './widget-context';
 
@@ -7,7 +8,7 @@ export type CustomAttribute = {
     Value: string;
 };
 
-export function htmlAttributes(widgetContext: WidgetContext<any>, error: string | undefined = undefined) {
+export function htmlAttributes(widgetContext: WidgetContext<any>, error: string | undefined = undefined): { [key: string]: any } {
     if (!widgetContext.requestContext.isEdit) {
         return {};
     }
@@ -41,7 +42,10 @@ export function htmlAttributes(widgetContext: WidgetContext<any>, error: string 
     attributes['data-sfisemptyvisualhidden'] = false;
     attributes['data-sfisempty'] = false;
     attributes['draggable'] = true;
-    attributes['data-sfhasquickeditoperation'] = true;
+
+    if (widgetContext.metadata.editorMetadata?.HasQuickEditOperation) {
+        attributes['data-sfhasquickeditoperation'] = true;
+    }
 
     if (error) {
         attributes['data-sferror'] = error;

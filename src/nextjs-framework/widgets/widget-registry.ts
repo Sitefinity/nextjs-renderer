@@ -86,7 +86,8 @@ export const widgetRegistry: WidgetRegistry = {
                 Section: 'Basic',
                 EmptyIcon: 'picture-o',
                 EmptyIconAction: 'Edit',
-                EmptyIconText: 'Select image'
+                EmptyIconText: 'Select image',
+                HasQuickEditOperation: true
             },
             ssr: true
         },
@@ -164,7 +165,8 @@ export const widgetRegistry: WidgetRegistry = {
             componentType: ContentBlock,
             editorMetadata: {
                 Title: 'Content block',
-                Section: 'Basic'
+                Section: 'Basic',
+                HasQuickEditOperation: true
             },
             ssr: true
         },

@@ -5,25 +5,18 @@ import { ImageTag } from './image-tag';
 import { ImageClickAction } from './interfaces/ImageClickAction';
 import { ImageDisplayMode } from './interfaces/ImageDisplayMode';
 import { WidgetContext, htmlAttributes, classNames, generateAnchorAttrsFromLink, LinkModel } from '../../editor';
-import { RestService, RestSdkTypes, ThumbnailItem, SdkItem, ImageItem } from '../../rest-sdk';
+import { RestService, RestSdkTypes, ThumbnailItem, ImageItem, SdkItem } from '../../rest-sdk';
 
 const imageWrapperClass = 'd-inline-block';
 
 export async function Image(props: WidgetContext<ImageEntity>) {
-    const entity = {
+    const entity: ImageEntity = {
         ImageSize: ImageDisplayMode.Responsive,
         ...props.model.Properties
     };
     const dataAttributes = htmlAttributes(props);
-    const defaultClass = classNames(imageWrapperClass, entity.CssClass);
-    const marginClass = entity.Margins && StyleGenerator.getMarginClasses(entity.Margins);
     const anchorAttributes = generateAnchorAttrsFromLink(entity.ActionLink);
-    dataAttributes['className'] = classNames(
-        defaultClass,
-        marginClass
-    );
 
-    dataAttributes['data-sfhasquickeditoperation'] = true;
     let imageItem = null;
     if (entity.Item && entity.Item.Id) {
         imageItem =  await RestService.getItemWithFallback(RestSdkTypes.Image, entity.Item.Id.toString(), entity.Item.Provider);
@@ -32,6 +25,13 @@ export async function Image(props: WidgetContext<ImageEntity>) {
     if (!imageItem) {
         return (<div {...dataAttributes} />);
     }
+
+    const defaultClass = classNames(imageWrapperClass, entity.CssClass);
+    const marginClass = entity.Margins && StyleGenerator.getMarginClasses(entity.Margins);
+    dataAttributes['className'] = classNames(
+        defaultClass,
+        marginClass
+    );
 
     const isSvg = imageItem.MimeType === 'image/svg+xml';
     const hasZeroDimensions = imageItem.Width === 0 && imageItem.Height === 0;
@@ -91,12 +91,10 @@ export async function Image(props: WidgetContext<ImageEntity>) {
 }
 
 export interface ImageEntity {
-    Item?: ImageItem;
-    Attributes?: { [key: string]: Array<{ Key: string, Value: string}> };
-    Margins?: OffsetStyle;
+    Item?: SdkItem;
+    CssClass?: string;
     Title?: string;
     AlternativeText?: string;
-    CssClass?: string;
     ClickAction?: ImageClickAction;
     ActionLink?: LinkModel;
     ImageSize?: ImageDisplayMode;
@@ -104,4 +102,6 @@ export interface ImageEntity {
     CustomSize?: { Width: number, Height: number};
     Thumnail?: ThumbnailItem;
     ViewName?: string;
+    Margins?: OffsetStyle;
+    Attributes?: { [key: string]: Array<{ Key: string, Value: string}> };
 }

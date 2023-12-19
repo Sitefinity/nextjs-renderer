@@ -1,43 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Image with selected image item 1`] = `
+exports[`Image rendered with original size 1`] = `
 <div>
-  <picture
-    class="d-inline-block"
-    data-sfhasquickeditoperation="true"
-  >
-    <source
-      height="160"
-      media="(max-width: 160px)"
-      type="image/jpeg"
-      width="160"
-    />
+  <span>
     <img
-      alt=""
-      class="d-inline-block img-fluid"
       loading="lazy"
-      title="Image"
+      src="/images/default-source/default-album/imagee7f8cd11-dafa-41c6-95bb-7100514c09dd.jpg?sfvrsn=87c70c89_2"
+      title="custom title"
     />
-  </picture>
-</div>
-`;
-
-exports[`should render image default state 1`] = `
-<div>
-  <div
-    class="d-inline-block"
-    data-sfemptyicon="picture-o"
-    data-sfemptyiconaction="Edit"
-    data-sfemptyicontext="Select image"
-    data-sfhasquickeditoperation="true"
-    data-sfid="568481ca-45db-4f02-a62e-f76122532902"
-    data-sfiscontentwidget="true"
-    data-sfisempty="false"
-    data-sfisemptyvisualhidden="false"
-    data-sfisorphaned="false"
-    data-sfname="SitefinityImage"
-    data-sftitle="Image"
-    draggable="true"
-  />
+  </span>
 </div>
 `;
