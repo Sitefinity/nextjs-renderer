@@ -288,7 +288,7 @@ export class RestService {
     public static uploadItem(args: UploadMediaArgs): Promise<SdkItem> {
         const wholeUrl = `${RestService.buildItemBaseUrl(args.Type)}${RestService.buildQueryParams(args.AdditionalQueryParams)}`;
         const headers = args.AdditionalHeaders || {};
-        const data = Object.assign({}, args.Fields, { Title: args.Title, ParentId: args.ParentId });
+        const data = Object.assign({}, args.Fields, { Title: args.Title, ParentId: args.ParentId, UrlName: args.UrlName });
 
         headers['X-Sf-Properties'] = JSON.stringify(data);
         headers['X-File-Name'] = args.FileName;

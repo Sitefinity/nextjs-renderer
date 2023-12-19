@@ -6,12 +6,13 @@ import { ImageEntity } from '../src/nextjs-framework/widgets/image/image';
 import { ImageDisplayMode } from '../src/nextjs-framework/widgets/image/interfaces/ImageDisplayMode';
 
 let sdkItem: SdkItem;
-beforeAll(async () => {
+beforeEach(async () => {
     const base64Image = fs.readFileSync('./tests/data/1.jpg', { encoding: 'base64' });
 
     let libraryId = '4BA7AD46-F29B-4e65-BE17-9BF7CE5BA1FB';
     sdkItem = await RestService.uploadItem({
         Title: 'Image',
+        UrlName: 'image-test',
         Type: RestSdkTypes.Image,
         ContentType: 'image/jpeg',
         FileName: 'test.jpg',
@@ -34,6 +35,9 @@ test('Image rendered with original size', async () => {
         },
         assert: async (element) => {
             await waitFor(() => {
+                const imgElement = element.querySelector('img');
+                expect(imgElement?.getAttribute('src')).toBeDefined();
+                imgElement?.setAttribute('src', 'https://systemvalforsnapshot');
                 expect(element).toMatchSnapshot();
             });
         }
@@ -55,11 +59,11 @@ test('Image with selected image item', async () => {
 
                 // remove dynamic elements from snapshot assert
                 expect(sourceElement?.getAttribute('srcset')).toBeDefined();
-                sourceElement?.removeAttribute('srcset');
+                sourceElement?.setAttribute('srcset', 'https://systemvalforsnapshot');
 
                 const imgElement = element.querySelector('img');
                 expect(imgElement?.getAttribute('src')).toBeDefined();
-                imgElement?.removeAttribute('src');
+                imgElement?.setAttribute('src', 'https://systemvalforsnapshot');
 
                 expect(element).toMatchSnapshot();
             });

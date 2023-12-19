@@ -5,9 +5,32 @@ exports[`Image rendered with original size 1`] = `
   <span>
     <img
       loading="lazy"
-      src="/images/default-source/default-album/imagee7f8cd11-dafa-41c6-95bb-7100514c09dd.jpg?sfvrsn=87c70c89_2"
+      src="https://systemvalforsnapshot"
       title="custom title"
     />
   </span>
+</div>
+`;
+
+exports[`Image with selected image item 1`] = `
+<div>
+  <picture
+    class="d-inline-block"
+  >
+    <source
+      height="160"
+      media="(max-width: 160px)"
+      srcset="https://systemvalforsnapshot"
+      type="image/jpeg"
+      width="160"
+    />
+    <img
+      alt=""
+      class="d-inline-block"
+      loading="lazy"
+      src="https://systemvalforsnapshot"
+      title="Image"
+    />
+  </picture>
 </div>
 `;
