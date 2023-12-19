@@ -79,10 +79,25 @@ export class WidgetTester {
         const metadata = RenderWidgetService.widgetRegistry.widgets[args.name];
         RenderWidgetService.parseProperties(widgetModel);
 
+        if (args.errorMessage) {
+            let thrown = false;
+            try {
+                await metadata.componentType({ model: widgetModel, requestContext, metadata });
+            } catch (error) {
+                expect((error as string).indexOf(args.errorMessage)).toBeGreaterThan(-1);
+                thrown = true;
+            }
+
+            expect(thrown).toEqual(true);
+            return;
+        }
+
         const component = await metadata.componentType({ model: widgetModel, requestContext, metadata });
 
         const { container } = render(component);
-        await args.assert(container);
+        if (args.assert) {
+            await args.assert(container);
+        }
     }
 }
 
@@ -92,7 +107,8 @@ export interface TestWidgetArgs<TEntity> {
     pageUrlName?: string;
     properties?: TEntity;
     render?: RenderType;
-    assert: AssertWidgetArgs;
+    errorMessage?: string;
+    assert?: AssertWidgetArgs;
 }
 
 

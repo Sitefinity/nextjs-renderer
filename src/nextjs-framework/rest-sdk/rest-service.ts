@@ -457,6 +457,7 @@ export class RestService {
     public static sendRequest<T>(request: RequestData): Promise<T> {
         const headers = this.buildHeaders(request);
 
+        request.method = request.method || 'GET';
         const args: RequestInit = { headers, method: request.method };
         if (request.data && headers['Content-Type'] === 'application/json') {
             args.body = JSON.stringify(request.data);
@@ -478,14 +479,12 @@ export class RestService {
                         if (contentTypeHeader.indexOf('application/json') !== -1) {
                             return x.json().then((y) => {
                                 const message = `${request.method} ${request.url} failed. Response -> ${y.error.code}: ${y.error.message}`;
-                                console.error(message);
                                 throw message;
                             });
                         }
 
                         return x.text().then((html) => {
                             const message = `${request.method} ${request.url} failed. Response -> ${x.status}: ${x.statusText} ${html}`;
-                            console.error(message);
                             throw message;
                         });
                     }

@@ -1,5 +1,5 @@
 import { waitFor } from '@testing-library/react';
-import { WidgetTester } from './framework/widget-tester';
+import { RenderType, WidgetTester } from './framework/widget-tester';
 import { RestSdkTypes, RestService, SdkItem } from '../src/nextjs-framework/rest-sdk';
 import fs from 'fs';
 import { ImageEntity } from '../src/nextjs-framework/widgets/image/image';
@@ -21,7 +21,7 @@ beforeEach(async () => {
     });
 });
 
-test('Image rendered with original size', async () => {
+test('image rendered with original size', async () => {
     await WidgetTester.testWidgetRender<ImageEntity>({
         name: 'SitefinityImage',
         properties: {
@@ -44,7 +44,7 @@ test('Image rendered with original size', async () => {
     });
 });
 
-test('Image with selected image item', async () => {
+test('image with selected image item(Image_OriginalSize_Rendered)', async () => {
     await WidgetTester.testWidgetRender({
         name: 'SitefinityImage',
         properties: {
@@ -68,5 +68,19 @@ test('Image with selected image item', async () => {
                 expect(element).toMatchSnapshot();
             });
         }
+    });
+});
+
+test('removed image throws exception (RemovedImage_Throws_Exception)', async () => {
+    await WidgetTester.testWidgetRender({
+        name: 'SitefinityImage',
+        properties: {
+            Item: {
+                Id: '30668382-47d9-4363-ab90-8c3ac70b87e9',
+                Provider: sdkItem.Provider
+            }
+        },
+        render: RenderType.Edit,
+        errorMessage: 'You are trying to access MediaContent item with id 30668382-47d9-4363-ab90-8c3ac70b87e9 that no longer exists. The most probable reason is that it has been deleted by another user'
     });
 });
