@@ -1,5 +1,5 @@
 
-import { WidgetEntity, Range, Category, LengthDependsOn, DisplayName, DataType, ContentSection, DataModel, TableView, Attributes, DefaultValue, Description, RegularExpression, ComlexType } from '@progress/sitefinity-widget-designers-sdk';
+import { WidgetEntity, Range, Category, LengthDependsOn, DisplayName, DataType, ContentSection, DataModel, TableView, Attributes, DefaultValue, Description, RegularExpression, ComplexType } from '@progress/sitefinity-widget-designers-sdk';
 import { BackgroundStyle } from '../styling/background-style';
 import { CustomCssModel } from '../styling/custom-css-model';
 import { OffsetStyle } from '../styling/offset-style';
@@ -67,7 +67,7 @@ export class SectionEntity {
     @DisplayName('Custom CSS class for...')
     @LengthDependsOn('ColumnsCount', 'Column', 'Column ', '[{"Name": "Section", "Title": "Section"}]')
     @DataModel(CustomCssModel)
-    @DataType(ComlexType.Dictionary)
+    @DataType(ComplexType.Dictionary)
     CustomCssClass: { [key: string]: CustomCssModel } | null = null;
 
     @Category('Advanced')
@@ -76,7 +76,7 @@ export class SectionEntity {
     @Description('Custom labels are displayed in the page editor for your convenience. They do not appear on the public site. You can change the generic name for this section and add column labels in the section widget.')
     @LengthDependsOn('ColumnsCount', 'Column', 'Column ', '[{"Name": "Section", "Title": "Section"}]')
     @DataModel(LabelModel)
-    @DataType(ComlexType.Dictionary)
+    @DataType(ComplexType.Dictionary)
     Labels: { [key: string]: LabelModel } | null = null;
 
     @Attributes({DisplayName: 'Column', DisplayTitle: 'Column ', PropertyName: 'ColumnsCount', ExtraRecords: '[{\"Name\": \"Section\", \"Title\": \"Section\"}]'})
