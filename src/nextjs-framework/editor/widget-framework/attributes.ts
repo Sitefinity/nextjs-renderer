@@ -63,7 +63,7 @@ export const generateAnchorAttrsFromLink = (linkModel?: LinkModel | null, classL
     return attributes;
 };
 
-export const getCustomAttributes = (attributes: { [key: string]: Array<{ Key: string, Value: string }> } | undefined, part: string): Dictionary => {
+export const getCustomAttributes = (attributes: { [key: string]: Array<{ Key: string, Value: string }> } | null, part: string): Dictionary => {
     if (!attributes || !attributes[part]){
         return {};
     }
