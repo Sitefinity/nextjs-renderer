@@ -54,16 +54,18 @@ import sitefinityParagraphJson from './form-widgets/paragraph/designer-metadata.
 import sitefinitySubmitButtonJson from './form-widgets/submit-button/designer-metadata.json';
 import sitefinityTextFieldJson from './form-widgets/textfield/designer-metadata.json';
 import { SearchFacetsEntity } from './search-facets/search-facets.entity';
+import { BreadcrumbEntity } from './breadcrumb/breadcrumb.entity';
 
 export const widgetRegistry: WidgetRegistry = initRegistry({
     widgets: {
         'SitefinityBreadcrumb': {
-            designerMetadata: sitefinityBreadcrumbJson,
+            entity: BreadcrumbEntity,
             componentType: Breadcrumb,
             editorMetadata: {
                 Title: 'Breadcrumb',
                 Category: 'Navigation & Search',
-                Section: 'Main navigation'
+                Section: 'Main navigation',
+                HasQuickEditOperation: true
             },
             ssr: true
         },

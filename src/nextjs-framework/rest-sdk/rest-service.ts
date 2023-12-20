@@ -1,3 +1,5 @@
+import { Dictionary } from '../typings/dictionary';
+import { BreadcrumbItem } from './dto/breadcrumb-item';
 import { CollectionResponse } from './dto/collection-response';
 import { GenericContentItem } from './dto/generic-content-item';
 import { SdkItem } from './dto/sdk-item';
@@ -8,6 +10,7 @@ import { CreateArgs } from './services/args/create-args';
 import { CreateWidgetArgs } from './services/args/create-widget-args';
 import { DeleteArgs } from './services/args/delete-args';
 import { GetAllArgs } from './services/args/get-all-args';
+import { GetBreadcrumbArgs } from './services/args/get-breadcrumb-args';
 import { GetLayoutArgs } from './services/args/get-layout-args';
 import { LockArgs } from './services/args/lock-page-args';
 import { PublishArgs } from './services/args/publish-args';
@@ -69,6 +72,22 @@ export class RestService {
         })}`;
 
         return this.sendRequest<T>({ url: wholeUrl });
+    }
+
+    public static getBreadcrumb(args: GetBreadcrumbArgs): Promise<BreadcrumbItem[]> {
+        let queryMap: Dictionary = {};
+        Object.keys(args).filter(x => (args as any)[x]).map((x) => {
+            if (x === 'detailItemInfo') {
+                queryMap[x] = JSON.stringify(args[x]);
+            } else {
+                queryMap[x] = (args as any)[x].toString();
+            }
+        });
+
+        const wholeUrl = `${RestService.buildItemBaseUrl(RestSdkTypes.Pages)}/Default.GetBreadcrumb()${RestService.buildQueryParams(queryMap)}`;
+        return this.sendRequest<{ value: T[], '@odata.count'?: number }>({ url: wholeUrl }).then((x) => {
+            return x.value;
+        });
     }
 
     public static getCustomItems<T extends SdkItem>(baseURL: string, action: string, queryParamsForMethod: any, contentText: string = ''): any{
