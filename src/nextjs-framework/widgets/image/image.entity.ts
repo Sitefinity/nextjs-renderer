@@ -1,4 +1,4 @@
-import { Attributes, Category, Choice,ConditionalVisibility, ContentSection, ContentSectionTitles, DataModel, DataType, DefaultValue, Description, DescriptionExtened, DisplayName, KnownFieldTypes, Margins, MediaItem, Required, SdkItemModel, ViewSelector, WidgetEntity, WidgetLabel } from '@progress/sitefinity-widget-designers';
+import { Attributes, Category, Choice,ConditionalVisibility, ContentSection, ContentSectionTitles, DataModel, DataType, DefaultValue, Description, DescriptionExtened, DisplayName, KnownFieldTypes, Margins, MediaItem, Required, SdkItemModel, ViewSelector, WidgetEntity, WidgetLabel } from '@progress/sitefinity-widget-designers-sdk';
 import { LinkModel } from '../../editor';
 import { OffsetStyle } from '../styling/offset-style';
 import { ImageClickAction, ImageClickActionChoices } from './interfaces/ImageClickAction';

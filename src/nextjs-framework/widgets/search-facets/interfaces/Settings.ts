@@ -1,6 +1,6 @@
 import { DecimalNumberRange, NumberRange } from './NumberRange';
 import { DateRange } from './DateRange';
-import { Choice,ComlexType, ConditionalVisibility, DataModel, DataType, DefaultValue, Description, DisplayName, DisplaySettings, KnownFieldTypes, Model, Placeholder, Range, StringLength, TableView } from '@progress/sitefinity-widget-designers';
+import { Choice,ComlexType, ConditionalVisibility, DataModel, DataType, DefaultValue, Description, DisplayName, DisplaySettings, KnownFieldTypes, Model, Placeholder, Range, StringLength, TableView } from '@progress/sitefinity-widget-designers-sdk';
 
 @Model()
 export class Settings {

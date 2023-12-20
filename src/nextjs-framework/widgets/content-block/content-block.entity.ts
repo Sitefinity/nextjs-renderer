@@ -1,4 +1,4 @@
-import { Attributes, Category, ContentContainer, ContentSection, DataModel, DataType, DisplayName, KnownFieldTypes, RegularExpression, TableView, WidgetEntity, WidgetLabel } from '@progress/sitefinity-widget-designers';
+import { Attributes, Category, ContentContainer, ContentSection, DataModel, DataType, DisplayName, KnownFieldTypes, RegularExpression, TableView, WidgetEntity, WidgetLabel } from '@progress/sitefinity-widget-designers-sdk';
 import { OffsetStyle } from '../styling/offset-style';
 
 @WidgetEntity('SitefinityContentBlock', 'Content block')
