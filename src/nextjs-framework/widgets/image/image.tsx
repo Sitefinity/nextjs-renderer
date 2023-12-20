@@ -53,7 +53,7 @@ export async function Image(props: WidgetContext<ImageEntity>) {
             imageViewModel.SelectedImageUrl = imageItem.Thumnail.Url;
 
             if (selectedThumbnail) {
-                imageViewModel.SelectedImageUrl = selectedThumbnail.Url;
+                imageViewModel.SelectedImageUrl = selectedThumbnail.Url as string;
                 imageViewModel.Width = selectedThumbnail.Width;
                 imageViewModel.Height = selectedThumbnail.Height;
             }
