@@ -44,16 +44,6 @@ exports[`Content block with custom attributes 1`] = `
 </div>
 `;
 
-exports[`Content block with custom margins and paddings 1`] = `
-<div>
-  <div
-    class="pb-4 ps-5 mb-4 ms-5"
-  >
-    Test content
-  </div>
-</div>
-`;
-
 exports[`Content block with custom tag name(CB_TagName_Rendered) 1`] = `
 <div>
   <h1>

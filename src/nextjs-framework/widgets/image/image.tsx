@@ -7,6 +7,7 @@ import { WidgetContext, htmlAttributes, generateAnchorAttrsFromLink, LinkModel, 
 import { RestService, RestSdkTypes, ThumbnailItem, ImageItem, SdkItem } from '../../rest-sdk';
 import { ImageViewModel } from './interfaces/ImageViewModel';
 import { Dictionary } from '../../typings/dictionary';
+import { StyleGenerator } from '../styling/style-generator.service';
 
 const imageWrapperClass = 'd-inline-block';
 
@@ -36,7 +37,7 @@ export async function Image(props: WidgetContext<ImageEntity>) {
         AlternativeText: entity.AlternativeText || imageItem.AlternativeText,
         ClickAction: entity.ClickAction || ImageClickAction.DoNothing,
         ImageSize: entity.ImageSize || ImageDisplayMode.Responsive,
-        FitToContainer: entity.FitToContainer === undefined ? true : false,
+        FitToContainer: entity.FitToContainer === undefined ? true : entity.FitToContainer,
         Attributes: entity.Attributes || {},
         Thumbnails: [],
         ActionLink: '',
@@ -71,7 +72,21 @@ export async function Image(props: WidgetContext<ImageEntity>) {
         imageViewModel.Height = entity.CustomSize.Height;
     }
 
-    let anchorClass = entity.CssClass ? imageWrapperClass : `${imageWrapperClass} ${entity.CssClass}`;
+    let anchorClass = imageWrapperClass;
+    if (entity.CssClass) {
+        anchorClass = `${imageWrapperClass} ${entity.CssClass}`;
+    }
+
+    let viewModelCssClass = entity.CssClass;
+    if (entity.Margins) {
+        let margins = StyleGenerator.getMarginClasses(entity.Margins);
+        if (viewModelCssClass) {
+            viewModelCssClass = `${viewModelCssClass} ${margins}`;
+        } else {
+            viewModelCssClass = margins;
+        }
+    }
+
     if (entity.ClickAction === ImageClickAction.OpenOriginalSize) {
         return (
           <a href={imageItem.Url} className={anchorClass}>
@@ -86,7 +101,7 @@ export async function Image(props: WidgetContext<ImageEntity>) {
           </a>
         );
     } else {
-        return renderImageTag(imageViewModel, entity.CssClass);
+        return renderImageTag(imageViewModel, viewModelCssClass);
     }
 }
 
@@ -96,7 +111,11 @@ function renderImageTag(imageModel: ImageViewModel, classAttributeValue?: string
     const imageAltAttribute = imageModel.AlternativeText || undefined;
 
     if (imageModel.ImageSize === ImageDisplayMode.Responsive) {
-        const pictureWrapperClass = `${imageWrapperClass} ${classAttributeValue}`;
+        let pictureWrapperClass = imageWrapperClass;
+        if (classAttributeValue) {
+            pictureWrapperClass = `${pictureWrapperClass} ${classAttributeValue}`;
+        }
+
         return (
           <picture className={pictureWrapperClass}>
             {
@@ -159,7 +178,7 @@ export interface ImageEntity {
     ActionLink?: LinkModel;
     ImageSize?: ImageDisplayMode;
     FitToContainer?: boolean;
-    CustomSize?: { Width: number, Height: number };
+    CustomSize?: { Width?: number, Height?: number };
     Thumnail?: ThumbnailItem;
     ViewName?: string;
     Margins?: OffsetStyle;

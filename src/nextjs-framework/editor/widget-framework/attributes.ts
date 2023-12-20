@@ -58,7 +58,7 @@ export const generateAnchorAttrsFromLink = (linkModel?: LinkModel | null, classL
     attributes.target = linkModel.target;
     attributes.href = linkModel.href;
     attributes.title = linkModel.tooltip || undefined;
-    attributes.className = linkModel.classList.join(' ') + classList ? ' ' + classList : '';
+    attributes.className = linkModel.classList?.join(' ') + classList ? ' ' + classList : '';
 
     return attributes;
 };
