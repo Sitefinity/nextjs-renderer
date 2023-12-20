@@ -45,7 +45,7 @@ test('image rendered with original size', async () => {
 });
 
 test('image with selected image item(Image_OriginalSize_Rendered)', async () => {
-    await WidgetTester.testWidgetRender({
+    await WidgetTester.testWidgetRender<ImageEntity>({
         name: 'SitefinityImage',
         properties: {
             Item: {
@@ -72,7 +72,7 @@ test('image with selected image item(Image_OriginalSize_Rendered)', async () => 
 });
 
 test('removed image throws exception (RemovedImage_Throws_Exception)', async () => {
-    await WidgetTester.testWidgetRender({
+    await WidgetTester.testWidgetRender<ImageEntity>({
         name: 'SitefinityImage',
         properties: {
             Item: {
@@ -82,5 +82,29 @@ test('removed image throws exception (RemovedImage_Throws_Exception)', async () 
         },
         render: RenderType.Edit,
         errorMessage: 'You are trying to access MediaContent item with id 30668382-47d9-4363-ab90-8c3ac70b87e9 that no longer exists. The most probable reason is that it has been deleted by another user'
+    });
+});
+
+test('image css class rendered (Image_CssClass_Rendered)', async () => {
+    await WidgetTester.testWidgetRender<ImageEntity>({
+        name: 'SitefinityImage',
+        properties: {
+            Item: {
+                Id: sdkItem.Id,
+                Provider: sdkItem.Provider
+            },
+            FitToContainer: false,
+            CssClass: 'myclass',
+            ImageSize: ImageDisplayMode.OriginalSize,
+            Title: 'custom title'
+        },
+        assert: async (element) => {
+            await waitFor(() => {
+                const imgElement = element.querySelector('img');
+                expect(imgElement?.getAttribute('src')).toBeDefined();
+                imgElement?.setAttribute('src', 'https://systemvalforsnapshot');
+                expect(element).toMatchSnapshot();
+            });
+        }
     });
 });

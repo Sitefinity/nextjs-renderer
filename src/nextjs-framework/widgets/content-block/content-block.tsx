@@ -1,13 +1,13 @@
 
 import React from 'react';
-import { WidgetContext, htmlAttributes } from '../../editor';
+import { WidgetContext, getCustomAttributes, htmlAttributes } from '../../editor';
 import { RestService } from '../../rest-sdk';
 import { OffsetStyle } from '../styling/offset-style';
 import { StyleGenerator } from '../styling/style-generator.service';
 
 export async function ContentBlock(props: WidgetContext<ContentBlockEntity>) {
 
-    const dataAttributes = htmlAttributes(props);
+    let dataAttributes = htmlAttributes(props);
 
     let content = props.model.Properties.Content;
     if (props.model.Properties && props.model.Properties.SharedContentID) {
@@ -37,11 +37,8 @@ export async function ContentBlock(props: WidgetContext<ContentBlockEntity>) {
         dataAttributes['className'] = cssClasses.join(' ');
     }
 
-    if (props.model.Properties.Attributes && props.model.Properties.Attributes.hasOwnProperty('SitefinityContentBlock')) {
-        props.model.Properties.Attributes['SitefinityContentBlock'].forEach((attribute) => {
-            dataAttributes[attribute.Key] = attribute.Value;
-        });
-    }
+    const customAttributes = getCustomAttributes(props.model.Properties.Attributes, 'SitefinityContentBlock');
+    dataAttributes = Object.assign(dataAttributes, customAttributes);
 
     return React.createElement(tagName, dataAttributes);
 }

@@ -34,3 +34,50 @@ exports[`Image with selected image item 1`] = `
   </picture>
 </div>
 `;
+
+exports[`image css class rendered (Image_CssClass_Rendered) 1`] = `
+<div>
+  <span>
+    <img
+      class="myclass"
+      loading="lazy"
+      src="https://systemvalforsnapshot"
+      title="custom title"
+    />
+  </span>
+</div>
+`;
+
+exports[`image rendered with original size 1`] = `
+<div>
+  <span>
+    <img
+      loading="lazy"
+      src="https://systemvalforsnapshot"
+      title="custom title"
+    />
+  </span>
+</div>
+`;
+
+exports[`image with selected image item(Image_OriginalSize_Rendered) 1`] = `
+<div>
+  <picture
+    class="d-inline-block undefined"
+  >
+    <source
+      height="160"
+      media="(max-width: 160px)"
+      srcset="https://systemvalforsnapshot"
+      type="image/jpeg"
+      width="160"
+    />
+    <img
+      class="img-fluid"
+      loading="lazy"
+      src="https://systemvalforsnapshot"
+      title="Image"
+    />
+  </picture>
+</div>
+`;

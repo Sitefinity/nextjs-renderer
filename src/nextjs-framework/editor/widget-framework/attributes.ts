@@ -3,11 +3,6 @@ import { Dictionary } from '../../typings/dictionary';
 import { LinkModel } from './link-model';
 import { WidgetContext } from './widget-context';
 
-export type CustomAttribute = {
-    Key: string;
-    Value: string;
-};
-
 export function htmlAttributes(widgetContext: WidgetContext<any>, error: string | undefined = undefined): { [key: string]: any } {
     if (!widgetContext.requestContext.isEdit) {
         return {};
@@ -68,13 +63,16 @@ export const generateAnchorAttrsFromLink = (linkModel?: LinkModel | null, classL
     return attributes;
 };
 
-export const getCustomAttributes = (attributes: any, part: string) => {
+export const getCustomAttributes = (attributes: { [key: string]: Array<{ Key: string, Value: string }> } | undefined, part: string): Dictionary => {
     if (!attributes || !attributes[part]){
         return {};
     }
 
-    return attributes[part].reduce(
-        (current: object, customAttribute: CustomAttribute) => {
-            return ({ ...current, [customAttribute.Key]: customAttribute.Value});
-        }, {});
+    let returnVal: Dictionary = {};
+
+    attributes[part].forEach((attribute) => {
+        returnVal[attribute.Key] = attribute.Value;
+    });
+
+    return returnVal;
 };
