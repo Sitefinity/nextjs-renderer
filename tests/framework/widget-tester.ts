@@ -77,7 +77,7 @@ export class WidgetTester {
 
         const widgetModel = layout.ComponentContext.Components[0];
         const metadata = RenderWidgetService.widgetRegistry.widgets[args.name];
-        RenderWidgetService.parseProperties(widgetModel);
+        RenderWidgetService.parseProperties(widgetModel, metadata);
 
         if (args.errorMessage) {
             let thrown = false;

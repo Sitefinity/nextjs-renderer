@@ -14,7 +14,7 @@ export class RenderWidgetService {
     public static createComponent(widgetModel: WidgetModel<any>, requestContext: RequestContext) {
         const registeredType = RenderWidgetService.widgetRegistry.widgets[widgetModel.Name];
 
-        parseProperties(widgetModel, registeredType);
+        RenderWidgetService.parseProperties(widgetModel, registeredType);
 
         const propsForWidget: WidgetContext<any> = {
             metadata: registeredType,
@@ -46,7 +46,37 @@ export class RenderWidgetService {
         }
     }
 
-    public static parseProperties(widgetModel: WidgetModel<any>) {
+    public static parseProperties(widgetModel: WidgetModel<any>, widgetMetadata: WidgetMetadata) {
+        let defaultValues: {[key: string]: any} = {};
+
+        let instance: any = null;
+        if (widgetMetadata.entity) {
+            try {
+                instance = new widgetMetadata.entity;
+            } catch {/*noop*/ }
+
+            if (instance) {
+                defaultValues = Object.assign({}, defaultValues, instance);
+            }
+        }
+
+        const propertiesMetadata: PropertyModel[] = widgetMetadata.designerMetadata?.PropertyMetadataFlat || [];
+
+        propertiesMetadata?.forEach(property => {
+            const value = property.DefaultValue;
+            if (value !== undefined && defaultValues[property.Name] === undefined) {
+                defaultValues[property.Name] = value;
+
+                if (property.Type === 'bool') {
+                    if (defaultValues[property.Name] === 'True') {
+                        defaultValues[property.Name] = true;
+                    } else if (defaultValues[property.Name] === 'False') {
+                        defaultValues[property.Name] = false;
+                    }
+                }
+            }
+        });
+
         Object.keys(widgetModel.Properties).forEach((key) => {
             try {
                 (widgetModel.Properties as any)[key] = JSON.parse((widgetModel.Properties as any)[key]);
@@ -54,39 +84,7 @@ export class RenderWidgetService {
                 // console.log('error')
             }
         });
+
+        widgetModel.Properties = Object.assign(defaultValues, widgetModel.Properties);
     }
-}
-
-function parseProperties(widgetModel: WidgetModel<any>, widgetMetadata: WidgetMetadata) {
-    let defaultValues: {[key: string]: any} = {};
-
-    let instance: any = null;
-    if (widgetMetadata.entity) {
-        try {
-            instance = new widgetMetadata.entity;
-        } catch {/*noop*/ }
-
-        if (instance) {
-            defaultValues = Object.assign({}, defaultValues, instance);
-        }
-    }
-
-    const propertiesMetadata: PropertyModel[] = widgetMetadata.designerMetadata?.PropertyMetadataFlat || [];
-
-    propertiesMetadata?.forEach(property => {
-        const value = property.DefaultValue;
-        if (value !== undefined && defaultValues[property.Name] === undefined) {
-            defaultValues[property.Name] = value;
-        }
-    });
-
-    Object.keys(widgetModel.Properties).forEach((key) => {
-        try {
-            (widgetModel.Properties as any)[key] = JSON.parse((widgetModel.Properties as any)[key]);
-        } catch {
-            // console.log('error')
-        }
-    });
-
-    widgetModel.Properties = Object.assign(defaultValues, widgetModel.Properties);
 }

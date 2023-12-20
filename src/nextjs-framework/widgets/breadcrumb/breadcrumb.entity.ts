@@ -62,7 +62,7 @@ export class BreadcrumbEntity {
     // Advanced
     @WidgetLabel()
     @Category('Advanced')
-    SfWidgetLabel: string = 'Classification';
+    SfWidgetLabel?: string = 'Classification';
 
     @Category('Advanced')
     @DisplayName('CSS class')
