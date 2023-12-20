@@ -1,4 +1,4 @@
-import { DefaultValue, Model } from '@progress/sitefinity-widget-designers';
+import { DefaultValue, Model } from '@progress/sitefinity-widget-designers-sdk';
 
 export interface SdkItem {
     Provider: string;

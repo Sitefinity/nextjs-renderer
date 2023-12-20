@@ -1,5 +1,5 @@
-import { EntityMetadataGenerator, MetadataModel } from '@progress/sitefinity-widget-designers';
-import { verifyFullDesigner } from '@progress/sitefinity-widget-designers';
+import { EntityMetadataGenerator, MetadataModel } from '@progress/sitefinity-widget-designers-sdk';
+import { verifyFullDesigner } from '@progress/sitefinity-widget-designers-sdk';
 import { ContentListEntity } from '../widgets/content-list/content-list-entity';
 
 import { SectionEntity } from '../widgets/section/section.entity';

@@ -8,6 +8,6 @@
         "react-dom": "18.2.0"
     },
     "dependencies": {
-        "@progress/sitefinity-widget-designers": "file:../../sitefinity-widget-designers/progress-sitefinity-widget-designers-0.0.6-development.tgz"
+        "@progress/sitefinity-widget-designers-sdk": "file:../../sitefinity-widget-designers/progress-sitefinity-widget-designers-sdk-0.0.7-development.tgz"
     }
 }

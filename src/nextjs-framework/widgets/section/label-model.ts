@@ -1,4 +1,4 @@
-import { DataType, DisplayName, MaxLength, Model, Placeholder } from '@progress/sitefinity-widget-designers';
+import { DataType, DisplayName, MaxLength, Model, Placeholder } from '@progress/sitefinity-widget-designers-sdk';
 
 @Model()
 export class LabelModel {

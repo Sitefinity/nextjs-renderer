@@ -1,6 +1,6 @@
 import { DecimalNumberRange, NumberRange } from './NumberRange';
 import { DateRange } from './DateRange';
-import { Choice,ComlexType, ConditionalVisibility, DataModel, DataType, DefaultValue, Description, DisplayName, DisplaySettings, KnownFieldTypes, Model, Placeholder, Range, StringLength, TableView } from '@progress/sitefinity-widget-designers';
+import { Choice,ComplexType, ConditionalVisibility, DataModel, DataType, DefaultValue, Description, DisplayName, DisplaySettings, KnownFieldTypes, Model, Placeholder, Range, StringLength, TableView } from '@progress/sitefinity-widget-designers-sdk';
 
 @Model()
 export class Settings {
@@ -17,7 +17,7 @@ export class Settings {
         '{"fieldName":"RangeType","operator":"Equals","value":1 },' +
         '{"fieldName":"FacetType","operator":"Equals","value":"DateAndTime" }]}')
     @DataModel(DateRange)
-    @DataType(ComlexType.Enumerable)
+    @DataType(ComplexType.Enumerable)
     DateRanges: DateRange[] | null = null;
 
     @DisplayName('Set a range step')
@@ -47,7 +47,7 @@ export class Settings {
         '{"fieldName":"RangeType","operator":"Equals","value":1 },' +
         '{"fieldName":"FacetType","operator":"Equals","value":"NumberWhole" }]}')
     @DataModel(NumberRange)
-    @DataType(ComlexType.Enumerable)
+    @DataType(ComplexType.Enumerable)
     NumberRanges: NumberRange[] | null = null;
 
     @TableView({ Reorderable: false, Selectable: false, MultipleSelect: false })
@@ -57,7 +57,7 @@ export class Settings {
         '{"fieldName":"RangeType","operator":"Equals","value":1 },' +
         '{"fieldName":"FacetType","operator":"Equals","value":"NumberDecimal" }]}')
     @DataModel(DecimalNumberRange)
-    @DataType(ComlexType.Enumerable)
+    @DataType(ComplexType.Enumerable)
     NumberRangesDecimal: DecimalNumberRange[] | null = null;
 
     @DisplayName('Prefix')

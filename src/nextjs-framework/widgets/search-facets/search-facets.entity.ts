@@ -1,4 +1,4 @@
-import { Category, Choice,ComlexType, ConditionalVisibility, ContentSection, ContentSectionTitles, DataModel, DataType, DefaultValue, Description, DisplayName, KeysValues, KnownFieldTypes, LengthDependsOn, Margins, Placeholder, PropertyCategory, Required, TableView, ViewSelector, WidgetEntity, WidgetLabel } from '@progress/sitefinity-widget-designers';
+import { Category, Choice, ComplexType, ConditionalVisibility, ContentSection, ContentSectionTitles, DataModel, DataType, DefaultValue, Description, DisplayName, KeysValues, KnownFieldTypes, LengthDependsOn, Margins, Placeholder, PropertyCategory, Required, TableView, ViewSelector, WidgetEntity, WidgetLabel } from '@progress/sitefinity-widget-designers-sdk';
 import { OffsetStyle } from '../styling/offset-style';
 import { FacetField } from './interfaces/FacetField';
 
@@ -21,7 +21,7 @@ export class SearchFacetsEntity {
     @DisplayName('Set facetable fields')
     @ConditionalVisibility('{"conditions":[{"fieldName":"IndexCatalogue","operator":"NotEquals","value":null }]}')
     @DataModel(FacetField)
-    @DataType(ComlexType.Enumerable)
+    @DataType(ComplexType.Enumerable)
     @DefaultValue(null)
     SelectedFacets: FacetField[] = [];
 

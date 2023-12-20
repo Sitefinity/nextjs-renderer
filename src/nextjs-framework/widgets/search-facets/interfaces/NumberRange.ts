@@ -1,4 +1,4 @@
-import { DataType, DecimalPlaces, DefaultValue, Description, DisplayName, Model, Placeholder, Required } from '@progress/sitefinity-widget-designers';
+import { DataType, DecimalPlaces, DefaultValue, Description, DisplayName, Model, Placeholder, Required } from '@progress/sitefinity-widget-designers-sdk';
 
 @Model()
 export class NumberRange {
