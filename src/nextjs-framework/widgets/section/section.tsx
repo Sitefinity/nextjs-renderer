@@ -12,7 +12,7 @@ const sectionKey = 'Section';
 
 export async function Section(props: WidgetContext<SectionEntity>) {
     props.model.Properties.ColumnsCount = props.model.Properties.ColumnsCount || 1;
-    props.model.Properties.ColumnProportionsInfo = props.model.Properties.ColumnProportionsInfo || '[12]';
+    props.model.Properties.ColumnProportionsInfo = props.model.Properties.ColumnProportionsInfo || ['12'];
     const columns = populateColumns(props);
     const section = await populateSection(props.model.Properties);
 
@@ -46,7 +46,7 @@ function populateColumns(context: WidgetContext<SectionEntity>): ColumnHolder[] 
     for (let i = 0; i < properties.ColumnsCount; i++) {
         let currentName = `${ColumnNamePrefix}${i + 1}`;
 
-        const classAttribute = `col-md-${properties.ColumnProportionsInfo[i]}`;
+        const classAttribute = `col-md-${properties.ColumnProportionsInfo![i]}`;
         const classAttributes = [classAttribute];
         let children: Array<ComponentContainer> = [];
         if (context.model.Children) {
@@ -76,7 +76,7 @@ function populateColumns(context: WidgetContext<SectionEntity>): ColumnHolder[] 
                 currentTitle = currentName;
             }
 
-            column.Attributes['data-sfplaceholderlabel'] = currentTitle;
+            column.Attributes['data-sfplaceholderlabel'] = currentTitle!;
         }
 
         if (properties.Attributes && properties.Attributes.hasOwnProperty(currentName)) {
@@ -144,7 +144,7 @@ function populateSection(properties: SectionEntity): Promise<SectionHolder> {
     }
 
     if (properties.CustomCssClass && properties.CustomCssClass.hasOwnProperty(sectionKey)) {
-        sectionClasses.push(properties.CustomCssClass[sectionKey].Class);
+        sectionClasses.push(properties.CustomCssClass[sectionKey].Class!);
     }
 
     if (!properties.SectionBackground) {
@@ -170,7 +170,7 @@ function populateSection(properties: SectionEntity): Promise<SectionHolder> {
             });
         }
     } else if (properties.SectionBackground.BackgroundType === 'Image' && properties.SectionBackground.ImageItem && properties.SectionBackground.ImageItem.Id) {
-        const imagePosition = properties.SectionBackground.Position || 'Fill';
+        const imagePosition = properties.SectionBackground.ImagePosition || 'Fill';
         sectionClasses.push(StylingConfig.ImageBackgroundClass);
         return RestService.getItemWithFallback<ImageItem>(RestSdkTypes.Image, properties.SectionBackground.ImageItem.Id, properties.SectionBackground.ImageItem.Provider).then((image) => {
             let style: { [key: string]: string } = {};

@@ -58,7 +58,7 @@ export async function DocumentList(props: WidgetContext<DocumentListEntity>) {
             viewModel.detailModel = await handleDetailView(context.detailItem, entity, context);
          } else {
             const fieldName = isGrid ? 'Document table' : 'Document list';
-            const viewCss = entity.CssClasses!.find(x => x.FieldName === fieldName);
+            const viewCss = entity.CssClasses?.find(x => x.FieldName === fieldName);
             defaultClass = viewCss ? viewCss.CssClass : '';
              viewModel.listModel = await handleListView(entity, context);
          }

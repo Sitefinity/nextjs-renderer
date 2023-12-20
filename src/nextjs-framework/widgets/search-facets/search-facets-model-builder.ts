@@ -102,12 +102,12 @@ export  class SearchFacetsModelBuilder {
 
      static  getFacetLabel(facetResponse: FacetResponseDto, facetField: FacetField): string {
         let facetLabel = '';
-        if (SearchFacetExtensions.isValueFacet(facetField.FacetFieldSettings)) {
+        if (SearchFacetExtensions.isValueFacet(facetField.FacetFieldSettings!)) {
             facetLabel = facetResponse.FacetValue;
             return facetLabel;
         }
 
-        let facetTableFieldType = facetField.FacetFieldSettings.FacetType;
+        let facetTableFieldType = facetField.FacetFieldSettings!.FacetType;
         if (facetTableFieldType === SearchIndexAdditonalFieldType.NumberDecimal
                 || facetTableFieldType === SearchIndexAdditonalFieldType.NumberWhole) {
             if (facetResponse.FacetType === SitefinityFacetType.Interval) {
@@ -125,7 +125,7 @@ export  class SearchFacetsModelBuilder {
                 const parsedDate = Date.parse(facetResponse.From);
                 if (parsedDate) {
                     const fromValue = new Date(parsedDate);
-                    let dateStep = WidgetSettingsFacetFieldMapper.getIntervalDateTime(facetField.FacetFieldSettings.DateStep);
+                    let dateStep = WidgetSettingsFacetFieldMapper.getIntervalDateTime(facetField.FacetFieldSettings!.DateStep!);
                     facetLabel = this.formatDateInterval(dateStep, fromValue) || '';
                     return facetLabel;
                 } else {
@@ -139,14 +139,14 @@ export  class SearchFacetsModelBuilder {
     }
 
      static  getRangeDateLabel(facetResponse: FacetResponseDto, facetableFieldSettings: FacetField): string {
-        let dateRanges = facetableFieldSettings.FacetFieldSettings.DateRanges;
+        let dateRanges = facetableFieldSettings.FacetFieldSettings!.DateRanges;
 
-        let dateRange = dateRanges.find(r =>
+        let dateRange = dateRanges!.find(r =>
             r.From && r.From.toISOString() === facetResponse.From &&
             r.To && r.To.toISOString() === facetResponse.To);
 
         if (dateRange != null) {
-            return dateRange.Label;
+            return dateRange.Label!;
         }
 
         return '';
@@ -172,19 +172,19 @@ export  class SearchFacetsModelBuilder {
         const from: number = this.parseRangeValue(facetResponse.From);
         const to: number = this.parseRangeValue(facetResponse.To);
 
-        let numberRanges = facetableFieldSettings.FacetFieldSettings.NumberRanges;
+        let numberRanges = facetableFieldSettings.FacetFieldSettings!.NumberRanges;
         if (numberRanges != null) {
             let numberRange = numberRanges.find(r => r.From === from && r.To === to);
             if (numberRange != null) {
-                return numberRange.Label;
+                return numberRange.Label!;
             }
         }
 
-        let decimalNumbeRanges = facetableFieldSettings.FacetFieldSettings.NumberRangesDecimal;
+        let decimalNumbeRanges = facetableFieldSettings.FacetFieldSettings!.NumberRangesDecimal;
         if (decimalNumbeRanges != null) {
             let numberRangeDecimal = decimalNumbeRanges.find(r => r.From === from && r.To === to);
             if (numberRangeDecimal != null) {
-                return numberRangeDecimal.Label;
+                return numberRangeDecimal.Label!;
             }
         }
 
@@ -193,8 +193,8 @@ export  class SearchFacetsModelBuilder {
 
     static  getIntervalNumberLabel(facetResponse: FacetResponseDto, facetableFieldSettings: FacetField): string {
         let facetLabel:string;
-        const prefix = facetableFieldSettings.FacetFieldSettings.Prefix;
-        const suffix = facetableFieldSettings.FacetFieldSettings.Suffix;
+        const prefix = facetableFieldSettings.FacetFieldSettings!.Prefix;
+        const suffix = facetableFieldSettings.FacetFieldSettings!.Suffix;
 
         facetLabel = `${prefix}${facetResponse.From}${suffix} - ${prefix}${facetResponse.To}${suffix}`;
         return facetLabel;

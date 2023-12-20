@@ -7,7 +7,8 @@ import { WidgetMetadata } from '../editor/widget-framework/widget-metadata';
 export class RendererContractImpl implements RendererContract {
 
     getWidgetMetadata(args: GetWidgetMetadataArgs): Promise<ComponentMetadata> {
-        const designerMetadata = RenderWidgetService.widgetRegistry.widgets[args.widgetName].designerMetadata;
+        const widgetRegister = RenderWidgetService.widgetRegistry.widgets[args.widgetName];
+        const designerMetadata = widgetRegister.designerMetadata;
         return Promise.resolve(designerMetadata);
     }
 

@@ -2,8 +2,8 @@
 import React from 'react';
 import { WidgetContext, getCustomAttributes, htmlAttributes } from '../../editor';
 import { RestService } from '../../rest-sdk';
-import { OffsetStyle } from '../styling/offset-style';
 import { StyleGenerator } from '../styling/style-generator.service';
+import { ContentBlockEntity } from './content-block.entity';
 
 export async function ContentBlock(props: WidgetContext<ContentBlockEntity>) {
 
@@ -41,15 +41,4 @@ export async function ContentBlock(props: WidgetContext<ContentBlockEntity>) {
     dataAttributes = Object.assign(dataAttributes, customAttributes);
 
     return React.createElement(tagName, dataAttributes);
-}
-
-export class ContentBlockEntity {
-    Content?: string;
-    TagName?: string;
-    ProviderName?: string;
-    SharedContentID?: string;
-    WrapperCssClass?: string;
-    Margins?: OffsetStyle;
-    Paddings?: OffsetStyle;
-    Attributes?: { [key: string]: Array<{ Key: string, Value: string }> };
 }

@@ -1,10 +1,6 @@
 
 import { Metadata } from 'next';
-
-import { RenderPage, initRendering } from '@progress/sitefinity-react-framework';
-import { pageMetadata } from '@progress/sitefinity-react-framework';
-import { widgetRegistry } from '../../nextjs-framework/widgets';
-import { WidgetExecutionError } from '../../nextjs-framework/widgets/error/widget-execution-error-component';
+import { widgetRegistry, RenderPage, WidgetExecutionError, initRendering, pageMetadata } from '@progress/sitefinity-react-framework';
 
 export async function generateMetadata({ params, searchParams }: any): Promise<Metadata> {
     initRendering(widgetRegistry, WidgetExecutionError);

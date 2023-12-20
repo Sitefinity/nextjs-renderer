@@ -1,14 +1,13 @@
 
 import { RestService } from '../../rest-sdk';
-import { ClassificationEntity, TaxaPageViewModel } from './classification';
+import { TaxaPageViewModel } from './classification';
+import { ClassificationEntity } from './classification-entity';
 
 export class ClassificationRestService {
 
     static getTaxons(entity: ClassificationEntity): {value: TaxaPageViewModel[]} {
         const settings = entity.ClassificationSettings;
-        if (settings &&  settings.selectedTaxonomyId) {
-            const showEmpty = entity.ShowEmpty || false;
-            const showCount = entity.ShowItemCount || true;
+        if (settings && settings.selectedTaxonomyId) {
             let orderBy = entity.OrderBy || 'Title ASC';
 
             if (orderBy === 'Custom') {
@@ -18,14 +17,14 @@ export class ClassificationRestService {
             }
 
             const additionalParams = {
-                'showEmpty': showEmpty,
+                'showEmpty': entity.ShowEmpty,
                 '$orderby': orderBy,
                 '@param': `[${(settings.selectedTaxaIds || []).map(x => `'${x}'`).toString()}]`
             };
             const taxonomyUrl = settings.selectedTaxonomyUrl;
             const contentText = `taxonomyId=${settings.selectedTaxonomyId},selectedTaxaIds=@param,selectionMode='${settings.selectionMode}',contentType='${settings.byContentType}'`;
             const action = 'Default.GetTaxons';
-            return RestService.getCustomItems(taxonomyUrl, action, additionalParams, contentText);
+            return RestService.getCustomItems(taxonomyUrl!, action, additionalParams, contentText);
 
         }
         return { value: [] };
