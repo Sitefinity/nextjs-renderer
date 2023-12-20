@@ -1,6 +1,6 @@
 import { SdkItem } from '../../rest-sdk';
 import { ImagePosition } from './image-position';
-import { Choice,ColorPalette, ConditionalVisibility, DataModel, DataType, DisplayName, KnownFieldTypes, MediaItem, Model, SdkItemModel } from '@progress/sitefinity-widget-designers';
+import { Choice,ColorPalette, ConditionalVisibility, DataModel, DataType, DisplayName, KnownFieldTypes, MediaItem, Model, SdkItemModel } from '@progress/sitefinity-widget-designers-sdk';
 import { StylingConfig } from './styling-config';
 
 @Model()

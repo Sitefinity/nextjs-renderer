@@ -1,5 +1,5 @@
 
-import { WidgetEntity, Range, Category, LengthDependsOn, DisplayName, DataType, ContentSection, DataModel, TableView, Attributes, DefaultValue, Description, RegularExpression, ComlexType } from '@progress/sitefinity-widget-designers';
+import { WidgetEntity, Range, Category, LengthDependsOn, DisplayName, DataType, ContentSection, DataModel, TableView, Attributes, DefaultValue, Description, RegularExpression, ComlexType } from '@progress/sitefinity-widget-designers-sdk';
 import { BackgroundStyle } from '../styling/background-style';
 import { CustomCssModel } from '../styling/custom-css-model';
 import { OffsetStyle } from '../styling/offset-style';
