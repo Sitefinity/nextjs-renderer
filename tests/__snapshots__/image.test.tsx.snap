@@ -176,6 +176,66 @@ exports[`image with selected image item(Image_OriginalSize_Rendered) 1`] = `
 </div>
 `;
 
+exports[`render image in edit mode with original size 1`] = `
+<div>
+  <span
+    data-sfemptyicon="picture-o"
+    data-sfemptyiconaction="Edit"
+    data-sfemptyicontext="Select image"
+    data-sfhasquickeditoperation="true"
+    data-sfid="static"
+    data-sfiscontentwidget="true"
+    data-sfisempty="false"
+    data-sfisemptyvisualhidden="false"
+    data-sfisorphaned="false"
+    data-sfname="SitefinityImage"
+    data-sftitle="Image"
+    draggable="true"
+  >
+    <img
+      alt="ImageAlternativeText"
+      loading="lazy"
+      src="https://systemvalforsnapshot"
+      title="Image"
+    />
+  </span>
+</div>
+`;
+
+exports[`render image in edit mode with responsive setting 1`] = `
+<div>
+  <picture
+    class="d-inline-block"
+    data-sfemptyicon="picture-o"
+    data-sfemptyiconaction="Edit"
+    data-sfemptyicontext="Select image"
+    data-sfhasquickeditoperation="true"
+    data-sfid="static"
+    data-sfiscontentwidget="true"
+    data-sfisempty="false"
+    data-sfisemptyvisualhidden="false"
+    data-sfisorphaned="false"
+    data-sfname="SitefinityImage"
+    data-sftitle="Image"
+    draggable="true"
+  >
+    <source
+      height="160"
+      media="(max-width: 160px)"
+      srcset="https://systemvalforsnapshot"
+      type="image/jpeg"
+      width="160"
+    />
+    <img
+      alt="ImageAlternativeText"
+      loading="lazy"
+      src="https://systemvalforsnapshot"
+      title="Image"
+    />
+  </picture>
+</div>
+`;
+
 exports[`responsive image (Image_Responsive_Rendered) 1`] = `
 <div>
   <picture

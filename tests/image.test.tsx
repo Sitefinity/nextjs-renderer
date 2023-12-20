@@ -405,3 +405,62 @@ test('image as link should set margins to anchor (ImageAsLinkShouldSetMarginsToA
         }
     });
 });
+
+test('render image in edit mode with responsive setting', async () => {
+    await WidgetTester.testWidgetRender<ImageEntity>({
+        name: 'SitefinityImage',
+        properties: {
+            Item: {
+                Id: sdkItem.Id,
+                Provider: sdkItem.Provider
+            },
+            FitToContainer: false,
+            ImageSize: ImageDisplayMode.Responsive
+        },
+        render: RenderType.Edit,
+        assert: async (element) => {
+            await waitFor(() => {
+
+                const actualElement = element.querySelector('[data-sfid]');
+                actualElement?.setAttribute('data-sfid', 'static');
+
+                const sourceElement = element.querySelector('source');
+                expect(sourceElement?.getAttribute('srcset')).toBeDefined();
+                sourceElement?.setAttribute('srcset', 'https://systemvalforsnapshot');
+
+                const imgElement = element.querySelector('img');
+                expect(imgElement?.getAttribute('src')).toBeDefined();
+                imgElement?.setAttribute('src', 'https://systemvalforsnapshot');
+
+                expect(element).toMatchSnapshot();
+            });
+        }
+    });
+});
+
+test('render image in edit mode with original size', async () => {
+    await WidgetTester.testWidgetRender<ImageEntity>({
+        name: 'SitefinityImage',
+        properties: {
+            Item: {
+                Id: sdkItem.Id,
+                Provider: sdkItem.Provider
+            },
+            FitToContainer: false,
+            ImageSize: ImageDisplayMode.OriginalSize
+        },
+        render: RenderType.Edit,
+        assert: async (element) => {
+            await waitFor(() => {
+                const actualElement = element.querySelector('[data-sfid]');
+                actualElement?.setAttribute('data-sfid', 'static');
+
+                const imgElement = element.querySelector('img');
+                expect(imgElement?.getAttribute('src')).toBeDefined();
+                imgElement?.setAttribute('src', 'https://systemvalforsnapshot');
+
+                expect(element).toMatchSnapshot();
+            });
+        }
+    });
+});

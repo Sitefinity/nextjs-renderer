@@ -2,7 +2,7 @@
 import { waitFor } from '@testing-library/react';
 import { RenderType, WidgetTester } from './framework/widget-tester';
 import { RestSdkTypes, RestService } from '../src/nextjs-framework/rest-sdk';
-import { ContentBlockEntity } from '../src/nextjs-framework/widgets';
+import { ContentBlockEntity } from '../src/nextjs-framework/widgets/content-block/content-block.entity';
 
 test('Content block render Content property', async () => {
     await WidgetTester.testWidgetRender<ContentBlockEntity>({

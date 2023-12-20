@@ -90,22 +90,22 @@ export async function Image(props: WidgetContext<ImageEntity>) {
     if (entity.ClickAction === ImageClickAction.OpenOriginalSize) {
         return (
           <a href={imageItem.Url} className={anchorClass}>
-            {renderImageTag(imageViewModel)}
+            {renderImageTag(imageViewModel, dataAttributes)}
           </a>
         );
     } else if (entity.ClickAction === ImageClickAction.OpenLink && !!entity.ActionLink?.href) {
         const anchorAttributes = generateAnchorAttrsFromLink(entity.ActionLink, anchorClass);
         return (
           <a {...anchorAttributes}>
-            {renderImageTag(imageViewModel)}
+            {renderImageTag(imageViewModel, dataAttributes)}
           </a>
         );
     } else {
-        return renderImageTag(imageViewModel, viewModelCssClass);
+        return renderImageTag(imageViewModel, dataAttributes, viewModelCssClass);
     }
 }
 
-function renderImageTag(imageModel: ImageViewModel, classAttributeValue?: string) {
+function renderImageTag(imageModel: ImageViewModel, dataAttributes: Dictionary, classAttributeValue?: string) {
     let imageClassName: string | undefined = imageModel.FitToContainer ? 'img-fluid' : undefined;
     let imageCustomAttributes = getCustomAttributes(imageModel.Attributes, 'Image');
     const imageAltAttribute = imageModel.AlternativeText || undefined;
@@ -117,7 +117,7 @@ function renderImageTag(imageModel: ImageViewModel, classAttributeValue?: string
         }
 
         return (
-          <picture className={pictureWrapperClass}>
+          <picture className={pictureWrapperClass} {...dataAttributes}>
             {
                     imageModel.Thumbnails.map((thumbnail, idx) => {
                         const sourceWidth = imageModel.Width && thumbnail.Width !== imageModel.Width ? thumbnail.Width : undefined;
@@ -155,7 +155,7 @@ function renderImageTag(imageModel: ImageViewModel, classAttributeValue?: string
     }
 
     return (
-      <span>
+      <span {...dataAttributes}>
         {renderImage(imageCustomAttributes, imageClassName, imageModel.SelectedImageUrl, imageModel.Title, imageAltAttribute)}
       </span>
     );
