@@ -54,9 +54,18 @@ export const generateAnchorAttrsFromLink = (linkModel?: LinkModel | null, classL
         return null;
     }
 
+    let href = linkModel.href;
+    if (linkModel.queryParams) {
+        href += `?${linkModel.queryParams}`;
+    }
+
+    if (linkModel.anchor) {
+        href += `#${linkModel.anchor}`;
+    }
+
     const attributes = {} as React.AnchorHTMLAttributes<HTMLAnchorElement>;
     attributes.target = linkModel.target;
-    attributes.href = linkModel.href;
+    attributes.href = href;
     attributes.title = linkModel.tooltip || undefined;
     attributes.className = linkModel.classList?.join(' ') + classList ? ' ' + classList : '';
 

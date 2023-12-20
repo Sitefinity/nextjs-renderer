@@ -1,0 +1,130 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`both buttons rendered (Button_Both_Rendered) 1`] = `
+<div>
+  <div
+    class="d-flex align-items-center justify-content-start"
+  >
+    <a
+      class="me-3 btn btn-primary"
+      data-call-to-action=""
+      href="kisela-krastavichka.jpg"
+    >
+      Primary Label
+    </a>
+    <a
+      class="btn btn-secondary"
+      data-call-to-action=""
+      href="kisela-krastavichka-2.jpg"
+    >
+      Secondary Label
+    </a>
+  </div>
+</div>
+`;
+
+exports[`button attributes rendered (Button_Attributes_Rendered) 1`] = `
+<div>
+  <div
+    class="d-flex align-items-center justify-content-start"
+    wrapper-attribute-key="rapper-attribute-value"
+  >
+    <a
+      class="me-3 btn btn-primary"
+      data-call-to-action=""
+      href="kisela-krastavichka.jpg"
+      primary-attribute-key="primary-attribute-value"
+    >
+      Primary Label
+    </a>
+    <a
+      class="btn btn-secondary"
+      data-call-to-action=""
+      href="kisela-krastavichka-2.jpg"
+      secondary-attribute-key="secondary-attribute-value"
+    >
+      Secondary Label
+    </a>
+  </div>
+</div>
+`;
+
+exports[`button margins rendered (Button_Margins_Rendered) 1`] = `
+<div>
+  <div
+    class="d-flex align-items-center justify-content-start mb-4 ms-5"
+  >
+    <a
+      class="me-3 btn btn-primary"
+      data-call-to-action=""
+      href="kisela-krastavichka.jpg"
+    >
+      Primary Label
+    </a>
+  </div>
+</div>
+`;
+
+exports[`button styling (Button_Styling_Rendered) 1`] = `
+<div>
+  <div
+    class="d-flex align-items-center justify-content-center"
+  >
+    <a
+      class="me-3 btn btn-secondary"
+      data-call-to-action=""
+      href="kisela-krastavichka.jpg"
+    >
+      Primary Label
+    </a>
+  </div>
+</div>
+`;
+
+exports[`primary button rendered (Button_PrimaryOnly_Rendered) 1`] = `
+<div>
+  <div
+    class="d-flex align-items-center justify-content-start"
+  >
+    <a
+      class="me-3 btn btn-primary"
+      data-call-to-action=""
+      href="kisela-krastavichka.jpg?a=b#c"
+    >
+      Primary Label
+    </a>
+  </div>
+</div>
+`;
+
+exports[`primary class overriden (Button_PrimaryClass_Overriden) 1`] = `
+<div>
+  <div
+    class="d-flex align-items-center justify-content-start"
+  >
+    <a
+      class="me-3 btn asd"
+      data-call-to-action=""
+      href="kisela-krastavichka.jpg"
+    >
+      Primary Label
+    </a>
+  </div>
+</div>
+`;
+
+exports[`secondary button rendered (Button_SecondaryOnly_Rendered) 1`] = `
+<div>
+  <div
+    class="d-flex align-items-center justify-content-start"
+  >
+    <a
+      class="btn btn-secondary"
+      data-call-to-action=""
+      href="kisela-krastavichka.jpg"
+    >
+      Secondary Label
+    </a>
+  </div>
+</div>
+`;

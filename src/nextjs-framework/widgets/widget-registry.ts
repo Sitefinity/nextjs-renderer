@@ -155,7 +155,9 @@ export const widgetRegistry: WidgetRegistry = initRegistry({
             componentType: CallToAction,
             editorMetadata: {
                 Title: 'Call to action',
-                Section: 'Basic'
+                Section: 'Basic',
+                EmptyIconText: 'Create call to action',
+                HasQuickEditOperation: true
             },
             ssr: true
         },
