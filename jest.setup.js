@@ -46,10 +46,14 @@ global.beforeAll(async () => {
 global.afterEach(async () => {
     for (let i = 0; i < createdItems.length; i++) {
         const createdItem = createdItems[i];
-        await restServiceModule.RestService.deleteItem({
-            Id: createdItem.id,
-            Type: createdItem.type
-        });
+        try {
+            await restServiceModule.RestService.deleteItem({
+                Id: createdItem.id,
+                Type: createdItem.type
+            });
+        } catch (error) {
+            continue;
+        }
     }
 
     createdItems = [];
