@@ -1,6 +1,6 @@
 export enum FieldSize {
-    None='NONE',
-    Small='S',
-    Medium='M',
-    Large='L',
+    None='WidthNONE',
+    Small='WidthS',
+    Medium='WidthM',
+    Large='WidthL',
 }
