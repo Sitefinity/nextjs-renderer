@@ -85,7 +85,7 @@ export class RestService {
         });
 
         const wholeUrl = `${RestService.buildItemBaseUrl(RestSdkTypes.Pages)}/Default.GetBreadcrumb()${RestService.buildQueryParams(queryMap)}`;
-        return this.sendRequest<{ value: T[], '@odata.count'?: number }>({ url: wholeUrl }).then((x) => {
+        return this.sendRequest<{ value: BreadcrumbItem[], '@odata.count'?: number }>({ url: wholeUrl }).then((x) => {
             return x.value;
         });
     }

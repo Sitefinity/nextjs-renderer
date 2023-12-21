@@ -25,7 +25,7 @@ export async function Form(props: WidgetContext<FormEntity>) {
         VisibilityClasses: StylingConfig.VisibilityClasses,
         InvalidClass: StylingConfig.InvalidClass
     };
-    const restService = props.restService || FormRestService;
+    const restService = FormRestService as any;
     let formDto;
     let formModel;
     const queryParams = {...searchParams};
