@@ -1,4 +1,3 @@
-
 'use client';
 
 import { RendererContractImpl } from '../services/renderer-contract';
@@ -23,7 +22,7 @@ export function RenderPageClient({ layout, metadata, context }: { layout: PageLa
             // thus we check every 100ms for dom changes. A proper check would be to see if every single
             // component is rendered
             const timePassed = new Date().getTime() - start;
-            if ((layout.ComponentContext.Components.length > 0 && document.body.childElementCount > 0) || layout.ComponentContext.Components.length === 0 || timePassed > timeout) {
+            if ((layout.ComponentContext.Components.length > 0 && timePassed > timeout) || layout.ComponentContext.Components.length === 0) {
                 window.clearInterval(handle);
 
                 (window as any)['rendererContract'] = new RendererContractImpl();

@@ -10,30 +10,16 @@ import { DetailItem, WidgetContext, htmlAttributes } from '../../editor';
 export async function ContentList(props: WidgetContext<ContentListEntity>) {
     const attributes = htmlAttributes(props);
     const properties = props.model.Properties;
-
+    const context = props.requestContext;
     let data: any = {
         detailModel: null,
         listModel: null,
         attributes
     };
 
-    properties.DetailPageMode = properties.DetailPageMode || 'SamePage';
-    properties.ContentViewDisplayMode = properties.ContentViewDisplayMode || 'Automatic';
-    properties.Attributes = properties.Attributes || {};
-    properties.CssClasses = properties.CssClasses || [];
-    properties.ListFieldMapping = properties.ListFieldMapping || [];
-    properties.OrderBy = properties.OrderBy || 'PublicationDate DESC';
-    properties.ListSettings = properties.ListSettings || {};
-    properties.ListSettings.DisplayMode = properties.ListSettings.DisplayMode || 'All';
-    properties.ListSettings.ItemsPerPage = properties.ListSettings.ItemsPerPage || 20;
-    properties.ListSettings.LimitItemsCount = properties.ListSettings.LimitItemsCount || 20;
-    properties.SelectExpression = properties.SelectExpression || '*';
-    properties.SelectionGroupLogicalOperator = properties.SelectionGroupLogicalOperator || 'AND';
-    properties.SfViewName = properties.SfViewName || 'CardsList';
-
     if (properties.ContentViewDisplayMode === 'Automatic') {
-        if (props.requestContext.detailItem) {
-            data.detailModel = await handleDetailView(props.requestContext.detailItem, props);
+        if (context.detailItem) {
+            data.detailModel = await handleDetailView(context.detailItem, props);
         } else {
             data.listModel = await handleListView(props);
         }
@@ -54,16 +40,16 @@ export async function ContentList(props: WidgetContext<ContentListEntity>) {
 
     return (
       <div {...data.attributes as any}>
-        {data.detailModel && <ContentListDetail entity={properties} detailModel={data.detailModel} />}
+        {data.detailModel && <ContentListDetail entity={properties} detailModel={data.detailModel} context={context} />}
         {data.listModel && <ContentListMaster  entity={properties} model={data.listModel} />}
       </div>
     );
 }
 
 function getAttributesWithClasses(props: WidgetContext<ContentListEntity>, fieldName: string, additionalClasses: string | null): Array<{ Key: string, Value: string}> {
-    const viewCss = props.model.Properties.CssClasses.find(x => x.FieldName === fieldName);
+    const viewCss = props.model.Properties.CssClasses?.find(x => x.FieldName === fieldName);
 
-    const contentListAttributes = props.model.Properties.Attributes['ContentList'] || [];
+    const contentListAttributes = props.model.Properties.Attributes?.ContentList || [];
     let classAttribute = contentListAttributes.find(x => x.Key === 'class');
     if (!classAttribute) {
         classAttribute = {
@@ -99,12 +85,12 @@ function handleDetailView(detailItem: DetailItem, props: WidgetContext<ContentLi
 
 function handleListView(props: WidgetContext<ContentListEntity>) {
     const listFieldMapping: {[key: string]: string} = {};
-    props.model.Properties.ListFieldMapping.forEach((entry) => {
-        listFieldMapping[entry.FriendlyName] = entry.Name;
+    props.model.Properties.ListFieldMapping?.forEach((entry) => {
+        listFieldMapping[entry.FriendlyName!] = entry.Name!;
     });
 
     const fieldCssClassMap: {[key: string]: string} = {};
-    props.model.Properties.CssClasses.forEach((entry) => {
+    props.model.Properties.CssClasses?.forEach((entry) => {
         fieldCssClassMap[entry.FieldName] = entry.CssClass;
     });
 

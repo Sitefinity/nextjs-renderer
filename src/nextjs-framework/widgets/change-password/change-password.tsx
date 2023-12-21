@@ -10,14 +10,7 @@ import { User } from './interfaces/User';
 import { RestSdkTypes, RestService, RootUrlService } from '../../rest-sdk';
 import { WidgetContext, htmlAttributes, classNames, getUniqueId, MixedContentContext } from '../../editor';
 import { RestExtensionsService } from '../rest-extensions';
-
-const defaultMixedContent = {
-    ItemIdsOrdered:null,
-    Content:[ {
-        Type:RestSdkTypes.Pages,
-        Variations:null
-    }]
-};
+import { defaultMixedContent } from '../common/defaults';
 
 export async function ChangePassword(props: WidgetContext<ChangePasswordEntity>) {
     const entity = {
@@ -72,11 +65,9 @@ export async function ChangePassword(props: WidgetContext<ChangePasswordEntity>)
     }
     const argsLocal = {
         BaseURL: baseURL,
-        Name: 'users/current',
-        AdditionalHeaders: {
-            cookie : context.cookie || ''
-        }
+        Name: 'users/current'
     };
+
     const response: { value: User } = await RestService.getUnboundType(argsLocal);
     const user: User = response.value;
 
@@ -124,7 +115,7 @@ export async function ChangePassword(props: WidgetContext<ChangePasswordEntity>)
 }
 
 export class ChangePasswordEntity {
-    Attributes?: any[];
+    Attributes?: { [key: string]: Array<{ Key: string, Value: string}> };
     CssClass?: string;
     Margins?: OffsetStyle;
     PostPasswordChangeAction?: PostPasswordChangeAction;

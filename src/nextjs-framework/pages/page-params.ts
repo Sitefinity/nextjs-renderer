@@ -3,5 +3,4 @@ export interface PageParams {
         slug: string[]
     },
     searchParams: { [key: string]: string },
-    cookie: string;
 }

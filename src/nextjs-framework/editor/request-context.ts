@@ -1,12 +1,12 @@
+import { PageLayoutServiceResponse, SdkItem } from '../rest-sdk';
 import { DetailItem } from './detail-item';
 
 export interface RequestContext {
-    pageNode?: any;
-    searchParams?: { [key: string]: string; };
-    detailItem: DetailItem | null;
+    layout: PageLayoutServiceResponse;
+    searchParams: { [key: string]: string; };
+    detailItem?: DetailItem;
     culture: string;
     isEdit: boolean;
     isPreview: boolean;
     isLive: boolean;
-    cookie?: string;
 }

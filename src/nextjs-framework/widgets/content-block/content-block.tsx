@@ -2,6 +2,7 @@
 import React from 'react';
 import { WidgetContext, htmlAttributes } from '../../editor';
 import { RestService } from '../../rest-sdk';
+import { ContentBlockEntity } from './content-block.entity';
 
 export async function ContentBlock(props: WidgetContext<ContentBlockEntity>) {
     const dataAttributes = htmlAttributes(props);
@@ -18,12 +19,4 @@ export async function ContentBlock(props: WidgetContext<ContentBlockEntity>) {
     return (
       <div {...dataAttributes as any} dangerouslySetInnerHTML={{ __html: content || '' }} />
     );
-}
-
-export class ContentBlockEntity {
-    Content!: string;
-    ExcludeFromSearchIndex!: boolean;
-    ProviderName!: string;
-    SharedContentID!: string;
-    WrapperCssClass!: string;
 }

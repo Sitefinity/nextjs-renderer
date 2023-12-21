@@ -1,7 +1,21 @@
+import { Choice,DataType, KnownFieldTypes, Model, Offset_Choices } from '@progress/sitefinity-widget-designers-sdk';
 import { OffsetSize } from './offset-size';
-import { VerticalOffsetStyle } from './vertical-offset-style';
 
-export interface OffsetStyle extends VerticalOffsetStyle {
-    Left: OffsetSize,
-    Right: OffsetSize,
+@Model()
+export class OffsetStyle {
+    @DataType(KnownFieldTypes.ChipChoice)
+    @Choice(Offset_Choices)
+    Top: OffsetSize = 'None';
+
+    @DataType(KnownFieldTypes.ChipChoice)
+    @Choice(Offset_Choices)
+    Bottom: OffsetSize = 'None';
+
+    @DataType(KnownFieldTypes.ChipChoice)
+    @Choice(Offset_Choices)
+    Left: OffsetSize = 'None';
+
+    @DataType(KnownFieldTypes.ChipChoice)
+    @Choice(Offset_Choices)
+    Right: OffsetSize = 'None';
 }

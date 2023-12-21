@@ -35,7 +35,7 @@ export async function SearchBox(props: WidgetContext<SearchBoxEntity>) {
     dataAttributes['data-sfemptyicontext'] = 'Set where to search';
     dataAttributes['data-sfhasquickeditoperation'] = true;
 
-    const currentSite = requestContext.pageNode.Site;
+    const currentSite = requestContext.layout.Site;
     const searchModel: any = {};
 
    searchModel.Attributes = entity.Attributes;
@@ -72,7 +72,7 @@ export async function SearchBox(props: WidgetContext<SearchBoxEntity>) {
 }
 
 export class SearchBoxEntity {
-    Attributes?: any[];
+    Attributes?: { [key: string]: Array<{ Key: string, Value: string}> };
     CssClass?: string;
     Margins?: OffsetStyle;
     SearchIndex?: string;

@@ -46,10 +46,10 @@ The Next.js Renderer uses the 'app router' by default. Since all of the pages ar
 ## Environment variables legend
 
 ### Development (.env.development)
-* **'NEXT_CMS_URL'** -> The URL of the CMS for server-side requests.
+* **'SF_CMS_URL'** -> The URL of the CMS for server-side requests.
 
 ### Production (.env.production)
-* **'NEXT_CMS_URL'** -> The URL of the CMS for server-side requests.
+* **'SF_CMS_URL'** -> The URL of the CMS for server-side requests.
 
 ## Static file generation & Deployment
 In order to use static generation, uncomment the generateStaticParams method in [the slug file](/src/app/[...slug]/page.tsx). Then run the command

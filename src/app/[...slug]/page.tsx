@@ -1,18 +1,13 @@
 
 import { Metadata } from 'next';
-import { cookies } from 'next/headers';
-
-import { RenderPage, initRendering } from '@progress/sitefinity-react-framework';
-import { pageMetadata } from '@progress/sitefinity-react-framework';
-import { widgetRegistry } from '@progress/sitefinity-react-framework';
-import { WidgetExecutionError } from '@progress/sitefinity-react-framework';
+import { widgetRegistry, RenderPage, WidgetExecutionError, initRendering, pageMetadata } from '@progress/sitefinity-react-framework';
 
 export async function generateMetadata({ params, searchParams }: any): Promise<Metadata> {
     initRendering(widgetRegistry, WidgetExecutionError);
-    return await pageMetadata({ params, searchParams, cookie: cookies().toString() });
+    return await pageMetadata({ params, searchParams });
 }
 
 export default async function Page({ params, searchParams }: any) {
     initRendering(widgetRegistry, WidgetExecutionError);
-    return RenderPage({ params, searchParams, cookie: cookies().toString() });
+    return RenderPage({ params, searchParams });
 }

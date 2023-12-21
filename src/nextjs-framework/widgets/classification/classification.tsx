@@ -1,15 +1,22 @@
 import React from 'react';
 import { StyleGenerator } from '../styling/style-generator.service';
-import { OffsetStyle } from '../styling/offset-style';
 import { ClassificationRestService } from './classification.service';
 import { PageViewModel } from '../navigation/interfaces/PageViewModel';
 import { WidgetContext, classNames, getCustomAttributes, htmlAttributes } from '../../editor';
+import { ClassificationEntity } from './classification-entity';
 
-const mapTaxonProperties = (taxon: any, taxonomyName: string, viewUrl?: string, searchParams?: any) =>{
-    const children: any[] = [];
+export interface TaxaPageViewModel extends PageViewModel {
+    AppliedTo: string;
+    UrlName: string;
+    SubTaxa: TaxaPageViewModel[];
 
-    taxon.SubTaxa.forEach((child: any) =>{
-        child.SubTaxa = mapTaxonProperties(child, taxonomyName);
+}
+
+const mapTaxonProperties = (taxon: TaxaPageViewModel, taxonomyName: string, viewUrl?: string, searchParams?: { [key: string]: string; }) =>{
+    const children: TaxaPageViewModel[] = [];
+
+    taxon.SubTaxa.forEach((child: TaxaPageViewModel) =>{
+        child.SubTaxa = mapTaxonProperties(child as TaxaPageViewModel, taxonomyName);
         child.UrlName = getTaxaUrl(taxonomyName, child.UrlName, viewUrl, searchParams);
         children.push(child);
     });
@@ -17,7 +24,7 @@ const mapTaxonProperties = (taxon: any, taxonomyName: string, viewUrl?: string, 
     return children;
 };
 
-const getTaxaUrl = (taxonomyName: string, taxonUrl: string, viewUrl?: string, searchParams?: any) => {
+const getTaxaUrl = (taxonomyName: string, taxonUrl: string, viewUrl?: string, searchParams?: { [key: string]: string; }) => {
     if (viewUrl === null) {
         return '#';
     }
@@ -26,7 +33,7 @@ const getTaxaUrl = (taxonomyName: string, taxonUrl: string, viewUrl?: string, se
 
     if (searchParams && Object.keys(searchParams).length) {
         const whitelistedQueryParams = ['sf_site','sfaction','sf_provider','sf_culture'];
-        const filteredQueryCollection: any = {};
+        const filteredQueryCollection: { [key: string]: string; } = {};
         whitelistedQueryParams.forEach(param => {
             const searchParamValue = searchParams[param];
             if (searchParamValue) {
@@ -48,17 +55,16 @@ export async function Classification(props: WidgetContext<ClassificationEntity>)
     const model = props.model;
     const properties = model.Properties;
     const settings = properties.ClassificationSettings;
-    const pageNode = props.requestContext.pageNode;
     const dataAttributes = htmlAttributes(props);
-    const tokens = await ClassificationRestService.getTaxons(model.Properties, model);
-    const viewUrl = pageNode ? pageNode.Fields.ViewUrl : '';
+    const tokens = await ClassificationRestService.getTaxons(model.Properties);
+    const viewUrl = props.requestContext.layout.Fields['ViewUrl'] || '';
     const searchParams = props.requestContext.searchParams;
 
     const updatedTokens = tokens.value.map (taxon => {
         return {
             ...taxon,
-            SubTaxa: mapTaxonProperties(taxon, settings!.selectedTaxonomyName, viewUrl, searchParams),
-            UrlName: getTaxaUrl(settings!.selectedTaxonomyName, taxon.UrlName, viewUrl, searchParams)
+            SubTaxa: mapTaxonProperties(taxon as TaxaPageViewModel, settings!.selectedTaxonomyName!, viewUrl, searchParams),
+            UrlName: getTaxaUrl(settings!.selectedTaxonomyName!, taxon.UrlName, viewUrl, searchParams)
         };
     });
 
@@ -74,11 +80,11 @@ export async function Classification(props: WidgetContext<ClassificationEntity>)
     dataAttributes['data-sfhasquickeditoperation'] = true;
     dataAttributes['data-sf-role'] = 'classification';
 
-    const renderSubTaxa = (taxa: PageViewModel[], show: boolean) => {
+    const renderSubTaxa = (taxa: TaxaPageViewModel[], show: boolean) => {
 
         return (<ul>
           {
-            taxa.map((t: any, idx: number) =>{
+            taxa.map((t: TaxaPageViewModel, idx: number) =>{
                const count = show ? `(${t.AppliedTo})` : '';
                return (<li key={idx} className="list-unstyled">
                  <a className="text-decoration-none" href={t.UrlName}>{t.Title}</a>
@@ -98,7 +104,7 @@ export async function Classification(props: WidgetContext<ClassificationEntity>)
         {...classificationCustomAttributes}
             >
         {
-            updatedTokens.map((item: any, idx: number) => {
+            updatedTokens.map((item: TaxaPageViewModel, idx: number) => {
                     const count = showItemCount ? `(${item.AppliedTo})` : '';
                     return (<li key={idx} className="list-unstyled">
                       <a className="text-decoration-none" href={item.UrlName}>{item.Title}</a>
@@ -112,26 +118,4 @@ export async function Classification(props: WidgetContext<ClassificationEntity>)
             }
       </ul>
     );
-}
-
-export interface ClassificationSettingsInterface {
-    selectedTaxonomyId: string;
-    selectedTaxonomyUrl: string;
-    selectedTaxonomyName: string;
-    selectedTaxonomyTitle: string;
-    selectionMode: string;
-    byContentType: string;
-    selectedTaxaIds: string [];
-  }
-
-export class ClassificationEntity {
-    ClassificationSettings?: ClassificationSettingsInterface;
-    CssClass?: string;
-    Margins?: OffsetStyle;
-    OrderBy?: string;
-    ShowItemCount?: boolean;
-    ShowEmpty?: boolean;
-    SfViewName?: string;
-    SortExpression?: string;
-    Attributes?: any[];
 }

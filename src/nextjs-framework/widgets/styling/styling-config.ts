@@ -70,5 +70,56 @@ export const StylingConfig = {
         'MarginRightS': 'me-3',
         'MarginRightM': 'me-4',
         'MarginRightL': 'me-5'
+    },
+    FieldSizeClesses: {
+        'WidthNONE': '',
+        'WidthS': 'w-50',
+        'WidthM': 'w-75',
+        'WidthL': 'w-100'
+    },
+    ColorPalettes: {
+        Default: {
+            DefaultColor: '#DCECF5',
+            Colors: [
+                // 40% lighter
+                '#FFADAD',
+                '#FFA4E1',
+                '#F59AFF',
+                '#8BF4FF',
+                '#92FFFB',
+                '#9EFFC9',
+                '#FFFFAE',
+                '#FFEB8D',
+                '#E4CFC5',
+                '#DCECF5',
+                '#FFFFFF',
+
+                // 20% lighter
+                '#FF7A7B',
+                '#FF71AD',
+                '#C267DC',
+                '#57C1FF',
+                '#5FD0C8',
+                '#6BDE96',
+                '#FFFF7B',
+                '#FFB85A',
+                '#B19D92',
+                '#A9B9C2',
+                '#cccccc',
+
+                // Base Colors
+                '#FF4848',
+                '#DC3E7B',
+                '#8F34A9',
+                '#238EFC',
+                '#2C9D95',
+                '#38AB63',
+                '#FFE048',
+                '#ED8527',
+                '#7E6A5F',
+                '#76868F',
+                '#000000'
+            ]
+        }
     }
 };

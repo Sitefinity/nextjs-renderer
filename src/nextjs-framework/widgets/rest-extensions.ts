@@ -129,7 +129,7 @@ export class RestExtensionsService {
     };
 
     public static getPageNodeUrl = async (page: MixedContentContext) => {
-        if (!page.Content || page.Content.length) {
+        if (!page.Content || !page.Content.length) {
             return '';
         }
 

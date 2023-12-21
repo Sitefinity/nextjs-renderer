@@ -13,6 +13,7 @@
         "jsx": "preserve",
         "declaration": true,
         "incremental": true,
+        "experimentalDecorators": true,
         "plugins": [
             {
                 "name": "next"

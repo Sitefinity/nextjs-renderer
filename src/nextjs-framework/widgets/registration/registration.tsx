@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleGenerator } from '../styling/style-generator.service';
 import { OffsetStyle } from '../styling/offset-style';
-import { MixedContentContext, WidgetContext, classNames, getUniqueId, htmlAttributes } from '../../editor';
+import { MixedContentContext, RequestContext, WidgetContext, classNames, getUniqueId, htmlAttributes } from '../../editor';
 
 import { ExternalLoginBase } from '../external-login-base';
 import { StylingConfig } from '../styling/styling-config';
@@ -9,25 +9,17 @@ import { PostRegistrationAction } from './interfaces/PostRegistrationAction';
 import { RegistrationForm } from './registration-form';
 import { RestSdkTypes, RootUrlService, ExternalProvider, RestService, RegistrationSettingsDto } from '../../rest-sdk';
 import { RestExtensionsService } from '../rest-extensions';
+import { defaultMixedContent } from '../common/defaults';
 
-
-const defaultMixedContent = {
-    ItemIdsOrdered:null,
-    Content:[ {
-        Type: RestSdkTypes.Pages,
-        Variations: null
-    }]
-};
 const EncryptedParam = 'qs';
 
-const isAccountActivationRequest = (context: any) => {
-    if (context && context.IsLive && context.searchParams[EncryptedParam]) {
+const isAccountActivationRequest = (context: RequestContext) => {
+    if (context && context.isLive && context.searchParams && context.searchParams[EncryptedParam]) {
         return true;
     }
 
     return false;
 };
-
 
 export async function Registration(props: WidgetContext<RegistrationEntity>) {
     const entity = {
@@ -145,7 +137,7 @@ export async function Registration(props: WidgetContext<RegistrationEntity>) {
         viewModel.RequiresQuestionAndAnswer = result.RequiresQuestionAndAnswer;
         viewModel.ActivationMethod = result.ActivationMethod;
         if (context.isLive) {
-            viewModel.ActivationPageUrl = context.pageNode.MetaInfo.CanonicalUrl;
+            viewModel.ActivationPageUrl = context.layout.MetaInfo.CanonicalUrl;
         }
     }
 
@@ -226,7 +218,7 @@ export async function Registration(props: WidgetContext<RegistrationEntity>) {
 }
 
 export class RegistrationEntity {
-    Attributes?: any[];
+    Attributes?: { [key: string]: Array<{ Key: string, Value: string}> };
     CssClass?: string;
     MarginStyle?: OffsetStyle;
     PostRegistrationAction?: PostRegistrationAction;

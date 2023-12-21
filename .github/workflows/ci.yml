@@ -28,6 +28,11 @@ jobs:
       - name: Install
         run: npm ci
 
+      - name: Build Sitefinity React Framework
+        run: npm run build
+        env:
+          ENVIRONMENT: production
+
       - name: Lint
         run: npm run lint
 

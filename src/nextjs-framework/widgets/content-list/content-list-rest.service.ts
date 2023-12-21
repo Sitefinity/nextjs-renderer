@@ -1,10 +1,11 @@
-import { DetailItem, ContentContext, ContentVariation } from '../../editor';
+import { DetailItem, ContentContext, ContentVariation, ContentListSettings } from '../../editor';
+import { ListDisplayMode } from '../../editor/widget-framework/list-display-mode';
 import { CollectionResponse, SdkItem, FilterConverterService, CombinedFilter, FilterClause, RelationFilter, GetAllArgs, OrderBy, RestService, ServiceMetadata, FilterOperators } from '../../rest-sdk';
 import { ContentListEntity } from './content-list-entity';
 
 export class ContentListRestService {
 
-    static getItems(entity: ContentListEntity, detailItem: DetailItem | null): Promise<CollectionResponse<SdkItem>> {
+    static getItems(entity: ContentListEntity, detailItem: DetailItem | undefined): Promise<CollectionResponse<SdkItem>> {
         if (entity.SelectedItems && entity.SelectedItems.Content && entity.SelectedItems.Content.length > 0
                 && entity.SelectedItems.Content[0].Variations) {
             const selectedContent = entity.SelectedItems.Content[0];
@@ -39,12 +40,12 @@ export class ContentListRestService {
     }
 
 
-    private static getParentFilterExpression(selectedContent: ContentContext, variation: ContentVariation, detailItem: DetailItem | null): FilterClause | null {
+    private static getParentFilterExpression(selectedContent: ContentContext, variation: ContentVariation, detailItem: DetailItem | undefined): FilterClause | null {
         let filterByParentExpressionSerialized = null;
         if (variation.DynamicFilterByParent) {
             let parentType = ServiceMetadata.getParentType(selectedContent.Type);
 
-            if (parentType != null && detailItem != null && detailItem.ItemType === parentType) {
+            if (parentType != null && detailItem && detailItem.ItemType === parentType) {
                 return <FilterClause>{
                     FieldName: 'ParentId',
                     FieldValue: detailItem.Id,
@@ -59,21 +60,22 @@ export class ContentListRestService {
     private static getSkipAndTake(entity: ContentListEntity, pageNumber: number): { Skip?: number, Take?: number, Count?: boolean, ShowPager?: boolean } {
         let retVal: { Skip?: number, Take?: number, ShowPager?: boolean, Count?: boolean } | null = {};
         let currentPage = 1;
-        switch (entity.ListSettings.DisplayMode) {
-            case 'Paging':
+        const settings = entity.ListSettings || new ContentListSettings();
+        switch (settings.DisplayMode ) {
+            case ListDisplayMode.Paging:
                 retVal.ShowPager = true;
-                retVal.Take = entity.ListSettings.ItemsPerPage;
+                retVal.Take = settings.ItemsPerPage;
 
                 currentPage = pageNumber;
 
                 if (currentPage > 1) {
-                    retVal.Skip = entity.ListSettings.ItemsPerPage * (currentPage - 1);
+                    retVal.Skip = settings.ItemsPerPage * (currentPage - 1);
                 }
 
                 retVal.Count = true;
                 break;
-            case 'Limit':
-                retVal.Take = entity.ListSettings.LimitItemsCount;
+            case ListDisplayMode.Limit:
+                retVal.Take = settings.LimitItemsCount;
                 break;
             default:
                 break;

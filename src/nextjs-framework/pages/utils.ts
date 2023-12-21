@@ -1,8 +1,6 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { PageParams } from './page-params';
-import { widgetRegistry } from '../widgets/widget-registry';
-import { WidgetExecutionError } from '../widgets/error/widget-execution-error-component';
 import { PageLayoutServiceResponse, LayoutService, GetAllArgs } from '../rest-sdk/services';
 import { ServiceMetadata } from '../rest-sdk/service-metadata';
 import { RootUrlService } from '../rest-sdk/root-url.service';
@@ -10,27 +8,14 @@ import { RenderWidgetService } from '../services/render-widget-service';
 import { RestService } from '../rest-sdk/rest-service';
 import { WidgetRegistry } from '../editor';
 
-export async function pageLayout({ params, searchParams, cookie }: PageParams): Promise<PageLayoutServiceResponse> {
+export async function pageLayout({ params, searchParams }: PageParams): Promise<PageLayoutServiceResponse> {
     if (params && params.slug.some(x => x === '_next')) {
         notFound();
     }
 
     await initRestSdk();
 
-    const actionParam = searchParams['sfaction'];
-
-    let headers: { [key: string]: string } = {};
-    if (process.env.NODE_ENV === 'development' && actionParam) {
-        headers = { 'Cookie': cookie };
-        if (process.env.SF_CLOUD_KEY) {
-            headers['X-SF-BYPASS-HOST'] = `${process.env.PROXY_ORIGINAL_HOST}:${process.env.PORT}`;
-            headers['X-SF-BYPASS-HOST-VALIDATION-KEY'] = process.env.SF_CLOUD_KEY;
-        } else {
-            headers['X-ORIGINAL-HOST'] = `${process.env.PROXY_ORIGINAL_HOST}:${process.env.PORT}`;
-        }
-    }
-
-    const layoutOrError = await LayoutService.get(params.slug.join('/'), actionParam, headers);
+    const layoutOrError = await LayoutService.get(params.slug.join('/'), searchParams);
     const errorResponse = layoutOrError as any;
     if (errorResponse.error && errorResponse.error.code) {
         if (errorResponse.error.code === 'NotFound') {
@@ -41,8 +26,8 @@ export async function pageLayout({ params, searchParams, cookie }: PageParams): 
     return layoutOrError as PageLayoutServiceResponse;
 }
 
-export async function pageMetadata({ params, searchParams, cookie }: PageParams): Promise<Metadata> {
-    const layout = await pageLayout({ params, searchParams, cookie });
+export async function pageMetadata({ params, searchParams }: PageParams): Promise<Metadata> {
+    const layout = await pageLayout({ params, searchParams });
     if (layout.MetaInfo) {
         return {
             title: layout.MetaInfo.Title,
@@ -96,7 +81,12 @@ export async function pageStaticParams() {
 }
 
 export async function initRestSdk() {
-    RootUrlService.rootUrl = `${process.env['PROXY_URL'] || process.env['NEXT_CMS_URL']}`;
+    if (process.env.NODE_ENV === 'development') {
+        RootUrlService.rootUrl = process.env['PROXY_URL'] as string;
+    } else {
+        RootUrlService.rootUrl = process.env['SF_CMS_URL'] as string;
+    }
+
     await ServiceMetadata.fetch();
 }
 

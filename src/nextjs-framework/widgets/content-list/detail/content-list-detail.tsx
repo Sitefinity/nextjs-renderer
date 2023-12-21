@@ -1,16 +1,18 @@
 import React from 'react';
-import { ContentListModelDetail } from './content-list-detail-model';
+import { ContentListModelDetail, DetailViewModel } from './content-list-detail-model';
 import { ContentListEntity } from '../content-list-entity';
 import { RestService, SdkItem } from '../../../rest-sdk';
+import { RequestContext } from '../../../editor';
+import { BlogPostDetail } from './content-list-detail.blog-post';
+import { DynamicDetail } from './content-list-detail.dynamic';
+import { EventDetail } from './content-list-detail.event';
+import { ListItemDetail } from './content-list-detail.list-item';
+import { NewsItemDetail } from './content-list-detail.news';
 
-export async function ContentListDetail(props: { detailModel: ContentListModelDetail, entity?: ContentListEntity }) {
+export async function ContentListDetail(props: { detailModel: ContentListModelDetail, entity?: ContentListEntity, context: RequestContext }) {
     const model = props.detailModel;
 
-    let queryParams: { [key: string]: string } = {};
-    new URLSearchParams(window.location.search).forEach((val, key) => {
-        queryParams[key] = val;
-    });
-
+    let queryParams: { [key: string]: string } = props.context.searchParams || {};
     let dataItem: SdkItem;
     if (queryParams.hasOwnProperty('sf-content-action')) {
         dataItem = await RestService.getItemWithStatus(
@@ -24,7 +26,7 @@ export async function ContentListDetail(props: { detailModel: ContentListModelDe
             model.DetailItem.ProviderName
         );
     }
-    let detailViewModel: State;
+    let detailViewModel: DetailViewModel;
     let attributes: { [key: string]: string } = {};
     if (model.Attributes) {
         model.Attributes.forEach((pair) => {
@@ -40,17 +42,11 @@ export async function ContentListDetail(props: { detailModel: ContentListModelDe
 
     return (
       <div {...detailViewModel?.Attributes as any}>
-        {detailViewModel?.ViewName === 'News' &&
-        <h3>
-          <span>{detailViewModel?.DetailItem.Title}</span>
-        </h3>
-            }
+        {detailViewModel?.ViewName === 'Details.BlogPosts.Default' && BlogPostDetail(detailViewModel)}
+        {detailViewModel?.ViewName === 'Details.Dynamic.Default' && DynamicDetail(detailViewModel)}
+        {detailViewModel?.ViewName === 'Details.Events.Default' && EventDetail(detailViewModel)}
+        {detailViewModel?.ViewName === 'Details.ListItems.Default' && ListItemDetail(detailViewModel)}
+        {detailViewModel?.ViewName === 'Details.News.Default' && NewsItemDetail(detailViewModel)}
       </div>
     );
-}
-
-interface State {
-    ViewName: string;
-    DetailItem: SdkItem,
-    Attributes: { [key: string]: string };
 }

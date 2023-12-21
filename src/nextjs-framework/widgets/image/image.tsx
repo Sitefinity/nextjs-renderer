@@ -5,30 +5,18 @@ import { ImageTag } from './image-tag';
 import { ImageClickAction } from './interfaces/ImageClickAction';
 import { ImageDisplayMode } from './interfaces/ImageDisplayMode';
 import { WidgetContext, htmlAttributes, classNames, generateAnchorAttrsFromLink, LinkModel } from '../../editor';
-import { RestService, RestSdkTypes } from '../../rest-sdk';
+import { RestService, RestSdkTypes, ThumbnailItem, SdkItem, ImageItem } from '../../rest-sdk';
+import { ImageEntity } from './image.entity';
 
 const imageWrapperClass = 'd-inline-block';
 
 export async function Image(props: WidgetContext<ImageEntity>) {
-    const entity = {
-        ImageSize: ImageDisplayMode.Responsive,
-        ...props.model.Properties
-    };
+    const entity = props.model.Properties;
     const dataAttributes = htmlAttributes(props);
     const defaultClass = classNames(imageWrapperClass, entity.CssClass);
     const marginClass = entity.Margins && StyleGenerator.getMarginClasses(entity.Margins);
     const anchorAttributes = generateAnchorAttrsFromLink(entity.ActionLink);
-    dataAttributes['className'] = classNames(
-        defaultClass,
-        marginClass
-    );
 
-    if (props.requestContext && props.requestContext.isEdit) {
-        dataAttributes['data-sfemptyicon'] = 'picture-o';
-        dataAttributes['data-sfemptyiconaction'] = 'Edit';
-    }
-
-    dataAttributes['data-sfemptyicontext'] = 'Select image';
     dataAttributes['data-sfhasquickeditoperation'] = true;
     let imageItem = null;
     if (entity.Item && entity.Item.Id) {
@@ -36,8 +24,13 @@ export async function Image(props: WidgetContext<ImageEntity>) {
     }
 
     if (!imageItem) {
-        return null;
+        return (<div {...dataAttributes} />);
     }
+
+    dataAttributes['className'] = classNames(
+        defaultClass,
+        marginClass
+    );
 
     const isSvg = imageItem.MimeType === 'image/svg+xml';
     const hasZeroDimensions = imageItem.Width === 0 && imageItem.Height === 0;
@@ -47,9 +40,9 @@ export async function Image(props: WidgetContext<ImageEntity>) {
     let selectedImageUrl =  imageItem.Url;
 
     if (imageItem.Thumbnails) {
-        thumbnails = imageItem.Thumbnails.sort((a: any,b: any) => a.Width - b.Width);
+        thumbnails = imageItem.Thumbnails.sort((a: ThumbnailItem,b: ThumbnailItem) => a.Width - b.Width);
         if (entity.ImageSize === ImageDisplayMode.Thumbnail && imageItem.Thumnail) {
-            let selectedThumbnail = thumbnails.find((t: any) => t.Title === entity.Thumnail.Name);
+            let selectedThumbnail = thumbnails.find((t: ThumbnailItem) => t.Title === entity.Thumnail!.Name);
             selectedImageUrl = imageItem.Thumnail.Url;
 
             if (selectedThumbnail) {
@@ -83,7 +76,7 @@ export async function Image(props: WidgetContext<ImageEntity>) {
     };
 
     return  entity.ClickAction === ImageClickAction.OpenOriginalSize
-                ? <a href={entity.Item.Url}
+                ? <a href={entity.Item!.Url}
                     {...dataAttributes}>
                   {<ImageTag imageModel={imageModel} />}
                 </a>
@@ -94,20 +87,4 @@ export async function Image(props: WidgetContext<ImageEntity>) {
                     :  <ImageTag imageModel={imageModel} className={entity.CssClass}
                         {...dataAttributes} />
              ;
-}
-
-export interface ImageEntity {
-    Item?: any;
-    Attributes?: any[];
-    Margins?: OffsetStyle;
-    Title?: string;
-    AlternativeText?: string;
-    CssClass?: string;
-    ClickAction?: ImageClickAction;
-    ActionLink?: LinkModel;
-    ImageSize?: ImageDisplayMode;
-    FitToContainer: boolean;
-    CustomSize?: any;
-    Thumnail?: any;
-    ViewName?: string;
 }
