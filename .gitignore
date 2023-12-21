@@ -38,5 +38,6 @@ next-env.d.ts
 
 /cert
 
+**dist**
 dist-framework
 src/nextjs-framework/node_modules
