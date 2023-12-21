@@ -56,7 +56,7 @@ export class FormRestService {
             }
         }
 
-        return rules;
+        return JSON.stringify(rules);
     }
 
     static getHiddenFields(formModel: FormModel){

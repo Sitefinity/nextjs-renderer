@@ -1,5 +1,5 @@
 import React from 'react';
-import { WidgetContext, classNames } from '../../../editor';
+import { WidgetContext, classNames, htmlAttributes } from '../../../editor';
 
 export async function SubmitButton(props: WidgetContext<SubmitButtonEntity>) {
     const entity = {
@@ -8,8 +8,8 @@ export async function SubmitButton(props: WidgetContext<SubmitButtonEntity>) {
     };
 
     const viewModel: any = {...entity};
-
-    return (<div className={classNames('mb-3', viewModel.CssClass)} data-sf-role="submit-button-container">
+    const dataAttributes = htmlAttributes(props);
+    return (<div {...dataAttributes} className={classNames('mb-3', viewModel.CssClass)} data-sf-role="submit-button-container">
       <button type="submit" className="btn btn-primary">{viewModel.Label}</button>
     </div>);
 }

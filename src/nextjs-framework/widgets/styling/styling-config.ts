@@ -71,7 +71,7 @@ export const StylingConfig = {
         'MarginRightM': 'me-4',
         'MarginRightL': 'me-5'
     },
-    FieldSizeClesses: {
+    FieldSizeClasses: {
         'WidthNONE': '',
         'WidthS': 'w-50',
         'WidthM': 'w-75',
