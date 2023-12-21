@@ -1,4 +1,4 @@
-import { DataType, DisplayName, Model, Placeholder } from '@progress/sitefinity-widget-designers';
+import { DataType, DisplayName, Model, Placeholder } from '@progress/sitefinity-widget-designers-sdk';
 
 @Model()
 export class CustomCssModel {

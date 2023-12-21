@@ -1,4 +1,4 @@
-import { Choice,DataType, KnownFieldTypes, Model, Offset_Choices } from '@progress/sitefinity-widget-designers';
+import { Choice,DataType, KnownFieldTypes, Model, Offset_Choices } from '@progress/sitefinity-widget-designers-sdk';
 import { OffsetSize } from './offset-size';
 
 @Model()

@@ -1,4 +1,4 @@
-import { Choice,ColorPalette, ConditionalVisibility, DataType, DisplayName, KnownFieldTypes, Model } from '@progress/sitefinity-widget-designers';
+import { Choice,ColorPalette, ConditionalVisibility, DataType, DisplayName, KnownFieldTypes, Model } from '@progress/sitefinity-widget-designers-sdk';
 import { BackgroundBase } from './background-base';
 import { StylingConfig } from './styling-config';
 

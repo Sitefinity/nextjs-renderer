@@ -1,4 +1,4 @@
-import { Attributes, Category, Choice,ContentSection, DataModel, DataType, Description, DisplayName, KnownFieldTypes, Margins, Model, Placeholder, Required, WidgetEntity, WidgetLabel } from '@progress/sitefinity-widget-designers';
+import { Attributes, Category, Choice,ContentSection, DataModel, DataType, Description, DisplayName, KnownFieldTypes, Margins, Model, Placeholder, Required, WidgetEntity, WidgetLabel } from '@progress/sitefinity-widget-designers-sdk';
 import { OffsetStyle } from '../styling/offset-style';
 
 @Model(true)

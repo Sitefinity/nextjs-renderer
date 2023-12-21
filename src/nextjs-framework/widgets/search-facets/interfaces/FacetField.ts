@@ -1,4 +1,4 @@
-import { BasicValueTypes, DataModel, DataType, DefaultValue, Description, Dialog, DisplayName, KnownFieldTypes, Model } from '@progress/sitefinity-widget-designers';
+import { BasicValueTypes, DataModel, DataType, DefaultValue, Description, Dialog, DisplayName, KnownFieldTypes, Model } from '@progress/sitefinity-widget-designers-sdk';
 import { Settings } from './Settings';
 
 @Model()

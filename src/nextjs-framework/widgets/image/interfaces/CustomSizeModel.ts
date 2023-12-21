@@ -1,4 +1,4 @@
-import { DataType, Model } from '@progress/sitefinity-widget-designers';
+import { DataType, Model } from '@progress/sitefinity-widget-designers-sdk';
 
 @Model()
 export class CustomSizeModel {

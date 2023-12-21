@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
-        "@progress/sitefinity-widget-designers": "file:sitefinity-widget-designers/progress-sitefinity-widget-designers-0.0.6-development.tgz",
+        "@progress/sitefinity-widget-designers-sdk": "file:sitefinity-widget-designers/progress-sitefinity-widget-designers-sdk-0.0.7-development.tgz",
         "bootstrap": "5.3.2",
         "next": "14.0.3",
         "react": "18.2.0",

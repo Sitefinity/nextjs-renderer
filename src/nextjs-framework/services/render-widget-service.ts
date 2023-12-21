@@ -4,7 +4,7 @@ import { WidgetContext } from '../editor/widget-framework/widget-context';
 import { WidgetModel } from '../editor/widget-framework/widget-model';
 import { WidgetRegistry } from '../editor/widget-framework/widget-registry';
 import { LazyComponent } from '../widgets/lazy/lazy-component';
-import { PropertyModel } from '@progress/sitefinity-widget-designers';
+import { PropertyModel } from '@progress/sitefinity-widget-designers-sdk';
 import { WidgetMetadata } from '../editor';
 
 export class RenderWidgetService {
