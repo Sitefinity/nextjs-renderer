@@ -2,7 +2,7 @@ import { initRestSdk } from './utils';
 import { RenderWidgetService } from '../services/render-widget-service';
 import { WidgetModel } from '../editor/widget-framework/widget-model';
 import { RequestContext } from '../editor/request-context';
-import { LayoutService } from '../rest-sdk';
+import { RestService } from '../rest-sdk';
 
 export async function RenderWidget({ searchParams }: { searchParams: { [key: string]: string } }) {
     await initRestSdk();
@@ -25,7 +25,10 @@ export async function RenderWidget({ searchParams }: { searchParams: { [key: str
     let params = new URLSearchParams(query);
     const paramsAsObject = Object.fromEntries(params);
 
-    const layout = await LayoutService.get(path, paramsAsObject);
+    const layout = await RestService.getLayout({
+        pagePath: path,
+        queryParams: paramsAsObject
+    });
     const requestContext: RequestContext = {
         layout: layout,
         searchParams: paramsAsObject,

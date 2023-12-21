@@ -1,9 +1,7 @@
 import React from 'react';
 import { StyleGenerator } from '../styling/style-generator.service';
-import { OffsetStyle } from '../styling/offset-style';
-import { Alignment } from '../styling/alignment';
-import { ButtonType } from '../styling/button-types';
-import { WidgetContext, htmlAttributes, generateAnchorAttrsFromLink, getCustomAttributes, classNames, LinkModel } from '../../editor';
+import { WidgetContext, htmlAttributes, generateAnchorAttrsFromLink, getCustomAttributes, combineClassNames } from '../../editor';
+import { CallToActionEntity } from './call-to-action.entity';
 
 export type CTAPart = 'Wrapper' | 'Primary' | 'Secondary';
 
@@ -13,9 +11,6 @@ export async function CallToAction(props: WidgetContext<CallToActionEntity>) {
     };
     const dataAttributes = htmlAttributes(props);
 
-    const defaultClass = `d-flex align-items-center ${properties.CssClass}`.trim();
-    const positionClass = StyleGenerator.getAlignmentClasses(properties.Position ? properties.Position.CTA.Alignment : 'Left');
-    const marginClass = properties.Margins && StyleGenerator.getMarginClasses(properties.Margins);
     const primaryAnchorAttributes = generateAnchorAttrsFromLink(properties.PrimaryActionLink);
     const secondaryAnchorAttributes = generateAnchorAttrsFromLink(properties.SecondaryActionLink);
     const wrapperCustomAttributes = getCustomAttributes(properties.Attributes, 'Wrapper');
@@ -26,13 +21,11 @@ export async function CallToAction(props: WidgetContext<CallToActionEntity>) {
     const primaryButtonClass = StyleGenerator.getButtonClasses(primaryClass);
     const secondaryButtonClass = StyleGenerator.getButtonClasses(secondaryClass);
 
-    dataAttributes['className'] = classNames(
-        defaultClass,
-        positionClass,
-        marginClass
-    );
-    dataAttributes['data-sfemptyicontext'] = 'Create call to action';
-    dataAttributes['data-sfhasquickeditoperation'] = true;
+    const defaultClass = combineClassNames('d-flex align-items-center', properties.CssClass);
+    const positionClass = StyleGenerator.getAlignmentClasses(properties.Position ? properties.Position.CTA.Alignment : 'Left');
+    const marginClass = properties.Margins && StyleGenerator.getMarginClasses(properties.Margins);
+    dataAttributes['className'] = combineClassNames(defaultClass, positionClass, marginClass);
+
     return (
       <div
         {...dataAttributes}
@@ -40,12 +33,12 @@ export async function CallToAction(props: WidgetContext<CallToActionEntity>) {
         >
         {
                 props.model.Properties.PrimaryActionLabel && <a {...primaryAnchorAttributes}
-                  className={classNames('me-3', primaryButtonClass)}
+                  className={combineClassNames('me-3', primaryButtonClass)}
                   data-call-to-action=""
                   {...primaryCustomAttributes}>
                     {props.model.Properties.PrimaryActionLabel}
                 </a>
-            }
+        }
         {
                 props.model.Properties.SecondaryActionLabel && <a {...secondaryAnchorAttributes}
                   className={secondaryButtonClass}
@@ -53,30 +46,8 @@ export async function CallToAction(props: WidgetContext<CallToActionEntity>) {
                   {...secondaryCustomAttributes}>
                     {props.model.Properties.SecondaryActionLabel}
                 </a>
-            }
+        }
       </div>
     );
 }
 
-export class CallToActionEntity {
-    PrimaryActionLabel?: string;
-    PrimaryActionLink?: LinkModel;
-    SecondaryActionLabel?: string;
-    SecondaryActionLink?: LinkModel;
-    Style?: {
-        Primary: {
-            DisplayStyle: ButtonType
-        },
-        Secondary: {
-            DisplayStyle: ButtonType
-        }
-    };
-    Attributes?: { [key: string]: Array<{ Key: string, Value: string}> };
-    Position?: {
-        CTA: {
-            Alignment: Alignment
-        };
-    };
-    CssClass?: string;
-    Margins?: OffsetStyle;
-}

@@ -100,5 +100,5 @@ export class ClassificationEntity {
     SortExpression: string | null = null;
 
     @Attributes('Classification')
-    Attributes?: any[];
+    Attributes?: { [key: string]: Array<{ Key: string, Value: string}> };
 }

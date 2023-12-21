@@ -25,3 +25,7 @@ export const classNames = (...args: any[]): string => {
         .filter(el => el !== null)
         .join(' ');
 };
+
+export function combineClassNames(...classNames: (string | undefined)[]) {
+    return classNames.filter(x => !!x).join(' ');
+}

@@ -32,7 +32,7 @@ export async function SearchResults(props: WidgetContext<SearchResultsEntity>) {
 
     const context = props.requestContext;
     const searchParams = context.searchParams || {};
-    const restService = props.restService || SearchResultsService;
+    const restService = SearchResultsService as any;
 
     const cultures = context.layout.Site.Cultures;
     const languageNames = new Intl.DisplayNames(['en'], {

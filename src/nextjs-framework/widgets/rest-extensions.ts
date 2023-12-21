@@ -1,7 +1,7 @@
 import { RestSdkTypes, RestService } from '../rest-sdk/rest-service';
 import { CollectionResponse } from '../rest-sdk/dto/collection-response';
 import { SdkItem } from '../rest-sdk/dto/sdk-item';
-import { GetAllArgs } from '../rest-sdk/services/get-all-args';
+import { GetAllArgs } from '../rest-sdk/services/args/get-all-args';
 import { FilterTypes } from '../rest-sdk/filters/filter-types';
 import { FilterConverterService } from '../rest-sdk/filters/filter-converter';
 import { ContentContext, ContentVariation, MixedContentContext } from '../editor/widget-framework/mixed-content-context';

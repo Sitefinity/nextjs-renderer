@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { PageParams } from './page-params';
-import { PageLayoutServiceResponse, LayoutService, GetAllArgs } from '../rest-sdk/services';
+import { PageLayoutServiceResponse, GetAllArgs } from '../rest-sdk/services';
 import { ServiceMetadata } from '../rest-sdk/service-metadata';
 import { RootUrlService } from '../rest-sdk/root-url.service';
 import { RenderWidgetService } from '../services/render-widget-service';
@@ -15,7 +15,10 @@ export async function pageLayout({ params, searchParams }: PageParams): Promise<
 
     await initRestSdk();
 
-    const layoutOrError = await LayoutService.get(params.slug.join('/'), searchParams);
+    const layoutOrError = await RestService.getLayout({
+        pagePath: params.slug.join('/'),
+        queryParams: searchParams
+    });
     const errorResponse = layoutOrError as any;
     if (errorResponse.error && errorResponse.error.code) {
         if (errorResponse.error.code === 'NotFound') {

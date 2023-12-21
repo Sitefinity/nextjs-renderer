@@ -1,14 +1,13 @@
 
 import React from 'react';
-import { WidgetContext, htmlAttributes } from '../../editor';
+import { WidgetContext, getCustomAttributes, htmlAttributes } from '../../editor';
 import { RestService } from '../../rest-sdk';
+import { StyleGenerator } from '../styling/style-generator.service';
 import { ContentBlockEntity } from './content-block.entity';
 
 export async function ContentBlock(props: WidgetContext<ContentBlockEntity>) {
-    const dataAttributes = htmlAttributes(props);
-    if (props.model.Properties.WrapperCssClass) {
-        dataAttributes['className'] = props.model.Properties.WrapperCssClass;
-    }
+
+    let dataAttributes = htmlAttributes(props);
 
     let content = props.model.Properties.Content;
     if (props.model.Properties && props.model.Properties.SharedContentID) {
@@ -16,7 +15,30 @@ export async function ContentBlock(props: WidgetContext<ContentBlockEntity>) {
         content = contentItem.Content;
     }
 
-    return (
-      <div {...dataAttributes as any} dangerouslySetInnerHTML={{ __html: content || '' }} />
-    );
+    const tagName = props.model.Properties.TagName || 'div';
+    dataAttributes.dangerouslySetInnerHTML = {
+        __html: content || ''
+    };
+
+    let cssClasses = [];
+    if (props.model.Properties.WrapperCssClass) {
+        cssClasses.push(props.model.Properties.WrapperCssClass);
+    }
+
+    if (props.model.Properties.Paddings) {
+        cssClasses.push(StyleGenerator.getPaddingClasses(props.model.Properties.Paddings));
+    }
+
+    if (props.model.Properties.Margins) {
+        cssClasses.push(StyleGenerator.getMarginClasses(props.model.Properties.Margins));
+    }
+
+    if (cssClasses.length > 0) {
+        dataAttributes['className'] = cssClasses.join(' ');
+    }
+
+    const customAttributes = getCustomAttributes(props.model.Properties.Attributes, 'SitefinityContentBlock');
+    dataAttributes = Object.assign(dataAttributes, customAttributes);
+
+    return React.createElement(tagName, dataAttributes);
 }

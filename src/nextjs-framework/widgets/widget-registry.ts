@@ -54,16 +54,18 @@ import sitefinityParagraphJson from './form-widgets/paragraph/designer-metadata.
 import sitefinitySubmitButtonJson from './form-widgets/submit-button/designer-metadata.json';
 import sitefinityTextFieldJson from './form-widgets/textfield/designer-metadata.json';
 import { SearchFacetsEntity } from './search-facets/search-facets.entity';
+import { BreadcrumbEntity } from './breadcrumb/breadcrumb.entity';
 
 export const widgetRegistry: WidgetRegistry = initRegistry({
     widgets: {
         'SitefinityBreadcrumb': {
-            designerMetadata: sitefinityBreadcrumbJson,
+            entity: BreadcrumbEntity,
             componentType: Breadcrumb,
             editorMetadata: {
                 Title: 'Breadcrumb',
                 Category: 'Navigation & Search',
-                Section: 'Main navigation'
+                Section: 'Main navigation',
+                HasQuickEditOperation: true
             },
             ssr: true
         },
@@ -85,7 +87,8 @@ export const widgetRegistry: WidgetRegistry = initRegistry({
                 Section: 'Basic',
                 EmptyIcon: 'picture-o',
                 EmptyIconAction: 'Edit',
-                EmptyIconText: 'Select image'
+                EmptyIconText: 'Select image',
+                HasQuickEditOperation: true
             },
             ssr: true
         },
@@ -154,7 +157,9 @@ export const widgetRegistry: WidgetRegistry = initRegistry({
             componentType: CallToAction,
             editorMetadata: {
                 Title: 'Call to action',
-                Section: 'Basic'
+                Section: 'Basic',
+                EmptyIconText: 'Create call to action',
+                HasQuickEditOperation: true
             },
             ssr: true
         },
@@ -163,14 +168,14 @@ export const widgetRegistry: WidgetRegistry = initRegistry({
             componentType: ContentBlock,
             editorMetadata: {
                 Title: 'Content block',
-                Section: 'Basic'
+                Section: 'Basic',
+                HasQuickEditOperation: true
             },
             ssr: true
         },
         'SitefinitySection': {
             entity: SectionEntity,
             componentType: Section,
-            selectorCategory: 'Layout',
             editorMetadata: {
                 Title: 'Section',
                 Category: 'Layout & Presets'
