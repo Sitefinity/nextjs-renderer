@@ -1,3 +1,6 @@
+> [!WARNING]
+> This repository is out of development and has been made available as a [starter sample](https://github.com/Sitefinity/nextjs-samples) and an [npm package](https://www.npmjs.com/package/@progress/sitefinity-nextjs-sdk).
+
 Progress® Sitefinity® CMS sample next.js standalone renderer app
 ======================================================
 
