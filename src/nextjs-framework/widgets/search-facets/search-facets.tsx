@@ -20,7 +20,7 @@ export async function SearchFacets(props: WidgetContext<SearchFacetsEntity>) {
 
     const context = props.requestContext;
     const searchParams = context.searchParams || {};
-    const restService = props.restService || SearchFacetsService;
+    const restService = SearchFacetsService as any;
     const viewModel: any = {
         IndexCatalogue: entity.IndexCatalogue,
         Attributes: entity.Attributes,

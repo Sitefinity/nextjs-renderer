@@ -1,13 +1,13 @@
 
+import { Dictionary } from '../../typings/dictionary';
 import { LinkModel } from './link-model';
 import { WidgetContext } from './widget-context';
 
-export type CustomAttribute = {
-    Key: string;
-    Value: string;
-};
+export function htmlAttributes(widgetContext: WidgetContext<any>, error: string | undefined = undefined): { [key: string]: any } {
+    if (!widgetContext.requestContext.isEdit) {
+        return {};
+    }
 
-export function htmlAttributes(widgetContext: WidgetContext<any>, error: string | undefined = undefined) {
     const model = widgetContext.model;
     const metadata = widgetContext.metadata;
     const editorMetadata = metadata?.editorMetadata;
@@ -33,11 +33,14 @@ export function htmlAttributes(widgetContext: WidgetContext<any>, error: string 
         }
     }
 
-    attributes['data-sfiscontentwidget'] = widgetContext.metadata?.selectorCategory !== 'Layout';
+    attributes['data-sfiscontentwidget'] = widgetContext.metadata?.editorMetadata?.Category !== 'Layout & Presets';
     attributes['data-sfisemptyvisualhidden'] = false;
     attributes['data-sfisempty'] = false;
     attributes['draggable'] = true;
-    attributes['data-sfhasquickeditoperation'] = true;
+
+    if (widgetContext.metadata.editorMetadata?.HasQuickEditOperation) {
+        attributes['data-sfhasquickeditoperation'] = true;
+    }
 
     if (error) {
         attributes['data-sferror'] = error;
@@ -51,22 +54,34 @@ export const generateAnchorAttrsFromLink = (linkModel?: LinkModel | null, classL
         return null;
     }
 
+    let href = linkModel.href;
+    if (linkModel.queryParams) {
+        href += `?${linkModel.queryParams}`;
+    }
+
+    if (linkModel.anchor) {
+        href += `#${linkModel.anchor}`;
+    }
+
     const attributes = {} as React.AnchorHTMLAttributes<HTMLAnchorElement>;
     attributes.target = linkModel.target;
-    attributes.href = linkModel.href;
+    attributes.href = href;
     attributes.title = linkModel.tooltip || undefined;
-    attributes.className = linkModel.classList.join(' ') + classList ? ' ' + classList : '';
+    attributes.className = linkModel.classList?.join(' ') + classList ? ' ' + classList : '';
 
     return attributes;
 };
 
-export const getCustomAttributes = (attributes: any, part: string) => {
+export const getCustomAttributes = (attributes: { [key: string]: Array<{ Key: string, Value: string }> } | null | undefined, part: string): Dictionary => {
     if (!attributes || !attributes[part]){
         return {};
     }
 
-    return attributes[part].reduce(
-        (current: object, customAttribute: CustomAttribute) => {
-            return ({ ...current, [customAttribute.Key]: customAttribute.Value});
-        }, {});
+    let returnVal: Dictionary = {};
+
+    attributes[part].forEach((attribute) => {
+        returnVal[attribute.Key] = attribute.Value;
+    });
+
+    return returnVal;
 };

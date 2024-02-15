@@ -1,13 +1,189 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should render image default state 1`] = `
+exports[`image as link should set margins to anchor (ImageAsLinkShouldSetMarginsToAnchor) 1`] = `
 <div>
-  <div
+  <a
+    class=" d-inline-block"
+    href="www.tarator.oz"
+  >
+    <picture
+      class="d-inline-block"
+    >
+      <source
+        height="160"
+        media="(max-width: 160px)"
+        srcset="https://systemvalforsnapshot"
+        type="image/jpeg"
+        width="160"
+      />
+      <img
+        alt="ImageAlternativeText"
+        loading="lazy"
+        src="https://systemvalforsnapshot"
+        title="Image"
+      />
+    </picture>
+  </a>
+</div>
+`;
+
+exports[`image attributes rendered (Image_Attributes_Rendered) 1`] = `
+<div>
+  <picture
+    class="d-inline-block"
+  >
+    <source
+      height="160"
+      media="(max-width: 160px)"
+      srcset="https://systemvalforsnapshot"
+      type="image/jpeg"
+      width="160"
+    />
+    <img
+      alt="ImageAlternativeText"
+      loading="lazy"
+      src="https://systemvalforsnapshot"
+      test-attribute-key="test-attribute-value"
+      test-attribute-key-second="test-attribute-value-second"
+      title="custom title"
+    />
+  </picture>
+</div>
+`;
+
+exports[`image css class rendered (Image_CssClass_Rendered) 1`] = `
+<div>
+  <span>
+    <img
+      alt="ImageAlternativeText"
+      class="myclass"
+      loading="lazy"
+      src="https://systemvalforsnapshot"
+      title="custom title"
+    />
+  </span>
+</div>
+`;
+
+exports[`image fit to container (Image_FitToContainer_Rendered) 1`] = `
+<div>
+  <span>
+    <img
+      alt="ImageAlternativeText"
+      class="img-fluid"
+      loading="lazy"
+      src="https://systemvalforsnapshot"
+      title="custom title"
+    />
+  </span>
+</div>
+`;
+
+exports[`image margins rendered (Image_Margins_Rendered) 1`] = `
+<div>
+  <span>
+    <img
+      alt="ImageAlternativeText"
+      class="mb-4 ms-5"
+      loading="lazy"
+      src="https://systemvalforsnapshot"
+      title="custom title"
+    />
+  </span>
+</div>
+`;
+
+exports[`image rendered with original size 1`] = `
+<div>
+  <span>
+    <img
+      alt="ImageAlternativeText"
+      loading="lazy"
+      src="https://systemvalforsnapshot"
+      title="custom title"
+    />
+  </span>
+</div>
+`;
+
+exports[`image title and alternative text do not fallback (ImageTitleAndAlternativeTextDoNotFallbackIfSet) 1`] = `
+<div>
+  <span>
+    <img
+      alt="custom alternative text"
+      loading="lazy"
+      src="https://systemvalforsnapshot"
+      title="custom title"
+      width="50"
+    />
+  </span>
+</div>
+`;
+
+exports[`image title and alternative text fallback if not set (ImageTitleAndAlternativeTextFallbackIfNotSet) 1`] = `
+<div>
+  <span>
+    <img
+      alt="ImageAlternativeText"
+      loading="lazy"
+      src="https://systemvalforsnapshot"
+      title="Image"
+      width="50"
+    />
+  </span>
+</div>
+`;
+
+exports[`image with custom size (Image_CustomSize_Rendered) 1`] = `
+<div>
+  <span>
+    <img
+      alt="ImageAlternativeText"
+      height="60"
+      loading="lazy"
+      src="https://systemvalforsnapshot"
+      title="custom title"
+      width="50"
+    />
+  </span>
+</div>
+`;
+
+exports[`image with custom width only (Image_CustomWidthOnly_Rendered) 1`] = `
+<div>
+  <span>
+    <img
+      alt="ImageAlternativeText"
+      loading="lazy"
+      src="https://systemvalforsnapshot"
+      title="custom title"
+      width="50"
+    />
+  </span>
+</div>
+`;
+
+exports[`image with selected image item(Image_OriginalSize_Rendered) 1`] = `
+<div>
+  <span>
+    <img
+      alt="ImageAlternativeText"
+      loading="lazy"
+      src="https://systemvalforsnapshot"
+      title="custom title"
+    />
+  </span>
+</div>
+`;
+
+exports[`render image in edit mode with original size 1`] = `
+<div>
+  <span
     data-sfemptyicon="picture-o"
     data-sfemptyiconaction="Edit"
     data-sfemptyicontext="Select image"
     data-sfhasquickeditoperation="true"
-    data-sfid="568481ca-45db-4f02-a62e-f76122532902"
+    data-sfid="static"
     data-sfiscontentwidget="true"
     data-sfisempty="false"
     data-sfisemptyvisualhidden="false"
@@ -15,6 +191,85 @@ exports[`should render image default state 1`] = `
     data-sfname="SitefinityImage"
     data-sftitle="Image"
     draggable="true"
-  />
+  >
+    <img
+      alt="ImageAlternativeText"
+      loading="lazy"
+      src="https://systemvalforsnapshot"
+      title="Image"
+    />
+  </span>
+</div>
+`;
+
+exports[`render image in edit mode with responsive setting 1`] = `
+<div>
+  <picture
+    class="d-inline-block"
+    data-sfemptyicon="picture-o"
+    data-sfemptyiconaction="Edit"
+    data-sfemptyicontext="Select image"
+    data-sfhasquickeditoperation="true"
+    data-sfid="static"
+    data-sfiscontentwidget="true"
+    data-sfisempty="false"
+    data-sfisemptyvisualhidden="false"
+    data-sfisorphaned="false"
+    data-sfname="SitefinityImage"
+    data-sftitle="Image"
+    draggable="true"
+  >
+    <source
+      height="160"
+      media="(max-width: 160px)"
+      srcset="https://systemvalforsnapshot"
+      type="image/jpeg"
+      width="160"
+    />
+    <img
+      alt="ImageAlternativeText"
+      loading="lazy"
+      src="https://systemvalforsnapshot"
+      title="Image"
+    />
+  </picture>
+</div>
+`;
+
+exports[`responsive image (Image_Responsive_Rendered) 1`] = `
+<div>
+  <picture
+    class="d-inline-block"
+  >
+    <source
+      height="160"
+      media="(max-width: 160px)"
+      srcset="https://systemvalforsnapshot"
+      type="image/jpeg"
+      width="160"
+    />
+    <img
+      alt="ImageAlternativeText"
+      class="img-fluid"
+      loading="lazy"
+      src="https://systemvalforsnapshot"
+      title="custom title"
+    />
+  </picture>
+</div>
+`;
+
+exports[`responsive image should not be rendered (Image_Responsive_Source_Should_Not_Be_Rendered) 1`] = `
+<div>
+  <picture
+    class="d-inline-block"
+  >
+    <img
+      class="img-fluid"
+      loading="lazy"
+      src="https://systemvalforsnapshot"
+      title="custom title"
+    />
+  </picture>
 </div>
 `;

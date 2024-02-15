@@ -10,5 +10,6 @@ export interface EditorMetadata {
     Toolbox?: string;
     Warning?: string;
     HideEmptyVisual?: boolean;
+    HasQuickEditOperation?: boolean;
     Order?: number;
 }

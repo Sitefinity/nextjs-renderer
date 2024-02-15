@@ -1,6 +1,8 @@
+import { Dictionary } from '../typings/dictionary';
+
 export interface PageParams {
     params: {
         slug: string[]
     },
-    searchParams: { [key: string]: string },
+    searchParams: Dictionary,
 }

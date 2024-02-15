@@ -1,108 +1,170 @@
-import { CallToAction, CallToActionEntity } from '@progress/sitefinity-react-framework';
-import { render, waitFor } from '@testing-library/react';
-import { RequestContext, WidgetModel } from '../src/nextjs-framework/editor';
+import { waitFor } from '@testing-library/react';
+import { RenderType, WidgetTester } from './framework/widget-tester';
+import { CallToActionEntity } from '../src/nextjs-framework/widgets/call-to-action/call-to-action.entity';
+import { StylingConfig } from '../src/nextjs-framework/widgets/styling/styling-config';
 
-it.skip('should render call to action', async () => {
-    const callToAction = await CallToAction({ model, requestContext, metadata });
-    const { container } = render(callToAction);
+beforeEach(() => {
+    StylingConfig.ButtonClasses['Primary'].Value = 'btn btn-primary';
+});
 
-    await waitFor(() => {
-        expect(container).toMatchSnapshot();
+test('primary class overriden (Button_PrimaryClass_Overriden)', async () => {
+    const originalValue = StylingConfig.ButtonClasses['Primary'].Value;
+    StylingConfig.ButtonClasses['Primary'].Value = 'btn asd';
+
+    await WidgetTester.testWidgetRender<CallToActionEntity>({
+        name: 'SitefinityButton',
+        properties: {
+            PrimaryActionLabel: 'Primary Label',
+            PrimaryActionLink: {
+                href: 'kisela-krastavichka.jpg'
+            } as any
+        },
+        assert: async (element) => {
+            await waitFor(() => {
+                expect(element).toMatchSnapshot();
+            });
+        }
+    });
+
+    StylingConfig.ButtonClasses['Primary'].Value = originalValue;
+});
+
+test('primary button rendered (Button_PrimaryOnly_Rendered)', async () => {
+    await WidgetTester.testWidgetRender<CallToActionEntity>({
+        name: 'SitefinityButton',
+        properties: {
+            PrimaryActionLabel: 'Primary Label',
+            PrimaryActionLink: {
+                href: 'kisela-krastavichka.jpg',
+                queryParams: 'a=b',
+                anchor: 'c'
+            } as any
+        },
+        assert: async (element) => {
+            await waitFor(() => {
+                expect(element).toMatchSnapshot();
+            });
+        }
     });
 });
 
-const metadata = {
-    designerMetadata: {
-        Name: 'SitefinityButton',
-        Caption: 'Call to action',
-        PropertyMetadata: [Array]
-    },
-    componentType: [CallToAction],
-    editorMetadata: { Title: 'Call to action' },
-    ssr: true
-};
-
-const model: WidgetModel<CallToActionEntity> = {
-    Id: 'c1b4772b-1bd3-4e88-b444-9c6ffa40976e',
-    Name: 'SitefinityButton',
-    PlaceHolder: 'Column1',
-    Caption: 'Call to action',
-    ViewName: '',
-    Lazy: false,
-    Properties: {
-        PrimaryActionLink: undefined,
-        PrimaryActionLabel: 'Login',
-        Margins: undefined,
-        SecondaryActionLabel: 'Register',
-        SecondaryActionLink: undefined
-    },
-    Children: []
-};
-
-const requestContext: RequestContext = {
-    detailItem: null,
-    searchParams: {
-        sfaction: 'edit',
-        sf_culture: 'en',
-        sf_site: '4c922118-f076-4e24-9193-93e004f50107',
-        sf_page_node: '831706cd-10e1-4184-b2e5-ef9f9ad0fdb5'
-    },
-    isEdit: true,
-    isPreview: false,
-    isLive: false,
-    culture: 'en',
-    layout: {
-        Culture: 'en',
-        SiteId: '4c922118-f076-4e24-9193-93e004f50107',
-        MetadataHash: '-1129976431',
-        Id: '831706cd-10e1-4184-b2e5-ef9f9ad0fdb5',
-        TemplateName: 'Default',
-        Renderer: 'React',
-        UrlParameters: [],
-        HasVariations: false,
-        Site: {
-            Id: '4c922118-f076-4e24-9193-93e004f50107',
-            Name: 'Quantum International',
-            DefaultCulture: 'en',
-            Cultures: [Array],
-            TimeZone: 'UTC;0;UTC;UTC;UTC;;',
-            IsSubFolder: false
+test('secondary button rendered (Button_SecondaryOnly_Rendered)', async () => {
+    await WidgetTester.testWidgetRender<CallToActionEntity>({
+        name: 'SitefinityButton',
+        properties: {
+            SecondaryActionLabel: 'Secondary Label',
+            SecondaryActionLink: {
+                href: 'kisela-krastavichka.jpg'
+            } as any
         },
-        User: null,
-        ComponentContext: {
-            HasLazyComponents: false,
-            OrphanedControls: [],
-            Components: [Array],
-            Fields: null,
-            Site: null,
-            User: null
-        },
-        Scripts: [],
-        DetailItem: null,
-        MetaInfo: {
-            Title: 'integration-test',
-            Description: '',
-            HtmlInHeadTag: null,
-            OpenGraphTitle: 'integration-test',
-            OpenGraphDescription: '',
-            OpenGraphImage: null,
-            OpenGraphVideo: null,
-            OpenGraphType: null,
-            OpenGraphSite: null,
-            CanonicalUrl: 'https://localhost:5001/integration-test'
-        },
-        Fields: {
-            Title: 'integration-test',
-            UrlName: 'integration-test',
-            LastModified: '2023-11-13T13:13:09.183Z',
-            DateCreated: '2023-11-13T13:13:09.183Z',
-            Crawlable: true,
-            ParentId: 'f669d9a7-009d-4d83-ddaa-000000000002',
-            RootId: 'f669d9a7-009d-4d83-ddaa-000000000002',
-            IsHomePage: false,
-            'AvailableLanguages@odata.type': '#Collection(String)',
-            AvailableLanguages: [Array],
-            ViewUrl: '/integration-test'
+        assert: async (element) => {
+            await waitFor(() => {
+                expect(element).toMatchSnapshot();
+            });
         }
-    }
-};
+    });
+});
+
+test('both buttons rendered (Button_Both_Rendered)', async () => {
+    await WidgetTester.testWidgetRender<CallToActionEntity>({
+        name: 'SitefinityButton',
+        properties: {
+            PrimaryActionLabel: 'Primary Label',
+            PrimaryActionLink: {
+                href: 'kisela-krastavichka.jpg'
+            } as any,
+            SecondaryActionLabel: 'Secondary Label',
+            SecondaryActionLink: {
+                href: 'kisela-krastavichka-2.jpg'
+            } as any
+        },
+        assert: async (element) => {
+            await waitFor(() => {
+                expect(element).toMatchSnapshot();
+            });
+        }
+    });
+});
+
+test('button styling (Button_Styling_Rendered)', async () => {
+    await WidgetTester.testWidgetRender<CallToActionEntity>({
+        name: 'SitefinityButton',
+        properties: {
+            PrimaryActionLabel: 'Primary Label',
+            PrimaryActionLink: {
+                href: 'kisela-krastavichka.jpg'
+            } as any,
+            Style: {
+                Primary: {
+                    DisplayStyle: 'Secondary'
+                }
+            },
+            Position: {
+                CTA: {
+                    Alignment: 'Center'
+                }
+            }
+        },
+        assert: async (element) => {
+            await waitFor(() => {
+                expect(element).toMatchSnapshot();
+            });
+        }
+    });
+});
+
+test('button margins rendered (Button_Margins_Rendered)', async () => {
+    await WidgetTester.testWidgetRender<CallToActionEntity>({
+        name: 'SitefinityButton',
+        properties: {
+            PrimaryActionLabel: 'Primary Label',
+            PrimaryActionLink: {
+                href: 'kisela-krastavichka.jpg'
+            } as any,
+            Margins: {
+                Left: 'L',
+                Bottom: 'M'
+            } as any
+        },
+        assert: async (element) => {
+            await waitFor(() => {
+                expect(element).toMatchSnapshot();
+            });
+        }
+    });
+});
+
+test('button attributes rendered (Button_Attributes_Rendered)', async () => {
+    await WidgetTester.testWidgetRender<CallToActionEntity>({
+        name: 'SitefinityButton',
+        properties: {
+            PrimaryActionLabel: 'Primary Label',
+            PrimaryActionLink: {
+                href: 'kisela-krastavichka.jpg'
+            } as any,
+            SecondaryActionLabel: 'Secondary Label',
+            SecondaryActionLink: {
+                href: 'kisela-krastavichka-2.jpg'
+            } as any,
+            Attributes: {
+                Wrapper: [{
+                    Key: 'wrapper-attribute-key',
+                    Value: 'rapper-attribute-value'
+                }],
+                Primary: [{
+                    Key: 'primary-attribute-key',
+                    Value: 'primary-attribute-value'
+                }],
+                Secondary: [{
+                    Key: 'secondary-attribute-key',
+                    Value: 'secondary-attribute-value'
+                }]
+            }
+        },
+        assert: async (element) => {
+            await waitFor(() => {
+                expect(element).toMatchSnapshot();
+            });
+        }
+    });
+});
