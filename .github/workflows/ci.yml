@@ -17,13 +17,13 @@ jobs:
         with:
           node-version: 18
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: "6.x.x"
+      # - name: Setup .NET
+      #   uses: actions/setup-dotnet@v3
+      #   with:
+      #     dotnet-version: "6.x.x"
 
-      - name: Generate Certificates
-        run: dotnet dev-certs https --export-path ./cert/cert.crt --no-password --format PEM
+      # - name: Generate Certificates
+      #   run: dotnet dev-certs https --export-path ./cert/cert.crt --no-password --format PEM
 
       - name: Install
         run: npm ci
@@ -38,3 +38,47 @@ jobs:
 
       - name: Test
         run: npm run test
+
+      - name: Build
+        run: npm run build
+        env:
+          ENVIRONMENT: production
+
+      - name: Build package
+        run: |
+          rm -rf ../dist
+          cd ./src/nextjs-framework
+          tsc
+
+          cd ../../../
+
+          cp ./nextjs-renderer/src/nextjs-framework/package.json ./dist/package.json
+          cd ./dist
+          npm pack
+
+      - name: Update template repository
+        run: |
+          rm -rf ../starter
+          git clone https://github.com/Gebov/nextjs-renderer-starter.git ../starter
+          cp -R -v ./src/app/ ../starter/src/app/
+
+          declare -a filestocopy=(".env.development" ".env.production" "server.js" "package.json" "next.config.js" "tsconfig.json")
+
+          for i in "${filestocopy[@]}"
+          do
+            cp -v ./$i ../starter/$i
+          done
+
+          cd ../starter
+
+          npm install ../dist
+          npm run build
+
+      - name: Copy package
+        run: cp ../dist/progress-sitefinity-react-framework* ./
+
+      - name: Archive package
+        uses: actions/upload-artifact@v3
+        with:
+          name: sitefinity-react-framework
+          path: ./progress-sitefinity-react-framework*
